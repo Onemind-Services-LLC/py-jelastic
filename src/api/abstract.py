@@ -143,6 +143,9 @@ class ClientAbstract(ABC):
 
         :param response: response from the API
         """
+        if self._debug:
+            print(f"[Jelastic] [RESPONSE] {response}")
+
         result_code = response.get("result", 0)
         error = response.get("error", "Unknown API error")
 
