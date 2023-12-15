@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  pull_request: { }
+  push:
+    branches:
+      - master
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: [ "3.10", "3.11" ]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install dev requirements
+        run: |
+          pip install -e .
+          pip install coverage pytest
+
+      - name: Run Tests
+        run: coverage run -m pytest --tb=short -vvv tests/unit
+
+      - name: Show Coverage
+        run: coverage report --omit="tests/*"
+
+  integration-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: [ "3.10", "3.11" ]
+    env:
+      JELASTIC_TOKEN: ${{ secrets.JELASTIC_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install dev requirements
+        run: |
+          pip install -e .
+          pip install coverage pytest
+
+      - name: Run Tests
+        run: coverage run -m pytest --tb=short -vvv tests/integration
+
+      - name: Show Coverage
+        run: coverage report --omit="tests/*"
