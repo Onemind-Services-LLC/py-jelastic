@@ -34,17 +34,17 @@ body:
     attributes:
       label: Steps to Reproduce
       description: >
-        Please provide a minimal working example to demonstrate the bug. Ensure that your example is as 
+        Please provide a minimal working example to demonstrate the bug. Ensure that your example is as
         concise as possible while adequately illustrating the issue. For example:
         ```python
         >>> from src.jelastic import Jelastic
         >>> jl = Jelastic('https://api.example.com', token='my-token')
-        
+
         ```
-        Note: **do not utilize the demo instance** for replicating suspected bugs, 
+        Note: **do not utilize the demo instance** for replicating suspected bugs,
         as its data is subject to change or removal at any time.
-        
-        _Please refrain from including any confidential or sensitive 
+
+        _Please refrain from including any confidential or sensitive
         information in your example._
     validations:
       required: true

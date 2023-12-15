@@ -6,10 +6,8 @@ from src.jelastic import Jelastic
 JELASTIC_URL = os.environ.get("JELASTIC_URL", "https://jca.xapp.cloudmydc.com/")
 JELASTIC_TOKEN = os.environ.get("JELASTIC_TOKEN")
 
-if not JELASTIC_URL or not JELASTIC_TOKEN:
-    raise Exception(
-        "JELASTIC_URL and JELASTIC_TOKEN must be set as environment variables"
-    )
+if not JELASTIC_TOKEN:
+    raise Exception("JELASTIC_TOKEN must be set as environment variables")
 
 CURRENT_DATETIME = datetime.now()
 
