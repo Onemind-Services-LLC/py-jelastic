@@ -1,14 +1,14 @@
 import pytest
 from datetime import datetime
 from unittest.mock import patch, Mock
-from src.api.billing import Billing, PERIOD
+from jelastic.api.billing import Billing, PERIOD
 
 success_response = {"error": "", "reason": 0, "result": 0, "source": "billing"}
 
 
 @pytest.fixture
 def client():
-    with patch("src.api.abstract.ClientAbstract._get") as mock_get:
+    with patch("jelastic.api.abstract.ClientAbstract._get") as mock_get:
         billing = Billing(session=Mock(), token="token")
         billing._get = mock_get
         yield billing

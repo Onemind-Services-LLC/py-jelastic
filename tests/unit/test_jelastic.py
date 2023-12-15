@@ -1,11 +1,11 @@
 import pytest
-from unittest.mock import patch, Mock
-from src.jelastic import Jelastic, ClientState
+from unittest.mock import patch
+from jelastic import Jelastic, ClientState
 
 
 @pytest.fixture
 def client():
-    with patch("src.jelastic.Jelastic"):
+    with patch("jelastic.jelastic.Jelastic"):
         return Jelastic(
             base_url="https://api.jelastic.com",
             token="token",

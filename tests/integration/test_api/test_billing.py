@@ -1,7 +1,7 @@
 import os
 import pytest
 from datetime import datetime
-from src.jelastic import Jelastic
+from jelastic import Jelastic
 
 JELASTIC_URL = os.environ.get("JELASTIC_URL", "https://jca.xapp.cloudmydc.com/")
 JELASTIC_TOKEN = os.environ.get("JELASTIC_TOKEN")

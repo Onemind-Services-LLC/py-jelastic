@@ -37,7 +37,7 @@ body:
         Please provide a minimal working example to demonstrate the bug. Ensure that your example is as
         concise as possible while adequately illustrating the issue. For example:
         ```python
-        >>> from src.jelastic import Jelastic
+        >>> from jelastic import Jelastic
         >>> jl = Jelastic('https://api.example.com', token='my-token')
 
         ```

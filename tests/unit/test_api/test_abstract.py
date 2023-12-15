@@ -3,8 +3,8 @@ from datetime import datetime
 from httpx import Response
 from unittest.mock import Mock
 from urllib.parse import urlencode
-from src.api.abstract import ClientAbstract
-from src.api.execptions import *
+from jelastic.api.abstract import ClientAbstract
+from jelastic.api.execptions import *
 
 
 class ConcreteClient(ClientAbstract):
