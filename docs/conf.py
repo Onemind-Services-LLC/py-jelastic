@@ -15,7 +15,7 @@ from pkg_resources import get_distribution
 # -- Project information -----------------------------------------------------
 
 project = 'py-jelastic'
-copyright = f'2016-{date.today().year} CloudMyDC LLC'
+copyright = f'2016-{date.today().year} Onemind Services LLC'
 author = 'Abhimanyu Saharan <asaharan@onemindservices.com>'
 
 # The version info for the project you're documenting, acts as replacement for
