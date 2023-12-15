@@ -5,7 +5,7 @@ from jelastic import Jelastic, ClientState
 
 @pytest.fixture
 def client():
-    with patch("jelastic.jelastic.Jelastic"):
+    with patch("jelastic.Jelastic"):
         return Jelastic(
             base_url="https://api.jelastic.com",
             token="token",

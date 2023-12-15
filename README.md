@@ -15,7 +15,7 @@ You can clone the repo and run `python setup.py install`.
 To begin, import the Jelastic client and instantiate the API.
 
 ```python
-from jelastic.jelastic import Jelastic
+from jelastic import Jelastic
 
 jelastic = Jelastic(
     'https://jca.xapp.cloudmydc.com',
@@ -26,7 +26,7 @@ jelastic = Jelastic(
 The library follows the convention from the Jelastic API documentation. For example, to get the list of accounts, you would do the following:
 
 ```python
-from jelastic.jelastic import Jelastic
+from jelastic import Jelastic
 
 jelastic = Jelastic(
     'https://jca.xapp.cloudmydc.com',

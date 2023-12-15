@@ -48,8 +48,8 @@ jobs:
 
       - name: Install dev requirements
         run: |
+          pip install -r requirements-test.txt
           pip install -e .
-          pip install coverage pytest
 
       - name: Run Tests
         run: coverage run -m pytest --tb=short -vvv tests/integration

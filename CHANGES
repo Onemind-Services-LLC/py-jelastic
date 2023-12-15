@@ -1,0 +1,17 @@
+.. meta::
+   :description: py-jelastic release history & changelog
+   :keywords: python, py-jelastic, release, changelog
+
+.. title:: py-jelastic release history & changelog
+
+=======
+Changes
+=======
+
+0.0.1 (*unreleased*)
+======================
+
+- Initial release
+- Added `jelastic.api.billing.Account` class
+- Added unit and integration tests
+- Added documentation using `Sphinx <http://www.sphinx-doc.org/en/stable/>`_

@@ -1,0 +1,6 @@
+User-agent: *
+
+Disallow: /_modules/
+Disallow: /_sources/
+
+Sitemap: https://onemind-services-llc.github.io/py-jelastic/sitemap.xml
