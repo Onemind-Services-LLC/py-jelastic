@@ -50,6 +50,7 @@ Table of Contents
 
    install
    abstract
+   administration
    billing
    exceptions
 

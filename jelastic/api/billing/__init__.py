@@ -19,6 +19,7 @@ class Billing(ClientAbstract):
 
     Ref: https://docs.jelastic.com/api/#!/billing
     """
+
     _endpoint1 = "billing"
 
     @property

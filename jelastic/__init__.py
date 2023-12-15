@@ -61,5 +61,11 @@ class Jelastic:
         self._session.__exit__(exc_type, exc_val, exc_tb)
 
     @property
+    def administration(self) -> Administration:
+        return Administration(
+            session=self._session, token=self._token, debug=self._debug
+        )
+
+    @property
     def billing(self) -> Billing:
         return Billing(session=self._session, token=self._token, debug=self._debug)

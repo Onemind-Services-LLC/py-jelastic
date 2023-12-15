@@ -28,4 +28,3 @@ Git repository
 Get latest development version::
 
   $ git clone https://github.com/Onemind-Services-LLC/py-jelastic
-

@@ -1,7 +1,7 @@
 import pytest
 from datetime import datetime
 from unittest.mock import patch, Mock
-from jelastic.api.billing import Billing, PERIOD
+from jelastic.api.billing import Billing
 
 success_response = {"error": "", "reason": 0, "result": 0, "source": "billing"}
 
