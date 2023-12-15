@@ -18,13 +18,13 @@ client_mock = Mock()
 
 @pytest.fixture
 def client():
-    return ConcreteClient(session=client_mock, token="token", debug=False)
+    return ConcreteClient(session=client_mock, token="token", debug=True)
 
 
 def test_init(client):
     assert client._session == client_mock
     assert client._token == "token"
-    assert client._debug is False
+    assert client._debug is True
 
 
 def test_endpoint_construction(client):

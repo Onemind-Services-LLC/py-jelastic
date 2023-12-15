@@ -9,7 +9,7 @@ success_response = {"error": "", "reason": 0, "result": 0, "source": "billing"}
 @pytest.fixture
 def client():
     with patch("src.api.abstract.ClientAbstract._get") as mock_get:
-        billing = Billing(session=Mock(), token="token", debug=False)
+        billing = Billing(session=Mock(), token="token")
         billing._get = mock_get
         yield billing
 
