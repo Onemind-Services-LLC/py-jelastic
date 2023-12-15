@@ -67,8 +67,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: totaldebug/sphinx-publish-action@1.2.0
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          sphinx_src: docs
-          target_branch: gh-pages
+          python-version: 3.10
+
+      - name: Install dev requirements
+        run: |
+          pip install -r requirements-docs.txt
+          pip install -e .
+
+      - name: Build Docs
+        run: |
+          cd docs
+          make html
+
+      - name: Deploy Docs
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/_build/html
