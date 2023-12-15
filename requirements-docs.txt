@@ -1,3 +1,4 @@
+-e .
 sphinx
 sphinx_press_theme
 sphinx-sitemap
