@@ -67,7 +67,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: totaldebug/sphinx-publish-action@v1.2.0
+      - uses: totaldebug/sphinx-publish-action@1.2.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           sphinx_src: docs
