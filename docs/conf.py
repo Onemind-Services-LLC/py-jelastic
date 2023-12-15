@@ -104,7 +104,14 @@ html_sidebars = {
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "py_jelastic_doc"
+htmlhelp_basename = "pyjelasticdoc"
+
+# The name for this set of Sphinx documents.  If None, it defaults to
+# "<project> v<release> documentation".
+html_title = "py-jelastic documentation"
+
+# A shorter title for the navigation bar.  Default is the same as html_title.
+html_short_title = "py-jelastic-%s" % release
 
 
 # -- Options for LaTeX output ---------------------------------------------

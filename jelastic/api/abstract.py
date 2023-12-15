@@ -7,7 +7,7 @@ from httpx import Client
 from httpx._types import QueryParamTypes
 from urllib.parse import urlencode
 
-from .execptions import *
+from .exceptions import *
 
 RequestData = dict[Any, Any]
 VALID_METHODS = Literal["get", "post"]

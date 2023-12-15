@@ -10,10 +10,29 @@ PERIOD = Literal["AGE", "YEAR", "MONTH", "WEEK", "DAY", "HOUR"]
 
 
 class Billing(ClientAbstract):
+    """
+    The Billing service provides methods for managing user accounts and their billing information.
+
+    >>> from jelastic import Jelastic
+    >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+    >>> jelastic.billing
+
+    Ref: https://docs.jelastic.com/api/#!/billing
+    """
     _endpoint1 = "billing"
 
     @property
     def Account(self) -> "_Account":
+        """
+        The methods of this service provide billing information about a user account (such as UID, balance, billing history,
+        quotas, etc.) and allow managing it.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.billing.Account
+
+        Ref: https://docs.jelastic.com/api/#!/api/billing.Account
+        """
         return _Account(session=self._session, token=self._token, debug=self._debug)
 
 

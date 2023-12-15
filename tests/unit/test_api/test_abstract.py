@@ -4,7 +4,7 @@ from httpx import Response
 from unittest.mock import Mock
 from urllib.parse import urlencode
 from jelastic.api.abstract import ClientAbstract
-from jelastic.api.execptions import *
+from jelastic.api.exceptions import *
 
 
 class ConcreteClient(ClientAbstract):

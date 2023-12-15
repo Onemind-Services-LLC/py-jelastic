@@ -2,11 +2,16 @@
    :maxdepth: 2
    :caption: Contents:
 
-Billing
-=======
+   abstract
+   billing
+   exceptions
 
-.. autoclass:: jelastic.api.billing.Billing
+py-jelastic
+===========
+
+.. autoclass:: jelastic.Jelastic
    :members:
+   :special-members: __init__
 
 Indices and tables
 ==================
