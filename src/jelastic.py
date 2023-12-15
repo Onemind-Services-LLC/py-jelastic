@@ -1,3 +1,4 @@
+import logging
 from enum import Enum
 from httpx import Client
 
@@ -43,6 +44,11 @@ class Jelastic:
         self._state = ClientState.UNOPENED
         self._token = token
         self._debug = debug
+
+        if debug:
+            logging.basicConfig(level=logging.DEBUG)
+        else:
+            logging.basicConfig(level=logging.INFO)
 
     def __enter__(self) -> "Jelastic":
         if self._state != ClientState.UNOPENED:

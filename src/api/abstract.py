@@ -68,7 +68,7 @@ class ClientAbstract(ABC):
         endpoint = endpoint.strip("?" + "&")
 
         message = f"{prefix}, Path: {endpoint}, Params: {params}"
-        print(message)
+        logger.debug(message)
 
     def _serialize_params(
         self, params: dict[str, Any], delimiter: str = None, datetime_format: str = None
@@ -144,7 +144,7 @@ class ClientAbstract(ABC):
         :param response: response from the API
         """
         if self._debug:
-            print(f"[Jelastic] [RESPONSE] {response}")
+            logger.debug(f"[Jelastic] [RESPONSE] {response}")
 
         result_code = response.get("result", 0)
         error = response.get("error", "Unknown API error")
