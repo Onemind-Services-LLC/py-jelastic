@@ -14,7 +14,7 @@ CURRENT_DATETIME = datetime.now()
 
 @pytest.fixture
 def client():
-    client = Jelastic(base_url=JELASTIC_URL, token=JELASTIC_TOKEN, debug=False)
+    client = Jelastic(base_url=JELASTIC_URL, token=JELASTIC_TOKEN, debug=True)
     return client.billing
 
 
