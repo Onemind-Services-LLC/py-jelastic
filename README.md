@@ -38,4 +38,4 @@ accounts = jelastic.billing.Account.GetAccounts()
 
 The result is a JSON dictionary returned from the Jelastic API.
 
-You can read more about this library at [Read the Docs](https://py-jelastic.readthedocs.io/en/latest/).
+You can read more about this library at [Read the Docs](https://onemind-services-llc.github.io/py-jelastic).

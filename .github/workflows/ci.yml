@@ -2,9 +2,7 @@ name: CI
 
 on:
   pull_request: { }
-  push:
-    branches:
-      - master
+  push: { }
 
 jobs:
   unit-tests:
@@ -56,3 +54,21 @@ jobs:
 
       - name: Show Coverage
         run: coverage report --omit="tests/*"
+
+  docs:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    needs:
+      - unit-tests
+      - integration-tests
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: totaldebug/action-sphinx@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          sphinx_src: docs
+          target_branch: gh-pages
