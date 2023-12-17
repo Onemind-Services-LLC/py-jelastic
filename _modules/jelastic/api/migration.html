@@ -9,7 +9,7 @@
           <link rel="stylesheet" href="../../../_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="../../../_static/documentation_options.js?v=077e564f"></script>
+        <script src="../../../_static/documentation_options.js?v=656af95f"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -417,7 +417,54 @@
 <div class="viewcode-block" id="Migration">
 <a class="viewcode-back" href="../../../migration.html#jelastic.api.migration.Migration">[docs]</a>
 <span class="k">class</span> <span class="nc">Migration</span><span class="p">(</span><span class="n">ClientAbstract</span><span class="p">):</span>
-    <span class="n">_endpoint1</span> <span class="o">=</span> <span class="s2">&quot;migration&quot;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">    &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; jelastic.migration</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_endpoint1</span> <span class="o">=</span> <span class="s2">&quot;migration&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Migration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_Migration&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.migration.Migration</span>
+
+<span class="sd">        https://docs.jelastic.com/api/private/#!/api/migration.Migration</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_Migration</span><span class="p">(</span>
+            <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
+            <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span>
+            <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="_Migration">
+<a class="viewcode-back" href="../../../migration.html#jelastic.api.migration._Migration">[docs]</a>
+<span class="k">class</span> <span class="nc">_Migration</span><span class="p">(</span><span class="n">Migration</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    https://docs.jelastic.com/api/private/#!/api/migration.Migration</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_endpoint2</span> <span class="o">=</span> <span class="s2">&quot;migration&quot;</span>
+
+<div class="viewcode-block" id="_Migration.GetMigrationOperations">
+<a class="viewcode-back" href="../../../migration.html#jelastic.api.migration._Migration.GetMigrationOperations">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetMigrationOperations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">search</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetMigrationOperations&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s1">&#39;search&#39;</span><span class="p">:</span> <span class="n">search</span>
+            <span class="p">}</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Migration.Migrate">
+<a class="viewcode-back" href="../../../migration.html#jelastic.api.migration._Migration.Migrate">[docs]</a>
+    <span class="k">def</span> <span class="nf">Migrate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;Migrate&quot;</span><span class="p">)</span></div>
+</div>
 
 </pre></div>
 
