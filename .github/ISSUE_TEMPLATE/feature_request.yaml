@@ -1,6 +1,6 @@
 ---
 name: ✨ Feature Request
-description: Propose a new pynetbox feature or enhancement
+description: Propose a new py-jelastic feature or enhancement
 labels: ["type: feature"]
 body:
   - type: markdown

@@ -1,6 +1,6 @@
 ---
 name: 🐛 Bug Report
-description: Report a reproducible bug in the current release of pynetbox
+description: Report a reproducible bug in the current release of py-jelastic
 labels: ["type: bug"]
 body:
   - type: markdown
