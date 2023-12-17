@@ -7,9 +7,10 @@ Utils
 
 .. autoclass:: jelastic.api.utils._Batch
    :members:
+   :undoc-members:
    :show-inheritance:
 
 .. autoclass:: jelastic.api.utils._Scheduler
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

@@ -7,4 +7,5 @@ Administration
 
 .. autoclass:: jelastic.api.administration._Analytics
    :members:
+   :undoc-members:
    :show-inheritance:
