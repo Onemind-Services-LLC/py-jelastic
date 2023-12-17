@@ -64,7 +64,9 @@ def test_get(client):
 
 def test_update(client):
     client._get.return_value = success_response
-    response = client.Project.Update("COLUMBUS", "proj1", "New Project Name", 123, "description")
+    response = client.Project.Update(
+        "COLUMBUS", "proj1", "New Project Name", 123, "description"
+    )
     client._get.assert_called_with(
         "Update",
         params={
@@ -72,7 +74,7 @@ def test_update(client):
             "projectId": "proj1",
             "projectName": "New Project Name",
             "ownerUid": 123,
-            "description": "description"
+            "description": "description",
         },
     )
     assert response == success_response

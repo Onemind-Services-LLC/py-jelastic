@@ -5,3 +5,13 @@ S3
    :members:
    :undoc-members:
    :show-inheritance:
+
+.. autoclass:: jelastic.api.s3._Account
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. autoclass:: jelastic.api.s3._Bucket
+   :members:
+   :undoc-members:
+   :show-inheritance:

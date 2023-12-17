@@ -36,11 +36,11 @@ class _Project(IaaS):
     """
 
     def Create(
-            self,
-            host_group: str,
-            project_name: str,
-            owner_uid: int = None,
-            description: str = None,
+        self,
+        host_group: str,
+        project_name: str,
+        owner_uid: int = None,
+        description: str = None,
     ):
         """
         Creates a new Virtuozzo Hybrid Infrastructure project.
@@ -92,8 +92,14 @@ class _Project(IaaS):
             },
         )
 
-    def Update(self, host_group: str, project_id: str, project_name: str, owner_uid: int = None,
-                description: str = None):
+    def Update(
+        self,
+        host_group: str,
+        project_id: str,
+        project_name: str,
+        owner_uid: int = None,
+        description: str = None,
+    ):
         """
         Changes the specified project name and description.
 
