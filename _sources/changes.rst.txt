@@ -13,6 +13,7 @@ Changes
 
 - Initial release
 - Added `jelastic.api.billing.Account` class
+- Added `jelastic.api.message.Email` class
 - Added `jelastic.api.migration.Migration` class
 - Added `jelastic.api.platform.Engine` class
 - Added `jelastic.api.thirdparty.GeoIp` class
