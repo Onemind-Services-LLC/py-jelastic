@@ -1,6 +1,6 @@
-Automation
-==========
+IO
+==
 
-.. automodule:: jelastic.api.automation
+.. automodule:: jelastic.api.io
    :members:
    :show-inheritance:

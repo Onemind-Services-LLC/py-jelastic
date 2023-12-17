@@ -9,7 +9,7 @@
           <link rel="stylesheet" href="../../../_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="../../../_static/documentation_options.js?v=81f1c024"></script>
+        <script src="../../../_static/documentation_options.js?v=bb0b1110"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -178,6 +178,15 @@
         
           <li class="toctree-l1 ">
             
+              <a href="../../../automation.html" class="reference internal ">Automation</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
               <a href="../../../billing.html" class="reference internal ">Billing</a>
             
 
@@ -232,7 +241,7 @@
         
           <li class="toctree-l1 ">
             
-              <a href="../../../io.html" class="reference internal ">Automation</a>
+              <a href="../../../io.html" class="reference internal ">IO</a>
             
 
             
@@ -475,11 +484,11 @@
 <div class="viewcode-block" id="_Account.ChangeGroup">
 <a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Account.ChangeGroup">[docs]</a>
     <span class="k">def</span> <span class="nf">ChangeGroup</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">group_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="n">uids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">send_email</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-            <span class="n">template</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">group_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">uids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">send_email</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">template</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Change account group for selected users</span>
@@ -507,7 +516,7 @@
 <div class="viewcode-block" id="_Account.ChargeAccountByUid">
 <a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Account.ChargeAccountByUid">[docs]</a>
     <span class="k">def</span> <span class="nf">ChargeAccountByUid</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Charge account by uid.</span>
@@ -541,13 +550,13 @@
 <div class="viewcode-block" id="_Account.ConvertToCommercialAndPay">
 <a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Account.ConvertToCommercialAndPay">[docs]</a>
     <span class="k">def</span> <span class="nf">ConvertToCommercialAndPay</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">customer</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
-            <span class="n">pay_method_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="n">service_plan_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-            <span class="n">auto_service_plan_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">auto_refill_main_balance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">auto_refill_period</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">customer</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+        <span class="n">pay_method_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">service_plan_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">auto_service_plan_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">auto_refill_main_balance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">auto_refill_period</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Make trial account commercial one. This method register Jbilling account into extern billing system. Commercial</span>
@@ -571,14 +580,14 @@
 <div class="viewcode-block" id="_Account.ConvertToTrial">
 <a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Account.ConvertToTrial">[docs]</a>
     <span class="k">def</span> <span class="nf">ConvertToTrial</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">template</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="n">uids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">end_time</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">start</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">bonus</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">template</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">uids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">end_time</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">start</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">bonus</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Converts non-trial and billing accounts to trial.</span>
@@ -609,13 +618,13 @@
 <div class="viewcode-block" id="_Account.ExportAccountBillingHistoryByPeriod">
 <a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Account.ExportAccountBillingHistoryByPeriod">[docs]</a>
     <span class="k">def</span> <span class="nf">ExportAccountBillingHistoryByPeriod</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
-            <span class="n">end_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
-            <span class="n">period</span><span class="p">:</span> <span class="n">PERIOD</span> <span class="o">=</span> <span class="s2">&quot;DAY&quot;</span><span class="p">,</span>
-            <span class="n">time_offset</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">group_nodes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-            <span class="n">target_app_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
+        <span class="n">end_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
+        <span class="n">period</span><span class="p">:</span> <span class="n">PERIOD</span> <span class="o">=</span> <span class="s2">&quot;DAY&quot;</span><span class="p">,</span>
+        <span class="n">time_offset</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">group_nodes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">target_app_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generates a link for downloading the specified account&#39;s billing history for the specific period.</span>
@@ -636,12 +645,12 @@
 <div class="viewcode-block" id="_Account.ExportEnvBillingHistoryByPeriod">
 <a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Account.ExportEnvBillingHistoryByPeriod">[docs]</a>
     <span class="k">def</span> <span class="nf">ExportEnvBillingHistoryByPeriod</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
-            <span class="n">end_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
-            <span class="n">time_offset</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-            <span class="n">period</span><span class="p">:</span> <span class="n">PERIOD</span> <span class="o">=</span> <span class="s2">&quot;DAY&quot;</span><span class="p">,</span>
-            <span class="n">group_nodes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
+        <span class="n">end_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
+        <span class="n">time_offset</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">period</span><span class="p">:</span> <span class="n">PERIOD</span> <span class="o">=</span> <span class="s2">&quot;DAY&quot;</span><span class="p">,</span>
+        <span class="n">group_nodes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generates a link for downloading the specified environment&#39;s billing history for the specific period.</span>
@@ -661,7 +670,7 @@
 <div class="viewcode-block" id="_Account.FundAccount">
 <a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Account.FundAccount">[docs]</a>
     <span class="k">def</span> <span class="nf">FundAccount</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">is_bonus</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">note</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">is_bonus</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">note</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Fund account by uid.</span>
@@ -705,13 +714,13 @@
 <div class="viewcode-block" id="_Account.GetAccountBillingByEngineTypeAndPeriod">
 <a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Account.GetAccountBillingByEngineTypeAndPeriod">[docs]</a>
     <span class="k">def</span> <span class="nf">GetAccountBillingByEngineTypeAndPeriod</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
-            <span class="n">end_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
-            <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">engine_types</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">period</span><span class="p">:</span> <span class="n">PERIOD</span> <span class="o">=</span> <span class="s2">&quot;DAY&quot;</span><span class="p">,</span>
-            <span class="n">time_offset</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
+        <span class="n">end_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
+        <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">engine_types</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">period</span><span class="p">:</span> <span class="n">PERIOD</span> <span class="o">=</span> <span class="s2">&quot;DAY&quot;</span><span class="p">,</span>
+        <span class="n">time_offset</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns account billing information for the specified period.</span>
@@ -742,13 +751,13 @@
 <div class="viewcode-block" id="_Account.GetAccountBillingHistoryByPeriod">
 <a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Account.GetAccountBillingHistoryByPeriod">[docs]</a>
     <span class="k">def</span> <span class="nf">GetAccountBillingHistoryByPeriod</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
-            <span class="n">end_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
-            <span class="n">period</span><span class="p">:</span> <span class="n">PERIOD</span> <span class="o">=</span> <span class="s2">&quot;DAY&quot;</span><span class="p">,</span>
-            <span class="n">time_offset</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">group_nodes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-            <span class="n">target_app_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
+        <span class="n">end_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
+        <span class="n">period</span><span class="p">:</span> <span class="n">PERIOD</span> <span class="o">=</span> <span class="s2">&quot;DAY&quot;</span><span class="p">,</span>
+        <span class="n">time_offset</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">group_nodes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">target_app_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gets account billing history.</span>
@@ -772,14 +781,14 @@
 <div class="viewcode-block" id="_Account.GetAccounts">
 <a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Account.GetAccounts">[docs]</a>
     <span class="k">def</span> <span class="nf">GetAccounts</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">lebalance</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">order_field</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">order_direction</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">filter_field</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">filter_value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">start_row</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">result_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">lebalance</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">order_field</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">order_direction</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">filter_field</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">filter_value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">start_row</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">result_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gets accounts.</span>
@@ -853,12 +862,12 @@
 <div class="viewcode-block" id="_Account.GetAggClusterBillingHistory">
 <a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Account.GetAggClusterBillingHistory">[docs]</a>
     <span class="k">def</span> <span class="nf">GetAggClusterBillingHistory</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
-            <span class="n">end_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
-            <span class="n">interval</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-            <span class="n">sum_fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
-            <span class="n">is_paid</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
+        <span class="n">end_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
+        <span class="n">interval</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">sum_fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">is_paid</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gets account billing history.</span>
@@ -877,13 +886,13 @@
 
 
     <span class="k">def</span> <span class="nf">GetAggExtraBillingHistory</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
-            <span class="n">end_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
-            <span class="n">interval</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-            <span class="n">is_paid</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-            <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
+        <span class="n">end_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
+        <span class="n">interval</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">is_paid</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
             <span class="s2">&quot;GetAggExtraBillingHistory&quot;</span><span class="p">,</span>
@@ -910,7 +919,7 @@
 <div class="viewcode-block" id="_Account.GetClusterBillingHistory">
 <a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Account.GetClusterBillingHistory">[docs]</a>
     <span class="k">def</span> <span class="nf">GetClusterBillingHistory</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span> <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">end_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">interval</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">end_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">interval</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gets account billing history.</span>
@@ -924,10 +933,10 @@
 <div class="viewcode-block" id="_Account.GetCollaborationQuotas">
 <a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Account.GetCollaborationQuotas">[docs]</a>
     <span class="k">def</span> <span class="nf">GetCollaborationQuotas</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">collaboration_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">quota_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">collaboration_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">quota_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gets list of quotas of the payer user.</span>
@@ -975,12 +984,12 @@
 <div class="viewcode-block" id="_Account.GetEnvBillingHistoryByPeriod">
 <a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Account.GetEnvBillingHistoryByPeriod">[docs]</a>
     <span class="k">def</span> <span class="nf">GetEnvBillingHistoryByPeriod</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
-            <span class="n">end_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
-            <span class="n">period</span><span class="p">:</span> <span class="n">PERIOD</span> <span class="o">=</span> <span class="s2">&quot;DAY&quot;</span><span class="p">,</span>
-            <span class="n">time_offset</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">group_nodes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
+        <span class="n">end_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
+        <span class="n">period</span><span class="p">:</span> <span class="n">PERIOD</span> <span class="o">=</span> <span class="s2">&quot;DAY&quot;</span><span class="p">,</span>
+        <span class="n">time_offset</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">group_nodes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gets environment billing history.</span>
@@ -1001,7 +1010,7 @@
 <div class="viewcode-block" id="_Account.GetExtendedAccountBillingHistoryByPeriod">
 <a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Account.GetExtendedAccountBillingHistoryByPeriod">[docs]</a>
     <span class="k">def</span> <span class="nf">GetExtendedAccountBillingHistoryByPeriod</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span> <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">end_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">target_app_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">end_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">target_app_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns user’s billing history information for the specified period.</span>
@@ -1083,7 +1092,7 @@
 <div class="viewcode-block" id="_Account.GetSumAccountBillingHistory">
 <a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Account.GetSumAccountBillingHistory">[docs]</a>
     <span class="k">def</span> <span class="nf">GetSumAccountBillingHistory</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">end_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">bonus</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">end_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">bonus</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gets account billing history.</span>
@@ -1148,11 +1157,11 @@
 <div class="viewcode-block" id="_Account.SetGroup">
 <a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Account.SetGroup">[docs]</a>
     <span class="k">def</span> <span class="nf">SetGroup</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">uid</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-            <span class="n">group_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="n">reset_balance</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-            <span class="n">reset_bonus</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">uid</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">group_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">reset_balance</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">reset_bonus</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Sets group to account.</span>
@@ -1220,7 +1229,7 @@
 <div class="viewcode-block" id="_Account.UnfundAccount">
 <a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Account.UnfundAccount">[docs]</a>
     <span class="k">def</span> <span class="nf">UnfundAccount</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">is_bonus</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">note</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">is_bonus</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">note</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Unfund account by uid.</span>

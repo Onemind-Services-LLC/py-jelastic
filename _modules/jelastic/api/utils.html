@@ -9,7 +9,7 @@
           <link rel="stylesheet" href="../../../_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="../../../_static/documentation_options.js?v=81f1c024"></script>
+        <script src="../../../_static/documentation_options.js?v=bb0b1110"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -178,6 +178,15 @@
         
           <li class="toctree-l1 ">
             
+              <a href="../../../automation.html" class="reference internal ">Automation</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
               <a href="../../../billing.html" class="reference internal ">Billing</a>
             
 
@@ -232,7 +241,7 @@
         
           <li class="toctree-l1 ">
             
-              <a href="../../../io.html" class="reference internal ">Automation</a>
+              <a href="../../../io.html" class="reference internal ">IO</a>
             
 
             
@@ -400,15 +409,241 @@
           <div class="content" role="main" v-pre>
             
   <h1>Source code for jelastic.api.utils</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">..abstract</span> <span class="kn">import</span> <span class="n">ClientAbstract</span>
+<span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Literal</span>
+
+<span class="kn">from</span> <span class="nn">..abstract</span> <span class="kn">import</span> <span class="n">ClientAbstract</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Utils&quot;</span><span class="p">]</span>
+
+<span class="n">TRIGGER_TYPE</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;cron&quot;</span><span class="p">,</span> <span class="s2">&quot;rate&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;oninit&quot;</span><span class="p">,</span> <span class="s2">&quot;once_delay&quot;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="Utils">
 <a class="viewcode-back" href="../../../utils.html#jelastic.api.utils.Utils">[docs]</a>
 <span class="k">class</span> <span class="nc">Utils</span><span class="p">(</span><span class="n">ClientAbstract</span><span class="p">):</span>
-    <span class="n">_endpoint1</span> <span class="o">=</span> <span class="s2">&quot;utils&quot;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">    &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; jelastic.utils</span>
+
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/utils</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_endpoint1</span> <span class="o">=</span> <span class="s2">&quot;utils&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Batch</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_Batch&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Used to perform several actions in one request to the server.</span>
+
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.utils.Batch</span>
+
+<span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/utils.Batch</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_Batch</span><span class="p">(</span>
+            <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
+            <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span>
+            <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Scheduler</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_Scheduler&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This service manages custom operations on the platform (tasks) that are performed based on the configured</span>
+<span class="sd">        triggers. A task can be associated with the account or specific environment (automatically removed alongside it)</span>
+<span class="sd">        and executed based on the specific conditions - cron, date, after the platform start, etc.</span>
+
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.utils.Scheduler</span>
+
+<span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/utils.Scheduler</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_Scheduler</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="_Batch">
+<a class="viewcode-back" href="../../../utils.html#jelastic.api.utils._Batch">[docs]</a>
+<span class="k">class</span> <span class="nc">_Batch</span><span class="p">(</span><span class="n">Utils</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Used to perform several actions in one request to the server.</span>
+
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/utils.Batch</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_endpoint2</span> <span class="o">=</span> <span class="s2">&quot;batch&quot;</span>
+
+<div class="viewcode-block" id="_Batch.Call">
+<a class="viewcode-back" href="../../../utils.html#jelastic.api.utils._Batch.Call">[docs]</a>
+    <span class="k">def</span> <span class="nf">Call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">sync</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Multiply call the functions of platforms in a single query.</span>
+
+<span class="sd">        :param request - batch query format JSON</span>
+<span class="sd">        :param sync - sync call</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;Call&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;request&quot;</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="s2">&quot;sync&quot;</span><span class="p">:</span> <span class="n">sync</span><span class="p">})</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="_Scheduler">
+<a class="viewcode-back" href="../../../utils.html#jelastic.api.utils._Scheduler">[docs]</a>
+<span class="k">class</span> <span class="nc">_Scheduler</span><span class="p">(</span><span class="n">Utils</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This service manages custom operations on the platform (tasks) that are performed based on the configured triggers.</span>
+<span class="sd">    A task can be associated with the account or specific environment (automatically removed alongside it) and executed</span>
+<span class="sd">    based on the specific conditions - cron, date, after the platform start, etc.</span>
+
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/utils.Scheduler</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_endpoint2</span> <span class="o">=</span> <span class="s2">&quot;scheduler&quot;</span>
+
+<div class="viewcode-block" id="_Scheduler.CreateAccountTask">
+<a class="viewcode-back" href="../../../utils.html#jelastic.api.utils._Scheduler.CreateAccountTask">[docs]</a>
+    <span class="k">def</span> <span class="nf">CreateAccountTask</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">script</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">trigger</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">TRIGGER_TYPE</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a task that executes a specified script based on the configured trigger.</span>
+
+<span class="sd">        :param script: custom script name to be executed by the task.</span>
+<span class="sd">        :param trigger: condition or frequency of the script execution (in the format: &quot;trigger_type:value&quot;, supported</span>
+<span class="sd">            trigger types: &quot;cron&quot;, &quot;rate&quot;, &quot;date&quot;, &quot;oninit&quot;, &quot;once_delay&quot;, supported value depends on the trigger_type).</span>
+<span class="sd">            Examples: &quot;cron:0 0 * * * *&quot;, &quot;once_delay:1000&quot;.</span>
+<span class="sd">        :param description: custom description for the task.</span>
+<span class="sd">        :param params: JSON object with additional trigger parameters.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">trigger</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">trigger</span><span class="p">)</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;CreateAccountTask&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;script&quot;</span><span class="p">:</span> <span class="n">script</span><span class="p">,</span>
+                <span class="s2">&quot;trigger&quot;</span><span class="p">:</span> <span class="n">trigger</span><span class="p">,</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+                <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="n">params</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Scheduler.CreateEnvTask">
+<a class="viewcode-back" href="../../../utils.html#jelastic.api.utils._Scheduler.CreateEnvTask">[docs]</a>
+    <span class="k">def</span> <span class="nf">CreateEnvTask</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">script</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">trigger</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">TRIGGER_TYPE</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a task that executes a specified script based on the configured trigger. The task is automatically</span>
+<span class="sd">        removed when the corresponding environment is deleted.</span>
+
+<span class="sd">        :param script: custom script name to be executed by the task.</span>
+<span class="sd">        :param trigger: condition or frequency of the script execution (in the format: &quot;trigger_type:value&quot;, supported</span>
+<span class="sd">            trigger types: &quot;cron&quot;, &quot;rate&quot;, &quot;date&quot;, &quot;oninit&quot;, &quot;once_delay&quot;, supported value depends on the trigger_type).</span>
+<span class="sd">            Examples: &quot;cron:0 0 * * * *&quot;, &quot;once_delay:1000&quot;.</span>
+<span class="sd">        :param description: custom description for the task.</span>
+<span class="sd">        :param params: JSON object with additional trigger parameters.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">trigger</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">trigger</span><span class="p">)</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;CreateEnvTask&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;script&quot;</span><span class="p">:</span> <span class="n">script</span><span class="p">,</span>
+                <span class="s2">&quot;trigger&quot;</span><span class="p">:</span> <span class="n">trigger</span><span class="p">,</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+                <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="n">params</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Scheduler.DeleteTasks">
+<a class="viewcode-back" href="../../../utils.html#jelastic.api.utils._Scheduler.DeleteTasks">[docs]</a>
+    <span class="k">def</span> <span class="nf">DeleteTasks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes specified tasks.</span>
+
+<span class="sd">        :param ids: list of task IDs to remove.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;DeleteTasks&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="n">ids</span><span class="p">},</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Scheduler.EditTask">
+<a class="viewcode-back" href="../../../utils.html#jelastic.api.utils._Scheduler.EditTask">[docs]</a>
+    <span class="k">def</span> <span class="nf">EditTask</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">script</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">trigger</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="n">TRIGGER_TYPE</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Changes the existing task according to the provided new values.</span>
+
+<span class="sd">        :param script: custom script name to be executed by the task.</span>
+<span class="sd">        :param trigger: condition or frequency of the script execution (in the format: &quot;trigger_type:value&quot;, supported</span>
+<span class="sd">            trigger types: &quot;cron&quot;, &quot;rate&quot;, &quot;date&quot;, &quot;oninit&quot;, &quot;once_delay&quot;, supported value depends on the trigger_type).</span>
+<span class="sd">            Examples: &quot;cron:0 0 * * * *&quot;, &quot;once_delay:1000&quot;.</span>
+<span class="sd">        :param id: unique identifier of the target task.</span>
+<span class="sd">        :param description: custom description for the task.</span>
+<span class="sd">        :param params: JSON object with additional trigger parameters.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">trigger</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">trigger</span><span class="p">)</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;EditTask&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;script&quot;</span><span class="p">:</span> <span class="n">script</span><span class="p">,</span>
+                <span class="s2">&quot;trigger&quot;</span><span class="p">:</span> <span class="n">trigger</span><span class="p">,</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+                <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="n">params</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Scheduler.GetTasks">
+<a class="viewcode-back" href="../../../utils.html#jelastic.api.utils._Scheduler.GetTasks">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetTasks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns information on the specified tasks.</span>
+
+<span class="sd">        :param ids: list of IDs to retrieve</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetTasks&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="n">ids</span><span class="p">},</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Scheduler.RescheduleTasks">
+<a class="viewcode-back" href="../../../utils.html#jelastic.api.utils._Scheduler.RescheduleTasks">[docs]</a>
+    <span class="k">def</span> <span class="nf">RescheduleTasks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;RescheduleTasks&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Scheduler.UnscheduleTasks">
+<a class="viewcode-back" href="../../../utils.html#jelastic.api.utils._Scheduler.UnscheduleTasks">[docs]</a>
+    <span class="k">def</span> <span class="nf">UnscheduleTasks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Unschedules all the tasks assigned for regular execution.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;UnscheduleTasks&quot;</span><span class="p">)</span></div>
+</div>
 
 </pre></div>
 

@@ -9,7 +9,7 @@
           <link rel="stylesheet" href="../../../_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="../../../_static/documentation_options.js?v=81f1c024"></script>
+        <script src="../../../_static/documentation_options.js?v=bb0b1110"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -178,6 +178,15 @@
         
           <li class="toctree-l1 ">
             
+              <a href="../../../automation.html" class="reference internal ">Automation</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
               <a href="../../../billing.html" class="reference internal ">Billing</a>
             
 
@@ -232,7 +241,7 @@
         
           <li class="toctree-l1 ">
             
-              <a href="../../../io.html" class="reference internal ">Automation</a>
+              <a href="../../../io.html" class="reference internal ">IO</a>
             
 
             
@@ -439,11 +448,11 @@
 <div class="viewcode-block" id="_Analytics.GetNodesAffinitySuggestion">
 <a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Analytics.GetNodesAffinitySuggestion">[docs]</a>
     <span class="k">def</span> <span class="nf">GetNodesAffinitySuggestion</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">target_app_ids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">node_groups</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">uids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">thread_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">target_app_ids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_groups</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">uids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">thread_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A list of environments with one node in every layer where distribution can be optimized</span>
@@ -468,12 +477,12 @@
 <div class="viewcode-block" id="_Analytics.GetNodesAntiAffinitySuggestion">
 <a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Analytics.GetNodesAntiAffinitySuggestion">[docs]</a>
     <span class="k">def</span> <span class="nf">GetNodesAntiAffinitySuggestion</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">target_app_ids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">mode</span><span class="p">:</span> <span class="n">MODE</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">node_groups</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">uids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">thread_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">target_app_ids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="n">MODE</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_groups</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">uids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">thread_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A list of environments with non-optimal container distribution with optimization suggestions</span>
