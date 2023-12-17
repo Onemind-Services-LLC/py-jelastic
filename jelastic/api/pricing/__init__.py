@@ -42,6 +42,7 @@ class _Option(Pricing):
     """
     Ref: https://docs.jelastic.com/api/private/#!/api/pricing.Option
     """
+
     _endpoint2 = "option"
 
     def Create(self, tariff_option: dict, reseller_id: int = None):
@@ -86,6 +87,7 @@ class _Tariff(Pricing):
     """
     Ref: https://docs.jelastic.com/api/private/#!/api/pricing.Tariff
     """
+
     _endpoint2 = "tariff"
 
     def CreateGrid(self, tariff_grid: dict, reseller_id: int = None):

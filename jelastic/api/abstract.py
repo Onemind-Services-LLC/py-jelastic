@@ -1,7 +1,7 @@
 import json
 import logging
 from abc import ABC
-from datetime import datetime
+from datetime import date, datetime
 from typing import Any, Literal, Optional
 from urllib.parse import urlencode
 
@@ -93,7 +93,7 @@ class ClientAbstract(ABC):
             if value is None:
                 continue  # pragma: no cover
 
-            if isinstance(value, datetime):
+            if isinstance(value, (date, datetime)):
                 if datetime_format:
                     serialized_params[key] = value.strftime(datetime_format)
                 else:
