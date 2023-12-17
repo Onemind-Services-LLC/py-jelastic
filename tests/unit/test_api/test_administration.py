@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import patch, Mock
-from jelastic.api.administration import Administration
+from jelastic.api import Administration
 
 success_response = {"error": "", "reason": 0, "result": 0, "source": "billing"}
 
