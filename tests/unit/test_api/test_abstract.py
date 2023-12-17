@@ -46,6 +46,13 @@ def test_serialize_params(client):
         == f'appid=cluster&session=token&{urlencode({"start_datetime": now.isoformat()})}'
     )
 
+    params = {"start_datetime": now}
+    serialized_params = client._serialize_params(params, datetime_format="%Y-%m-%d")
+    assert (
+        serialized_params
+        == f'appid=cluster&session=token&{urlencode({"start_datetime": now.strftime("%Y-%m-%d")})}'
+    )
+
     params = {"list": ["l1", "l2"]}
     serialized_params = client._serialize_params(params, delimiter=",")
     assert serialized_params == "appid=cluster&list=l1%2Cl2&session=token"

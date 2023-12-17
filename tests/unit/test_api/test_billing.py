@@ -399,6 +399,18 @@ def test_get_collaboration_quotas(client):
     )
     assert response == success_response
 
+    with pytest.raises(ValueError):
+        client.Account.GetCollaborationQuotas(
+            quota_names=["quota1", "quota2"]
+        )
+
+    with pytest.raises(ValueError):
+        client.Account.GetCollaborationQuotas(
+            123,
+            owner_uid=123,
+            quota_names=["quota1", "quota2"]
+        )
+
 
 def test_get_countries(client):
     client._get.return_value = success_response
