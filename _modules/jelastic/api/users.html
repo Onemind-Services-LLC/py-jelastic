@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html  lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+      <title>jelastic.api.users</title>
+    
+          <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+          <link rel="stylesheet" href="../../../_static/theme.css " type="text/css" />
+      
+      <!-- sphinx script_files -->
+        <script src="../../../_static/documentation_options.js?v=81f1c024"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+
+      
+      <!-- bundled in js (rollup iife) -->
+      <!-- <script src="../../../_static/theme-vendors.js"></script> -->
+      <script src="../../../_static/theme.js" defer></script>
+      <link rel="canonical" href="https://onemind-services-llc.github.io/py-jelastic/_modules/jelastic/api/users.html" />
+    
+  <link rel="index" title="Index" href="../../../genindex.html" />
+  <link rel="search" title="Search" href="../../../search.html" /> 
+  </head>
+
+  <body>
+    <div id="app">
+    <div class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="../../../index.html" class="home-link">
+    
+      <span class="site-name">py-jelastic</span>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+  
+    <div class="nav-item">
+      <a href="../../../index.html#table-of-contents"
+         class="nav-link ">
+         table of contents
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../../../index.html#project"
+         class="nav-link ">
+         project
+      </a>
+    </div>
+  
+
+
+
+  
+    <div class="nav-item">
+      <a href="https://cloudmydc.com"
+        class="nav-link external">
+          Website <outboundlink></outboundlink>
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="https://app.xapp.cloudmydc.com/"
+        class="nav-link external">
+          App <outboundlink></outboundlink>
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="https://github.com/Onemind-Services-LLC/py-jelastic"
+        class="nav-link external">
+          Github <outboundlink></outboundlink>
+      </a>
+    </div>
+  
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+  
+    <div class="nav-item">
+      <a href="../../../index.html#table-of-contents"
+         class="nav-link ">
+         table of contents
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../../../index.html#project"
+         class="nav-link ">
+         project
+      </a>
+    </div>
+  
+
+
+
+  
+    <div class="nav-item">
+      <a href="https://cloudmydc.com"
+        class="nav-link external">
+          Website <outboundlink></outboundlink>
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="https://app.xapp.cloudmydc.com/"
+        class="nav-link external">
+          App <outboundlink></outboundlink>
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="https://github.com/Onemind-Services-LLC/py-jelastic"
+        class="nav-link external">
+          Github <outboundlink></outboundlink>
+      </a>
+    </div>
+  
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="../../../search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../../../index.html#table-of-contents">table of contents</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../../../install.html" class="reference internal ">Installing</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../../../abstract.html" class="reference internal ">Client Abstract</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../../../administration.html" class="reference internal ">Administration</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../../../billing.html" class="reference internal ">Billing</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../../../data.html" class="reference internal ">Data</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../../../development.html" class="reference internal ">Development</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../../../environment.html" class="reference internal ">Environment</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../../../exceptions.html" class="reference internal ">Exceptions</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../../../iaas.html" class="reference internal ">IaaS</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../../../io.html" class="reference internal ">Automation</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../../../management.html" class="reference internal ">Management</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../../../marketplace.html" class="reference internal ">Marketplace</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../../../message.html" class="reference internal ">Message</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../../../migration.html" class="reference internal ">Migration</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../../../platform.html" class="reference internal ">Platform</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../../../pool.html" class="reference internal ">Pool</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../../../pricing.html" class="reference internal ">Pricing</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../../../s3.html" class="reference internal ">S3</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../../../security.html" class="reference internal ">Security</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../../../thirdparty.html" class="reference internal ">Third Party</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../../../users.html" class="reference internal ">Users</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../../../utils.html" class="reference internal ">Utils</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../../../index.html#project">project</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../../../support.html" class="reference internal ">Support</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="../../../changes.html" class="reference internal ">Changes</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../../index.html">Module code</a> &raquo;</li>
+    
+    <li>jelastic.api.users</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main" v-pre>
+            
+  <h1>Source code for jelastic.api.users</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">..abstract</span> <span class="kn">import</span> <span class="n">ClientAbstract</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Users&quot;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="Users">
+<a class="viewcode-back" href="../../../users.html#jelastic.api.users.Users">[docs]</a>
+<span class="k">class</span> <span class="nc">Users</span><span class="p">(</span><span class="n">ClientAbstract</span><span class="p">):</span>
+    <span class="n">_endpoint1</span> <span class="o">=</span> <span class="s2">&quot;users&quot;</span></div>
+
+</pre></div>
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2016-2023 Onemind Services LLC.
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 7.2.6 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
+</div>
+            </div>
+          </div>
+      </page>
+    </div></div>
+    
+    
+  </body>
+</html>
