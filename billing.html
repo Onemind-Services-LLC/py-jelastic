@@ -10,7 +10,7 @@
           <link rel="stylesheet" href="_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="_static/documentation_options.js?v=bb0b1110"></script>
+        <script src="_static/documentation_options.js?v=7c01e40b"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -633,6 +633,11 @@ then allowed for billing accounts.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Account.GetAggExtraBillingHistory">
+<span class="sig-name descname"><span class="pre">GetAggExtraBillingHistory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_paid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Account.GetAggExtraBillingHistory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Account.GetAggExtraBillingHistory" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="jelastic.api.billing._Account.GetBillingInfo">
 <span class="sig-name descname"><span class="pre">GetBillingInfo</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Account.GetBillingInfo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Account.GetBillingInfo" title="Link to this definition">¶</a></dt>
 <dd><p>Returns account billing information.</p>
@@ -709,6 +714,11 @@ Possible values: NullExternBilling, PbasExternBilling, PbaExternBilling.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Account.GetExternalUserById">
+<span class="sig-name descname"><span class="pre">GetExternalUserById</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Account.GetExternalUserById"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Account.GetExternalUserById" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="jelastic.api.billing._Account.GetFundAccountHistory">
 <span class="sig-name descname"><span class="pre">GetFundAccountHistory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Account.GetFundAccountHistory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Account.GetFundAccountHistory" title="Link to this definition">¶</a></dt>
 <dd><p>Getting Fund history account by uid.</p>
@@ -744,6 +754,11 @@ Possible values: NullExternBilling, PbasExternBilling, PbaExternBilling.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Account.RemoveQuota">
+<span class="sig-name descname"><span class="pre">RemoveQuota</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Account.RemoveQuota"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Account.RemoveQuota" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="jelastic.api.billing._Account.ResetTestAccounts">
 <span class="sig-name descname"><span class="pre">ResetTestAccounts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Account.ResetTestAccounts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Account.ResetTestAccounts" title="Link to this definition">¶</a></dt>
 <dd><p>Resets a list of testing accounts on the platform.</p>
@@ -766,6 +781,11 @@ environments are shutdown. At activation all active environments are woken up.</
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Account.SetFundNote">
+<span class="sig-name descname"><span class="pre">SetFundNote</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Account.SetFundNote"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Account.SetFundNote" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="jelastic.api.billing._Account.SetGroup">
@@ -791,6 +811,11 @@ environments are shutdown. At activation all active environments are woken up.</
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Account.SetUserNote">
+<span class="sig-name descname"><span class="pre">SetUserNote</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Account.SetUserNote"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Account.SetUserNote" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="jelastic.api.billing._Account.SurchargeAccounts">
