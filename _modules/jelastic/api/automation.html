@@ -9,7 +9,7 @@
           <link rel="stylesheet" href="../../../_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="../../../_static/documentation_options.js?v=c4b54c3b"></script>
+        <script src="../../../_static/documentation_options.js?v=56177722"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -409,7 +409,10 @@
           <div class="content" role="main" v-pre>
             
   <h1>Source code for jelastic.api.automation</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">..abstract</span> <span class="kn">import</span> <span class="n">ClientAbstract</span>
+<span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+
+<span class="kn">from</span> <span class="nn">..abstract</span> <span class="kn">import</span> <span class="n">ClientAbstract</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Automation&quot;</span><span class="p">]</span>
 
@@ -417,7 +420,218 @@
 <div class="viewcode-block" id="Automation">
 <a class="viewcode-back" href="../../../automation.html#jelastic.api.automation.Automation">[docs]</a>
 <span class="k">class</span> <span class="nc">Automation</span><span class="p">(</span><span class="n">ClientAbstract</span><span class="p">):</span>
-    <span class="n">_endpoint1</span> <span class="o">=</span> <span class="s2">&quot;automation&quot;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">    &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; jelastic.automation</span>
+
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/automation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_endpoint1</span> <span class="o">=</span> <span class="s2">&quot;automation&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Utils</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_Utils&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.automation.Utils</span>
+
+<span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/automation.Utils</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_Utils</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="_Utils">
+<a class="viewcode-back" href="../../../automation.html#jelastic.api.automation._Utils">[docs]</a>
+<span class="k">class</span> <span class="nc">_Utils</span><span class="p">(</span><span class="n">Automation</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">    &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; jelastic.automation.Utils</span>
+
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/automation.Utils</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_endpoint2</span> <span class="o">=</span> <span class="s2">&quot;utils&quot;</span>
+
+<div class="viewcode-block" id="_Utils.ClearBillingHistory">
+<a class="viewcode-back" href="../../../automation.html#jelastic.api.automation._Utils.ClearBillingHistory">[docs]</a>
+    <span class="k">def</span> <span class="nf">ClearBillingHistory</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start_date</span><span class="p">:</span> <span class="n">date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">:</span> <span class="n">date</span><span class="p">,</span> <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;ClearBillingHistory&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;uid&quot;</span><span class="p">:</span> <span class="n">uid</span><span class="p">,</span>
+                <span class="s2">&quot;startDate&quot;</span><span class="p">:</span> <span class="n">start_date</span><span class="p">,</span>
+                <span class="s2">&quot;endDate&quot;</span><span class="p">:</span> <span class="n">end_date</span><span class="p">,</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">datetime_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Utils.ClearMonthTraffic">
+<a class="viewcode-back" href="../../../automation.html#jelastic.api.automation._Utils.ClearMonthTraffic">[docs]</a>
+    <span class="k">def</span> <span class="nf">ClearMonthTraffic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">month_start</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;ClearMonthTraffic&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;uid&quot;</span><span class="p">:</span> <span class="n">uid</span><span class="p">,</span>
+                <span class="s2">&quot;monthStart&quot;</span><span class="p">:</span> <span class="n">month_start</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Utils.ClearResourceStatistics">
+<a class="viewcode-back" href="../../../automation.html#jelastic.api.automation._Utils.ClearResourceStatistics">[docs]</a>
+    <span class="k">def</span> <span class="nf">ClearResourceStatistics</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start_date_from</span><span class="p">:</span> <span class="n">date</span><span class="p">,</span> <span class="n">start_date_to</span><span class="p">:</span> <span class="n">date</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;ClearResourceStatistics&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;uid&quot;</span><span class="p">:</span> <span class="n">uid</span><span class="p">,</span>
+                <span class="s2">&quot;startDateFrom&quot;</span><span class="p">:</span> <span class="n">start_date_from</span><span class="p">,</span>
+                <span class="s2">&quot;startDateTo&quot;</span><span class="p">:</span> <span class="n">start_date_to</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">datetime_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Utils.GenerateBillableItemStatistics">
+<a class="viewcode-back" href="../../../automation.html#jelastic.api.automation._Utils.GenerateBillableItemStatistics">[docs]</a>
+    <span class="k">def</span> <span class="nf">GenerateBillableItemStatistics</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">start_date</span><span class="p">:</span> <span class="n">date</span><span class="p">,</span>
+        <span class="n">duration_hour</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">item_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GenerateBillableItemStatistics&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;startDate&quot;</span><span class="p">:</span> <span class="n">start_date</span><span class="p">,</span>
+                <span class="s2">&quot;durationHour&quot;</span><span class="p">:</span> <span class="n">duration_hour</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+                <span class="s2">&quot;itemId&quot;</span><span class="p">:</span> <span class="n">item_id</span><span class="p">,</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">datetime_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Utils.GenerateStatistics">
+<a class="viewcode-back" href="../../../automation.html#jelastic.api.automation._Utils.GenerateStatistics">[docs]</a>
+    <span class="k">def</span> <span class="nf">GenerateStatistics</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">start_date</span><span class="p">:</span> <span class="n">date</span><span class="p">,</span> <span class="n">duration_hour</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">node_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">stat_json</span><span class="p">:</span> <span class="nb">dict</span>
+    <span class="p">):</span>
+        <span class="n">stat_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">stat_json</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GenerateStatistics&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;startDate&quot;</span><span class="p">:</span> <span class="n">start_date</span><span class="p">,</span>
+                <span class="s2">&quot;durationHour&quot;</span><span class="p">:</span> <span class="n">duration_hour</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+                <span class="s2">&quot;statJson&quot;</span><span class="p">:</span> <span class="n">stat_json</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">datetime_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Utils.GetUidUsageByPeriod">
+<a class="viewcode-back" href="../../../automation.html#jelastic.api.automation._Utils.GetUidUsageByPeriod">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetUidUsageByPeriod</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start_date</span><span class="p">:</span> <span class="n">date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">:</span> <span class="n">date</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetUidUsageByPeriod&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;uid&quot;</span><span class="p">:</span> <span class="n">uid</span><span class="p">,</span>
+                <span class="s2">&quot;startDate&quot;</span><span class="p">:</span> <span class="n">start_date</span><span class="p">,</span>
+                <span class="s2">&quot;endDate&quot;</span><span class="p">:</span> <span class="n">end_date</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">datetime_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Utils.SetAccountDate">
+<a class="viewcode-back" href="../../../automation.html#jelastic.api.automation._Utils.SetAccountDate">[docs]</a>
+    <span class="k">def</span> <span class="nf">SetAccountDate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">date_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">date_value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;SetAccountDate&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;uid&quot;</span><span class="p">:</span> <span class="n">uid</span><span class="p">,</span> <span class="s2">&quot;dateType&quot;</span><span class="p">:</span> <span class="n">date_type</span><span class="p">,</span> <span class="s2">&quot;dateValue&quot;</span><span class="p">:</span> <span class="n">date_value</span><span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Utils.SetAppNodeDate">
+<a class="viewcode-back" href="../../../automation.html#jelastic.api.automation._Utils.SetAppNodeDate">[docs]</a>
+    <span class="k">def</span> <span class="nf">SetAppNodeDate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">date_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">date_value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;SetAppNodeDate&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;dateType&quot;</span><span class="p">:</span> <span class="n">date_type</span><span class="p">,</span>
+                <span class="s2">&quot;dateValue&quot;</span><span class="p">:</span> <span class="n">date_value</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Utils.SetBillingHistoryDate">
+<a class="viewcode-back" href="../../../automation.html#jelastic.api.automation._Utils.SetBillingHistoryDate">[docs]</a>
+    <span class="k">def</span> <span class="nf">SetBillingHistoryDate</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">uid</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">start_date_from</span><span class="p">:</span> <span class="n">date</span><span class="p">,</span>
+        <span class="n">start_date_to</span><span class="p">:</span> <span class="n">date</span><span class="p">,</span>
+        <span class="n">date_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">date_value</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;SetBillingHistoryDate&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;uid&quot;</span><span class="p">:</span> <span class="n">uid</span><span class="p">,</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;startDateFrom&quot;</span><span class="p">:</span> <span class="n">start_date_from</span><span class="p">,</span>
+                <span class="s2">&quot;startDateTo&quot;</span><span class="p">:</span> <span class="n">start_date_to</span><span class="p">,</span>
+                <span class="s2">&quot;dateType&quot;</span><span class="p">:</span> <span class="n">date_type</span><span class="p">,</span>
+                <span class="s2">&quot;dateValue&quot;</span><span class="p">:</span> <span class="n">date_value</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">datetime_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Utils.SetMonthTraffic">
+<a class="viewcode-back" href="../../../automation.html#jelastic.api.automation._Utils.SetMonthTraffic">[docs]</a>
+    <span class="k">def</span> <span class="nf">SetMonthTraffic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">month_start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">external_traffic</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;SetMonthTraffic&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;uid&quot;</span><span class="p">:</span> <span class="n">uid</span><span class="p">,</span>
+                <span class="s2">&quot;monthStart&quot;</span><span class="p">:</span> <span class="n">month_start</span><span class="p">,</span>
+                <span class="s2">&quot;externalTraffic&quot;</span><span class="p">:</span> <span class="n">external_traffic</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Utils.ShiftResourceCreatedOnDateToStartDate">
+<a class="viewcode-back" href="../../../automation.html#jelastic.api.automation._Utils.ShiftResourceCreatedOnDateToStartDate">[docs]</a>
+    <span class="k">def</span> <span class="nf">ShiftResourceCreatedOnDateToStartDate</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">start_date_from</span><span class="p">:</span> <span class="n">date</span><span class="p">,</span> <span class="n">start_date_to</span><span class="p">:</span> <span class="n">date</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;ShiftResourceCreatedOnDateToStartDate&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;uid&quot;</span><span class="p">:</span> <span class="n">uid</span><span class="p">,</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;startDateFrom&quot;</span><span class="p">:</span> <span class="n">start_date_from</span><span class="p">,</span>
+                <span class="s2">&quot;startDateTo&quot;</span><span class="p">:</span> <span class="n">start_date_to</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">datetime_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+</div>
 
 </pre></div>
 
