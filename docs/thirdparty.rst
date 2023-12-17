@@ -6,7 +6,7 @@ Third Party
    :undoc-members:
    :show-inheritance:
 
-.. autoclass:: jelastic.api.utils._GeoIp
+.. autoclass:: jelastic.api.thirdparty._GeoIp
    :members:
    :undoc-members:
    :show-inheritance:
