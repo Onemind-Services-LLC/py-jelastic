@@ -13,6 +13,7 @@ Changes
 
 - Initial release
 - Added `jelastic.api.billing.Account` class
+- Added `jelastic.api.thirdparty.GeoIp` class
 - Added `jelastic.api.utils.Batch` class
 - Added `jelastic.api.utils.Scheduler` class
 - Added unit and integration tests

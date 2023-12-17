@@ -9,7 +9,7 @@
           <link rel="stylesheet" href="../../../_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="../../../_static/documentation_options.js?v=7c01e40b"></script>
+        <script src="../../../_static/documentation_options.js?v=82609c86"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -417,8 +417,23 @@
 <div class="viewcode-block" id="ThirdParty">
 <a class="viewcode-back" href="../../../thirdparty.html#jelastic.api.thirdparty.ThirdParty">[docs]</a>
 <span class="k">class</span> <span class="nc">ThirdParty</span><span class="p">(</span><span class="n">ClientAbstract</span><span class="p">):</span>
-    <span class="n">_endpoint1</span> <span class="o">=</span> <span class="s2">&quot;thirdparty&quot;</span></div>
+    <span class="n">_endpoint1</span> <span class="o">=</span> <span class="s2">&quot;thirdparty&quot;</span>
 
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">GeoIp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_GeoIp&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_GeoIp</span><span class="p">(</span>
+            <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
+            <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span>
+            <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+
+<span class="k">class</span> <span class="nc">_GeoIp</span><span class="p">(</span><span class="n">ThirdParty</span><span class="p">):</span>
+    <span class="n">_endpoint2</span> <span class="o">=</span> <span class="s2">&quot;geoip&quot;</span>
+
+    <span class="k">def</span> <span class="nf">GeoIp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GeoIp&quot;</span><span class="p">)</span>
 </pre></div>
 
           </div>
