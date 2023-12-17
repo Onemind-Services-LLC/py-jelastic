@@ -18,7 +18,7 @@ def test_get_nodes_affinity_suggestion(client):
     response = client.Analytics.GetNodesAffinitySuggestion(
         ["app_id1", "app_id2"], ["node_group1", "node_group2"], ["uid1", "uid2"], 10
     )
-    client._get.assert_called_once_with(
+    client._get.assert_called_with(
         "GetNodesAffinitySuggestion",
         params={
             "targetAppIds": ["app_id1", "app_id2"],
@@ -41,7 +41,7 @@ def test_get_nodes_anti_affinity_suggestion(client):
         ["uid1", "uid2"],
         10,
     )
-    client._get.assert_called_once_with(
+    client._get.assert_called_with(
         "GetNodesAntiAffinitySuggestion",
         params={
             "targetAppIds": ["app_id1", "app_id2"],

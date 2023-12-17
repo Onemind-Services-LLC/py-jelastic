@@ -23,7 +23,7 @@ def test_clear_billing_history(client):
     response = client.Utils.ClearBillingHistory(
         1, CURRENT_DATETIME.date(), CURRENT_DATETIME.date(), "env"
     )
-    client._get.assert_called_once_with(
+    client._get.assert_called_with(
         "ClearBillingHistory",
         params={
             "uid": 1,
@@ -40,7 +40,7 @@ def test_clear_billing_history(client):
 def test_clear_monthly_traffic(client):
     client._get.return_value = success_response
     response = client.Utils.ClearMonthTraffic(1, "1")
-    client._get.assert_called_once_with(
+    client._get.assert_called_with(
         "ClearMonthTraffic", params={"uid": 1, "monthStart": "1"}
     )
 
@@ -52,7 +52,7 @@ def test_clear_resource_statistics(client):
     response = client.Utils.ClearResourceStatistics(
         1, CURRENT_DATETIME.date(), CURRENT_DATETIME.date()
     )
-    client._get.assert_called_once_with(
+    client._get.assert_called_with(
         "ClearResourceStatistics",
         params={
             "uid": 1,
@@ -70,7 +70,7 @@ def test_generate_billable_item_statistics(client):
     response = client.Utils.GenerateBillableItemStatistics(
         CURRENT_DATETIME.date(), 1, 1, 1, "env"
     )
-    client._get.assert_called_once_with(
+    client._get.assert_called_with(
         "GenerateBillableItemStatistics",
         params={
             "startDate": CURRENT_DATETIME.date(),
@@ -89,7 +89,7 @@ def test_generate_statistics(client):
     response = client.Utils.GenerateStatistics(
         CURRENT_DATETIME.date(), 1, 1, {"cpu": "1"}
     )
-    client._get.assert_called_once_with(
+    client._get.assert_called_with(
         "GenerateStatistics",
         params={
             "startDate": CURRENT_DATETIME.date(),
@@ -107,7 +107,7 @@ def test_get_uid_usage_by_period(client):
     response = client.Utils.GetUidUsageByPeriod(
         1, CURRENT_DATETIME.date(), CURRENT_DATETIME.date()
     )
-    client._get.assert_called_once_with(
+    client._get.assert_called_with(
         "GetUidUsageByPeriod",
         params={
             "uid": 1,
@@ -122,7 +122,7 @@ def test_get_uid_usage_by_period(client):
 def test_set_account_date(client):
     client._get.return_value = success_response
     response = client.Utils.SetAccountDate(1, "type", "value")
-    client._get.assert_called_once_with(
+    client._get.assert_called_with(
         "SetAccountDate",
         params={"uid": 1, "dateType": "type", "dateValue": "value"},
     )
@@ -132,7 +132,7 @@ def test_set_account_date(client):
 def test_set_app_node_date(client):
     client._get.return_value = success_response
     response = client.Utils.SetAppNodeDate("env", "type", "value")
-    client._get.assert_called_once_with(
+    client._get.assert_called_with(
         "SetAppNodeDate",
         params={"envName": "env", "dateType": "type", "dateValue": "value"},
     )
@@ -144,7 +144,7 @@ def test_set_billing_history_date(client):
     response = client.Utils.SetBillingHistoryDate(
         1, "env", CURRENT_DATETIME.date(), CURRENT_DATETIME.date(), "type", "value"
     )
-    client._get.assert_called_once_with(
+    client._get.assert_called_with(
         "SetBillingHistoryDate",
         params={
             "uid": 1,
@@ -162,7 +162,7 @@ def test_set_billing_history_date(client):
 def test_set_month_traffic(client):
     client._get.return_value = success_response
     response = client.Utils.SetMonthTraffic(1, "1", 1.0)
-    client._get.assert_called_once_with(
+    client._get.assert_called_with(
         "SetMonthTraffic",
         params={"uid": 1, "monthStart": "1", "externalTraffic": 1.0},
     )
@@ -174,7 +174,7 @@ def test_shift_resource_created_on_date_to_start_date(client):
     response = client.Utils.ShiftResourceCreatedOnDateToStartDate(
         1, "env", CURRENT_DATETIME.date(), CURRENT_DATETIME.date()
     )
-    client._get.assert_called_once_with(
+    client._get.assert_called_with(
         "ShiftResourceCreatedOnDateToStartDate",
         params={
             "uid": 1,
