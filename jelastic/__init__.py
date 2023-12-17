@@ -1,4 +1,5 @@
 from enum import Enum
+
 from httpx import Client
 
 # Import all API endpoints
@@ -19,7 +20,7 @@ class Jelastic:
     """Jelastic API client, main entry point for all API operations."""
 
     def __init__(
-        self, base_url: str, token: str, version: str = "1.0", debug: bool = False
+            self, base_url: str, token: str, version: str = "1.0", debug: bool = False
     ):
         """
         To initialize with API endpoints for the Jelastic API.
@@ -67,5 +68,91 @@ class Jelastic:
         )
 
     @property
+    def automation(self) -> Automation:
+        return Automation(
+            session=self._session, token=self._token, debug=self._debug
+        )
+
+    @property
     def billing(self) -> Billing:
         return Billing(session=self._session, token=self._token, debug=self._debug)
+
+    @property
+    def data(self) -> Data:
+        return Data(session=self._session, token=self._token, debug=self._debug)
+
+    @property
+    def development(self) -> Development:
+        return Development(
+            session=self._session, token=self._token, debug=self._debug
+        )
+
+    @property
+    def environment(self) -> Environment:
+        return Environment(
+            session=self._session, token=self._token, debug=self._debug
+        )
+
+    @property
+    def iaas(self) -> IaaS:
+        return IaaS(session=self._session, token=self._token, debug=self._debug)
+
+    @property
+    def io(self) -> IO:
+        return IO(session=self._session, token=self._token, debug=self._debug)
+
+    @property
+    def management(self) -> Management:
+        return Management(session=self._session, token=self._token, debug=self._debug)
+
+    @property
+    def marketplace(self) -> Marketplace:
+        return Marketplace(session=self._session, token=self._token, debug=self._debug)
+
+    @property
+    def message(self) -> Message:
+        return Message(session=self._session, token=self._token, debug=self._debug)
+
+    @property
+    def migration(self) -> Migration:
+        return Migration(session=self._session, token=self._token, debug=self._debug)
+
+    @property
+    def platform(self) -> Platform:
+        return Platform(session=self._session, token=self._token, debug=self._debug)
+
+    @property
+    def pool(self) -> Pool:
+        return Pool(session=self._session, token=self._token, debug=self._debug)
+
+    @property
+    def pricing(self) -> Pricing:
+        return Pricing(session=self._session, token=self._token, debug=self._debug)
+
+    @property
+    def s3(self) -> S3:
+        return S3(session=self._session, token=self._token, debug=self._debug)
+
+    @property
+    def security(self) -> Security:
+        return Security(session=self._session, token=self._token, debug=self._debug)
+
+    @property
+    def statistic(self) -> Statistic:
+        return Statistic(session=self._session, token=self._token, debug=self._debug)
+
+    @property
+    def system(self) -> System:
+        return System(session=self._session, token=self._token, debug=self._debug)
+
+    @property
+    def thirdparty(self) -> ThirdParty:
+        return ThirdParty(session=self._session, token=self._token, debug=self._debug)
+
+    @property
+    def users(self) -> Users:
+        return Users(session=self._session, token=self._token, debug=self._debug)
+
+    @property
+    def utils(self) -> Utils:
+        return Utils(session=self._session, token=self._token, debug=self._debug)

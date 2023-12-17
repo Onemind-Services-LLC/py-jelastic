@@ -1,0 +1,6 @@
+S3
+==
+
+.. automodule:: jelastic.api.s3
+   :members:
+   :show-inheritance:

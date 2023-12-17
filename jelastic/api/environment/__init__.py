@@ -1,9 +1,7 @@
-from datetime import datetime
-
-from ..api import API
+from ..abstract import ClientAbstract
 
 __all__ = ["Environment"]
 
 
-class Environment(API):
+class Environment(ClientAbstract):
     _endpoint1 = "environment"
