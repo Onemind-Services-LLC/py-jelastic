@@ -9,7 +9,7 @@
           <link rel="stylesheet" href="../../../_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="../../../_static/documentation_options.js?v=f69c3028"></script>
+        <script src="../../../_static/documentation_options.js?v=8745a452"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -417,7 +417,393 @@
 <div class="viewcode-block" id="S3">
 <a class="viewcode-back" href="../../../s3.html#jelastic.api.s3.S3">[docs]</a>
 <span class="k">class</span> <span class="nc">S3</span><span class="p">(</span><span class="n">ClientAbstract</span><span class="p">):</span>
-    <span class="n">_endpoint1</span> <span class="o">=</span> <span class="s2">&quot;s3&quot;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">    &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; jelastic.s3</span>
+
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/s3</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_endpoint1</span> <span class="o">=</span> <span class="s2">&quot;s3&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Account</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_Account&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Service provides an interface for managing S3 stuff</span>
+
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.s3.Account</span>
+
+<span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/s3.Account</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_Account</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Bucket</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_Bucket&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Service provides an interface for managing S3 stuff</span>
+
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.s3.Bucket</span>
+
+<span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/s3.Bucket</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_Bucket</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="_Account">
+<a class="viewcode-back" href="../../../s3.html#jelastic.api.s3._Account">[docs]</a>
+<span class="k">class</span> <span class="nc">_Account</span><span class="p">(</span><span class="n">S3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Service provides an interface for managing S3 stuff</span>
+
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/s3.Account</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_endpoint2</span> <span class="o">=</span> <span class="s2">&quot;account&quot;</span>
+
+<div class="viewcode-block" id="_Account.Create">
+<a class="viewcode-back" href="../../../s3.html#jelastic.api.s3._Account.Create">[docs]</a>
+    <span class="k">def</span> <span class="nf">Create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a new S3 account.</span>
+
+<span class="sd">        :param host_group: unique name of the target host group.</span>
+<span class="sd">        :param name: a name of the account to be created.</span>
+<span class="sd">        :param owner_uid: unique identifier of the S3 account owner.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Create&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;hostGroup&quot;</span><span class="p">:</span> <span class="n">host_group</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Account.Delete">
+<a class="viewcode-back" href="../../../s3.html#jelastic.api.s3._Account.Delete">[docs]</a>
+    <span class="k">def</span> <span class="nf">Delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes an S3 account.</span>
+
+<span class="sd">        :param host_group: unique name of the target host group.</span>
+<span class="sd">        :param name: a name of the account to be deleted.</span>
+<span class="sd">        :param owner_uid: unique identifier of the S3 account owner.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Delete&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;hostGroup&quot;</span><span class="p">:</span> <span class="n">host_group</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Account.GenerateKey">
+<a class="viewcode-back" href="../../../s3.html#jelastic.api.s3._Account.GenerateKey">[docs]</a>
+    <span class="k">def</span> <span class="nf">GenerateKey</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates a new key for an S3 account.</span>
+
+<span class="sd">        :param host_group: unique name of the target host group.</span>
+<span class="sd">        :param name: a name of the account to be updated.</span>
+<span class="sd">        :param owner_uid: unique identifier of the S3 account owner.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GenerateKey&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;hostGroup&quot;</span><span class="p">:</span> <span class="n">host_group</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Account.GetKeys">
+<a class="viewcode-back" href="../../../s3.html#jelastic.api.s3._Account.GetKeys">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetKeys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the list of accounts together with keys for each available S3 cluster.</span>
+
+<span class="sd">        :param owner_uid: unique identifier of the S3 account owner.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetKeys&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="_Account.RegenerateKeys">
+<a class="viewcode-back" href="../../../s3.html#jelastic.api.s3._Account.RegenerateKeys">[docs]</a>
+    <span class="k">def</span> <span class="nf">RegenerateKeys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">acc_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Regenerates the target key pair by access key.</span>
+
+<span class="sd">        :param host_group: unique name of the target host group.</span>
+<span class="sd">        :param acc_key: access key that should be regenerated.</span>
+<span class="sd">        :param owner_uid: unique identifier of the S3 account owner.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;RegenerateKeys&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;hostGroup&quot;</span><span class="p">:</span> <span class="n">host_group</span><span class="p">,</span> <span class="s2">&quot;accKey&quot;</span><span class="p">:</span> <span class="n">acc_key</span><span class="p">,</span> <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Account.RevokeKey">
+<a class="viewcode-back" href="../../../s3.html#jelastic.api.s3._Account.RevokeKey">[docs]</a>
+    <span class="k">def</span> <span class="nf">RevokeKey</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">acc_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Revokes the target key to the S3 account for the current user.</span>
+
+<span class="sd">        :param host_group: unique name of the target host group.</span>
+<span class="sd">        :param acc_key: access key that should be revoked.</span>
+<span class="sd">        :param owner_uid: unique identifier of the S3 account owner.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;RevokeKey&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;hostGroup&quot;</span><span class="p">:</span> <span class="n">host_group</span><span class="p">,</span> <span class="s2">&quot;accKey&quot;</span><span class="p">:</span> <span class="n">acc_key</span><span class="p">,</span> <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">},</span>
+        <span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="_Bucket">
+<a class="viewcode-back" href="../../../s3.html#jelastic.api.s3._Bucket">[docs]</a>
+<span class="k">class</span> <span class="nc">_Bucket</span><span class="p">(</span><span class="n">S3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Service provides an interface for managing S3 stuff</span>
+
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/s3.Bucket</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_endpoint2</span> <span class="o">=</span> <span class="s2">&quot;bucket&quot;</span>
+
+<div class="viewcode-block" id="_Bucket.CopyObject">
+<a class="viewcode-back" href="../../../s3.html#jelastic.api.s3._Bucket.CopyObject">[docs]</a>
+    <span class="k">def</span> <span class="nf">CopyObject</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">src_bucket_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">src_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">dest_bucket_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">dest_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">host_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Copies an object from one bucket to another.</span>
+
+<span class="sd">        :param src_bucket_name: name of the source bucket.</span>
+<span class="sd">        :param src_key: unique identifier of the source object key.</span>
+<span class="sd">        :param dest_bucket_name: name of the target bucket.</span>
+<span class="sd">        :param dest_key: unique identifier of the target object key.</span>
+<span class="sd">        :param host_group: unique identifier of the target host group.</span>
+<span class="sd">        :param owner_uid: unique identifier of the bucket owner.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;CopyObject&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;srcBucketName&quot;</span><span class="p">:</span> <span class="n">src_bucket_name</span><span class="p">,</span>
+                <span class="s2">&quot;srcKey&quot;</span><span class="p">:</span> <span class="n">src_key</span><span class="p">,</span>
+                <span class="s2">&quot;dstBucketName&quot;</span><span class="p">:</span> <span class="n">dest_bucket_name</span><span class="p">,</span>
+                <span class="s2">&quot;dstKey&quot;</span><span class="p">:</span> <span class="n">dest_key</span><span class="p">,</span>
+                <span class="s2">&quot;hostGroup&quot;</span><span class="p">:</span> <span class="n">host_group</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Bucket.Create">
+<a class="viewcode-back" href="../../../s3.html#jelastic.api.s3._Bucket.Create">[docs]</a>
+    <span class="k">def</span> <span class="nf">Create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">host_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a new bucket in the storage.</span>
+
+<span class="sd">        :param bucket_name: name of the bucket to be created.</span>
+<span class="sd">        :param host_group: unique identifier of the target host group.</span>
+<span class="sd">        :param owner_uid: unique identifier of the bucket owner.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Create&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;bucketName&quot;</span><span class="p">:</span> <span class="n">bucket_name</span><span class="p">,</span>
+                <span class="s2">&quot;hostGroup&quot;</span><span class="p">:</span> <span class="n">host_group</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Bucket.Delete">
+<a class="viewcode-back" href="../../../s3.html#jelastic.api.s3._Bucket.Delete">[docs]</a>
+    <span class="k">def</span> <span class="nf">Delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">host_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes a bucket from the storage.</span>
+
+<span class="sd">        :param bucket_name: name of the bucket to be deleted.</span>
+<span class="sd">        :param host_group: unique identifier of the target host group.</span>
+<span class="sd">        :param owner_uid: unique identifier of the bucket owner.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Delete&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;bucketName&quot;</span><span class="p">:</span> <span class="n">bucket_name</span><span class="p">,</span>
+                <span class="s2">&quot;hostGroup&quot;</span><span class="p">:</span> <span class="n">host_group</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Bucket.DeleteObject">
+<a class="viewcode-back" href="../../../s3.html#jelastic.api.s3._Bucket.DeleteObject">[docs]</a>
+    <span class="k">def</span> <span class="nf">DeleteObject</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">host_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Removes an object from the bucket.</span>
+
+<span class="sd">        :param bucket_name: name of the bucket.</span>
+<span class="sd">        :param key: unique identifier of the object key.</span>
+<span class="sd">        :param host_group: unique identifier of the target host group.</span>
+<span class="sd">        :param owner_uid: unique identifier of the bucket owner.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;DeleteObject&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;bucketName&quot;</span><span class="p">:</span> <span class="n">bucket_name</span><span class="p">,</span>
+                <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span>
+                <span class="s2">&quot;hostGroup&quot;</span><span class="p">:</span> <span class="n">host_group</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Bucket.DeletePolicy">
+<a class="viewcode-back" href="../../../s3.html#jelastic.api.s3._Bucket.DeletePolicy">[docs]</a>
+    <span class="k">def</span> <span class="nf">DeletePolicy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">host_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Removes bucket policy.</span>
+
+<span class="sd">        :param bucket_name: name of the bucket.</span>
+<span class="sd">        :param host_group: unique identifier of the target host group.</span>
+<span class="sd">        :param owner_uid: unique identifier of the bucket owner.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;DeletePolicy&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;bucketName&quot;</span><span class="p">:</span> <span class="n">bucket_name</span><span class="p">,</span>
+                <span class="s2">&quot;hostGroup&quot;</span><span class="p">:</span> <span class="n">host_group</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Bucket.GetPolicy">
+<a class="viewcode-back" href="../../../s3.html#jelastic.api.s3._Bucket.GetPolicy">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetPolicy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">host_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a list of bucket policies.</span>
+
+<span class="sd">        :param bucket_name: name of the bucket.</span>
+<span class="sd">        :param host_group: unique identifier of the target host group.</span>
+<span class="sd">        :param owner_uid: unique identifier of the bucket owner.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetPolicy&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;bucketName&quot;</span><span class="p">:</span> <span class="n">bucket_name</span><span class="p">,</span>
+                <span class="s2">&quot;hostGroup&quot;</span><span class="p">:</span> <span class="n">host_group</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Bucket.GetPresignedURL">
+<a class="viewcode-back" href="../../../s3.html#jelastic.api.s3._Bucket.GetPresignedURL">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetPresignedURL</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">host_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a link to the bucket.</span>
+
+<span class="sd">        :param bucket_name: name of the bucket.</span>
+<span class="sd">        :param key: unique identifier of the object key.</span>
+<span class="sd">        :param host_group: unique identifier of the target host group.</span>
+<span class="sd">        :param owner_uid: unique identifier of the bucket owner.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetPresignedURL&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;bucketName&quot;</span><span class="p">:</span> <span class="n">bucket_name</span><span class="p">,</span>
+                <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span>
+                <span class="s2">&quot;hostGroup&quot;</span><span class="p">:</span> <span class="n">host_group</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Bucket.List">
+<a class="viewcode-back" href="../../../s3.html#jelastic.api.s3._Bucket.List">[docs]</a>
+    <span class="k">def</span> <span class="nf">List</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a list of buckets in the storage.</span>
+
+<span class="sd">        :param owner_uid: unique identifier of the bucket owner.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;List&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="_Bucket.ListObjects">
+<a class="viewcode-back" href="../../../s3.html#jelastic.api.s3._Bucket.ListObjects">[docs]</a>
+    <span class="k">def</span> <span class="nf">ListObjects</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">bucket_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">host_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">continuation_token</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">delimiter</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="n">max_keys</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a list of objects in a bucket.</span>
+
+<span class="sd">        :param bucket_name: name of the bucket.</span>
+<span class="sd">        :param host_group: unique identifier of the target host group.</span>
+<span class="sd">        :param prefix: filters response to objects that start with the provided string.</span>
+<span class="sd">        :param continuation_token: custom token to indicate that the list continues on the same bucket.</span>
+<span class="sd">        :param delimiter: custom string to divide separate object records.</span>
+<span class="sd">        :param max_keys: the maximum number of objects returned in the response.</span>
+<span class="sd">        :param owner_uid: unique identifier of the bucket owner.</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;ListObjects&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;bucketName&quot;</span><span class="p">:</span> <span class="n">bucket_name</span><span class="p">,</span>
+                <span class="s2">&quot;hostGroup&quot;</span><span class="p">:</span> <span class="n">host_group</span><span class="p">,</span>
+                <span class="s2">&quot;prefix&quot;</span><span class="p">:</span> <span class="n">prefix</span><span class="p">,</span>
+                <span class="s2">&quot;continuationToken&quot;</span><span class="p">:</span> <span class="n">continuation_token</span><span class="p">,</span>
+                <span class="s2">&quot;delimiter&quot;</span><span class="p">:</span> <span class="n">delimiter</span><span class="p">,</span>
+                <span class="s2">&quot;maxKeys&quot;</span><span class="p">:</span> <span class="n">max_keys</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Bucket.SetPolicy">
+<a class="viewcode-back" href="../../../s3.html#jelastic.api.s3._Bucket.SetPolicy">[docs]</a>
+    <span class="k">def</span> <span class="nf">SetPolicy</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">bucket_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">host_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Replaces existing bucket policies with the provided value.</span>
+
+<span class="sd">        :param bucket_name: name of the bucket.</span>
+<span class="sd">        :param host_group: unique identifier of the target host group.</span>
+<span class="sd">        :param policy: S3 policies to specify permissions for each resource to allow or deny actions requested by user or role.</span>
+<span class="sd">        :param owner_uid: unique identifier of the bucket owner.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;SetPolicy&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;bucketName&quot;</span><span class="p">:</span> <span class="n">bucket_name</span><span class="p">,</span>
+                <span class="s2">&quot;hostGroup&quot;</span><span class="p">:</span> <span class="n">host_group</span><span class="p">,</span>
+                <span class="s2">&quot;policy&quot;</span><span class="p">:</span> <span class="n">policy</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+</div>
 
 </pre></div>
 

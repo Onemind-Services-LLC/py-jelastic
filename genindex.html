@@ -10,7 +10,7 @@
           <link rel="stylesheet" href="_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="_static/documentation_options.js?v=f69c3028"></script>
+        <script src="_static/documentation_options.js?v=8745a452"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -421,6 +421,7 @@
  | <a href="#G"><strong>G</strong></a>
  | <a href="#I"><strong>I</strong></a>
  | <a href="#J"><strong>J</strong></a>
+ | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#P"><strong>P</strong></a>
  | <a href="#R"><strong>R</strong></a>
@@ -436,19 +437,25 @@
       <li><a href="abstract.html#jelastic.api.abstract.ClientAbstract.__init__">__init__() (jelastic.api.abstract.ClientAbstract method)</a>
 </li>
       <li><a href="billing.html#jelastic.api.billing._Account">_Account (class in jelastic.api.billing)</a>
+
+      <ul>
+        <li><a href="s3.html#jelastic.api.s3._Account">(class in jelastic.api.s3)</a>
 </li>
+      </ul></li>
       <li><a href="administration.html#jelastic.api.administration._Analytics">_Analytics (class in jelastic.api.administration)</a>
 </li>
       <li><a href="utils.html#jelastic.api.utils._Batch">_Batch (class in jelastic.api.utils)</a>
+</li>
+      <li><a href="s3.html#jelastic.api.s3._Bucket">_Bucket (class in jelastic.api.s3)</a>
 </li>
       <li><a href="message.html#jelastic.api.message._Email">_Email (class in jelastic.api.message)</a>
 </li>
       <li><a href="abstract.html#jelastic.api.abstract.ClientAbstract._endpoint">_endpoint() (jelastic.api.abstract.ClientAbstract method)</a>
 </li>
-      <li><a href="platform.html#jelastic.api.platform._Engine">_Engine (class in jelastic.api.platform)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="platform.html#jelastic.api.platform._Engine">_Engine (class in jelastic.api.platform)</a>
+</li>
       <li><a href="thirdparty.html#jelastic.api.thirdparty._GeoIp">_GeoIp (class in jelastic.api.thirdparty)</a>
 </li>
       <li><a href="abstract.html#jelastic.api.abstract.ClientAbstract._handle_response">_handle_response() (jelastic.api.abstract.ClientAbstract method)</a>
@@ -470,7 +477,11 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="billing.html#jelastic.api.billing.Billing.Account">Account (jelastic.api.billing.Billing property)</a>
+
+      <ul>
+        <li><a href="s3.html#jelastic.api.s3.S3.Account">(jelastic.api.s3.S3 property)</a>
 </li>
+      </ul></li>
       <li><a href="billing.html#jelastic.api.billing._Account.AddAccount">AddAccount() (jelastic.api.billing._Account method)</a>
 </li>
   </ul></td>
@@ -493,6 +504,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="billing.html#jelastic.api.billing.Billing">Billing (class in jelastic.api.billing)</a>
 </li>
+      <li><a href="s3.html#jelastic.api.s3.S3.Bucket">Bucket (jelastic.api.s3.S3 property)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -511,16 +524,24 @@
 </li>
       <li><a href="abstract.html#jelastic.api.abstract.ClientAbstract">ClientAbstract (class in jelastic.api.abstract)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="billing.html#jelastic.api.billing._Account.ConvertToCommercial">ConvertToCommercial() (jelastic.api.billing._Account method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="billing.html#jelastic.api.billing._Account.ConvertToCommercialAndPay">ConvertToCommercialAndPay() (jelastic.api.billing._Account method)</a>
 </li>
       <li><a href="billing.html#jelastic.api.billing._Account.ConvertToTrial">ConvertToTrial() (jelastic.api.billing._Account method)</a>
 </li>
-      <li><a href="iaas.html#jelastic.api.iaas._Project.Create">Create() (jelastic.api.iaas._Project method)</a>
+      <li><a href="s3.html#jelastic.api.s3._Bucket.CopyObject">CopyObject() (jelastic.api.s3._Bucket method)</a>
 </li>
+      <li><a href="iaas.html#jelastic.api.iaas._Project.Create">Create() (jelastic.api.iaas._Project method)</a>
+
+      <ul>
+        <li><a href="s3.html#jelastic.api.s3._Account.Create">(jelastic.api.s3._Account method)</a>
+</li>
+        <li><a href="s3.html#jelastic.api.s3._Bucket.Create">(jelastic.api.s3._Bucket method)</a>
+</li>
+      </ul></li>
       <li><a href="utils.html#jelastic.api.utils._Scheduler.CreateAccountTask">CreateAccountTask() (jelastic.api.utils._Scheduler method)</a>
 </li>
       <li><a href="utils.html#jelastic.api.utils._Scheduler.CreateEnvTask">CreateEnvTask() (jelastic.api.utils._Scheduler method)</a>
@@ -534,9 +555,19 @@
       <li><a href="data.html#jelastic.api.data.Data">Data (class in jelastic.api.data)</a>
 </li>
       <li><a href="iaas.html#jelastic.api.iaas._Project.Delete">Delete() (jelastic.api.iaas._Project method)</a>
+
+      <ul>
+        <li><a href="s3.html#jelastic.api.s3._Account.Delete">(jelastic.api.s3._Account method)</a>
 </li>
+        <li><a href="s3.html#jelastic.api.s3._Bucket.Delete">(jelastic.api.s3._Bucket method)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="s3.html#jelastic.api.s3._Bucket.DeleteObject">DeleteObject() (jelastic.api.s3._Bucket method)</a>
+</li>
+      <li><a href="s3.html#jelastic.api.s3._Bucket.DeletePolicy">DeletePolicy() (jelastic.api.s3._Bucket method)</a>
+</li>
       <li><a href="utils.html#jelastic.api.utils._Scheduler.DeleteTasks">DeleteTasks() (jelastic.api.utils._Scheduler method)</a>
 </li>
       <li><a href="development.html#jelastic.api.development.Development">Development (class in jelastic.api.development)</a>
@@ -581,6 +612,8 @@
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="s3.html#jelastic.api.s3._Account.GenerateKey">GenerateKey() (jelastic.api.s3._Account method)</a>
+</li>
       <li><a href="thirdparty.html#jelastic.api.thirdparty.ThirdParty.GeoIp">GeoIp (jelastic.api.thirdparty.ThirdParty property)</a>
 </li>
       <li><a href="thirdparty.html#jelastic.api.thirdparty._GeoIp.GeoIp">GeoIp() (jelastic.api.thirdparty._GeoIp method)</a>
@@ -617,10 +650,10 @@
 </li>
       <li><a href="billing.html#jelastic.api.billing._Account.GetClusterBillingHistory">GetClusterBillingHistory() (jelastic.api.billing._Account method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="billing.html#jelastic.api.billing._Account.GetCollaborationQuotas">GetCollaborationQuotas() (jelastic.api.billing._Account method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="billing.html#jelastic.api.billing._Account.GetCountries">GetCountries() (jelastic.api.billing._Account method)</a>
 </li>
       <li><a href="billing.html#jelastic.api.billing._Account.GetCountryStates">GetCountryStates() (jelastic.api.billing._Account method)</a>
@@ -639,11 +672,17 @@
 </li>
       <li><a href="billing.html#jelastic.api.billing._Account.GetFundAccountHistory">GetFundAccountHistory() (jelastic.api.billing._Account method)</a>
 </li>
+      <li><a href="s3.html#jelastic.api.s3._Account.GetKeys">GetKeys() (jelastic.api.s3._Account method)</a>
+</li>
       <li><a href="migration.html#jelastic.api.migration._Migration.GetMigrationOperations">GetMigrationOperations() (jelastic.api.migration._Migration method)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Analytics.GetNodesAffinitySuggestion">GetNodesAffinitySuggestion() (jelastic.api.administration._Analytics method)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Analytics.GetNodesAntiAffinitySuggestion">GetNodesAntiAffinitySuggestion() (jelastic.api.administration._Analytics method)</a>
+</li>
+      <li><a href="s3.html#jelastic.api.s3._Bucket.GetPolicy">GetPolicy() (jelastic.api.s3._Bucket method)</a>
+</li>
+      <li><a href="s3.html#jelastic.api.s3._Bucket.GetPresignedURL">GetPresignedURL() (jelastic.api.s3._Bucket method)</a>
 </li>
       <li><a href="billing.html#jelastic.api.billing._Account.GetQuotas">GetQuotas() (jelastic.api.billing._Account method)</a>
 </li>
@@ -835,6 +874,18 @@
   </ul></td>
 </tr></table>
 
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="s3.html#jelastic.api.s3._Bucket.List">List() (jelastic.api.s3._Bucket method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="s3.html#jelastic.api.s3._Bucket.ListObjects">ListObjects() (jelastic.api.s3._Bucket method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -921,6 +972,8 @@
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="s3.html#jelastic.api.s3._Account.RegenerateKeys">RegenerateKeys() (jelastic.api.s3._Account method)</a>
+</li>
       <li><a href="billing.html#jelastic.api.billing._Account.RemoveQuota">RemoveQuota() (jelastic.api.billing._Account method)</a>
 </li>
   </ul></td>
@@ -928,6 +981,8 @@
       <li><a href="utils.html#jelastic.api.utils._Scheduler.RescheduleTasks">RescheduleTasks() (jelastic.api.utils._Scheduler method)</a>
 </li>
       <li><a href="billing.html#jelastic.api.billing._Account.ResetTestAccounts">ResetTestAccounts() (jelastic.api.billing._Account method)</a>
+</li>
+      <li><a href="s3.html#jelastic.api.s3._Account.RevokeKey">RevokeKey() (jelastic.api.s3._Account method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -947,13 +1002,15 @@
 </li>
       <li><a href="billing.html#jelastic.api.billing._Account.SetAccountStatus">SetAccountStatus() (jelastic.api.billing._Account method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="billing.html#jelastic.api.billing._Account.SetBillingInfo">SetBillingInfo() (jelastic.api.billing._Account method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="billing.html#jelastic.api.billing._Account.SetFundNote">SetFundNote() (jelastic.api.billing._Account method)</a>
 </li>
       <li><a href="billing.html#jelastic.api.billing._Account.SetGroup">SetGroup() (jelastic.api.billing._Account method)</a>
+</li>
+      <li><a href="s3.html#jelastic.api.s3._Bucket.SetPolicy">SetPolicy() (jelastic.api.s3._Bucket method)</a>
 </li>
       <li><a href="billing.html#jelastic.api.billing._Account.SetQuota">SetQuota() (jelastic.api.billing._Account method)</a>
 </li>
