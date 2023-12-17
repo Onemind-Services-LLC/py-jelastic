@@ -51,6 +51,7 @@ Table of Contents
    install
    abstract
    administration
+   automation
    billing
    data
    development

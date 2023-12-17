@@ -30,11 +30,11 @@ class _Analytics(Administration):
     _endpoint2 = "analytics"
 
     def GetNodesAffinitySuggestion(
-            self,
-            target_app_ids: list[str] = None,
-            node_groups: list[str] = None,
-            uids: list[int] = None,
-            thread_count: int = None,
+        self,
+        target_app_ids: list[str] = None,
+        node_groups: list[str] = None,
+        uids: list[int] = None,
+        thread_count: int = None,
     ):
         """
         A list of environments with one node in every layer where distribution can be optimized
@@ -56,12 +56,12 @@ class _Analytics(Administration):
         )
 
     def GetNodesAntiAffinitySuggestion(
-            self,
-            target_app_ids: list[str] = None,
-            mode: MODE = None,
-            node_groups: list[str] = None,
-            uids: list[int] = None,
-            thread_count: int = None,
+        self,
+        target_app_ids: list[str] = None,
+        mode: MODE = None,
+        node_groups: list[str] = None,
+        uids: list[int] = None,
+        thread_count: int = None,
     ):
         """
         A list of environments with non-optimal container distribution with optimization suggestions

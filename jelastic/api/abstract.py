@@ -50,7 +50,7 @@ class ClientAbstract(ABC):
         self._debug = debug
 
     def _log_debug(
-            self, method: VALID_METHODS, path: str, params: Optional[dict[str, Any]] = None
+        self, method: VALID_METHODS, path: str, params: Optional[dict[str, Any]] = None
     ) -> None:
         """
         Prints `debug` information about the request.
@@ -72,7 +72,7 @@ class ClientAbstract(ABC):
         print(message)
 
     def _serialize_params(
-            self, params: dict[str, Any], delimiter: str = None, datetime_format: str = None
+        self, params: dict[str, Any], delimiter: str = None, datetime_format: str = None
     ) -> str:
         """
         Serialize params for endpoint URL
@@ -99,9 +99,9 @@ class ClientAbstract(ABC):
                 else:
                     serialized_params[key] = value.isoformat()
             elif (
-                    isinstance(value, list)
-                    and all(isinstance(item, str) for item in value)
-                    and delimiter
+                isinstance(value, list)
+                and all(isinstance(item, str) for item in value)
+                and delimiter
             ):
                 serialized_params[key] = f"{delimiter}".join(value)
             elif isinstance(value, dict):
@@ -116,11 +116,11 @@ class ClientAbstract(ABC):
         return urlencode(serialized_params)
 
     def _endpoint(
-            self,
-            path: str,
-            params: Optional[dict[str, Any]] = None,
-            delimiter: str = None,
-            datetime_format: str = None,
+        self,
+        path: str,
+        params: Optional[dict[str, Any]] = None,
+        delimiter: str = None,
+        datetime_format: str = None,
     ) -> str:
         """
         Returns the endpoint for the request.
@@ -167,11 +167,11 @@ class ClientAbstract(ABC):
         return response
 
     def _get(
-            self,
-            *args: str,
-            params: QueryParamTypes = None,
-            delimiter: str = None,
-            datetime_format: str = None,
+        self,
+        *args: str,
+        params: QueryParamTypes = None,
+        delimiter: str = None,
+        datetime_format: str = None,
     ) -> dict[str, Any]:
         if self._debug:
             getattr(self, "_log_debug")("get", *args, params=params)

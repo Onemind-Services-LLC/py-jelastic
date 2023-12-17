@@ -20,7 +20,7 @@ class Jelastic:
     """Jelastic API client, main entry point for all API operations."""
 
     def __init__(
-            self, base_url: str, token: str, version: str = "1.0", debug: bool = False
+        self, base_url: str, token: str, version: str = "1.0", debug: bool = False
     ):
         """
         To initialize with API endpoints for the Jelastic API.
@@ -69,9 +69,7 @@ class Jelastic:
 
     @property
     def automation(self) -> Automation:
-        return Automation(
-            session=self._session, token=self._token, debug=self._debug
-        )
+        return Automation(session=self._session, token=self._token, debug=self._debug)
 
     @property
     def billing(self) -> Billing:
@@ -83,15 +81,11 @@ class Jelastic:
 
     @property
     def development(self) -> Development:
-        return Development(
-            session=self._session, token=self._token, debug=self._debug
-        )
+        return Development(session=self._session, token=self._token, debug=self._debug)
 
     @property
     def environment(self) -> Environment:
-        return Environment(
-            session=self._session, token=self._token, debug=self._debug
-        )
+        return Environment(session=self._session, token=self._token, debug=self._debug)
 
     @property
     def iaas(self) -> IaaS:

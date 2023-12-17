@@ -1,6 +1,6 @@
 # py-jelastic
 
-[![CI](https://github.com/Onemind-Services-LLC/py-jelastic/actions/workflows/ci.yml/badge.svg)](https://github.com/Onemind-Services-LLC/py-jelastic/actions/workflows/ci.yml)
+[![CI](https://github.com/Onemind-Services-LLC/py-jelastic/actions/workflows/ci.yml/badge.svg)](https://github.com/Onemind-Services-LLC/py-jelastic/actions/workflows/ci.yml) [![Documentation](https://github.com/Onemind-Services-LLC/py-jelastic/actions/workflows/pages/pages-build-deployment/badge.svg?branch=gh-pages)](https://github.com/Onemind-Services-LLC/py-jelastic/actions/workflows/pages/pages-build-deployment) [![Upload Python Package](https://github.com/Onemind-Services-LLC/py-jelastic/actions/workflows/publish.yml/badge.svg)](https://github.com/Onemind-Services-LLC/py-jelastic/actions/workflows/publish.yml)
 
 Python API client library for [Jelastic](https://jelastic.com/).
 
