@@ -9,7 +9,7 @@
           <link rel="stylesheet" href="../../../_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="../../../_static/documentation_options.js?v=a12341d9"></script>
+        <script src="../../../_static/documentation_options.js?v=5b2fac0e"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -417,7 +417,130 @@
 <div class="viewcode-block" id="IaaS">
 <a class="viewcode-back" href="../../../iaas.html#jelastic.api.iaas.IaaS">[docs]</a>
 <span class="k">class</span> <span class="nc">IaaS</span><span class="p">(</span><span class="n">ClientAbstract</span><span class="p">):</span>
-    <span class="n">_endpoint1</span> <span class="o">=</span> <span class="s2">&quot;iaas&quot;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">    &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; jelastic.iaas</span>
+
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/iaas</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_endpoint1</span> <span class="o">=</span> <span class="s2">&quot;iaas&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Project</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_Project&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.iaas.Project</span>
+
+<span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/iaas.Project</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_Project</span><span class="p">(</span>
+            <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
+            <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span>
+            <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="_Project">
+<a class="viewcode-back" href="../../../iaas.html#jelastic.api.iaas._Project">[docs]</a>
+<span class="k">class</span> <span class="nc">_Project</span><span class="p">(</span><span class="n">IaaS</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/iaas.Project</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="_Project.Create">
+<a class="viewcode-back" href="../../../iaas.html#jelastic.api.iaas._Project.Create">[docs]</a>
+    <span class="k">def</span> <span class="nf">Create</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">host_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">project_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a new Virtuozzo Hybrid Infrastructure project.</span>
+
+<span class="sd">        :param host_group: unique identifier of the target host group.</span>
+<span class="sd">        :param project_name: new project&#39;s name.</span>
+<span class="sd">        :param owner_uid: unique identifier of the project&#39;s owner.</span>
+<span class="sd">        :param description: new project&#39;s description.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Create&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;hostGroup&quot;</span><span class="p">:</span> <span class="n">host_group</span><span class="p">,</span>
+                <span class="s2">&quot;projectName&quot;</span><span class="p">:</span> <span class="n">project_name</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Project.Delete">
+<a class="viewcode-back" href="../../../iaas.html#jelastic.api.iaas._Project.Delete">[docs]</a>
+    <span class="k">def</span> <span class="nf">Delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">project_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes a specified Virtuozzo Hybrid Infrastructure project.</span>
+
+<span class="sd">        :param host_group: unique identifier of the target host group.</span>
+<span class="sd">        :param project_id: unique identifier of the target project.</span>
+<span class="sd">        :param owner_uid: unique identifier of the project&#39;s owner.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Delete&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;hostGroup&quot;</span><span class="p">:</span> <span class="n">host_group</span><span class="p">,</span>
+                <span class="s2">&quot;projectId&quot;</span><span class="p">:</span> <span class="n">project_id</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Project.Get">
+<a class="viewcode-back" href="../../../iaas.html#jelastic.api.iaas._Project.Get">[docs]</a>
+    <span class="k">def</span> <span class="nf">Get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a list of Virtuozzo Hybrid Infrastructure projects related to the user and host group.</span>
+
+<span class="sd">        :param host_group: unique identifier of the target host group.</span>
+<span class="sd">        :param owner_uid: unique identifier of the project&#39;s owner.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Get&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;hostGroup&quot;</span><span class="p">:</span> <span class="n">host_group</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Project.Update">
+<a class="viewcode-back" href="../../../iaas.html#jelastic.api.iaas._Project.Update">[docs]</a>
+    <span class="k">def</span> <span class="nf">Update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">project_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">project_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Changes the specified project name and description.</span>
+
+<span class="sd">        :param host_group: unique identifier of the target host group.</span>
+<span class="sd">        :param project_id: unique identifier of the target project.</span>
+<span class="sd">        :param project_name: updated project&#39;s name.</span>
+<span class="sd">        :param owner_uid: unique identifier of the project&#39;s owner.</span>
+<span class="sd">        :param description: updated project&#39;s description.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Update&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;hostGroup&quot;</span><span class="p">:</span> <span class="n">host_group</span><span class="p">,</span>
+                <span class="s2">&quot;projectId&quot;</span><span class="p">:</span> <span class="n">project_id</span><span class="p">,</span>
+                <span class="s2">&quot;projectName&quot;</span><span class="p">:</span> <span class="n">project_name</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+</div>
 
 </pre></div>
 
