@@ -9,7 +9,7 @@
           <link rel="stylesheet" href="../../../_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="../../../_static/documentation_options.js?v=f84b4be7"></script>
+        <script src="../../../_static/documentation_options.js?v=8741ecb6"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -417,7 +417,209 @@
 <div class="viewcode-block" id="Pricing">
 <a class="viewcode-back" href="../../../pricing.html#jelastic.api.pricing.Pricing">[docs]</a>
 <span class="k">class</span> <span class="nc">Pricing</span><span class="p">(</span><span class="n">ClientAbstract</span><span class="p">):</span>
-    <span class="n">_endpoint1</span> <span class="o">=</span> <span class="s2">&quot;pricing&quot;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">    &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; jelastic.pricing</span>
+
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/pricing</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_endpoint1</span> <span class="o">=</span> <span class="s2">&quot;pricing&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Option</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_Option&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.pricing.Option</span>
+
+<span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/pricing.Option</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_Option</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Tariff</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_Tariff&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.pricing.Tariff</span>
+
+<span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/pricing.Tariff</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">_Tariff</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="_Option">
+<a class="viewcode-back" href="../../../pricing.html#jelastic.api.pricing._Option">[docs]</a>
+<span class="k">class</span> <span class="nc">_Option</span><span class="p">(</span><span class="n">Pricing</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/pricing.Option</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="_Option.Create">
+<a class="viewcode-back" href="../../../pricing.html#jelastic.api.pricing._Option.Create">[docs]</a>
+    <span class="k">def</span> <span class="nf">Create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tariff_option</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a new tariff option TariffOption for the main platform or reseller. It should be unique by name</span>
+
+<span class="sd">        :param tariff_option: JSON representation of object which needs to be created.</span>
+<span class="sd">        :param reseller_id: unique identifier of a reseller</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Create&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;tariffOption&quot;</span><span class="p">:</span> <span class="n">tariff_option</span><span class="p">,</span> <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">}</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Option.Delete">
+<a class="viewcode-back" href="../../../pricing.html#jelastic.api.pricing._Option.Delete">[docs]</a>
+    <span class="k">def</span> <span class="nf">Delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes a tariff option TariffOption for the main platform or reseller.</span>
+
+<span class="sd">        :param name: name of a tariff option</span>
+<span class="sd">        :param reseller_id: unique identifier of a reseller</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;Delete&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="_Option.Edit">
+<a class="viewcode-back" href="../../../pricing.html#jelastic.api.pricing._Option.Edit">[docs]</a>
+    <span class="k">def</span> <span class="nf">Edit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tariff_option</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Modifies a tariff option TariffOption for the main platform or reseller. It should be unique by name</span>
+
+<span class="sd">        :param tariff_option: JSON representation of object which needs to be created.</span>
+<span class="sd">        :param reseller_id: unique identifier of a reseller</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Edit&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;tariffOption&quot;</span><span class="p">:</span> <span class="n">tariff_option</span><span class="p">,</span> <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">}</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Option.Get">
+<a class="viewcode-back" href="../../../pricing.html#jelastic.api.pricing._Option.Get">[docs]</a>
+    <span class="k">def</span> <span class="nf">Get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param reseller_id: unique identifier of a reseller</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;Get&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">})</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="_Tariff">
+<a class="viewcode-back" href="../../../pricing.html#jelastic.api.pricing._Tariff">[docs]</a>
+<span class="k">class</span> <span class="nc">_Tariff</span><span class="p">(</span><span class="n">Pricing</span><span class="p">):</span>
+<div class="viewcode-block" id="_Tariff.CreateGrid">
+<a class="viewcode-back" href="../../../pricing.html#jelastic.api.pricing._Tariff.CreateGrid">[docs]</a>
+    <span class="k">def</span> <span class="nf">CreateGrid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tariff_grid</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a new tariff grid TariffGrid for the main platform or reseller. It should be unique by name</span>
+
+<span class="sd">        :param tariff_grid: JSON representation of object which needs to be created.</span>
+<span class="sd">        :param reseller_id: unique identifier of a reseller</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;CreateGrid&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;tariffGrid&quot;</span><span class="p">:</span> <span class="n">tariff_grid</span><span class="p">,</span> <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">}</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Tariff.CreateGridItem">
+<a class="viewcode-back" href="../../../pricing.html#jelastic.api.pricing._Tariff.CreateGridItem">[docs]</a>
+    <span class="k">def</span> <span class="nf">CreateGridItem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grid_item</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a new tariff grid item TariffGridItem for the main platform or reseller. It should be unique by name</span>
+
+<span class="sd">        :param grid_item: JSON representation of object which needs to be created.</span>
+<span class="sd">        :param reseller_id: unique identifier of a reseller</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;CreateGridItem&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;gridItem&quot;</span><span class="p">:</span> <span class="n">grid_item</span><span class="p">,</span> <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">}</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Tariff.DeleteGrid">
+<a class="viewcode-back" href="../../../pricing.html#jelastic.api.pricing._Tariff.DeleteGrid">[docs]</a>
+    <span class="k">def</span> <span class="nf">DeleteGrid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes a tariff grid TariffGrid by its name.</span>
+
+<span class="sd">        :param name: name of the grid</span>
+<span class="sd">        :param reseller_id: unique identifier of a reseller</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;DeleteGrid&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="_Tariff.DeleteGridItem">
+<a class="viewcode-back" href="../../../pricing.html#jelastic.api.pricing._Tariff.DeleteGridItem">[docs]</a>
+    <span class="k">def</span> <span class="nf">DeleteGridItem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes a tariff grid item TariffGridItem by its name.</span>
+
+<span class="sd">        :param name: name of the grid item</span>
+<span class="sd">        :param reseller_id: unique identifier of a reseller</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;DeleteGridItem&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">}</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Tariff.EditGrid">
+<a class="viewcode-back" href="../../../pricing.html#jelastic.api.pricing._Tariff.EditGrid">[docs]</a>
+    <span class="k">def</span> <span class="nf">EditGrid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tariff_grid</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Modifies a tariff grid TariffGrid for the main platform or reseller. It should be unique by name</span>
+
+<span class="sd">        :param tariff_grid: JSON representation of object which needs to be created.</span>
+<span class="sd">        :param reseller_id: unique identifier of a reseller</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;EditGrid&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;tariffGrid&quot;</span><span class="p">:</span> <span class="n">tariff_grid</span><span class="p">,</span> <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">}</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Tariff.EditGridItem">
+<a class="viewcode-back" href="../../../pricing.html#jelastic.api.pricing._Tariff.EditGridItem">[docs]</a>
+    <span class="k">def</span> <span class="nf">EditGridItem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grid_item</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Modifies a tariff grid item TariffGridItem for the main platform or reseller. It should be unique by name</span>
+
+<span class="sd">        :param grid_item: JSON representation of object which needs to be created.</span>
+<span class="sd">        :param reseller_id: unique identifier of a reseller</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;EditGridItem&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;gridItem&quot;</span><span class="p">:</span> <span class="n">grid_item</span><span class="p">,</span> <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">}</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Tariff.GetGridItems">
+<a class="viewcode-back" href="../../../pricing.html#jelastic.api.pricing._Tariff.GetGridItems">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetGridItems</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets a list of tariff grid items TariffGridItem by grid name.</span>
+
+<span class="sd">        :param name: name of the grid</span>
+<span class="sd">        :param reseller_id: unique identifier of a reseller</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetGridItems&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">}</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Tariff.GetGrids">
+<a class="viewcode-back" href="../../../pricing.html#jelastic.api.pricing._Tariff.GetGrids">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetGrids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets a list of tariff grids TariffGrid for the main platform or reseller.</span>
+
+<span class="sd">        :param names: name(s) of the grid(s)</span>
+<span class="sd">        :param reseller_id: unique identifier of a reseller</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetGrids&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="n">names</span><span class="p">,</span> <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">})</span></div>
+</div>
 
 </pre></div>
 

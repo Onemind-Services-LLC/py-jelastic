@@ -10,7 +10,7 @@
           <link rel="stylesheet" href="_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="_static/documentation_options.js?v=f84b4be7"></script>
+        <script src="_static/documentation_options.js?v=8741ecb6"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -423,6 +423,7 @@
  | <a href="#J"><strong>J</strong></a>
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
+ | <a href="#O"><strong>O</strong></a>
  | <a href="#P"><strong>P</strong></a>
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
@@ -452,10 +453,10 @@
 </li>
       <li><a href="abstract.html#jelastic.api.abstract.ClientAbstract._endpoint">_endpoint() (jelastic.api.abstract.ClientAbstract method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="platform.html#jelastic.api.platform._Engine">_Engine (class in jelastic.api.platform)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="thirdparty.html#jelastic.api.thirdparty._GeoIp">_GeoIp (class in jelastic.api.thirdparty)</a>
 </li>
       <li><a href="abstract.html#jelastic.api.abstract.ClientAbstract._handle_response">_handle_response() (jelastic.api.abstract.ClientAbstract method)</a>
@@ -464,11 +465,15 @@
 </li>
       <li><a href="migration.html#jelastic.api.migration._Migration">_Migration (class in jelastic.api.migration)</a>
 </li>
+      <li><a href="pricing.html#jelastic.api.pricing._Option">_Option (class in jelastic.api.pricing)</a>
+</li>
       <li><a href="iaas.html#jelastic.api.iaas._Project">_Project (class in jelastic.api.iaas)</a>
 </li>
       <li><a href="utils.html#jelastic.api.utils._Scheduler">_Scheduler (class in jelastic.api.utils)</a>
 </li>
       <li><a href="abstract.html#jelastic.api.abstract.ClientAbstract._serialize_params">_serialize_params() (jelastic.api.abstract.ClientAbstract method)</a>
+</li>
+      <li><a href="pricing.html#jelastic.api.pricing._Tariff">_Tariff (class in jelastic.api.pricing)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -526,17 +531,19 @@
 </li>
       <li><a href="billing.html#jelastic.api.billing._Account.ConvertToCommercial">ConvertToCommercial() (jelastic.api.billing._Account method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="billing.html#jelastic.api.billing._Account.ConvertToCommercialAndPay">ConvertToCommercialAndPay() (jelastic.api.billing._Account method)</a>
 </li>
       <li><a href="billing.html#jelastic.api.billing._Account.ConvertToTrial">ConvertToTrial() (jelastic.api.billing._Account method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="s3.html#jelastic.api.s3._Bucket.CopyObject">CopyObject() (jelastic.api.s3._Bucket method)</a>
 </li>
       <li><a href="iaas.html#jelastic.api.iaas._Project.Create">Create() (jelastic.api.iaas._Project method)</a>
 
       <ul>
+        <li><a href="pricing.html#jelastic.api.pricing._Option.Create">(jelastic.api.pricing._Option method)</a>
+</li>
         <li><a href="s3.html#jelastic.api.s3._Account.Create">(jelastic.api.s3._Account method)</a>
 </li>
         <li><a href="s3.html#jelastic.api.s3._Bucket.Create">(jelastic.api.s3._Bucket method)</a>
@@ -545,6 +552,10 @@
       <li><a href="utils.html#jelastic.api.utils._Scheduler.CreateAccountTask">CreateAccountTask() (jelastic.api.utils._Scheduler method)</a>
 </li>
       <li><a href="utils.html#jelastic.api.utils._Scheduler.CreateEnvTask">CreateEnvTask() (jelastic.api.utils._Scheduler method)</a>
+</li>
+      <li><a href="pricing.html#jelastic.api.pricing._Tariff.CreateGrid">CreateGrid() (jelastic.api.pricing._Tariff method)</a>
+</li>
+      <li><a href="pricing.html#jelastic.api.pricing._Tariff.CreateGridItem">CreateGridItem() (jelastic.api.pricing._Tariff method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -557,6 +568,8 @@
       <li><a href="iaas.html#jelastic.api.iaas._Project.Delete">Delete() (jelastic.api.iaas._Project method)</a>
 
       <ul>
+        <li><a href="pricing.html#jelastic.api.pricing._Option.Delete">(jelastic.api.pricing._Option method)</a>
+</li>
         <li><a href="s3.html#jelastic.api.s3._Account.Delete">(jelastic.api.s3._Account method)</a>
 </li>
         <li><a href="s3.html#jelastic.api.s3._Bucket.Delete">(jelastic.api.s3._Bucket method)</a>
@@ -564,6 +577,10 @@
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="pricing.html#jelastic.api.pricing._Tariff.DeleteGrid">DeleteGrid() (jelastic.api.pricing._Tariff method)</a>
+</li>
+      <li><a href="pricing.html#jelastic.api.pricing._Tariff.DeleteGridItem">DeleteGridItem() (jelastic.api.pricing._Tariff method)</a>
+</li>
       <li><a href="s3.html#jelastic.api.s3._Bucket.DeleteObject">DeleteObject() (jelastic.api.s3._Bucket method)</a>
 </li>
       <li><a href="s3.html#jelastic.api.s3._Bucket.DeletePolicy">DeletePolicy() (jelastic.api.s3._Bucket method)</a>
@@ -578,14 +595,20 @@
 <h2 id="E">E</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="pricing.html#jelastic.api.pricing._Option.Edit">Edit() (jelastic.api.pricing._Option method)</a>
+</li>
+      <li><a href="pricing.html#jelastic.api.pricing._Tariff.EditGrid">EditGrid() (jelastic.api.pricing._Tariff method)</a>
+</li>
+      <li><a href="pricing.html#jelastic.api.pricing._Tariff.EditGridItem">EditGridItem() (jelastic.api.pricing._Tariff method)</a>
+</li>
       <li><a href="utils.html#jelastic.api.utils._Scheduler.EditTask">EditTask() (jelastic.api.utils._Scheduler method)</a>
 </li>
       <li><a href="message.html#jelastic.api.message.Message.Email">Email (jelastic.api.message.Message property)</a>
 </li>
-      <li><a href="billing.html#jelastic.api.billing._Account.EnableUser">EnableUser() (jelastic.api.billing._Account method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="billing.html#jelastic.api.billing._Account.EnableUser">EnableUser() (jelastic.api.billing._Account method)</a>
+</li>
       <li><a href="platform.html#jelastic.api.platform.Platform.Engine">Engine (jelastic.api.platform.Platform property)</a>
 </li>
       <li><a href="environment.html#jelastic.api.environment.Environment">Environment (class in jelastic.api.environment)</a>
@@ -623,6 +646,8 @@
       <ul>
         <li><a href="platform.html#jelastic.api.platform._Engine.Get">(jelastic.api.platform._Engine method)</a>
 </li>
+        <li><a href="pricing.html#jelastic.api.pricing._Option.Get">(jelastic.api.pricing._Option method)</a>
+</li>
       </ul></li>
       <li><a href="billing.html#jelastic.api.billing._Account.GetAccount">GetAccount() (jelastic.api.billing._Account method)</a>
 </li>
@@ -652,10 +677,10 @@
 </li>
       <li><a href="billing.html#jelastic.api.billing._Account.GetCollaborationQuotas">GetCollaborationQuotas() (jelastic.api.billing._Account method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="billing.html#jelastic.api.billing._Account.GetCountries">GetCountries() (jelastic.api.billing._Account method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="billing.html#jelastic.api.billing._Account.GetCountryStates">GetCountryStates() (jelastic.api.billing._Account method)</a>
 </li>
       <li><a href="platform.html#jelastic.api.platform._Engine.GetEntryPoint">GetEntryPoint() (jelastic.api.platform._Engine method)</a>
@@ -671,6 +696,10 @@
       <li><a href="billing.html#jelastic.api.billing._Account.GetExternBillingSystemSession">GetExternBillingSystemSession() (jelastic.api.billing._Account method)</a>
 </li>
       <li><a href="billing.html#jelastic.api.billing._Account.GetFundAccountHistory">GetFundAccountHistory() (jelastic.api.billing._Account method)</a>
+</li>
+      <li><a href="pricing.html#jelastic.api.pricing._Tariff.GetGridItems">GetGridItems() (jelastic.api.pricing._Tariff method)</a>
+</li>
+      <li><a href="pricing.html#jelastic.api.pricing._Tariff.GetGrids">GetGrids() (jelastic.api.pricing._Tariff method)</a>
 </li>
       <li><a href="s3.html#jelastic.api.s3._Account.GetKeys">GetKeys() (jelastic.api.s3._Account method)</a>
 </li>
@@ -953,6 +982,14 @@
   </ul></td>
 </tr></table>
 
+<h2 id="O">O</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="pricing.html#jelastic.api.pricing.Pricing.Option">Option (jelastic.api.pricing.Pricing property)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -1025,6 +1062,10 @@
 
 <h2 id="T">T</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="pricing.html#jelastic.api.pricing.Pricing.Tariff">Tariff (jelastic.api.pricing.Pricing property)</a>
+</li>
+  </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="thirdparty.html#jelastic.api.thirdparty.ThirdParty">ThirdParty (class in jelastic.api.thirdparty)</a>
 </li>
