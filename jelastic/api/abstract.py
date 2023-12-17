@@ -91,7 +91,7 @@ class ClientAbstract(ABC):
         serialized_params = {}
         for key, value in params.items():
             if value is None:
-                continue
+                continue  # pragma: no cover
 
             if isinstance(value, datetime):
                 if datetime_format:
