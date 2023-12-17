@@ -5,3 +5,8 @@ Platform
    :members:
    :undoc-members:
    :show-inheritance:
+
+.. autoclass:: jelastic.api.platform._Engine
+   :members:
+   :undoc-members:
+   :show-inheritance:
