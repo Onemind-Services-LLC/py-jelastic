@@ -9,7 +9,7 @@
           <link rel="stylesheet" href="../../../_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="../../../_static/documentation_options.js?v=82609c86"></script>
+        <script src="../../../_static/documentation_options.js?v=077e564f"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -417,7 +417,78 @@
 <div class="viewcode-block" id="Platform">
 <a class="viewcode-back" href="../../../platform.html#jelastic.api.platform.Platform">[docs]</a>
 <span class="k">class</span> <span class="nc">Platform</span><span class="p">(</span><span class="n">ClientAbstract</span><span class="p">):</span>
-    <span class="n">_endpoint1</span> <span class="o">=</span> <span class="s2">&quot;platform&quot;</span></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">    &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; jelastic.platform</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_endpoint1</span> <span class="o">=</span> <span class="s2">&quot;platform&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Engine</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_Engine&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Service provides an interface for managing host group engines.</span>
+
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.platform.Engine</span>
+
+<span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/platform.Engine</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_Engine</span><span class="p">(</span>
+            <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
+            <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span>
+            <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span>
+        <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="_Engine">
+<a class="viewcode-back" href="../../../platform.html#jelastic.api.platform._Engine">[docs]</a>
+<span class="k">class</span> <span class="nc">_Engine</span><span class="p">(</span><span class="n">Platform</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Service provides an interface for managing host group engines.</span>
+
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/platform.Engine</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_endpoint2</span> <span class="o">=</span> <span class="s2">&quot;engine&quot;</span>
+
+<div class="viewcode-block" id="_Engine.Get">
+<a class="viewcode-back" href="../../../platform.html#jelastic.api.platform._Engine.Get">[docs]</a>
+    <span class="k">def</span> <span class="nf">Get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a list of available engines for the user.</span>
+
+<span class="sd">        :param engine_type: specific engine, support for which should be checked by the method.</span>
+<span class="sd">        :param owner_uid: unique identifier of the platform owner.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Get&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;engineType&quot;</span><span class="p">:</span> <span class="n">engine_type</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span>
+            <span class="p">}</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Engine.GetEntryPoint">
+<a class="viewcode-back" href="../../../platform.html#jelastic.api.platform._Engine.GetEntryPoint">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetEntryPoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Connects a user to the host group.</span>
+
+<span class="sd">        :param host_group: unique identifier of the target host group.</span>
+<span class="sd">        :param owner_uid: unique identifier of the platform owner.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetEntryPoint&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s1">&#39;hostGroup&#39;</span><span class="p">:</span> <span class="n">host_group</span><span class="p">,</span>
+                <span class="s1">&#39;ownerUid&#39;</span><span class="p">:</span> <span class="n">owner_uid</span>
+            <span class="p">}</span>
+        <span class="p">)</span></div>
+</div>
 
 </pre></div>
 
