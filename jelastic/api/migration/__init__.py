@@ -9,6 +9,7 @@ class Migration(ClientAbstract):
     >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
     >>> jelastic.migration
     """
+
     _endpoint1 = "migration"
 
     @property
@@ -31,15 +32,11 @@ class _Migration(Migration):
     """
     https://docs.jelastic.com/api/private/#!/api/migration.Migration
     """
+
     _endpoint2 = "migration"
 
     def GetMigrationOperations(self, search: str = None):
-        return self._get(
-            "GetMigrationOperations",
-            params={
-                'search': search
-            }
-        )
+        return self._get("GetMigrationOperations", params={"search": search})
 
     def Migrate(self):
         return self._get("Migrate")

@@ -23,11 +23,7 @@ class Platform(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/private/#!/api/platform.Engine
         """
-        return _Engine(
-            session=self._session,
-            token=self._token,
-            debug=self._debug
-        )
+        return _Engine(session=self._session, token=self._token, debug=self._debug)
 
 
 class _Engine(Platform):
@@ -36,6 +32,7 @@ class _Engine(Platform):
 
     Ref: https://docs.jelastic.com/api/private/#!/api/platform.Engine
     """
+
     _endpoint2 = "engine"
 
     def Get(self, engine_type: str = None, owner_uid: int = None):
@@ -46,11 +43,7 @@ class _Engine(Platform):
         :param owner_uid: unique identifier of the platform owner.
         """
         return self._get(
-            "Get",
-            params={
-                "engineType": engine_type,
-                "ownerUid": owner_uid
-            }
+            "Get", params={"engineType": engine_type, "ownerUid": owner_uid}
         )
 
     def GetEntryPoint(self, host_group: str, owner_uid: int = None):
@@ -61,9 +54,5 @@ class _Engine(Platform):
         :param owner_uid: unique identifier of the platform owner.
         """
         return self._get(
-            "GetEntryPoint",
-            params={
-                'hostGroup': host_group,
-                'ownerUid': owner_uid
-            }
+            "GetEntryPoint", params={"hostGroup": host_group, "ownerUid": owner_uid}
         )
