@@ -302,7 +302,6 @@ class _Bucket(S3):
         :param delimiter: custom string to divide separate object records.
         :param max_keys: the maximum number of objects returned in the response.
         :param owner_uid: unique identifier of the bucket owner.
-        :return:
         """
         return self._get(
             "ListObjects",

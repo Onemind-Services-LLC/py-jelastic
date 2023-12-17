@@ -646,7 +646,6 @@ class _Account(Billing):
         :param name: a name of the quota to be adjusted.
         :param value: custom value for the quota.
         :param reference_id: reference ID of the quota.
-        :return:
         """
         return self._get(
             "SetQuota",

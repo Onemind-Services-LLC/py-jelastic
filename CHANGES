@@ -12,13 +12,5 @@ Changes
 ======================
 
 - Initial release
-- Added `jelastic.api.billing.Account` class
-- Added `jelastic.api.iaas.Project` class
-- Added `jelastic.api.message.Email` class
-- Added `jelastic.api.migration.Migration` class
-- Added `jelastic.api.platform.Engine` class
-- Added `jelastic.api.thirdparty.GeoIp` class
-- Added `jelastic.api.utils.Batch` class
-- Added `jelastic.api.utils.Scheduler` class
 - Added unit and integration tests
 - Added documentation using `Sphinx <http://www.sphinx-doc.org/en/stable/>`_
