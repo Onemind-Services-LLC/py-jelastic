@@ -25,6 +25,21 @@ class Administration(ClientAbstract):
             debug=self._debug,
         )
 
+    @property
+    def Config(self) -> "_Config":
+        """
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.administration.Config
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/administration.Config
+        """
+        return _Config(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+        )
+
 
 class _Analytics(Administration):
     _endpoint2 = "analytics"
@@ -80,6 +95,283 @@ class _Analytics(Administration):
                 "nodeGroups": node_groups,
                 "uids": uids,
                 "threadCount": thread_count,
+            },
+            delimiter=",",
+        )
+
+
+class _Config(Administration):
+    _endpoint2 = "config"
+
+    def ApplyConfig(
+        self,
+        type: str,
+        password: str,
+    ):
+        return self._get(
+            "ApplyConfig",
+            params={
+                "type": type,
+                "password": password,
+            },
+            delimiter=",",
+        )
+
+    def ApplyDefaults(
+        self,
+        edition: str,
+    ):
+        return self._get(
+            "ApplyDefaults",
+            params={
+                "edition": edition,
+            },
+            delimiter=",",
+        )
+
+    def ApplyResellerConfig(
+        self,
+        type: str,
+        password: str,
+        reseller_id: str,
+    ):
+        return self._get(
+            "ApplyResellerConfig",
+            params={
+                "type": type,
+                "password": password,
+                "resellerId": reseller_id,
+            },
+            delimiter=",",
+        )
+
+    def ChangeConfigKey(
+        self,
+        type: str,
+        key: str,
+        value: list[str] = None,
+    ):
+        return self._get(
+            "ChangeConfigKey",
+            params={
+                "type": type,
+                "key": key,
+                "value": value,
+            },
+            delimiter=",",
+        )
+
+    def ChangePropertiesForReseller(
+        self,
+        reseller_id: str,
+    ):
+        return self._get(
+            "ChangePropertiesForReseller",
+            params={
+                "resellerId": reseller_id,
+            },
+            delimiter=",",
+        )
+
+    def CreatingConfigType(
+        self,
+        type: str,
+        description: str,
+    ):
+        return self._get(
+            "CreatingConfigType",
+            params={
+                "type": type,
+                "description": description,
+            },
+            delimiter=",",
+        )
+
+    def CreatingKeyConfig(
+        self,
+        type: str,
+        key: str,
+        value: str,
+        default_value: str,
+        expert: str,
+        description: str,
+        key_type: str,
+    ):
+        return self._get(
+            "CreatingKeyConfig",
+            params={
+                "type": type,
+                "key": key,
+                "value": value,
+                "default_value": default_value,
+                "expert": expert,
+                "description": description,
+                "keyType": key_type,
+            },
+            delimiter=",",
+        )
+
+    def FindConfigKey(
+        self,
+        value: str,
+    ):
+        return self._get(
+            "FindConfigKey",
+            params={
+                "value": value,
+            },
+            delimiter=",",
+        )
+
+    def GetAllConfigType(
+        self,
+        expert: str,
+    ):
+        return self._get(
+            "GetAllConfigType",
+            params={
+                "expert": expert,
+            },
+            delimiter=",",
+        )
+
+    def GetAllKeyConfigByType(
+        self,
+        type: str,
+        expert: str,
+    ):
+        return self._get(
+            "GetAllKeyConfigByType",
+            params={
+                "type": type,
+                "expert": expert,
+            },
+            delimiter=",",
+        )
+
+    def GetConfigKey(
+        self,
+        type: str,
+        key: str,
+    ):
+        """
+        :param type: configuration type
+        :param key: configuration key name
+        """
+        return self._get(
+            "GetConfigKey",
+            params={
+                "type": type,
+                "key": key,
+            },
+            delimiter=",",
+        )
+
+    def GetConfigKeyByResellerId(
+        self,
+        type: str,
+        key: str,
+        reseller_id: list[int] = None,
+    ):
+        """
+        :param type: configuration type
+        :param key: configuration key name
+        :param reseller_id: unique identifier of the reseller (Optional)
+        """
+        return self._get(
+            "GetConfigKeyByResellerId",
+            params={
+                "type": type,
+                "key": key,
+                "resellerId": reseller_id,
+            },
+            delimiter=",",
+        )
+
+    def GetConfigKeys(
+        self,
+        type: list[str] = None,
+        key: list[str] = None,
+    ):
+        """
+        :param type: a comma-separated list of the setting types (for filtering).
+        :param key: a comma-separated list of the setting names (for filtering).
+        """
+        return self._get(
+            "GetConfigKeys",
+            params={
+                "type": type,
+                "key": key,
+            },
+            delimiter=",",
+        )
+
+    def RemoveConfigKey(
+        self,
+        type: str,
+        key: str,
+    ):
+        return self._get(
+            "RemoveConfigKey",
+            params={
+                "type": type,
+                "key": key,
+            },
+            delimiter=",",
+        )
+
+    def RemoveConfigType(
+        self,
+        type: str,
+    ):
+        return self._get(
+            "RemoveConfigType",
+            params={
+                "type": type,
+            },
+            delimiter=",",
+        )
+
+    def RemoveResellerProperties(
+        self,
+        reseller_id: int,
+    ):
+        return self._get(
+            "RemoveResellerProperties",
+            params={
+                "resellerId": reseller_id,
+            },
+            delimiter=",",
+        )
+
+    def RevertConfigKey(
+        self,
+        type: str,
+        key: str,
+    ):
+        return self._get(
+            "RevertConfigKey",
+            params={
+                "type": type,
+                "key": key,
+            },
+            delimiter=",",
+        )
+
+    def SetResellerConfigKey(
+        self,
+        type: str,
+        key: str,
+        value: str,
+        reseller_id: int,
+    ):
+        return self._get(
+            "SetResellerConfigKey",
+            params={
+                "type": type,
+                "key": key,
+                "value": value,
+                "resellerId": reseller_id,
             },
             delimiter=",",
         )
