@@ -71,8 +71,6 @@ class Administration(ClientAbstract):
         )
 
 
-
-
 class _Analytics(Administration):
     _endpoint2 = "analytics"
 
@@ -130,6 +128,8 @@ class _Analytics(Administration):
             },
             delimiter=",",
         )
+
+
 class _HostGroup(Administration):
     """
     Ref: https://docs.jelastic.com/api/private/#!/api/administration.HostGroup
@@ -347,6 +347,7 @@ class _Host(Administration):
             },
             delimiter=",",
         )
+
 
 class _Utils(Administration):
     """
