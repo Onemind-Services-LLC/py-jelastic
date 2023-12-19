@@ -9,7 +9,7 @@
           <link rel="stylesheet" href="../../../_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="../../../_static/documentation_options.js?v=4fc62589"></script>
+        <script src="../../../_static/documentation_options.js?v=1080ca86"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -436,6 +436,21 @@
             <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
             <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span>
             <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Host</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_Host&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.administration.Host</span>
+
+<span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/administration.Host</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_Host</span><span class="p">(</span>
+            <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
+            <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span>
+            <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span>
         <span class="p">)</span></div>
 
 
@@ -501,6 +516,97 @@
                 <span class="s2">&quot;nodeGroups&quot;</span><span class="p">:</span> <span class="n">node_groups</span><span class="p">,</span>
                 <span class="s2">&quot;uids&quot;</span><span class="p">:</span> <span class="n">uids</span><span class="p">,</span>
                 <span class="s2">&quot;threadCount&quot;</span><span class="p">:</span> <span class="n">thread_count</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="_Host">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Host">[docs]</a>
+<span class="k">class</span> <span class="nc">_Host</span><span class="p">(</span><span class="n">Administration</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/administration.Host</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_endpoint2</span> <span class="o">=</span> <span class="s2">&quot;host&quot;</span>
+
+<div class="viewcode-block" id="_Host.AddLabels">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Host.AddLabels">[docs]</a>
+    <span class="k">def</span> <span class="nf">AddLabels</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">ids</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">labels</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;AddLabels&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="n">ids</span><span class="p">,</span>
+                <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="n">labels</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Host.CheckHostConnection">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Host.CheckHostConnection">[docs]</a>
+    <span class="k">def</span> <span class="nf">CheckHostConnection</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">host_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">port</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">check_external_ip</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param host_id: unique identifier of the target host.</span>
+<span class="sd">        :param port: checks the connection through the custom port (host&#39;s SSH port from the settings if not specified).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;CheckHostConnection&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;hostId&quot;</span><span class="p">:</span> <span class="n">host_id</span><span class="p">,</span>
+                <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="n">port</span><span class="p">,</span>
+                <span class="s2">&quot;checkExternalIp&quot;</span><span class="p">:</span> <span class="n">check_external_ip</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Host.GetHostFirewallSets">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Host.GetHostFirewallSets">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetHostFirewallSets</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetHostFirewallSets&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{})</span></div>
+
+
+<div class="viewcode-block" id="_Host.RemoveLabels">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Host.RemoveLabels">[docs]</a>
+    <span class="k">def</span> <span class="nf">RemoveLabels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ids</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">labels</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;RemoveLabels&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="n">ids</span><span class="p">,</span> <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="n">labels</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="_Host.SetLabels">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Host.SetLabels">[docs]</a>
+    <span class="k">def</span> <span class="nf">SetLabels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ids</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">labels</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;SetLabels&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="n">ids</span><span class="p">,</span> <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="n">labels</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="_Host.UpdateHostFirewall">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Host.UpdateHostFirewall">[docs]</a>
+    <span class="k">def</span> <span class="nf">UpdateHostFirewall</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">host_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">force</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">check_external_ip</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param host_id: unique identifier of the target host (all hosts if not defined).</span>
+<span class="sd">        :param force: proceeds (true) or interrupts (false) the operation in case of errors.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;UpdateHostFirewall&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;hostId&quot;</span><span class="p">:</span> <span class="n">host_id</span><span class="p">,</span>
+                <span class="s2">&quot;force&quot;</span><span class="p">:</span> <span class="n">force</span><span class="p">,</span>
+                <span class="s2">&quot;checkExternalIp&quot;</span><span class="p">:</span> <span class="n">check_external_ip</span><span class="p">,</span>
             <span class="p">},</span>
             <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
