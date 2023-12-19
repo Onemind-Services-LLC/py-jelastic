@@ -9,7 +9,7 @@
           <link rel="stylesheet" href="../../../_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="../../../_static/documentation_options.js?v=780ac88a"></script>
+        <script src="../../../_static/documentation_options.js?v=2136ec95"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -433,6 +433,21 @@
 <span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/administration.Analytics</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">_Analytics</span><span class="p">(</span>
+            <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
+            <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span>
+            <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Subscription</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_Subscription&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.administration.Subscription</span>
+
+<span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/administration.Subscription</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_Subscription</span><span class="p">(</span>
             <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
             <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span>
             <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span>
@@ -1359,6 +1374,482 @@
 <a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils.UpdateNodes">[docs]</a>
     <span class="k">def</span> <span class="nf">UpdateNodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;UpdateNodes&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{})</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="_Subscription">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Subscription">[docs]</a>
+<span class="k">class</span> <span class="nc">_Subscription</span><span class="p">(</span><span class="n">Administration</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/administration.Subscription</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_endpoint2</span> <span class="o">=</span> <span class="s2">&quot;subscription&quot;</span>
+
+<div class="viewcode-block" id="_Subscription.AddCategory">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Subscription.AddCategory">[docs]</a>
+    <span class="k">def</span> <span class="nf">AddCategory</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">category</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+        <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param category: JSON representation of an object (subscription Category) that should be created</span>
+<span class="sd">        :param reseller_id: unique identifier of the target reseller platform.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;AddCategory&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="n">category</span><span class="p">,</span>
+                <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Subscription.AddProduct">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Subscription.AddProduct">[docs]</a>
+    <span class="k">def</span> <span class="nf">AddProduct</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">product</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param category: JSON representation of an object (subscription Product) that should be created.</span>
+<span class="sd">        :param product: unique identifier of the target reseller platform.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;AddProduct&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;product&quot;</span><span class="p">:</span> <span class="n">product</span><span class="p">,</span>
+                <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Subscription.AddServicePlan">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Subscription.AddServicePlan">[docs]</a>
+    <span class="k">def</span> <span class="nf">AddServicePlan</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">service_plan</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+        <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">expand_fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param service_plan: JSON representation of an object (subscription Service Plan) that should be created.</span>
+<span class="sd">        :param reseller_id: unique identifier of the target reseller platform.</span>
+<span class="sd">        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;AddServicePlan&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;servicePlan&quot;</span><span class="p">:</span> <span class="n">service_plan</span><span class="p">,</span>
+                <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">,</span>
+                <span class="s2">&quot;expandFields&quot;</span><span class="p">:</span> <span class="n">expand_fields</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Subscription.AddSubscriptionItemResource">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Subscription.AddSubscriptionItemResource">[docs]</a>
+    <span class="k">def</span> <span class="nf">AddSubscriptionItemResource</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">subscription_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">item_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">item_resource_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">resources</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param subscription_id: unique identifier of the target subscription.</span>
+<span class="sd">        :param item_id: unique identifier of the target subscription item.</span>
+<span class="sd">        :param item_resource_id: unique identifier of the target subscription item resource.</span>
+<span class="sd">        :param resources: JSON representation of an object (subscription item resource) that should be created.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;AddSubscriptionItemResource&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;subscriptionId&quot;</span><span class="p">:</span> <span class="n">subscription_id</span><span class="p">,</span>
+                <span class="s2">&quot;itemId&quot;</span><span class="p">:</span> <span class="n">item_id</span><span class="p">,</span>
+                <span class="s2">&quot;itemResourceId&quot;</span><span class="p">:</span> <span class="n">item_resource_id</span><span class="p">,</span>
+                <span class="s2">&quot;resources&quot;</span><span class="p">:</span> <span class="n">resources</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Subscription.AdjustProduct">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Subscription.AdjustProduct">[docs]</a>
+    <span class="k">def</span> <span class="nf">AdjustProduct</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">subscription_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">item_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">item_resource_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param subscription_id: unique identifier of the target subscription.</span>
+<span class="sd">        :param item_id: unique identifier of the target subscription item.</span>
+<span class="sd">        :param item_resource_id: unique identifier of the target subscription item resource.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;AdjustProduct&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;subscriptionId&quot;</span><span class="p">:</span> <span class="n">subscription_id</span><span class="p">,</span>
+                <span class="s2">&quot;itemId&quot;</span><span class="p">:</span> <span class="n">item_id</span><span class="p">,</span>
+                <span class="s2">&quot;itemResourceId&quot;</span><span class="p">:</span> <span class="n">item_resource_id</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Subscription.DeleteCategory">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Subscription.DeleteCategory">[docs]</a>
+    <span class="k">def</span> <span class="nf">DeleteCategory</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param id: unique identifier of the target category.</span>
+<span class="sd">        :param reseller_id: unique identifier of the target reseller platform.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;DeleteCategory&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span> <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Subscription.DeleteProduct">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Subscription.DeleteProduct">[docs]</a>
+    <span class="k">def</span> <span class="nf">DeleteProduct</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param id: unique identifier of the target product.</span>
+<span class="sd">        :param reseller_id: unique identifier of the target reseller platform.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;DeleteProduct&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span> <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Subscription.DeleteServicePlan">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Subscription.DeleteServicePlan">[docs]</a>
+    <span class="k">def</span> <span class="nf">DeleteServicePlan</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param id: unique identifier of the target service plan.</span>
+<span class="sd">        :param reseller_id: unique identifier of the target reseller platform.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;DeleteServicePlan&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span> <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Subscription.EditCategory">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Subscription.EditCategory">[docs]</a>
+    <span class="k">def</span> <span class="nf">EditCategory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">category</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param category: JSON representation of an object (subscription Category) that should be created.</span>
+<span class="sd">        :param reseller_id: unique identifier of the target reseller platform.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;EditCategory&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="n">category</span><span class="p">,</span>
+                <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Subscription.EditProduct">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Subscription.EditProduct">[docs]</a>
+    <span class="k">def</span> <span class="nf">EditProduct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">category</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param category: JSON representation of an object (subscription Product) that should be created.</span>
+<span class="sd">        :param reseller_id: unique identifier of the target reseller platform.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;EditProduct&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="n">category</span><span class="p">,</span>
+                <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Subscription.EditServicePlan">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Subscription.EditServicePlan">[docs]</a>
+    <span class="k">def</span> <span class="nf">EditServicePlan</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">service_plan</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+        <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">expend_fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param service_plan: JSON representation of an object (subscription Service Plan) that should be created.</span>
+<span class="sd">        :param reseller_id: unique identifier of the target reseller platform.</span>
+<span class="sd">        :param expend_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;EditServicePlan&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;servicePlan&quot;</span><span class="p">:</span> <span class="n">service_plan</span><span class="p">,</span>
+                <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">,</span>
+                <span class="s2">&quot;expendFields&quot;</span><span class="p">:</span> <span class="n">expend_fields</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Subscription.GetCategories">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Subscription.GetCategories">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetCategories</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">expend_fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param reseller_id: unique identifier of the target reseller platform.</span>
+<span class="sd">        :param expend_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetCategories&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">,</span>
+                <span class="s2">&quot;expendFields&quot;</span><span class="p">:</span> <span class="n">expend_fields</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Subscription.GetProducts">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Subscription.GetProducts">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetProducts</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">status</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">subscription_status</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">expend_fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">start_row</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">result_count</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">order_field</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">order_direction</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param id: unique identifier of the product (for filtering).</span>
+<span class="sd">        :param status: a comma-separated list of the subscription Product statuses (ProductStatus) that should be returned.</span>
+<span class="sd">        :param reseller_id: unique identifier of the target reseller platform.</span>
+<span class="sd">        :param subscription_status: a comma-separated list of the subscription statuses (SubscriptionStatus) that should be returned.</span>
+<span class="sd">        :param expend_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).</span>
+<span class="sd">        :param start_row: returns information starting from the specified row in the response (starts with 0, by default).</span>
+<span class="sd">        :param result_count: returns the specified number of rows from the response (0 – unlimited – by default).</span>
+<span class="sd">        :param order_field: sorts results by the specified field</span>
+<span class="sd">        :param order_direction: sorts results in the ascending (ASC) or descending (DESC) order</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetProduct&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+                <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">status</span><span class="p">,</span>
+                <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">,</span>
+                <span class="s2">&quot;subscriptionStatus&quot;</span><span class="p">:</span> <span class="n">subscription_status</span><span class="p">,</span>
+                <span class="s2">&quot;expandFields&quot;</span><span class="p">:</span> <span class="n">expend_fields</span><span class="p">,</span>
+                <span class="s2">&quot;startRow&quot;</span><span class="p">:</span> <span class="n">start_row</span><span class="p">,</span>
+                <span class="s2">&quot;resultCount&quot;</span><span class="p">:</span> <span class="n">result_count</span><span class="p">,</span>
+                <span class="s2">&quot;orderField&quot;</span><span class="p">:</span> <span class="n">order_field</span><span class="p">,</span>
+                <span class="s2">&quot;orderDirection&quot;</span><span class="p">:</span> <span class="n">order_direction</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Subscription.GetServicePlans">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Subscription.GetServicePlans">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetServicePlans</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">has_products</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">subscription_status</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">product_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">expend_fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param id: unique identifier of the service plan (for filtering).</span>
+<span class="sd">        :param has_products: a flag that indicates if returned Service Plans should have (true) or not (false) assigned products</span>
+<span class="sd">        :param subscription_status: a comma-separated list of the subscription statuses (SubscriptionStatus) that should be returned.</span>
+<span class="sd">        :param product_id: unique identifier of the subscription product (for filtering).</span>
+<span class="sd">        :param expend_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).</span>
+<span class="sd">        :param reseller_id: unique identifier of the target reseller platform.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetServicePlans&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+                <span class="s2">&quot;hasProducts&quot;</span><span class="p">:</span> <span class="n">has_products</span><span class="p">,</span>
+                <span class="s2">&quot;subscriptionStatus&quot;</span><span class="p">:</span> <span class="n">subscription_status</span><span class="p">,</span>
+                <span class="s2">&quot;productId&quot;</span><span class="p">:</span> <span class="n">product_id</span><span class="p">,</span>
+                <span class="s2">&quot;expandFields&quot;</span><span class="p">:</span> <span class="n">expend_fields</span><span class="p">,</span>
+                <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Subscription.GetSubscriptions">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Subscription.GetSubscriptions">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetSubscriptions</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">uid</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">status</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">product_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">service_plan_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">expend_fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">start_row</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">result_count</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">order_field</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">order_direction</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param id: unique identifier of the subscription (for filtering).</span>
+<span class="sd">        :param uid: unique identifier of the target user.</span>
+<span class="sd">        :param status: a comma-separated list of the subscription statuses (SubscriptionStatus) that should be returned.</span>
+<span class="sd">        :param reseller_id: unique identifier of the target reseller platform.</span>
+<span class="sd">        :param product_id: unique identifier of the target product.</span>
+<span class="sd">        :param service_plan_id: unique identifier of the target service plan.</span>
+<span class="sd">        :param expend_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).</span>
+<span class="sd">        :param start_row: returns information starting from the specified row in the response (starts with 0, by default).</span>
+<span class="sd">        :param result_count: returns the specified number of rows from the response (0 – unlimited – by default).</span>
+<span class="sd">        :param order_field: sorts results by the specified field</span>
+<span class="sd">        :param order_direction: sorts results in the ascending (ASC) or descending (DESC) order</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetSubscriptions&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+                <span class="s2">&quot;uid&quot;</span><span class="p">:</span> <span class="n">uid</span><span class="p">,</span>
+                <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">status</span><span class="p">,</span>
+                <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">,</span>
+                <span class="s2">&quot;productId&quot;</span><span class="p">:</span> <span class="n">product_id</span><span class="p">,</span>
+                <span class="s2">&quot;servicePlanId&quot;</span><span class="p">:</span> <span class="n">service_plan_id</span><span class="p">,</span>
+                <span class="s2">&quot;expandFields&quot;</span><span class="p">:</span> <span class="n">expend_fields</span><span class="p">,</span>
+                <span class="s2">&quot;startRow&quot;</span><span class="p">:</span> <span class="n">start_row</span><span class="p">,</span>
+                <span class="s2">&quot;resultCount&quot;</span><span class="p">:</span> <span class="n">result_count</span><span class="p">,</span>
+                <span class="s2">&quot;orderField&quot;</span><span class="p">:</span> <span class="n">order_field</span><span class="p">,</span>
+                <span class="s2">&quot;orderDirection&quot;</span><span class="p">:</span> <span class="n">order_direction</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Subscription.SetCategoryPublished">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Subscription.SetCategoryPublished">[docs]</a>
+    <span class="k">def</span> <span class="nf">SetCategoryPublished</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">published</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param id: unique identifier of the target category.</span>
+<span class="sd">        :param published: publishes (true) or unpublishes (false) the subscription Category.</span>
+<span class="sd">        :param reseller_id: unique identifier of the target reseller platform.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;SetCategoryPublished&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+                <span class="s2">&quot;published&quot;</span><span class="p">:</span> <span class="n">published</span><span class="p">,</span>
+                <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Subscription.SetProductStatus">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Subscription.SetProductStatus">[docs]</a>
+    <span class="k">def</span> <span class="nf">SetProductStatus</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">status</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param id: unique identifier of the target product.</span>
+<span class="sd">        :param status: a new status (ProductStatus) that should be set for the subscription Product.</span>
+<span class="sd">        :param reseller_id: unique identifier of the target reseller platform.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;SetProductStatus&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+                <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">status</span><span class="p">,</span>
+                <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Subscription.SetServicePlanStatus">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Subscription.SetServicePlanStatus">[docs]</a>
+    <span class="k">def</span> <span class="nf">SetServicePlanStatus</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">status</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param id: unique identifier of the target service plan.</span>
+<span class="sd">        :param status: a new status (ServicePlanStatus) that should be set for the subscription Service Plan.</span>
+<span class="sd">        :param reseller_id: unique identifier of the target reseller platform.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;SetServicePlanStatus&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+                <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">status</span><span class="p">,</span>
+                <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Subscription.TerminateSubscription">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Subscription.TerminateSubscription">[docs]</a>
+    <span class="k">def</span> <span class="nf">TerminateSubscription</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">subscription_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param subscription_id: unique identifier of the target subscription.</span>
+<span class="sd">        :param password: current (admin) user&#39;s password to confirm subscription resources deletion.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;TerminateSubscription&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;subscriptionId&quot;</span><span class="p">:</span> <span class="n">subscription_id</span><span class="p">,</span>
+                <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
 </div>
 
 </pre></div>
