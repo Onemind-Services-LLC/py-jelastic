@@ -10,6 +10,11 @@ Administration
    :undoc-members:
    :show-inheritance:
 
+.. autoclass:: jelastic.api.administration._Host
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 .. autoclass:: jelastic.api.administration._Utils
    :members:
    :undoc-members:
