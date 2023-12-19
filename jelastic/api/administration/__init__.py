@@ -101,6 +101,10 @@ class _Analytics(Administration):
 
 
 class _Config(Administration):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/administration.Config
+    """
+
     _endpoint2 = "config"
 
     def ApplyConfig(
