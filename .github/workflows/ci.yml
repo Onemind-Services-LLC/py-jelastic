@@ -26,8 +26,15 @@ jobs:
       - name: Run Tests
         run: coverage run -m pytest --tb=short -vvv tests/unit
 
-      - name: Show Coverage
-        run: coverage report --omit="tests/*"
+      - name: Run Coverage
+        run: coverage xml --omit="tests/*"
+
+      - name: Comment coverage on PR
+        if: github.event_name == 'pull_request'
+        uses: orgoro/coverage@v3.1
+        with:
+          coverageFile: coverage.xml
+          token: ${{ secrets.GITHUB_TOKEN }}
 
   integration-tests:
     runs-on: ubuntu-latest
@@ -52,7 +59,7 @@ jobs:
       - name: Run Tests
         run: coverage run -m pytest --tb=short -vvv tests/integration
 
-      - name: Show Coverage
+      - name: Run Coverage
         run: coverage report --omit="tests/*"
 
   docs:
