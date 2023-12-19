@@ -102,6 +102,10 @@ class _Analytics(Administration):
 
 
 class _Resource(Administration):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/administration.Resource
+    """
+
     _endpoint2 = "resource"
 
     def AddStatistics(
