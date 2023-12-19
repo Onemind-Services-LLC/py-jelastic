@@ -239,6 +239,7 @@ def test_test_end_points(client):
     )
     assert response == success_response
 
+
 def test_add_labels(client):
     client._get.return_value = success_response
     response = client.Host.AddLabels("app_id1", "app_label1")

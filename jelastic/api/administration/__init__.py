@@ -114,6 +114,7 @@ class _Analytics(Administration):
             delimiter=",",
         )
 
+
 class _HostGroup(Administration):
     """
     Ref: https://docs.jelastic.com/api/private/#!/api/administration.HostGroup
@@ -261,6 +262,7 @@ class _HostGroup(Administration):
             },
             delimiter=",",
         )
+
 
 class _Host(Administration):
     """
