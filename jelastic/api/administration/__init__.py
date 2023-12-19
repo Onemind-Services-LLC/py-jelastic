@@ -101,6 +101,10 @@ class _Analytics(Administration):
 
 
 class _Monitoring(Administration):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/administration.Monitoring
+    """
+
     _endpoint2 = "monitoring"
 
     def GetDockerPullStatus(self):
