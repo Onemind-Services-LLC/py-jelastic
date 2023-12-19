@@ -26,6 +26,21 @@ class Administration(ClientAbstract):
         )
 
     @property
+    def Template(self) -> "_Template":
+        """
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.administration.Template
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/administration.Template
+        """
+        return _Template(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+        )
+
+    @property
     def Host(self) -> "_Host":
         """
         >>> from jelastic import Jelastic
@@ -126,6 +141,44 @@ class _Analytics(Administration):
                 "uids": uids,
                 "threadCount": thread_count,
             },
+            delimiter=",",
+        )
+
+
+class _Template(Administration):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/administration.Template
+    """
+
+    _endpoint2 = "template"
+
+    def SetDefaultRegistry(
+        self,
+        id: list[int] = None,
+    ):
+        """
+        :param id: identifier of the registry.
+        """
+        return self._get(
+            "SetDefaultRegistry",
+            params={
+                "id": id,
+            },
+            delimiter=",",
+        )
+
+    def SetDistribution(
+        self,
+        node_types: str,
+        distribution: list[str] = None,
+    ):
+        """
+        :param node_type: templates where distribution should be set.
+        :param distribution: zone configuration JSON string, example: {"mode":"STRICT","zones":"windows"}.
+        """
+        return self._get(
+            "SetDistribution",
+            params={"nodeTypes": node_types, "distribution": distribution},
             delimiter=",",
         )
 
