@@ -10,7 +10,7 @@
           <link rel="stylesheet" href="_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="_static/documentation_options.js?v=2ee1e89e"></script>
+        <script src="_static/documentation_options.js?v=2b533b17"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -485,6 +485,17 @@
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="jelastic.api.administration.Administration.Update">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Update</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#jelastic.api.administration._Update" title="jelastic.api.administration._Update"><span class="pre">_Update</span></a></em><a class="headerlink" href="#jelastic.api.administration.Administration.Update" title="Link to this definition">¶</a></dt>
+<dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jelastic</span> <span class="kn">import</span> <span class="n">Jelastic</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jelastic</span> <span class="o">=</span> <span class="n">Jelastic</span><span class="p">(</span><span class="s1">&#39;https://jca.xapp.cloudmydc.com&#39;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s1">&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jelastic</span><span class="o">.</span><span class="n">administration</span><span class="o">.</span><span class="n">Update</span>
+</pre></div>
+</div>
+<p>Ref: <a class="reference external" href="https://docs.jelastic.com/api/private/#!/api/administration.Update">https://docs.jelastic.com/api/private/#!/api/administration.Update</a></p>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="jelastic.api.administration.Administration.Utils">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Utils</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#jelastic.api.administration._Utils" title="jelastic.api.administration._Utils"><span class="pre">_Utils</span></a></em><a class="headerlink" href="#jelastic.api.administration.Administration.Utils" title="Link to this definition">¶</a></dt>
 <dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jelastic</span> <span class="kn">import</span> <span class="n">Jelastic</span>
@@ -533,6 +544,28 @@
 </dd>
 </dl>
 </dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="jelastic.api.administration._Update">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jelastic.api.administration.</span></span><span class="sig-name descname"><span class="pre">_Update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/administration.html#_Update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.administration._Update" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#jelastic.api.administration.Administration" title="jelastic.api.administration.Administration"><code class="xref py py-class docutils literal notranslate"><span class="pre">Administration</span></code></a></p>
+<p>Ref: <a class="reference external" href="https://docs.jelastic.com/api/private/#!/api/administration.Update">https://docs.jelastic.com/api/private/#!/api/administration.Update</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.administration._Update.FixExtDns">
+<span class="sig-name descname"><span class="pre">FixExtDns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_app_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/administration.html#_Update.FixExtDns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.administration._Update.FixExtDns" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.administration._Update.RestoreEnv">
+<span class="sig-name descname"><span class="pre">RestoreEnv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/administration.html#_Update.RestoreEnv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.administration._Update.RestoreEnv" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.administration._Update.SyncInfraEnv">
+<span class="sig-name descname"><span class="pre">SyncInfraEnv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">registry</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/administration.html#_Update.SyncInfraEnv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.administration._Update.SyncInfraEnv" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
