@@ -149,25 +149,28 @@ class _Template(Administration):
     """
     Ref: https://docs.jelastic.com/api/private/#!/api/administration.Template
     """
-    _endpoint2 = 'template'
+
+    _endpoint2 = "template"
 
     def SetDefaultRegistry(
-            self,
-            id: list[int] = None,
+        self,
+        id: list[int] = None,
     ):
         """
         :param id: identifier of the registry.
         """
         return self._get(
             "SetDefaultRegistry",
-            params={"id": id, },
+            params={
+                "id": id,
+            },
             delimiter=",",
         )
 
     def SetDistribution(
-            self,
-            node_types: str,
-            distribution: list[str] = None,
+        self,
+        node_types: str,
+        distribution: list[str] = None,
     ):
         """
         :param node_type: templates where distribution should be set.
@@ -175,10 +178,7 @@ class _Template(Administration):
         """
         return self._get(
             "SetDistribution",
-            params={
-                'nodeTypes': node_types,
-                'distribution': distribution
-            },
+            params={"nodeTypes": node_types, "distribution": distribution},
             delimiter=",",
         )
 
