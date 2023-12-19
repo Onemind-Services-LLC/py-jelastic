@@ -55,6 +55,7 @@ class Administration(ClientAbstract):
             debug=self._debug,
         )
 
+
 class _Analytics(Administration):
     _endpoint2 = "analytics"
 
@@ -112,6 +113,8 @@ class _Analytics(Administration):
             },
             delimiter=",",
         )
+
+
 class _Host(Administration):
     """
     Ref: https://docs.jelastic.com/api/private/#!/api/administration.Host
@@ -180,6 +183,7 @@ class _Host(Administration):
             },
             delimiter=",",
         )
+
 
 class _Utils(Administration):
     """

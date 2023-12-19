@@ -54,6 +54,7 @@ def test_get_nodes_anti_affinity_suggestion(client):
     )
     assert response == success_response
 
+
 def test_add_system_external_dns_records(client):
     client._get.return_value = success_response
     response = client.Utils.AddSystemExternalDNSRecord(
@@ -409,6 +410,7 @@ def test_update_nodes(client):
     response = client.Utils.UpdateNodes()
     client._get.assert_called_with("UpdateNodes", params={})
     assert response == success_response
+
 
 def test_add_labels(client):
     client._get.return_value = success_response
