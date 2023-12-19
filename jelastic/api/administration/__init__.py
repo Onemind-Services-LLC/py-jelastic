@@ -41,6 +41,21 @@ class Administration(ClientAbstract):
         )
 
     @property
+    def HostGroup(self) -> "_HostGroup":
+        """
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.administration.HostGroup
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/administration.HostGroup
+        """
+        return _HostGroup(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+        )
+
+    @property
     def Utils(self) -> "_Utils":
         """
         >>> from jelastic import Jelastic
@@ -54,6 +69,8 @@ class Administration(ClientAbstract):
             token=self._token,
             debug=self._debug,
         )
+
+
 
 
 class _Analytics(Administration):
@@ -110,6 +127,153 @@ class _Analytics(Administration):
                 "nodeGroups": node_groups,
                 "uids": uids,
                 "threadCount": thread_count,
+            },
+            delimiter=",",
+        )
+class _HostGroup(Administration):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/administration.HostGroup
+    """
+
+    _endpoint2 = "hostGroup"
+
+    def Add(
+        self,
+        data: dict,
+    ):
+        """
+        :param data: JSON representation of an object (host group) that should be created.
+        """
+        return self._get(
+            "Add",
+            params={
+                "data": data,
+            },
+            delimiter=",",
+        )
+
+    def AddEndpoints(
+        self,
+        host_group: str,
+        end_points: dict,
+    ):
+        """
+        :param host_group: unique identifier of the target host group.
+        :param end_points: JSON array of endpoint objects.
+        """
+        return self._get(
+            "AddEndpoints",
+            params={
+                "hostGroup": host_group,
+                "endpoints": end_points,
+            },
+            delimiter=",",
+        )
+
+    def Edit(
+        self,
+        data: dict,
+    ):
+        """
+        :param data: JSON representation of an object (host group) that should be edited.
+        """
+        return self._get(
+            "Edit",
+            params={
+                "data": data,
+            },
+            delimiter=",",
+        )
+
+    def EditEndpoints(
+        self,
+        host_group: str,
+        end_points: dict,
+    ):
+        """
+        :param end_points: JSON array of endpoint objects
+        """
+        return self._get(
+            "EditEndpoints",
+            params={
+                "hostGroup": host_group,
+                "endpoints": end_points,
+            },
+            delimiter=",",
+        )
+
+    def Get(
+        self,
+    ):
+        return self._get("Get", params={})
+
+    def GetEndpoints(
+        self,
+        host_group: str,
+    ):
+        """
+        :param host_group: unique identifier of the target host group.
+        """
+        return self._get(
+            "GetEndpoints",
+            params={
+                "hostGroup": host_group,
+            },
+        )
+
+    def Remove(
+        self,
+        id: int,
+    ):
+        """
+        :param id:unique identifier of the target host group.
+        """
+        return self._get(
+            "Remove",
+            params={
+                "id": id,
+            },
+        )
+
+    def RemoveEndpoints(
+        self,
+        id: int,
+    ):
+        """
+        :param id:unique identifier of the target endpoint.
+        """
+        return self._get(
+            "RemoveEndpoints",
+            params={
+                "id": id,
+            },
+        )
+
+    def RenameRemoteUser(
+        self,
+        uid: int,
+        email: str,
+    ):
+        """
+        :param uid: unique identifier of the target user.
+        :param email: new email address for the user.
+        """
+        return self._get(
+            "RenameRemoteUser",
+            params={"uid": uid, "email": email},
+        )
+
+    def TestEndpoints(
+        self,
+        end_points: dict,
+    ):
+        """
+        :param end_points: JSON array with endpoints objects with ids.
+        """
+        return self._get(
+            "TestEndpoints",
+            params={
+                "endPoints": end_points,
             },
             delimiter=",",
         )
@@ -183,7 +347,6 @@ class _Host(Administration):
             },
             delimiter=",",
         )
-
 
 class _Utils(Administration):
     """
