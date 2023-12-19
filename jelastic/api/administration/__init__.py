@@ -101,6 +101,10 @@ class _Analytics(Administration):
 
 
 class _HostGroup(Administration):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/administration.HostGroup
+    """
+
     _endpoint2 = "hostGroup"
 
     def Add(
