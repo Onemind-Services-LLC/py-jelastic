@@ -1,3 +1,4 @@
+from datetime import date
 from typing import Literal
 
 from ..abstract import ClientAbstract
@@ -20,6 +21,21 @@ class Administration(ClientAbstract):
         Ref: https://docs.jelastic.com/api/private/#!/api/administration.Analytics
         """
         return _Analytics(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+        )
+
+    @property
+    def Resource(self) -> "_Resource":
+        """
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.administration.Resource
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/administration.Resource
+        """
+        return _Resource(
             session=self._session,
             token=self._token,
             debug=self._debug,
@@ -80,6 +96,38 @@ class _Analytics(Administration):
                 "nodeGroups": node_groups,
                 "uids": uids,
                 "threadCount": thread_count,
+            },
+            delimiter=",",
+        )
+
+
+class _Resource(Administration):
+    _endpoint2 = "resource"
+
+    def AddStatistics(
+        self,
+        resource_name: str,
+        uid: int,
+        value: int,
+        start_date: list[date] = None,
+        end_date: list[date] = None,
+        env_name: list[str] = None,
+        node_id: list[int] = None,
+        note: list[str] = None,
+        value_group: list[str] = None,
+    ):
+        return self._get(
+            "AddStatistics",
+            params={
+                "resourceName": resource_name,
+                "uid": uid,
+                "value": value,
+                "startDate": start_date,
+                "endDate": end_date,
+                "envName": env_name,
+                "nodeId": node_id,
+                "note": note,
+                "valueGroup": value_group,
             },
             delimiter=",",
         )
