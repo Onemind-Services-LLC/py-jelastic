@@ -26,6 +26,21 @@ class Administration(ClientAbstract):
         )
 
     @property
+    def Monitoring(self) -> "_Monitoring":
+        """
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.administration.Monitoring
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/administration.Monitoring
+        """
+        return _Monitoring(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+        )
+
+    @property
     def Template(self) -> "_Template":
         """
         >>> from jelastic import Jelastic
@@ -143,6 +158,23 @@ class _Analytics(Administration):
             },
             delimiter=",",
         )
+
+
+class _Monitoring(Administration):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/administration.Monitoring
+    """
+
+    _endpoint2 = "monitoring"
+
+    def GetDockerPullStatus(self):
+        """
+        Returns cached result of the "docker pull" operation (cache lifetime = 600s). Pulled image is selected randomly from the list of published DOCKERIZED templates. This method is used for monitoring.
+        """
+        return self._get("GetDockerPullStatus", params={})
+
+    def GetHostFirewallStatus(self):
+        return self._get("GetHostFirewallStatus", params={})
 
 
 class _Template(Administration):
