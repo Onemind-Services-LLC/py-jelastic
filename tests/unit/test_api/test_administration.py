@@ -55,7 +55,7 @@ def test_get_nodes_anti_affinity_suggestion(client):
     assert response == success_response
 
 
-def test_fix_ext_dns(client):
+def test_update_fix_ext_dns(client):
     client._get.return_value = success_response
     response = client.Update.FixExtDns(
         [1, 2, 3, 4],
@@ -264,7 +264,7 @@ def test_export_env(client):
     assert response == success_response
 
 
-def test_fix_ext_dns(client):
+def test_utils_fix_ext_dns(client):
     client._get.return_value = success_response
     response = client.Utils.FixExtDns(
         [1, 2, 3],
