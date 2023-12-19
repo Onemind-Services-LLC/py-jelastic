@@ -9,7 +9,7 @@
           <link rel="stylesheet" href="../../../_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="../../../_static/documentation_options.js?v=ae87edbf"></script>
+        <script src="../../../_static/documentation_options.js?v=9bc9ab18"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -466,6 +466,21 @@
             <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
             <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span>
             <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Utils</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_Utils&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.administration.Utils</span>
+
+<span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/administration.Utils</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_Utils</span><span class="p">(</span>
+            <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
+            <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span>
+            <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span>
         <span class="p">)</span></div>
 
 
@@ -807,6 +822,361 @@
             <span class="p">},</span>
             <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="_Utils">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils">[docs]</a>
+<span class="k">class</span> <span class="nc">_Utils</span><span class="p">(</span><span class="n">Administration</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/administration.Utils</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="_Utils.AddSystemExternalDNSRecord">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils.AddSystemExternalDNSRecord">[docs]</a>
+    <span class="k">def</span> <span class="nf">AddSystemExternalDNSRecord</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">record_data</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">ttl</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">record_data_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">ssl_enabled</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">enabled</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param record_data: custom data for the DNS record.</span>
+<span class="sd">        :param name: name for DNS records (must be the same as one of the existing record).</span>
+<span class="sd">        :param ttl: TTL (time to live) value for the DNS record.</span>
+<span class="sd">        :param record_data_type: type of the DNS record data (currently, only the ‘TXT’ value is supported).</span>
+<span class="sd">        :param ssl_enabled: defines whether the SSL is enabled for the record (true, by default) or not (false).</span>
+<span class="sd">        :param enabled: defines whether the record is enabled (true, by default) or not (false).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;AddSystemExternalDNSRecord&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;recordData&quot;</span><span class="p">:</span> <span class="n">record_data</span><span class="p">,</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                <span class="s2">&quot;ttl&quot;</span><span class="p">:</span> <span class="n">ttl</span><span class="p">,</span>
+                <span class="s2">&quot;recordDataType&quot;</span><span class="p">:</span> <span class="n">record_data_type</span><span class="p">,</span>
+                <span class="s2">&quot;sslEnabled&quot;</span><span class="p">:</span> <span class="n">ssl_enabled</span><span class="p">,</span>
+                <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">enabled</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Utils.AnalizeEnv">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils.AnalizeEnv">[docs]</a>
+    <span class="k">def</span> <span class="nf">AnalizeEnv</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">domain</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;AnalizeEnv&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;domain&quot;</span><span class="p">:</span> <span class="n">domain</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Utils.BalanceResources">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils.BalanceResources">[docs]</a>
+    <span class="k">def</span> <span class="nf">BalanceResources</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;BalanceResources&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;domain&quot;</span><span class="p">:</span> <span class="n">domain</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="_Utils.ClearEnvs">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils.ClearEnvs">[docs]</a>
+    <span class="k">def</span> <span class="nf">ClearEnvs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;ClearEnvs&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{})</span></div>
+
+
+<div class="viewcode-block" id="_Utils.DeleteBrokenEnvs">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils.DeleteBrokenEnvs">[docs]</a>
+    <span class="k">def</span> <span class="nf">DeleteBrokenEnvs</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">target_app_ids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;DeleteBrokenEnvs&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;targetAppIds&quot;</span><span class="p">:</span> <span class="n">target_app_ids</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Utils.EditSystemExternalDNSRecord">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils.EditSystemExternalDNSRecord">[docs]</a>
+    <span class="k">def</span> <span class="nf">EditSystemExternalDNSRecord</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">record_data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">ttl</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">record_data_type</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">ssl_enabled</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">enabled</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param id: unique identifier of the target custom external DNS record.</span>
+<span class="sd">        :param record_data: new custom data for the DNS record.</span>
+<span class="sd">        :param name: name for DNS records (must be the same as one of the existing record).</span>
+<span class="sd">        :param ttl: TTL (time to live) value for the DNS record.</span>
+<span class="sd">        :param record_data_type: type of the DNS record data (currently, only the ‘TXT’ value is supported).</span>
+<span class="sd">        :param ssl_enabled: defines whether the SSL is enabled for the record (true, by default) or not (false).</span>
+<span class="sd">        :param enabled: defines whether the record is enabled (true, by default) or not (false).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;EditSystemExternalDNSRecord&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+                <span class="s2">&quot;recordData&quot;</span><span class="p">:</span> <span class="n">record_data</span><span class="p">,</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                <span class="s2">&quot;ttl&quot;</span><span class="p">:</span> <span class="n">ttl</span><span class="p">,</span>
+                <span class="s2">&quot;recordDataType&quot;</span><span class="p">:</span> <span class="n">record_data_type</span><span class="p">,</span>
+                <span class="s2">&quot;sslEnabled&quot;</span><span class="p">:</span> <span class="n">ssl_enabled</span><span class="p">,</span>
+                <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">enabled</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Utils.ExportEnv">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils.ExportEnv">[docs]</a>
+    <span class="k">def</span> <span class="nf">ExportEnv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_app_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;ExportEnv&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;targetAppId&quot;</span><span class="p">:</span> <span class="n">target_app_id</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Utils.FixExtDns">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils.FixExtDns">[docs]</a>
+    <span class="k">def</span> <span class="nf">FixExtDns</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">target_app_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;FixExtDns&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;uid&quot;</span><span class="p">:</span> <span class="n">uid</span><span class="p">,</span>
+                <span class="s2">&quot;targetAppId&quot;</span><span class="p">:</span> <span class="n">target_app_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Utils.FixLaunching">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils.FixLaunching">[docs]</a>
+    <span class="k">def</span> <span class="nf">FixLaunching</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;FixLaunching&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{})</span></div>
+
+
+<div class="viewcode-block" id="_Utils.GenerateZone">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils.GenerateZone">[docs]</a>
+    <span class="k">def</span> <span class="nf">GenerateZone</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">generate_slept</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GenerateZone&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;generateSlept&quot;</span><span class="p">:</span> <span class="n">generate_slept</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Utils.GetAvgs">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils.GetAvgs">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetAvgs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetAvgs&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{})</span></div>
+
+
+<div class="viewcode-block" id="_Utils.GetAvgs2">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils.GetAvgs2">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetAvgs2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetAvgs2&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{})</span></div>
+
+
+<div class="viewcode-block" id="_Utils.GetBalancerStat">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils.GetBalancerStat">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetBalancerStat</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">start_time</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">end_time</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetBalancerStat&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;starttime&quot;</span><span class="p">:</span> <span class="n">start_time</span><span class="p">,</span>
+                <span class="s2">&quot;endtime&quot;</span><span class="p">:</span> <span class="n">end_time</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Utils.GetCloudletsUsage">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils.GetCloudletsUsage">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetCloudletsUsage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetCloudletsUsage&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{})</span></div>
+
+
+<div class="viewcode-block" id="_Utils.GetDBCreationStat">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils.GetDBCreationStat">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetDBCreationStat</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">start_time</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">end_time</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetDBCreationStat&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;startTime&quot;</span><span class="p">:</span> <span class="n">start_time</span><span class="p">,</span>
+                <span class="s2">&quot;endTime&quot;</span><span class="p">:</span> <span class="n">end_time</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Utils.GetErrors">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils.GetErrors">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetErrors</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">start_time</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">end_time</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">start_row</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">result_count</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="nb">filter</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GerErrors&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;starttime&quot;</span><span class="p">:</span> <span class="n">start_time</span><span class="p">,</span>
+                <span class="s2">&quot;endtime&quot;</span><span class="p">:</span> <span class="n">end_time</span><span class="p">,</span>
+                <span class="s2">&quot;startrow&quot;</span><span class="p">:</span> <span class="n">start_row</span><span class="p">,</span>
+                <span class="s2">&quot;resultCount&quot;</span><span class="p">:</span> <span class="n">result_count</span><span class="p">,</span>
+                <span class="s2">&quot;filter&quot;</span><span class="p">:</span> <span class="nb">filter</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Utils.GetErrorsByDate">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils.GetErrorsByDate">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetErrorsByDate</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">start_time</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">end_time</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">interval</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="nb">filter</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetErrorsByDate&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;starttime&quot;</span><span class="p">:</span> <span class="n">start_time</span><span class="p">,</span>
+                <span class="s2">&quot;endtime&quot;</span><span class="p">:</span> <span class="n">end_time</span><span class="p">,</span>
+                <span class="s2">&quot;interval&quot;</span><span class="p">:</span> <span class="n">interval</span><span class="p">,</span>
+                <span class="s2">&quot;filter&quot;</span><span class="p">:</span> <span class="nb">filter</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Utils.GetSystemExternalDNSRecords">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils.GetSystemExternalDNSRecords">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetSystemExternalDNSRecords</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetSystemExternalDNSRecords&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{})</span></div>
+
+
+<div class="viewcode-block" id="_Utils.GetZone">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils.GetZone">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetZone</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetZone&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{})</span></div>
+
+
+<div class="viewcode-block" id="_Utils.ImportEnv">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils.ImportEnv">[docs]</a>
+    <span class="k">def</span> <span class="nf">ImportEnv</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_info</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">enable_firewall</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;ImportEnv&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envInfo&quot;</span><span class="p">:</span> <span class="n">env_info</span><span class="p">,</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;enableFirewall&quot;</span><span class="p">:</span> <span class="n">enable_firewall</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Utils.InspectEnvs">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils.InspectEnvs">[docs]</a>
+    <span class="k">def</span> <span class="nf">InspectEnvs</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">remove</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;InspectEnvs&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;remove&quot;</span><span class="p">:</span> <span class="n">remove</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Utils.ManageService">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils.ManageService">[docs]</a>
+    <span class="k">def</span> <span class="nf">ManageService</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">command</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">service_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;ManageServices&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;nodeid&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+                <span class="s2">&quot;command&quot;</span><span class="p">:</span> <span class="n">command</span><span class="p">,</span>
+                <span class="s2">&quot;servicename&quot;</span><span class="p">:</span> <span class="n">service_name</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Utils.RemoveSystemExternalDNSRecord">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils.RemoveSystemExternalDNSRecord">[docs]</a>
+    <span class="k">def</span> <span class="nf">RemoveSystemExternalDNSRecord</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;RemoveSystemExternalDNSRecord&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Utils.UpdateEnv">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils.UpdateEnv">[docs]</a>
+    <span class="k">def</span> <span class="nf">UpdateEnv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_app_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;UpdateEnv&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;targetAppId&quot;</span><span class="p">:</span> <span class="n">target_app_id</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Utils.UpdateEnvInThread">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils.UpdateEnvInThread">[docs]</a>
+    <span class="k">def</span> <span class="nf">UpdateEnvInThread</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_app_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;UpdateEnvInThread&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;targetAppId&quot;</span><span class="p">:</span> <span class="n">target_app_id</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Utils.UpdateNodes">
+<a class="viewcode-back" href="../../../administration.html#jelastic.api.administration._Utils.UpdateNodes">[docs]</a>
+    <span class="k">def</span> <span class="nf">UpdateNodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;UpdateNodes&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{})</span></div>
 </div>
 
 </pre></div>
