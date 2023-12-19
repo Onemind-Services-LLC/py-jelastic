@@ -45,11 +45,11 @@ class _Analytics(Administration):
     _endpoint2 = "analytics"
 
     def GetNodesAffinitySuggestion(
-            self,
-            target_app_ids: list[str] = None,
-            node_groups: list[str] = None,
-            uids: list[int] = None,
-            thread_count: int = None,
+        self,
+        target_app_ids: list[str] = None,
+        node_groups: list[str] = None,
+        uids: list[int] = None,
+        thread_count: int = None,
     ):
         """
         A list of environments with one node in every layer where distribution can be optimized
@@ -71,12 +71,12 @@ class _Analytics(Administration):
         )
 
     def GetNodesAntiAffinitySuggestion(
-            self,
-            target_app_ids: list[str] = None,
-            mode: MODE = None,
-            node_groups: list[str] = None,
-            uids: list[int] = None,
-            thread_count: int = None,
+        self,
+        target_app_ids: list[str] = None,
+        mode: MODE = None,
+        node_groups: list[str] = None,
+        uids: list[int] = None,
+        thread_count: int = None,
     ):
         """
         A list of environments with non-optimal container distribution with optimization suggestions
@@ -102,14 +102,15 @@ class _Analytics(Administration):
 
 class _Host(Administration):
     """
-       Ref: https://docs.jelastic.com/api/private/#!/api/administration.Host
+    Ref: https://docs.jelastic.com/api/private/#!/api/administration.Host
     """
+
     _endpoint2 = "host"
 
     def AddLabels(
-            self,
-            ids: str,
-            labels: str,
+        self,
+        ids: str,
+        labels: str,
     ):
         return self._get(
             "AddLabels",
@@ -120,10 +121,10 @@ class _Host(Administration):
         )
 
     def CheckHostConnection(
-            self,
-            host_id: str,
-            port: list[int] = None,
-            check_external_ip: list[bool] = None,
+        self,
+        host_id: str,
+        port: list[int] = None,
+        check_external_ip: list[bool] = None,
     ):
         """
         :param host_id: unique identifier of the target host.
@@ -149,10 +150,10 @@ class _Host(Administration):
         return self._get("SetLabels", params={"ids": ids, "labels": labels})
 
     def UpdateHostFirewall(
-            self,
-            host_id: list[int] = None,
-            force: list[bool] = None,
-            check_external_ip: list[bool] = None,
+        self,
+        host_id: list[int] = None,
+        force: list[bool] = None,
+        check_external_ip: list[bool] = None,
     ):
         """
         :param host_id: unique identifier of the target host (all hosts if not defined).
