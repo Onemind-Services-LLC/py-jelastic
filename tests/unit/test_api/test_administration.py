@@ -64,7 +64,6 @@ def test_apply_config(client):
             "type": "type",
             "password": "password",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -79,7 +78,6 @@ def test_apply_defaults(client):
         params={
             "edition": "edition",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -94,7 +92,6 @@ def test_apply_reseller_config(client):
             "password": "password",
             "resellerId": "id_1",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -124,7 +121,6 @@ def tes_change_properties_for_reseller(client):
         params={
             "resellerId": "rid_1",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -138,7 +134,6 @@ def test_creating_config_type(client):
     client._get.assert_called_with(
         "CreatingConfigType",
         params={"type": "type", "description": "description"},
-        delimiter=",",
     )
     assert response == success_response
 
@@ -159,7 +154,6 @@ def test_creating_key_config(client):
             "description": "description",
             "keyType": "key type",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -174,7 +168,6 @@ def test_find_config_key(client):
         params={
             "value": "value",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -189,7 +182,6 @@ def test_get_all_config_type(client):
         params={
             "expert": "expert",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -206,7 +198,6 @@ def test_get_congif_key(client):
             "type": "type",
             "key": "key",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -255,7 +246,6 @@ def test_remove_config_key(client):
             "type": "type",
             "key": "key",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -270,7 +260,6 @@ def test_remove_config_type(client):
         params={
             "type": "type",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -285,7 +274,6 @@ def test_remove_reseller_properties(client):
         params={
             "resellerId": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -299,7 +287,6 @@ def test_revert_config_key(client):
             "type": "type",
             "key": "key",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -315,6 +302,5 @@ def test_set_reseller_config_key(client):
             "value": "value",
             "resellerId": 1,
         },
-        delimiter=",",
     )
     assert response == success_response

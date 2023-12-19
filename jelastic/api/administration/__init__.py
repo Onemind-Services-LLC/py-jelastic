@@ -114,7 +114,6 @@ class _Config(Administration):
                 "type": type,
                 "password": password,
             },
-            delimiter=",",
         )
 
     def ApplyDefaults(
@@ -126,7 +125,6 @@ class _Config(Administration):
             params={
                 "edition": edition,
             },
-            delimiter=",",
         )
 
     def ApplyResellerConfig(
@@ -142,7 +140,6 @@ class _Config(Administration):
                 "password": password,
                 "resellerId": reseller_id,
             },
-            delimiter=",",
         )
 
     def ChangeConfigKey(
@@ -170,7 +167,6 @@ class _Config(Administration):
             params={
                 "resellerId": reseller_id,
             },
-            delimiter=",",
         )
 
     def CreatingConfigType(
@@ -184,7 +180,6 @@ class _Config(Administration):
                 "type": type,
                 "description": description,
             },
-            delimiter=",",
         )
 
     def CreatingKeyConfig(
@@ -208,7 +203,6 @@ class _Config(Administration):
                 "description": description,
                 "keyType": key_type,
             },
-            delimiter=",",
         )
 
     def FindConfigKey(
@@ -220,7 +214,6 @@ class _Config(Administration):
             params={
                 "value": value,
             },
-            delimiter=",",
         )
 
     def GetAllConfigType(
@@ -232,7 +225,6 @@ class _Config(Administration):
             params={
                 "expert": expert,
             },
-            delimiter=",",
         )
 
     def GetAllKeyConfigByType(
@@ -246,7 +238,6 @@ class _Config(Administration):
                 "type": type,
                 "expert": expert,
             },
-            delimiter=",",
         )
 
     def GetConfigKey(
@@ -264,7 +255,6 @@ class _Config(Administration):
                 "type": type,
                 "key": key,
             },
-            delimiter=",",
         )
 
     def GetConfigKeyByResellerId(
@@ -317,7 +307,6 @@ class _Config(Administration):
                 "type": type,
                 "key": key,
             },
-            delimiter=",",
         )
 
     def RemoveConfigType(
@@ -329,7 +318,6 @@ class _Config(Administration):
             params={
                 "type": type,
             },
-            delimiter=",",
         )
 
     def RemoveResellerProperties(
@@ -341,7 +329,6 @@ class _Config(Administration):
             params={
                 "resellerId": reseller_id,
             },
-            delimiter=",",
         )
 
     def RevertConfigKey(
@@ -355,7 +342,6 @@ class _Config(Administration):
                 "type": type,
                 "key": key,
             },
-            delimiter=",",
         )
 
     def SetResellerConfigKey(
@@ -373,5 +359,4 @@ class _Config(Administration):
                 "value": value,
                 "resellerId": reseller_id,
             },
-            delimiter=",",
         )
