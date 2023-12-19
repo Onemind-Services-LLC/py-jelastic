@@ -26,6 +26,21 @@ class Administration(ClientAbstract):
         )
 
     @property
+    def Update(self) -> "_Update":
+        """
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.administration.Update
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/administration.Update
+        """
+        return _Update(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+        )
+
+    @property
     def Monitoring(self) -> "_Monitoring":
         """
         >>> from jelastic import Jelastic
@@ -155,6 +170,58 @@ class _Analytics(Administration):
                 "nodeGroups": node_groups,
                 "uids": uids,
                 "threadCount": thread_count,
+            },
+            delimiter=",",
+        )
+
+
+class _Update(Administration):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/administration.Update
+    """
+
+    _endpoint2 = "update"
+
+    def FixExtDns(
+        self,
+        uid: list[int] = None,
+        target_app_id: list[str] = None,
+    ):
+        return self._get(
+            "FixExtDns",
+            params={
+                "uid": uid,
+                "targetAppIds": target_app_id,
+            },
+            delimiter=",",
+        )
+
+    def RestoreEnv(
+        self,
+        env_name: list[str] = None,
+        uid: list[int] = None,
+        region: list[str] = None,
+    ):
+        return self._get(
+            "RestoreEnv",
+            params={
+                "envName": env_name,
+                "uid": uid,
+                "region": region,
+            },
+            delimiter=",",
+        )
+
+    def SyncInfraEnv(
+        self,
+        domain: list[str] = None,
+        registry: list[str] = None,
+    ):
+        return self._get(
+            "SyncInfraEnv",
+            params={
+                "domain": domain,
+                "registry": registry,
             },
             delimiter=",",
         )
