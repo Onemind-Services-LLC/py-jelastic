@@ -37,6 +37,90 @@ class Billing(ClientAbstract):
         return _Account(session=self._session, token=self._token, debug=self._debug)
 
     @property
+    def GroupQuota(self) -> "_GroupQuota":
+        """
+        The methods of this service provide billing information about a user account (such as UID, balance, billing history,
+        quotas, etc.) and allow managing it.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.billing.GroupQuota
+
+        Ref: https://docs.jelastic.com/api/#!/api/billing.GroupQuota
+        """
+        return _GroupQuota(session=self._session, token=self._token, debug=self._debug)
+
+    @property
+    def Integration(self) -> "_Integration":
+        """
+        The methods of this service provide billing information about a user account (such as UID, balance, billing history,
+        quotas, etc.) and allow managing it.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.billing.Integration
+
+        Ref: https://docs.jelastic.com/api/#!/api/billing.Integration
+        """
+        return _Integration(session=self._session, token=self._token, debug=self._debug)
+
+    @property
+    def PayMethod(self) -> "_PayMethod":
+        """
+        The methods of this service provide billing information about a user account (such as UID, balance, billing history,
+        quotas, etc.) and allow managing it.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.billing.PayMethod
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/billing.PayMethod
+        """
+        return _PayMethod(session=self._session, token=self._token, debug=self._debug)
+
+    @property
+    def Pricing(self) -> "_Pricing":
+        """
+        The methods of this service provide billing information about a user account (such as UID, balance, billing history,
+        quotas, etc.) and allow managing it.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.billing.Pricing
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/billing.Pricing
+        """
+        return _Pricing(session=self._session, token=self._token, debug=self._debug)
+
+    @property
+    def Reseller(self) -> "_Reseller":
+        """
+        The methods of this service provide billing information about a user account (such as UID, balance, billing history,
+        quotas, etc.) and allow managing it.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.billing.Reseller
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/billing.Reseller
+        """
+        return _Reseller(session=self._session, token=self._token, debug=self._debug)
+
+    @property
+    def ServicePlan(self) -> "_ServicePlan":
+        """
+        The methods of this service provide billing information about a user account (such as UID, balance, billing history,
+        quotas, etc.) and allow managing it.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.billing.ServicePlan
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/billing.ServicePlan
+        """
+        return _ServicePlan(session=self._session, token=self._token, debug=self._debug)
+
+    @property
     def Order(self) -> "_Order":
         """
         The methods of this service provide billing information about a user account (such as UID, balance, billing history,
@@ -74,11 +158,11 @@ class _Account(Billing):
         return self._get("ChangeEmail", params={"login": login, "email": email})
 
     def ChangeGroup(
-            self,
-            group_name: str,
-            uids: list[str] = None,
-            send_email: bool = False,
-            template: str = None,
+        self,
+        group_name: str,
+        uids: list[str] = None,
+        send_email: bool = False,
+        template: str = None,
     ):
         """
         Change account group for selected users
@@ -100,7 +184,7 @@ class _Account(Billing):
         return self._get("ChangePhoneNumber", params={"login": login, "number": number})
 
     def ChargeAccountByUid(
-            self, uid: int, amount: float, description: str, env_name: str = None
+        self, uid: int, amount: float, description: str, env_name: str = None
     ):
         """
         Charge account by uid.
@@ -128,13 +212,13 @@ class _Account(Billing):
         return self._get("ConvertToCommercial", params={"customer": customer})
 
     def ConvertToCommercialAndPay(
-            self,
-            customer: dict,
-            pay_method_type: str,
-            service_plan_id: int,
-            auto_service_plan_id: int = None,
-            auto_refill_main_balance: int = None,
-            auto_refill_period: str = None,
+        self,
+        customer: dict,
+        pay_method_type: str,
+        service_plan_id: int,
+        auto_service_plan_id: int = None,
+        auto_refill_main_balance: int = None,
+        auto_refill_period: str = None,
     ):
         """
         Make trial account commercial one. This method register Jbilling account into extern billing system. Commercial
@@ -155,14 +239,14 @@ class _Account(Billing):
         )
 
     def ConvertToTrial(
-            self,
-            template: str,
-            uids: list[str] = None,
-            start_time: datetime = None,
-            end_time: datetime = None,
-            start: int = None,
-            count: int = None,
-            bonus: float = None,
+        self,
+        template: str,
+        uids: list[str] = None,
+        start_time: datetime = None,
+        end_time: datetime = None,
+        start: int = None,
+        count: int = None,
+        bonus: float = None,
     ):
         """
         Converts non-trial and billing accounts to trial.
@@ -187,13 +271,13 @@ class _Account(Billing):
         return self._get("EnableUser", params={"uid": uid})
 
     def ExportAccountBillingHistoryByPeriod(
-            self,
-            start_time: datetime,
-            end_time: datetime,
-            period: PERIOD = "DAY",
-            time_offset: int = None,
-            group_nodes: bool = False,
-            target_app_id: str = None,
+        self,
+        start_time: datetime,
+        end_time: datetime,
+        period: PERIOD = "DAY",
+        time_offset: int = None,
+        group_nodes: bool = False,
+        target_app_id: str = None,
     ):
         """
         Generates a link for downloading the specified account's billing history for the specific period.
@@ -211,12 +295,12 @@ class _Account(Billing):
         )
 
     def ExportEnvBillingHistoryByPeriod(
-            self,
-            start_time: datetime,
-            end_time: datetime,
-            time_offset: int,
-            period: PERIOD = "DAY",
-            group_nodes: bool = False,
+        self,
+        start_time: datetime,
+        end_time: datetime,
+        time_offset: int,
+        period: PERIOD = "DAY",
+        group_nodes: bool = False,
     ):
         """
         Generates a link for downloading the specified environment's billing history for the specific period.
@@ -233,7 +317,7 @@ class _Account(Billing):
         )
 
     def FundAccount(
-            self, uid: int, amount: float, is_bonus: bool = False, note: str = None
+        self, uid: int, amount: float, is_bonus: bool = False, note: str = None
     ):
         """
         Fund account by uid.
@@ -268,13 +352,13 @@ class _Account(Billing):
         return self._get("GetAccount")
 
     def GetAccountBillingByEngineTypeAndPeriod(
-            self,
-            start_time: datetime,
-            end_time: datetime,
-            owner_uid: str = None,
-            engine_types: list[str] = None,
-            period: PERIOD = "DAY",
-            time_offset: int = None,
+        self,
+        start_time: datetime,
+        end_time: datetime,
+        owner_uid: str = None,
+        engine_types: list[str] = None,
+        period: PERIOD = "DAY",
+        time_offset: int = None,
     ):
         """
         Returns account billing information for the specified period.
@@ -302,13 +386,13 @@ class _Account(Billing):
         )
 
     def GetAccountBillingHistoryByPeriod(
-            self,
-            start_time: datetime,
-            end_time: datetime,
-            period: PERIOD = "DAY",
-            time_offset: int = None,
-            group_nodes: bool = False,
-            target_app_id: str = None,
+        self,
+        start_time: datetime,
+        end_time: datetime,
+        period: PERIOD = "DAY",
+        time_offset: int = None,
+        group_nodes: bool = False,
+        target_app_id: str = None,
     ):
         """
         Gets account billing history.
@@ -329,14 +413,14 @@ class _Account(Billing):
         )
 
     def GetAccounts(
-            self,
-            lebalance: str = None,
-            order_field: str = None,
-            order_direction: str = None,
-            filter_field: str = None,
-            filter_value: str = None,
-            start_row: int = None,
-            result_count: int = None,
+        self,
+        lebalance: str = None,
+        order_field: str = None,
+        order_direction: str = None,
+        filter_field: str = None,
+        filter_value: str = None,
+        start_row: int = None,
+        result_count: int = None,
     ):
         """
         Gets accounts.
@@ -392,12 +476,12 @@ class _Account(Billing):
         return self._get("GetAccountsForDestroying")
 
     def GetAggClusterBillingHistory(
-            self,
-            start_time: datetime,
-            end_time: datetime,
-            interval: int,
-            sum_fields: list[str],
-            is_paid: bool = False,
+        self,
+        start_time: datetime,
+        end_time: datetime,
+        interval: int,
+        sum_fields: list[str],
+        is_paid: bool = False,
     ):
         """
         Gets account billing history.
@@ -415,13 +499,13 @@ class _Account(Billing):
         )
 
     def GetAggExtraBillingHistory(
-            self,
-            start_time: datetime,
-            end_time: datetime,
-            interval: int,
-            is_paid: bool = False,
-            type: str = None,
-            names: list[str] = None,
+        self,
+        start_time: datetime,
+        end_time: datetime,
+        interval: int,
+        is_paid: bool = False,
+        type: str = None,
+        names: list[str] = None,
     ):
         return self._get(
             "GetAggExtraBillingHistory",
@@ -443,7 +527,7 @@ class _Account(Billing):
         return self._get("GetBillingInfo")
 
     def GetClusterBillingHistory(
-            self, start_time: datetime, end_time: datetime, interval: int = None
+        self, start_time: datetime, end_time: datetime, interval: int = None
     ):
         """
         Gets account billing history.
@@ -454,10 +538,10 @@ class _Account(Billing):
         )
 
     def GetCollaborationQuotas(
-            self,
-            collaboration_id: int = None,
-            owner_uid: int = None,
-            quota_names: list[str] = None,
+        self,
+        collaboration_id: int = None,
+        owner_uid: int = None,
+        quota_names: list[str] = None,
     ):
         """
         Gets list of quotas of the payer user.
@@ -496,12 +580,12 @@ class _Account(Billing):
         return self._get("GetCountryStates", params={"ccode": country_code})
 
     def GetEnvBillingHistoryByPeriod(
-            self,
-            start_time: datetime,
-            end_time: datetime,
-            period: PERIOD = "DAY",
-            time_offset: int = None,
-            group_nodes: bool = False,
+        self,
+        start_time: datetime,
+        end_time: datetime,
+        period: PERIOD = "DAY",
+        time_offset: int = None,
+        group_nodes: bool = False,
     ):
         """
         Gets environment billing history.
@@ -519,7 +603,7 @@ class _Account(Billing):
         )
 
     def GetExtendedAccountBillingHistoryByPeriod(
-            self, start_time: datetime, end_time: datetime, target_app_id: str = None
+        self, start_time: datetime, end_time: datetime, target_app_id: str = None
     ):
         """
         Returns user’s billing history information for the specified period.
@@ -583,7 +667,7 @@ class _Account(Billing):
         )
 
     def GetSumAccountBillingHistory(
-            self, uid: int, start_time: datetime, end_time: datetime, bonus: int = None
+        self, uid: int, start_time: datetime, end_time: datetime, bonus: int = None
     ):
         """
         Gets account billing history.
@@ -633,11 +717,11 @@ class _Account(Billing):
         return self._get("SetFundNote", params={"id": id, "note": note})
 
     def SetGroup(
-            self,
-            uid: int,
-            group_name: str,
-            reset_balance: bool = False,
-            reset_bonus: bool = False,
+        self,
+        uid: int,
+        group_name: str,
+        reset_balance: bool = False,
+        reset_bonus: bool = False,
     ):
         """
         Sets group to account.
@@ -692,7 +776,7 @@ class _Account(Billing):
         return self._get("SuspendUser", params={"uid": uid})
 
     def UnfundAccount(
-            self, uid: int, amount: float, is_bonus: bool = False, note: str = None
+        self, uid: int, amount: float, is_bonus: bool = False, note: str = None
     ):
         """
         Unfund account by uid.
@@ -716,6 +800,930 @@ class _Account(Billing):
 
         return self._get(
             "WithdrawAccounts", params={"startDate": start_date, "endDate": end_date}
+        )
+
+
+class _GroupQuota(Billing):
+    """
+    Ref: https://docs.jelastic.com/api/#!/api/billing.GroupQuota
+    """
+
+    _endpoint2 = "getQuota"
+
+    def AddGroup(
+        self,
+        type: str,
+        name: str,
+        description: list[str] = None,
+        source_group_name: list[str] = None,
+        domain: list[str] = None,
+        conversion_group: list[str] = None,
+    ):
+        """
+        :param type: quota group type.
+        :param name: unique name of the target quota group.
+        :param description: custom description for the quota group.
+        :param source_group_name: name of the quota group to be used as a source for the new group.
+        :param domain: domain name of the target platform.
+        :param conversion_group: name of the quota group to be used after conversion.
+        """
+        return self._get(
+            "AddGroup",
+            params={
+                "type": type,
+                "name": name,
+                "description": description,
+                "sourceGroupName": source_group_name,
+                "domain": domain,
+                "conversionGroup": conversion_group,
+            },
+            delimiter=",",
+        )
+
+    def AddQuota(
+        self,
+        name: str,
+        description: list[str] = None,
+        reference_id: list[str] = None,
+        default_value: list[int] = None,
+        assign_to_group: list[bool] = None,
+    ):
+        """
+        :param name: a name of the quota to be created.
+        :param description: custom quota description.
+        :param reference_id: reference ID of the quota.
+        :param default_value: quota's default value.
+        :param assign_to_group: a flag that indicates if this quota could (true) or not (false) be assigned to groups.
+        """
+        return self._get(
+            "AddQuota",
+            params={
+                "name": name,
+                "description": description,
+                "referenceId": reference_id,
+                "defaultValue": default_value,
+                "assignToGroup": assign_to_group,
+            },
+            delimiter=",",
+        )
+
+    def DeleteGroup(self, name: str):
+        return self._get("DeleteGroup", params={"name": name})
+
+    def EditGroup(
+        self,
+        name: str,
+        new_name: list[str] = None,
+        description: list[str] = None,
+        conversion_group: list[str] = None,
+    ):
+        """
+        :param name: unique name of the target quota group.
+        :param new_name: a new name for the quota group.
+        :param description: custom description for the quota group.
+        :param conversion_group: name of the quota group to be used after conversion.
+        """
+        return self._get(
+            "EditGroup",
+            params={
+                "name": name,
+                "newName": new_name,
+                "description": description,
+                "conversionGroup": conversion_group,
+            },
+            delimiter=",",
+        )
+
+    def EditQuota(
+        self,
+        name: str,
+        reference_id: list[str] = None,
+        new_reference_id: list[str] = None,
+        description: list[str] = None,
+    ):
+        return self._get(
+            "EditQuota",
+            params={
+                "name": name,
+                "referenceId": reference_id,
+                "newReferenceId": new_reference_id,
+                "description": description,
+            },
+            delimiter=",",
+        )
+
+    def GetGroupQuotas(self, name: str, quotas_names: list[str] = None):
+        return self._get(
+            "GetGroupQuotas",
+            params={
+                "name": name,
+                "quotasnames": quotas_names,
+            },
+            delimiter=",",
+        )
+
+    def GetGroups(self):
+        return self._get("GetGroups", params={})
+
+    def GetPricingModels(self, group_name: str):
+        return self._get("GetPricingModels", params={"groupName": group_name})
+
+    def GetQuotas(self):
+        return self._get("GetQuotas", params={})
+
+    def IsDomainBound(self, checksum: list[str] = None):
+        return self._get(
+            "IsDomainBound",
+            params={"checksum": checksum},
+            delimiter=",",
+        )
+
+    def RemoveGroupQuota(self, group_name: str, quota_name: str):
+        return self._get(
+            "RemoveGroupQuota",
+            params={
+                "groupName": group_name,
+                "quotaName": quota_name,
+            },
+        )
+
+    def RemoveQuota(
+        self,
+        name: str,
+        force: list[bool] = None,
+        reference_id: list[str] = None,
+    ):
+        """
+        :param name: a name of the quota to be removed.
+        :param force: proceeds (true) or interrupts (false) the operation in case of errors.
+        :param reference_id: reference ID of the quota.
+        """
+        return self._get(
+            "RemoveQuota",
+            params={
+                "name": name,
+                "force": force,
+                "referenceId": reference_id,
+            },
+            delimiter=",",
+        )
+
+    def SetCollaborationGroup(
+        self,
+        name: str,
+    ):
+        return self._get("SetCollaborationGroup", params={"name": name})
+
+    def SetDefaultGroup(self, name: str):
+        return self._get("DefaultGroup", params={"name": name})
+
+    def SetGroupQuota(
+        self,
+        group_name: str,
+        quota_name: str,
+        value: int,
+        reference_id: list[str] = None,
+    ):
+        """
+        :param group_name: unique name of the target group.
+        :param quota_name: a name of the quota to be adjusted.
+        :param value: custom value for the quota.
+        :param reference_id: reference ID of the quota.
+        """
+        return self._get(
+            "SetGroupQuota",
+            params={
+                "groupName": group_name,
+                "quotaName": quota_name,
+                "value": value,
+                "referenceId": reference_id,
+            },
+            delimiter=",",
+        )
+
+    def SetPricingModels(
+        self,
+        group_name: str,
+        data: str,
+    ):
+        return self._get(
+            "SetPricingModel", params={"groupName": group_name, "data": data}
+        )
+
+    def SetSignupGroup(self, name: str):
+        return self._get("SetSignupGroup", params={"name": name})
+
+    def SetWinDomain(
+        self,
+        group_name: str,
+        win_domain_id: int,
+    ):
+        return self._get(
+            "SetWinDomain",
+            params={"groupName": group_name, "winDomainId": win_domain_id},
+        )
+
+    def UnassignHdNodeGroup(
+        self,
+        hardware_node_group: str,
+        checksum: str,
+    ):
+        return self._get(
+            "UnassignHdNodeGroup",
+            params={
+                "hardwareNodeGroup": hardware_node_group,
+                "checksum": checksum,
+            },
+        )
+
+
+class _Integration(Billing):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/administration.Integration
+    """
+
+    _endpoint = "integration"
+
+    def GetInvoiceUrl(self, invoice_id: int):
+        """
+        :param invoice_id: unique identifier of the target invoice in the internal billing system.
+        """
+        return self._get("GetInvoiceUrl", params={"invoiceId": invoice_id})
+
+    def GetSSOUrl(self, path: list[str] = None):
+        """
+        :param path: destination path within the integrated system.
+        """
+        return self._get("GetSSOUrl", params={"path": path})
+
+
+class _PayMethod(Billing):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/billing.PayMethod
+    """
+
+    _endpoint2 = "payMethod"
+
+    def EnablePayMethod(
+        self,
+        pay_method_id: str,
+        enable: int,
+    ):
+        """
+        :param pay_method_id: payment method ID to be set as default one (see the GetPayMethodList method)
+        :param enable: enables (1) or disables (0) the provided payment method
+        """
+        return self._get(
+            "EnablePayMethod", params={"payMethodId": pay_method_id, "enable": enable}
+        )
+
+    def GetDefaultPayMethod(self):
+        return self._get("GetDefaultPayMethod", params={})
+
+    def GetPublicToken(self):
+        return self._get("GetPublicToken", params={})
+
+    def GetValidPayTypes(self):
+        return self._get("GetValidPayTypes", params={})
+
+    def RegisterBankCard(
+        self,
+        first_name: str,
+        last_name: str,
+        card_number: str,
+        card_code: str,
+        expire_month: int,
+        expire_year: int,
+        service_plan_id: int,
+    ):
+        """
+        :param first_name: exactly as on the card
+        :param last_name: exactly as on the card
+        :param card_number: very big number
+        :param card_code: 4 digits.
+        :param expire_month: exactly as on the card. from 1 to 12
+        :param expire_year: year in format yyyy
+        :param service_plan_id: service plan id to buy for check card or 0 then min test pay is used.
+        """
+        return self._get(
+            "RegisterBankCard",
+            params={
+                "firstName": first_name,
+                "lastName": last_name,
+                "cardNumber": card_number,
+                "cardCode": card_code,
+                "expireMonth": expire_month,
+                "expireYear": expire_year,
+                "servicePlanId": service_plan_id,
+            },
+        )
+
+    def RegisterPayMethodAndPay(
+        self,
+        pay_method_type: str,
+        service_plan_id: int,
+        auto_service_plan_id: list[int] = None,
+        auto_refill_min_balance: list[int] = None,
+        auto_refill_period: list[str] = None,
+    ):
+        """
+        :param pay_method_type: take value from item of GetValidPayTypes response
+        :param auto_service_plan_id: service plan id for auto refill, should 0 or -1 if none
+        :param auto_refill_min_balance: min balance threshold when by new service plan
+        :param auto_refill_period: accepted string literals "WEEK" and "MONTH"
+        """
+        return self._get(
+            "RegisterPayMethodAndPay",
+            params={
+                "payMethodType": pay_method_type,
+                "servicePlanId": service_plan_id,
+                "autoServicePlanId": auto_service_plan_id,
+                "autoRefillMinBalance": auto_refill_min_balance,
+                "autoRefillPeriod": auto_refill_period,
+            },
+            delimiter=",",
+        )
+
+    def SetDefaultPayMethod(self, pay_method_id: str):
+        """
+        :param pay_method_id: payment method ID to be set as default one (see the GetPayMethodList method)
+        """
+        return self._get("SetDefaultPayMethod", params={"payMethodId": pay_method_id})
+
+    def SetupIntent(
+        self,
+        payment_method_type: list[str] = None,
+    ):
+        """
+        :param payment_method_type: list of payment method keys (optional), for example: card, bancontact, ...
+        """
+        return self._get(
+            "SetupIntent",
+            params={"paymentMethodType": payment_method_type},
+            delimiter=",",
+        )
+
+
+class _Pricing(Billing):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/billing.Pricing
+    """
+
+    endpoint = "pricing"
+
+    def AddPricing(
+        self,
+        pricing: dict,
+        tariff_ids: str,
+        tariff_grid_names: list[str] = None,
+    ):
+        return self._get(
+            "AddPricing",
+            params={
+                "pricing": pricing,
+                "tariffIds": tariff_ids,
+                "tariffGridNames": tariff_grid_names,
+            },
+            delimiter=",",
+        )
+
+    def AddResource(self, resource: str):
+        return self._get("AddResource", params={"resource": resource})
+
+    def AddTariff(self, tariff: dict):
+        return self._get(
+            "AddTariff",
+            params={"tariff": tariff},
+            delimiter=",",
+        )
+
+    def AttachTariff(self, uniq_name: str, target_app_id: str):
+        return self._get(
+            "AttachTariff", params={"uniqName": uniq_name, "targetAppId": target_app_id}
+        )
+
+    def AttachTariffGrid(
+        self,
+        tariff_grid_name: str,
+        id: str,
+    ):
+        return self._get(
+            "AttachTariffGrid",
+            params={
+                "tariffGridName": tariff_grid_name,
+                "id": id,
+            },
+        )
+
+    def CheckHostGroupsAllowed(
+        self,
+        owner_uid: list[int] = None,
+        hardware_node_groups: list[str] = None,
+    ):
+        """
+        :param owner_uid: unique identifier of the target user.
+        :param hardware_node_groups: a comma-separated list of the host groups to be checked.
+        """
+        return self._get(
+            "CheckHostGroupsAllowed",
+            params={"ownerUid": owner_uid, "hardwareNodeGroups": hardware_node_groups},
+            delimiter=",",
+        )
+
+    def DeletePricing(self, id: str):
+        return self._get("DeletePricing", params={"id": id})
+
+    def DeleteTariff(self, id: str):
+        return self._get("DeleteTariff", params={"id": id})
+
+    def DetachTariff(
+        self,
+        uniq_name: str,
+        target_app_id: str,
+    ):
+        return self._get(
+            "DetachTariff", params={"uniqName": uniq_name, "targetAppId": target_app_id}
+        )
+
+    def DetachTariffGrid(
+        self,
+        tariff_grid_name: str,
+        id: str,
+    ):
+        return self._get(
+            "DetachTariffGrid", params={"tariffGridName": tariff_grid_name, "id": id}
+        )
+
+    def EditPricing(
+        self,
+        pricing: dict,
+    ):
+        return self._get(
+            "EditPricing",
+            params={"pricing": pricing},
+            delimiter=",",
+        )
+
+    def EditResource(self, resource: str):
+        return self._get("EditResource", params={"resource": resource})
+
+    def EditTariff(self, tariff: dict):
+        return self._get(
+            "EditTariff",
+            params={"tariff": tariff},
+            delimiter=",",
+        )
+
+    def GetCurrencies(self, currency: list[str] = None):
+        return self._get(
+            "GetCurrencies",
+            params={"currency": currency},
+            delimiter=",",
+        )
+
+    def GetPlatformCurrency(self, reseller_id: list[int] = None):
+        return self._get(
+            "GetPlatformCurrency",
+            params={"resellerId": reseller_id},
+            delimiter=",",
+        )
+
+    def GetPricing(self, owner_uid: list[int] = None):
+        return self._get(
+            "GetPricing",
+            params={"ownerUid": owner_uid},
+            delimiter=",",
+        )
+
+    def GetPricingInner(self, reseller_id: list[int] = None):
+        """
+        :param reseller_id: unique ID of the target reseller platform
+        """
+        return self._get(
+            "GetPricingInner",
+            params={"resellerId": reseller_id},
+            delimiter=",",
+        )
+
+    def GetResources(
+        self,
+        id: list[int] = None,
+        name: list[str] = None,
+    ):
+        return self._get(
+            "GetResources",
+            params={"id": id, "name": name},
+            delimiter=",",
+        )
+
+    def GetTariffsInner(
+        self,
+        pricing_id: list[str] = None,
+        type: list[str] = None,
+        reseller_id: list[int] = None,
+    ):
+        """
+        :param pricing_id: pricing model unique ID.
+        :param type: a semicolon-separated list of tariff types.
+        :param reseller_id: unique ID of the target reseller platform.
+        """
+        return self._get(
+            "GetTariffsInner",
+            params={"priceId": pricing_id, "type": type, "resellerId": reseller_id},
+            delimiter=",",
+        )
+
+    def GetUniqueResourceNames(self):
+        return self._get("GetUniqueResourceNames", params={})
+
+    def SetTariffs(
+        self,
+        pricing_id: str,
+        tariff_ids: str,
+        tariff_grid_names: list[str] = None,
+    ):
+        return self._get(
+            "SetTariffs",
+            params={
+                "pricingId": pricing_id,
+                "tariffIds": tariff_ids,
+                "tariffGridNames": tariff_grid_names,
+            },
+            delimiter=",",
+        )
+
+    def ValidateEnvironment(
+        self,
+        hardware_node_group: str,
+        owner_uid: list[int] = None,
+    ):
+        return self._get(
+            "ValidateEnvironment",
+            params={
+                "hardwareNodeGroup": hardware_node_group,
+                "ownerUid": owner_uid,
+            },
+            delimiter=",",
+        )
+
+    def ValidateNode(
+        self,
+        uid: int,
+        hardware_node_group: str,
+        node_type: str,
+        fixed_cloud_lets: int,
+        flexible_cloud_lets: int,
+    ):
+        return self._get(
+            "ValidateNode",
+            params={
+                "uid": uid,
+                "hardwareNodeGroup": hardware_node_group,
+                "nodeType": node_type,
+                "fixedCloudlets": fixed_cloud_lets,
+                "flexibleCloudlets": flexible_cloud_lets,
+            },
+        )
+
+    def ValidateNodeInner(
+        self,
+        uid: int,
+        hardware_node_group: str,
+        node_type: str,
+        fixed_cloud_lets: int,
+        flexible_cloud_lets: int,
+    ):
+        return self._get(
+            "ValidateNodeInner",
+            params={
+                "uid": uid,
+                "hardwareNodeGroup": hardware_node_group,
+                "nodeType": node_type,
+                "fixedCloudlets": fixed_cloud_lets,
+                "flexibleCloudlets": flexible_cloud_lets,
+            },
+        )
+
+
+class _Reseller(Billing):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/billing.Reseller
+    """
+
+    def AddReseller(
+        self,
+        reseller: str,
+        platform: str,
+        regions: str,
+        settings: list[str] = None,
+    ):
+        """
+        :param reseller: JSON representation of the reseller object.
+        :param platform: JSON representation of the reseller platform object.
+        :param regions: JSON representation of the reseller regions object.
+        :param settings: JSON representation of the reseller setting object.
+        """
+        return self._get(
+            "AddReseller",
+            params={
+                "reseller": reseller,
+                "platform": platform,
+                "regions": regions,
+                "settings": settings,
+            },
+            delimiter=",",
+        )
+
+    def EditReseller(
+        self,
+        reseller: str,
+        platform: str,
+        regions: list[str] = None,
+    ):
+        return self._get(
+            "EditReseller",
+            params={
+                "reseller": reseller,
+                "platform": platform,
+                "regions": regions,
+            },
+            delimiter=",",
+        )
+
+    def GetAllResellers(self):
+        return self._get("GetAllResellers", params={})
+
+    def GetResellerByAppid(self, target_app_id: str):
+        return self._get("GetResellerByAppid", params={"targetAppid": target_app_id})
+
+    def GetResellerById(self, id: int):
+        return self._get("GetResellerById", params={"id": id})
+
+    def GetResellerByOwnerUid(self, uid: int):
+        return self._get("GetResellerByOwnerUid", params={"uid": uid})
+
+    def GetResellerByUid(self, uid: int):
+        return self._get("GetResellerByUid", params={"uid": uid})
+
+    def RemoveReseller(self, id: int):
+        return self._get("RemoveReseller", params={"id": id})
+
+    def SetResellerStatus(self, id: int, status: str):
+        return self._get("SetResellerStatus", params={"id": id, "status": status})
+
+
+class _ServicePlan(Billing):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/billing.ServicePlan
+    """
+
+    _endpoint2 = "servicePlan"
+
+    def CreateLevelAutoPay(
+        self,
+        min_balance: int,
+        expires: str,
+        service_plan_id: int,
+        payment_method_id: str,
+        min_period: int,
+    ):
+        """
+        :param min_balance: the value used in the "account.balance < minBalance" expression.
+        :param expires: date [and time] (in the UTC ISO 8601 format) when the auto-pay becomes unavailable.
+        :param service_plan_id: service plan ID to be paid (for example, $200 one-time fee)
+        :param payment_method_id: payment method ID to be used (see the GetPayMethodList method)
+        :param min_period: minimal delay (in seconds) between two consecutive auto-pays. 0 means no limit.
+        """
+        return self._get(
+            "CreateLevelAutoPay",
+            params={
+                "minBalance": min_balance,
+                "expires": expires,
+                "servicePlanId": service_plan_id,
+                "paymentMethodId": payment_method_id,
+                "minPeriod": min_period,
+            },
+        )
+
+    def CreateRegularAutoPay(
+        self,
+        cron_expression: str,
+        expires: str,
+        time_zone: str,
+        service_plan_id: int,
+        payment_method_id: str,
+    ):
+        """
+
+        :param cron_expression: Year value is optional. '*' means every possible value.
+        :param expires: date [and time] (in the UTC ISO 8601 format) when the auto-pay becomes unavailable.
+        :param time_zone: time zone for the cron expression. For example, GMT+4.
+        :param service_plan_id: service plan ID to be paid (for example, $200 one-time fee)
+        :param payment_method_id: payment method ID to be used (see the GetPayMethodList method)
+        """
+        return self._get(
+            "CreateRegularAutoPay",
+            params={
+                "cronExpression": cron_expression,
+                "expires": expires,
+                "timeZone": time_zone,
+                "servicePlanId": service_plan_id,
+                "paymentMethodId": payment_method_id,
+            },
+        )
+
+    def CreateServicePlan(
+        self,
+        name: str,
+        description: str,
+        service_plan_type: str,
+        extern_plan_id: str,
+    ):
+        """
+        :param name: unique name of service plan
+        :param description: detailed comment about the service plan
+        :param service_plan_type: "one-time" or "regular"
+        """
+        return self._get(
+            "CreateServicePlan",
+            params={
+                "name": name,
+                "description": description,
+                "servicePlanType": service_plan_type,
+                "externPlanId": extern_plan_id,
+            },
+        )
+
+    def DeleteAutoPay(self, auto_pay_id: int):
+        """
+        :param auto_pay_id: auto pay id. It can be get with ServicePlanService#GetAutoPays method
+        """
+        return self._get("DeleteAutoPay", params={"autoPayId": auto_pay_id})
+
+    def DeleteServicePlan(self, service_plan_id: int):
+        """
+        :param service_plan_id: id of sevice plan to be deleted
+        """
+        return self._get("DeleteServicePlan", params={"servicePlanId": service_plan_id})
+
+    def EnableServicePlan(self, service_plan_id: int, enabled: int):
+        """
+        :param service_plan_id: id of the specified service plan
+        :param enabled: 1 enabled and 0 = disabled
+        """
+        return self._get(
+            "EnableServicePlan",
+            params={"servicePlanId": service_plan_id, "enabled": enabled},
+        )
+
+    def ExtendedCreateServicePlan(
+        self,
+        label: str,
+        external_plan_id: str,
+        description: str,
+        enabled: bool,
+        type: str,
+        by_default: bool,
+        price: str,
+    ):
+        """
+        :param label: name or short description of the service plan
+        :param external_plan_id: service plan ID in the external billing system
+        :param description: detailed description of the service plan
+        :param enabled: enables (1) or disables (0) the service plan
+        :param type: service plan type in the external billing system (usually, one-time fee)
+        :param by_default: proposes the current service plan to users during the recharge operations by default (1) or not (0). Only one service plan can be set as default.
+        :param price: the sum to be refilled on the account balance by this service plan
+        """
+        return self._get(
+            "ExtendedCreateServicePlan",
+            params={
+                "label": label,
+                "externalPlanId": external_plan_id,
+                "description": description,
+                "enabled": enabled,
+                "type": type,
+                "byDefault": by_default,
+                "price": price,
+            },
+        )
+
+    def ExtendedGetServicePlans(self):
+        return self._get("ExtendedGetServicePlans", params={})
+
+    def ExtendedServicePlanUpdate(
+        self,
+        id: int,
+        label: str,
+        external_plan_id: str,
+        description: str,
+        enabled: bool,
+        type: str,
+        by_default: bool,
+        price: str,
+    ):
+        """
+        :param id: internal service plan ID in the PaaS admin panel
+        :param label: name or short description of the service plan
+        :param external_plan_id: service plan ID in the external billing system
+        :param description: detailed description of the service plan
+        :param enabled: enables (1) or disables (0) the service plan
+        :param type: service plan type in the external billing system (usually, one-time fee)
+        :param by_default: proposes the current service plan to users during the recharge operations by default (1) or not (0). Only one service plan can be set as default.
+        :param price: the sum to be refilled on the account balance by this service plan
+        """
+        return self._get(
+            "ExtendedServicePlanUpdate",
+            params={
+                "id": id,
+                "label": label,
+                "externalPlanId": external_plan_id,
+                "description": description,
+                "enabled": enabled,
+                "type": type,
+                "byDefault": by_default,
+                "price": price,
+            },
+        )
+
+    def GetAutoPayHistory(self, auto_pay_id: int):
+        """
+        :param auto_pay_id: specified auto pay id
+        """
+        return self._get("GetAutoPayHistory", params={"autoPayId": auto_pay_id})
+
+    def GetAutoPays(self):
+        return self._get("GetAutoPays", params={})
+
+    def GetBoughtServicePlans(self):
+        return self._get("GetBoughtServicePlans", params={})
+
+    def GetCurrency(self):
+        return self._get("GetCurrency", params={})
+
+    def GetFinalCost(self, service_plan_id: int):
+        """
+        :param service_plan_id: specified service plan id
+        """
+        return self._get("GetFinalCost", params={"servicePlanId": service_plan_id})
+
+    def GetPayMethodList(self):
+        return self._get("GetPayMethodList", params={})
+
+    def GetPaymentNews(self):
+        return self._get("GetPaymentNews", params={})
+
+    def GetServicePlan(self, service_plan_id: int):
+        """
+        :param service_plan_id: id of service plan to be returned
+        """
+        return self._get("GetServicePlan", params={"servicePlanId": service_plan_id})
+
+    def GetServicePlanByType(self, plan_type: list[int] = None):
+        return self._get("GetServicePlanByType", params={"planType": plan_type})
+
+    def PaymentNewsRead(self, id: int):
+        """
+        :param id: comma separated ids of payments
+        """
+        return self._get("PaymentNewsRead", params={"id": id})
+
+    def SetExternPlanId(
+        self,
+        service_plan_id: int,
+        external_plan_id: int,
+    ):
+        """
+        :param service_plan_id: JBilling service plan id
+        """
+        return self._get(
+            "SetExternPlanId",
+            params={
+                "servicePlanId": service_plan_id,
+                "externalPlanId": external_plan_id,
+            },
+        )
+
+    def UpdateServicePlan(
+        self,
+        service_plan_id: int,
+        name: str,
+        description: str,
+        extern_service_plan_id: str,
+    ):
+        """
+        :param service_plan_id: id of service plan to be changed
+        :param name: new name (unique among the others)
+        :param description: detailed description
+        """
+        return self._get(
+            "UpdateServicePlan",
+            params={
+                "servicePlanId": service_plan_id,
+                "name": name,
+                "description": description,
+                "externServicePlanId": extern_service_plan_id,
+            },
         )
 
 
