@@ -2,9 +2,8 @@ import pytest
 import datetime
 from unittest.mock import patch, Mock
 from jelastic.api import Administration
-from datetime import datetime, date
 
-CURRENT_DATETIME = datetime.now()
+CURRENT_DATETIME = datetime.datetime.now()
 success_response = {"error": "", "reason": 0, "result": 0, "source": "billing"}
 
 
@@ -328,7 +327,7 @@ def test_add_statistics(client):
         "resource 1",
         1,
         1234,
-        [datetime.date.today(), datetime.date.today()],
+        [CURRENT_DATETIME.date().today(), CURRENT_DATETIME.date().today()],
         [datetime.date(2025, 11, 11), datetime.date(2025, 11, 12)],
         ["env 1", "env 2", "env 3"],
         [1, 2, 3],
@@ -341,7 +340,7 @@ def test_add_statistics(client):
             "resourceName": "resource 1",
             "uid": 1,
             "value": 1234,
-            "startDate": [datetime.date.today(), datetime.date.today()],
+            "startDate": [CURRENT_DATETIME.date().today(), CURRENT_DATETIME.date().today()],
             "endDate": [datetime.date(2025, 11, 11), datetime.date(2025, 11, 12)],
             "envName": ["env 1", "env 2", "env 3"],
             "nodeId": [1, 2, 3],
