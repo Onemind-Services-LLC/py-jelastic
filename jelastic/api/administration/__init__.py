@@ -1556,3 +1556,68 @@ class _Subscription(Administration):
                 "password": password,
             },
         )
+
+
+class _VirtualNetwork(Administration):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/administration.VirtualNetwork
+    """
+
+    _endpoint2 = "virtualNetwork"
+
+    def AddVirtualNetwork(
+        self,
+        virtual_network: dict,
+    ):
+        """
+        :param virtual_network: a list of the target virtual networks' unique identifiers.
+        """
+        return self._get(
+            "AddVirtualNetwork",
+            params={"virtualNetwork": virtual_network},
+            delimiter=",",
+        )
+
+    def ApplyVirtualNetworks(
+        self,
+        host_id: list[int] = None,
+    ):
+        """
+        :param host_id: unique identifier of the target host (all hosts if not defined).
+        """
+        return self._get(
+            "ApplyVirtualNetworks",
+            params={
+                "hostId": host_id,
+            },
+            delimiter=",",
+        )
+
+    def DeleteVirtualNetworks(
+        self,
+        ids: int = None,
+    ):
+        """
+        :param ids: a list of the target virtual networks' unique identifiers.
+        """
+        return self._get(
+            "DeleteVirtualNetworks",
+            params={
+                "ids": ids,
+            },
+        )
+
+    def GetVirtualNetworks(
+        self,
+        ids: list[int] = None,
+    ):
+        """
+        :param ids:
+        """
+        return self._get(
+            "GetVirtualNetworks",
+            params={
+                "ids": ids,
+            },
+            delimiter=",",
+        )
