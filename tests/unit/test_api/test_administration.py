@@ -112,7 +112,7 @@ def test_change_config_key(client):
     assert response == success_response
 
 
-def tes_change_properties_for_reseller(client):
+def test_change_properties_for_reseller(client):
     client._get.return_value = success_response
     response = client.Config.ChangePropertiesForReseller(
         "rid_1",
