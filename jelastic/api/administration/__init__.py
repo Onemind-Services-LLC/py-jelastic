@@ -146,16 +146,31 @@ class Administration(ClientAbstract):
             debug=self._debug,
         )
 
+    @property
+    def VirtualNetwork(self) -> "_VirtualNetwork":
+        """
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.administration.VirtualNetwork
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/administration.VirtualNetwork
+        """
+        return _VirtualNetwork(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+        )
+
 
 class _Analytics(Administration):
     _endpoint2 = "analytics"
 
     def GetNodesAffinitySuggestion(
-        self,
-        target_app_ids: list[str] = None,
-        node_groups: list[str] = None,
-        uids: list[int] = None,
-        thread_count: int = None,
+            self,
+            target_app_ids: list[str] = None,
+            node_groups: list[str] = None,
+            uids: list[int] = None,
+            thread_count: int = None,
     ):
         """
         A list of environments with one node in every layer where distribution can be optimized
@@ -177,12 +192,12 @@ class _Analytics(Administration):
         )
 
     def GetNodesAntiAffinitySuggestion(
-        self,
-        target_app_ids: list[str] = None,
-        mode: MODE = None,
-        node_groups: list[str] = None,
-        uids: list[int] = None,
-        thread_count: int = None,
+            self,
+            target_app_ids: list[str] = None,
+            mode: MODE = None,
+            node_groups: list[str] = None,
+            uids: list[int] = None,
+            thread_count: int = None,
     ):
         """
         A list of environments with non-optimal container distribution with optimization suggestions
@@ -214,16 +229,16 @@ class _Resource(Administration):
     _endpoint2 = "resource"
 
     def AddStatistics(
-        self,
-        resource_name: str,
-        uid: int,
-        value: int,
-        start_date: list[date] = None,
-        end_date: list[date] = None,
-        env_name: list[str] = None,
-        node_id: list[int] = None,
-        note: list[str] = None,
-        value_group: list[str] = None,
+            self,
+            resource_name: str,
+            uid: int,
+            value: int,
+            start_date: list[date] = None,
+            end_date: list[date] = None,
+            env_name: list[str] = None,
+            node_id: list[int] = None,
+            note: list[str] = None,
+            value_group: list[str] = None,
     ):
         return self._get(
             "AddStatistics",
@@ -250,9 +265,9 @@ class _Update(Administration):
     _endpoint2 = "update"
 
     def FixExtDns(
-        self,
-        uid: list[int] = None,
-        target_app_id: list[str] = None,
+            self,
+            uid: list[int] = None,
+            target_app_id: list[str] = None,
     ):
         return self._get(
             "FixExtDns",
@@ -264,10 +279,10 @@ class _Update(Administration):
         )
 
     def RestoreEnv(
-        self,
-        env_name: list[str] = None,
-        uid: list[int] = None,
-        region: list[str] = None,
+            self,
+            env_name: list[str] = None,
+            uid: list[int] = None,
+            region: list[str] = None,
     ):
         return self._get(
             "RestoreEnv",
@@ -280,9 +295,9 @@ class _Update(Administration):
         )
 
     def SyncInfraEnv(
-        self,
-        domain: list[str] = None,
-        registry: list[str] = None,
+            self,
+            domain: list[str] = None,
+            registry: list[str] = None,
     ):
         return self._get(
             "SyncInfraEnv",
@@ -319,8 +334,8 @@ class _Template(Administration):
     _endpoint2 = "template"
 
     def SetDefaultRegistry(
-        self,
-        id: list[int] = None,
+            self,
+            id: list[int] = None,
     ):
         """
         :param id: identifier of the registry.
@@ -334,9 +349,9 @@ class _Template(Administration):
         )
 
     def SetDistribution(
-        self,
-        node_types: str,
-        distribution: list[str] = None,
+            self,
+            node_types: str,
+            distribution: list[str] = None,
     ):
         """
         :param node_type: templates where distribution should be set.
@@ -357,8 +372,8 @@ class _HostGroup(Administration):
     _endpoint2 = "hostGroup"
 
     def Add(
-        self,
-        data: dict,
+            self,
+            data: dict,
     ):
         """
         :param data: JSON representation of an object (host group) that should be created.
@@ -372,9 +387,9 @@ class _HostGroup(Administration):
         )
 
     def AddEndpoints(
-        self,
-        host_group: str,
-        end_points: dict,
+            self,
+            host_group: str,
+            end_points: dict,
     ):
         """
         :param host_group: unique identifier of the target host group.
@@ -390,8 +405,8 @@ class _HostGroup(Administration):
         )
 
     def Edit(
-        self,
-        data: dict,
+            self,
+            data: dict,
     ):
         """
         :param data: JSON representation of an object (host group) that should be edited.
@@ -405,9 +420,9 @@ class _HostGroup(Administration):
         )
 
     def EditEndpoints(
-        self,
-        host_group: str,
-        end_points: dict,
+            self,
+            host_group: str,
+            end_points: dict,
     ):
         """
         :param end_points: JSON array of endpoint objects
@@ -422,13 +437,13 @@ class _HostGroup(Administration):
         )
 
     def Get(
-        self,
+            self,
     ):
         return self._get("Get", params={})
 
     def GetEndpoints(
-        self,
-        host_group: str,
+            self,
+            host_group: str,
     ):
         """
         :param host_group: unique identifier of the target host group.
@@ -441,8 +456,8 @@ class _HostGroup(Administration):
         )
 
     def Remove(
-        self,
-        id: int,
+            self,
+            id: int,
     ):
         """
         :param id:unique identifier of the target host group.
@@ -455,8 +470,8 @@ class _HostGroup(Administration):
         )
 
     def RemoveEndpoints(
-        self,
-        id: int,
+            self,
+            id: int,
     ):
         """
         :param id:unique identifier of the target endpoint.
@@ -469,9 +484,9 @@ class _HostGroup(Administration):
         )
 
     def RenameRemoteUser(
-        self,
-        uid: int,
-        email: str,
+            self,
+            uid: int,
+            email: str,
     ):
         """
         :param uid: unique identifier of the target user.
@@ -483,8 +498,8 @@ class _HostGroup(Administration):
         )
 
     def TestEndpoints(
-        self,
-        end_points: dict,
+            self,
+            end_points: dict,
     ):
         """
         :param end_points: JSON array with endpoints objects with ids.
@@ -506,9 +521,9 @@ class _Host(Administration):
     _endpoint2 = "host"
 
     def AddLabels(
-        self,
-        ids: str,
-        labels: str,
+            self,
+            ids: str,
+            labels: str,
     ):
         return self._get(
             "AddLabels",
@@ -519,10 +534,10 @@ class _Host(Administration):
         )
 
     def CheckHostConnection(
-        self,
-        host_id: str,
-        port: list[int] = None,
-        check_external_ip: list[bool] = None,
+            self,
+            host_id: str,
+            port: list[int] = None,
+            check_external_ip: list[bool] = None,
     ):
         """
         :param host_id: unique identifier of the target host.
@@ -548,10 +563,10 @@ class _Host(Administration):
         return self._get("SetLabels", params={"ids": ids, "labels": labels})
 
     def UpdateHostFirewall(
-        self,
-        host_id: list[int] = None,
-        force: list[bool] = None,
-        check_external_ip: list[bool] = None,
+            self,
+            host_id: list[int] = None,
+            force: list[bool] = None,
+            check_external_ip: list[bool] = None,
     ):
         """
         :param host_id: unique identifier of the target host (all hosts if not defined).
@@ -574,13 +589,13 @@ class _Utils(Administration):
     """
 
     def AddSystemExternalDNSRecord(
-        self,
-        record_data: str,
-        name: str,
-        ttl: int,
-        record_data_type: str,
-        ssl_enabled: list[bool] = None,
-        enabled: list[bool] = None,
+            self,
+            record_data: str,
+            name: str,
+            ttl: int,
+            record_data_type: str,
+            ssl_enabled: list[bool] = None,
+            enabled: list[bool] = None,
     ):
         """
         :param record_data: custom data for the DNS record.
@@ -604,8 +619,8 @@ class _Utils(Administration):
         )
 
     def AnalizeEnv(
-        self,
-        domain: str,
+            self,
+            domain: str,
     ):
         return self._get(
             "AnalizeEnv",
@@ -621,8 +636,8 @@ class _Utils(Administration):
         return self._get("ClearEnvs", params={})
 
     def DeleteBrokenEnvs(
-        self,
-        target_app_ids: list[str] = None,
+            self,
+            target_app_ids: list[str] = None,
     ):
         return self._get(
             "DeleteBrokenEnvs",
@@ -633,14 +648,14 @@ class _Utils(Administration):
         )
 
     def EditSystemExternalDNSRecord(
-        self,
-        id: int,
-        record_data: list[str] = None,
-        name: list[str] = None,
-        ttl: list[int] = None,
-        record_data_type: list[str] = None,
-        ssl_enabled: list[bool] = None,
-        enabled: list[bool] = None,
+            self,
+            id: int,
+            record_data: list[str] = None,
+            name: list[str] = None,
+            ttl: list[int] = None,
+            record_data_type: list[str] = None,
+            ssl_enabled: list[bool] = None,
+            enabled: list[bool] = None,
     ):
         """
         :param id: unique identifier of the target custom external DNS record.
@@ -687,8 +702,8 @@ class _Utils(Administration):
         return self._get("FixLaunching", params={})
 
     def GenerateZone(
-        self,
-        generate_slept: bool,
+            self,
+            generate_slept: bool,
     ):
         return self._get(
             "GenerateZone",
@@ -704,9 +719,9 @@ class _Utils(Administration):
         return self._get("GetAvgs2", params={})
 
     def GetBalancerStat(
-        self,
-        start_time: str,
-        end_time: str,
+            self,
+            start_time: str,
+            end_time: str,
     ):
         return self._get(
             "GetBalancerStat",
@@ -720,9 +735,9 @@ class _Utils(Administration):
         return self._get("GetCloudletsUsage", params={})
 
     def GetDBCreationStat(
-        self,
-        start_time: str,
-        end_time: str,
+            self,
+            start_time: str,
+            end_time: str,
     ):
         return self._get(
             "GetDBCreationStat",
@@ -733,12 +748,12 @@ class _Utils(Administration):
         )
 
     def GetErrors(
-        self,
-        start_time: str,
-        end_time: str,
-        start_row: int,
-        result_count: int,
-        filter: list[int] = None,
+            self,
+            start_time: str,
+            end_time: str,
+            start_row: int,
+            result_count: int,
+            filter: list[int] = None,
     ):
         return self._get(
             "GerErrors",
@@ -753,11 +768,11 @@ class _Utils(Administration):
         )
 
     def GetErrorsByDate(
-        self,
-        start_time: str,
-        end_time: str,
-        interval: int,
-        filter: list[int] = None,
+            self,
+            start_time: str,
+            end_time: str,
+            interval: int,
+            filter: list[int] = None,
     ):
         return self._get(
             "GetErrorsByDate",
@@ -777,10 +792,10 @@ class _Utils(Administration):
         return self._get("GetZone", params={})
 
     def ImportEnv(
-        self,
-        env_info: str,
-        env_name: list[str] = None,
-        enable_firewall: list[bool] = None,
+            self,
+            env_info: str,
+            env_name: list[str] = None,
+            enable_firewall: list[bool] = None,
     ):
         return self._get(
             "ImportEnv",
@@ -793,8 +808,8 @@ class _Utils(Administration):
         )
 
     def InspectEnvs(
-        self,
-        remove: list[bool] = None,
+            self,
+            remove: list[bool] = None,
     ):
         return self._get(
             "InspectEnvs",
@@ -850,9 +865,9 @@ class _Subscription(Administration):
     _endpoint2 = "subscription"
 
     def AddCategory(
-        self,
-        category: dict,
-        reseller_id: list[int] = None,
+            self,
+            category: dict,
+            reseller_id: list[int] = None,
     ):
         """
         :param category: JSON representation of an object (subscription Category) that should be created
@@ -868,9 +883,9 @@ class _Subscription(Administration):
         )
 
     def AddProduct(
-        self,
-        product: dict = None,
-        reseller_id: list[int] = None,
+            self,
+            product: dict = None,
+            reseller_id: list[int] = None,
     ):
         """
         :param category: JSON representation of an object (subscription Product) that should be created.
@@ -886,10 +901,10 @@ class _Subscription(Administration):
         )
 
     def AddServicePlan(
-        self,
-        service_plan: dict,
-        reseller_id: list[int] = None,
-        expand_fields: list[str] = None,
+            self,
+            service_plan: dict,
+            reseller_id: list[int] = None,
+            expand_fields: list[str] = None,
     ):
         """
         :param service_plan: JSON representation of an object (subscription Service Plan) that should be created.
@@ -907,11 +922,11 @@ class _Subscription(Administration):
         )
 
     def AddSubscriptionItemResource(
-        self,
-        subscription_id: int,
-        item_id: int,
-        item_resource_id: int,
-        resources: dict,
+            self,
+            subscription_id: int,
+            item_id: int,
+            item_resource_id: int,
+            resources: dict,
     ):
         """
 
@@ -932,10 +947,10 @@ class _Subscription(Administration):
         )
 
     def AdjustProduct(
-        self,
-        subscription_id: int,
-        item_id: int,
-        item_resource_id: int,
+            self,
+            subscription_id: int,
+            item_id: int,
+            item_resource_id: int,
     ):
         """
         :param subscription_id: unique identifier of the target subscription.
@@ -952,9 +967,9 @@ class _Subscription(Administration):
         )
 
     def DeleteCategory(
-        self,
-        id: int,
-        reseller_id: list[int] = None,
+            self,
+            id: int,
+            reseller_id: list[int] = None,
     ):
         """
         :param id: unique identifier of the target category.
@@ -967,9 +982,9 @@ class _Subscription(Administration):
         )
 
     def DeleteProduct(
-        self,
-        id: int,
-        reseller_id: list[int] = None,
+            self,
+            id: int,
+            reseller_id: list[int] = None,
     ):
         """
         :param id: unique identifier of the target product.
@@ -982,9 +997,9 @@ class _Subscription(Administration):
         )
 
     def DeleteServicePlan(
-        self,
-        id: int,
-        reseller_id: list[int] = None,
+            self,
+            id: int,
+            reseller_id: list[int] = None,
     ):
         """
         :param id: unique identifier of the target service plan.
@@ -1025,10 +1040,10 @@ class _Subscription(Administration):
         )
 
     def EditServicePlan(
-        self,
-        service_plan: dict,
-        reseller_id: list[int] = None,
-        expend_fields: list[str] = None,
+            self,
+            service_plan: dict,
+            reseller_id: list[int] = None,
+            expend_fields: list[str] = None,
     ):
         """
         :param service_plan: JSON representation of an object (subscription Service Plan) that should be created.
@@ -1046,9 +1061,9 @@ class _Subscription(Administration):
         )
 
     def GetCategories(
-        self,
-        reseller_id: list[int] = None,
-        expend_fields: list[str] = None,
+            self,
+            reseller_id: list[int] = None,
+            expend_fields: list[str] = None,
     ):
         """
         :param reseller_id: unique identifier of the target reseller platform.
@@ -1064,16 +1079,16 @@ class _Subscription(Administration):
         )
 
     def GetProducts(
-        self,
-        id: list[int] = None,
-        status: list[str] = None,
-        reseller_id: list[int] = None,
-        subscription_status: list[str] = None,
-        expend_fields: list[str] = None,
-        start_row: list[int] = None,
-        result_count: list[int] = None,
-        order_field: list[str] = None,
-        order_direction: list[str] = None,
+            self,
+            id: list[int] = None,
+            status: list[str] = None,
+            reseller_id: list[int] = None,
+            subscription_status: list[str] = None,
+            expend_fields: list[str] = None,
+            start_row: list[int] = None,
+            result_count: list[int] = None,
+            order_field: list[str] = None,
+            order_direction: list[str] = None,
     ):
         """
         :param id: unique identifier of the product (for filtering).
@@ -1103,13 +1118,13 @@ class _Subscription(Administration):
         )
 
     def GetServicePlans(
-        self,
-        id: list[int] = None,
-        has_products: list[bool] = None,
-        subscription_status: list[str] = None,
-        product_id: list[int] = None,
-        expend_fields: list[str] = None,
-        reseller_id: list[int] = None,
+            self,
+            id: list[int] = None,
+            has_products: list[bool] = None,
+            subscription_status: list[str] = None,
+            product_id: list[int] = None,
+            expend_fields: list[str] = None,
+            reseller_id: list[int] = None,
     ):
         """
         :param id: unique identifier of the service plan (for filtering).
@@ -1133,18 +1148,18 @@ class _Subscription(Administration):
         )
 
     def GetSubscriptions(
-        self,
-        id: list[int] = None,
-        uid: list[int] = None,
-        status: list[str] = None,
-        reseller_id: list[int] = None,
-        product_id: list[int] = None,
-        service_plan_id: list[int] = None,
-        expend_fields: list[str] = None,
-        start_row: list[int] = None,
-        result_count: list[int] = None,
-        order_field: list[str] = None,
-        order_direction: list[str] = None,
+            self,
+            id: list[int] = None,
+            uid: list[int] = None,
+            status: list[str] = None,
+            reseller_id: list[int] = None,
+            product_id: list[int] = None,
+            service_plan_id: list[int] = None,
+            expend_fields: list[str] = None,
+            start_row: list[int] = None,
+            result_count: list[int] = None,
+            order_field: list[str] = None,
+            order_direction: list[str] = None,
     ):
         """
         :param id: unique identifier of the subscription (for filtering).
@@ -1178,10 +1193,10 @@ class _Subscription(Administration):
         )
 
     def SetCategoryPublished(
-        self,
-        id: int,
-        published: bool,
-        reseller_id: list[int] = None,
+            self,
+            id: int,
+            published: bool,
+            reseller_id: list[int] = None,
     ):
         """
         :param id: unique identifier of the target category.
@@ -1199,10 +1214,10 @@ class _Subscription(Administration):
         )
 
     def SetProductStatus(
-        self,
-        id: int,
-        status: str,
-        reseller_id: list[int] = None,
+            self,
+            id: int,
+            status: str,
+            reseller_id: list[int] = None,
     ):
         """
         :param id: unique identifier of the target product.
@@ -1220,10 +1235,10 @@ class _Subscription(Administration):
         )
 
     def SetServicePlanStatus(
-        self,
-        id: int,
-        status: str,
-        reseller_id: list[int] = None,
+            self,
+            id: int,
+            status: str,
+            reseller_id: list[int] = None,
     ):
         """
         :param id: unique identifier of the target service plan.
@@ -1241,9 +1256,9 @@ class _Subscription(Administration):
         )
 
     def TerminateSubscription(
-        self,
-        subscription_id: int,
-        password: str,
+            self,
+            subscription_id: int,
+            password: str,
     ):
         """
         :param subscription_id: unique identifier of the target subscription.
@@ -1255,4 +1270,70 @@ class _Subscription(Administration):
                 "subscriptionId": subscription_id,
                 "password": password,
             },
+        )
+
+
+class _VirtualNetwork(Administration):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/administration.VirtualNetwork
+    """
+    _endpoint2 = 'virtualNetwork'
+
+    def AddVirtualNetwork(
+            self,
+            virtual_network: dict,
+    ):
+        """
+        :param virtual_network: a list of the target virtual networks' unique identifiers.
+        """
+        return self._get(
+            "AddVirtualNetwork",
+            params={
+                'virtualNetwork': virtual_network
+            },
+            delimiter=",",
+        )
+
+    def ApplyVirtualNetworks(
+            self,
+            host_id: list[int] = None,
+    ):
+        """
+        :param host_id: unique identifier of the target host (all hosts if not defined).
+        """
+        return self._get(
+            "ApplyVirtualNetworks",
+            params={
+                'hostId': host_id,
+            },
+            delimiter=",",
+        )
+
+    def DeleteVirtualNetworks(
+            self,
+            ids: int = None,
+    ):
+        """
+        :param ids: a list of the target virtual networks' unique identifiers.
+        """
+        return self._get(
+            'DeleteVirtualNetworks',
+            params={
+                'ids': ids,
+            }
+        )
+
+    def GetVirtualNetworks(
+            self,
+            ids: list[int] = None,
+    ):
+        """
+        :param ids:
+        """
+        return self._get(
+            'GetVirtualNetworks',
+            params={
+                'ids': ids,
+            },
+            delimiter=",",
         )
