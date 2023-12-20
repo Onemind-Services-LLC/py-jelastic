@@ -9,7 +9,7 @@
           <link rel="stylesheet" href="../../../_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="../../../_static/documentation_options.js?v=507652d2"></script>
+        <script src="../../../_static/documentation_options.js?v=8d24358e"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -448,6 +448,20 @@
 <span class="sd">        Ref: https://docs.jelastic.com/api/#!/api/billing.Account</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">_Account</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Integration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_Integration&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The methods of this service provide billing information about a user account (such as UID, balance, billing history,</span>
+<span class="sd">        quotas, etc.) and allow managing it.</span>
+
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.billing.Integration</span>
+
+<span class="sd">        Ref: https://docs.jelastic.com/api/#!/api/billing.Integration</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_Integration</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">Pricing</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_Pricing&quot;</span><span class="p">:</span>
@@ -1313,6 +1327,35 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
             <span class="s2">&quot;WithdrawAccounts&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;startDate&quot;</span><span class="p">:</span> <span class="n">start_date</span><span class="p">,</span> <span class="s2">&quot;endDate&quot;</span><span class="p">:</span> <span class="n">end_date</span><span class="p">}</span>
         <span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="_Integration">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Integration">[docs]</a>
+<span class="k">class</span> <span class="nc">_Integration</span><span class="p">(</span><span class="n">Billing</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/administration.Integration</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_endpoint</span> <span class="o">=</span> <span class="s2">&quot;integration&quot;</span>
+
+<div class="viewcode-block" id="_Integration.GetInvoiceUrl">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Integration.GetInvoiceUrl">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetInvoiceUrl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">invoice_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param invoice_id: unique identifier of the target invoice in the internal billing system.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetInvoiceUrl&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;invoiceId&quot;</span><span class="p">:</span> <span class="n">invoice_id</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="_Integration.GetSSOUrl">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Integration.GetSSOUrl">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetSSOUrl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param path: destination path within the integrated system.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetSSOUrl&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">path</span><span class="p">})</span></div>
 </div>
 
 
