@@ -9,7 +9,7 @@
           <link rel="stylesheet" href="../../../_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="../../../_static/documentation_options.js?v=15f041dd"></script>
+        <script src="../../../_static/documentation_options.js?v=f2398de6"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -475,7 +475,21 @@
 
 <span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/billing.Reseller</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">_Reseller</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">_Reseller</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ServicePlan</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_ServicePlan&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The methods of this service provide billing information about a user account (such as UID, balance, billing history,</span>
+<span class="sd">        quotas, etc.) and allow managing it.</span>
+
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.billing.ServicePlan</span>
+
+<span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/billing.ServicePlan</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_ServicePlan</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">)</span></div>
 
 
 
@@ -1310,6 +1324,8 @@
 <span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/billing.Pricing</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="n">endpoint</span> <span class="o">=</span> <span class="s2">&quot;pricing&quot;</span>
+
 <div class="viewcode-block" id="_Pricing.AddPricing">
 <a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Pricing.AddPricing">[docs]</a>
     <span class="k">def</span> <span class="nf">AddPricing</span><span class="p">(</span>
@@ -1684,6 +1700,264 @@
 
     <span class="k">def</span> <span class="nf">SetResellerStatus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;SetResellerStatus&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">status</span><span class="p">})</span></div>
+
+
+
+<div class="viewcode-block" id="_ServicePlan">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._ServicePlan">[docs]</a>
+<span class="k">class</span> <span class="nc">_ServicePlan</span><span class="p">(</span><span class="n">Billing</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/billing.ServicePlan</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_endpoint2</span> <span class="o">=</span> <span class="s2">&quot;servicePlan&quot;</span>
+
+    <span class="k">def</span> <span class="nf">CreateLevelAutoPay</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">min_balance</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">expires</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">service_plan_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">payment_method_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">min_period</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param min_balance: the value used in the &quot;account.balance &lt; minBalance&quot; expression.</span>
+<span class="sd">        :param expires: date [and time] (in the UTC ISO 8601 format) when the auto-pay becomes unavailable.</span>
+<span class="sd">        :param service_plan_id: service plan ID to be paid (for example, $200 one-time fee)</span>
+<span class="sd">        :param payment_method_id: payment method ID to be used (see the GetPayMethodList method)</span>
+<span class="sd">        :param min_period: minimal delay (in seconds) between two consecutive auto-pays. 0 means no limit.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;CreateLevelAutoPay&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;minBalance&quot;</span><span class="p">:</span> <span class="n">min_balance</span><span class="p">,</span>
+                <span class="s2">&quot;expires&quot;</span><span class="p">:</span> <span class="n">expires</span><span class="p">,</span>
+                <span class="s2">&quot;servicePlanId&quot;</span><span class="p">:</span> <span class="n">service_plan_id</span><span class="p">,</span>
+                <span class="s2">&quot;paymentMethodId&quot;</span><span class="p">:</span> <span class="n">payment_method_id</span><span class="p">,</span>
+                <span class="s2">&quot;minPeriod&quot;</span><span class="p">:</span> <span class="n">min_period</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">CreateRegularAutoPay</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">cron_expression</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">expires</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">time_zone</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">service_plan_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">payment_method_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param cron_expression: Year value is optional. &#39;*&#39; means every possible value.</span>
+<span class="sd">        :param expires: date [and time] (in the UTC ISO 8601 format) when the auto-pay becomes unavailable.</span>
+<span class="sd">        :param time_zone: time zone for the cron expression. For example, GMT+4.</span>
+<span class="sd">        :param service_plan_id: service plan ID to be paid (for example, $200 one-time fee)</span>
+<span class="sd">        :param payment_method_id: payment method ID to be used (see the GetPayMethodList method)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;CreateRegularAutoPay&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;cronExpression&quot;</span><span class="p">:</span> <span class="n">cron_expression</span><span class="p">,</span>
+                <span class="s2">&quot;expires&quot;</span><span class="p">:</span> <span class="n">expires</span><span class="p">,</span>
+                <span class="s2">&quot;timeZone&quot;</span><span class="p">:</span> <span class="n">time_zone</span><span class="p">,</span>
+                <span class="s2">&quot;servicePlanId&quot;</span><span class="p">:</span> <span class="n">service_plan_id</span><span class="p">,</span>
+                <span class="s2">&quot;paymentMethodId&quot;</span><span class="p">:</span> <span class="n">payment_method_id</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">CreateServicePlan</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">description</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">service_plan_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">extern_plan_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param name: unique name of service plan</span>
+<span class="sd">        :param description: detailed comment about the service plan</span>
+<span class="sd">        :param service_plan_type: &quot;one-time&quot; or &quot;regular&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;CreateServicePlan&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+                <span class="s2">&quot;servicePlanType&quot;</span><span class="p">:</span> <span class="n">service_plan_type</span><span class="p">,</span>
+                <span class="s2">&quot;externPlanId&quot;</span><span class="p">:</span> <span class="n">extern_plan_id</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">DeleteAutoPay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">auto_pay_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param auto_pay_id: auto pay id. It can be get with ServicePlanService#GetAutoPays method</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;DeleteAutoPay&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;autoPayId&quot;</span><span class="p">:</span> <span class="n">auto_pay_id</span><span class="p">})</span>
+
+    <span class="k">def</span> <span class="nf">DeleteServicePlan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">service_plan_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param service_plan_id: id of sevice plan to be deleted</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;DeleteServicePlan&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;servicePlanId&quot;</span><span class="p">:</span> <span class="n">service_plan_id</span><span class="p">})</span>
+
+    <span class="k">def</span> <span class="nf">EnableServicePlan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">service_plan_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">enabled</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param service_plan_id: id of the specified service plan</span>
+<span class="sd">        :param enabled: 1 enabled and 0 = disabled</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;EnableServicePlan&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;servicePlanId&quot;</span><span class="p">:</span> <span class="n">service_plan_id</span><span class="p">,</span> <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">enabled</span><span class="p">},</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">ExtendedCreateServicePlan</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">external_plan_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">description</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">enabled</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">by_default</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">price</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param label: name or short description of the service plan</span>
+<span class="sd">        :param external_plan_id: service plan ID in the external billing system</span>
+<span class="sd">        :param description: detailed description of the service plan</span>
+<span class="sd">        :param enabled: enables (1) or disables (0) the service plan</span>
+<span class="sd">        :param type: service plan type in the external billing system (usually, one-time fee)</span>
+<span class="sd">        :param by_default: proposes the current service plan to users during the recharge operations by default (1) or not (0). Only one service plan can be set as default.</span>
+<span class="sd">        :param price: the sum to be refilled on the account balance by this service plan</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;ExtendedCreateServicePlan&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span>
+                <span class="s2">&quot;externalPlanId&quot;</span><span class="p">:</span> <span class="n">external_plan_id</span><span class="p">,</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+                <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">enabled</span><span class="p">,</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">,</span>
+                <span class="s2">&quot;byDefault&quot;</span><span class="p">:</span> <span class="n">by_default</span><span class="p">,</span>
+                <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="n">price</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">ExtendedGetServicePlans</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;ExtendedGetServicePlans&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{})</span>
+
+    <span class="k">def</span> <span class="nf">ExtendedServicePlanUpdate</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">external_plan_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">description</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">enabled</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">by_default</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">price</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param id: internal service plan ID in the PaaS admin panel</span>
+<span class="sd">        :param label: name or short description of the service plan</span>
+<span class="sd">        :param external_plan_id: service plan ID in the external billing system</span>
+<span class="sd">        :param description: detailed description of the service plan</span>
+<span class="sd">        :param enabled: enables (1) or disables (0) the service plan</span>
+<span class="sd">        :param type: service plan type in the external billing system (usually, one-time fee)</span>
+<span class="sd">        :param by_default: proposes the current service plan to users during the recharge operations by default (1) or not (0). Only one service plan can be set as default.</span>
+<span class="sd">        :param price: the sum to be refilled on the account balance by this service plan</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;ExtendedServicePlanUpdate&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+                <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span>
+                <span class="s2">&quot;externalPlanId&quot;</span><span class="p">:</span> <span class="n">external_plan_id</span><span class="p">,</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+                <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">enabled</span><span class="p">,</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">,</span>
+                <span class="s2">&quot;byDefault&quot;</span><span class="p">:</span> <span class="n">by_default</span><span class="p">,</span>
+                <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="n">price</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">GetAutoPayHistory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">auto_pay_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param auto_pay_id: specified auto pay id</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetAutoPayHistory&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;autoPayId&quot;</span><span class="p">:</span> <span class="n">auto_pay_id</span><span class="p">})</span>
+
+    <span class="k">def</span> <span class="nf">GetAutoPays</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetAutoPays&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{})</span>
+
+    <span class="k">def</span> <span class="nf">GetBoughtServicePlans</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetBoughtServicePlans&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{})</span>
+
+    <span class="k">def</span> <span class="nf">GetCurrency</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetCurrency&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{})</span>
+
+    <span class="k">def</span> <span class="nf">GetFinalCost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">service_plan_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param service_plan_id: specified service plan id</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetFinalCost&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;servicePlanId&quot;</span><span class="p">:</span> <span class="n">service_plan_id</span><span class="p">})</span>
+
+    <span class="k">def</span> <span class="nf">GetPayMethodList</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetPayMethodList&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{})</span>
+
+    <span class="k">def</span> <span class="nf">GetPaymentNews</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetPaymentNews&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{})</span>
+
+    <span class="k">def</span> <span class="nf">GetServicePlan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">service_plan_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param service_plan_id: id of service plan to be returned</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetServicePlan&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;servicePlanId&quot;</span><span class="p">:</span> <span class="n">service_plan_id</span><span class="p">})</span>
+
+    <span class="k">def</span> <span class="nf">GetServicePlanByType</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plan_type</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetServicePlanByType&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;planType&quot;</span><span class="p">:</span> <span class="n">plan_type</span><span class="p">})</span>
+
+    <span class="k">def</span> <span class="nf">PaymentNewsRead</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param id: comma separated ids of payments</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;PaymentNewsRead&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">})</span>
+
+    <span class="k">def</span> <span class="nf">SetExternPlanId</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">service_plan_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">external_plan_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param service_plan_id: JBilling service plan id</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;SetExternPlanId&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;servicePlanId&quot;</span><span class="p">:</span> <span class="n">service_plan_id</span><span class="p">,</span>
+                <span class="s2">&quot;externalPlanId&quot;</span><span class="p">:</span> <span class="n">external_plan_id</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">UpdateServicePlan</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">service_plan_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">description</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">extern_service_plan_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param service_plan_id: id of service plan to be changed</span>
+<span class="sd">        :param name: new name (unique among the others)</span>
+<span class="sd">        :param description: detailed description</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;UpdateServicePlan&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;servicePlanId&quot;</span><span class="p">:</span> <span class="n">service_plan_id</span><span class="p">,</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+                <span class="s2">&quot;externServicePlanId&quot;</span><span class="p">:</span> <span class="n">extern_service_plan_id</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
 
 </pre></div>
 
