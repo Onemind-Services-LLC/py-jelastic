@@ -75,6 +75,23 @@ class Environment(ClientAbstract):
         """
         return _Node(session=self._session, token=self._token, debug=self._debug)
 
+    @property
+    def Build(self) -> "_Build":
+        """
+        This service provides methods to manage Java project deployment from the version control system (VCS) repositories. The process requires a dedicated Maven build automation node that will build and deploy Java projects. With Maven, you can add any public or private project directly from your VCS repository (Git or SVN) using the appropriate link type: http, https, git (or svn). After the addition, Java projects can be deployed to the appropriate application servers.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.environment.Build
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/environment.Build
+        """
+        return _Build(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+        )
+
 
 class _Billing(Environment):
     """
@@ -326,3 +343,448 @@ class _Node(Environment):
         :param name: title of the message
         """
         return self._get("SendNotification", params={"name": name, "message": message})
+class _Build(Environment):
+    """
+   This service provides methods to manage Java project deployment from the version control system (VCS) repositories. The process requires a dedicated Maven build automation node that will build and deploy Java projects. With Maven, you can add any public or private project directly from your VCS repository (Git or SVN) using the appropriate link type: http, https, git (or svn). After the addition, Java projects can be deployed to the appropriate application servers.
+    resources that grouped by account.
+
+    Ref: https://docs.jelastic.com/api/private/#!/api/environment.Build
+    """
+
+    _endpoint2 = "build"
+    def AddProject(
+        self,
+        autoupdate: bool,
+        auto_resolve_conflict: bool,
+        env_name: str,
+        node_id: int,
+        name: str,
+        type: str,
+        path: str,
+        key_id:list[int]=None,
+        login:list[str]=None,
+        password:list[str]=None,
+        target_env: list[str]=None,
+        context:list[str]=None,
+        branch:list[str]=None,
+        interval:list[str]=None,
+        delay:list[int]=None,
+        deploy_now:list[bool]=None,
+        hooks:list[str]=None,
+        work_dir:list[str]=None,
+        target_node_group:list[str]=None,
+        is_sequential:list[bool]=None
+    ):
+        return self._get(
+            "AddProject",
+            params={
+                "autoUpdate": autoupdate,
+                "autoResolveConflict": auto_resolve_conflict,
+                "envName": env_name,
+                "nodeId": node_id,
+                "name": name,
+                "type": type,
+                "path": path,
+                "keyId": key_id,
+                "login": login,
+                "password": password,
+                "targetEnv": target_env,
+                "context": context,
+                "branch": branch,
+                "interval": interval,
+                "delay": delay,
+                "deployNow": deploy_now,
+                "hooks": hooks,
+                "workDir": work_dir,
+                "targetNodeGroup": target_node_group,
+                "isSequential": is_sequential,
+            },
+            delimiter=",",
+        )
+
+    def AddProjectWithCreds(
+            self,
+            autoupdate: bool,
+            auto_resolve_conflict: bool,
+            env_name: str,
+            node_id: int,
+            name: str,
+            type: str,
+            path: str,
+            target_env: list[str] = None,
+            login: list[str] = None,
+            password: list[str] = None,
+            context: list[str] = None,
+            branch: list[str] = None,
+            interval: list[str] = None,
+            delay: list[int] = None,
+            deploy_now: list[bool] = None,
+            hooks: list[str] = None,
+            work_dir: list[str] = None,
+    ):
+        """
+        param autoupdate: defines whether to enable (true) or disable (false) automatic project updates (only upon code changes in the remote repository); auto-update frequency is set with the interval parameter.
+        param auto_resolve_conflict: defines whether to automatically resolve (true) or not (false) merge conflicts (by updating the contradictory files to the repository version, i.e. locally made changes are discarded).
+        param env_name: source environment name (with a build node).
+        param node_id: unique identifier of the build node.
+        param name: project name.
+        param type: VCS repository type ("GIT" or "SVN").
+        param path: URL to the repository (including protocol).
+        param target_env: target environment name (with a Java application server).
+        param login: login for authentication in VCS.
+        param password: password or token for authentication in VCS.
+        param context: custom context name for the deployed project (ROOT by default).
+        param branch: remote repository branch (master by default).
+        param interval: delay (in minutes) for automatic project updates.
+        param delay: delay (in seconds) between two consecutive deployments when using the sequential deployment type (I.e. when deployment is performed on servers one-by-one to ensure uptime).
+        param deploy_now: defines whether to just create (false) or create and immediately deploy (true) the project.
+        param hooks: JSON object with custom scripts (actual content) to be executed before and after the build/deployment operations. For example: {"preDeploy":"script", "postDeploy":"script", "preBuild":"script", "postBuild":"script"}.
+        param work_dir: relative path to the repository subdirectory with application source code.
+        """
+        return self._get(
+            "AddProjectWithCreds",
+            params={
+                "autoUpdate": autoupdate,
+                "autoResolveConflict": auto_resolve_conflict,
+                "envName": env_name,
+                "nodeId": node_id,
+                "name": name,
+                "type": type,
+                "path": path,
+                "targetEnv": target_env,
+                "login": login,
+                "password": password,
+                "context": context,
+                "branch": branch,
+                "interval": interval,
+                "delay": delay,
+                "deployNow": deploy_now,
+                "hooks": hooks,
+                "workDir": work_dir,
+            },
+            delimiter=",",
+        )
+    def AddProjectWithKey(
+            self,
+            autoupdate: bool,
+            auto_resolve_conflict: bool,
+            env_name: str,
+            node_id: int,
+            name: str,
+            type: str,
+            path: str,
+            target_env: list[str] = None,
+            key_id: list[int] = None,
+            context: list[str] = None,
+            branch: list[str] = None,
+            interval: list[str] = None,
+            delay: list[int] = None,
+            deploy_now: list[bool] = None,
+            hooks: list[str] = None,
+            work_dir: list[str] = None,
+    ):
+        """
+        param autoupdate: Defines whether to enable (true) or disable (false) automatic project updates (only upon code changes in the remote repository); auto-update frequency is set with the interval parameter.
+        param auto_resolve_conflict: defines whether to automatically resolve (true) or not (false) merge conflicts (by updating the contradictory files to the repository version, i.e. locally made changes are discarded).
+        param env_name: source environment name (with a build node).
+        param node_id: unique identifier of the build node.
+        param name: project name.
+        param type: VCS repository type ("GIT" or "SVN").
+        param path: URL to the repository (including protocol).
+        param target_env: target environment name (with a Java application server).
+        param key_id: unique identifier of a private SSH key on the account. It can be found in the dashboard (account Settings > SSH Keys > Private Keys) or fetched with the Management > Account > GetSSHKeys method.
+        param context: custom context name for the deployed project (ROOT by default).
+        param branch: remote repository branch (master by default).
+        param interval: delay (in minutes) for automatic project updates.
+        param delay: delay (in seconds) between two consecutive deployments when using the sequential deployment type (I.e. when deployment is performed on servers one-by-one to ensure uptime).
+        param deploy_now: defines whether to just create (false) or create and immediately deploy (true) the project.
+        param hooks: JSON object with custom scripts (actual content) to be executed before and after the build/deployment operations. For example: {"preDeploy":"script", "postDeploy":"script", "preBuild":"script", "postBuild":"script"}.
+        param work_dir: relative path to the repository subdirectory with application source code.
+        """
+        return self._get(
+            "AddProjectWithKey",
+            params={
+                "autoUpdate": autoupdate,
+                "autoResolveConflict": auto_resolve_conflict,
+                "envName": env_name,
+                "nodeId": node_id,
+                "name": name,
+                "type": type,
+                "path": path,
+                "targetEnv": target_env,
+                "keyId": key_id,
+                "context": context,
+                "branch": branch,
+                "interval": interval,
+                "delay": delay,
+                "deployNow": deploy_now,
+                "hooks": hooks,
+                "workDir": work_dir,
+            },
+            delimiter=",",
+        )
+
+    def BuildDeploy(
+            self,
+            env_name: str,
+            project_name:str
+    ):
+        """
+        param env_name: source environment name (with a build node).
+        param project_name: project name.
+        """
+        return self._get(
+            "BuildDeploy",
+            params={
+                "envName": env_name,
+                "projectName": project_name,
+
+            },
+        )
+    def BuildDeployProject(
+            self,
+            env_name: str,
+            node_id: int,
+            project_id:str,
+            delay: list[int] = None,
+            update:list[bool] = None,
+            is_sequential: list[bool] = None
+
+    ):
+        """
+        param env_name: target environment name.
+        param node_id: unique identifier of the build node.
+        param project_id: unique identifier of the added project that should be built and deployed.
+        param delay: delay (in seconds) between two consecutive deployments when using the sequential deployment type (I.e. when deployment is performed on servers one-by-one to ensure uptime).
+        param update: defines whether to update (true) or not (false) the project before deployment.
+        param is_sequential: defines whether to deploy project on application servers one-by-one to ensure uptime (true) or simultaneously (false).
+        """
+        return self._get(
+            "BuildDeployProject",
+            params={
+                "envName": env_name,
+                "nodeid": node_id,
+                "projectid": project_id,
+                "delay": delay,
+                "update": update,
+                "isSequential":is_sequential
+            },
+            delimiter=",",
+        )
+
+    def BuildProject(
+            self,
+            env_name: str,
+            node_id: int,
+            project_id:str,
+            update:list[bool] = None,
+            skip_publish:list[bool] = None,
+            asyncs: list[bool] = None
+
+    ):
+        """
+        param env_name: source environment name (with a build node).
+        param node_id: unique identifier of the build node.
+        param project_id: unique identifier of the added project that should be built.
+        param update: defines whether to update (true) or not (false) the project before building.
+        param skip_publish: defines whether to add built project to the Deployment Manager (false) or not (true).
+        param asyncs: defines whether to build projects asynchronously (true) or not (false).
+        """
+        return self._get(
+            "BuildProject",
+            params={
+                "envName": env_name,
+                "nodeid": node_id,
+                "projectid": project_id,
+                "update": update,
+                "skipPublish":skip_publish,
+                "async":asyncs
+            },
+            delimiter=",",
+        )
+    def DeployProject(
+            self,
+            env_name: str,
+            node_id: int,
+            project_id:str,
+            delay: list[int] = None,
+            is_sequential: list[bool] = None
+
+
+    ):
+        """
+        param env_name: source environment name (with a build node).
+        param node_id: unique identifier of the build node.
+        param project_id: unique identifier of the built project that should be deployed.
+        param delay: delay (in seconds) between two consecutive deployments when using the sequential deployment type (I.e. when deployment is performed on servers one-by-one to ensure uptime).
+        param is_sequential: defines whether to use sequential (true) or simultaneous (false) deployment type; the former can ensure uptime, and the latter is faster.
+        """
+        return self._get(
+            "DeployProject",
+            params={
+                "envName": env_name,
+                "nodeid": node_id,
+                "projectid": project_id,
+                "delay": delay,
+                "isSequential":is_sequential
+            },
+            delimiter=",",
+        )
+    def EditProject(
+        self,
+
+        env_name: str,
+        node_id: int,
+        project_id: int,
+        name: str,
+        type: str,
+        path: str,
+        key_id:list[int]=None,
+        login:list[str]=None,
+        password:list[str]=None,
+        env: list[str]=None,
+        context:list[str]=None,
+        branch:list[str]=None,
+        autoupdate: list[bool] = None,
+        interval:list[str]=None,
+        auto_resolve_conflict: list[bool] = None,
+        delay:list[int]=None,
+        hooks:list[str]=None,
+        work_dir:list[str]=None,
+        target_node_group:list[str]=None,
+    ):
+        """
+        param env_name: source environment name (with a build node).
+        param node_id: unique identifier of the build node.
+        param project_id: unique identifier of the project.
+        param name: project name.
+        param type: VCS repository type (“GIT” or “SVN”).
+        param path: URL to the repository (including protocol).
+        param key_id: unique identifier of a private SSH key on the account. It can be found in the dashboard (account Settings > SSH Keys > Private Keys) or fetched with the Management > Account > GetSSHKeys method.
+        param login: login for authentication in VCS.
+        param password: password or token for authentication in VCS.
+        param env: target environment name (with a Java application server).
+        param context: custom context name for the deployed project (ROOT by default).
+        param branch: remote repository branch (master by default).
+        param autoupdate: defines whether to enable (true) or disable (false) automatic project updates (only upon code changes in the remote repository); auto-update frequency is set with the interval parameter.
+        param interval: delay (in minutes) for automatic project updates.
+        param auto_resolve_conflict: defines whether to automatically resolve (true) or not (false) merge conflicts (by updating the contradictory files to the repository version, i.e. locally made changes are discarded).
+        param delay:  delay (in seconds) between two consecutive deployments when using the sequential deployment type (I.e. when deployment is performed on servers one-by-one to ensure uptime).
+        param hooks: JSON object with custom scripts (actual content) to be executed before and after the build/deployment operations. For example: {"preDeploy":"script", "postDeploy":"script", "preBuild":"script", "postBuild":"script"}.
+        param work_dir: relative path to the repository subdirectory with application source code.
+        param target_node_group: target node group (layer) with Java application servers.
+        """
+        return self._get(
+            "EditProject",
+            params={
+
+
+                "envName": env_name,
+                "nodeid": node_id,
+                "projectid": project_id,
+                "name": name,
+                "type": type,
+                "path": path,
+                "keyId": key_id,
+                "login": login,
+                "password": password,
+                "env": env,
+                "context": context,
+                "branch": branch,
+                "autoUpdate": autoupdate,
+                "interval": interval,
+                "autoResolveConflict": auto_resolve_conflict,
+                "delay": delay,
+                "hooks": hooks,
+                "workDir": work_dir,
+                "targetNodeGroup": target_node_group,
+            },
+            delimiter=",",
+        )
+    def GetProjectInfo(
+        self,
+        env_name: str,
+        node_id: int,
+        project_id: list[int]=None,
+        project_name: list[str]=None
+    ):
+        """
+        param env_name: source environment name (with a build node).
+        param node_id: unique identifier of the build node.
+        param project_id: unique identifier of the project.
+        param project_name: project name.
+        """
+        return self._get(
+            "GetProjectInfo",
+            params={
+                "envName": env_name,
+                "nodeid": node_id,
+                "projectid": project_id,
+                "projectName": project_name,
+            },
+            delimiter=",",
+        )
+    def GetProjects(
+        self,
+        env_name: str,
+        node_group: list[int]=None,
+        node_id: list[int]=None,
+
+    ):
+        """
+        param env_name: source environment name (with a build node).
+        param node_group: unique identifier of the node group with a build node.
+        param node_id: unique identifier of the build node.
+        """
+        return self._get(
+            "GetProjects",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "nodeid": node_id,
+            },
+            delimiter=",",
+        )
+    def RemoveProject(
+        self,
+        env_name: str,
+        nodeid: int,
+        projectid: int,
+    ):
+        """
+        param env_name: source environment name (with a build node).
+        param nodeid: unique identifier of the build node.
+        param projectid: unique identifier of the project.
+        """
+        return self._get(
+            "RemoveProject",
+            params={
+                "envName": env_name,
+                "nodeid": nodeid,
+                "projectid": projectid,
+            },
+            delimiter=",",
+        )
+    def Update(
+        self,
+        env_name: str,
+        node_id: int,
+        project_id: list[int]=None,
+        context: list[str]=None,
+    ):
+        """
+        param env_name: source environment name (with a build node).
+        param nodeid: unique identifier of the build node.
+        param projectid: unique identifier of the project.
+        param context: custom context name for the deployed project (ROOT by default).
+        """
+        return self._get(
+            "Update",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "projectId": project_id,
+                "context": context,
+            },
+            delimiter=",",
+        )
