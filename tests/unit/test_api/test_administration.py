@@ -2,7 +2,6 @@ import pytest
 from unittest.mock import patch, Mock
 from jelastic.api import Administration
 from datetime import datetime, date
-import pytz
 CURRENT_DATETIME = datetime.now()
 success_response = {"error": "", "reason": 0, "result": 0, "source": "billing"}
 
