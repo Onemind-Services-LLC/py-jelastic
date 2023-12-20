@@ -9,7 +9,7 @@
           <link rel="stylesheet" href="../../../_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="../../../_static/documentation_options.js?v=af2cf3a8"></script>
+        <script src="../../../_static/documentation_options.js?v=de6fd5a0"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -486,7 +486,27 @@
 
 <span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/environment.Node</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">_Node</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">_Node</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Binder</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_Binder&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        With the platform, you can set your own external domain name for your projects instead of using the default hosting provider domain name. Binding can be done in two ways: by adding a CNAME record or by setting A Records.</span>
+<span class="sd">        A CNAME specifies an alias for a canonical name record in a Domain Name System (DNS) database. If you don&#39;t have your own Public IP, your URL is an alias for a single canonical name that is associated with a common platform IP address in the DNS database. In this case, it&#39;s recommended to set your own custom domain by adding a CNAME record.</span>
+<span class="sd">        A Record is an entry in your DNS zone file that maps each domain name to an IP address. When you type www.mycustomsite.com, the browser goes to the nameserver for mycustomsite.com and asks for the A Record. This record must point to an IP address - it will be the IP address of your web server. Setting your own custom external domain name using A Record is more appropriate if you have a personal Public IP address.</span>
+<span class="sd">       Also, you can bind Custom SSL to your custom domain.</span>
+
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.environment.Binder</span>
+
+<span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/environment.Binder</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_Binder</span><span class="p">(</span>
+            <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
+            <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span>
+            <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span>
+        <span class="p">)</span></div>
 
 
 
@@ -792,6 +812,602 @@
 <span class="sd">        :param name: title of the message</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;SendNotification&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">message</span><span class="p">})</span></div>
+</div>
+
+<div class="viewcode-block" id="_Binder">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder">[docs]</a>
+<span class="k">class</span> <span class="nc">_Binder</span><span class="p">(</span><span class="n">Environment</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">   With the platform, you can set your own external domain name for your projects instead of using the default hosting provider domain name. Binding can be done in two ways: by adding a CNAME record or by setting A Records.</span>
+
+<span class="sd">    A CNAME specifies an alias for a canonical name record in a Domain Name System (DNS) database. If you don&#39;t have your own Public IP, your URL is an alias for a single canonical name that is associated with a common platform IP address in the DNS database. In this case, it&#39;s recommended to set your own custom domain by adding a CNAME record.</span>
+
+<span class="sd">    A Record is an entry in your DNS zone file that maps each domain name to an IP address. When you type www.mycustomsite.com, the browser goes to the nameserver for mycustomsite.com and asks for the A Record. This record must point to an IP address - it will be the IP address of your web server. Setting your own custom external domain name using A Record is more appropriate if you have a personal Public IP address.</span>
+
+<span class="sd">    Also, you can bind Custom SSL to your custom domain.</span>
+
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/environment.Binder</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_endpoint2</span> <span class="o">=</span> <span class="s2">&quot;Binder&quot;</span>
+
+<div class="viewcode-block" id="_Binder.AddDomains">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.AddDomains">[docs]</a>
+    <span class="k">def</span> <span class="nf">AddDomains</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">domains</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">subdomain</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param domains: a comma- or semicolon-separated list of domains (e.g. domain1,domain2 or domain1;domain2).</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.</span>
+<span class="sd">        param node_id: unique identifier of the target node (container).</span>
+<span class="sd">        param subdomain: defines whether the layer/node subdomain should be attached via &quot;-&quot; (false) or &quot;.&quot; (true, by default).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;AddDomains&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;domains&quot;</span><span class="p">:</span> <span class="n">domains</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+                <span class="s2">&quot;subdomain&quot;</span><span class="p">:</span> <span class="n">subdomain</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Binder.AddSSLCert">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.AddSSLCert">[docs]</a>
+    <span class="k">def</span> <span class="nf">AddSSLCert</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">cert</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">interm</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param key: private key (can be either key body or link to download it).</span>
+<span class="sd">        param cert: domain certificate (can be either certificate body or link to download it).</span>
+<span class="sd">        param interm: intermediate certificate (CA) (can be either intermediate body or link to download it).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;AddSSLCert&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span>
+                <span class="s2">&quot;cert&quot;</span><span class="p">:</span> <span class="n">cert</span><span class="p">,</span>
+                <span class="s2">&quot;interm&quot;</span><span class="p">:</span> <span class="n">interm</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Binder.AttachExtIp">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.AttachExtIp">[docs]</a>
+    <span class="k">def</span> <span class="nf">AttachExtIp</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">nodeid</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;AttachExtIp&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeid&quot;</span><span class="p">:</span> <span class="n">nodeid</span><span class="p">,</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Binder.BindExtDomain">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.BindExtDomain">[docs]</a>
+    <span class="k">def</span> <span class="nf">BindExtDomain</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">extdomain</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">cert_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;BindExtDomain&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;extdomain&quot;</span><span class="p">:</span> <span class="n">extdomain</span><span class="p">,</span>
+                <span class="s2">&quot;certId&quot;</span><span class="p">:</span> <span class="n">cert_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Binder.BindExtDomains">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.BindExtDomains">[docs]</a>
+    <span class="k">def</span> <span class="nf">BindExtDomains</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">extdomains</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">cert_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param extdomain: a comma-separated list of external domains to be bound to the environment.</span>
+<span class="sd">        param cert_id: unique identifier of the SSL certificate.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;BindExtDomains&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;extdomains&quot;</span><span class="p">:</span> <span class="n">extdomains</span><span class="p">,</span>
+                <span class="s2">&quot;certId&quot;</span><span class="p">:</span> <span class="n">cert_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Binder.BindSSL">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.BindSSL">[docs]</a>
+    <span class="k">def</span> <span class="nf">BindSSL</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">cert_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">cert</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">intermediate</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;BindSSL&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;cert_key&quot;</span><span class="p">:</span> <span class="n">cert_key</span><span class="p">,</span>
+                <span class="s2">&quot;cert&quot;</span><span class="p">:</span> <span class="n">cert</span><span class="p">,</span>
+                <span class="s2">&quot;intermediate&quot;</span><span class="p">:</span> <span class="n">intermediate</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Binder.BindSSLCert">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.BindSSLCert">[docs]</a>
+    <span class="k">def</span> <span class="nf">BindSSLCert</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">cert_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="n">entry_point</span><span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">ext_domains</span> <span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param cert_id: unique identifier of the SSL certificate.</span>
+<span class="sd">        param entry_point: entry point can be either &quot;ENV&quot; (for all environments domains, by default) or &quot;SLB&quot; (for environment domains specified in the extDomains parameter).</span>
+<span class="sd">        param ext_domains: a comma-separated list of external domains to be bound with the SSL certificate.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;BindSSLCert&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;certId&quot;</span><span class="p">:</span> <span class="n">cert_id</span><span class="p">,</span>
+                <span class="s2">&quot;entryPoint&quot;</span><span class="p">:</span> <span class="n">entry_point</span><span class="p">,</span>
+                <span class="s2">&quot;extDomains&quot;</span><span class="p">:</span> <span class="n">ext_domains</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Binder.CheckDomain">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.CheckDomain">[docs]</a>
+    <span class="k">def</span> <span class="nf">CheckDomain</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">domain</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">region</span><span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param domain: domain name to be checked.</span>
+<span class="sd">        param region: unique name of a region to be checked.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;CheckDomain&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;domain&quot;</span><span class="p">:</span> <span class="n">domain</span><span class="p">,</span>
+                <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="n">region</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Binder.CheckExtDomain">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.CheckExtDomain">[docs]</a>
+    <span class="k">def</span> <span class="nf">CheckExtDomain</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">extdomains</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param extdomains: external domain name to be checked.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;CheckExtDomain&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;extdomains&quot;</span><span class="p">:</span> <span class="n">extdomains</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Binder.DeleteSSL">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.DeleteSSL">[docs]</a>
+    <span class="k">def</span> <span class="nf">DeleteSSL</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;DeleteSSL&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span> <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Binder.DetachExtIp">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.DetachExtIp">[docs]</a>
+    <span class="k">def</span> <span class="nf">DetachExtIp</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">nodeid</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="n">ip</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param nodeid: unique identifier of the target node (container).</span>
+<span class="sd">        param ip: IP address that should be removed from the node.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;DetachExtIp&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeid&quot;</span><span class="p">:</span> <span class="n">nodeid</span><span class="p">,</span>
+                <span class="s2">&quot;ip&quot;</span><span class="p">:</span> <span class="n">ip</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Binder.DisableSSL">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.DisableSSL">[docs]</a>
+    <span class="k">def</span> <span class="nf">DisableSSL</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;DisableSSL&quot;</span><span class="p">,</span><span class="n">params</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+        <span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="_Binder.EditSSLCert">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.EditSSLCert">[docs]</a>
+    <span class="k">def</span> <span class="nf">EditSSLCert</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="n">key</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">cert</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">interm</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param id: unique identifier of the target SSL certificate.</span>
+<span class="sd">        param key: private key (can be either key body or link to download it).</span>
+<span class="sd">        param cert: domain certificate (can be either certificate body or link to download it).</span>
+<span class="sd">        param interm: intermediate certificate (CA) (can be intermediate body or link to download it); if set to &quot;*&quot;, &quot;null&quot;, or &quot;none&quot;, the intermediate certificate will be removed from the platform database.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;EditSSLCert&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+                <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span>
+                <span class="s2">&quot;cert&quot;</span><span class="p">:</span> <span class="n">cert</span><span class="p">,</span>
+                <span class="s2">&quot;interm&quot;</span><span class="p">:</span> <span class="n">interm</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Binder.GetDomainInfo">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.GetDomainInfo">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetDomainInfo</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">domain</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns environment appid if environment found by domain.</span>
+
+<span class="sd">        param domain: domain of the environment for search</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetDomainInfo&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;domain&quot;</span><span class="p">:</span> <span class="n">domain</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Binder.GetDomains">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.GetDomains">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetDomains</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">node_group</span><span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">node_id</span><span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">in_short</span><span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer) for filtering, e.g. &quot;cp&quot; for the default application server layer.</span>
+<span class="sd">        param node_id: unique identifier of the target node (container) for filtering. It has priority over the nodeGroup parameter.</span>
+<span class="sd">        param in_short: defines whether domains should be presented in the short (true, by default) or extended (false) form.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetDomains&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+                <span class="s2">&quot;inShort&quot;</span><span class="p">:</span> <span class="n">in_short</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Binder.GetExtDomains">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.GetExtDomains">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetExtDomains</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetExtDomains&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span>
+        <span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="_Binder.GetSSL">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.GetSSL">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetSSL</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetSSL&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span>
+        <span class="p">})</span></div>
+
+<div class="viewcode-block" id="_Binder.GetSSLCerts">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.GetSSLCerts">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetSSLCerts</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">ids</span><span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetSSLCerts&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+            <span class="s2">&quot;ids&quot;</span><span class="p">:</span><span class="n">ids</span><span class="p">},</span>
+                         <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+                         <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Binder.ManageNodeDnsState">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.ManageNodeDnsState">[docs]</a>
+    <span class="k">def</span> <span class="nf">ManageNodeDnsState</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
+            <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">enabled</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param node_id: unique identifier of the target node (container).</span>
+<span class="sd">        param enabled: defines whether to enable (true) or disable (false) DNS records for the target node.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;ManageNodeDnsState&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+                <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">enabled</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Binder.MoveExtIps">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.MoveExtIps">[docs]</a>
+    <span class="k">def</span> <span class="nf">MoveExtIps</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
+            <span class="n">source_node_id</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span>
+            <span class="n">target_node_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="n">ips</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: source environment name.</span>
+<span class="sd">        param source_node_id: unique identifier of the source node (from the source environment).</span>
+<span class="sd">        param target_node_id: unique identifier of the target node (could be from the same or different environment on the account).</span>
+<span class="sd">        param ips: a comma- or semicolon-separated list of IP addresses that should be transferred (use &quot;*&quot; to move all the source node external IP addresses).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;MoveExtIps&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;sourceNodeId&quot;</span><span class="p">:</span> <span class="n">source_node_id</span><span class="p">,</span>
+                <span class="s2">&quot;targetNodeId&quot;</span><span class="p">:</span> <span class="n">target_node_id</span><span class="p">,</span>
+                <span class="s2">&quot;ips&quot;</span><span class="p">:</span><span class="n">ips</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Binder.RemoveDomains">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.RemoveDomains">[docs]</a>
+    <span class="k">def</span> <span class="nf">RemoveDomains</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
+            <span class="n">domains</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
+            <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param domains: a comma- or semicolon-separated list of domains (e.g. domain1,domain2 or domain1;domain2); provide &quot;*&quot; to remove all custom domains.</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. &quot;cp&quot; for the default application server layer.</span>
+<span class="sd">        param node_id: unique identifier of the target node (container).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;RemoveDomains&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;domains&quot;</span><span class="p">:</span> <span class="n">domains</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;node_id&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Binder.RemoveExtDomains">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.RemoveExtDomains">[docs]</a>
+    <span class="k">def</span> <span class="nf">RemoveExtDomains</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
+            <span class="n">extdomain</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param extdomain: external domain name to be detached.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;RemoveExtDomains&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;extdomain&quot;</span><span class="p">:</span> <span class="n">extdomain</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Binder.RemoveSSL">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.RemoveSSL">[docs]</a>
+    <span class="k">def</span> <span class="nf">RemoveSSL</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;RemoveSSL&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Binder.RemoveSSLCerts">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.RemoveSSLCerts">[docs]</a>
+    <span class="k">def</span> <span class="nf">RemoveSSLCerts</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
+            <span class="n">ids</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param ids: a comma-separated list of certificate IDs (e.g. id1,id2,id3); provide &quot;*&quot; to remove all certificates.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;RemoveSSLCerts&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="n">ids</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Binder.SetExtIpCount">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.SetExtIpCount">[docs]</a>
+    <span class="k">def</span> <span class="nf">SetExtIpCount</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
+            <span class="nb">type</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
+            <span class="n">count</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param type: external IP address type (&quot;ipv4&quot; or &quot;ipv6&quot;).</span>
+<span class="sd">        param count: number of IPs to add per container - requires the multiple IPs feature enabled on the account.</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. &quot;cp&quot; for the default application server layer.</span>
+<span class="sd">        param node_id: unique identifier of the target node (container).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;SetExtIpCount&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">,</span>
+                <span class="s2">&quot;count&quot;</span><span class="p">:</span><span class="n">count</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;node_id&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Binder.SwapExtDomains">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.SwapExtDomains">[docs]</a>
+    <span class="k">def</span> <span class="nf">SwapExtDomains</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
+            <span class="n">targetappid</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param targetappid: Target (second) environment name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;SwapExtDomains&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;targetappid&quot;</span><span class="p">:</span> <span class="n">targetappid</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Binder.SwapExtIps">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.SwapExtIps">[docs]</a>
+    <span class="k">def</span> <span class="nf">SwapExtIps</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
+            <span class="n">source_node_id</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span>
+            <span class="n">target_node_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="n">source_ip</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">target_ip</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: source environment name.</span>
+<span class="sd">        param source_node_id: unique identifier of the source node (from the source environment).</span>
+<span class="sd">        param target_node_id: unique identifier of the target node (could be from the same or different environment on the account).</span>
+<span class="sd">        param source_ip: source IP address that should be swapped (if not specified, all external IPs from source node are transferred to the target).</span>
+<span class="sd">        param target_ip: target IP address that should be swapped (if not specified, all external IPs from target node are transferred to the source).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;SwapExtIps&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;sourceNodeId&quot;</span><span class="p">:</span> <span class="n">source_node_id</span><span class="p">,</span>
+                <span class="s2">&quot;targetNodeId&quot;</span><span class="p">:</span> <span class="n">target_node_id</span><span class="p">,</span>
+                <span class="s2">&quot;sourceIp&quot;</span><span class="p">:</span><span class="n">source_ip</span><span class="p">,</span>
+                <span class="s2">&quot;targetIp&quot;</span><span class="p">:</span><span class="n">target_ip</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Binder.UnbindSSLCert">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Binder.UnbindSSLCert">[docs]</a>
+    <span class="k">def</span> <span class="nf">UnbindSSLCert</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
+            <span class="n">extdomains</span><span class="p">:</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param extdomain: a comma-separated list of external domains to be unbound (if not specified, SSL certificates are unbound from the environment).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;UnbindSSLCert&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;extDomains&quot;</span><span class="p">:</span> <span class="n">extdomains</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
 </div>
 
 </pre></div>
