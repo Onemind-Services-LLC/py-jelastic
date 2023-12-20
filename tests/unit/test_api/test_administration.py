@@ -186,6 +186,19 @@ def test_get_all_config_type(client):
     assert response == success_response
 
 
+def test_get_all_key_config_by_type(client):
+    client._get.return_value = success_response
+    response = client.Config.GetAllKeyConfigByType("type", "expert")
+    client._get.assert_called_with(
+        "GetAllKeyConfigByType",
+        params={
+            "type": "type",
+            "expert": "expert",
+        },
+    )
+    assert response == success_response
+
+
 def test_get_congif_key(client):
     client._get.return_value = success_response
     response = client.Config.GetConfigKey(
