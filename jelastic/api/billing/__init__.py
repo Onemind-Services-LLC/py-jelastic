@@ -723,7 +723,7 @@ class _Invoice(Billing):
     """
     Ref: https://docs.jelastic.com/api/private/#!/api/billing.Invoice
     """
-
+    _endpoint = "invoice"
     def Event(
         self,
         extern_id: str,
