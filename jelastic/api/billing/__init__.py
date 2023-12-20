@@ -1388,7 +1388,7 @@ class _Subscription(Billing):
         return self._get(
             'DiscardUpdateSubscription',
             params={'subscriptionId': subscription_id}
-                            )
+        )
 
     def GetCategories(self, expand_fields: list[str] = None):
         """
@@ -1402,14 +1402,70 @@ class _Subscription(Billing):
             delimiter=",",
         )
 
-    def GetProducts(self):
-        pass
+    def GetProducts(
+            self,
+            id: list[int] = None,
+            category_id: list[int] = None,
+            expand_fields: list[str] = None,
+            start_row: list[int] = None,
+            result_count: list[int] = None,
+            order_field: list[str] = None,
+            order_direction: list[str] = None,
+    ):
+        """
+        :param id: unique identifier of the target subscription Product (for filtering).
+        :param category_id: unique identifier of the target subscription Category (for filtering).
+        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).
+        :param start_row: returns information starting from the specified row in the response (starts with 0, by default).
+        :param result_count: returns the specified number of rows from the response (0 – unlimited – by default).
+        :param order_field: sorts results by the specified field
+        :param order_direction: sorts results in the ascending (ASC) or descending (DESC) order
+        """
+        return self._get(
+            'GetProducts',
+            params={
+                'id': id,
+                'categoryId': category_id,
+                'expandFields': expand_fields,
+                'startRow': start_row,
+                'resultCount': result_count,
+                'orderField': order_field,
+                'orderDirection': order_direction,
+            },
+            delimiter=",",
+        )
 
-    def GetRestrictedHardNodeGroups(self):
-        pass
+    def GetRestrictedHardNodeGroups(self, subscription_item_id: int):
+        """
+        :param subscription_id: unique identifier of the target subscription item.
+        """
+        return self._get(
+            'GetHardNodeGroups',
+            params={
+                'subscriptionItemId': subscription_item_id,
+            }
+        )
 
-    def GetServicePlans(self):
-        pass
+    def GetServicePlans(
+            self,
+            id: list[int] = None,
+            product_id: list[int] = None,
+            expand_fields: list[str] = None,
+                        ):
+        """
+        :param id: unique identifier of the target service plan (for filtering).
+        :param product_id: unique identifier of the target subscription product (for filtering).
+        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).
+        """
+        return self._get(
+            'GetServicePlans',
+            params={
+                'id': id,
+                'productId': product_id,
+                'expandFields': expand_fields,
+            },
+            delimiter=",",
+        )
 
     def GetSubscriptions(self):
         pass
