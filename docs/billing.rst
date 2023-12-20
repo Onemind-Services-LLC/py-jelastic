@@ -10,6 +10,11 @@ Billing
    :undoc-members:
    :show-inheritance:
 
+.. autoclass:: jelastic.api.billing._GroupQuota
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 .. autoclass:: jelastic.api.billing._Integration
    :members:
    :undoc-members:
