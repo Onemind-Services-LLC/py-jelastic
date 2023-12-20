@@ -10,7 +10,7 @@
           <link rel="stylesheet" href="_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="_static/documentation_options.js?v=8d24358e"></script>
+        <script src="_static/documentation_options.js?v=91c8070f"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -476,10 +476,10 @@
 </li>
       <li><a href="environment.html#jelastic.api.environment._JError">_JError (class in jelastic.api.environment)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="abstract.html#jelastic.api.abstract.ClientAbstract._log_debug">_log_debug() (jelastic.api.abstract.ClientAbstract method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="migration.html#jelastic.api.migration._Migration">_Migration (class in jelastic.api.migration)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Monitoring">_Monitoring (class in jelastic.api.administration)</a>
@@ -487,6 +487,8 @@
       <li><a href="environment.html#jelastic.api.environment._Node">_Node (class in jelastic.api.environment)</a>
 </li>
       <li><a href="pricing.html#jelastic.api.pricing._Option">_Option (class in jelastic.api.pricing)</a>
+</li>
+      <li><a href="billing.html#jelastic.api.billing._PayMethod">_PayMethod (class in jelastic.api.billing)</a>
 </li>
       <li><a href="billing.html#jelastic.api.billing._Pricing">_Pricing (class in jelastic.api.billing)</a>
 </li>
@@ -766,6 +768,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="message.html#jelastic.api.message.Message.Email">Email (jelastic.api.message.Message property)</a>
 </li>
+      <li><a href="billing.html#jelastic.api.billing._PayMethod.EnablePayMethod">EnablePayMethod() (jelastic.api.billing._PayMethod method)</a>
+</li>
       <li><a href="billing.html#jelastic.api.billing._Account.EnableUser">EnableUser() (jelastic.api.billing._Account method)</a>
 </li>
       <li><a href="billing.html#jelastic.api.billing._Pricing.endpoint">endpoint (jelastic.api.billing._Pricing attribute)</a>
@@ -896,6 +900,8 @@
 </li>
       <li><a href="administration.html#jelastic.api.administration._Utils.GetDBCreationStat">GetDBCreationStat() (jelastic.api.administration._Utils method)</a>
 </li>
+      <li><a href="billing.html#jelastic.api.billing._PayMethod.GetDefaultPayMethod">GetDefaultPayMethod() (jelastic.api.billing._PayMethod method)</a>
+</li>
       <li><a href="administration.html#jelastic.api.administration._Monitoring.GetDockerPullStatus">GetDockerPullStatus() (jelastic.api.administration._Monitoring method)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._HostGroup.GetEndpoints">GetEndpoints() (jelastic.api.administration._HostGroup method)</a>
@@ -956,6 +962,8 @@
 </li>
       <li><a href="administration.html#jelastic.api.administration._Subscription.GetProducts">GetProducts() (jelastic.api.administration._Subscription method)</a>
 </li>
+      <li><a href="billing.html#jelastic.api.billing._PayMethod.GetPublicToken">GetPublicToken() (jelastic.api.billing._PayMethod method)</a>
+</li>
       <li><a href="billing.html#jelastic.api.billing._Account.GetQuotas">GetQuotas() (jelastic.api.billing._Account method)</a>
 </li>
       <li><a href="billing.html#jelastic.api.billing._Pricing.GetResources">GetResources() (jelastic.api.billing._Pricing method)</a>
@@ -981,6 +989,8 @@
       <li><a href="automation.html#jelastic.api.automation._Utils.GetUidUsageByPeriod">GetUidUsageByPeriod() (jelastic.api.automation._Utils method)</a>
 </li>
       <li><a href="billing.html#jelastic.api.billing._Pricing.GetUniqueResourceNames">GetUniqueResourceNames() (jelastic.api.billing._Pricing method)</a>
+</li>
+      <li><a href="billing.html#jelastic.api.billing._PayMethod.GetValidPayTypes">GetValidPayTypes() (jelastic.api.billing._PayMethod method)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._VirtualNetwork.GetVirtualNetworks">GetVirtualNetworks() (jelastic.api.administration._VirtualNetwork method)</a>
 </li>
@@ -1290,6 +1300,8 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="billing.html#jelastic.api.billing.Billing.PayMethod">PayMethod (jelastic.api.billing.Billing property)</a>
+</li>
       <li><a href="platform.html#jelastic.api.platform.Platform">Platform (class in jelastic.api.platform)</a>
 </li>
       <li><a href="pool.html#jelastic.api.pool.Pool">Pool (class in jelastic.api.pool)</a>
@@ -1312,6 +1324,10 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="s3.html#jelastic.api.s3._Account.RegenerateKeys">RegenerateKeys() (jelastic.api.s3._Account method)</a>
 </li>
+      <li><a href="billing.html#jelastic.api.billing._PayMethod.RegisterBankCard">RegisterBankCard() (jelastic.api.billing._PayMethod method)</a>
+</li>
+      <li><a href="billing.html#jelastic.api.billing._PayMethod.RegisterPayMethodAndPay">RegisterPayMethodAndPay() (jelastic.api.billing._PayMethod method)</a>
+</li>
       <li><a href="administration.html#jelastic.api.administration._HostGroup.Remove">Remove() (jelastic.api.administration._HostGroup method)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Config.RemoveConfigKey">RemoveConfigKey() (jelastic.api.administration._Config method)</a>
@@ -1324,10 +1340,10 @@
 </li>
       <li><a href="billing.html#jelastic.api.billing._Account.RemoveQuota">RemoveQuota() (jelastic.api.billing._Account method)</a>
 </li>
-      <li><a href="administration.html#jelastic.api.administration._Config.RemoveResellerProperties">RemoveResellerProperties() (jelastic.api.administration._Config method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="administration.html#jelastic.api.administration._Config.RemoveResellerProperties">RemoveResellerProperties() (jelastic.api.administration._Config method)</a>
+</li>
       <li><a href="administration.html#jelastic.api.administration._Utils.RemoveSystemExternalDNSRecord">RemoveSystemExternalDNSRecord() (jelastic.api.administration._Utils method)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._HostGroup.RenameRemoteUser">RenameRemoteUser() (jelastic.api.administration._HostGroup method)</a>
@@ -1380,6 +1396,8 @@
 </li>
       <li><a href="administration.html#jelastic.api.administration._Subscription.SetCategoryPublished">SetCategoryPublished() (jelastic.api.administration._Subscription method)</a>
 </li>
+      <li><a href="billing.html#jelastic.api.billing._PayMethod.SetDefaultPayMethod">SetDefaultPayMethod() (jelastic.api.billing._PayMethod method)</a>
+</li>
       <li><a href="administration.html#jelastic.api.administration._Template.SetDefaultRegistry">SetDefaultRegistry() (jelastic.api.administration._Template method)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Template.SetDistribution">SetDistribution() (jelastic.api.administration._Template method)</a>
@@ -1407,6 +1425,8 @@
       <li><a href="administration.html#jelastic.api.administration._Subscription.SetServicePlanStatus">SetServicePlanStatus() (jelastic.api.administration._Subscription method)</a>
 </li>
       <li><a href="billing.html#jelastic.api.billing._Pricing.SetTariffs">SetTariffs() (jelastic.api.billing._Pricing method)</a>
+</li>
+      <li><a href="billing.html#jelastic.api.billing._PayMethod.SetupIntent">SetupIntent() (jelastic.api.billing._PayMethod method)</a>
 </li>
       <li><a href="billing.html#jelastic.api.billing._Account.SetUserNote">SetUserNote() (jelastic.api.billing._Account method)</a>
 </li>

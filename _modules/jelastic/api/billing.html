@@ -9,7 +9,7 @@
           <link rel="stylesheet" href="../../../_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="../../../_static/documentation_options.js?v=8d24358e"></script>
+        <script src="../../../_static/documentation_options.js?v=91c8070f"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -462,6 +462,20 @@
 <span class="sd">        Ref: https://docs.jelastic.com/api/#!/api/billing.Integration</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">_Integration</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">PayMethod</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_PayMethod&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The methods of this service provide billing information about a user account (such as UID, balance, billing history,</span>
+<span class="sd">        quotas, etc.) and allow managing it.</span>
+
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.billing.PayMethod</span>
+
+<span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/billing.PayMethod</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_PayMethod</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">Pricing</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_Pricing&quot;</span><span class="p">:</span>
@@ -1356,6 +1370,140 @@
 <span class="sd">        :param path: destination path within the integrated system.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetSSOUrl&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">path</span><span class="p">})</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="_PayMethod">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._PayMethod">[docs]</a>
+<span class="k">class</span> <span class="nc">_PayMethod</span><span class="p">(</span><span class="n">Billing</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/billing.PayMethod</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_endpoint2</span> <span class="o">=</span> <span class="s2">&quot;payMethod&quot;</span>
+
+<div class="viewcode-block" id="_PayMethod.EnablePayMethod">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._PayMethod.EnablePayMethod">[docs]</a>
+    <span class="k">def</span> <span class="nf">EnablePayMethod</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">pay_method_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">enable</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param pay_method_id: payment method ID to be set as default one (see the GetPayMethodList method)</span>
+<span class="sd">        :param enable: enables (1) or disables (0) the provided payment method</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;EnablePayMethod&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;payMethodId&quot;</span><span class="p">:</span> <span class="n">pay_method_id</span><span class="p">,</span> <span class="s2">&quot;enable&quot;</span><span class="p">:</span> <span class="n">enable</span><span class="p">}</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_PayMethod.GetDefaultPayMethod">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._PayMethod.GetDefaultPayMethod">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetDefaultPayMethod</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetDefaultPayMethod&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{})</span></div>
+
+
+<div class="viewcode-block" id="_PayMethod.GetPublicToken">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._PayMethod.GetPublicToken">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetPublicToken</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetPublicToken&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{})</span></div>
+
+
+<div class="viewcode-block" id="_PayMethod.GetValidPayTypes">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._PayMethod.GetValidPayTypes">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetValidPayTypes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetValidPayTypes&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{})</span></div>
+
+
+<div class="viewcode-block" id="_PayMethod.RegisterBankCard">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._PayMethod.RegisterBankCard">[docs]</a>
+    <span class="k">def</span> <span class="nf">RegisterBankCard</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">first_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">last_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">card_number</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">card_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">expire_month</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">expire_year</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">service_plan_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param first_name: exactly as on the card</span>
+<span class="sd">        :param last_name: exactly as on the card</span>
+<span class="sd">        :param card_number: very big number</span>
+<span class="sd">        :param card_code: 4 digits.</span>
+<span class="sd">        :param expire_month: exactly as on the card. from 1 to 12</span>
+<span class="sd">        :param expire_year: year in format yyyy</span>
+<span class="sd">        :param service_plan_id: service plan id to buy for check card or 0 then min test pay is used.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;RegisterBankCard&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;firstName&quot;</span><span class="p">:</span> <span class="n">first_name</span><span class="p">,</span>
+                <span class="s2">&quot;lastName&quot;</span><span class="p">:</span> <span class="n">last_name</span><span class="p">,</span>
+                <span class="s2">&quot;cardNumber&quot;</span><span class="p">:</span> <span class="n">card_number</span><span class="p">,</span>
+                <span class="s2">&quot;cardCode&quot;</span><span class="p">:</span> <span class="n">card_code</span><span class="p">,</span>
+                <span class="s2">&quot;expireMonth&quot;</span><span class="p">:</span> <span class="n">expire_month</span><span class="p">,</span>
+                <span class="s2">&quot;expireYear&quot;</span><span class="p">:</span> <span class="n">expire_year</span><span class="p">,</span>
+                <span class="s2">&quot;servicePlanId&quot;</span><span class="p">:</span> <span class="n">service_plan_id</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_PayMethod.RegisterPayMethodAndPay">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._PayMethod.RegisterPayMethodAndPay">[docs]</a>
+    <span class="k">def</span> <span class="nf">RegisterPayMethodAndPay</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">pay_method_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">service_plan_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">auto_service_plan_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">auto_refill_min_balance</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">auto_refill_period</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param pay_method_type: take value from item of GetValidPayTypes response</span>
+<span class="sd">        :param auto_service_plan_id: service plan id for auto refill, should 0 or -1 if none</span>
+<span class="sd">        :param auto_refill_min_balance: min balance threshold when by new service plan</span>
+<span class="sd">        :param auto_refill_period: accepted string literals &quot;WEEK&quot; and &quot;MONTH&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;RegisterPayMethodAndPay&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;payMethodType&quot;</span><span class="p">:</span> <span class="n">pay_method_type</span><span class="p">,</span>
+                <span class="s2">&quot;servicePlanId&quot;</span><span class="p">:</span> <span class="n">service_plan_id</span><span class="p">,</span>
+                <span class="s2">&quot;autoServicePlanId&quot;</span><span class="p">:</span> <span class="n">auto_service_plan_id</span><span class="p">,</span>
+                <span class="s2">&quot;autoRefillMinBalance&quot;</span><span class="p">:</span> <span class="n">auto_refill_min_balance</span><span class="p">,</span>
+                <span class="s2">&quot;autoRefillPeriod&quot;</span><span class="p">:</span> <span class="n">auto_refill_period</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_PayMethod.SetDefaultPayMethod">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._PayMethod.SetDefaultPayMethod">[docs]</a>
+    <span class="k">def</span> <span class="nf">SetDefaultPayMethod</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pay_method_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param pay_method_id: payment method ID to be set as default one (see the GetPayMethodList method)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;SetDefaultPayMethod&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;payMethodId&quot;</span><span class="p">:</span> <span class="n">pay_method_id</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="_PayMethod.SetupIntent">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._PayMethod.SetupIntent">[docs]</a>
+    <span class="k">def</span> <span class="nf">SetupIntent</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">payment_method_type</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param payment_method_type: list of payment method keys (optional), for example: card, bancontact, ...</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;SetupIntent&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;paymentMethodType&quot;</span><span class="p">:</span> <span class="n">payment_method_type</span><span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
 </div>
 
 
