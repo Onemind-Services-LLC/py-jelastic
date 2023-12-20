@@ -14,3 +14,36 @@ Billing
    :members:
    :undoc-members:
    :show-inheritance:
+
+.. autoclass:: jelastic.api.billing._GroupQuota
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. autoclass:: jelastic.api.billing._Integration
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. autoclass:: jelastic.api.billing._PayMethod
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. autoclass:: jelastic.api.billing._Pricing
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. autoclass:: jelastic.api.billing._Reseller
+   :undoc-members:
+   :show-inheritance:
+
+.. autoclass:: jelastic.api.billing._ServicePlan
+   :undoc-members:
+   :show-inheritance:
+
+.. autoclass:: jelastic.api.billing._Order
+   :members:
+   :undoc-members:
+   :show-inheritance:
