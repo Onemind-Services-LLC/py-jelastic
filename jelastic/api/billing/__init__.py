@@ -724,6 +724,8 @@ class _GroupQuota(Billing):
     Ref: https://docs.jelastic.com/api/#!/api/billing.GroupQuota
     """
 
+    _endpoint2 = "getQuota"
+
     def AddGroup(
         self,
         type: str,
