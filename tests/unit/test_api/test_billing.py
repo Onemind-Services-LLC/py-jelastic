@@ -973,3 +973,829 @@ def test_unassign_hd_node_group(client):
         },
     )
     assert response == success_response
+
+
+def test_get_invoice_url(client):
+    client._get.return_value = success_response
+    response = client.Integration.GetInvoiceUrl(1)
+    client._get.assert_called_with("GetInvoiceUrl", params={"invoiceId": 1})
+    assert response == success_response
+
+
+def test_get_sso_url(client):
+    client._get.return_value = success_response
+    response = client.Integration.GetSSOUrl(
+        ["path 1", "path 2"],
+    )
+    client._get.assert_called_with(
+        "GetSSOUrl",
+        params={
+            "path": ["path 1", "path 2"],
+        },
+    )
+    assert response == success_response
+
+
+def test_enable_pay_method(client):
+    client._get.return_value = success_response
+    response = client.PayMethod.EnablePayMethod("pid1", 1)
+    client._get.assert_called_with(
+        "EnablePayMethod", params={"payMethodId": "pid1", "enable": 1}
+    )
+    assert response == success_response
+
+
+def test_get_default_pay_method(client):
+    client._get.return_value = success_response
+    response = client.PayMethod.GetDefaultPayMethod()
+    client._get.assert_called_with("GetDefaultPayMethod", params={})
+    assert response == success_response
+
+
+def test_get_public_token(client):
+    client._get.return_value = success_response
+    response = client.PayMethod.GetPublicToken()
+    client._get.assert_called_with("GetPublicToken", params={})
+    assert response == success_response
+
+
+def test_get_valid_pay_types(client):
+    client._get.return_value = success_response
+    response = client.PayMethod.GetValidPayTypes()
+    client._get.assert_called_with("GetValidPayTypes", params={})
+    assert response == success_response
+
+
+def test_register_bank_card(client):
+    client._get.return_value = success_response
+    response = client.PayMethod.RegisterBankCard(
+        "f_name",
+        "l_name",
+        "1111-1111-1111-1111",
+        "123",
+        8,
+        24,
+        1,
+    )
+    client._get.assert_called_with(
+        "RegisterBankCard",
+        params={
+            "firstName": "f_name",
+            "lastName": "l_name",
+            "cardNumber": "1111-1111-1111-1111",
+            "cardCode": "123",
+            "expireMonth": 8,
+            "expireYear": 24,
+            "servicePlanId": 1,
+        },
+    )
+    assert response == success_response
+
+
+def test_register_pay_method_and_pay(client):
+    client._get.return_value = success_response
+    response = client.PayMethod.RegisterPayMethodAndPay(
+        "pay type",
+        1,
+        [1, 1, 0],
+        [500, 500, 500],
+        ["WEEK", "MONTH", "WEEK"],
+    )
+    client._get.assert_called_with(
+        "RegisterPayMethodAndPay",
+        params={
+            "payMethodType": "pay type",
+            "servicePlanId": 1,
+            "autoServicePlanId": [1, 1, 0],
+            "autoRefillMinBalance": [500, 500, 500],
+            "autoRefillPeriod": ["WEEK", "MONTH", "WEEK"],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_set_default_pay_method(client):
+    client._get.return_value = success_response
+    response = client.PayMethod.SetDefaultPayMethod("pay method")
+    client._get.assert_called_with(
+        "SetDefaultPayMethod", params={"payMethodId": "pay method"}
+    )
+    assert response == success_response
+
+
+def test_setup_intent(client):
+    client._get.return_value = success_response
+    response = client.PayMethod.SetupIntent(["type1", "type2", "type3"])
+    client._get.assert_called_with(
+        "SetupIntent",
+        params={"paymentMethodType": ["type1", "type2", "type3"]},
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_add_pricing(client):
+    client._get.return_value = success_response
+    response = client.Pricing.AddPricing(
+        {
+            "amount1": 20.10,
+            "amount2": 20.10,
+            "amount3": 20.10,
+            "amount4": 20.10,
+            "amount5": 20.10,
+            "amount6": 20.10,
+        },
+        "tariff_id_1",
+        ["name1", "name2", "name3"],
+    )
+    client._get.assert_called_with(
+        "AddPricing",
+        params={
+            "pricing": {
+                "amount1": 20.10,
+                "amount2": 20.10,
+                "amount3": 20.10,
+                "amount4": 20.10,
+                "amount5": 20.10,
+                "amount6": 20.10,
+            },
+            "tariffIds": "tariff_id_1",
+            "tariffGridNames": ["name1", "name2", "name3"],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_add_resource(client):
+    client._get.return_value = success_response
+    response = client.Pricing.AddResource("resource")
+    client._get.assert_called_with("AddResource", params={"resource": "resource"})
+    assert response == success_response
+
+
+def test_add_tariff(client):
+    client._get.return_value = success_response
+    response = client.Pricing.AddTariff(
+        {
+            "tariff1": "val1",
+            "tariff2": "val2",
+            "tariff3": "val3",
+            "tariff4": "val4",
+            "tariff5": "val5",
+        }
+    )
+    client._get.assert_called_with(
+        "AddTariff",
+        params={
+            "tariff": {
+                "tariff1": "val1",
+                "tariff2": "val2",
+                "tariff3": "val3",
+                "tariff4": "val4",
+                "tariff5": "val5",
+            }
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_attach_tariff(client):
+    client._get.return_value = success_response
+    response = client.Pricing.AttachTariff("name", "app_id")
+    client._get.assert_called_with(
+        "AttachTariff", params={"uniqName": "name", "targetAppId": "app_id"}
+    )
+    assert response == success_response
+
+
+def test_attach_tariff_grid(client):
+    client._get.return_value = success_response
+    response = client.Pricing.AttachTariffGrid("name", "id")
+    client._get.assert_called_with(
+        "AttachTariffGrid",
+        params={
+            "tariffGridName": "name",
+            "id": "id",
+        },
+    )
+    assert response == success_response
+
+
+def test_check_host_groups_allowed(client):
+    client._get.return_value = success_response
+    response = client.Pricing.CheckHostGroupsAllowed(
+        [1, 2, 3],
+        ["group1", "group2", "group3"],
+    )
+    client._get.assert_called_with(
+        "CheckHostGroupsAllowed",
+        params={
+            "ownerUid": [1, 2, 3],
+            "hardwareNodeGroups": ["group1", "group2", "group3"],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_delete_pricing(client):
+    client._get.return_value = success_response
+    response = client.Pricing.DeletePricing("id")
+    client._get.assert_called_with("DeletePricing", params={"id": "id"})
+    assert response == success_response
+
+
+def test_delete_tariff(client):
+    client._get.return_value = success_response
+    response = client.Pricing.DeleteTariff("id")
+    client._get.assert_called_with("DeleteTariff", params={"id": "id"})
+    assert response == success_response
+
+
+def test_detach_tariff(client):
+    client._get.return_value = success_response
+    response = client.Pricing.DetachTariff("name", "app id 1")
+    client._get.assert_called_with(
+        "DetachTariff", params={"uniqName": "name", "targetAppId": "app id 1"}
+    )
+    assert response == success_response
+
+
+def test_detach_tariff_grid(client):
+    client._get.return_value = success_response
+    response = client.Pricing.DetachTariffGrid("grid 1", "id")
+    client._get.assert_called_with(
+        "DetachTariffGrid", params={"tariffGridName": "grid 1", "id": "id"}
+    )
+    assert response == success_response
+
+
+def test_edit_pricing(client):
+    client._get.return_value = success_response
+    response = client.Pricing.EditPricing(
+        {
+            "price1": 10.1,
+            "price2": 10.1,
+            "price3": 10.1,
+            "price4": 10.1,
+            "price5": 10.1,
+        }
+    )
+    client._get.assert_called_with(
+        "EditPricing",
+        params={
+            "pricing": {
+                "price1": 10.1,
+                "price2": 10.1,
+                "price3": 10.1,
+                "price4": 10.1,
+                "price5": 10.1,
+            }
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_edit_resource(client):
+    client._get.return_value = success_response
+    response = client.Pricing.EditResource("resource")
+    client._get.assert_called_with("EditResource", params={"resource": "resource"})
+    assert response == success_response
+
+
+def test_edit_tariff(client):
+    client._get.return_value = success_response
+    response = client.Pricing.EditTariff(
+        {
+            "tariff1": "val1",
+            "tariff2": "val2",
+            "tariff3": "val3",
+            "tariff4": "val4",
+            "tariff5": "val5",
+        }
+    )
+    client._get.assert_called_with(
+        "EditTariff",
+        params={
+            "tariff": {
+                "tariff1": "val1",
+                "tariff2": "val2",
+                "tariff3": "val3",
+                "tariff4": "val4",
+                "tariff5": "val5",
+            }
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_currencies(client):
+    client._get.return_value = success_response
+    response = client.Pricing.GetCurrencies(["USD", "INR"])
+    client._get.assert_called_with(
+        "GetCurrencies",
+        params={"currency": ["USD", "INR"]},
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_platform_currency(client):
+    client._get.return_value = success_response
+    response = client.Pricing.GetPlatformCurrency([1, 2, 3])
+    client._get.assert_called_with(
+        "GetPlatformCurrency",
+        params={"resellerId": [1, 2, 3]},
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_pricing(client):
+    client._get.return_value = success_response
+    response = client.Pricing.GetPricing([1, 2, 3])
+    client._get.assert_called_with(
+        "GetPricing",
+        params={"ownerUid": [1, 2, 3]},
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_pricing_inner(client):
+    client._get.return_value = success_response
+    response = client.Pricing.GetPricingInner([1, 2, 3])
+    client._get.assert_called_with(
+        "GetPricingInner",
+        params={"resellerId": [1, 2, 3]},
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_resources(client):
+    client._get.return_value = success_response
+    response = client.Pricing.GetResources(
+        [1, 2, 3],
+        ["name1", "name2", "name3"],
+    )
+    client._get.assert_called_with(
+        "GetResources",
+        params={"id": [1, 2, 3], "name": ["name1", "name2", "name3"]},
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_tariffs_inner(client):
+    client._get.return_value = success_response
+    response = client.Pricing.GetTariffsInner(
+        ["pid1", "pid2", "pid3", "pid4"],
+        ["type1", "type2", "type3", "type4"],
+        [1, 2, 3, 4],
+    )
+    client._get.assert_called_with(
+        "GetTariffsInner",
+        params={
+            "priceId": ["pid1", "pid2", "pid3", "pid4"],
+            "type": ["type1", "type2", "type3", "type4"],
+            "resellerId": [1, 2, 3, 4],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_unique_resource_name(client):
+    client._get.return_value = success_response
+    response = client.Pricing.GetUniqueResourceNames()
+    client._get.assert_called_with("GetUniqueResourceNames", params={})
+    assert response == success_response
+
+
+def test_set_tariff(client):
+    client._get.return_value = success_response
+    response = client.Pricing.SetTariffs(
+        "pid",
+        "tariff_id",
+        ["name1", "name2", "name3"],
+    )
+    client._get.assert_called_with(
+        "SetTariffs",
+        params={
+            "pricingId": "pid",
+            "tariffIds": "tariff_id",
+            "tariffGridNames": ["name1", "name2", "name3"],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_validate_environment(client):
+    client._get.return_value = success_response
+    response = client.Pricing.ValidateEnvironment("node", [1, 2, 3])
+    client._get.assert_called_with(
+        "ValidateEnvironment",
+        params={
+            "hardwareNodeGroup": "node",
+            "ownerUid": [1, 2, 3],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_test_validate_node(client):
+    client._get.return_value = success_response
+    response = client.Pricing.ValidateNode(
+        1,
+        "node",
+        "node type",
+        10,
+        20,
+    )
+    client._get.assert_called_with(
+        "ValidateNode",
+        params={
+            "uid": 1,
+            "hardwareNodeGroup": "node",
+            "nodeType": "node type",
+            "fixedCloudlets": 10,
+            "flexibleCloudlets": 20,
+        },
+    )
+    assert response == success_response
+
+
+def test_validate_node_inner(client):
+    client._get.return_value = success_response
+    response = client.Pricing.ValidateNodeInner(
+        1,
+        "node",
+        "node type",
+        10,
+        20,
+    )
+    client._get.assert_called_with(
+        "ValidateNodeInner",
+        params={
+            "uid": 1,
+            "hardwareNodeGroup": "node",
+            "nodeType": "node type",
+            "fixedCloudlets": 10,
+            "flexibleCloudlets": 20,
+        },
+    )
+    assert response == success_response
+
+
+def test_add_reseller(client):
+    client._get.return_value = success_response
+    response = client.Reseller.AddReseller(
+        "reseller",
+        "platform",
+        "regions",
+        ["setting1", "setting2", "setting3"],
+    )
+    client._get.assert_called_with(
+        "AddReseller",
+        params={
+            "reseller": "reseller",
+            "platform": "platform",
+            "regions": "regions",
+            "settings": ["setting1", "setting2", "setting3"],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_edit_reseller(client):
+    client._get.return_value = success_response
+    response = client.Reseller.EditReseller(
+        "reseller",
+        "platform",
+        ["region1", "region2", "region3"],
+    )
+    client._get.assert_called_with(
+        "EditReseller",
+        params={
+            "reseller": "reseller",
+            "platform": "platform",
+            "regions": ["region1", "region2", "region3"],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_all_resellers(client):
+    client._get.return_value = success_response
+    response = client.Reseller.GetAllResellers()
+    client._get.assert_called_with("GetAllResellers", params={})
+    assert response == success_response
+
+
+def test_get_reseller_by_app_id(client):
+    client._get.return_value = success_response
+    response = client.Reseller.GetResellerByAppid("app id")
+    client._get.assert_called_with(
+        "GetResellerByAppid", params={"targetAppid": "app id"}
+    )
+    assert response == success_response
+
+
+def test_get_reseller_by_id(client):
+    client._get.return_value = success_response
+    response = client.Reseller.GetResellerById(1)
+    client._get.assert_called_with("GetResellerById", params={"id": 1})
+    assert response == success_response
+
+
+def test_get_reseller_by_owner_uid(client):
+    client._get.return_value = success_response
+    response = client.Reseller.GetResellerByOwnerUid(1)
+    client._get.assert_called_with("GetResellerByOwnerUid", params={"uid": 1})
+    assert response == success_response
+
+
+def test_get_reseller_by_uid(client):
+    client._get.return_value = success_response
+    response = client.Reseller.GetResellerByUid(1)
+    client._get.assert_called_with("GetResellerByUid", params={"uid": 1})
+    assert response == success_response
+
+
+def test_remove_reseller(client):
+    client._get.return_value = success_response
+    response = client.Reseller.RemoveReseller(1)
+    client._get.assert_called_with("RemoveReseller", params={"id": 1})
+    assert response == success_response
+
+
+def test_remove_reseller_status(client):
+    client._get.return_value = success_response
+    response = client.Reseller.SetResellerStatus(1, "status")
+    client._get.assert_called_with(
+        "SetResellerStatus", params={"id": 1, "status": "status"}
+    )
+    assert response == success_response
+
+
+def test_create_level_auto_pay(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.CreateLevelAutoPay(
+        1000,
+        "2024-11-11",
+        10,
+        "online",
+        5,
+    )
+    client._get.assert_called_with(
+        "CreateLevelAutoPay",
+        params={
+            "minBalance": 1000,
+            "expires": "2024-11-11",
+            "servicePlanId": 10,
+            "paymentMethodId": "online",
+            "minPeriod": 5,
+        },
+    )
+    assert response == success_response
+
+
+def test_create_regular_auto_pay(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.CreateRegularAutoPay(
+        "exp",
+        "2024-11-11",
+        "GMT+4",
+        1,
+        "online",
+    )
+    client._get.assert_called_with(
+        "CreateRegularAutoPay",
+        params={
+            "cronExpression": "exp",
+            "expires": "2024-11-11",
+            "timeZone": "GMT+4",
+            "servicePlanId": 1,
+            "paymentMethodId": "online",
+        },
+    )
+    assert response == success_response
+
+
+def test_create_service_plan(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.CreateServicePlan(
+        "name",
+        "description",
+        "one-time",
+        "ext1",
+    )
+    client._get.assert_called_with(
+        "CreateServicePlan",
+        params={
+            "name": "name",
+            "description": "description",
+            "servicePlanType": "one-time",
+            "externPlanId": "ext1",
+        },
+    )
+    assert response == success_response
+
+
+def test_delete_auto_pay(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.DeleteAutoPay(1)
+    client._get.assert_called_with("DeleteAutoPay", params={"autoPayId": 1})
+    assert response == success_response
+
+
+def test_delete_service_plan(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.DeleteServicePlan(1)
+    client._get.assert_called_with("DeleteServicePlan", params={"servicePlanId": 1})
+    assert response == success_response
+
+
+def test_enable_service_plan(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.EnableServicePlan(1, 1)
+    client._get.assert_called_with(
+        "EnableServicePlan", params={"servicePlanId": 1, "enabled": 1}
+    )
+    assert response == success_response
+
+
+def test_extended_create_service_plan(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.ExtendedCreateServicePlan(
+        "label",
+        "ext1",
+        "description",
+        True,
+        "type",
+        True,
+        "1000",
+    )
+    client._get.assert_called_with(
+        "ExtendedCreateServicePlan",
+        params={
+            "label": "label",
+            "externalPlanId": "ext1",
+            "description": "description",
+            "enabled": True,
+            "type": "type",
+            "byDefault": True,
+            "price": "1000",
+        },
+    )
+    assert response == success_response
+
+
+def test_extended_get_service_plans(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.ExtendedGetServicePlans()
+    client._get.assert_called_with("ExtendedGetServicePlans", params={})
+    assert response == success_response
+
+
+def test_extended_get_service_plan_update(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.ExtendedServicePlanUpdate(
+        1,
+        "label",
+        "ext1",
+        "description",
+        True,
+        "type",
+        True,
+        "1000",
+    )
+    client._get.assert_called_with(
+        "ExtendedServicePlanUpdate",
+        params={
+            "id": 1,
+            "label": "label",
+            "externalPlanId": "ext1",
+            "description": "description",
+            "enabled": True,
+            "type": "type",
+            "byDefault": True,
+            "price": "1000",
+        },
+    )
+    assert response == success_response
+
+
+def test_get_auto_pay_history(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.GetAutoPayHistory(1)
+    client._get.assert_called_with("GetAutoPayHistory", params={"autoPayId": 1})
+    assert response == success_response
+
+
+def test_get_auto_pays(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.GetAutoPays()
+    client._get.assert_called_with("GetAutoPays", params={})
+    assert response == success_response
+
+
+def test_get_bought_service_plans(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.GetBoughtServicePlans()
+    client._get.assert_called_with("GetBoughtServicePlans", params={})
+    assert response == success_response
+
+
+def test_get_currency(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.GetCurrency()
+    client._get.assert_called_with("GetCurrency", params={})
+    assert response == success_response
+
+
+def test_get_final_cost(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.GetFinalCost(1)
+    client._get.assert_called_with("GetFinalCost", params={"servicePlanId": 1})
+    assert response == success_response
+
+
+def test_get_payment_method_list(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.GetPayMethodList()
+    client._get.assert_called_with("GetPayMethodList", params={})
+    assert response == success_response
+
+
+def test_get_payment_news(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.GetPaymentNews()
+    client._get.assert_called_with("GetPaymentNews", params={})
+    assert response == success_response
+
+
+def test_get_service_plan(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.GetServicePlan(1)
+    client._get.assert_called_with("GetServicePlan", params={"servicePlanId": 1})
+    assert response == success_response
+
+
+def test_get_service_plan_by_type(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.GetServicePlanByType([1, 2, 3])
+    client._get.assert_called_with(
+        "GetServicePlanByType", params={"planType": [1, 2, 3]}
+    )
+    assert response == success_response
+
+
+def test_payment_news_read(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.PaymentNewsRead(1)
+    client._get.assert_called_with("PaymentNewsRead", params={"id": 1})
+    assert response == success_response
+
+
+def test_set_extern_plan_id(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.SetExternPlanId(1, 1)
+    client._get.assert_called_with(
+        "SetExternPlanId",
+        params={
+            "servicePlanId": 1,
+            "externalPlanId": 1,
+        },
+    )
+    assert response == success_response
+
+
+def test_update_service_plan(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.UpdateServicePlan(
+        1,
+        "name",
+        "description",
+        "ext1",
+    )
+    client._get.assert_called_with(
+        "UpdateServicePlan",
+        params={
+            "servicePlanId": 1,
+            "name": "name",
+            "description": "description",
+            "externServicePlanId": "ext1",
+        },
+    )
+    assert response == success_response
