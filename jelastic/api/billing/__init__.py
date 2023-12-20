@@ -36,6 +36,20 @@ class Billing(ClientAbstract):
         """
         return _Account(session=self._session, token=self._token, debug=self._debug)
 
+    @property
+    def GroupQuota(self) -> "_GroupQuota":
+        """
+        The methods of this service provide billing information about a user account (such as UID, balance, billing history,
+        quotas, etc.) and allow managing it.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.billing.GroupQuota
+
+        Ref: https://docs.jelastic.com/api/#!/api/billing.GroupQuota
+        """
+        return _GroupQuota(session=self._session, token=self._token, debug=self._debug)
+
 
 class _Account(Billing):
     """
@@ -702,4 +716,236 @@ class _Account(Billing):
 
         return self._get(
             "WithdrawAccounts", params={"startDate": start_date, "endDate": end_date}
+        )
+
+
+class _GroupQuota(Billing):
+    """
+    Ref: https://docs.jelastic.com/api/#!/api/billing.GroupQuota
+    """
+
+    def AddGroup(
+        self,
+        type: str,
+        name: str,
+        description: list[str] = None,
+        source_group_name: list[str] = None,
+        domain: list[str] = None,
+        conversion_group: list[str] = None,
+    ):
+        """
+        :param type: quota group type.
+        :param name: unique name of the target quota group.
+        :param description: custom description for the quota group.
+        :param source_group_name: name of the quota group to be used as a source for the new group.
+        :param domain: domain name of the target platform.
+        :param conversion_group: name of the quota group to be used after conversion.
+        """
+        return self._get(
+            "AddGroup",
+            params={
+                "type": type,
+                "name": name,
+                "description": description,
+                "sourceGroupName": source_group_name,
+                "domain": domain,
+                "conversionGroup": conversion_group,
+            },
+            delimiter=",",
+        )
+
+    def AddQuota(
+        self,
+        name: str,
+        description: list[str] = None,
+        reference_id: list[str] = None,
+        default_value: list[int] = None,
+        assign_to_group: list[bool] = None,
+    ):
+        """
+        :param name: a name of the quota to be created.
+        :param description: custom quota description.
+        :param reference_id: reference ID of the quota.
+        :param default_value: quota's default value.
+        :param assign_to_group: a flag that indicates if this quota could (true) or not (false) be assigned to groups.
+        """
+        return self._get(
+            "AddQuota",
+            params={
+                "name": name,
+                "description": description,
+                "referenceId": reference_id,
+                "defaultValue": default_value,
+                "assignToGroup": assign_to_group,
+            },
+            delimiter=",",
+        )
+
+    def DeleteGroup(self, name: str):
+        return self._get("DeleteGroup", params={"name": name})
+
+    def EditGroup(
+        self,
+        name: str,
+        new_name: list[str] = None,
+        description: list[str] = None,
+        conversion_group: list[str] = None,
+    ):
+        """
+        :param name: unique name of the target quota group.
+        :param new_name: a new name for the quota group.
+        :param description: custom description for the quota group.
+        :param conversion_group: name of the quota group to be used after conversion.
+        """
+        return self._get(
+            "EditGroup",
+            params={
+                "name": name,
+                "newName": new_name,
+                "description": description,
+                "conversionGroup": conversion_group,
+            },
+            delimiter=",",
+        )
+
+    def EditQuota(
+        self,
+        name: str,
+        reference_id: list[str] = None,
+        new_reference_id: list[str] = None,
+        description: list[str] = None,
+    ):
+        return self._get(
+            "EditQuota",
+            params={
+                "name": name,
+                "referenceId": reference_id,
+                "newReferenceId": new_reference_id,
+                "description": description,
+            },
+            delimiter=",",
+        )
+
+    def GetGroupQuotas(self, name: str, quotas_names: list[str] = None):
+        return self._get(
+            "GetGroupQuotas",
+            params={
+                "name": name,
+                "quotasnames": quotas_names,
+            },
+            delimiter=",",
+        )
+
+    def GetGroups(self):
+        return self._get("GetGroups", params={})
+
+    def GetPricingModels(self, group_name: str):
+        return self._get("GetPricingModels", params={"groupName": group_name})
+
+    def GetQuotas(self):
+        return self._get("GetQuotas", params={})
+
+    def IsDomainBound(self, checksum: list[str] = None):
+        return self._get(
+            "IsDomainBound",
+            params={"checksum": checksum},
+            delimiter=",",
+        )
+
+    def RemoveGroupQuota(self, group_name: str, quota_name: str):
+        return self._get(
+            "RemoveGroupQuota",
+            params={
+                "groupName": group_name,
+                "quotaName": quota_name,
+            },
+        )
+
+    def RemoveQuota(
+        self,
+        name: str,
+        force: list[bool] = None,
+        reference_id: list[str] = None,
+    ):
+        """
+        :param name: a name of the quota to be removed.
+        :param force: proceeds (true) or interrupts (false) the operation in case of errors.
+        :param reference_id: reference ID of the quota.
+        """
+        return self._get(
+            "RemoveQuota",
+            params={
+                "name": name,
+                "force": force,
+                "referenceId": reference_id,
+            },
+            delimiter=",",
+        )
+
+    def SetCollaborationGroup(
+        self,
+        name: str,
+    ):
+        return self._get("SetCollaborationGroup", params={"name": name})
+
+    def SetDefaultGroup(self, name: str):
+        return self._get("DefaultGroup", params={"name": name})
+
+    def SetGroupQuota(
+        self,
+        group_name: str,
+        quota_name: str,
+        value: int,
+        reference_id: list[str] = None,
+    ):
+        """
+        :param group_name: unique name of the target group.
+        :param quota_name: a name of the quota to be adjusted.
+        :param value: custom value for the quota.
+        :param reference_id: reference ID of the quota.
+        """
+        return self._get(
+            "SetGroupQuota",
+            params={
+                "groupName": group_name,
+                "quotaName": quota_name,
+                "value": value,
+                "referenceId": reference_id,
+            },
+            delimiter=",",
+        )
+
+    def SetPricingModels(
+        self,
+        group_name: str,
+        data: str,
+    ):
+        return self._get(
+            "SetPricingModel", params={"groupName": group_name, "data": data}
+        )
+
+    def SetSignupGroup(self, name: str):
+        return self._get("SetSignupGroup", params={"name": name})
+
+    def SetWinDomain(
+        self,
+        group_name: str,
+        win_domain_id: int,
+    ):
+        return self._get(
+            "SetWinDomain",
+            params={"groupName": group_name, "winDomainId": win_domain_id},
+        )
+
+    def UnassignHdNodeGroup(
+        self,
+        hardware_node_group: str,
+        checksum: str,
+    ):
+        return self._get(
+            "UnassignHdNodeGroup",
+            params={
+                "hardwareNodeGroup": hardware_node_group,
+                "checksum": checksum,
+            },
         )
