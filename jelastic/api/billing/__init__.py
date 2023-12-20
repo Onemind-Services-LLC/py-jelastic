@@ -50,6 +50,48 @@ class Billing(ClientAbstract):
         """
         return _Integration(session=self._session, token=self._token, debug=self._debug)
 
+    @property
+    def Pricing(self) -> "_Pricing":
+        """
+        The methods of this service provide billing information about a user account (such as UID, balance, billing history,
+        quotas, etc.) and allow managing it.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.billing.Pricing
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/billing.Pricing
+        """
+        return _Pricing(session=self._session, token=self._token, debug=self._debug)
+
+    @property
+    def Reseller(self) -> "_Reseller":
+        """
+        The methods of this service provide billing information about a user account (such as UID, balance, billing history,
+        quotas, etc.) and allow managing it.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.billing.Reseller
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/billing.Reseller
+        """
+        return _Reseller(session=self._session, token=self._token, debug=self._debug)
+
+    @property
+    def ServicePlan(self) -> "_ServicePlan":
+        """
+        The methods of this service provide billing information about a user account (such as UID, balance, billing history,
+        quotas, etc.) and allow managing it.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.billing.ServicePlan
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/billing.ServicePlan
+        """
+        return _ServicePlan(session=self._session, token=self._token, debug=self._debug)
+
 
 class _Account(Billing):
     """
@@ -737,3 +779,566 @@ class _Integration(Billing):
         :param path: destination path within the integrated system.
         """
         return self._get("GetSSOUrl", params={"path": path})
+
+
+class _Pricing(Billing):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/billing.Pricing
+    """
+
+    endpoint = "pricing"
+
+    def AddPricing(
+        self,
+        pricing: dict,
+        tariff_ids: str,
+        tariff_grid_names: list[str] = None,
+    ):
+        return self._get(
+            "AddPricing",
+            params={
+                "pricing": pricing,
+                "tariffIds": tariff_ids,
+                "tariffGridNames": tariff_grid_names,
+            },
+            delimiter=",",
+        )
+
+    def AddResource(self, resource: str):
+        return self._get("AddResource", params={"resource": resource})
+
+    def AddTariff(self, tariff: dict):
+        return self._get(
+            "AddTariff",
+            params={"tariff": tariff},
+            delimiter=",",
+        )
+
+    def AttachTariff(self, uniq_name: str, target_app_id: str):
+        return self._get(
+            "AttachTariff", params={"uniqName": uniq_name, "targetAppId": target_app_id}
+        )
+
+    def AttachTariffGrid(
+        self,
+        tariff_grid_name: str,
+        id: str,
+    ):
+        return self._get(
+            "AttachTariffGrid",
+            params={
+                "tariffGridName": tariff_grid_name,
+                "id": id,
+            },
+        )
+
+    def CheckHostGroupsAllowed(
+        self,
+        owner_uid: list[int] = None,
+        hardware_node_groups: list[str] = None,
+    ):
+        """
+        :param owner_uid: unique identifier of the target user.
+        :param hardware_node_groups: a comma-separated list of the host groups to be checked.
+        """
+        return self._get(
+            "CheckHostGroupsAllowed",
+            params={"ownerUid": owner_uid, "hardwareNodeGroups": hardware_node_groups},
+            delimiter=",",
+        )
+
+    def DeletePricing(self, id: str):
+        return self._get("DeletePricing", params={"id": id})
+
+    def DeleteTariff(self, id: str):
+        return self._get("DeleteTariff", params={"id": id})
+
+    def DetachTariff(
+        self,
+        uniq_name: str,
+        target_app_id: str,
+    ):
+        return self._get(
+            "DetachTariff", params={"uniqName": uniq_name, "targetAppId": target_app_id}
+        )
+
+    def DetachTariffGrid(
+        self,
+        tariff_grid_name: str,
+        id: str,
+    ):
+        return self._get(
+            "DetachTariffGrid", params={"tariffGridName": tariff_grid_name, "id": id}
+        )
+
+    def EditPricing(
+        self,
+        pricing: dict,
+    ):
+        return self._get(
+            "EditPricing",
+            params={"pricing": pricing},
+            delimiter=",",
+        )
+
+    def EditResource(self, resource: str):
+        return self._get("EditResource", params={"resource": resource})
+
+    def EditTariff(self, tariff: dict):
+        return self._get(
+            "EditTariff",
+            params={"tariff": tariff},
+            delimiter=",",
+        )
+
+    def GetCurrencies(self, currency: list[str] = None):
+        return self._get(
+            "GetCurrencies",
+            params={"currency": currency},
+            delimiter=",",
+        )
+
+    def GetPlatformCurrency(self, reseller_id: list[int] = None):
+        return self._get(
+            "GetPlatformCurrency",
+            params={"resellerId": reseller_id},
+            delimiter=",",
+        )
+
+    def GetPricing(self, owner_uid: list[int] = None):
+        return self._get(
+            "GetPricing",
+            params={"ownerUid": owner_uid},
+            delimiter=",",
+        )
+
+    def GetPricingInner(self, reseller_id: list[int] = None):
+        """
+        :param reseller_id: unique ID of the target reseller platform
+        """
+        return self._get(
+            "GetPricingInner",
+            params={"resellerId": reseller_id},
+            delimiter=",",
+        )
+
+    def GetResources(
+        self,
+        id: list[int] = None,
+        name: list[str] = None,
+    ):
+        return self._get(
+            "GetResources",
+            params={"id": id, "name": name},
+            delimiter=",",
+        )
+
+    def GetTariffsInner(
+        self,
+        pricing_id: list[str] = None,
+        type: list[str] = None,
+        reseller_id: list[int] = None,
+    ):
+        """
+        :param pricing_id: pricing model unique ID.
+        :param type: a semicolon-separated list of tariff types.
+        :param reseller_id: unique ID of the target reseller platform.
+        """
+        return self._get(
+            "GetTariffsInner",
+            params={"priceId": pricing_id, "type": type, "resellerId": reseller_id},
+            delimiter=",",
+        )
+
+    def GetUniqueResourceNames(self):
+        return self._get("GetUniqueResourceNames", params={})
+
+    def SetTariffs(
+        self,
+        pricing_id: str,
+        tariff_ids: str,
+        tariff_grid_names: list[str] = None,
+    ):
+        return self._get(
+            "SetTariffs",
+            params={
+                "pricingId": pricing_id,
+                "tariffIds": tariff_ids,
+                "tariffGridNames": tariff_grid_names,
+            },
+            delimiter=",",
+        )
+
+    def ValidateEnvironment(
+        self,
+        hardware_node_group: str,
+        owner_uid: list[int] = None,
+    ):
+        return self._get(
+            "ValidateEnvironment",
+            params={
+                "hardwareNodeGroup": hardware_node_group,
+                "ownerUid": owner_uid,
+            },
+            delimiter=",",
+        )
+
+    def ValidateNode(
+        self,
+        uid: int,
+        hardware_node_group: str,
+        node_type: str,
+        fixed_cloud_lets: int,
+        flexible_cloud_lets: int,
+    ):
+        return self._get(
+            "ValidateNode",
+            params={
+                "uid": uid,
+                "hardwareNodeGroup": hardware_node_group,
+                "nodeType": node_type,
+                "fixedCloudlets": fixed_cloud_lets,
+                "flexibleCloudlets": flexible_cloud_lets,
+            },
+        )
+
+    def ValidateNodeInner(
+        self,
+        uid: int,
+        hardware_node_group: str,
+        node_type: str,
+        fixed_cloud_lets: int,
+        flexible_cloud_lets: int,
+    ):
+        return self._get(
+            "ValidateNodeInner",
+            params={
+                "uid": uid,
+                "hardwareNodeGroup": hardware_node_group,
+                "nodeType": node_type,
+                "fixedCloudlets": fixed_cloud_lets,
+                "flexibleCloudlets": flexible_cloud_lets,
+            },
+        )
+
+
+class _Reseller(Billing):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/billing.Reseller
+    """
+
+    def AddReseller(
+        self,
+        reseller: str,
+        platform: str,
+        regions: str,
+        settings: list[str] = None,
+    ):
+        """
+        :param reseller: JSON representation of the reseller object.
+        :param platform: JSON representation of the reseller platform object.
+        :param regions: JSON representation of the reseller regions object.
+        :param settings: JSON representation of the reseller setting object.
+        """
+        return self._get(
+            "AddReseller",
+            params={
+                "reseller": reseller,
+                "platform": platform,
+                "regions": regions,
+                "settings": settings,
+            },
+            delimiter=",",
+        )
+
+    def EditReseller(
+        self,
+        reseller: str,
+        platform: str,
+        regions: list[str] = None,
+    ):
+        return self._get(
+            "EditReseller",
+            params={
+                "reseller": reseller,
+                "platform": platform,
+                "regions": regions,
+            },
+            delimiter=",",
+        )
+
+    def GetAllResellers(self):
+        return self._get("GetAllResellers", params={})
+
+    def GetResellerByAppid(self, target_app_id: str):
+        return self._get("GetResellerByAppid", params={"targetAppid": target_app_id})
+
+    def GetResellerById(self, id: int):
+        return self._get("GetResellerById", params={"id": id})
+
+    def GetResellerByOwnerUid(self, uid: int):
+        return self._get("GetResellerByOwnerUid", params={"uid": uid})
+
+    def GetResellerByUid(self, uid: int):
+        return self._get("GetResellerByUid", params={"uid": uid})
+
+    def RemoveReseller(self, id: int):
+        return self._get("RemoveReseller", params={"id": id})
+
+    def SetResellerStatus(self, id: int, status: str):
+        return self._get("SetResellerStatus", params={"id": id, "status": status})
+
+
+class _ServicePlan(Billing):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/billing.ServicePlan
+    """
+
+    _endpoint2 = "servicePlan"
+
+    def CreateLevelAutoPay(
+        self,
+        min_balance: int,
+        expires: str,
+        service_plan_id: int,
+        payment_method_id: str,
+        min_period: int,
+    ):
+        """
+        :param min_balance: the value used in the "account.balance < minBalance" expression.
+        :param expires: date [and time] (in the UTC ISO 8601 format) when the auto-pay becomes unavailable.
+        :param service_plan_id: service plan ID to be paid (for example, $200 one-time fee)
+        :param payment_method_id: payment method ID to be used (see the GetPayMethodList method)
+        :param min_period: minimal delay (in seconds) between two consecutive auto-pays. 0 means no limit.
+        """
+        return self._get(
+            "CreateLevelAutoPay",
+            params={
+                "minBalance": min_balance,
+                "expires": expires,
+                "servicePlanId": service_plan_id,
+                "paymentMethodId": payment_method_id,
+                "minPeriod": min_period,
+            },
+        )
+
+    def CreateRegularAutoPay(
+        self,
+        cron_expression: str,
+        expires: str,
+        time_zone: str,
+        service_plan_id: int,
+        payment_method_id: str,
+    ):
+        """
+
+        :param cron_expression: Year value is optional. '*' means every possible value.
+        :param expires: date [and time] (in the UTC ISO 8601 format) when the auto-pay becomes unavailable.
+        :param time_zone: time zone for the cron expression. For example, GMT+4.
+        :param service_plan_id: service plan ID to be paid (for example, $200 one-time fee)
+        :param payment_method_id: payment method ID to be used (see the GetPayMethodList method)
+        """
+        return self._get(
+            "CreateRegularAutoPay",
+            params={
+                "cronExpression": cron_expression,
+                "expires": expires,
+                "timeZone": time_zone,
+                "servicePlanId": service_plan_id,
+                "paymentMethodId": payment_method_id,
+            },
+        )
+
+    def CreateServicePlan(
+        self,
+        name: str,
+        description: str,
+        service_plan_type: str,
+        extern_plan_id: str,
+    ):
+        """
+        :param name: unique name of service plan
+        :param description: detailed comment about the service plan
+        :param service_plan_type: "one-time" or "regular"
+        """
+        return self._get(
+            "CreateServicePlan",
+            params={
+                "name": name,
+                "description": description,
+                "servicePlanType": service_plan_type,
+                "externPlanId": extern_plan_id,
+            },
+        )
+
+    def DeleteAutoPay(self, auto_pay_id: int):
+        """
+        :param auto_pay_id: auto pay id. It can be get with ServicePlanService#GetAutoPays method
+        """
+        return self._get("DeleteAutoPay", params={"autoPayId": auto_pay_id})
+
+    def DeleteServicePlan(self, service_plan_id: int):
+        """
+        :param service_plan_id: id of sevice plan to be deleted
+        """
+        return self._get("DeleteServicePlan", params={"servicePlanId": service_plan_id})
+
+    def EnableServicePlan(self, service_plan_id: int, enabled: int):
+        """
+        :param service_plan_id: id of the specified service plan
+        :param enabled: 1 enabled and 0 = disabled
+        """
+        return self._get(
+            "EnableServicePlan",
+            params={"servicePlanId": service_plan_id, "enabled": enabled},
+        )
+
+    def ExtendedCreateServicePlan(
+        self,
+        label: str,
+        external_plan_id: str,
+        description: str,
+        enabled: bool,
+        type: str,
+        by_default: bool,
+        price: str,
+    ):
+        """
+        :param label: name or short description of the service plan
+        :param external_plan_id: service plan ID in the external billing system
+        :param description: detailed description of the service plan
+        :param enabled: enables (1) or disables (0) the service plan
+        :param type: service plan type in the external billing system (usually, one-time fee)
+        :param by_default: proposes the current service plan to users during the recharge operations by default (1) or not (0). Only one service plan can be set as default.
+        :param price: the sum to be refilled on the account balance by this service plan
+        """
+        return self._get(
+            "ExtendedCreateServicePlan",
+            params={
+                "label": label,
+                "externalPlanId": external_plan_id,
+                "description": description,
+                "enabled": enabled,
+                "type": type,
+                "byDefault": by_default,
+                "price": price,
+            },
+        )
+
+    def ExtendedGetServicePlans(self):
+        return self._get("ExtendedGetServicePlans", params={})
+
+    def ExtendedServicePlanUpdate(
+        self,
+        id: int,
+        label: str,
+        external_plan_id: str,
+        description: str,
+        enabled: bool,
+        type: str,
+        by_default: bool,
+        price: str,
+    ):
+        """
+        :param id: internal service plan ID in the PaaS admin panel
+        :param label: name or short description of the service plan
+        :param external_plan_id: service plan ID in the external billing system
+        :param description: detailed description of the service plan
+        :param enabled: enables (1) or disables (0) the service plan
+        :param type: service plan type in the external billing system (usually, one-time fee)
+        :param by_default: proposes the current service plan to users during the recharge operations by default (1) or not (0). Only one service plan can be set as default.
+        :param price: the sum to be refilled on the account balance by this service plan
+        """
+        return self._get(
+            "ExtendedServicePlanUpdate",
+            params={
+                "id": id,
+                "label": label,
+                "externalPlanId": external_plan_id,
+                "description": description,
+                "enabled": enabled,
+                "type": type,
+                "byDefault": by_default,
+                "price": price,
+            },
+        )
+
+    def GetAutoPayHistory(self, auto_pay_id: int):
+        """
+        :param auto_pay_id: specified auto pay id
+        """
+        return self._get("GetAutoPayHistory", params={"autoPayId": auto_pay_id})
+
+    def GetAutoPays(self):
+        return self._get("GetAutoPays", params={})
+
+    def GetBoughtServicePlans(self):
+        return self._get("GetBoughtServicePlans", params={})
+
+    def GetCurrency(self):
+        return self._get("GetCurrency", params={})
+
+    def GetFinalCost(self, service_plan_id: int):
+        """
+        :param service_plan_id: specified service plan id
+        """
+        return self._get("GetFinalCost", params={"servicePlanId": service_plan_id})
+
+    def GetPayMethodList(self):
+        return self._get("GetPayMethodList", params={})
+
+    def GetPaymentNews(self):
+        return self._get("GetPaymentNews", params={})
+
+    def GetServicePlan(self, service_plan_id: int):
+        """
+        :param service_plan_id: id of service plan to be returned
+        """
+        return self._get("GetServicePlan", params={"servicePlanId": service_plan_id})
+
+    def GetServicePlanByType(self, plan_type: list[int] = None):
+        return self._get("GetServicePlanByType", params={"planType": plan_type})
+
+    def PaymentNewsRead(self, id: int):
+        """
+        :param id: comma separated ids of payments
+        """
+        return self._get("PaymentNewsRead", params={"id": id})
+
+    def SetExternPlanId(
+        self,
+        service_plan_id: int,
+        external_plan_id: int,
+    ):
+        """
+        :param service_plan_id: JBilling service plan id
+        """
+        return self._get(
+            "SetExternPlanId",
+            params={
+                "servicePlanId": service_plan_id,
+                "externalPlanId": external_plan_id,
+            },
+        )
+
+    def UpdateServicePlan(
+        self,
+        service_plan_id: int,
+        name: str,
+        description: str,
+        extern_service_plan_id: str,
+    ):
+        """
+        :param service_plan_id: id of service plan to be changed
+        :param name: new name (unique among the others)
+        :param description: detailed description
+        """
+        return self._get(
+            "UpdateServicePlan",
+            params={
+                "servicePlanId": service_plan_id,
+                "name": name,
+                "description": description,
+                "externServicePlanId": extern_service_plan_id,
+            },
+        )
