@@ -50,6 +50,20 @@ class Billing(ClientAbstract):
         """
         return _Pricing(session=self._session, token=self._token, debug=self._debug)
 
+    @property
+    def Reseller(self) -> "_Reseller":
+        """
+        The methods of this service provide billing information about a user account (such as UID, balance, billing history,
+        quotas, etc.) and allow managing it.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.billing.Reseller
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/billing.Reseller
+        """
+        return _Reseller(session=self._session, token=self._token, debug=self._debug)
+
 
 class _Account(Billing):
     """
@@ -956,3 +970,70 @@ class _Pricing(Billing):
                 "flexibleCloudlets": flexible_cloud_lets,
             },
         )
+
+
+class _Reseller(Billing):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/billing.Reseller
+    """
+
+    def AddReseller(
+        self,
+        reseller: str,
+        platform: str,
+        regions: str,
+        settings: list[str] = None,
+    ):
+        """
+        :param reseller: JSON representation of the reseller object.
+        :param platform: JSON representation of the reseller platform object.
+        :param regions: JSON representation of the reseller regions object.
+        :param settings: JSON representation of the reseller setting object.
+        """
+        return self._get(
+            "AddReseller",
+            params={
+                "reseller": reseller,
+                "platform": platform,
+                "regions": regions,
+                "settings": settings,
+            },
+            delimiter=",",
+        )
+
+    def EditReseller(
+        self,
+        reseller: str,
+        platform: str,
+        regions: list[str] = None,
+    ):
+        return self._get(
+            "EditReseller",
+            params={
+                "reseller": reseller,
+                "platform": platform,
+                "regions": regions,
+            },
+            delimiter=",",
+        )
+
+    def GetAllResellers(self):
+        return self._get("GetAllResellers", params={})
+
+    def GetResellerByAppid(self, target_app_id: str):
+        return self._get("GetResellerByAppid", params={"targetAppid": target_app_id})
+
+    def GetResellerById(self, id: int):
+        return self._get("GetResellerById", params={"id": id})
+
+    def GetResellerByOwnerUid(self, uid: int):
+        return self._get("GetResellerByOwnerUid", params={"uid": uid})
+
+    def GetResellerByUid(self, uid: int):
+        return self._get("GetResellerByUid", params={"uid": uid})
+
+    def RemoveReseller(self, id: int):
+        return self._get("RemoveReseller", params={"id": id})
+
+    def SetResellerStatus(self, id: int, status: str):
+        return self._get("SetResellerStatus", params={"id": id, "status": status})
