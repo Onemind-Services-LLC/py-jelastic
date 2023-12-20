@@ -724,7 +724,7 @@ class _PayMethod(Billing):
     Ref: https://docs.jelastic.com/api/private/#!/api/billing.PayMethod
     """
 
-    _endpoint2 = ("payMethod",)
+    _endpoint2 = "payMethod"
 
     def EnablePayMethod(
         self,
