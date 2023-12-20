@@ -10,7 +10,7 @@
           <link rel="stylesheet" href="_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="_static/documentation_options.js?v=338f3fc3"></script>
+        <script src="_static/documentation_options.js?v=f98f081d"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -478,6 +478,8 @@
 </li>
       <li><a href="billing.html#jelastic.api.billing._Integration">_Integration (class in jelastic.api.billing)</a>
 </li>
+      <li><a href="billing.html#jelastic.api.billing._Invoice">_Invoice (class in jelastic.api.billing)</a>
+</li>
       <li><a href="environment.html#jelastic.api.environment._JError">_JError (class in jelastic.api.environment)</a>
 </li>
   </ul></td>
@@ -812,10 +814,10 @@
 </li>
       <li><a href="utils.html#jelastic.api.utils._Scheduler.EditTask">EditTask() (jelastic.api.utils._Scheduler method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="message.html#jelastic.api.message.Message.Email">Email (jelastic.api.message.Message property)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="billing.html#jelastic.api.billing._PayMethod.EnablePayMethod">EnablePayMethod() (jelastic.api.billing._PayMethod method)</a>
 </li>
       <li><a href="billing.html#jelastic.api.billing._Account.EnableUser">EnableUser() (jelastic.api.billing._Account method)</a>
@@ -845,6 +847,8 @@
 </li>
       </ul></li>
       <li><a href="environment.html#jelastic.api.environment._JError.Error">Error() (jelastic.api.environment._JError method)</a>
+</li>
+      <li><a href="billing.html#jelastic.api.billing._Invoice.Event">Event() (jelastic.api.billing._Invoice method)</a>
 </li>
       <li><a href="environment.html#jelastic.api.environment.Environment.Export">Export (jelastic.api.environment.Environment property)</a>
 </li>
@@ -980,9 +984,11 @@
 </li>
       <li><a href="environment.html#jelastic.api.environment._Binder.GetExtDomains">GetExtDomains() (jelastic.api.environment._Binder method)</a>
 </li>
+      <li><a href="billing.html#jelastic.api.billing._Account.GetExtendedAccountBillingHistoryByPeriod">GetExtendedAccountBillingHistoryByPeriod() (jelastic.api.billing._Account method)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="billing.html#jelastic.api.billing._Account.GetExtendedAccountBillingHistoryByPeriod">GetExtendedAccountBillingHistoryByPeriod() (jelastic.api.billing._Account method)</a>
+      <li><a href="billing.html#jelastic.api.billing._Invoice.GetExternalInvoices">GetExternalInvoices() (jelastic.api.billing._Invoice method)</a>
 </li>
       <li><a href="billing.html#jelastic.api.billing._Account.GetExternalUserById">GetExternalUserById() (jelastic.api.billing._Account method)</a>
 </li>
@@ -1003,6 +1009,8 @@
       <li><a href="administration.html#jelastic.api.administration._Host.GetHostFirewallSets">GetHostFirewallSets() (jelastic.api.administration._Host method)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Monitoring.GetHostFirewallStatus">GetHostFirewallStatus() (jelastic.api.administration._Monitoring method)</a>
+</li>
+      <li><a href="billing.html#jelastic.api.billing._Invoice.GetInvoices">GetInvoices() (jelastic.api.billing._Invoice method)</a>
 </li>
       <li><a href="billing.html#jelastic.api.billing._Integration.GetInvoiceUrl">GetInvoiceUrl() (jelastic.api.billing._Integration method)</a>
 </li>
@@ -1109,6 +1117,8 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="billing.html#jelastic.api.billing.Billing.Integration">Integration (jelastic.api.billing.Billing property)</a>
+</li>
+      <li><a href="billing.html#jelastic.api.billing.Billing.Invoice">Invoice (jelastic.api.billing.Billing property)</a>
 </li>
       <li><a href="io.html#jelastic.api.io.IO">IO (class in jelastic.api.io)</a>
 </li>
@@ -1299,11 +1309,17 @@
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="billing.html#jelastic.api.billing._Invoice.MakeInvoice">MakeInvoice() (jelastic.api.billing._Invoice method)</a>
+</li>
       <li><a href="management.html#jelastic.api.management.Management">Management (class in jelastic.api.management)</a>
 </li>
       <li><a href="environment.html#jelastic.api.environment._Binder.ManageNodeDnsState">ManageNodeDnsState() (jelastic.api.environment._Binder method)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Utils.ManageService">ManageService() (jelastic.api.administration._Utils method)</a>
+</li>
+      <li><a href="billing.html#jelastic.api.billing._Invoice.MarkAsPaid">MarkAsPaid() (jelastic.api.billing._Invoice method)</a>
+</li>
+      <li><a href="billing.html#jelastic.api.billing._Invoice.MarkAsVoid">MarkAsVoid() (jelastic.api.billing._Invoice method)</a>
 </li>
       <li><a href="marketplace.html#jelastic.api.marketplace.Marketplace">Marketplace (class in jelastic.api.marketplace)</a>
 </li>
@@ -1396,14 +1412,16 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="billing.html#jelastic.api.billing._Invoice.Pay">Pay() (jelastic.api.billing._Invoice method)</a>
+</li>
       <li><a href="billing.html#jelastic.api.billing.Billing.PayMethod">PayMethod (jelastic.api.billing.Billing property)</a>
 </li>
       <li><a href="platform.html#jelastic.api.platform.Platform">Platform (class in jelastic.api.platform)</a>
 </li>
-      <li><a href="pool.html#jelastic.api.pool.Pool">Pool (class in jelastic.api.pool)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="pool.html#jelastic.api.pool.Pool">Pool (class in jelastic.api.pool)</a>
+</li>
       <li><a href="pricing.html#jelastic.api.pricing.Pricing">Pricing (class in jelastic.api.pricing)</a>
 
       <ul>
@@ -1481,6 +1499,8 @@
       <li><a href="s3.html#jelastic.api.s3.S3">S3 (class in jelastic.api.s3)</a>
 </li>
       <li><a href="utils.html#jelastic.api.utils.Utils.Scheduler">Scheduler (jelastic.api.utils.Utils property)</a>
+</li>
+      <li><a href="billing.html#jelastic.api.billing._Invoice.SearchInvoices">SearchInvoices() (jelastic.api.billing._Invoice method)</a>
 </li>
       <li><a href="security.html#jelastic.api.security.Security">Security (class in jelastic.api.security)</a>
 </li>
