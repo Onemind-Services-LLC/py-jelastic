@@ -50,6 +50,20 @@ class Billing(ClientAbstract):
         """
         return _Pricing(session=self._session, token=self._token, debug=self._debug)
 
+    @property
+    def Reseller(self) -> "_Reseller":
+        """
+        The methods of this service provide billing information about a user account (such as UID, balance, billing history,
+        quotas, etc.) and allow managing it.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.billing.Reseller
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/billing.Reseller
+        """
+        return _Reseller(session=self._session, token=self._token, debug=self._debug)
+
 
 class _Account(Billing):
     """
@@ -74,11 +88,11 @@ class _Account(Billing):
         return self._get("ChangeEmail", params={"login": login, "email": email})
 
     def ChangeGroup(
-        self,
-        group_name: str,
-        uids: list[str] = None,
-        send_email: bool = False,
-        template: str = None,
+            self,
+            group_name: str,
+            uids: list[str] = None,
+            send_email: bool = False,
+            template: str = None,
     ):
         """
         Change account group for selected users
@@ -100,7 +114,7 @@ class _Account(Billing):
         return self._get("ChangePhoneNumber", params={"login": login, "number": number})
 
     def ChargeAccountByUid(
-        self, uid: int, amount: float, description: str, env_name: str = None
+            self, uid: int, amount: float, description: str, env_name: str = None
     ):
         """
         Charge account by uid.
@@ -128,13 +142,13 @@ class _Account(Billing):
         return self._get("ConvertToCommercial", params={"customer": customer})
 
     def ConvertToCommercialAndPay(
-        self,
-        customer: dict,
-        pay_method_type: str,
-        service_plan_id: int,
-        auto_service_plan_id: int = None,
-        auto_refill_main_balance: int = None,
-        auto_refill_period: str = None,
+            self,
+            customer: dict,
+            pay_method_type: str,
+            service_plan_id: int,
+            auto_service_plan_id: int = None,
+            auto_refill_main_balance: int = None,
+            auto_refill_period: str = None,
     ):
         """
         Make trial account commercial one. This method register Jbilling account into extern billing system. Commercial
@@ -155,14 +169,14 @@ class _Account(Billing):
         )
 
     def ConvertToTrial(
-        self,
-        template: str,
-        uids: list[str] = None,
-        start_time: datetime = None,
-        end_time: datetime = None,
-        start: int = None,
-        count: int = None,
-        bonus: float = None,
+            self,
+            template: str,
+            uids: list[str] = None,
+            start_time: datetime = None,
+            end_time: datetime = None,
+            start: int = None,
+            count: int = None,
+            bonus: float = None,
     ):
         """
         Converts non-trial and billing accounts to trial.
@@ -187,13 +201,13 @@ class _Account(Billing):
         return self._get("EnableUser", params={"uid": uid})
 
     def ExportAccountBillingHistoryByPeriod(
-        self,
-        start_time: datetime,
-        end_time: datetime,
-        period: PERIOD = "DAY",
-        time_offset: int = None,
-        group_nodes: bool = False,
-        target_app_id: str = None,
+            self,
+            start_time: datetime,
+            end_time: datetime,
+            period: PERIOD = "DAY",
+            time_offset: int = None,
+            group_nodes: bool = False,
+            target_app_id: str = None,
     ):
         """
         Generates a link for downloading the specified account's billing history for the specific period.
@@ -211,12 +225,12 @@ class _Account(Billing):
         )
 
     def ExportEnvBillingHistoryByPeriod(
-        self,
-        start_time: datetime,
-        end_time: datetime,
-        time_offset: int,
-        period: PERIOD = "DAY",
-        group_nodes: bool = False,
+            self,
+            start_time: datetime,
+            end_time: datetime,
+            time_offset: int,
+            period: PERIOD = "DAY",
+            group_nodes: bool = False,
     ):
         """
         Generates a link for downloading the specified environment's billing history for the specific period.
@@ -233,7 +247,7 @@ class _Account(Billing):
         )
 
     def FundAccount(
-        self, uid: int, amount: float, is_bonus: bool = False, note: str = None
+            self, uid: int, amount: float, is_bonus: bool = False, note: str = None
     ):
         """
         Fund account by uid.
@@ -268,13 +282,13 @@ class _Account(Billing):
         return self._get("GetAccount")
 
     def GetAccountBillingByEngineTypeAndPeriod(
-        self,
-        start_time: datetime,
-        end_time: datetime,
-        owner_uid: str = None,
-        engine_types: list[str] = None,
-        period: PERIOD = "DAY",
-        time_offset: int = None,
+            self,
+            start_time: datetime,
+            end_time: datetime,
+            owner_uid: str = None,
+            engine_types: list[str] = None,
+            period: PERIOD = "DAY",
+            time_offset: int = None,
     ):
         """
         Returns account billing information for the specified period.
@@ -302,13 +316,13 @@ class _Account(Billing):
         )
 
     def GetAccountBillingHistoryByPeriod(
-        self,
-        start_time: datetime,
-        end_time: datetime,
-        period: PERIOD = "DAY",
-        time_offset: int = None,
-        group_nodes: bool = False,
-        target_app_id: str = None,
+            self,
+            start_time: datetime,
+            end_time: datetime,
+            period: PERIOD = "DAY",
+            time_offset: int = None,
+            group_nodes: bool = False,
+            target_app_id: str = None,
     ):
         """
         Gets account billing history.
@@ -329,14 +343,14 @@ class _Account(Billing):
         )
 
     def GetAccounts(
-        self,
-        lebalance: str = None,
-        order_field: str = None,
-        order_direction: str = None,
-        filter_field: str = None,
-        filter_value: str = None,
-        start_row: int = None,
-        result_count: int = None,
+            self,
+            lebalance: str = None,
+            order_field: str = None,
+            order_direction: str = None,
+            filter_field: str = None,
+            filter_value: str = None,
+            start_row: int = None,
+            result_count: int = None,
     ):
         """
         Gets accounts.
@@ -392,12 +406,12 @@ class _Account(Billing):
         return self._get("GetAccountsForDestroying")
 
     def GetAggClusterBillingHistory(
-        self,
-        start_time: datetime,
-        end_time: datetime,
-        interval: int,
-        sum_fields: list[str],
-        is_paid: bool = False,
+            self,
+            start_time: datetime,
+            end_time: datetime,
+            interval: int,
+            sum_fields: list[str],
+            is_paid: bool = False,
     ):
         """
         Gets account billing history.
@@ -415,13 +429,13 @@ class _Account(Billing):
         )
 
     def GetAggExtraBillingHistory(
-        self,
-        start_time: datetime,
-        end_time: datetime,
-        interval: int,
-        is_paid: bool = False,
-        type: str = None,
-        names: list[str] = None,
+            self,
+            start_time: datetime,
+            end_time: datetime,
+            interval: int,
+            is_paid: bool = False,
+            type: str = None,
+            names: list[str] = None,
     ):
         return self._get(
             "GetAggExtraBillingHistory",
@@ -443,7 +457,7 @@ class _Account(Billing):
         return self._get("GetBillingInfo")
 
     def GetClusterBillingHistory(
-        self, start_time: datetime, end_time: datetime, interval: int = None
+            self, start_time: datetime, end_time: datetime, interval: int = None
     ):
         """
         Gets account billing history.
@@ -454,10 +468,10 @@ class _Account(Billing):
         )
 
     def GetCollaborationQuotas(
-        self,
-        collaboration_id: int = None,
-        owner_uid: int = None,
-        quota_names: list[str] = None,
+            self,
+            collaboration_id: int = None,
+            owner_uid: int = None,
+            quota_names: list[str] = None,
     ):
         """
         Gets list of quotas of the payer user.
@@ -496,12 +510,12 @@ class _Account(Billing):
         return self._get("GetCountryStates", params={"ccode": country_code})
 
     def GetEnvBillingHistoryByPeriod(
-        self,
-        start_time: datetime,
-        end_time: datetime,
-        period: PERIOD = "DAY",
-        time_offset: int = None,
-        group_nodes: bool = False,
+            self,
+            start_time: datetime,
+            end_time: datetime,
+            period: PERIOD = "DAY",
+            time_offset: int = None,
+            group_nodes: bool = False,
     ):
         """
         Gets environment billing history.
@@ -519,7 +533,7 @@ class _Account(Billing):
         )
 
     def GetExtendedAccountBillingHistoryByPeriod(
-        self, start_time: datetime, end_time: datetime, target_app_id: str = None
+            self, start_time: datetime, end_time: datetime, target_app_id: str = None
     ):
         """
         Returns user’s billing history information for the specified period.
@@ -583,7 +597,7 @@ class _Account(Billing):
         )
 
     def GetSumAccountBillingHistory(
-        self, uid: int, start_time: datetime, end_time: datetime, bonus: int = None
+            self, uid: int, start_time: datetime, end_time: datetime, bonus: int = None
     ):
         """
         Gets account billing history.
@@ -633,11 +647,11 @@ class _Account(Billing):
         return self._get("SetFundNote", params={"id": id, "note": note})
 
     def SetGroup(
-        self,
-        uid: int,
-        group_name: str,
-        reset_balance: bool = False,
-        reset_bonus: bool = False,
+            self,
+            uid: int,
+            group_name: str,
+            reset_balance: bool = False,
+            reset_bonus: bool = False,
     ):
         """
         Sets group to account.
@@ -692,7 +706,7 @@ class _Account(Billing):
         return self._get("SuspendUser", params={"uid": uid})
 
     def UnfundAccount(
-        self, uid: int, amount: float, is_bonus: bool = False, note: str = None
+            self, uid: int, amount: float, is_bonus: bool = False, note: str = None
     ):
         """
         Unfund account by uid.
@@ -725,10 +739,10 @@ class _Pricing(Billing):
     """
 
     def AddPricing(
-        self,
-        pricing: dict,
-        tariff_ids: str,
-        tariff_grid_names: list[str] = None,
+            self,
+            pricing: dict,
+            tariff_ids: str,
+            tariff_grid_names: list[str] = None,
     ):
         return self._get(
             "AddPricing",
@@ -756,9 +770,9 @@ class _Pricing(Billing):
         )
 
     def AttachTariffGrid(
-        self,
-        tariff_grid_name: str,
-        id: str,
+            self,
+            tariff_grid_name: str,
+            id: str,
     ):
         return self._get(
             "AttachTariffGrid",
@@ -769,9 +783,9 @@ class _Pricing(Billing):
         )
 
     def CheckHostGroupsAllowed(
-        self,
-        owner_uid: list[int] = None,
-        hardware_node_groups: list[str] = None,
+            self,
+            owner_uid: list[int] = None,
+            hardware_node_groups: list[str] = None,
     ):
         """
         :param owner_uid: unique identifier of the target user.
@@ -790,26 +804,26 @@ class _Pricing(Billing):
         return self._get("DeleteTariff", params={"id": id})
 
     def DetachTariff(
-        self,
-        uniq_name: str,
-        target_app_id: str,
+            self,
+            uniq_name: str,
+            target_app_id: str,
     ):
         return self._get(
             "DetachTariff", params={"uniqName": uniq_name, "targetAppId": target_app_id}
         )
 
     def DetachTariffGrid(
-        self,
-        tariff_grid_name: str,
-        id: str,
+            self,
+            tariff_grid_name: str,
+            id: str,
     ):
         return self._get(
             "DetachTariffGrid", params={"tariffGridName": tariff_grid_name, "id": id}
         )
 
     def EditPricing(
-        self,
-        pricing: dict,
+            self,
+            pricing: dict,
     ):
         return self._get(
             "EditPricing",
@@ -859,9 +873,9 @@ class _Pricing(Billing):
         )
 
     def GetResources(
-        self,
-        id: list[int] = None,
-        name: list[str] = None,
+            self,
+            id: list[int] = None,
+            name: list[str] = None,
     ):
         return self._get(
             "GetResources",
@@ -870,10 +884,10 @@ class _Pricing(Billing):
         )
 
     def GetTariffsInner(
-        self,
-        pricing_id: list[str] = None,
-        type: list[str] = None,
-        reseller_id: list[int] = None,
+            self,
+            pricing_id: list[str] = None,
+            type: list[str] = None,
+            reseller_id: list[int] = None,
     ):
         """
         :param pricing_id: pricing model unique ID.
@@ -890,10 +904,10 @@ class _Pricing(Billing):
         return self._get("GetUniqueResourceNames", params={})
 
     def SetTariffs(
-        self,
-        pricing_id: str,
-        tariff_ids: str,
-        tariff_grid_names: list[str] = None,
+            self,
+            pricing_id: str,
+            tariff_ids: str,
+            tariff_grid_names: list[str] = None,
     ):
         return self._get(
             "SetTariffs",
@@ -906,9 +920,9 @@ class _Pricing(Billing):
         )
 
     def ValidateEnvironment(
-        self,
-        hardware_node_group: str,
-        owner_uid: list[int] = None,
+            self,
+            hardware_node_group: str,
+            owner_uid: list[int] = None,
     ):
         return self._get(
             "ValidateEnvironment",
@@ -920,12 +934,12 @@ class _Pricing(Billing):
         )
 
     def ValidateNode(
-        self,
-        uid: int,
-        hardware_node_group: str,
-        node_type: str,
-        fixed_cloud_lets: int,
-        flexible_cloud_lets: int,
+            self,
+            uid: int,
+            hardware_node_group: str,
+            node_type: str,
+            fixed_cloud_lets: int,
+            flexible_cloud_lets: int,
     ):
         return self._get(
             "ValidateNode",
@@ -939,12 +953,12 @@ class _Pricing(Billing):
         )
 
     def ValidateNodeInner(
-        self,
-        uid: int,
-        hardware_node_group: str,
-        node_type: str,
-        fixed_cloud_lets: int,
-        flexible_cloud_lets: int,
+            self,
+            uid: int,
+            hardware_node_group: str,
+            node_type: str,
+            fixed_cloud_lets: int,
+            flexible_cloud_lets: int,
     ):
         return self._get(
             "ValidateNodeInner",
@@ -955,4 +969,92 @@ class _Pricing(Billing):
                 "fixedCloudlets": fixed_cloud_lets,
                 "flexibleCloudlets": flexible_cloud_lets,
             },
+        )
+
+
+class _Reseller(Billing):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/billing.Reseller
+    """
+
+    def AddReseller(
+            self,
+            reseller: str,
+            platform: str,
+            regions: str,
+            settings: list[str] = None,
+    ):
+        """
+        :param reseller: JSON representation of the reseller object.
+        :param platform: JSON representation of the reseller platform object.
+        :param regions: JSON representation of the reseller regions object.
+        :param settings: JSON representation of the reseller setting object.
+        """
+        return self._get(
+            "AddReseller",
+            params={
+                "reseller": reseller,
+                "platform": platform,
+                "regions": regions,
+                "settings": settings,
+            },
+            delimiter=",",
+        )
+
+    def EditReseller(
+            self,
+            reseller: str,
+            platform: str,
+            regions: list[str] = None,
+    ):
+        return self._get(
+            'EditReseller',
+            params={
+                "reseller": reseller,
+                "platform": platform,
+                "regions": regions,
+            },
+            delimiter=",",
+        )
+
+    def GetAllResellers(self):
+        return self._get(
+            "GetAllResellers",
+            params={}
+        )
+
+    def GetResellerByAppid(self, target_app_id: str):
+        return self._get(
+            "GetResellerByAppid",
+            params={'targetAppid': target_app_id}
+        )
+
+    def GetResellerById(self, id: int):
+        return self._get(
+            "GetResellerById",
+            params={'id': id}
+        )
+
+    def GetResellerByOwnerUid(self, uid: int):
+        return self._get(
+            "GetResellerByOwnerUid",
+            params={'uid': uid}
+        )
+
+    def GetResellerByUid(self, uid: int):
+        return self._get(
+            "GetResellerByUid",
+            params={'uid': uid}
+        )
+
+    def RemoveReseller(self, id: int):
+        return self._get(
+            "RemoveReseller",
+            params={'id': id}
+        )
+
+    def SetResellerStatus(self, id: int, status: str):
+        return self._get(
+            "SetResellerStatus",
+            params={'id': id, 'status': status}
         )
