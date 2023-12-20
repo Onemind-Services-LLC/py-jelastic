@@ -64,6 +64,20 @@ class Billing(ClientAbstract):
         """
         return _Reseller(session=self._session, token=self._token, debug=self._debug)
 
+    @property
+    def ServicePlan(self) -> "_ServicePlan":
+        """
+        The methods of this service provide billing information about a user account (such as UID, balance, billing history,
+        quotas, etc.) and allow managing it.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.billing.ServicePlan
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/billing.ServicePlan
+        """
+        return _ServicePlan(session=self._session, token=self._token, debug=self._debug)
+
 
 class _Account(Billing):
     """
@@ -738,6 +752,8 @@ class _Pricing(Billing):
     Ref: https://docs.jelastic.com/api/private/#!/api/billing.Pricing
     """
 
+    endpoint = "pricing"
+
     def AddPricing(
         self,
         pricing: dict,
@@ -1037,3 +1053,258 @@ class _Reseller(Billing):
 
     def SetResellerStatus(self, id: int, status: str):
         return self._get("SetResellerStatus", params={"id": id, "status": status})
+
+
+class _ServicePlan(Billing):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/billing.ServicePlan
+    """
+
+    _endpoint2 = "servicePlan"
+
+    def CreateLevelAutoPay(
+        self,
+        min_balance: int,
+        expires: str,
+        service_plan_id: int,
+        payment_method_id: str,
+        min_period: int,
+    ):
+        """
+        :param min_balance: the value used in the "account.balance < minBalance" expression.
+        :param expires: date [and time] (in the UTC ISO 8601 format) when the auto-pay becomes unavailable.
+        :param service_plan_id: service plan ID to be paid (for example, $200 one-time fee)
+        :param payment_method_id: payment method ID to be used (see the GetPayMethodList method)
+        :param min_period: minimal delay (in seconds) between two consecutive auto-pays. 0 means no limit.
+        """
+        return self._get(
+            "CreateLevelAutoPay",
+            params={
+                "minBalance": min_balance,
+                "expires": expires,
+                "servicePlanId": service_plan_id,
+                "paymentMethodId": payment_method_id,
+                "minPeriod": min_period,
+            },
+        )
+
+    def CreateRegularAutoPay(
+        self,
+        cron_expression: str,
+        expires: str,
+        time_zone: str,
+        service_plan_id: int,
+        payment_method_id: str,
+    ):
+        """
+
+        :param cron_expression: Year value is optional. '*' means every possible value.
+        :param expires: date [and time] (in the UTC ISO 8601 format) when the auto-pay becomes unavailable.
+        :param time_zone: time zone for the cron expression. For example, GMT+4.
+        :param service_plan_id: service plan ID to be paid (for example, $200 one-time fee)
+        :param payment_method_id: payment method ID to be used (see the GetPayMethodList method)
+        """
+        return self._get(
+            "CreateRegularAutoPay",
+            params={
+                "cronExpression": cron_expression,
+                "expires": expires,
+                "timeZone": time_zone,
+                "servicePlanId": service_plan_id,
+                "paymentMethodId": payment_method_id,
+            },
+        )
+
+    def CreateServicePlan(
+        self,
+        name: str,
+        description: str,
+        service_plan_type: str,
+        extern_plan_id: str,
+    ):
+        """
+        :param name: unique name of service plan
+        :param description: detailed comment about the service plan
+        :param service_plan_type: "one-time" or "regular"
+        """
+        return self._get(
+            "CreateServicePlan",
+            params={
+                "name": name,
+                "description": description,
+                "servicePlanType": service_plan_type,
+                "externPlanId": extern_plan_id,
+            },
+        )
+
+    def DeleteAutoPay(self, auto_pay_id: int):
+        """
+        :param auto_pay_id: auto pay id. It can be get with ServicePlanService#GetAutoPays method
+        """
+        return self._get("DeleteAutoPay", params={"autoPayId": auto_pay_id})
+
+    def DeleteServicePlan(self, service_plan_id: int):
+        """
+        :param service_plan_id: id of sevice plan to be deleted
+        """
+        return self._get("DeleteServicePlan", params={"servicePlanId": service_plan_id})
+
+    def EnableServicePlan(self, service_plan_id: int, enabled: int):
+        """
+        :param service_plan_id: id of the specified service plan
+        :param enabled: 1 enabled and 0 = disabled
+        """
+        return self._get(
+            "EnableServicePlan",
+            params={"servicePlanId": service_plan_id, "enabled": enabled},
+        )
+
+    def ExtendedCreateServicePlan(
+        self,
+        label: str,
+        external_plan_id: str,
+        description: str,
+        enabled: bool,
+        type: str,
+        by_default: bool,
+        price: str,
+    ):
+        """
+        :param label: name or short description of the service plan
+        :param external_plan_id: service plan ID in the external billing system
+        :param description: detailed description of the service plan
+        :param enabled: enables (1) or disables (0) the service plan
+        :param type: service plan type in the external billing system (usually, one-time fee)
+        :param by_default: proposes the current service plan to users during the recharge operations by default (1) or not (0). Only one service plan can be set as default.
+        :param price: the sum to be refilled on the account balance by this service plan
+        """
+        return self._get(
+            "ExtendedCreateServicePlan",
+            params={
+                "label": label,
+                "externalPlanId": external_plan_id,
+                "description": description,
+                "enabled": enabled,
+                "type": type,
+                "byDefault": by_default,
+                "price": price,
+            },
+        )
+
+    def ExtendedGetServicePlans(self):
+        return self._get("ExtendedGetServicePlans", params={})
+
+    def ExtendedServicePlanUpdate(
+        self,
+        id: int,
+        label: str,
+        external_plan_id: str,
+        description: str,
+        enabled: bool,
+        type: str,
+        by_default: bool,
+        price: str,
+    ):
+        """
+        :param id: internal service plan ID in the PaaS admin panel
+        :param label: name or short description of the service plan
+        :param external_plan_id: service plan ID in the external billing system
+        :param description: detailed description of the service plan
+        :param enabled: enables (1) or disables (0) the service plan
+        :param type: service plan type in the external billing system (usually, one-time fee)
+        :param by_default: proposes the current service plan to users during the recharge operations by default (1) or not (0). Only one service plan can be set as default.
+        :param price: the sum to be refilled on the account balance by this service plan
+        """
+        return self._get(
+            "ExtendedServicePlanUpdate",
+            params={
+                "id": id,
+                "label": label,
+                "externalPlanId": external_plan_id,
+                "description": description,
+                "enabled": enabled,
+                "type": type,
+                "byDefault": by_default,
+                "price": price,
+            },
+        )
+
+    def GetAutoPayHistory(self, auto_pay_id: int):
+        """
+        :param auto_pay_id: specified auto pay id
+        """
+        return self._get("GetAutoPayHistory", params={"autoPayId": auto_pay_id})
+
+    def GetAutoPays(self):
+        return self._get("GetAutoPays", params={})
+
+    def GetBoughtServicePlans(self):
+        return self._get("GetBoughtServicePlans", params={})
+
+    def GetCurrency(self):
+        return self._get("GetCurrency", params={})
+
+    def GetFinalCost(self, service_plan_id: int):
+        """
+        :param service_plan_id: specified service plan id
+        """
+        return self._get("GetFinalCost", params={"servicePlanId": service_plan_id})
+
+    def GetPayMethodList(self):
+        return self._get("GetPayMethodList", params={})
+
+    def GetPaymentNews(self):
+        return self._get("GetPaymentNews", params={})
+
+    def GetServicePlan(self, service_plan_id: int):
+        """
+        :param service_plan_id: id of service plan to be returned
+        """
+        return self._get("GetServicePlan", params={"servicePlanId": service_plan_id})
+
+    def GetServicePlanByType(self, plan_type: list[int] = None):
+        return self._get("GetServicePlanByType", params={"planType": plan_type})
+
+    def PaymentNewsRead(self, id: int):
+        """
+        :param id: comma separated ids of payments
+        """
+        return self._get("PaymentNewsRead", params={"id": id})
+
+    def SetExternPlanId(
+        self,
+        service_plan_id: int,
+        external_plan_id: int,
+    ):
+        """
+        :param service_plan_id: JBilling service plan id
+        """
+        return self._get(
+            "SetExternPlanId",
+            params={
+                "servicePlanId": service_plan_id,
+                "externalPlanId": external_plan_id,
+            },
+        )
+
+    def UpdateServicePlan(
+        self,
+        service_plan_id: int,
+        name: str,
+        description: str,
+        extern_service_plan_id: str,
+    ):
+        """
+        :param service_plan_id: id of service plan to be changed
+        :param name: new name (unique among the others)
+        :param description: detailed description
+        """
+        return self._get(
+            "UpdateServicePlan",
+            params={
+                "servicePlanId": service_plan_id,
+                "name": name,
+                "description": description,
+                "externServicePlanId": extern_service_plan_id,
+            },
+        )
