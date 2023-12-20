@@ -51,6 +51,20 @@ class Billing(ClientAbstract):
         return _Integration(session=self._session, token=self._token, debug=self._debug)
 
     @property
+    def PayMethod(self) -> "_PayMethod":
+        """
+        The methods of this service provide billing information about a user account (such as UID, balance, billing history,
+        quotas, etc.) and allow managing it.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.billing.PayMethod
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/billing.PayMethod
+        """
+        return _PayMethod(session=self._session, token=self._token, debug=self._debug)
+
+    @property
     def Pricing(self) -> "_Pricing":
         """
         The methods of this service provide billing information about a user account (such as UID, balance, billing history,
@@ -779,6 +793,113 @@ class _Integration(Billing):
         :param path: destination path within the integrated system.
         """
         return self._get("GetSSOUrl", params={"path": path})
+
+
+class _PayMethod(Billing):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/billing.PayMethod
+    """
+
+    _endpoint2 = "payMethod"
+
+    def EnablePayMethod(
+        self,
+        pay_method_id: str,
+        enable: int,
+    ):
+        """
+        :param pay_method_id: payment method ID to be set as default one (see the GetPayMethodList method)
+        :param enable: enables (1) or disables (0) the provided payment method
+        """
+        return self._get(
+            "EnablePayMethod", params={"payMethodId": pay_method_id, "enable": enable}
+        )
+
+    def GetDefaultPayMethod(self):
+        return self._get("GetDefaultPayMethod", params={})
+
+    def GetPublicToken(self):
+        return self._get("GetPublicToken", params={})
+
+    def GetValidPayTypes(self):
+        return self._get("GetValidPayTypes", params={})
+
+    def RegisterBankCard(
+        self,
+        first_name: str,
+        last_name: str,
+        card_number: str,
+        card_code: str,
+        expire_month: int,
+        expire_year: int,
+        service_plan_id: int,
+    ):
+        """
+        :param first_name: exactly as on the card
+        :param last_name: exactly as on the card
+        :param card_number: very big number
+        :param card_code: 4 digits.
+        :param expire_month: exactly as on the card. from 1 to 12
+        :param expire_year: year in format yyyy
+        :param service_plan_id: service plan id to buy for check card or 0 then min test pay is used.
+        """
+        return self._get(
+            "RegisterBankCard",
+            params={
+                "firstName": first_name,
+                "lastName": last_name,
+                "cardNumber": card_number,
+                "cardCode": card_code,
+                "expireMonth": expire_month,
+                "expireYear": expire_year,
+                "servicePlanId": service_plan_id,
+            },
+        )
+
+    def RegisterPayMethodAndPay(
+        self,
+        pay_method_type: str,
+        service_plan_id: int,
+        auto_service_plan_id: list[int] = None,
+        auto_refill_min_balance: list[int] = None,
+        auto_refill_period: list[str] = None,
+    ):
+        """
+        :param pay_method_type: take value from item of GetValidPayTypes response
+        :param auto_service_plan_id: service plan id for auto refill, should 0 or -1 if none
+        :param auto_refill_min_balance: min balance threshold when by new service plan
+        :param auto_refill_period: accepted string literals "WEEK" and "MONTH"
+        """
+        return self._get(
+            "RegisterPayMethodAndPay",
+            params={
+                "payMethodType": pay_method_type,
+                "servicePlanId": service_plan_id,
+                "autoServicePlanId": auto_service_plan_id,
+                "autoRefillMinBalance": auto_refill_min_balance,
+                "autoRefillPeriod": auto_refill_period,
+            },
+            delimiter=",",
+        )
+
+    def SetDefaultPayMethod(self, pay_method_id: str):
+        """
+        :param pay_method_id: payment method ID to be set as default one (see the GetPayMethodList method)
+        """
+        return self._get("SetDefaultPayMethod", params={"payMethodId": pay_method_id})
+
+    def SetupIntent(
+        self,
+        payment_method_type: list[str] = None,
+    ):
+        """
+        :param payment_method_type: list of payment method keys (optional), for example: card, bancontact, ...
+        """
+        return self._get(
+            "SetupIntent",
+            params={"paymentMethodType": payment_method_type},
+            delimiter=",",
+        )
 
 
 class _Pricing(Billing):
