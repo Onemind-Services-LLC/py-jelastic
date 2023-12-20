@@ -46,7 +46,7 @@ class Billing(ClientAbstract):
         >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.billing.Order
 
-        Ref: https://docs.jelastic.com/api/#!/api/billing.Order
+        Ref: https://docs.jelastic.com/api/private/#!/api/billing.Order
         """
         return _Order(session=self._session, token=self._token, debug=self._debug)
 
@@ -794,11 +794,7 @@ class _Order(Billing):
         checksum: str,
     ):
         """
-        :param start_date: START DATE
-        :param end_date: END DATE
-        :param uid: UID
         :param checksum: required but not used
-        :return:
         """
 
         start_date = start_date.strftime("%Y-%m-%d")
