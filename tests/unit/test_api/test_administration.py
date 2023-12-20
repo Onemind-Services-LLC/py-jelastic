@@ -3,7 +3,7 @@ from unittest.mock import patch, Mock
 from jelastic.api import Administration
 from datetime import datetime, date
 import pytz
-
+CURRENT_DATETIME = datetime.now()
 success_response = {"error": "", "reason": 0, "result": 0, "source": "billing"}
 
 
@@ -739,13 +739,13 @@ def test_get_all_resellers(client):
 def test_get_all_sum_stat_by_uid(client):
     client._get.return_value = success_response
     response = client.Cluster.GetAllSumStatByUid(
-        [1, 2], [datetime(2022, 11, 10, tzinfo=pytz.utc), datetime(2022, 11, 10, tzinfo=pytz.utc)], [1, 1]
+        [1, 2], [ CURRENT_DATETIME.date(), CURRENT_DATETIME.date()], [1, 1]
     )
     client._get.assert_called_with(
         "GetAllSumStatByUid",
         params={
             "duration": [1, 2],
-            "endtime": [datetime(2022, 11, 10, tzinfo=pytz.utc), datetime(2022, 11, 10, tzinfo=pytz.utc)],
+            "endtime":  [ CURRENT_DATETIME.date(), CURRENT_DATETIME.date()],
             "uid": [1, 1],
         },
         delimiter=",",
@@ -783,14 +783,14 @@ def test_get_billable_items(client):
 def test_get_cluster_load_history(client):
     client._get.return_value = success_response
     response = client.Cluster.GetClusterLoadHistory(
-        [datetime(2022, 11, 10, tzinfo=pytz.utc), datetime(2022, 11, 10, tzinfo=pytz.utc)],
-        [datetime(2022, 9, 10, tzinfo=pytz.utc), datetime(2022, 10, 10, tzinfo=pytz.utc)]
+        [ CURRENT_DATETIME.date(),  CURRENT_DATETIME.date()],
+        [ CURRENT_DATETIME.date(), CURRENT_DATETIME.date(),]
     )
     client._get.assert_called_with(
         "GetClusterLoadHistory",
         params={
-            "starttime": [datetime(2022, 11, 10, tzinfo=pytz.utc), datetime(2022, 11, 10, tzinfo=pytz.utc)],
-            "endtime": [datetime(2022, 9, 10, tzinfo=pytz.utc), datetime(2022, 10, 10, tzinfo=pytz.utc)]
+            "starttime": [ CURRENT_DATETIME.date(),  CURRENT_DATETIME.date()],
+            "endtime": [ CURRENT_DATETIME.date(),  CURRENT_DATETIME.date()],
         },
     )
     assert response == success_response
@@ -949,13 +949,13 @@ def test_get_env_info(client):
 def test_get_env_stat(client):
     client._get.return_value = success_response
     response = client.Cluster.GetEnvStat(
-        datetime(2022, 11, 10, tzinfo=pytz.utc), datetime(2022, 9, 10, tzinfo=pytz.utc)
+        CURRENT_DATETIME.date(),  CURRENT_DATETIME.date(),
     )
     client._get.assert_called_with(
         "GetEnvStat",
         params={
-            "starttime": datetime(2022, 11, 10, tzinfo=pytz.utc),
-            "endtime": datetime(2022, 9, 10, tzinfo=pytz.utc)
+            "starttime":  CURRENT_DATETIME.date(),
+            "endtime": CURRENT_DATETIME.date(),
         },
     )
     assert response == success_response
@@ -964,13 +964,13 @@ def test_get_env_stat(client):
 def test_get_environment_group_populations(client):
     client._get.return_value = success_response
     response = client.Cluster.GetEnvironmentGroupPopulations(
-        datetime(2022, 11, 10, tzinfo=pytz.utc), datetime(2022, 9, 10, tzinfo=pytz.utc)
+        CURRENT_DATETIME.date(), CURRENT_DATETIME.date()
     )
     client._get.assert_called_with(
         "GetEnvironmentGroupPopulations",
         params={
-            "start": datetime(2022, 11, 10, tzinfo=pytz.utc),
-            "end": datetime(2022, 9, 10, tzinfo=pytz.utc)
+            "start":  CURRENT_DATETIME.date(),
+            "end": CURRENT_DATETIME.date()
         },
     )
     assert response == success_response
@@ -1403,7 +1403,7 @@ def test_get_stats(client):
     client._get.return_value = success_response
     response = client.Cluster.GetStats(
         1, 1, "target_appid",
-        [datetime(2022, 11, 10, tzinfo=pytz.utc), datetime(2022, 9, 10, tzinfo=pytz.utc)
+        [ CURRENT_DATETIME.date(), CURRENT_DATETIME.date()
          ], [1, 2], ["nodetype1", "nodetype2"], ["node_group1", "node_group2"]
 
     )
@@ -1413,8 +1413,7 @@ def test_get_stats(client):
             "duration": 1,
             "interval": 1,
             "targetAppid": "target_appid",
-            "endtime": [datetime(2022, 11, 10, tzinfo=pytz.utc), datetime(2022, 9, 10, tzinfo=pytz.utc)
-                        ],
+            "endtime":  [CURRENT_DATETIME.date(), CURRENT_DATETIME.date()],
             "nodeid": [1, 2],
             "nodetype": ["nodetype1", "nodetype2"],
             "nodeGroup": ["node_group1", "node_group2"],
@@ -1428,16 +1427,14 @@ def test_get_sum_stats(client):
     client._get.return_value = success_response
     response = client.Cluster.GetSumStat(
         [1, 2],
-        [datetime(2022, 11, 10, tzinfo=pytz.utc), datetime(2022, 9, 10, tzinfo=pytz.utc)
-         ], ["target_appid1", "target_appid2"]
+        [CURRENT_DATETIME.date(), CURRENT_DATETIME.date()], ["target_appid1", "target_appid2"]
 
     )
     client._get.assert_called_with(
         "GetSumStat",
         params={
             "duration": [1, 2],
-            "endtime": [datetime(2022, 11, 10, tzinfo=pytz.utc), datetime(2022, 9, 10, tzinfo=pytz.utc)
-                        ],
+            "endtime":  [CURRENT_DATETIME.date(), CURRENT_DATETIME.date()],
             "targetAppid": ["target_appid1", "target_appid2"]
 
         },
@@ -1523,7 +1520,7 @@ def test_get_templates(client):
 def test_get_user_activity(client):
     client._get.return_value = success_response
     response = client.Cluster.GetUserActivity(
-        1, datetime(2022, 11, 10, tzinfo=pytz.utc), datetime(2022, 9, 10, tzinfo=pytz.utc),
+        1, CURRENT_DATETIME.date(),  CURRENT_DATETIME.date(),
         ["target_appid1", "target_appid2"], ["start_row1", "start_row2"], [1, 2],
         ["service_name1", "service_name2"], ["search_text1", "search_text2"],
         ["action_types1", "action_types2"], ["order_field1", "order_field2"],
@@ -1533,8 +1530,8 @@ def test_get_user_activity(client):
         "GetUserActivity",
         params={
             "uid": 1,
-            "starttime": datetime(2022, 11, 10, tzinfo=pytz.utc),
-            "endtime": datetime(2022, 9, 10, tzinfo=pytz.utc),
+            "starttime":  CURRENT_DATETIME.date(),
+            "endtime":  CURRENT_DATETIME.date(),
             "targetAppid": ["target_appid1", "target_appid2"],
             "startRow": ["start_row1", "start_row2"],
             "resultCount": [1, 2],
@@ -1552,15 +1549,15 @@ def test_get_user_activity(client):
 def test_get_user_activities(client):
     client._get.return_value = success_response
     response = client.Cluster.GetUsersActivities(
-        datetime(2022, 11, 10, tzinfo=pytz.utc),
-        datetime(2022, 9, 10, tzinfo=pytz.utc),
+        CURRENT_DATETIME.date(),
+        CURRENT_DATETIME.date(),
         [1, 2], [1, 2]
     )
     client._get.assert_called_with(
         "GetUsersActivities",
         params={
-            "starttime": datetime(2022, 11, 10, tzinfo=pytz.utc),
-            "endtime": datetime(2022, 9, 10, tzinfo=pytz.utc),
+            "starttime": CURRENT_DATETIME.date(),
+            "endtime": CURRENT_DATETIME.date(),
             "startRow": [1, 2],
             "resultCount": [1, 2],
         },
@@ -2041,15 +2038,15 @@ def test_set_template_published(client):
 def test_sleep(client):
     client._get.return_value = success_response
     response = client.Cluster.Sleep(
-        [datetime(2022, 11, 11, tzinfo=pytz.utc), datetime(2022, 11, 11, tzinfo=pytz.utc)],
-        [datetime(2024, 11, 11, tzinfo=pytz.utc), datetime(2024, 11, 11, tzinfo=pytz.utc)],
+        [CURRENT_DATETIME.date(), CURRENT_DATETIME.date()],
+        [CURRENT_DATETIME.date(), CURRENT_DATETIME.date()],
         [1, 2, 3]
     )
     client._get.assert_called_with(
         "Sleep",
         params={
-            "starttime": [datetime(2022, 11, 11, tzinfo=pytz.utc), datetime(2022, 11, 11, tzinfo=pytz.utc)],
-            "endtime": [datetime(2024, 11, 11, tzinfo=pytz.utc), datetime(2024, 11, 11, tzinfo=pytz.utc)],
+            "starttime":  [CURRENT_DATETIME.date(), CURRENT_DATETIME.date()],
+            "endtime":  [CURRENT_DATETIME.date(), CURRENT_DATETIME.date()],
             "deactivateAfter": [1, 2, 3],
         },
         delimiter=",",
@@ -2113,13 +2110,13 @@ def test_stop_evacuation(client):
 def test_sync_cloud_lets(client):
     client._get.return_value = success_response
     response = client.Cluster.SyncCloudlets(
-        datetime(2022, 11, 11, tzinfo=pytz.utc),
+        CURRENT_DATETIME.date(),
         [True, False, True],
     )
     client._get.assert_called_with(
         "SyncCloudlets(",
         params={
-            "starttime": datetime(2022, 11, 11, tzinfo=pytz.utc),
+            "starttime":  CURRENT_DATETIME.date(),
             "debug": [True, False, True],
         },
     )
