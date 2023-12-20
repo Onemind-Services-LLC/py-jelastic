@@ -1451,7 +1451,7 @@ class _Subscription(Billing):
             id: list[int] = None,
             product_id: list[int] = None,
             expand_fields: list[str] = None,
-                        ):
+    ):
         """
         :param id: unique identifier of the target service plan (for filtering).
         :param product_id: unique identifier of the target subscription product (for filtering).
@@ -1467,11 +1467,77 @@ class _Subscription(Billing):
             delimiter=",",
         )
 
-    def GetSubscriptions(self):
-        pass
+    def GetSubscriptions(
+            self,
+            id: list[int] = None,
+            product_id: list[int] = None,
+            status: list[str] = None,
+            expand_fields: list[str] = None,
+            start_row: list[int] = None,
+            result_count: list[int] = None,
+            order_field: list[str] = None,
+            order_direction: list[str] = None,
+    ):
+        """
+        :param id: unique identifier of the target subscription (for filtering).
+        :param product_id: unique identifier of the target subscription product (for filtering).
+        :param status: a comma-separated list of the subscription statuses.("INCOMPLETE", "INCOMPLETE_EXPIRED", "TRIAL", "ACTIVE", "PAST_DUE", "UNPAID", "SUSPENDED", "CANCELED", "ENDED").
+        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).
+        :param start_row: returns information starting from the specified row in the response (starts with 0, by default).
+        :param result_count: returns the specified number of rows from the response (0 – unlimited – by default).
+        :param order_field: sorts results by the specified field
+        :param order_direction: sorts results in the ascending (ASC) or descending (DESC) order
+        """
+        return self._get(
+            'GetSubscriptions',
+            params={
+                'id': id,
+                'productId': product_id,
+                'status': status,
+                'expandFields': expand_fields,
+                'startRow': start_row,
+                'resultCount': result_count,
+                'orderField': order_field,
+                'orderDirection': order_direction,
+            },
+            delimiter=",",
+        )
 
-    def InstallProduct(self):
-        pass
+    def InstallProduct(
+            self,
+            subscription_id: int,
+            item_id: list[int] = None,
+            settings: list[str] = None,
+            env_name: list[str] = None,
+            display_name: list[str] = None,
+            env_groups: list[str] = None,
+            region: list[str] = None,
+            lang: list[str] = None,
+    ):
+        """
+        :param subscription_id: unique identifier of the target subscription.
+        :param item_id: unique identifier of the target subscription item.
+        :param settings: JSON object with subscription configuration.
+        :param env_name: target environment name
+        :param display_name: target environment display name
+        :param env_groups: target environment groups
+        :param region: target environment region
+        :param lang: target installation language
+        """
+        return self._get(
+            'InstallProduct',
+            params={
+                'subscriptionId': subscription_id,
+                'itemId': item_id,
+                'settings': settings,
+                'envName': env_name,
+                'displayName': display_name,
+                'envGroups': env_groups,
+                'region': region,
+                'lang': lang,
+            },
+            delimiter=",",
+        )
 
     def MoveProduct(self):
         pass
