@@ -42,6 +42,10 @@ class Administration(ClientAbstract):
 
 
 class _Analytics(Administration):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/administration.Config
+    """
+
     _endpoint2 = "analytics"
 
     def GetNodesAffinitySuggestion(
