@@ -9,3 +9,8 @@ Administration
    :members:
    :undoc-members:
    :show-inheritance:
+
+.. autoclass:: jelastic.api.administration._Cluster
+   :members:
+   :undoc-members:
+   :show-inheritance:
