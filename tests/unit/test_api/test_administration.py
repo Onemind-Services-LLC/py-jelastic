@@ -1390,7 +1390,7 @@ def test_add_virtual_network(client):
     client._get.assert_called_with(
         "AddVirtualNetwork",
         params={
-            'virtualNetwork': {
+            "virtualNetwork": {
                 "networkName1": "name1",
                 "networkName2": "name2",
                 "networkName3": "name3",
@@ -1411,7 +1411,7 @@ def test_apply_virtual_networks(client):
     client._get.assert_called_with(
         "ApplyVirtualNetworks",
         params={
-            'hostId': [1, 2, 3, 4],
+            "hostId": [1, 2, 3, 4],
         },
         delimiter=",",
     )
@@ -1422,10 +1422,10 @@ def test_delete_virtual_networks(client):
     client._get.return_value = success_response
     response = client.VirtualNetwork.DeleteVirtualNetworks(1)
     client._get.assert_called_with(
-        'DeleteVirtualNetworks',
+        "DeleteVirtualNetworks",
         params={
-            'ids': 1,
-        }
+            "ids": 1,
+        },
     )
     assert response == success_response
 
@@ -1436,9 +1436,9 @@ def test_get_virtual_networks(client):
         [1, 2, 3, 4],
     )
     client._get.assert_called_with(
-        'GetVirtualNetworks',
+        "GetVirtualNetworks",
         params={
-            'ids': [1, 2, 3, 4],
+            "ids": [1, 2, 3, 4],
         },
         delimiter=",",
     )
