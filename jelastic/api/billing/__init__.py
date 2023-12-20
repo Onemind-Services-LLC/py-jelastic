@@ -36,6 +36,20 @@ class Billing(ClientAbstract):
         """
         return _Account(session=self._session, token=self._token, debug=self._debug)
 
+    @property
+    def Invoice(self) -> "_Invoice":
+        """
+        The methods of this service provide billing information about a user account (such as UID, balance, billing history,
+        quotas, etc.) and allow managing it.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.billing.Invoice
+
+        Ref: https://docs.jelastic.com/api/#!/api/billing.Invoice
+        """
+        return _Invoice(session=self._session, token=self._token, debug=self._debug)
+
 
 class _Account(Billing):
     """
@@ -702,4 +716,182 @@ class _Account(Billing):
 
         return self._get(
             "WithdrawAccounts", params={"startDate": start_date, "endDate": end_date}
+        )
+
+
+class _Invoice(Billing):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/billing.Invoice
+    """
+
+    def Event(
+        self,
+        extern_id: str,
+        event_type: str,
+    ):
+        """
+        :param extern_id: unique identifier of the document that was returned by external billing system
+        :param event_type: invoice event type (EXPIRED or PAID)
+        """
+        return self._get(
+            "Event", params={"externId": extern_id, "eventType": event_type}
+        )
+
+    def GetExternalInvoices(
+        self,
+        limit: list[int] = None,
+        owner_uid: list[int] = None,
+    ):
+        """
+        :param limit: the maximum number of invoices returned in the response.
+        :param owner_uid: unique identifier of the invoice owner.
+        """
+        return self._get(
+            "ExternalInvoices",
+            params={
+                "limit": limit,
+                "ownerUid": owner_uid,
+            },
+            delimiter=",",
+        )
+
+    def GetInvoices(
+        self,
+        id: list[int] = None,
+        unique_name: list[str] = None,
+        type: list[str] = None,
+        status: list[str] = None,
+        subscription_id: list[int] = None,
+        subscription_status: list[str] = None,
+        order_fields: list[str] = None,
+        order_direction: list[str] = None,
+        start_row: list[int] = None,
+        result_count: list[int] = None,
+        expand_fields: list[str] = None,
+    ):
+        """
+        :param id: unique identifier of the target invoice.
+        :param unique_name: a name of the target invoice that is provided to the end-user.
+        :param type: invoice type (POST_PAYMENT or SUBSCRIPTION).
+        :param status: a semicolon-separated list of invoice statuses.
+        :param subscription_id: unique identifier of the target subscription.
+        :param subscription_status: a semicolon-separated list of the subscription statuses.
+        :param order_fields: sorts results by the specified field.
+        :param order_direction: sorts results in the ascending (ASC) or descending (DESC) order.
+        :param start_row: returns information starting from the specified row in the response (starts with 0, by default).
+        :param result_count: returns the specified number of rows from the response (0 – unlimited – by default).
+        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group
+        """
+        return self._get(
+            "GetInvoices",
+            params={
+                "id": id,
+                "uniqueName": unique_name,
+                "type": type,
+                "status": status,
+                "subscriptionId": subscription_id,
+                "subscriptionStatus": subscription_status,
+                "orderFields": order_fields,
+                "orderDirection": order_direction,
+                "startRow": start_row,
+                "resultCount": result_count,
+                "expandFields": expand_fields,
+            },
+            delimiter=",",
+        )
+
+    def MakeInvoice(
+        self,
+        uid: str,
+        skip_pay: list[bool] = None,
+    ):
+        """
+        :param uid: a comma-separated list of target POST-paid users' unique identifiers (all, if not set).
+        :param skip_pay: a flag that disables (true) or enables (false) auto-pay with a default payment method
+        """
+        return self._get(
+            "MakeInvoice",
+            params={
+                "uid": uid,
+                "skipPay": skip_pay,
+            },
+            delimiter=",",
+        )
+
+    def MarkAsPaid(
+        self,
+        id: list[int] = None,
+        ebs_invoice_id: list[str] = None,
+    ):
+        """
+        :param id: unique identifier of the target invoice.
+        :param ebs_invoice_id: unique identifier of the target invoice in the external billing system.
+        """
+        return self._get(
+            "MarkAsPaid",
+            params={
+                "id": id,
+                "ebsInvoiceId": ebs_invoice_id,
+            },
+            delimiter=",",
+        )
+
+    def MarkAsVoid(
+        self,
+        id: list[int] = None,
+        ebs_invoice_id: list[str] = None,
+    ):
+        """
+        :param id: unique identifier of the target invoice.
+        :param ebs_invoice_id: unique identifier of the target invoice in the external billing system.
+        """
+        return self._get(
+            "MarkAsVoid",
+            params={
+                "id": id,
+                "ebsInvoiceId": ebs_invoice_id,
+            },
+            delimiter=",",
+        )
+
+    def Pay(
+        self,
+        id: int,
+        payment_method_id: list[str] = None,
+        payment_method_type: list[str] = None,
+    ):
+        """
+        :param id: unique identifier of the target invoice.
+        :param payment_method_id: unique identifier of the payment method type.
+        :param payment_method_type: type of the payment method.
+        """
+        return self._get(
+            "Pay",
+            params={
+                "id": id,
+                "paymentMethodId": payment_method_id,
+                "paymentMethodType": payment_method_type,
+            },
+            delimiter=",",
+        )
+
+    def SearchInvoices(
+        self,
+        search: str,
+        expand_fields: list[str] = None,
+        reseller_id: list[int] = None,
+    ):
+        """
+        :param search: a search string in the JSON format. For example: {"startDate":"2023-01-23 00:00:00","endDate":"2023-01-30 23:59:59","orderField":"id","orderDirection":"DESC","startRow":0,"resultCount":10}
+        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).
+        :param reseller_id: unique identifier of the target reseller platform.
+        """
+        return self._get(
+            "SearchInvoices",
+            params={
+                "search": search,
+                "expandFields": expand_fields,
+                "resellerId": reseller_id,
+            },
+            delimiter=",",
         )
