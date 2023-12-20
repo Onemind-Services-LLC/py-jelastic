@@ -10,7 +10,7 @@
           <link rel="stylesheet" href="_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="_static/documentation_options.js?v=599651cf"></script>
+        <script src="_static/documentation_options.js?v=aa2d6a84"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -449,6 +449,19 @@ quotas, etc.) and allow managing it.</p>
 <p>Ref: <a class="reference external" href="https://docs.jelastic.com/api/#!/api/billing.Account">https://docs.jelastic.com/api/#!/api/billing.Account</a></p>
 </dd></dl>
 
+<dl class="py property">
+<dt class="sig sig-object py" id="jelastic.api.billing.Billing.Pricing">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Pricing</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#jelastic.api.billing._Pricing" title="jelastic.api.billing._Pricing"><span class="pre">_Pricing</span></a></em><a class="headerlink" href="#jelastic.api.billing.Billing.Pricing" title="Link to this definition">¶</a></dt>
+<dd><p>The methods of this service provide billing information about a user account (such as UID, balance, billing history,
+quotas, etc.) and allow managing it.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jelastic</span> <span class="kn">import</span> <span class="n">Jelastic</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jelastic</span> <span class="o">=</span> <span class="n">Jelastic</span><span class="p">(</span><span class="s1">&#39;https://jca.xapp.cloudmydc.com&#39;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s1">&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jelastic</span><span class="o">.</span><span class="n">billing</span><span class="o">.</span><span class="n">Pricing</span>
+</pre></div>
+</div>
+<p>Ref: <a class="reference external" href="https://docs.jelastic.com/api/private/#!/api/billing.Pricing">https://docs.jelastic.com/api/private/#!/api/billing.Pricing</a></p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -847,6 +860,155 @@ environments are shutdown. At activation all active environments are woken up.</
 <span class="sig-name descname"><span class="pre">WithdrawAccounts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">date</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Account.WithdrawAccounts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Account.WithdrawAccounts" title="Link to this definition">¶</a></dt>
 <dd><p>Charge accounts for resource usage for the specified period.</p>
 </dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="jelastic.api.billing._Pricing">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jelastic.api.billing.</span></span><span class="sig-name descname"><span class="pre">_Pricing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Pricing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Pricing" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#jelastic.api.billing.Billing" title="jelastic.api.billing.Billing"><code class="xref py py-class docutils literal notranslate"><span class="pre">Billing</span></code></a></p>
+<p>Ref: <a class="reference external" href="https://docs.jelastic.com/api/private/#!/api/billing.Pricing">https://docs.jelastic.com/api/private/#!/api/billing.Pricing</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Pricing.AddPricing">
+<span class="sig-name descname"><span class="pre">AddPricing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pricing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tariff_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tariff_grid_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Pricing.AddPricing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Pricing.AddPricing" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Pricing.AddResource">
+<span class="sig-name descname"><span class="pre">AddResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Pricing.AddResource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Pricing.AddResource" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Pricing.AddTariff">
+<span class="sig-name descname"><span class="pre">AddTariff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tariff</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Pricing.AddTariff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Pricing.AddTariff" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Pricing.AttachTariff">
+<span class="sig-name descname"><span class="pre">AttachTariff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uniq_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_app_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Pricing.AttachTariff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Pricing.AttachTariff" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Pricing.AttachTariffGrid">
+<span class="sig-name descname"><span class="pre">AttachTariffGrid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tariff_grid_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Pricing.AttachTariffGrid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Pricing.AttachTariffGrid" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Pricing.CheckHostGroupsAllowed">
+<span class="sig-name descname"><span class="pre">CheckHostGroupsAllowed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">owner_uid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hardware_node_groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Pricing.CheckHostGroupsAllowed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Pricing.CheckHostGroupsAllowed" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>owner_uid</strong> – unique identifier of the target user.</p></li>
+<li><p><strong>hardware_node_groups</strong> – a comma-separated list of the host groups to be checked.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Pricing.DeletePricing">
+<span class="sig-name descname"><span class="pre">DeletePricing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Pricing.DeletePricing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Pricing.DeletePricing" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Pricing.DeleteTariff">
+<span class="sig-name descname"><span class="pre">DeleteTariff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Pricing.DeleteTariff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Pricing.DeleteTariff" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Pricing.DetachTariff">
+<span class="sig-name descname"><span class="pre">DetachTariff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uniq_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_app_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Pricing.DetachTariff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Pricing.DetachTariff" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Pricing.DetachTariffGrid">
+<span class="sig-name descname"><span class="pre">DetachTariffGrid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tariff_grid_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Pricing.DetachTariffGrid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Pricing.DetachTariffGrid" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Pricing.EditPricing">
+<span class="sig-name descname"><span class="pre">EditPricing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pricing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Pricing.EditPricing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Pricing.EditPricing" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Pricing.EditResource">
+<span class="sig-name descname"><span class="pre">EditResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Pricing.EditResource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Pricing.EditResource" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Pricing.EditTariff">
+<span class="sig-name descname"><span class="pre">EditTariff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tariff</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Pricing.EditTariff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Pricing.EditTariff" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Pricing.GetCurrencies">
+<span class="sig-name descname"><span class="pre">GetCurrencies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">currency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Pricing.GetCurrencies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Pricing.GetCurrencies" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Pricing.GetPlatformCurrency">
+<span class="sig-name descname"><span class="pre">GetPlatformCurrency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reseller_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Pricing.GetPlatformCurrency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Pricing.GetPlatformCurrency" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Pricing.GetPricing">
+<span class="sig-name descname"><span class="pre">GetPricing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">owner_uid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Pricing.GetPricing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Pricing.GetPricing" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Pricing.GetPricingInner">
+<span class="sig-name descname"><span class="pre">GetPricingInner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reseller_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Pricing.GetPricingInner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Pricing.GetPricingInner" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>reseller_id</strong> – unique ID of the target reseller platform</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Pricing.GetResources">
+<span class="sig-name descname"><span class="pre">GetResources</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Pricing.GetResources"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Pricing.GetResources" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Pricing.GetTariffsInner">
+<span class="sig-name descname"><span class="pre">GetTariffsInner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pricing_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reseller_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Pricing.GetTariffsInner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Pricing.GetTariffsInner" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pricing_id</strong> – pricing model unique ID.</p></li>
+<li><p><strong>type</strong> – a semicolon-separated list of tariff types.</p></li>
+<li><p><strong>reseller_id</strong> – unique ID of the target reseller platform.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Pricing.GetUniqueResourceNames">
+<span class="sig-name descname"><span class="pre">GetUniqueResourceNames</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Pricing.GetUniqueResourceNames"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Pricing.GetUniqueResourceNames" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Pricing.SetTariffs">
+<span class="sig-name descname"><span class="pre">SetTariffs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pricing_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tariff_ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tariff_grid_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Pricing.SetTariffs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Pricing.SetTariffs" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Pricing.ValidateEnvironment">
+<span class="sig-name descname"><span class="pre">ValidateEnvironment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hardware_node_group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">owner_uid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Pricing.ValidateEnvironment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Pricing.ValidateEnvironment" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Pricing.ValidateNode">
+<span class="sig-name descname"><span class="pre">ValidateNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hardware_node_group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixed_cloud_lets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flexible_cloud_lets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Pricing.ValidateNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Pricing.ValidateNode" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.billing._Pricing.ValidateNodeInner">
+<span class="sig-name descname"><span class="pre">ValidateNodeInner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">uid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hardware_node_group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixed_cloud_lets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flexible_cloud_lets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/billing.html#_Pricing.ValidateNodeInner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.billing._Pricing.ValidateNodeInner" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 

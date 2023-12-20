@@ -9,7 +9,7 @@
           <link rel="stylesheet" href="../../../_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="../../../_static/documentation_options.js?v=599651cf"></script>
+        <script src="../../../_static/documentation_options.js?v=aa2d6a84"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -447,7 +447,21 @@
 
 <span class="sd">        Ref: https://docs.jelastic.com/api/#!/api/billing.Account</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">_Account</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">_Account</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Pricing</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_Pricing&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The methods of this service provide billing information about a user account (such as UID, balance, billing history,</span>
+<span class="sd">        quotas, etc.) and allow managing it.</span>
+
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.billing.Pricing</span>
+
+<span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/billing.Pricing</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_Pricing</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">)</span></div>
 
 
 
@@ -1270,6 +1284,320 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
             <span class="s2">&quot;WithdrawAccounts&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;startDate&quot;</span><span class="p">:</span> <span class="n">start_date</span><span class="p">,</span> <span class="s2">&quot;endDate&quot;</span><span class="p">:</span> <span class="n">end_date</span><span class="p">}</span>
+        <span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="_Pricing">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Pricing">[docs]</a>
+<span class="k">class</span> <span class="nc">_Pricing</span><span class="p">(</span><span class="n">Billing</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/billing.Pricing</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="_Pricing.AddPricing">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Pricing.AddPricing">[docs]</a>
+    <span class="k">def</span> <span class="nf">AddPricing</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">pricing</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+        <span class="n">tariff_ids</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">tariff_grid_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;AddPricing&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;pricing&quot;</span><span class="p">:</span> <span class="n">pricing</span><span class="p">,</span>
+                <span class="s2">&quot;tariffIds&quot;</span><span class="p">:</span> <span class="n">tariff_ids</span><span class="p">,</span>
+                <span class="s2">&quot;tariffGridNames&quot;</span><span class="p">:</span> <span class="n">tariff_grid_names</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Pricing.AddResource">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Pricing.AddResource">[docs]</a>
+    <span class="k">def</span> <span class="nf">AddResource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;AddResource&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;resource&quot;</span><span class="p">:</span> <span class="n">resource</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="_Pricing.AddTariff">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Pricing.AddTariff">[docs]</a>
+    <span class="k">def</span> <span class="nf">AddTariff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tariff</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;AddTariff&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;tariff&quot;</span><span class="p">:</span> <span class="n">tariff</span><span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Pricing.AttachTariff">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Pricing.AttachTariff">[docs]</a>
+    <span class="k">def</span> <span class="nf">AttachTariff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uniq_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target_app_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;AttachTariff&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;uniqName&quot;</span><span class="p">:</span> <span class="n">uniq_name</span><span class="p">,</span> <span class="s2">&quot;targetAppId&quot;</span><span class="p">:</span> <span class="n">target_app_id</span><span class="p">}</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Pricing.AttachTariffGrid">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Pricing.AttachTariffGrid">[docs]</a>
+    <span class="k">def</span> <span class="nf">AttachTariffGrid</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">tariff_grid_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;AttachTariffGrid&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;tariffGridName&quot;</span><span class="p">:</span> <span class="n">tariff_grid_name</span><span class="p">,</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Pricing.CheckHostGroupsAllowed">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Pricing.CheckHostGroupsAllowed">[docs]</a>
+    <span class="k">def</span> <span class="nf">CheckHostGroupsAllowed</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">hardware_node_groups</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param owner_uid: unique identifier of the target user.</span>
+<span class="sd">        :param hardware_node_groups: a comma-separated list of the host groups to be checked.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;CheckHostGroupsAllowed&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span> <span class="s2">&quot;hardwareNodeGroups&quot;</span><span class="p">:</span> <span class="n">hardware_node_groups</span><span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Pricing.DeletePricing">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Pricing.DeletePricing">[docs]</a>
+    <span class="k">def</span> <span class="nf">DeletePricing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;DeletePricing&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="_Pricing.DeleteTariff">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Pricing.DeleteTariff">[docs]</a>
+    <span class="k">def</span> <span class="nf">DeleteTariff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;DeleteTariff&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="_Pricing.DetachTariff">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Pricing.DetachTariff">[docs]</a>
+    <span class="k">def</span> <span class="nf">DetachTariff</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">uniq_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">target_app_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;DetachTariff&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;uniqName&quot;</span><span class="p">:</span> <span class="n">uniq_name</span><span class="p">,</span> <span class="s2">&quot;targetAppId&quot;</span><span class="p">:</span> <span class="n">target_app_id</span><span class="p">}</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Pricing.DetachTariffGrid">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Pricing.DetachTariffGrid">[docs]</a>
+    <span class="k">def</span> <span class="nf">DetachTariffGrid</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">tariff_grid_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;DetachTariffGrid&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;tariffGridName&quot;</span><span class="p">:</span> <span class="n">tariff_grid_name</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">}</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Pricing.EditPricing">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Pricing.EditPricing">[docs]</a>
+    <span class="k">def</span> <span class="nf">EditPricing</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">pricing</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;EditPricing&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;pricing&quot;</span><span class="p">:</span> <span class="n">pricing</span><span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Pricing.EditResource">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Pricing.EditResource">[docs]</a>
+    <span class="k">def</span> <span class="nf">EditResource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;EditResource&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;resource&quot;</span><span class="p">:</span> <span class="n">resource</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="_Pricing.EditTariff">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Pricing.EditTariff">[docs]</a>
+    <span class="k">def</span> <span class="nf">EditTariff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tariff</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;EditTariff&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;tariff&quot;</span><span class="p">:</span> <span class="n">tariff</span><span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Pricing.GetCurrencies">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Pricing.GetCurrencies">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetCurrencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">currency</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetCurrencies&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;currency&quot;</span><span class="p">:</span> <span class="n">currency</span><span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Pricing.GetPlatformCurrency">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Pricing.GetPlatformCurrency">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetPlatformCurrency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetPlatformCurrency&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Pricing.GetPricing">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Pricing.GetPricing">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetPricing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetPricing&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Pricing.GetPricingInner">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Pricing.GetPricingInner">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetPricingInner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param reseller_id: unique ID of the target reseller platform</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetPricingInner&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Pricing.GetResources">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Pricing.GetResources">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetResources</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetResources&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Pricing.GetTariffsInner">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Pricing.GetTariffsInner">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetTariffsInner</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">pricing_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param pricing_id: pricing model unique ID.</span>
+<span class="sd">        :param type: a semicolon-separated list of tariff types.</span>
+<span class="sd">        :param reseller_id: unique ID of the target reseller platform.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetTariffsInner&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;priceId&quot;</span><span class="p">:</span> <span class="n">pricing_id</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">,</span> <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Pricing.GetUniqueResourceNames">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Pricing.GetUniqueResourceNames">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetUniqueResourceNames</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetUniqueResourceNames&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{})</span></div>
+
+
+<div class="viewcode-block" id="_Pricing.SetTariffs">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Pricing.SetTariffs">[docs]</a>
+    <span class="k">def</span> <span class="nf">SetTariffs</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">pricing_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">tariff_ids</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">tariff_grid_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;SetTariffs&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;pricingId&quot;</span><span class="p">:</span> <span class="n">pricing_id</span><span class="p">,</span>
+                <span class="s2">&quot;tariffIds&quot;</span><span class="p">:</span> <span class="n">tariff_ids</span><span class="p">,</span>
+                <span class="s2">&quot;tariffGridNames&quot;</span><span class="p">:</span> <span class="n">tariff_grid_names</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Pricing.ValidateEnvironment">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Pricing.ValidateEnvironment">[docs]</a>
+    <span class="k">def</span> <span class="nf">ValidateEnvironment</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">hardware_node_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;ValidateEnvironment&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;hardwareNodeGroup&quot;</span><span class="p">:</span> <span class="n">hardware_node_group</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Pricing.ValidateNode">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Pricing.ValidateNode">[docs]</a>
+    <span class="k">def</span> <span class="nf">ValidateNode</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">uid</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">hardware_node_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">fixed_cloud_lets</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">flexible_cloud_lets</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;ValidateNode&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;uid&quot;</span><span class="p">:</span> <span class="n">uid</span><span class="p">,</span>
+                <span class="s2">&quot;hardwareNodeGroup&quot;</span><span class="p">:</span> <span class="n">hardware_node_group</span><span class="p">,</span>
+                <span class="s2">&quot;nodeType&quot;</span><span class="p">:</span> <span class="n">node_type</span><span class="p">,</span>
+                <span class="s2">&quot;fixedCloudlets&quot;</span><span class="p">:</span> <span class="n">fixed_cloud_lets</span><span class="p">,</span>
+                <span class="s2">&quot;flexibleCloudlets&quot;</span><span class="p">:</span> <span class="n">flexible_cloud_lets</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Pricing.ValidateNodeInner">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Pricing.ValidateNodeInner">[docs]</a>
+    <span class="k">def</span> <span class="nf">ValidateNodeInner</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">uid</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">hardware_node_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">fixed_cloud_lets</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">flexible_cloud_lets</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;ValidateNodeInner&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;uid&quot;</span><span class="p">:</span> <span class="n">uid</span><span class="p">,</span>
+                <span class="s2">&quot;hardwareNodeGroup&quot;</span><span class="p">:</span> <span class="n">hardware_node_group</span><span class="p">,</span>
+                <span class="s2">&quot;nodeType&quot;</span><span class="p">:</span> <span class="n">node_type</span><span class="p">,</span>
+                <span class="s2">&quot;fixedCloudlets&quot;</span><span class="p">:</span> <span class="n">fixed_cloud_lets</span><span class="p">,</span>
+                <span class="s2">&quot;flexibleCloudlets&quot;</span><span class="p">:</span> <span class="n">flexible_cloud_lets</span><span class="p">,</span>
+            <span class="p">},</span>
         <span class="p">)</span></div>
 </div>
 
