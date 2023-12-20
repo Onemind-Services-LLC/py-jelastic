@@ -37,3 +37,8 @@ Billing
 .. autoclass:: jelastic.api.billing._ServicePlan
    :undoc-members:
    :show-inheritance:
+
+.. autoclass:: jelastic.api.billing._Order
+   :members:
+   :undoc-members:
+   :show-inheritance:

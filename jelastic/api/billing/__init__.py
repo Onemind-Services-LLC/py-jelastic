@@ -120,6 +120,20 @@ class Billing(ClientAbstract):
         """
         return _ServicePlan(session=self._session, token=self._token, debug=self._debug)
 
+    @property
+    def Order(self) -> "_Order":
+        """
+        The methods of this service provide billing information about a user account (such as UID, balance, billing history,
+        quotas, etc.) and allow managing it.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.billing.Order
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/billing.Order
+        """
+        return _Order(session=self._session, token=self._token, debug=self._debug)
+
 
 class _Account(Billing):
     """
@@ -1710,4 +1724,137 @@ class _ServicePlan(Billing):
                 "description": description,
                 "externServicePlanId": extern_service_plan_id,
             },
+        )
+
+
+class _Order(Billing):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/billing.Order
+    """
+    _endpoint2 = 'order'
+
+    def AddStats(
+            self,
+            resource_name: str,
+            uid: int,
+            value: int,
+            start_date: list[str] = None,
+            end_date: list[str] = None,
+            env_name: list[str] = None,
+            node_id: list[int] = None,
+            note: list[str] = None,
+            value_group: list[str] = None,
+    ):
+        return self._get(
+            "AddStats",
+            params={
+                "resourceName": resource_name,
+                "uid": uid,
+                "value": value,
+                "startDate": start_date,
+                "endDate": end_date,
+                "envName": env_name,
+                "nodeId": node_id,
+                "note": note,
+                "valueGroup": value_group,
+            },
+            delimiter=",",
+        )
+
+    def EnvResources(
+            self,
+            start_date: date,
+            end_date: date,
+    ):
+        start_date = start_date.strftime("%Y-%m-%d")
+        end_date = end_date.strftime("%Y-%m-%d")
+        return self._get(
+            "EnvResources",
+            params={
+                "startDate": start_date,
+                "endDate": end_date,
+            },
+        )
+
+    def EnvsResources(
+            self,
+            start_date: date,
+            end_date: date,
+            target_app_id: str,
+            checksum: str,
+    ):
+        start_date = start_date.strftime("%Y-%m-%d")
+        end_date = end_date.strftime("%Y-%m-%d")
+        return self._get(
+            "EnvsResources",
+            params={
+                "startDate": start_date,
+                "endDate": end_date,
+                "targetAppId": target_app_id,
+                "checksum": checksum,
+            },
+        )
+
+    def EnvsResourcesByAccount(
+            self,
+            start_date: date,
+            end_date: date,
+            uid: int,
+            checksum: str,
+    ):
+        """
+        :param checksum: required but not used
+        """
+
+        start_date = start_date.strftime("%Y-%m-%d")
+        end_date = end_date.strftime("%Y-%m-%d")
+        return self._get(
+            "EnvsResourcesByAccount",
+            params={
+                "startDate": start_date,
+                "endDate": end_date,
+                "uid": uid,
+                "checksum": checksum,
+            },
+        )
+
+    def GetOptions(
+            self,
+            target_env_name: str,
+            node_group: str,
+    ):
+        """
+        :param target_env_name: env which holds nodeGroup
+        :param node_group: Node Group
+        """
+        return self._get(
+            "GetOptions",
+            params={
+                "targetEnvName": target_env_name,
+                "nodeGroup": node_group,
+            },
+        )
+
+    def SetOptions(
+            self,
+            target_env_name: str,
+            node_group: str,
+            options: str,
+            node_id: list[int] = None,
+    ):
+        """
+        :param target_env_name: target environment name with the required node group (layer).
+        :param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        :param options: JSON object with the required billing options.
+        :param node_id: unique identifier of the node that will be used to identify the target node group (overrides the nodeGroup parameter if both are specified).
+        """
+        return self._get(
+            "SetOptions",
+            params={
+                "targetEnvName": target_env_name,
+                "nodeGroup": node_group,
+                "options": options,
+                "nodeId": node_id,
+            },
+            delimiter=",",
         )
