@@ -25,3 +25,8 @@ Environment
     :members:
     :undoc-members:
     :show-inheritance:
+
+.. autoclass:: jelastic.api.environment._Build
+    :members:
+    :undoc-members:
+    :show-inheritance:
