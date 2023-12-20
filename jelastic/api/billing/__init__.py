@@ -36,6 +36,20 @@ class Billing(ClientAbstract):
         """
         return _Account(session=self._session, token=self._token, debug=self._debug)
 
+    @property
+    def Integration(self) -> "_Integration":
+        """
+        The methods of this service provide billing information about a user account (such as UID, balance, billing history,
+        quotas, etc.) and allow managing it.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.billing.Integration
+
+        Ref: https://docs.jelastic.com/api/#!/api/billing.Integration
+        """
+        return _Integration(session=self._session, token=self._token, debug=self._debug)
+
 
 class _Account(Billing):
     """
@@ -703,3 +717,23 @@ class _Account(Billing):
         return self._get(
             "WithdrawAccounts", params={"startDate": start_date, "endDate": end_date}
         )
+
+
+class _Integration(Billing):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/administration.Integration
+    """
+
+    _endpoint = "integration"
+
+    def GetInvoiceUrl(self, invoice_id: int):
+        """
+        :param invoice_id: unique identifier of the target invoice in the internal billing system.
+        """
+        return self._get("GetInvoiceUrl", params={"invoiceId": invoice_id})
+
+    def GetSSOUrl(self, path: list[str] = None):
+        """
+        :param path: destination path within the integrated system.
+        """
+        return self._get("GetSSOUrl", params={"path": path})
