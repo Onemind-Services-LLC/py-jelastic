@@ -95,6 +95,23 @@ class Environment(ClientAbstract):
             debug=self._debug,
         )
 
+    @property
+    def NodeGroup(self) -> "_NodeGroup":
+        """
+        The nodeGroup API service is used to manage data (parameters) and custom options of the environment layers.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.environment.NodeGroup
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/environment.NodeGroup
+        """
+        return _NodeGroup(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+        )
+
 
 class _Billing(Environment):
     """
@@ -855,3 +872,68 @@ class _Binder(Environment):
             },
             delimiter=",",
         )
+class _NodeGroup(Environment):
+    """
+    The nodeGroup API service is used to manage data (parameters) and custom options of the environment layers.
+
+    Ref: https://docs.jelastic.com/api/private/#!/api/environment.NodeGroup
+    """
+
+    _endpoint2 = "nodeGroup"
+
+    def ApplyData(
+            self,
+            env_name: str,
+            node_group: str,
+            data: str,
+    ):
+        """
+        param env_name: target environment name.
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        param data: JSON object with the node group data (parameters), e.g. {"redeployContainerDelay":20, "customProperty":"value"}.
+        """
+        return self._get(
+            "ApplyData",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "data": data,
+            },
+        )
+    def Get(
+            self,
+            env_name: str,
+            node_group: str,
+    ):
+        """
+        param env_name: target environment name.
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        """
+        return self._get(
+            "Get",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+            },
+        )
+    def SetSLBAccessEnabled(
+            self,
+            env_name: str,
+            node_group: str,
+            enabled: bool,
+    ):
+        """
+        param env_name: target environment name.
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        param enabled: defines whether allow (true) or deny (false) access to the layer via Shared Load Balancer.
+        """
+        return self._get(
+            "SetSLBAccessEnabled",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "enabled": enabled,
+            },
+        )
+
+
