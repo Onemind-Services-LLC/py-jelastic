@@ -754,7 +754,7 @@ def test_get_uid_actions_admin(client):
 def test_search_actions(client):
     client._get.return_value = success_response
     response = client.Tracking.SearchActions(
-        "session", {"search1": "search_text1", "search2": "search2"}
+        "session", {"search1": "search1", "search2": "search2"}
     )
     client._get.assert_called_with(
         "SearchActions",
