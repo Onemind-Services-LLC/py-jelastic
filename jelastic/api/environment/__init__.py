@@ -95,6 +95,23 @@ class Environment(ClientAbstract):
             debug=self._debug,
         )
 
+    @property
+    def Group(self) -> "_Group":
+        """
+        Categorize environments in the account with the help of the group management API. Such user-defined groups can filter the environment list, allowing a clear-cut view of the projects. Learn more in the documentation.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.environment.Group
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/environment.Group
+        """
+        return _Group(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+        )
+
 
 class _Billing(Environment):
     """
@@ -855,3 +872,198 @@ class _Binder(Environment):
             },
             delimiter=",",
         )
+class _Group(Environment):
+    """
+   Categorize environments in the account with the help of the group management API. Such user-defined groups can filter the environment list, allowing a clear-cut view of the projects.
+
+    Ref: https://docs.jelastic.com/api/private/#!/api/environment.Group
+    """
+
+    _endpoint2 = "group"
+    def AttachEnv(
+            self,
+            env_name:str,
+            env_group:str,
+            target_appid: list[str]=None,
+            owner_uid: list[int]=None
+    ):
+        """
+        param env_name: source environment name.
+        param env_group: a comma-separated list of the target environment group names.
+        param target_appid: if specified, redefines the target environment. For example, to the environment shared via the collaboration feature.
+        param owner_uid: unique identifier of the target account’s owner. Required if the operation is performed by the collaboration member on the shared account.
+        """
+        return self._get(
+            "AttachEnv",
+            params={
+                "envName": env_name,
+                "envGroup": env_group,
+                "targetAppid": target_appid,
+                "ownerUid":owner_uid,
+            },
+            delimiter=",",
+        )
+    def CreateGroup(
+            self,
+            env_name:str,
+            env_group:list[str]=None,
+            data:dict=None,
+            owner_uid: list[int]=None
+    ):
+        """
+        param env_name: source environment name.
+        param env_group: a comma-separated list of the target environment group names.
+        param data : JSON object with the new group settings:
+        param owner_uid: unique identifier of the target account’s owner. Required if the operation is performed by the collaboration member on the shared account.
+        """
+        return self._get(
+            "CreateGroup",
+            params={
+                "envName": env_name,
+                "envGroup": env_group,
+                "data": data,
+                "ownerUid":owner_uid,
+            },
+            delimiter=",",
+        )
+    def DetachEnv(
+            self,
+            env_name:str,
+            env_group:str,
+            target_appid: list[str]=None,
+            owner_uid: list[int]=None
+    ):
+        """
+        param env_name: source environment name.
+        param env_group: a comma-separated list of the target environment group names.
+        param target_appid: if specified, redefines the target environment. For example, to the environment shared via the collaboration feature.
+        param owner_uid: unique identifier of the target account’s owner. Required if the operation is performed by the collaboration member on the shared account.
+        """
+        return self._get(
+            "DetachEnv",
+            params={
+                "envName": env_name,
+                "envGroup": env_group,
+                "targetAppid": target_appid,
+                "ownerUid":owner_uid,
+            },
+            delimiter=",",
+        )
+    def EditGroup(
+            self,
+            env_name:str,
+            src_group_name:str,
+            dst_group_name:list[str]=None,
+            data:dict=None,
+            owner_uid: list[int]=None
+    ):
+        """
+        param env_name: source environment name.
+        param src_group_name: target environment group name.
+        param dst_group_name: New environment group name (renames srcGroupName).
+        param data : JSON object with the new group settings:
+        param owner_uid: unique identifier of the target account’s owner. Required if the operation is performed by the collaboration member on the shared account.
+        """
+        return self._get(
+            "EditGroup",
+            params={
+                "envName": env_name,
+                "srcGroupName": src_group_name,
+                "dstGroupName": dst_group_name,
+                "data": data,
+                "ownerUid":owner_uid,
+            },
+            delimiter=",",
+        )
+    def GetGroups(
+            self,
+            env_name:str,
+            target_appid: list[str]=None,
+            owner_uid: list[int]=None
+    ):
+        """
+        param env_name: source environment name.
+        param target_appid: if specified, redefines the target environment. For example, to the environment shared via the collaboration feature.
+        param owner_uid: unique identifier of the target account’s owner. Required if the operation is performed by the collaboration member on the shared account.
+        """
+        return self._get(
+            "GetGroups",
+            params={
+                "envName": env_name,
+                "targetAppid": target_appid,
+                "ownerUid":owner_uid,
+            },
+            delimiter=",",
+        )
+
+    def RemoveGroup(
+            self,
+            env_name: str,
+            env_group: str,
+            owner_uid: list[int] = None
+    ):
+        """
+        param env_name: source environment name.
+        param env_group: a comma-separated list of the target environment group names.
+        param owner_uid: unique identifier of the target account’s owner. Required if the operation is performed by the collaboration member on the shared account.
+        """
+        return self._get(
+            "RemoveGroup",
+            params={
+                "envName": env_name,
+                "envGroup": env_group,
+                "ownerUid": owner_uid,
+            },
+            delimiter=",",
+        )
+    def SetEnv(
+            self,
+            env_name:str,
+            env_group:str,
+            target_appid: list[str]=None,
+    ):
+        """
+        param env_name: source environment name.
+        param env_group: a comma-separated list of the target environment group names.
+        param target_appid: if specified, redefines the target environment. For example, to the environment shared via the collaboration feature.
+        """
+        return self._get(
+            "SetEnv",
+            params={
+                "envName": env_name,
+                "envGroup": env_group,
+                "targetAppid": target_appid,
+            },
+            delimiter=",",
+        )
+
+    def SetIsolationEnabled(
+            self,
+            env_name: str,
+            group_name: str,
+            enabled: bool,
+            owner_uid: list[int] = None
+    ):
+        """
+        param env_name: source environment name.
+        param group_name: target environment group name.
+        param enabled: defines whether isolate (true) or not (false) environments within the group.
+        param owner_uid: unique identifier of the target account’s owner. Required if the operation is performed by the collaboration member on the shared account.
+        """
+        return self._get(
+            "SetIsolationEnabled",
+            params={
+                "envName": env_name,
+                "groupName": group_name,
+                "enabled": enabled,
+                "ownerUid": owner_uid,
+            },
+            delimiter=",",
+        )
+
+
+
+
+
+
+
