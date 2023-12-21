@@ -78,6 +78,22 @@ class Billing(ClientAbstract):
         """
         return _ServicePlan(session=self._session, token=self._token, debug=self._debug)
 
+    @property
+    def Subscription(self) -> "_Subscription":
+        """
+        The methods of this service provide billing information about a user account (such as UID, balance, billing history,
+        quotas, etc.) and allow managing it.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.billing.Subscription
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/billing.Subscription
+        """
+        return _Subscription(
+            session=self._session, token=self._token, debug=self._debug
+        )
+
 
 class _Account(Billing):
     """
@@ -102,11 +118,11 @@ class _Account(Billing):
         return self._get("ChangeEmail", params={"login": login, "email": email})
 
     def ChangeGroup(
-            self,
-            group_name: str,
-            uids: list[str] = None,
-            send_email: bool = False,
-            template: str = None,
+        self,
+        group_name: str,
+        uids: list[str] = None,
+        send_email: bool = False,
+        template: str = None,
     ):
         """
         Change account group for selected users
@@ -128,7 +144,7 @@ class _Account(Billing):
         return self._get("ChangePhoneNumber", params={"login": login, "number": number})
 
     def ChargeAccountByUid(
-            self, uid: int, amount: float, description: str, env_name: str = None
+        self, uid: int, amount: float, description: str, env_name: str = None
     ):
         """
         Charge account by uid.
@@ -156,13 +172,13 @@ class _Account(Billing):
         return self._get("ConvertToCommercial", params={"customer": customer})
 
     def ConvertToCommercialAndPay(
-            self,
-            customer: dict,
-            pay_method_type: str,
-            service_plan_id: int,
-            auto_service_plan_id: int = None,
-            auto_refill_main_balance: int = None,
-            auto_refill_period: str = None,
+        self,
+        customer: dict,
+        pay_method_type: str,
+        service_plan_id: int,
+        auto_service_plan_id: int = None,
+        auto_refill_main_balance: int = None,
+        auto_refill_period: str = None,
     ):
         """
         Make trial account commercial one. This method register Jbilling account into extern billing system. Commercial
@@ -183,14 +199,14 @@ class _Account(Billing):
         )
 
     def ConvertToTrial(
-            self,
-            template: str,
-            uids: list[str] = None,
-            start_time: datetime = None,
-            end_time: datetime = None,
-            start: int = None,
-            count: int = None,
-            bonus: float = None,
+        self,
+        template: str,
+        uids: list[str] = None,
+        start_time: datetime = None,
+        end_time: datetime = None,
+        start: int = None,
+        count: int = None,
+        bonus: float = None,
     ):
         """
         Converts non-trial and billing accounts to trial.
@@ -215,13 +231,13 @@ class _Account(Billing):
         return self._get("EnableUser", params={"uid": uid})
 
     def ExportAccountBillingHistoryByPeriod(
-            self,
-            start_time: datetime,
-            end_time: datetime,
-            period: PERIOD = "DAY",
-            time_offset: int = None,
-            group_nodes: bool = False,
-            target_app_id: str = None,
+        self,
+        start_time: datetime,
+        end_time: datetime,
+        period: PERIOD = "DAY",
+        time_offset: int = None,
+        group_nodes: bool = False,
+        target_app_id: str = None,
     ):
         """
         Generates a link for downloading the specified account's billing history for the specific period.
@@ -239,12 +255,12 @@ class _Account(Billing):
         )
 
     def ExportEnvBillingHistoryByPeriod(
-            self,
-            start_time: datetime,
-            end_time: datetime,
-            time_offset: int,
-            period: PERIOD = "DAY",
-            group_nodes: bool = False,
+        self,
+        start_time: datetime,
+        end_time: datetime,
+        time_offset: int,
+        period: PERIOD = "DAY",
+        group_nodes: bool = False,
     ):
         """
         Generates a link for downloading the specified environment's billing history for the specific period.
@@ -261,7 +277,7 @@ class _Account(Billing):
         )
 
     def FundAccount(
-            self, uid: int, amount: float, is_bonus: bool = False, note: str = None
+        self, uid: int, amount: float, is_bonus: bool = False, note: str = None
     ):
         """
         Fund account by uid.
@@ -296,13 +312,13 @@ class _Account(Billing):
         return self._get("GetAccount")
 
     def GetAccountBillingByEngineTypeAndPeriod(
-            self,
-            start_time: datetime,
-            end_time: datetime,
-            owner_uid: str = None,
-            engine_types: list[str] = None,
-            period: PERIOD = "DAY",
-            time_offset: int = None,
+        self,
+        start_time: datetime,
+        end_time: datetime,
+        owner_uid: str = None,
+        engine_types: list[str] = None,
+        period: PERIOD = "DAY",
+        time_offset: int = None,
     ):
         """
         Returns account billing information for the specified period.
@@ -330,13 +346,13 @@ class _Account(Billing):
         )
 
     def GetAccountBillingHistoryByPeriod(
-            self,
-            start_time: datetime,
-            end_time: datetime,
-            period: PERIOD = "DAY",
-            time_offset: int = None,
-            group_nodes: bool = False,
-            target_app_id: str = None,
+        self,
+        start_time: datetime,
+        end_time: datetime,
+        period: PERIOD = "DAY",
+        time_offset: int = None,
+        group_nodes: bool = False,
+        target_app_id: str = None,
     ):
         """
         Gets account billing history.
@@ -357,14 +373,14 @@ class _Account(Billing):
         )
 
     def GetAccounts(
-            self,
-            lebalance: str = None,
-            order_field: str = None,
-            order_direction: str = None,
-            filter_field: str = None,
-            filter_value: str = None,
-            start_row: int = None,
-            result_count: int = None,
+        self,
+        lebalance: str = None,
+        order_field: str = None,
+        order_direction: str = None,
+        filter_field: str = None,
+        filter_value: str = None,
+        start_row: int = None,
+        result_count: int = None,
     ):
         """
         Gets accounts.
@@ -420,12 +436,12 @@ class _Account(Billing):
         return self._get("GetAccountsForDestroying")
 
     def GetAggClusterBillingHistory(
-            self,
-            start_time: datetime,
-            end_time: datetime,
-            interval: int,
-            sum_fields: list[str],
-            is_paid: bool = False,
+        self,
+        start_time: datetime,
+        end_time: datetime,
+        interval: int,
+        sum_fields: list[str],
+        is_paid: bool = False,
     ):
         """
         Gets account billing history.
@@ -443,13 +459,13 @@ class _Account(Billing):
         )
 
     def GetAggExtraBillingHistory(
-            self,
-            start_time: datetime,
-            end_time: datetime,
-            interval: int,
-            is_paid: bool = False,
-            type: str = None,
-            names: list[str] = None,
+        self,
+        start_time: datetime,
+        end_time: datetime,
+        interval: int,
+        is_paid: bool = False,
+        type: str = None,
+        names: list[str] = None,
     ):
         return self._get(
             "GetAggExtraBillingHistory",
@@ -471,7 +487,7 @@ class _Account(Billing):
         return self._get("GetBillingInfo")
 
     def GetClusterBillingHistory(
-            self, start_time: datetime, end_time: datetime, interval: int = None
+        self, start_time: datetime, end_time: datetime, interval: int = None
     ):
         """
         Gets account billing history.
@@ -482,10 +498,10 @@ class _Account(Billing):
         )
 
     def GetCollaborationQuotas(
-            self,
-            collaboration_id: int = None,
-            owner_uid: int = None,
-            quota_names: list[str] = None,
+        self,
+        collaboration_id: int = None,
+        owner_uid: int = None,
+        quota_names: list[str] = None,
     ):
         """
         Gets list of quotas of the payer user.
@@ -524,12 +540,12 @@ class _Account(Billing):
         return self._get("GetCountryStates", params={"ccode": country_code})
 
     def GetEnvBillingHistoryByPeriod(
-            self,
-            start_time: datetime,
-            end_time: datetime,
-            period: PERIOD = "DAY",
-            time_offset: int = None,
-            group_nodes: bool = False,
+        self,
+        start_time: datetime,
+        end_time: datetime,
+        period: PERIOD = "DAY",
+        time_offset: int = None,
+        group_nodes: bool = False,
     ):
         """
         Gets environment billing history.
@@ -547,7 +563,7 @@ class _Account(Billing):
         )
 
     def GetExtendedAccountBillingHistoryByPeriod(
-            self, start_time: datetime, end_time: datetime, target_app_id: str = None
+        self, start_time: datetime, end_time: datetime, target_app_id: str = None
     ):
         """
         Returns user’s billing history information for the specified period.
@@ -611,7 +627,7 @@ class _Account(Billing):
         )
 
     def GetSumAccountBillingHistory(
-            self, uid: int, start_time: datetime, end_time: datetime, bonus: int = None
+        self, uid: int, start_time: datetime, end_time: datetime, bonus: int = None
     ):
         """
         Gets account billing history.
@@ -661,11 +677,11 @@ class _Account(Billing):
         return self._get("SetFundNote", params={"id": id, "note": note})
 
     def SetGroup(
-            self,
-            uid: int,
-            group_name: str,
-            reset_balance: bool = False,
-            reset_bonus: bool = False,
+        self,
+        uid: int,
+        group_name: str,
+        reset_balance: bool = False,
+        reset_bonus: bool = False,
     ):
         """
         Sets group to account.
@@ -720,7 +736,7 @@ class _Account(Billing):
         return self._get("SuspendUser", params={"uid": uid})
 
     def UnfundAccount(
-            self, uid: int, amount: float, is_bonus: bool = False, note: str = None
+        self, uid: int, amount: float, is_bonus: bool = False, note: str = None
     ):
         """
         Unfund account by uid.
@@ -755,10 +771,10 @@ class _Pricing(Billing):
     endpoint = "pricing"
 
     def AddPricing(
-            self,
-            pricing: dict,
-            tariff_ids: str,
-            tariff_grid_names: list[str] = None,
+        self,
+        pricing: dict,
+        tariff_ids: str,
+        tariff_grid_names: list[str] = None,
     ):
         return self._get(
             "AddPricing",
@@ -786,9 +802,9 @@ class _Pricing(Billing):
         )
 
     def AttachTariffGrid(
-            self,
-            tariff_grid_name: str,
-            id: str,
+        self,
+        tariff_grid_name: str,
+        id: str,
     ):
         return self._get(
             "AttachTariffGrid",
@@ -799,9 +815,9 @@ class _Pricing(Billing):
         )
 
     def CheckHostGroupsAllowed(
-            self,
-            owner_uid: list[int] = None,
-            hardware_node_groups: list[str] = None,
+        self,
+        owner_uid: list[int] = None,
+        hardware_node_groups: list[str] = None,
     ):
         """
         :param owner_uid: unique identifier of the target user.
@@ -820,26 +836,26 @@ class _Pricing(Billing):
         return self._get("DeleteTariff", params={"id": id})
 
     def DetachTariff(
-            self,
-            uniq_name: str,
-            target_app_id: str,
+        self,
+        uniq_name: str,
+        target_app_id: str,
     ):
         return self._get(
             "DetachTariff", params={"uniqName": uniq_name, "targetAppId": target_app_id}
         )
 
     def DetachTariffGrid(
-            self,
-            tariff_grid_name: str,
-            id: str,
+        self,
+        tariff_grid_name: str,
+        id: str,
     ):
         return self._get(
             "DetachTariffGrid", params={"tariffGridName": tariff_grid_name, "id": id}
         )
 
     def EditPricing(
-            self,
-            pricing: dict,
+        self,
+        pricing: dict,
     ):
         return self._get(
             "EditPricing",
@@ -889,9 +905,9 @@ class _Pricing(Billing):
         )
 
     def GetResources(
-            self,
-            id: list[int] = None,
-            name: list[str] = None,
+        self,
+        id: list[int] = None,
+        name: list[str] = None,
     ):
         return self._get(
             "GetResources",
@@ -900,10 +916,10 @@ class _Pricing(Billing):
         )
 
     def GetTariffsInner(
-            self,
-            pricing_id: list[str] = None,
-            type: list[str] = None,
-            reseller_id: list[int] = None,
+        self,
+        pricing_id: list[str] = None,
+        type: list[str] = None,
+        reseller_id: list[int] = None,
     ):
         """
         :param pricing_id: pricing model unique ID.
@@ -920,10 +936,10 @@ class _Pricing(Billing):
         return self._get("GetUniqueResourceNames", params={})
 
     def SetTariffs(
-            self,
-            pricing_id: str,
-            tariff_ids: str,
-            tariff_grid_names: list[str] = None,
+        self,
+        pricing_id: str,
+        tariff_ids: str,
+        tariff_grid_names: list[str] = None,
     ):
         return self._get(
             "SetTariffs",
@@ -936,9 +952,9 @@ class _Pricing(Billing):
         )
 
     def ValidateEnvironment(
-            self,
-            hardware_node_group: str,
-            owner_uid: list[int] = None,
+        self,
+        hardware_node_group: str,
+        owner_uid: list[int] = None,
     ):
         return self._get(
             "ValidateEnvironment",
@@ -950,12 +966,12 @@ class _Pricing(Billing):
         )
 
     def ValidateNode(
-            self,
-            uid: int,
-            hardware_node_group: str,
-            node_type: str,
-            fixed_cloud_lets: int,
-            flexible_cloud_lets: int,
+        self,
+        uid: int,
+        hardware_node_group: str,
+        node_type: str,
+        fixed_cloud_lets: int,
+        flexible_cloud_lets: int,
     ):
         return self._get(
             "ValidateNode",
@@ -969,12 +985,12 @@ class _Pricing(Billing):
         )
 
     def ValidateNodeInner(
-            self,
-            uid: int,
-            hardware_node_group: str,
-            node_type: str,
-            fixed_cloud_lets: int,
-            flexible_cloud_lets: int,
+        self,
+        uid: int,
+        hardware_node_group: str,
+        node_type: str,
+        fixed_cloud_lets: int,
+        flexible_cloud_lets: int,
     ):
         return self._get(
             "ValidateNodeInner",
@@ -994,11 +1010,11 @@ class _Reseller(Billing):
     """
 
     def AddReseller(
-            self,
-            reseller: str,
-            platform: str,
-            regions: str,
-            settings: list[str] = None,
+        self,
+        reseller: str,
+        platform: str,
+        regions: str,
+        settings: list[str] = None,
     ):
         """
         :param reseller: JSON representation of the reseller object.
@@ -1018,10 +1034,10 @@ class _Reseller(Billing):
         )
 
     def EditReseller(
-            self,
-            reseller: str,
-            platform: str,
-            regions: list[str] = None,
+        self,
+        reseller: str,
+        platform: str,
+        regions: list[str] = None,
     ):
         return self._get(
             "EditReseller",
@@ -1063,12 +1079,12 @@ class _ServicePlan(Billing):
     _endpoint2 = "servicePlan"
 
     def CreateLevelAutoPay(
-            self,
-            min_balance: int,
-            expires: str,
-            service_plan_id: int,
-            payment_method_id: str,
-            min_period: int,
+        self,
+        min_balance: int,
+        expires: str,
+        service_plan_id: int,
+        payment_method_id: str,
+        min_period: int,
     ):
         """
         :param min_balance: the value used in the "account.balance < minBalance" expression.
@@ -1089,12 +1105,12 @@ class _ServicePlan(Billing):
         )
 
     def CreateRegularAutoPay(
-            self,
-            cron_expression: str,
-            expires: str,
-            time_zone: str,
-            service_plan_id: int,
-            payment_method_id: str,
+        self,
+        cron_expression: str,
+        expires: str,
+        time_zone: str,
+        service_plan_id: int,
+        payment_method_id: str,
     ):
         """
 
@@ -1116,11 +1132,11 @@ class _ServicePlan(Billing):
         )
 
     def CreateServicePlan(
-            self,
-            name: str,
-            description: str,
-            service_plan_type: str,
-            extern_plan_id: str,
+        self,
+        name: str,
+        description: str,
+        service_plan_type: str,
+        extern_plan_id: str,
     ):
         """
         :param name: unique name of service plan
@@ -1160,14 +1176,14 @@ class _ServicePlan(Billing):
         )
 
     def ExtendedCreateServicePlan(
-            self,
-            label: str,
-            external_plan_id: str,
-            description: str,
-            enabled: bool,
-            type: str,
-            by_default: bool,
-            price: str,
+        self,
+        label: str,
+        external_plan_id: str,
+        description: str,
+        enabled: bool,
+        type: str,
+        by_default: bool,
+        price: str,
     ):
         """
         :param label: name or short description of the service plan
@@ -1195,15 +1211,15 @@ class _ServicePlan(Billing):
         return self._get("ExtendedGetServicePlans", params={})
 
     def ExtendedServicePlanUpdate(
-            self,
-            id: int,
-            label: str,
-            external_plan_id: str,
-            description: str,
-            enabled: bool,
-            type: str,
-            by_default: bool,
-            price: str,
+        self,
+        id: int,
+        label: str,
+        external_plan_id: str,
+        description: str,
+        enabled: bool,
+        type: str,
+        by_default: bool,
+        price: str,
     ):
         """
         :param id: internal service plan ID in the PaaS admin panel
@@ -1272,9 +1288,9 @@ class _ServicePlan(Billing):
         return self._get("PaymentNewsRead", params={"id": id})
 
     def SetExternPlanId(
-            self,
-            service_plan_id: int,
-            external_plan_id: int,
+        self,
+        service_plan_id: int,
+        external_plan_id: int,
     ):
         """
         :param service_plan_id: JBilling service plan id
@@ -1288,11 +1304,11 @@ class _ServicePlan(Billing):
         )
 
     def UpdateServicePlan(
-            self,
-            service_plan_id: int,
-            name: str,
-            description: str,
-            extern_service_plan_id: str,
+        self,
+        service_plan_id: int,
+        name: str,
+        description: str,
+        extern_service_plan_id: str,
     ):
         """
         :param service_plan_id: id of service plan to be changed
@@ -1309,3 +1325,376 @@ class _ServicePlan(Billing):
             },
         )
 
+
+class _Subscription(Billing):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/billing.Subscription
+    """
+
+    _endpoint = "subscription"
+
+    def Cancel(
+        self,
+        id: int,
+        immediately: list[bool] = None,
+        cancel_date: list[str] = None,
+        passphrase: list[str] = None,
+        expand_fields: list[str] = None,
+    ):
+        """
+        :param id: unique identifier of the target subscription.
+        :param immediately: defines whether the current subscription should be cancelled immediately (true) or at the end of already purchased period (false).
+        :param cancel_date: a specific date when the subscription should be canceled. UTC time in the ISO 8601 format, e.g. "2022-11-16T00:00:00".
+        :param passphrase: unique code to confirm immediate subscription resources deletion.
+        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).
+        """
+        return self._get(
+            "Cancel",
+            params={
+                "id": id,
+                "immediately": immediately,
+                "cancelDate": cancel_date,
+                "passphrase": passphrase,
+                "expandFields": expand_fields,
+            },
+            delimiter=",",
+        )
+
+    def CloneProduct(
+        self,
+        subscription_id: int,
+        item_resource: int,
+        target_env_name: str,
+        item_id: list[int] = None,
+    ):
+        """
+        :param subscription_id: unique identifier of the target subscription.
+        :param item_resource: unique identifier of the target subscription item resource.
+        :param target_env_name: domain prefix for the cloned environment.
+        :param item_id: unique identifier of the target subscription item.
+        """
+        return self._get(
+            "CloneProduct",
+            params={
+                "subscriptionId": subscription_id,
+                "itemResource": item_resource,
+                "targetEnvName": target_env_name,
+                "itemId": item_id,
+            },
+            delimiter=",",
+        )
+
+    def DiscardUpdateSubscription(self, subscription_id: int):
+        """
+        :param subscription_id: unique identifier of the target subscription.
+        """
+        return self._get(
+            "DiscardUpdateSubscription", params={"subscriptionId": subscription_id}
+        )
+
+    def GetCategories(self, expand_fields: list[str] = None):
+        """
+        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).
+        """
+        return self._get(
+            "GetCategories",
+            params={"expandFields": expand_fields},
+            delimiter=",",
+        )
+
+    def GetProducts(
+        self,
+        id: list[int] = None,
+        category_id: list[int] = None,
+        expand_fields: list[str] = None,
+        start_row: list[int] = None,
+        result_count: list[int] = None,
+        order_field: list[str] = None,
+        order_direction: list[str] = None,
+    ):
+        """
+        :param id: unique identifier of the target subscription Product (for filtering).
+        :param category_id: unique identifier of the target subscription Category (for filtering).
+        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).
+        :param start_row: returns information starting from the specified row in the response (starts with 0, by default).
+        :param result_count: returns the specified number of rows from the response (0 – unlimited – by default).
+        :param order_field: sorts results by the specified field
+        :param order_direction: sorts results in the ascending (ASC) or descending (DESC) order
+        """
+        return self._get(
+            "GetProducts",
+            params={
+                "id": id,
+                "categoryId": category_id,
+                "expandFields": expand_fields,
+                "startRow": start_row,
+                "resultCount": result_count,
+                "orderField": order_field,
+                "orderDirection": order_direction,
+            },
+            delimiter=",",
+        )
+
+    def GetRestrictedHardNodeGroups(self, subscription_item_id: int):
+        """
+        :param subscription_id: unique identifier of the target subscription item.
+        """
+        return self._get(
+            "GetHardNodeGroups",
+            params={
+                "subscriptionItemId": subscription_item_id,
+            },
+        )
+
+    def GetServicePlans(
+        self,
+        id: list[int] = None,
+        product_id: list[int] = None,
+        expand_fields: list[str] = None,
+    ):
+        """
+        :param id: unique identifier of the target service plan (for filtering).
+        :param product_id: unique identifier of the target subscription product (for filtering).
+        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).
+        """
+        return self._get(
+            "GetServicePlans",
+            params={
+                "id": id,
+                "productId": product_id,
+                "expandFields": expand_fields,
+            },
+            delimiter=",",
+        )
+
+    def GetSubscriptions(
+        self,
+        id: list[int] = None,
+        product_id: list[int] = None,
+        status: list[str] = None,
+        expand_fields: list[str] = None,
+        start_row: list[int] = None,
+        result_count: list[int] = None,
+        order_field: list[str] = None,
+        order_direction: list[str] = None,
+    ):
+        """
+        :param id: unique identifier of the target subscription (for filtering).
+        :param product_id: unique identifier of the target subscription product (for filtering).
+        :param status: a comma-separated list of the subscription statuses.("INCOMPLETE", "INCOMPLETE_EXPIRED", "TRIAL", "ACTIVE", "PAST_DUE", "UNPAID", "SUSPENDED", "CANCELED", "ENDED").
+        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).
+        :param start_row: returns information starting from the specified row in the response (starts with 0, by default).
+        :param result_count: returns the specified number of rows from the response (0 – unlimited – by default).
+        :param order_field: sorts results by the specified field
+        :param order_direction: sorts results in the ascending (ASC) or descending (DESC) order
+        """
+        return self._get(
+            "GetSubscriptions",
+            params={
+                "id": id,
+                "productId": product_id,
+                "status": status,
+                "expandFields": expand_fields,
+                "startRow": start_row,
+                "resultCount": result_count,
+                "orderField": order_field,
+                "orderDirection": order_direction,
+            },
+            delimiter=",",
+        )
+
+    def InstallProduct(
+        self,
+        subscription_id: int,
+        item_id: list[int] = None,
+        settings: list[str] = None,
+        env_name: list[str] = None,
+        display_name: list[str] = None,
+        env_groups: list[str] = None,
+        region: list[str] = None,
+        lang: list[str] = None,
+    ):
+        """
+        :param subscription_id: unique identifier of the target subscription.
+        :param item_id: unique identifier of the target subscription item.
+        :param settings: JSON object with subscription configuration.
+        :param env_name: target environment name
+        :param display_name: target environment display name
+        :param env_groups: target environment groups
+        :param region: target environment region
+        :param lang: target installation language
+        """
+        return self._get(
+            "InstallProduct",
+            params={
+                "subscriptionId": subscription_id,
+                "itemId": item_id,
+                "settings": settings,
+                "envName": env_name,
+                "displayName": display_name,
+                "envGroups": env_groups,
+                "region": region,
+                "lang": lang,
+            },
+            delimiter=",",
+        )
+
+    def MoveProduct(
+        self,
+        subscription_id: int,
+        item_resource_id: int,
+        target_subscription_id: int,
+        target_item_id: int,
+        passphrase: str,
+        item_id: list[int] = None,
+    ):
+        """
+        :param subscription_id: unique identifier of the source subscription.
+        :param item_resource_id: unique identifier of the source subscription item resource.
+        :param target_subscription_id: unique identifier of the target subscription item resource.
+        :param target_item_id: unique identifier of the target subscription item.
+        :param passphrase: confirmation code for the operation (provide the “uniqueName” value from the “ItemResource” object).
+        :param item_id: unique identifier of the source subscription item.
+        """
+        return self._get(
+            "MoveProduct",
+            params={
+                "subscriptionId": subscription_id,
+                "itemResourceId": item_resource_id,
+                "targetSubscriptionId": target_subscription_id,
+                "targetItemId": target_item_id,
+                "passphrase": passphrase,
+                "itemId": item_id,
+            },
+            delimiter=",",
+        )
+
+    def SetAutopay(
+        self,
+        id: int,
+        enabled: bool,
+        expand_fields: list[str] = None,
+    ):
+        """
+        :param id: unique identifier of the target subscription.
+        :param enabled: defines whether to enable (true) or disable (false) the auto pay option for the subscription.
+        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).
+        """
+        return self._get(
+            "SetAutopay",
+            params={
+                "id": id,
+                "enabled": enabled,
+                "expandFields": expand_fields,
+            },
+            delimiter=",",
+        )
+
+    def Subscribe(
+        self,
+        product_id: int,
+        items: str,
+        change_automatically: list[bool] = None,
+        expand_fields: list[str] = None,
+    ):
+        """
+        :param product_id: unique identifier of the subscription product.
+        :param items: JSON object with subscription details. For example: [{"servicePlanId": 1, "tariffPlanId": 1, "quantity": 10}].
+        :param change_automatically: defines whether the auto pay option for the subscription should be enabled (true) or disabled (false).
+        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).
+        """
+        return self._get(
+            "Subscribe",
+            params={
+                "productId": product_id,
+                "items": items,
+                "chargeAutomatically": change_automatically,
+                "expandFields": expand_fields,
+            },
+            delimiter=",",
+        )
+
+    def UndoCancel(
+        self,
+        id: int,
+        expand_fields: list[str] = None,
+    ):
+        """
+        :param id: unique identifier of the target subscription.
+        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).
+        """
+        return self._get(
+            "UndoCancel",
+            params={
+                "id": id,
+                "expandFields": expand_fields,
+            },
+            delimiter=",",
+        )
+
+    def UninstallProduct(
+        self,
+        subscription_id: int,
+        item_id: int,
+        item_resource_id: int,
+        passphrase: str,
+    ):
+        """
+        :param subscription_id: unique identifier of the target subscription.
+        :param item_id: unique identifier of the target subscription item.
+        :param item_resource_id: unique identifier of the target subscription item resource.
+        :param passphrase: confirmation code for the operation (provide the “uniqueName” value from the “ItemResource” object).
+        """
+        return self._get(
+            "UninstallProduct",
+            params={
+                "subscriptionId": subscription_id,
+                "itemId": item_id,
+                "itemResourceId": item_resource_id,
+                "passphrase": passphrase,
+            },
+        )
+
+    def UpcomingInvoice(
+        self,
+        subscription_id: int,
+        item_id: int,
+        quantity: int,
+    ):
+        """
+        :param subscription_id: unique identifier of the target subscription.
+        :param item_id: unique identifier of the target subscription item.
+        :param quantity: a new installation quantity for the subscription.
+        """
+        return self._get(
+            "UpcomingInvoice",
+            params={
+                "subscriptionId": subscription_id,
+                "itemId": item_id,
+                "quantity": quantity,
+            },
+        )
+
+    def UpdateSubscription(
+        self,
+        subscription_id: int,
+        item_id: int,
+        quantity: int,
+        expand_fields: list[str] = None,
+    ):
+        """
+        :param subscription_id: unique identifier of the target subscription.
+        :param item_id: unique identifier of the target subscription item
+        :param quantity: a new installation quantity for the subscription.
+        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).
+        """
+        return self._get(
+            "UpdateSubscription",
+            params={
+                "subscriptionId": subscription_id,
+                "itemId": item_id,
+                "quantity": quantity,
+                "expandFields": expand_fields,
+            },
+            delimiter=",",
+        )
