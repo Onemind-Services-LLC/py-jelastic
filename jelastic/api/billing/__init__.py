@@ -849,7 +849,9 @@ class _Invoice(Billing):
     """
     Ref: https://docs.jelastic.com/api/private/#!/api/billing.Invoice
     """
+
     _endpoint2 = "invoice"
+
     def Event(
         self,
         extern_id: str,
@@ -1951,19 +1953,20 @@ class _Order(Billing):
     """
     Ref: https://docs.jelastic.com/api/private/#!/api/billing.Order
     """
-    _endpoint2 = 'order'
+
+    _endpoint2 = "order"
 
     def AddStats(
-            self,
-            resource_name: str,
-            uid: int,
-            value: int,
-            start_date: list[str] = None,
-            end_date: list[str] = None,
-            env_name: list[str] = None,
-            node_id: list[int] = None,
-            note: list[str] = None,
-            value_group: list[str] = None,
+        self,
+        resource_name: str,
+        uid: int,
+        value: int,
+        start_date: list[str] = None,
+        end_date: list[str] = None,
+        env_name: list[str] = None,
+        node_id: list[int] = None,
+        note: list[str] = None,
+        value_group: list[str] = None,
     ):
         return self._get(
             "AddStats",
@@ -1982,9 +1985,9 @@ class _Order(Billing):
         )
 
     def EnvResources(
-            self,
-            start_date: date,
-            end_date: date,
+        self,
+        start_date: date,
+        end_date: date,
     ):
         start_date = start_date.strftime("%Y-%m-%d")
         end_date = end_date.strftime("%Y-%m-%d")

@@ -2356,3 +2356,17 @@ def test_set_month_traffic(client):
         },
     )
     assert response == success_response
+
+
+def test_set_signup_group(client):
+    client._get.return_value = success_response
+    response = client.GroupQuota.SetSignupGroup(
+        "group",
+    )
+    client._get.assert_called_with(
+        "SetSignupGroup",
+        params={
+            "name": "group",
+        },
+    )
+    assert response == success_response
