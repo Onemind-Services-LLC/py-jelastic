@@ -148,6 +148,20 @@ class Billing(ClientAbstract):
         """
         return _Invoice(session=self._session, token=self._token, debug=self._debug)
 
+    @property
+    def System(self) -> "_System":
+        """
+        The methods of this service provide billing information about a user account (such as UID, balance, billing history,
+        quotas, etc.) and allow managing it.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.billing.System
+
+        Ref: https://docs.jelastic.com/api/#!/api/billing.System
+        """
+        return _System(session=self._session, token=self._token, debug=self._debug)
+
 
 class _Account(Billing):
     """
@@ -821,7 +835,9 @@ class _Invoice(Billing):
     """
     Ref: https://docs.jelastic.com/api/private/#!/api/billing.Invoice
     """
+
     _endpoint2 = "invoice"
+
     def Event(
         self,
         extern_id: str,
@@ -1923,19 +1939,20 @@ class _Order(Billing):
     """
     Ref: https://docs.jelastic.com/api/private/#!/api/billing.Order
     """
-    _endpoint2 = 'order'
+
+    _endpoint2 = "order"
 
     def AddStats(
-            self,
-            resource_name: str,
-            uid: int,
-            value: int,
-            start_date: list[str] = None,
-            end_date: list[str] = None,
-            env_name: list[str] = None,
-            node_id: list[int] = None,
-            note: list[str] = None,
-            value_group: list[str] = None,
+        self,
+        resource_name: str,
+        uid: int,
+        value: int,
+        start_date: list[str] = None,
+        end_date: list[str] = None,
+        env_name: list[str] = None,
+        node_id: list[int] = None,
+        note: list[str] = None,
+        value_group: list[str] = None,
     ):
         return self._get(
             "AddStats",
@@ -1954,9 +1971,9 @@ class _Order(Billing):
         )
 
     def EnvResources(
-            self,
-            start_date: date,
-            end_date: date,
+        self,
+        start_date: date,
+        end_date: date,
     ):
         start_date = start_date.strftime("%Y-%m-%d")
         end_date = end_date.strftime("%Y-%m-%d")
@@ -1969,11 +1986,11 @@ class _Order(Billing):
         )
 
     def EnvsResources(
-            self,
-            start_date: date,
-            end_date: date,
-            target_app_id: str,
-            checksum: str,
+        self,
+        start_date: date,
+        end_date: date,
+        target_app_id: str,
+        checksum: str,
     ):
         start_date = start_date.strftime("%Y-%m-%d")
         end_date = end_date.strftime("%Y-%m-%d")
@@ -1988,11 +2005,11 @@ class _Order(Billing):
         )
 
     def EnvsResourcesByAccount(
-            self,
-            start_date: date,
-            end_date: date,
-            uid: int,
-            checksum: str,
+        self,
+        start_date: date,
+        end_date: date,
+        uid: int,
+        checksum: str,
     ):
         """
         :param checksum: required but not used
@@ -2011,9 +2028,9 @@ class _Order(Billing):
         )
 
     def GetOptions(
-            self,
-            target_env_name: str,
-            node_group: str,
+        self,
+        target_env_name: str,
+        node_group: str,
     ):
         """
         :param target_env_name: env which holds nodeGroup
@@ -2028,11 +2045,11 @@ class _Order(Billing):
         )
 
     def SetOptions(
-            self,
-            target_env_name: str,
-            node_group: str,
-            options: str,
-            node_id: list[int] = None,
+        self,
+        target_env_name: str,
+        node_group: str,
+        options: str,
+        node_id: list[int] = None,
     ):
         """
         :param target_env_name: target environment name with the required node group (layer).
@@ -2050,3 +2067,121 @@ class _Order(Billing):
             },
             delimiter=",",
         )
+
+
+class _System(Billing):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/billing.System
+    """
+
+    _endpoint2 = "system"
+
+    def CleanCheckRequestCache(
+        self,
+        uid: list[int] = None,
+        local_only: list[bool] = None,
+    ):
+        return self._get(
+            "CleanCheckRequestCache",
+            params={
+                "uid": uid,
+                "localOnly": local_only,
+            },
+            delimiter=",",
+        )
+
+    def Event(
+        self,
+        topic: str,
+        message: str,
+        publish_local: list[bool] = None,
+    ):
+        return self._get(
+            "Event",
+            params={
+                "topic": topic,
+                "message": message,
+                "publishLocal": publish_local,
+            },
+            delimiter=",",
+        )
+
+    def GetAPIDescriptions(
+        self,
+        is_public_only: list[bool] = None,
+        is_token: list[bool] = None,
+    ):
+        return self._get(
+            "GetAPIDescriptions",
+            params={
+                "isPublicOnly": is_public_only,
+                "isToken": is_token,
+            },
+            delimiter=",",
+        )
+
+    def GetAutoPercent(self):
+        return self._get("GetAutoPercent", params={})
+
+    def GetCacheStats(self):
+        return self._get("GetCacheStats", params={})
+
+    def GetCacheStatus(self):
+        return self._get("GetCacheStatus", params={})
+
+    def GetInstanceCacheStatus(self):
+        return self._get("GetInstanceCacheStatus", params={})
+
+    def GetStatus(self, checksum: int):
+        return self._get("GetStatus", params={"checksum": checksum})
+
+    def GetVersion(self):
+        return self._get("GetVersion", params={})
+
+    def RefreshEmailTemplates(self):
+        return self._get("RefreshEmailTemplates", params={})
+
+    def RefreshUser(self, language: list[str] = None):
+        return self._get(
+            "RefreshUser",
+            params={"language": language},
+            delimiter=",",
+        )
+
+    def ReloadConfiguration(
+        self,
+        reseller_id: list[int] = None,
+        changed_placeholders: list[str] = None,
+    ):
+        return self._get(
+            "ReloadConfiguration",
+            params={
+                "resellerId": reseller_id,
+                "changedPlaceholders": changed_placeholders,
+            },
+            delimiter=",",
+        )
+
+    def SendEmail(
+        self,
+        template: str,
+        email: list[str] = None,
+        language: list[str] = None,
+        timeout: list[int] = None,
+    ):
+        return self._get(
+            "SendEmail",
+            params={
+                "template": template,
+                "email": email,
+                "language": language,
+                "timeout": timeout,
+            },
+            delimiter=",",
+        )
+
+    def Validate(self):
+        return self._get("Validate", params={})
+
+    def ValidateAll(self):
+        return self._get("ValidateAll", params={})
