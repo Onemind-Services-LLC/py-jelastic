@@ -162,6 +162,20 @@ class Billing(ClientAbstract):
         """
         return _System(session=self._session, token=self._token, debug=self._debug)
 
+    @property
+    def Utils(self) -> "_Utils":
+        """
+        The methods of this service provide billing information about a user account (such as UID, balance, billing history,
+        quotas, etc.) and allow managing it.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.billing.Utils
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/billing.Utils
+        """
+        return _Utils(session=self._session, token=self._token, debug=self._debug)
+
 
 class _Account(Billing):
     """
@@ -2066,6 +2080,122 @@ class _Order(Billing):
                 "nodeId": node_id,
             },
             delimiter=",",
+        )
+
+
+class _Utils(Billing):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/billing.Utils
+    """
+
+    _endpoint2 = "utils"
+
+    def ClearBillingHistory(
+        self,
+        env_name: str,
+        uid: int,
+        start_date: str,
+        end_date: str,
+        checksum: str,
+    ):
+        return self._get(
+            "ClearBillingHistory",
+            params={
+                "envName": env_name,
+                "uid": uid,
+                "startDate": start_date,
+                "endDate": end_date,
+                "checksum": checksum,
+            },
+        )
+
+    def ClearMonthTraffic(
+        self,
+        uid: int,
+        month_start: str,
+        checksum: str,
+    ):
+        return self._get(
+            "ClearMonthTraffic",
+            params={
+                "uid": uid,
+                "monthStart": month_start,
+                "checksum": checksum,
+            },
+        )
+
+    def GetUidUsageByPeriod(
+        self,
+        uid: int,
+        start_date: str,
+        end_date: str,
+        checksum: str,
+    ):
+        return self._get(
+            "GetUidUsageByPeriod",
+            params={
+                "uid": uid,
+                "startDate": start_date,
+                "endDate": end_date,
+                "checksum": checksum,
+            },
+        )
+
+    def SetAccountDate(
+        self,
+        uid: int,
+        date_type: str,
+        date_value: str,
+        checksum: str,
+    ):
+        return self._get(
+            "SetAccountDate",
+            params={
+                "uid": uid,
+                "dateType": date_type,
+                "dateValue": date_value,
+                "checksum": checksum,
+            },
+        )
+
+    def SetBillingHistoryDate(
+        self,
+        uid: int,
+        env_name: str,
+        start_date_from: str,
+        start_date_to: str,
+        date_type: str,
+        date_value: str,
+        checksum: str,
+    ):
+        return self._get(
+            "SetBillingHistoryDate",
+            params={
+                "uid": uid,
+                "envName": env_name,
+                "startDateFrom": start_date_from,
+                "startDateTo": start_date_to,
+                "dateType": date_type,
+                "dateValue": date_value,
+                "checksum": checksum,
+            },
+        )
+
+    def SetMonthTraffic(
+        self,
+        uid: int,
+        month_start: str,
+        external_traffic: int,
+        checksum: str,
+    ):
+        return self._get(
+            "SetMonthTraffic",
+            params={
+                "uid": uid,
+                "monthStart": month_start,
+                "externalTraffic": external_traffic,
+                "checksum": checksum,
+            },
         )
 
 
