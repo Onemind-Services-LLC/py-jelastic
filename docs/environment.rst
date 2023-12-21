@@ -30,3 +30,8 @@ Environment
     :members:
     :undoc-members:
     :show-inheritance:
+
+.. autoclass:: jelastic.api.environment._Tracking
+    :members:
+    :undoc-members:
+    :show-inheritance:
