@@ -8,6 +8,12 @@ class Marketplace(ClientAbstract):
 
     @property
     def Favorite(self) -> "_Favorite":
+        """
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.marketplace.Favorite
+        Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.Favorite
+        """
         return _Favorite(
             session=self._session,
             token=self._token,
@@ -133,20 +139,6 @@ class _Installation(Marketplace):
                 "force": force,
             },
             delimiter=",",
-        )
-
-    @property
-    def Favorite(self) -> "_Favorite":
-        """
-        >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
-        >>> jelastic.marketplace.Favorite
-        Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.Favorite
-        """
-        return _Favorite(
-            session=self._session,
-            token=self._token,
-            debug=self._debug,
         )
 
 
