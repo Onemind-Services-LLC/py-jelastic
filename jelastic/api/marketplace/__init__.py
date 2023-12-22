@@ -5,6 +5,7 @@ __all__ = ["Marketplace"]
 
 class Marketplace(ClientAbstract):
     _endpoint1 = "marketplace"
+
     @property
     def Favorite(self) -> "_Favorite":
         """
@@ -24,7 +25,9 @@ class _Favorite(Marketplace):
     """
     Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.Favorite
     """
+
     _endpoint2 = "favorite"
+
     def Add(
         self,
         id: str,
@@ -38,6 +41,7 @@ class _Favorite(Marketplace):
                 "id": id,
             },
         )
+
     def AddManifest(
         self,
         manifest: str,
@@ -51,6 +55,7 @@ class _Favorite(Marketplace):
                 "manifest": manifest,
             },
         )
+
     def Delete(
         self,
         id: str,
@@ -64,11 +69,12 @@ class _Favorite(Marketplace):
                 "id": id,
             },
         )
+
     def GetList(
         self,
-        search: list[str]=None,
-        lang: list[str]=None,
-        checksum: list[str]=None,
+        search: list[str] = None,
+        lang: list[str] = None,
+        checksum: list[str] = None,
     ):
         """
         param search: JSON object with the search parameters
@@ -83,5 +89,3 @@ class _Favorite(Marketplace):
                 "checksum": checksum,
             },
         )
-
-
