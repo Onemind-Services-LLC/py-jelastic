@@ -340,7 +340,10 @@ def test_add_statistics(client):
             "resourceName": "resource 1",
             "uid": 1,
             "value": 1234,
-            "startDate": [CURRENT_DATETIME.date().today(), CURRENT_DATETIME.date().today()],
+            "startDate": [
+                CURRENT_DATETIME.date().today(),
+                CURRENT_DATETIME.date().today(),
+            ],
             "endDate": [datetime.date(2025, 11, 11), datetime.date(2025, 11, 12)],
             "envName": ["env 1", "env 2", "env 3"],
             "nodeId": [1, 2, 3],
