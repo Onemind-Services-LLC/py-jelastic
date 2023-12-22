@@ -350,7 +350,7 @@ def test_build_project(client):
         },
         delimiter=",",
     )
-def test_build_project(client):
+def test_deploy_project(client):
     client._get.return_value = success_response
     response = client.Build.DeployProject(
         "env_name", 1, "project_id",[1,1],[True,False])
