@@ -9,7 +9,7 @@
           <link rel="stylesheet" href="../../../_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="../../../_static/documentation_options.js?v=23dcd06f"></script>
+        <script src="../../../_static/documentation_options.js?v=1267f324"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -825,6 +825,8 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;SendNotification&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">message</span><span class="p">})</span></div>
 </div>
 
+
+
 <div class="viewcode-block" id="_Deployment">
 <a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment">[docs]</a>
 <span class="k">class</span> <span class="nc">_Deployment</span><span class="p">(</span><span class="n">Environment</span><span class="p">):</span>
@@ -841,6 +843,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_endpoint2</span> <span class="o">=</span> <span class="s2">&quot;deployment&quot;</span>
+
 <div class="viewcode-block" id="_Deployment.AddBuildProject">
 <a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.AddBuildProject">[docs]</a>
     <span class="k">def</span> <span class="nf">AddBuildProject</span><span class="p">(</span>
@@ -851,7 +854,7 @@
         <span class="n">repo</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">deployment</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">settings</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">hooks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span> <span class="kc">None</span>
+        <span class="n">hooks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        param env_name: target environment name (with a build node).</span>
@@ -873,8 +876,9 @@
                 <span class="s2">&quot;settings&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="p">,</span>
                 <span class="s2">&quot;hooks&quot;</span><span class="p">:</span> <span class="n">hooks</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="_Deployment.AddRepo">
 <a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.AddRepo">[docs]</a>
@@ -911,8 +915,9 @@
                 <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span>
                 <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="_Deployment.BuildDeployProject">
 <a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.BuildDeployProject">[docs]</a>
@@ -921,8 +926,8 @@
         <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">node_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">skip_update</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span><span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">delay</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span> <span class="kc">None</span>
+        <span class="n">skip_update</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">delay</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        param env_name: target environment name (with a build node).</span>
@@ -940,8 +945,9 @@
                 <span class="s2">&quot;skipUpdate&quot;</span><span class="p">:</span> <span class="n">skip_update</span><span class="p">,</span>
                 <span class="s2">&quot;delay&quot;</span><span class="p">:</span> <span class="n">delay</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="_Deployment.BuildProject">
 <a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.BuildProject">[docs]</a>
@@ -950,8 +956,8 @@
         <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">node_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">skip_upload</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span><span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">skip_update</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span><span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">skip_upload</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">skip_update</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        param env_name: target environment name (with a build node).</span>
@@ -969,7 +975,7 @@
                 <span class="s2">&quot;skipUpload&quot;</span><span class="p">:</span> <span class="n">skip_upload</span><span class="p">,</span>
                 <span class="s2">&quot;skipUpdate&quot;</span><span class="p">:</span> <span class="n">skip_update</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
 
 
@@ -1007,10 +1013,11 @@
                 <span class="s2">&quot;buildNodeId&quot;</span><span class="p">:</span> <span class="n">build_node_id</span><span class="p">,</span>
                 <span class="s2">&quot;settings&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="p">,</span>
                 <span class="s2">&quot;hooks&quot;</span><span class="p">:</span> <span class="n">hooks</span><span class="p">,</span>
-                <span class="s2">&quot;delay&quot;</span><span class="p">:</span> <span class="n">delay</span>
+                <span class="s2">&quot;delay&quot;</span><span class="p">:</span> <span class="n">delay</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="_Deployment.DeployArchive">
 <a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.DeployArchive">[docs]</a>
@@ -1046,10 +1053,11 @@
                 <span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="n">context</span><span class="p">,</span>
                 <span class="s2">&quot;zdt&quot;</span><span class="p">:</span> <span class="n">zdt</span><span class="p">,</span>
                 <span class="s2">&quot;hooks&quot;</span><span class="p">:</span> <span class="n">hooks</span><span class="p">,</span>
-                <span class="s2">&quot;delay&quot;</span><span class="p">:</span> <span class="n">delay</span>
+                <span class="s2">&quot;delay&quot;</span><span class="p">:</span> <span class="n">delay</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="_Deployment.DeployProject">
 <a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.DeployProject">[docs]</a>
@@ -1071,8 +1079,9 @@
                 <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
                 <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">project</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="_Deployment.EditBuildProject">
 <a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.EditBuildProject">[docs]</a>
@@ -1081,11 +1090,11 @@
         <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">node_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">name</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">repo</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">repo</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">deployment</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">settings</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">hooks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span> <span class="kc">None</span>
+        <span class="n">hooks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        param env_name: target environment name (with a build node).</span>
@@ -1109,8 +1118,9 @@
                 <span class="s2">&quot;settings&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="p">,</span>
                 <span class="s2">&quot;hooks&quot;</span><span class="p">:</span> <span class="n">hooks</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="_Deployment.EditProject">
 <a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.EditProject">[docs]</a>
@@ -1119,11 +1129,11 @@
         <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">node_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">context</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">new_context</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">repo</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">new_context</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">repo</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">settings</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">hooks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">delay</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span> <span class="kc">None</span>
+        <span class="n">hooks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">delay</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        param env_name: target environment name (with a build node).</span>
@@ -1148,7 +1158,7 @@
                 <span class="s2">&quot;hooks&quot;</span><span class="p">:</span> <span class="n">hooks</span><span class="p">,</span>
                 <span class="s2">&quot;delay&quot;</span><span class="p">:</span> <span class="n">delay</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
 
 
@@ -1156,7 +1166,7 @@
 <a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.EditRepo">[docs]</a>
     <span class="k">def</span> <span class="nf">EditRepo</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="nb">id</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="nb">type</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">url</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -1180,7 +1190,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
             <span class="s2">&quot;EditRepo&quot;</span><span class="p">,</span>
             <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-                <span class="s2">&quot;id&quot;</span><span class="p">:</span><span class="nb">id</span><span class="p">,</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
                 <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
                 <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">,</span>
                 <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span>
@@ -1190,8 +1200,9 @@
                 <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span>
                 <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="_Deployment.GetBuildProjectInfo">
 <a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.GetBuildProjectInfo">[docs]</a>
@@ -1213,16 +1224,17 @@
                 <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
                 <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">project</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="_Deployment.GetBuildProjects">
 <a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.GetBuildProjects">[docs]</a>
     <span class="k">def</span> <span class="nf">GetBuildProjects</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        param env_name: target environment name (with a build node).</span>
@@ -1236,16 +1248,13 @@
                 <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
                 <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="_Deployment.GetDeployments">
 <a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.GetDeployments">[docs]</a>
-    <span class="k">def</span> <span class="nf">GetDeployments</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">node_group</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="p">):</span>
+    <span class="k">def</span> <span class="nf">GetDeployments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">node_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        param env_name: target environment name (with a build node).</span>
 <span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.</span>
@@ -1256,19 +1265,19 @@
                 <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
                 <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="_Deployment.GetHooks">
 <a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.GetHooks">[docs]</a>
     <span class="k">def</span> <span class="nf">GetHooks</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">context</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">project</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">context</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">project</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        param env_name: target environment name (with a build node).</span>
@@ -1286,16 +1295,17 @@
                 <span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="n">context</span><span class="p">,</span>
                 <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">project</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="_Deployment.GetProjectInfo">
 <a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.GetProjectInfo">[docs]</a>
     <span class="k">def</span> <span class="nf">GetProjectInfo</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="n">context</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">context</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        param env_name: target environment name (with a build node).</span>
@@ -1309,14 +1319,15 @@
                 <span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="n">context</span><span class="p">,</span>
                 <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="_Deployment.GetRepos">
 <a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.GetRepos">[docs]</a>
     <span class="k">def</span> <span class="nf">GetRepos</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="nb">id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        param id: unique identifier of the repository.</span>
@@ -1326,17 +1337,17 @@
             <span class="n">params</span><span class="o">=</span><span class="p">{</span>
                 <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="_Deployment.RemoveBuildProject">
 <a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.RemoveBuildProject">[docs]</a>
     <span class="k">def</span> <span class="nf">RemoveBuildProject</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="n">node_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        param env_name: target environment name (with a build node).</span>
@@ -1350,15 +1361,13 @@
                 <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
                 <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">project</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="_Deployment.RemoveRepo">
 <a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.RemoveRepo">[docs]</a>
-    <span class="k">def</span> <span class="nf">RemoveRepo</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="p">):</span>
+    <span class="k">def</span> <span class="nf">RemoveRepo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        param id: unique identifier of the repository.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1369,6 +1378,7 @@
             <span class="p">},</span>
         <span class="p">)</span></div>
 
+
 <div class="viewcode-block" id="_Deployment.RenameContext">
 <a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.RenameContext">[docs]</a>
     <span class="k">def</span> <span class="nf">RenameContext</span><span class="p">(</span>
@@ -1376,7 +1386,7 @@
         <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">node_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">old_context</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">new_context</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">new_context</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        param env_name: target environment name (with a build node).</span>
@@ -1393,6 +1403,7 @@
                 <span class="s2">&quot;newContext&quot;</span><span class="p">:</span> <span class="n">new_context</span><span class="p">,</span>
             <span class="p">},</span>
         <span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="_Deployment.Undeploy">
 <a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.Undeploy">[docs]</a>
@@ -1413,20 +1424,20 @@
                 <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
                 <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
                 <span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="n">context</span><span class="p">,</span>
-
             <span class="p">},</span>
         <span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="_Deployment.Update">
 <a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.Update">[docs]</a>
     <span class="k">def</span> <span class="nf">Update</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">context</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">project</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">delay</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">context</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">project</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">delay</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        param env_name: target environment name (with a build node).</span>
@@ -1446,15 +1457,9 @@
                 <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">project</span><span class="p">,</span>
                 <span class="s2">&quot;delay&quot;</span><span class="p">:</span> <span class="n">delay</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
 </div>
-
-
-
-
-
-
 
 
 
