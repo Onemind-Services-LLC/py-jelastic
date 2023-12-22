@@ -9,7 +9,7 @@
           <link rel="stylesheet" href="../../../_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="../../../_static/documentation_options.js?v=41eeeb43"></script>
+        <script src="../../../_static/documentation_options.js?v=567aa72b"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -420,6 +420,20 @@
     <span class="n">_endpoint1</span> <span class="o">=</span> <span class="s2">&quot;marketplace&quot;</span>
 
     <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">App</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_App&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.marketplace.App</span>
+<span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.App</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_App</span><span class="p">(</span>
+            <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
+            <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span>
+            <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">Console</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_Console&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
@@ -663,6 +677,187 @@
 <span class="sd">        param message: a custom message to be added to the console log.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;WriteLog&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">message</span><span class="p">})</span>
+
+
+<span class="k">class</span> <span class="nc">_App</span><span class="p">(</span><span class="n">Marketplace</span><span class="p">):</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.App</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_endpoint2</span> <span class="o">=</span> <span class="s2">&quot;app&quot;</span>
+
+    <span class="k">def</span> <span class="nf">AddApp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">manifest</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param manifest: custom personal JPS (manifest body or link) to be added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;AddApp&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;manifest&quot;</span><span class="p">:</span> <span class="n">manifest</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">DeleteApp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param id: unique identifier of the target personal JPS manifest in the Marketplace..</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;DeleteApp&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">EditApp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">manifest</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param id: unique identifier of the target personal JPS manifest in the Marketplace..</span>
+<span class="sd">        :param manifest: updated personal JPS (manifest body or link).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;EditApp&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+                <span class="s2">&quot;manifest&quot;</span><span class="p">:</span> <span class="n">manifest</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">GetAddonList</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">envName</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">search</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param envName: target environment name.</span>
+<span class="sd">        :param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.</span>
+<span class="sd">        :param search: JSON object with the search parameters. For example (all fields are optional):</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetAddonList&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">envName</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;search&quot;</span><span class="p">:</span> <span class="n">search</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">GetAppInfo</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">lang</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param id: unique identifier of the target JPS manifest in the Marketplace.</span>
+<span class="sd">        :param lang: target localization language.</span>
+<span class="sd">        :param owner_uid: unique identifier of the target user account.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetAppInfo&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+                <span class="s2">&quot;lang&quot;</span><span class="p">:</span> <span class="n">lang</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">GetCategories</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetCategories&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{},</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">GetChecksum</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetChecksum&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{},</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">GetList</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">search</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param search: JSON object with the search parameters. For example (all fields are optional):</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetList&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;search&quot;</span><span class="p">:</span> <span class="n">search</span><span class="p">},</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">Install</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">settings</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">display_name</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">region</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">env_groups</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">nodes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">override_nodes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">skip_email</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">skip_node_emails</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param id: unique identifier of the target JPS manifest in the Marketplace.</span>
+<span class="sd">        :param env_name: target environment name.</span>
+<span class="sd">        :param settings: JSON object with custom settings for the JPS manifest.</span>
+<span class="sd">        :param display_name: custom alias (display name) for the deployed application.</span>
+<span class="sd">        :param region: target environment region.</span>
+<span class="sd">        :param env_groups: target environment group name or JSON array of group names.</span>
+<span class="sd">        :param owner_uid: unique identifier of the target user account.</span>
+<span class="sd">        :param nodes: JSON object with a list of environment nodes and their settings. Considered for &#39;jpsType: install&#39; only.</span>
+<span class="sd">        :param override_nodes: defines whether to override (true) or merge (false) nodes from the &#39;nodes&#39; parameter with the nodes specified in the manifest.</span>
+<span class="sd">        :param skip_email: defines whether to send email after the successful installation (false) or not (true).</span>
+<span class="sd">        :param skip_node_emails: defines whether to send emails after the new nodes creation (false) or not (true).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Install&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;settings&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="p">,</span>
+                <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="n">display_name</span><span class="p">,</span>
+                <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="n">region</span><span class="p">,</span>
+                <span class="s2">&quot;envGroups&quot;</span><span class="p">:</span> <span class="n">env_groups</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+                <span class="s2">&quot;nodes&quot;</span><span class="p">:</span> <span class="n">nodes</span><span class="p">,</span>
+                <span class="s2">&quot;overrideNodes&quot;</span><span class="p">:</span> <span class="n">override_nodes</span><span class="p">,</span>
+                <span class="s2">&quot;skipEmail&quot;</span><span class="p">:</span> <span class="n">skip_email</span><span class="p">,</span>
+                <span class="s2">&quot;skipNodeEmails&quot;</span><span class="p">:</span> <span class="n">skip_node_emails</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">InstallAddon</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">settings</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">skip_email</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param id: unique identifier of the target JPS manifest in the Marketplace.</span>
+<span class="sd">        :param settings: JSON object with custom settings for the JPS manifest.</span>
+<span class="sd">        :param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.</span>
+<span class="sd">        :param skip_email: defines whether to send email after the successful installation (false) or not (true).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;InstallAddon&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+                <span class="s2">&quot;settings&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;skipEmail&quot;</span><span class="p">:</span> <span class="n">skip_email</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
 </pre></div>
 
           </div>
