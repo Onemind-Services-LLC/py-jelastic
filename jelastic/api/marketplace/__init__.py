@@ -7,6 +7,20 @@ class Marketplace(ClientAbstract):
     _endpoint1 = "marketplace"
 
     @property
+    def App(self) -> "_App":
+        """
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.marketplace.App
+        Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.App
+        """
+        return _App(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+        )
+
+    @property
     def Console(self) -> "_Console":
         """
         >>> from jelastic import Jelastic
@@ -249,20 +263,6 @@ class _Console(Marketplace):
         param message: a custom message to be added to the console log.
         """
         return self._get("WriteLog", params={"message": message})
-
-    @property
-    def App(self) -> "_App":
-        """
-        >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
-        >>> jelastic.marketplace.App
-        Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.App
-        """
-        return _App(
-            session=self._session,
-            token=self._token,
-            debug=self._debug,
-        )
 
 
 class _App(Marketplace):

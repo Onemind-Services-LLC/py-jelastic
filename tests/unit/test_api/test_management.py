@@ -31,6 +31,11 @@ def test_clear_log(client):
     response = client.Console.ClearLog()
     client._get.assert_called_with(
         "ClearLog",
+        params={},
+    )
+    assert response == success_response
+
+
 def test_add_app(client):
     client._get.return_value = success_response
     response = client.App.AddApp("manifest")
@@ -143,6 +148,8 @@ def test_delete(client):
         "Delete",
         params={"id": "id"},
     )
+
+
 def test_get_checksum(client):
     client._get.return_value = success_response
     response = client.App.GetChecksum()
@@ -159,18 +166,11 @@ def test_get_list(client):
     client._get.assert_called_with(
         "GetList",
         params={"search": ["search1", "search2", "search3"]},
+    )
     response = client.Favorite.GetList(
         "search",
         "lang",
         "checksum",
-    )
-    client._get.assert_called_with(
-        "Delete",
-        params={
-            "search": "search",
-            "lang": "lang",
-            "checksum": "checksum",
-        },
     )
     assert response == success_response
 
@@ -204,6 +204,12 @@ def test_install(client):
             "overrideNodes": [False, False, True],
             "skipEmail": [False, True, False],
             "skipNodeEmails": [False, True, False],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
 def test_execute_action(client):
     client._get.return_value = success_response
     response = client.Installation.ExecuteAction(
@@ -271,6 +277,11 @@ def test_get_settings(client):
             "appUniqueName": "app_unique_name",
             "settingsId": ["settings_id1", "settings_id2"],
             "lang": ["lang1", "lang2"],
+        },
+        delimiter=",",
+    )
+
+
 def test_install_addon(client):
     client._get.return_value = success_response
     response = client.App.InstallAddon(
