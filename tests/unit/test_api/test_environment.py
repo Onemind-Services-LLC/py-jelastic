@@ -1797,6 +1797,7 @@ def test_create_environment(client):
     )
     assert response == success_response
 
+
 def test_delete_env(client):
     client._get.return_value = success_response
     response = client.Control.DeleteEnv(
@@ -1804,14 +1805,15 @@ def test_delete_env(client):
         ['password1', 'password2', 'password3'],
     )
     client._get.assert_called_once_with(
-            'DeleteEnv',
-            params={
-                'envName': 'env',
-                'password': ['password1', 'password2', 'password3'],
-            },
-            delimiter=",",
-        )
+        'DeleteEnv',
+        params={
+            'envName': 'env',
+            'password': ['password1', 'password2', 'password3'],
+        },
+        delimiter=",",
+    )
     assert response == success_response
+
 
 def test_delete_exported_files(client):
     client._get.return_value = success_response
@@ -1820,13 +1822,14 @@ def test_delete_exported_files(client):
         'file',
     )
     client._get.assert_called_once_with(
-            'DeleteExportedFiles',
-            params={
-                'envName': 'env',
-                'fileName': 'file',
-            }
-        )
+        'DeleteExportedFiles',
+        params={
+            'envName': 'env',
+            'fileName': 'file',
+        }
+    )
     assert response == success_response
+
 
 def test_deploy_app(client):
     client._get.return_value = success_response
@@ -1836,27 +1839,28 @@ def test_deploy_app(client):
         'file name',
         ['context1', 'context2', 'context3'],
         [True, False, True],
-        [1,2,3],
+        [1, 2, 3],
         ['group1', 'group2', 'group3'],
         ['hook1', 'hook2', 'hook3'],
         [True, False, True],
     )
     client._get.assert_called_once_with(
-            'DeployApp',
-            params={
-                'envName': 'env',
-                'fileUrl': 'file url',
-                'fileName': 'file name',
-                'context': ['context1', 'context2', 'context3'],
-                'atomicDeploy': [True, False, True],
-                'delay': [1,2,3],
-                'nodeGroup': ['group1', 'group2', 'group3'],
-                'hooks': ['hook1', 'hook2', 'hook3'],
-                'isSequential': [True, False, True],
-            },
-            delimiter=",",
-        )
+        'DeployApp',
+        params={
+            'envName': 'env',
+            'fileUrl': 'file url',
+            'fileName': 'file name',
+            'context': ['context1', 'context2', 'context3'],
+            'atomicDeploy': [True, False, True],
+            'delay': [1, 2, 3],
+            'nodeGroup': ['group1', 'group2', 'group3'],
+            'hooks': ['hook1', 'hook2', 'hook3'],
+            'isSequential': [True, False, True],
+        },
+        delimiter=",",
+    )
     assert response == success_response
+
 
 def test_detach_env_group(client):
     client._get.return_value = success_response
@@ -1865,13 +1869,14 @@ def test_detach_env_group(client):
         'group',
     )
     client._get.assert_called_once_with(
-            'DetachEnvGroup',
-            params={
-                'envName': 'env',
-                'envGroup': 'group',
-            }
-        )
+        'DetachEnvGroup',
+        params={
+            'envName': 'env',
+            'envGroup': 'group',
+        }
+    )
     assert response == success_response
+
 
 def test_disable_replication(client):
     client._get.return_value = success_response
@@ -1880,13 +1885,14 @@ def test_disable_replication(client):
         'group',
     )
     client._get.assert_called_once_with(
-            'DisableReplication',
-            params={
-                'envName': 'env',
-                'nodeGroup': 'group',
-            }
-        )
+        'DisableReplication',
+        params={
+            'envName': 'env',
+            'nodeGroup': 'group',
+        }
+    )
     assert response == success_response
+
 
 def test_edit_endpoint(client):
     client._get.return_value = success_response
@@ -1907,5 +1913,1032 @@ def test_edit_endpoint(client):
             'privatePort': 8000,
             'protocol': 'tcp',
         }
+    )
+    assert response == success_response
+
+
+def test_edit_env_settings(client):
+    client._get.return_value = success_response
+    response = client.Control.EditEnvSettings(
+        'env',
+        {
+            'setting1': 'val1',
+            'setting2': 'val2',
+            'setting3': 'val3',
+            'setting4': 'val4',
+            'setting5': 'val5',
+        },
+    )
+    client._get.assert_called_once_with(
+        'EditEnvSettings',
+        params={
+            'envName': 'env',
+            'settings': {
+                'setting1': 'val1',
+                'setting2': 'val2',
+                'setting3': 'val3',
+                'setting4': 'val4',
+                'setting5': 'val5',
+            },
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_edit_node_group(client):
+    client._get.return_value = success_response
+    response = client.Control.EditNodeGroup(
+        'env',
+        {
+            'group1': 'val1',
+            'group2': 'val2',
+            'group3': 'val3',
+            'group4': 'val4',
+            'group5': 'val5',
+        },
+    )
+    client._get.assert_called_once_with(
+        'EditNodeGroup',
+        params={
+            'envName': 'env',
+            'nodeGroup': {
+                'group1': 'val1',
+                'group2': 'val2',
+                'group3': 'val3',
+                'group4': 'val4',
+                'group5': 'val5',
+            },
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_edit_registry_credentials(client):
+    client._get.return_value = success_response
+    response = client.Control.EditRegistryCredentials(
+        {
+            'filter1': 'value1',
+            'filter2': 'value2',
+            'filter3': 'value3',
+            'filter4': 'value4',
+            'filter5': 'value5',
+        },
+        ['user1', 'user2', 'user3'],
+        ['password1', 'password2', 'password3'],
+    )
+    client._get.assert_called_once_with(
+        'EditRegistryCredentials',
+        params={
+            'filter': {
+                'filter1': 'value1',
+                'filter2': 'value2',
+                'filter3': 'value3',
+                'filter4': 'value4',
+                'filter5': 'value5',
+            },
+            'user': ['user1', 'user2', 'user3'],
+            'password': ['password1', 'password2', 'password3'],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_exec_cmd(client):
+    client._get.return_value = success_response
+    response = client.Control.ExecCmd(
+        'env',
+        'type',
+        {
+            'command1': 'val1',
+            'command2': 'val2',
+            'command3': 'val3',
+            'command4': 'val4',
+            'command5': 'val5',
+        },
+        [True, False, True],
+    )
+    client._get.assert_called_once_with(
+        'ExecCmd',
+        params={
+            'envName': 'env',
+            'nodeType': 'type',
+            'commandList': {
+                'command1': 'val1',
+                'command2': 'val2',
+                'command3': 'val3',
+                'command4': 'val4',
+                'command5': 'val5',
+            },
+            'sayYes': [True, False, True],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_exec_cmd_by_group(client):
+    client._get.return_value = success_response
+    response = client.Control.ExecCmdByGroup(
+        'env',
+        'group',
+        {
+            'command1': 'val1',
+            'command2': 'val2',
+            'command3': 'val3',
+            'command4': 'val4',
+            'command5': 'val5',
+        },
+        [True, False, True],
+        [True, False, True],
+    )
+    client._get.assert_called_once_with(
+        'ExecCmdByGroup',
+        params={
+            'envName': 'env',
+            'nodeGroup': 'group',
+            'commandList': {
+                'command1': 'val1',
+                'command2': 'val2',
+                'command3': 'val3',
+                'command4': 'val4',
+                'command5': 'val5',
+            },
+            'sayYes': [True, False, True],
+            'async': [True, False, True],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_exec_cmd_by_id(client):
+    client._get.return_value = success_response
+    response = client.Control.ExecCmdById(
+        'env',
+        1,
+        {
+            'command1': 'val1',
+            'command2': 'val2',
+            'command3': 'val3',
+            'command4': 'val4',
+            'command5': 'val5',
+        },
+        [True, False, True],
+    )
+    client._get.assert_called_once_with(
+        'ExecCmdById',
+        params={
+            'envName': 'env',
+            'nodeId': 1,
+            'commandList': {
+                'command1': 'val1',
+                'command2': 'val2',
+                'command3': 'val3',
+                'command4': 'val4',
+                'command5': 'val5',
+            },
+            'sayYes': [True, False, True],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_exec_cmd_by_type(client):
+    client._get.return_value = success_response
+    response = client.Control.ExecCmdByType(
+        'env',
+        'type',
+        {
+            'command1': 'val1',
+            'command2': 'val2',
+            'command3': 'val3',
+            'command4': 'val4',
+            'command5': 'val5',
+        },
+        [True, False, True],
+    )
+    client._get.assert_called_once_with(
+        'ExecCmdByType',
+        params={
+            'envName': 'env',
+            'nodeType': 'type',
+            'commandList': {
+                'command1': 'val1',
+                'command2': 'val2',
+                'command3': 'val3',
+                'command4': 'val4',
+                'command5': 'val5',
+            },
+            'sayYes': [True, False, True],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_exec_cmd_inner(client):
+    client._get.return_value = success_response
+    response = client.Control.ExecCmdInner(
+        'env',
+        'app id',
+        'session',
+        {
+            'command1': 'val1',
+            'command2': 'val2',
+            'command3': 'val3',
+            'command4': 'val4',
+            'command5': 'val5',
+        },
+        ['type1', 'type2', 'type3'],
+        [1, 2, 3],
+        ['name1', 'name2', 'name3'],
+        [True, False, True],
+        ['group1', 'group2', 'group3'],
+        [True, False, True],
+    )
+    client._get.assert_called_once_with(
+        'ExecCmdInner',
+        params={
+            'envName': 'env',
+            'targetAppId': 'app id',
+            'session': 'session',
+            'commandList': {
+                'command1': 'val1',
+                'command2': 'val2',
+                'command3': 'val3',
+                'command4': 'val4',
+                'command5': 'val5',
+            },
+            'nodeType': ['type1', 'type2', 'type3'],
+            'nodeId': [1, 2, 3],
+            'userName': ['name1', 'name2', 'name3'],
+            'sayYes': [True, False, True],
+            'nodeGroup': ['group1', 'group2', 'group3'],
+            'async': [True, False, True],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_exec_docker_run_cmd(client):
+    client._get.return_value = success_response
+    response = client.Control.ExecDockerRunCmd('env', 1)
+    client._get.assert_called_once_with(
+        'ExecDockerRunCmd',
+        params={
+            'envName': 'env',
+            'nodeId': 1,
+        }
+    )
+    assert response == success_response
+
+
+def test_export(client):
+    client._get.return_value = success_response
+    response = client.Control.Export('env', 'settings')
+    client._get.assert_called_once_with(
+        'Export',
+        params={
+            'envName': 'env',
+            'settings': 'settings',
+        }
+    )
+    assert response == success_response
+
+
+def test_finish(client):
+    client._get.return_value = success_response
+    response = client.Control.Finish('env')
+    client._get.assert_called_once_with(
+        'Finish',
+        params={'envName': 'env'}
+    )
+    assert response == success_response
+
+
+def test_firewall_status(client):
+    client._get.return_value = success_response
+    response = client.Control.FireWallStatus('env', 1)
+    client._get.assert_called_once_with(
+        'FireWallStatus',
+        params={
+            'envName': 'env',
+            'nodeId': 1,
+        }
+    )
+    assert response == success_response
+
+
+def test_get_active_envs(client):
+    client._get.return_value = success_response
+    response = client.Control.GetActiveEnvs(
+        'env',
+        'domain',
+        CURRENT_DATETIME,
+        CURRENT_DATETIME,
+        'checksum',
+    )
+    client._get.assert_called_once_with(
+        'GetActiveEnvs',
+        params={
+            'envName': 'env',
+            'domain': 'domain',
+            'starttime': CURRENT_DATETIME,
+            'endtime': CURRENT_DATETIME,
+            'checksum': 'checksum',
+        },
+        datetime_format="%Y-%m-%d",
+    )
+    assert response == success_response
+
+
+def test_get_all_sum_stat_by_uid(client):
+    client._get.return_value = success_response
+    response = client.Control.GetAllSumStatByUid(
+        [1, 2, 3],
+        [CURRENT_DATETIME, CURRENT_DATETIME, CURRENT_DATETIME],
+    )
+    client._get.assert_called_once_with(
+        'GetAllSumStatByUid',
+        params={
+            'duration': [1, 2, 3],
+            'endtime': [CURRENT_DATETIME, CURRENT_DATETIME, CURRENT_DATETIME],
+        },
+        datetime_format="%Y-%m-%d",
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_basic_envs_info(client):
+    client._get.return_value = success_response
+    response = client.Control.GetBasicEnvsInfo([1, 2, 3])
+    client._get.assert_called_once_with(
+        'GetBasicsEnvsInfo',
+        params={
+            'ownerUid': [1, 2, 3],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_container_entry_point(client):
+    client._get.return_value = success_response
+    response = client.Control.GetContainerEntryPoint('env', 1)
+    client._get.assert_called_once_with(
+        'GetContainerEntryPoint',
+        params={
+            'envName': 'env',
+            'nodeId': 1,
+        }
+    )
+    assert response == success_response
+
+
+def test_get_container_env_vars(client):
+    client._get.return_value = success_response
+    response = client.Control.GetContainerEnvVars('env', 1)
+    client._get.assert_called_once_with(
+        'GetContainerEnvVars',
+        params={
+            'envName': 'env',
+            'nodeId': 1,
+        }
+    )
+    assert response == success_response
+
+
+def test_get_container_env_vars_by_group(client):
+    client._get.return_value = success_response
+    response = client.Control.GetContainerEnvVarsByGroup('env', 'group')
+    client._get.assert_called_once_with(
+        'GetContainerEnvVarsByGroup',
+        params={
+            'envName': 'env',
+            'nodeGroup': 'group',
+        }
+    )
+    assert response == success_response
+
+
+def test_get_container_manifest(client):
+    client._get.return_value = success_response
+    response = client.Control.GetContainerManifest(
+        'image',
+        ['registry1', 'registry2', 'registry3'],
+        ['name1', 'name2', 'name3'],
+        ['password1', 'password2', 'password3'],
+        [True, False, True],
+    )
+    client._get.assert_called_once_with(
+        'GetContainerManifest',
+        params={
+            'image': 'image',
+            'registry': ['registry1', 'registry2', 'registry3'],
+            'userName': ['name1', 'name2', 'name3'],
+            'password': ['password1', 'password2', 'password3'],
+            'ignoreFormat': [True, False, True],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_container_node_tags(client):
+    client._get.return_value = success_response
+    response = client.Control.GetContainerNodeTags('env', 1)
+    client._get.assert_called_once_with(
+        'GetContainerNodeTags',
+        params={
+            'envName': 'env',
+            'nodeId': 1,
+        }
+    )
+    assert response == success_response
+
+
+def test_get_container_run_cmd(client):
+    client._get.return_value = success_response
+    response = client.Control.GetContainerRunCmd('env', 1)
+    client._get.assert_called_once_with(
+        'GetContainerRunCmd',
+        params={
+            'envName': 'env',
+            'nodeId': 1,
+        }
+    )
+    assert response == success_response
+
+
+def test_get_container_run_config(client):
+    client._get.return_value = success_response
+    response = client.Control.GetContainerRunConfig('env', 1)
+    client._get.assert_called_once_with(
+        'GetContainerRunConfig',
+        params={
+            'envName': 'env',
+            'nodeId': 1,
+        }
+    )
+    assert response == success_response
+
+
+def test_get_container_tags(client):
+    client._get.return_value = success_response
+    response = client.Control.GetContainerTags(
+        'image',
+        ['registry1', 'registry2', 'registry3'],
+        ['name1', 'name2', 'name3'],
+        ['password1', 'password2', 'password3'],
+    )
+    client._get.assert_called_once_with(
+        'GetContainerTags',
+        params={
+            'image': 'image',
+            'registry': ['registry1', 'registry2', 'registry3'],
+            'userName': ['name1', 'name2', 'name3'],
+            'password': ['password1', 'password2', 'password3'],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_container_volumes_by_group(client):
+    client._get.return_value = success_response
+    response = client.Control.GetContainerVolumesByGroup('env', 'group')
+    client._get.assert_called_once_with(
+        'GetContainerVolumesByGroup',
+        params={
+            'envName': 'env',
+            'nodeGroup': 'group',
+        }
+    )
+    assert response == success_response
+
+
+def test_get_container_volumes_by_id(client):
+    client._get.return_value = success_response
+    response = client.Control.GetContainerVolumesById('env', 1)
+    client._get.assert_called_once_with(
+        'GetContainerVolumesById',
+        params={
+            'envName': 'env',
+            'nodeId': 1,
+        }
+    )
+    assert response == success_response
+
+
+def test_get_docker_config(client):
+    client._get.return_value = success_response
+    response = client.Control.GetDockerConfig('env', 1)
+    client._get.assert_called_once_with(
+        'GetDockerConfig',
+        params={
+            'envName': 'env',
+            'nodeId': 1,
+        }
+    )
+    assert response == success_response
+
+
+def test_get_docker_entry_point(client):
+    client._get.return_value = success_response
+    response = client.Control.GetDockerEntryPoint('env', 1)
+    client._get.assert_called_once_with(
+        'GetDockerEntryPoint',
+        params={
+            'envName': 'env',
+            'nodeId': 1,
+        }
+    )
+    assert response == success_response
+
+
+def test_get_docker_run_cmd(client):
+    client._get.return_value = success_response
+    response = client.Control.GetDockerRunCmd('env', 1)
+    client._get.assert_called_once_with(
+        'GetDockerRunCmd',
+        params={
+            'envName': 'env',
+            'nodeId': 1,
+        }
+    )
+    assert response == success_response
+
+
+def test_get_domains_list(client):
+    client._get.return_value = success_response
+    response = client.Control.GetDomainsList('env', 'checksum')
+    client._get.assert_called_once_with(
+        'GetDomainsList',
+        params={
+            'envName': 'env',
+            'checksum': 'checksum',
+        }
+    )
+    assert response == success_response
+
+
+def test_get_endpoints(client):
+    client._get.return_value = success_response
+    response = client.Control.GetEndpoints('env', [1, 2, 3])
+    client._get.assert_called_once_with(
+        'GetEndpoints',
+        params={
+            'envName': 'env',
+            'nodeId': [1, 2, 3],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_engine_list(client):
+    client._get.return_value = success_response
+    response = client.Control.GetEngineList(['type1', 'type2', 'type3'])
+    client._get.assert_called_once_with(
+        'GetEngineList',
+        params={
+            'type': ['type1', 'type2', 'type3'],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_engine_types(client):
+    client._get.return_value = success_response
+    response = client.Control.GetEngineTypes()
+    client._get.assert_called_once_with(
+        'GetEngineTypes',
+        params={}
+    )
+    assert response == success_response
+
+
+def test_get_env_info(client):
+    client._get.return_value = success_response
+    response = client.Control.GetEnvInfo('env', [True, False, True])
+    client._get.assert_called_once_with(
+        'GetEnvInfolazy',
+        params={
+            'envName': 'env',
+            'lazy': [True, False, True],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_env_property(client):
+    client._get.return_value = success_response
+    response = client.Control.GetEnvProperty('env', [True, False, True])
+    client._get.assert_called_once_with(
+        'GetEnvProperty',
+        params={
+            'envName': 'env',
+            'propertyKeys': [True, False, True],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_envs(client):
+    client._get.return_value = success_response
+    response = client.Control.GetEnvs([True, False, True], [1, 2, 3])
+    client._get.assert_called_once_with(
+        'GetEnvs',
+        params={
+            'lazy': [True, False, True],
+            'ownerUid': [1, 2, 3]
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_envs_by_criteria(client):
+    client._get.return_value = success_response
+    response = client.Control.GetEnvsByCriteria(
+        {
+            'criteria1': 'value1',
+            'criteria2': 'value2',
+            'criteria3': 'value3',
+            'criteria4': 'value4',
+            'criteria5': 'value5',
+        },
+        [True, False, True],
+    )
+    client._get.assert_called_once_with(
+        'GetEnvsByCriteria',
+        params={
+            'criteria': {
+                'criteria1': 'value1',
+                'criteria2': 'value2',
+                'criteria3': 'value3',
+                'criteria4': 'value4',
+                'criteria5': 'value5',
+            },
+            'lazy': [True, False, True],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_envs_info(client):
+    client._get.return_value = success_response
+    response = client.Control.GetEnvsInfo(
+        'env',
+        ['app1', 'app2', 'app3'],
+    )
+    client._get.assert_called_once_with(
+        'GetEnvsInfo',
+        params={
+            'envName': 'env',
+            'targetAppid': ['app1', 'app2', 'app3'],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_logs(client):
+    client._get.return_value = success_response
+    response = client.Control.GetLogs(
+        'env',
+        1,
+        ['path1', 'path2', 'path3'],
+    )
+    client._get.assert_called_once_with(
+        'GetLogs',
+        params={
+            'envName': 'env',
+            'nodeId': 1,
+            'path': ['path1', 'path2', 'path3'],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_logs_list(client):
+    client._get.return_value = success_response
+    response = client.Control.GetLogsList(
+        'env',
+        1,
+        ['path1', 'path2', 'path3'],
+    )
+    client._get.assert_called_once_with(
+        'GetLogsList',
+        params={
+            'envName': 'env',
+            'nodeId': 1,
+            'path': ['path1', 'path2', 'path3'],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_node_groups(client):
+    client._get.return_value = success_response
+    response = client.Control.GetNodeGroups('env')
+    client._get.assert_called_once_with(
+        'GetNodeGroups',
+        params={
+            'envName': 'env',
+        },
+    )
+    assert response == success_response
+
+
+def test_get_node_info(client):
+    client._get.return_value = success_response
+    response = client.Control.GetNodeInfo('node_id')
+    client._get.assert_called_once_with(
+        'GetNodeInfo',
+        params={
+            'GetNodeInfo': 'node_id',
+        },
+    )
+    assert response == success_response
+
+
+def test_get_node_missions(client):
+    client._get.return_value = success_response
+    response = client.Control.GetNodeMissions()
+    client._get.assert_called_once_with(
+        'GetNodeMissions',
+        params={}
+    )
+    assert response == success_response
+
+
+def test_get_node_ssh_key(client):
+    client._get.return_value = success_response
+    response = client.Control.GetNodeSSHKey(
+        'env',
+        1,
+        1,
+        [True, False, False],
+    )
+    client._get.assert_called_once_with(
+        'GetNodeSSHKey',
+        params={
+            'envName': 'env',
+            'nodeId': 1,
+            'uid': 1,
+            'skipNodeTypeCheck': [True, False, False],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_node_tags(client):
+    client._get.return_value = success_response
+    response = client.Control.GetNodeTags('env', 1)
+    client._get.assert_called_once_with(
+        'GetNodeTags',
+        params={
+            'envName': 'env',
+            'nodeId': 1,
+        },
+    )
+    assert response == success_response
+
+
+def test_get_regions(client):
+    client._get.return_value = success_response
+    response = client.Control.GetRegions()
+    client._get.assert_called_once_with(
+        'GetRegions',
+        params={}
+    )
+    assert response == success_response
+
+
+def test_get_regions_inner(client):
+    client._get.return_value = success_response
+    response = client.Control.GetRegionsInner('group', [True, False, True])
+    client._get.assert_called_once_with(
+        'GetRegionsInner',
+        params={
+            'groupName': 'group',
+            'isEnabled': [True, False, True],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_registry_info(client):
+    client._get.return_value = success_response
+    response = client.Control.GetRegistryInfo('env', 'group')
+    client._get.assert_called_once_with(
+        'GetRegistryInfo',
+        params={
+            'envName': 'env',
+            'nodeGroup': 'group',
+        },
+    )
+    assert response == success_response
+
+
+def test_get_ssh_access_info(client):
+    client._get.return_value = success_response
+    response = client.Control.GetSSHAccessInfo(1)
+    client._get.assert_called_once_with(
+        'GetSSHAccessInfo',
+        params={
+            'nodeId': 1,
+        }
+    )
+    assert response == success_response
+
+
+def test_getshared_envs_by_uid(client):
+    client._get.return_value = success_response
+    response = client.Control.GetSharedEnvsByUid(1)
+    client._get.assert_called_once_with(
+        'GetSharedEnvsByUid',
+        params={
+            'uid': 1,
+        }
+    )
+    assert response == success_response
+
+
+def test_get_software_packages(client):
+    client._get.return_value = success_response
+    response = client.Control.GetSoftwarePackages(
+        'env',
+        ['node1', 'node2', 'node3'],
+        ['group1', 'group2', 'group3'],
+    )
+    client._get.assert_called_once_with(
+        'GetSoftwarePackages',
+        params={
+            'envName': 'env',
+            'nodeType': ['node1', 'node2', 'node3'],
+            'nodeGroup': ['group1', 'group2', 'group3'],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_stats(client):
+    client._get.return_value = success_response
+    response = client.Control.GetStats(
+        'env',
+        10,
+        10,
+        [CURRENT_DATETIME, CURRENT_DATETIME, CURRENT_DATETIME],
+        [1, 2, 3],
+        ['node1', 'node2', 'node3'],
+        ['group1', 'group2', 'group3'],
+    )
+    client._get.assert_called_once_with(
+        'GetStats',
+        params={
+            'envName': 'env',
+            'duration': 10,
+            'interval': 10,
+            'endtime': [CURRENT_DATETIME, CURRENT_DATETIME, CURRENT_DATETIME],
+            'nodeid': [1, 2, 3],
+            'nodetype': ['node1', 'node2', 'node3'],
+            'nodeGroup': ['group1', 'group2', 'group3'],
+        },
+        datetime_format="%Y-%m-%d",
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_sum_stat(client):
+    client._get.return_value = success_response
+    response = client.Control.GetSumStat(
+        'env',
+        10,
+        [CURRENT_DATETIME, CURRENT_DATETIME, CURRENT_DATETIME],
+    )
+    client._get.assert_called_once_with(
+        'GetSumStat',
+        params={
+            'envName': 'env',
+            'duration': 10,
+            'endtime': [CURRENT_DATETIME, CURRENT_DATETIME, CURRENT_DATETIME],
+        },
+        datetime_format="%Y-%m-%d",
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_template_manifest(client):
+    client._get.return_value = success_response
+    response = client.Control.GetTemplateManifest('node', 'tag')
+    client._get.assert_called_once_with(
+        'GetTemplateManifest',
+        params={
+            'nodeType': 'node',
+            'tag': 'tag',
+        }
+    )
+    assert response == success_response
+
+
+def test_get_templates(client):
+    client._get.return_value = success_response
+    response = client.Control.GetTemplates(
+        ['type1', 'type2', 'type3'],
+        [1, 2, 3],
+    )
+    client._get.assert_called_once_with(
+        'GetTemplates',
+        params={
+            'type': ['type1', 'type2', 'type3'],
+            'ownerUid': [1, 2, 3],
+        }
+    )
+    assert response == success_response
+
+
+def test_get_transfer_request(client):
+    client._get.return_value = success_response
+    response = client.Control.GetTransferRequest()
+    client._get.assert_called_once_with(
+        'GetTransferRequest',
+        params={}
+    )
+    assert response == success_response
+
+
+def test_install_package_by_group(client):
+    client._get.return_value = success_response
+    response = client.Control.InstallPackageByGroup(
+        'env',
+        'node',
+        'name',
+    )
+    client._get.assert_called_once_with(
+        'InstallPackageByGroup',
+        params={
+            'envName': 'env',
+            'nodeGroup': 'node',
+            'packageName': 'name',
+        }
+    )
+    assert response == success_response
+
+
+def test_install_package_by_id(client):
+    client._get.return_value = success_response
+    response = client.Control.InstallPackageById(
+        'env',
+        'name',
+        [1, 2, 3],
+    )
+    client._get.assert_called_once_with(
+        'InstallPackageById',
+        params={
+            'envName': 'env',
+            'packageName': 'name',
+            'nodeId': [1, 2, 3],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_install_software_package(client):
+    client._get.return_value = success_response
+    response = client.Control.InstallSoftwarePackage(
+        'env',
+        'keyword',
+        ['type1', 'type2', 'type3'],
+        ['group1', 'group2', 'group3'],
+    )
+    client._get.assert_called_once_with(
+        'InstallSoftwarePackage',
+        params={
+            'envName': 'env',
+            'keyword': 'keyword',
+            'nodeType': ['type1', 'type2', 'type3'],
+            'nodeGroup': ['group1', 'group2', 'group3'],
+        },
+        delimiter=",",
     )
     assert response == success_response

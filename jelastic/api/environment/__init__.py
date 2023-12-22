@@ -2116,7 +2116,7 @@ class _Control(Environment):
             node_type: str,
             command_list: dict,
             say_yes: list[bool] = None,
-                ):
+    ):
         return self._get(
             'ExecCmd',
             params={
@@ -2135,7 +2135,7 @@ class _Control(Environment):
             command_list: dict,
             say_yes: list[bool] = None,
             Async: list[bool] = None,
-                ):
+    ):
         """
         :param env_name: target environment name.
         :param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
@@ -2154,13 +2154,14 @@ class _Control(Environment):
             },
             delimiter=",",
         )
+
     def ExecCmdById(
             self,
             env_name: str,
             node_id: int,
             command_list: dict,
             say_yes: list[bool] = None,
-                    ):
+    ):
         """
         :param env_name: target environment name.
         :param node_id: unique identifier of the target node (container).
@@ -2184,7 +2185,7 @@ class _Control(Environment):
             node_type: str,
             command_list: dict,
             say_yes: list[bool] = None,
-                    ):
+    ):
         return self._get(
             'ExecCmdByType',
             params={
@@ -2208,13 +2209,13 @@ class _Control(Environment):
             say_yes: list[bool] = None,
             node_group: list[str] = None,
             Async: list[bool] = None,
-                     ):
+    ):
         return self._get(
             'ExecCmdInner',
             params={
                 'envName': env_name,
                 'targetAppId': target_app_id,
-                'session':session,
+                'session': session,
                 'commandList': command_list,
                 'nodeType': node_type,
                 'nodeId': node_id,
@@ -2230,7 +2231,7 @@ class _Control(Environment):
             self,
             env_name: str,
             node_id: int
-                         ):
+    ):
         return self._get(
             'ExecDockerRunCmd',
             params={
@@ -2243,7 +2244,11 @@ class _Control(Environment):
             self,
             env_name: str,
             settings: str,
-               ):
+    ):
+        """
+        :param env_name: application identifier of the environment
+        :param settings: settings for export
+        """
         return self._get(
             'Export',
             params={
@@ -2252,149 +2257,769 @@ class _Control(Environment):
             }
         )
 
-    def Finish(self):
-        pass
+    def Finish(
+            self,
+            env_name: str,
+    ):
+        return self._get(
+            'Finish',
+            params={'envName': env_name}
+        )
 
-    def FireWallStatus(self):
-        pass
+    def FireWallStatus(
+            self,
+            env_name: str,
+            node_id: int,
+    ):
+        return self._get(
+            'FireWallStatus',
+            params={
+                'envName': env_name,
+                'nodeId': node_id,
+            }
+        )
 
-    def GetActiveEnvs(self):
-        pass
+    def GetActiveEnvs(
+            self,
+            env_name: str,
+            domain: str,
+            start_time: date,
+            end_time: date,
+            checksum: str,
+    ):
+        return self._get(
+            'GetActiveEnvs',
+            params={
+                'envName': env_name,
+                'domain': domain,
+                'starttime': start_time,
+                'endtime': end_time,
+                'checksum': checksum,
+            },
+            datetime_format="%Y-%m-%d",
+        )
 
-    def GetAllSumStatByUid(self):
-        pass
+    def GetAllSumStatByUid(
+            self,
+            duration: list[int] = None,
+            end_time: list[date] = None,
+    ):
+        """
+        :param duration: period (in seconds) to show statistics for.
+        :param end_time: end time (UTC) in the format “yyyy-MM-dd hh:mm:ss”, e.g. "2022-11-16 00:00:00" (duration must be passed).
+        """
+        return self._get(
+            'GetAllSumStatByUid',
+            params={
+                'duration': duration,
+                'endtime': end_time,
+            },
+            datetime_format="%Y-%m-%d",
+            delimiter=",",
+        )
 
-    def GetBasicEnvsInfo(self):
-        pass
+    def GetBasicEnvsInfo(self, owner_uid: list[int]):
+        """
+        :param owner_uid: unique identifier of the target user account.
+        """
+        return self._get(
+            'GetBasicsEnvsInfo',
+            params={
+                'ownerUid': owner_uid,
+            },
+            delimiter=",",
+        )
 
-    def GetContainerEntryPoint(self):
-        pass
+    def GetContainerEntryPoint(self, env_name: str, node_id: int):
+        """
+        :param env_name: target environment name.
+        :param node_id: unique identifier of the target node (container).
+        """
+        return self._get(
+            'GetContainerEntryPoint',
+            params={
+                'envName': env_name,
+                'nodeId': node_id,
+            }
+        )
 
-    def GetContainerEnvVars(self):
-        pass
+    def GetContainerEnvVars(
+            self,
+            env_name: str,
+            node_id: int,
+    ):
+        """
+                :param env_name: target environment name.
+                :param node_id: unique identifier of the target node (container).
+                """
+        return self._get(
+            'GetContainerEnvVars',
+            params={
+                'envName': env_name,
+                'nodeId': node_id,
+            }
+        )
 
-    def GetContainerEnvVarsByGroup(self):
-        pass
+    def GetContainerEnvVarsByGroup(
+            self,
+            env_name: str,
+            node_group: str,
+    ):
+        """
+                :param env_name: target environment name.
+                :param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
+                """
+        return self._get(
+            'GetContainerEnvVarsByGroup',
+            params={
+                'envName': env_name,
+                'nodeGroup': node_group,
+            }
+        )
 
-    def GetContainerManifest(self):
-        pass
+    def GetContainerManifest(
+            self,
+            image: str,
+            registry: list[str] = None,
+            user_name: list[str] = None,
+            password: list[str] = None,
+            ignore_format: list[bool] = None,
+    ):
+        """
+        :param image: container's Docker image and tag, e.g. "alpine:latest".
+        :param registry: custom remote registry, where the container image is stored (Docker Hub by default).
+        :param user_name: username for authentication at the remote registry.
+        :param password: password for authentication at the remote registry.
+        :param ignore_format: defines whether to ignore image format (true) or not (false).
+        """
+        return self._get(
+            'GetContainerManifest',
+            params={
+                'image': image,
+                'registry': registry,
+                'userName': user_name,
+                'password': password,
+                'ignoreFormat': ignore_format,
+            },
+            delimiter=",",
+        )
 
-    def GetContainerNodeTags(self):
-        pass
+    def GetContainerNodeTags(self, env_name: str, node_id: int):
+        """
+        :params env_name: target environment name.
+        :param node_id: unique identifier of the target node (container).
+        """
+        return self._get(
+            'GetContainerNodeTags',
+            params={
+                'envName': env_name,
+                'nodeId': node_id,
+            }
+        )
 
-    def GetContainerRunCmd(self):
-        pass
+    def GetContainerRunCmd(self, env_name: str, node_id: int):
+        """
+        :params env_name: target environment name.
+        :param node_id: unique identifier of the target node (container).
+        """
+        return self._get(
+            'GetContainerRunCmd',
+            params={
+                'envName': env_name,
+                'nodeId': node_id,
+            }
+        )
 
-    def GetContainerRunConfig(self):
-        pass
+    def GetContainerRunConfig(self, env_name: str, node_id: int):
+        """
+        :params env_name: target environment name.
+        :param node_id: unique identifier of the target node (container).
+        """
+        return self._get(
+            'GetContainerRunConfig',
+            params={
+                'envName': env_name,
+                'nodeId': node_id,
+            }
+        )
 
-    def GetContainerTags(self):
-        pass
+    def GetContainerTags(
+            self,
+            image: str,
+            registry: list[str] = None,
+            user_name: list[str] = None,
+            password: list[str] = None,
+    ):
+        """
+        :params image: container's Docker image and tag, e.g. "alpine:latest".
+        :param registry: custom remote registry, where the container image is stored (Docker Hub by default).
+        :param user_name: username for authentication at the remote registry.
+        :param password: password for authentication at the remote registry.
+        """
+        return self._get(
+            'GetContainerTags',
+            params={
+                'image': image,
+                'registry': registry,
+                'userName': user_name,
+                'password': password,
+            },
+            delimiter=",",
+        )
 
-    def GetContainerVolumesByGroup(self):
-        pass
+    def GetContainerVolumesByGroup(
+            self,
+            env_name: str,
+            node_group: str,
+    ):
+        """
+        :params env_name: target environment name.
+        :param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
+        """
+        return self._get(
+            'GetContainerVolumesByGroup',
+            params={
+                'envName': env_name,
+                'nodeGroup': node_group,
+            }
+        )
 
-    def GetContainerVolumesById(self):
-        pass
+    def GetContainerVolumesById(
+            self,
+            env_name: str,
+            node_id: int,
+    ):
+        """
+        :params env_name: target environment name.
+        :param node_id: unique identifier of the target node (container).
+        """
+        return self._get(
+            'GetContainerVolumesById',
+            params={
+                'envName': env_name,
+                'nodeId': node_id,
+            }
+        )
 
-    def GetDockerConfig(self):
-        pass
+    def GetDockerConfig(
+            self,
+            env_name: str,
+            node_id: int,
+    ):
+        return self._get(
+            'GetDockerConfig',
+            params={
+                'envName': env_name,
+                'nodeId': node_id,
+            }
+        )
 
-    def GetDockerEntryPoint(self):
-        pass
+    def GetDockerEntryPoint(
+            self,
+            env_name: str,
+            node_id: int,
+    ):
+        return self._get(
+            'GetDockerEntryPoint',
+            params={
+                'envName': env_name,
+                'nodeId': node_id,
+            }
+        )
 
-    def GetDockerRunCmd(self):
-        pass
+    def GetDockerRunCmd(
+            self,
+            env_name: str,
+            node_id: int,
+    ):
+        return self._get(
+            'GetDockerRunCmd',
+            params={
+                'envName': env_name,
+                'nodeId': node_id,
+            }
+        )
 
-    def GetDomainsList(self):
-        pass
+    def GetDomainsList(
+            self,
+            env_name: str,
+            checksum: str,
+    ):
+        return self._get(
+            'GetDomainsList',
+            params={
+                'envName': env_name,
+                'checksum': checksum,
+            }
+        )
 
-    def GetEndpoints(self):
-        pass
+    def GetEndpoints(
+            self,
+            env_name: str,
+            node_id: list[int] = None,
+    ):
+        """
+        :param env_name: target environment name.
+        :param node_id: unique identifier of the target node (container).
+        """
+        return self._get(
+            'GetEndpoints',
+            params={
+                'envName': env_name,
+                'nodeId': node_id,
+            },
+            delimiter=",",
+        )
 
-    def GetEngineList(self):
-        pass
+    def GetEngineList(
+            self,
+            type: list[str] = None,
+    ):
+        """
+        :param type: type of the engine (java/php/ruby/js)
+        """
+        return self._get(
+            'GetEngineList',
+            params={
+                'type': type,
+            },
+            delimiter=",",
+        )
 
     def GetEngineTypes(self):
-        pass
+        return self._get(
+            'GetEngineTypes',
+            params={}
+        )
 
-    def GetEnvInfo(self):
-        pass
+    def GetEnvInfo(
+            self,
+            env_name: str,
+            lazy: list[bool] = None,
+    ):
+        """
+        :param env_name: target environment name.
+        :param lazy: defines whether to load only the main environment metadata, e.g. name, alias, domain, etc., (true) or all the environment information (false).
+        """
+        return self._get(
+            'GetEnvInfolazy',
+            params={
+                'envName': env_name,
+                'lazy': lazy,
+            },
+            delimiter=",",
+        )
 
-    def GetEnvProperty(self):
-        pass
+    def GetEnvProperty(
+            self,
+            env_name: str,
+            property_keys: list[str] = None,
+    ):
+        """
+        :param env_name: target environment name.
+        :param property_keys: a comma-separated list of property keys (all properties if “null” or “empty”). For example: "customProperty1,customProperty2".
+        """
+        return self._get(
+            'GetEnvProperty',
+            params={
+                'envName': env_name,
+                'propertyKeys': property_keys,
+            },
+            delimiter=",",
+        )
 
-    def GetEnvs(self):
-        pass
+    def GetEnvs(
+            self,
+            lazy: list[bool] = None,
+            owner_uid: list[int] = None,
+    ):
+        """
+        :param lazy: defines whether to load only the main environment metadata, e.g. name, alias, domain, etc., (true) or all the environment information (false).
+        :param owner_uid: unique identifier of the target user account.
+        """
+        return self._get(
+            'GetEnvs',
+            params={
+                'lazy': lazy,
+                'ownerUid': owner_uid,
+            },
+            delimiter=",",
+        )
 
-    def GetEnvsByCriteria(self):
-        pass
+    def GetEnvsByCriteria(
+            self,
+            criteria: dict,
+            lazy: list[bool] = None,
+    ):
+        return self._get(
+            'GetEnvsByCriteria',
+            params={
+                'criteria': criteria,
+                'lazy': lazy,
+            },
+            delimiter=",",
+        )
 
-    def GetEnvsInfo(self):
-        pass
+    def GetEnvsInfo(
+            self,
+            env_name: str,
+            target_app_id: list[str] = None,
+    ):
+        return self._get(
+            'GetEnvsInfo',
+            params={
+                'envName': env_name,
+                'targetAppid': target_app_id,
+            },
+            delimiter=",",
+        )
 
-    def GetLogs(self):
-        pass
+    def GetLogs(
+            self,
+            env_name: str,
+            node_id: int,
+            path: list[str] = None,
+    ):
+        return self._get(
+            'GetLogs',
+            params={
+                'envName': env_name,
+                'nodeId': node_id,
+                'path': path,
+            },
+            delimiter=",",
+        )
 
-    def GetLogsList(self):
-        pass
+    def GetLogsList(
+            self,
+            env_name: str,
+            node_id: int,
+            path: list[str] = None,
+    ):
+        """
+        :param env_name: target environment name.
+        :param node_id: unique identifier of the target node (container).
+        :params path: custom path to the log files (/var/log by default).
+        """
+        return self._get(
+            'GetLogsList',
+            params={
+                'envName': env_name,
+                'nodeId': node_id,
+                'path': path,
+            },
+            delimiter=",",
+        )
 
-    def GetNodeGroups(self):
-        pass
+    def GetNodeGroups(
+            self,
+            env_name: str,
+    ):
+        """
+        :param env_name: target environment name
+        """
+        return self._get(
+            'GetNodeGroups',
+            params={
+                'envName': env_name,
+            },
+        )
 
-    def GetNodeInfo(self):
-        pass
+    def GetNodeInfo(
+            self,
+            node_id: str,
+    ):
+        """
+        :param node_id: node identifier
+        """
+        return self._get(
+            'GetNodeInfo',
+            params={
+                'GetNodeInfo': node_id,
+            },
+        )
 
     def GetNodeMissions(self):
-        pass
+        return self._get(
+            'GetNodeMissions',
+            params={}
+        )
 
-    def GetNodeSSHKey(self):
-        pass
+    def GetNodeSSHKey(
+            self,
+            env_name: str,
+            node_id: int,
+            uid: int,
+            skip_node_type_check: list[bool] = None,
+    ):
+        """
+        :param node_id: unique identifier of the software node.
+        :param skip_node_type_check: ignore 'jelastic.ssh.nodetype.restriction.list'
+        """
+        return self._get(
+            'GetNodeSSHKey',
+            params={
+                'envName': env_name,
+                'nodeId': node_id,
+                'uid': uid,
+                'skipNodeTypeCheck': skip_node_type_check,
+            },
+            delimiter=",",
+        )
 
-    def GetNodeTags(self):
-        pass
+    def GetNodeTags(
+            self,
+            env_name: str,
+            node_id: int,
+    ):
+        """
+        :param env_name: target environment name.
+        :param node_id: unique identifier of the target node (container).
+        """
+        return self._get(
+            'GetNodeTags',
+            params={
+                'envName': env_name,
+                'nodeId': node_id,
+            },
+        )
 
     def GetRegions(self):
-        pass
+        return self._get(
+            'GetRegions',
+            params={}
+        )
 
-    def GetRegionsInner(self):
-        pass
+    def GetRegionsInner(
+            self,
+            group_name: str,
+            is_enabled: list[bool] = None,
+    ):
+        """
+        :param group_name: unique identifier of the target user group.
+        :param is_enabled: defines whether to include only active regions (true) or not (false).
+        """
+        return self._get(
+            'GetRegionsInner',
+            params={
+                'groupName': group_name,
+                'isEnabled': is_enabled,
+            },
+            delimiter=",",
+        )
 
-    def GetRegistryInfo(self):
-        pass
+    def GetRegistryInfo(
+            self,
+            env_name: str,
+            node_group: str,
+    ):
+        """
+        :param env_name: target environment name.
+        :param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        """
+        return self._get(
+            'GetRegistryInfo',
+            params={
+                'envName': env_name,
+                'nodeGroup': node_group,
+            },
+        )
 
-    def GetSSHAccessInfo(self):
-        pass
+    def GetSSHAccessInfo(self, node_id: int):
+        """
+        :param node_id: unique identifier of the target node (container).
+        """
+        return self._get(
+            'GetSSHAccessInfo',
+            params={
+                'nodeId': node_id,
+            }
+        )
 
-    def GetSharedEnvsByUid(self):
-        pass
+    def GetSharedEnvsByUid(self, uid: int):
+        """
+        :param uid: identifier of the target user
+        """
+        return self._get(
+            'GetSharedEnvsByUid',
+            params={
+                'uid': uid,
+            }
+        )
 
-    def GetSoftwarePackages(self):
-        pass
+    def GetSoftwarePackages(
+            self,
+            env_name: str,
+            node_type: list[str] = None,
+            node_group: list[str] = None,
+    ):
+        """
+        :param env_name: target environment name.
+        :param node_type: unique identifier of the target node type (software stack), e.g. “tomcat11” for the Tomcat 11 stack.
+        :param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        """
+        return self._get(
+            'GetSoftwarePackages',
+            params={
+                'envName': env_name,
+                'nodeType': node_type,
+                'nodeGroup': node_group,
+            },
+            delimiter=",",
+        )
 
-    def GetStats(self):
-        pass
+    def GetStats(
+            self,
+            env_name: str,
+            duration: int,
+            interval: int,
+            end_time: list[datetime] = None,
+            node_id: list[int] = None,
+            node_type: list[str] = None,
+            node_group: list[str] = None,
+    ):
+        """
+        :param env_name: target environment name.
+        :param duration: period (in seconds) to show statistics for.
+        :param interval: interval (in seconds) to divide the stated period (duration).
+        :param end_time: end time (UTC) in the format “yyyy-MM-dd hh:mm:ss”, e.g. "2022-11-16 00:00:00" (duration must be passed).
+        :node_id: unique identifier of the target node (container).
+        :node_type: unique identifier of the target node type (software stack), e.g. “tomcat11” for the Tomcat 11 stack. Required if nodeid is not specified.
+        :node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        """
+        return self._get(
+            'GetStats',
+            params={
+                'envName': env_name,
+                'duration': duration,
+                'interval': interval,
+                'endtime': end_time,
+                'nodeid': node_id,
+                'nodetype': node_type,
+                'nodeGroup': node_group,
+            },
+            datetime_format="%Y-%m-%d",
+            delimiter=",",
+        )
 
-    def GetSumStat(self):
-        pass
+    def GetSumStat(
+            self,
+            env_name: str,
+            duration: int,
+            end_time: list[datetime] = None,
+    ):
+        """
+        :param env_name: target environment name
+        :params duration: period (in seconds) to show statistics for.
+        :param end_time: end time (UTC) in the format “yyyy-MM-dd hh:mm:ss”, e.g. "2022-11-16 00:00:00" (duration must be passed).
+        """
+        return self._get(
+            'GetSumStat',
+            params={
+                'envName': env_name,
+                'duration': duration,
+                'endtime': end_time,
+            },
+            datetime_format="%Y-%m-%d",
+            delimiter=",",
+        )
 
-    def GetTemplateManifest(self):
-        pass
+    def GetTemplateManifest(
+            self,
+            node_type: str,
+            tag: str,
+    ):
+        """
+        :param node_type: unique identifier of the target node type (software stack), e.g. “tomcat11” for the Tomcat 11 stack.
+        :param tag: target tag for the template.
+        """
+        return self._get(
+            'GetTemplateManifest',
+            params={
+                'nodeType': node_type,
+                'tag': tag,
+            }
+        )
 
-    def GetTemplates(self):
-        pass
+    def GetTemplates(
+            self,
+            type: list[str] = None,
+            owneer_uid: list[int] = None,
+    ):
+        """
+        :param type: filter the list by the template type (ALL,NATIVE,CARTRIDGE,DOCKERIZED)
+        :param owneer_uid: filter the list by the templates available for the specific user.
+        """
+        return self._get(
+            'GetTemplates',
+            params={
+                'type': type,
+                'ownerUid': owneer_uid,
+            }
+        )
 
     def GetTransferRequest(self):
-        pass
+        return self._get(
+            'GetTransferRequest',
+            params={}
+        )
 
-    def InstallPackageByGroup(self):
-        pass
+    def InstallPackageByGroup(
+            self,
+            env_name: str,
+            node_group: str,
+            package_name: str,
+    ):
+        """
+        :param env_name: environment name or appid
+        :param node_group: node group (cp, bl, nosql, sql)
+        """
+        return self._get(
+            'InstallPackageByGroup',
+            params={
+                'envName': env_name,
+                'nodeGroup': node_group,
+                'packageName': package_name,
+            }
+        )
 
-    def InstallPackageById(self):
-        pass
+    def InstallPackageById(
+            self,
+            env_name: str,
+            package_name: str,
+            node_id: list[int] = None,
+    ):
+        """
+        :param env_name: environment name or appid
+        :node_id: id of node
+        """
+        return self._get(
+            'InstallPackageById',
+            params={
+                'envName': env_name,
+                'packageName': package_name,
+                'nodeId': node_id,
+            },
+            delimiter=",",
+        )
 
-    def InstallSoftwarePackage(self):
-        pass
+    def InstallSoftwarePackage(
+            self,
+            env_name: str,
+            keyword: str,
+            node_type: list[str] = None,
+            node_group: list[str] = None,
+                               ):
+        return self._get(
+            'InstallSoftwarePackage',
+            params={
+                'envName': env_name,
+                'keyword': keyword,
+                'nodeType': node_type,
+                'nodeGroup': node_group,
+            },
+            delimiter=",",
+        )
 
     def LinkDockerNodes(self):
         pass
