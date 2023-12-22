@@ -95,6 +95,17 @@ class Environment(ClientAbstract):
             debug=self._debug,
         )
 
+    @property
+    def Deployment(self) -> "_Node":
+        """
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.environment.Deployment
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/environment.Deployment
+        """
+        return _Deployment(session=self._session, token=self._token, debug=self._debug)
+
 
 class _Billing(Environment):
     """
@@ -346,6 +357,571 @@ class _Node(Environment):
         :param name: title of the message
         """
         return self._get("SendNotification", params={"name": name, "message": message})
+class _Deployment(Environment):
+    """
+    The Deployment API methods implement extensive Deployment Manager functionality, including application installation (from archive packages and remote Git/SVN repositories) and management (update, rename, context undeploy, etc.). If working with Java projects from the VCS repository, a special Maven build node is used for the source's compilation, which requires separate API methods.
+
+    Based on this, three method types can be distinguished the below-listed methods can be conditionally divided into three groups:
+
+    for Maven build node - AddBuildProject, EditBuildProject, GetBuildProjectInfo, RemoveBuildProject, GetBuildProjects, BuildProject, BuildDeployProject, DeployProject, Update
+    for Deployment Manager - Deploy, DeployArchive, AddRepo, EditRepo, GetRepos, RemoveRepo
+    for already deployed projects - EditProject, GetProjectInfo, RenameContext, Undeploy, Update
+
+    Ref: https://docs.jelastic.com/api/private/#!/api/environment.Deployment
+    """
+
+    _endpoint2 = "deployment"
+    def AddBuildProject(
+        self,
+        env_name: str,
+        node_id: int,
+        name: str,
+        repo: str,
+        deployment: dict = None,
+        settings: dict = None,
+        hooks: list[str]= None
+    ):
+        """
+        param env_name: target environment name (with a build node).
+        param node_id: unique identifier of the build node.
+        param name: project name.
+        param repo: unique identifier of a repository in the Deployment Manager (e.g. 1 or {"id":1}) or JSON object with repository access details {"url":"...", ["login":"..."], ["password":"..."], ["branch":"..."], ["type":"GIT/SVN"], ["keyId":1]}
+        param deployment: JSON object with deployment data:
+        param settings: JSON object with additional deployment settings:
+        param hooks: JSON object with custom scripts (actual content) to be executed before and after the build/deployment operations. For example: {"preDeploy":"script", "postDeploy":"script", "preBuild":"script", "postBuild":"script"}.
+        """
+        return self._get(
+            "AddBuildProject",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "name": name,
+                "repo": repo,
+                "deployment": deployment,
+                "settings": settings,
+                "hooks": hooks,
+            },
+            delimeter=",",
+        )
+    def AddRepo(
+        self,
+        name: str,
+        url: str,
+        type: list[str] = None,
+        branch: list[str] = None,
+        key_id: list[int] = None,
+        login: list[str] = None,
+        password: list[str] = None,
+        description: list[str] = None,
+    ):
+        """
+        param name: project name.
+        param url: URL to the repository with the project sources.
+        param type: VCS repository type ("GIT" or "SVN").
+        param branch: remote repository branch (master by default).
+        param key_id: unique identifier of a private SSH key on the account. It can be found in the dashboard (account Settings > SSH Keys > Private Keys) or fetched with the GetSSHKeys method.
+        param login: login for authentication in VCS.
+        param password: password or token for authentication in VCS.
+        param description: custom description for the project.
+        """
+        return self._get(
+            "AddRepo",
+            params={
+                "name": name,
+                "url": url,
+                "type": type,
+                "branch": branch,
+                "keyId": key_id,
+                "login": login,
+                "password": password,
+                "description": description,
+            },
+            delimeter=",",
+        )
+    def BuildDeployProject(
+        self,
+        env_name: str,
+        node_id: int,
+        project: str,
+        skip_update: list[bool]= None,
+        delay: list[int]= None
+    ):
+        """
+        param env_name: target environment name (with a build node).
+        param node_id: unique identifier of the build node.
+        param project: unique identifier or name of the project.
+        param skip_update: defines whether to update (false) or not (true) the project from the VCS source files.
+        param delay: delay (in seconds) between two consecutive deployments when using the sequential deployment type (i.e. when deployment is performed on servers one-by-one to ensure uptime).
+        """
+        return self._get(
+            "BuildDeployProject",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "project": project,
+                "skipUpdate": skip_update,
+                "delay": delay,
+            },
+            delimeter=",",
+        )
+    def BuildProject(
+        self,
+        env_name: str,
+        node_id: int,
+        project: str,
+        skip_upload: list[bool]= None,
+        skip_update: list[bool]= None,
+    ):
+        """
+        param env_name: target environment name (with a build node).
+        param node_id: unique identifier of the build node.
+        param project: unique identifier or name of the project.
+        param skip_update: defines whether to update (false) or not (true) the project from the VCS source files.
+        param skip_upload: defines whether to add built project to the Deployment Manager (false) or not (true).
+        """
+        return self._get(
+            "BuildProject",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "project": project,
+                "skipUpload": skip_upload,
+                "skipUpdate": skip_update,
+            },
+            delimeter=",",
+        )
+
+    def Deploy(
+        self,
+        env_name: str,
+        repo: str,
+        context: str,
+        node_group: list[str] = None,
+        build_node_id: list[int] = None,
+        settings: dict = None,
+        hooks: list[str] = None,
+        delay: list[int] = None,
+    ):
+        """
+        param env_name: target environment name (with a build node).
+        param repo: unique identifier of a repository in the Deployment Manager (e.g. 1 or {"id":1}) or JSON object with repository access details {"url":"...", ["login":"..."], ["password":"..."], ["branch":"..."], ["type":"GIT/SVN"], ["keyId":1]}
+        param context: target context name of the deployed project.
+        param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
+        param build_node_id: unique identifier of a Maven build node (for Java-based projects only).
+        param settings: JSON object with the deployment settings:
+        param hooks: JSON object with custom scripts (actual content) to be executed before and after the build/deployment operations. For example: {"preDeploy":"script", "postDeploy":"script", "preBuild":"script", "postBuild":"script"}.
+        param delay: delay (in seconds) between two consecutive deployments when using the sequential deployment type (i.e. when deployment is performed on servers one-by-one to ensure uptime).
+
+        """
+        return self._get(
+            "Deploy",
+            params={
+                "envName": env_name,
+                "repo": repo,
+                "context": context,
+                "nodeGroup": node_group,
+                "buildNodeId": build_node_id,
+                "settings": settings,
+                "hooks": hooks,
+                "delay": delay
+            },
+            delimeter=",",
+        )
+    def DeployArchive(
+        self,
+        env_name: str,
+        file_url: str,
+        file_name: str,
+        node_group: list[str] = None,
+        context: list[str] = None,
+        zdt: list[bool] = None,
+        hooks: list[str] = None,
+        delay: list[int] = None,
+    ):
+        """
+        param env_name: target environment name (with a build node).
+        param file_url: URL to the archive file.
+        param file_name: archive file name from the Deployment Manager storage.
+        param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
+        param context: custom context name for the deployed project (ROOT by default).
+        param zdt: defines whether to use zero-downtime deployment for PHP (true) or not (false).
+        param hooks: JSON object with custom scripts (actual content) to be executed before and after the build/deployment operations. For example: {"preDeploy":"script", "postDeploy":"script", "preBuild":"script", "postBuild":"script"}.
+        param delay: delay (in seconds) between two consecutive deployments when using the sequential deployment type (i.e. when deployment is performed on servers one-by-one to ensure uptime).
+
+        """
+        return self._get(
+            "DeployArchive",
+            params={
+                "envName": env_name,
+                "fileUrl": file_url,
+                "fileName": file_name,
+                "nodeGroup": node_group,
+                "context": context,
+                "zdt": zdt,
+                "hooks": hooks,
+                "delay": delay
+            },
+            delimeter=",",
+        )
+    def DeployProject(
+        self,
+        env_name: str,
+        node_id: int,
+        project: str,
+    ):
+        """
+        param env_name: target environment name (with a build node).
+        param node_id: unique identifier of the build node.
+        param project: unique identifier or name of the project.
+        """
+        return self._get(
+            "DeployProject",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "project": project,
+            },
+            delimeter=",",
+        )
+    def EditBuildProject(
+        self,
+        env_name: str,
+        node_id: int,
+        project: str,
+        name: list[str]=None,
+        repo: list[str]=None,
+        deployment: dict = None,
+        settings: dict = None,
+        hooks: list[str]= None
+    ):
+        """
+        param env_name: target environment name (with a build node).
+        param node_id: unique identifier of the build node.
+        param project: unique identifier or name of the project
+        param name:New project name.
+        param repo: unique identifier of a repository in the Deployment Manager (e.g. 1 or {"id":1}) or JSON object with repository access details {"url":"...", ["login":"..."], ["password":"..."], ["branch":"..."], ["type":"GIT/SVN"], ["keyId":1]}
+        param deployment: JSON object with deployment data:
+        param settings: JSON object with additional deployment settings:
+        param hooks: JSON object with custom scripts (actual content) to be executed before and after the build/deployment operations. For example: {"preDeploy":"script", "postDeploy":"script", "preBuild":"script", "postBuild":"script"}.
+        """
+        return self._get(
+            "EditBuildProject",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "project": project,
+                "name": name,
+                "repo": repo,
+                "deployment": deployment,
+                "settings": settings,
+                "hooks": hooks,
+            },
+            delimeter=",",
+        )
+    def EditProject(
+        self,
+        env_name: str,
+        node_group: str,
+        context: str,
+        new_context: list[str]=None,
+        repo: list[str]=None,
+        settings: dict = None,
+        hooks: list[str]= None,
+        delay: list[int]= None
+    ):
+        """
+        param env_name: target environment name (with a build node).
+        param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
+        param context: target context name of the deployed project.
+        param new_context: new context name for the project (could be the same as Context).
+        param repo: unique identifier of a repository in the Deployment Manager (e.g. 1 or {"id":1}) or JSON object with repository access details {"url":"...", ["login":"..."], ["password":"..."], ["branch":"..."], ["type":"GIT/SVN"], ["keyId":1]}
+        param deployment: JSON object with deployment data:
+        param settings: JSON object with additional deployment settings:
+        param hooks: JSON object with custom scripts (actual content) to be executed before and after the build/deployment operations. For example: {"preDeploy":"script", "postDeploy":"script", "preBuild":"script", "postBuild":"script"}.
+        param delay: delay (in seconds) between two consecutive deployments when using the sequential deployment type (I.e. when deployment is performed on servers one-by-one to ensure uptime).
+        """
+        return self._get(
+            "EditProject",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "context": context,
+                "newContext": new_context,
+                "repo": repo,
+                "settings": settings,
+                "hooks": hooks,
+                "delay": delay,
+            },
+            delimeter=",",
+        )
+
+    def EditRepo(
+        self,
+        id:int,
+        name: list[str] = None,
+        type: list[str] = None,
+        url: list[str] = None,
+        branch: list[str] = None,
+        key_id: list[int] = None,
+        login: list[str] = None,
+        password: list[str] = None,
+        description: list[str] = None,
+    ):
+        """
+        param id : unique identifier of the repository to be edited.
+        param name: project name.
+        param url: URL to the repository with the project sources.
+        param type: VCS repository type ("GIT" or "SVN").
+        param branch: remote repository branch (master by default).
+        param key_id: unique identifier of a private SSH key on the account. It can be found in the dashboard (account Settings > SSH Keys > Private Keys) or fetched with the GetSSHKeys method.
+        param login: login for authentication in VCS.
+        param password: password or token for authentication in VCS.
+        param description: custom description for the project.
+        """
+        return self._get(
+            "EditRepo",
+            params={
+                "id":id,
+                "name": name,
+                "type": type,
+                "url": url,
+                "branch": branch,
+                "keyId": key_id,
+                "login": login,
+                "password": password,
+                "description": description,
+            },
+            delimeter=",",
+        )
+    def GetBuildProjectInfo(
+        self,
+        env_name: str,
+        node_id: int,
+        project: str,
+    ):
+        """
+        param env_name: target environment name (with a build node).
+        param node_id: unique identifier of the build node.
+        param project: unique identifier or name of the project
+        """
+        return self._get(
+            "GetBuildProjectInfo",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "project": project,
+            },
+            delimeter=",",
+        )
+    def GetBuildProjects(
+        self,
+        env_name: str,
+        node_group: list[str]=None,
+        node_id: list[int]=None,
+    ):
+        """
+        param env_name: target environment name (with a build node).
+        param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
+        param node_id: unique identifier of the build node.
+        """
+        return self._get(
+            "GetBuildProjects",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "nodeId": node_id,
+            },
+            delimeter=",",
+        )
+    def GetDeployments(
+        self,
+        env_name: str,
+        node_group: str
+    ):
+        """
+        param env_name: target environment name (with a build node).
+        param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
+        """
+        return self._get(
+            "GetDeployments",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+            },
+            delimeter=",",
+        )
+
+    def GetHooks(
+            self,
+            env_name: str,
+            node_group: list[str] = None,
+            node_id: list[int] = None,
+            context: list[str] = None,
+            project: list[str] = None,
+    ):
+        """
+        param env_name: target environment name (with a build node).
+        param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
+        param node_id: unique identifier of the target node (container).
+        param context: target context name of the deployed project.
+        param project: unique identifier or name of the project.
+        """
+        return self._get(
+            "GetHooks",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "nodeId": node_id,
+                "context": context,
+                "project": project,
+            },
+            delimeter=",",
+        )
+    def GetProjectInfo(
+            self,
+            env_name: str,
+            context: str,
+            node_group: list[str] = None,
+    ):
+        """
+        param env_name: target environment name (with a build node).
+        param context: target context name of the deployed project.
+        param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
+        """
+        return self._get(
+            "GetProjectInfo",
+            params={
+                "envName": env_name,
+                "context": context,
+                "nodeGroup": node_group,
+            },
+            delimeter=",",
+        )
+    def GetRepos(
+            self,
+            id: list[int] = None,
+    ):
+        """
+        param id: unique identifier of the repository.
+        """
+        return self._get(
+            "GetRepos",
+            params={
+                "id": id,
+            },
+            delimeter=",",
+        )
+
+    def RemoveBuildProject(
+            self,
+            env_name: str,
+            node_id: str,
+            project: str,
+    ):
+        """
+        param env_name: target environment name (with a build node).
+        param node_id: unique identifier of the target node (container).
+        param project: unique identifier or name of the project.
+        """
+        return self._get(
+            "RemoveBuildProject",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "project": project,
+            },
+            delimeter=",",
+        )
+    def RemoveRepo(
+            self,
+            id: int
+    ):
+        """
+        param id: unique identifier of the repository.
+        """
+        return self._get(
+            "RemoveRepo",
+            params={
+                "id": id,
+            },
+        )
+    def RenameContext(
+        self,
+        env_name: str,
+        node_group: str,
+        old_context: str,
+        new_context:str,
+    ):
+        """
+        param env_name: target environment name (with a build node).
+        param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
+        param old_context: target context name of the deployed project.
+        param new_context: new context name for the project (could be the same as Context).
+        """
+        return self._get(
+            "RenameContext",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "oldContext": old_context,
+                "newContext": new_context,
+            },
+        )
+    def Undeploy(
+        self,
+        env_name: str,
+        node_group: str,
+        context: str,
+    ):
+        """
+        param env_name: target environment name (with a build node).
+        param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
+        param context: target context name of the deployed project.
+        """
+        return self._get(
+            "Undeploy",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "context": context,
+
+            },
+        )
+    def Update(
+            self,
+            env_name: str,
+            node_group: list[str] = None,
+            node_id: list[int] = None,
+            context: list[str] = None,
+            project: list[str] = None,
+            delay: list[str] = None,
+    ):
+        """
+        param env_name: target environment name (with a build node).
+        param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
+        param node_id: unique identifier of the target node (container).
+        param context: target context name of the deployed project.
+        param project: unique identifier or name of the project.
+        param delay: delay (in seconds) between two consecutive deployments when using the sequential deployment type (I.e. when deployment is performed on servers one-by-one to ensure uptime).
+        """
+        return self._get(
+            "Update",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "nodeId": node_id,
+                "context": context,
+                "project": project,
+                "delay": delay,
+            },
+            delimeter=",",
+        )
+
+
+
+
+
+
 
 
 class _Binder(Environment):
