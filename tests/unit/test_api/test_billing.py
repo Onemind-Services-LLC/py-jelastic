@@ -722,6 +722,529 @@ def test_withdraw_accounts(client):
     assert response == success_response
 
 
+def test_event(client):
+    client._get.return_value = success_response
+    response = client.Invoice.Event("id_1", "type_1")
+    client._get.assert_called_with(
+        "Event", params={"externId": "id_1", "eventType": "type_1"}
+    )
+    assert response == success_response
+
+
+def test_get_external_invoices(client):
+    client._get.return_value = success_response
+    response = client.Invoice.GetExternalInvoices(
+        [1, 2, 3, 4],
+        [1, 2, 3, 4],
+    )
+    client._get.assert_called_with(
+        "ExternalInvoices",
+        params={
+            "limit": [1, 2, 3, 4],
+            "ownerUid": [1, 2, 3, 4],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_invoices(client):
+    client._get.return_value = success_response
+    response = client.Invoice.GetInvoices(
+        [1, 2, 3],
+        ["uname1", "uname2", "uname3"],
+        ["type1", "type2", "type3"],
+        ["status1", "status2", "status3"],
+        [1, 2, 3],
+        ["sub_status1", "sub_status2", "sub_status3"],
+        ["field1", "field2", "field3"],
+        ["direction1", "direction2", "direction3"],
+        [1, 2, 3],
+        [1, 2, 3],
+        ["exp_fields1", "exp_fields2", "exp_fields3"],
+    )
+    client._get.assert_called_with(
+        "GetInvoices",
+        params={
+            "id": [1, 2, 3],
+            "uniqueName": ["uname1", "uname2", "uname3"],
+            "type": ["type1", "type2", "type3"],
+            "status": ["status1", "status2", "status3"],
+            "subscriptionId": [1, 2, 3],
+            "subscriptionStatus": ["sub_status1", "sub_status2", "sub_status3"],
+            "orderFields": ["field1", "field2", "field3"],
+            "orderDirection": ["direction1", "direction2", "direction3"],
+            "startRow": [1, 2, 3],
+            "resultCount": [1, 2, 3],
+            "expandFields": ["exp_fields1", "exp_fields2", "exp_fields3"],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_make_invoice(client):
+    client._get.return_value = success_response
+    response = client.Invoice.MakeInvoice(
+        "uid1",
+        [True, False, True],
+    )
+    client._get.assert_called_with(
+        "MakeInvoice",
+        params={
+            "uid": "uid1",
+            "skipPay": [True, False, True],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_mark_as_paid(client):
+    client._get.return_value = success_response
+    response = client.Invoice.MarkAsPaid(
+        [1, 2, 3],
+        ["envoice1", "envoice2", "envoice3"],
+    )
+    client._get.assert_called_with(
+        "MarkAsPaid",
+        params={
+            "id": [1, 2, 3],
+            "ebsInvoiceId": ["envoice1", "envoice2", "envoice3"],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_mark_as_void(client):
+    client._get.return_value = success_response
+    response = client.Invoice.MarkAsVoid(
+        [1, 2, 3],
+        ["envoice1", "envoice2", "envoice3"],
+    )
+    client._get.assert_called_with(
+        "MarkAsVoid",
+        params={
+            "id": [1, 2, 3],
+            "ebsInvoiceId": ["envoice1", "envoice2", "envoice3"],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_pay(client):
+    client._get.return_value = success_response
+    response = client.Invoice.Pay(
+        1,
+        ["pid1", "pid2", "pid3"],
+        ["type1", "type2", "type3"],
+    )
+    client._get.assert_called_with(
+        "Pay",
+        params={
+            "id": 1,
+            "paymentMethodId": ["pid1", "pid2", "pid3"],
+            "paymentMethodType": ["type1", "type2", "type3"],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_search_invoices(client):
+    client._get.return_value = success_response
+    response = client.Invoice.SearchInvoices(
+        "search",
+        ["field1", "field2", "field3"],
+        [1, 2, 3],
+    )
+    client._get.assert_called_with(
+        "SearchInvoices",
+        params={
+            "search": "search",
+            "expandFields": ["field1", "field2", "field3"],
+            "resellerId": [1, 2, 3],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_add_group(client):
+    client._get.return_value = success_response
+    response = client.GroupQuota.AddGroup(
+        "type",
+        "group name",
+        ["description1", "description2", "description3"],
+        ["source group 1", "source group 2", "source group 3"],
+        ["domain 1", "domain 2", "domain 3"],
+        ["conversion group 1", "conversion group 2", "conversion group 3"],
+    )
+    client._get.assert_called_with(
+        "AddGroup",
+        params={
+            "type": "type",
+            "name": "group name",
+            "description": ["description1", "description2", "description3"],
+            "sourceGroupName": ["source group 1", "source group 2", "source group 3"],
+            "domain": ["domain 1", "domain 2", "domain 3"],
+            "conversionGroup": [
+                "conversion group 1",
+                "conversion group 2",
+                "conversion group 3",
+            ],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_add_quota(client):
+    client._get.return_value = success_response
+    response = client.GroupQuota.AddQuota(
+        "name",
+        ["description1", "description2", "description3"],
+        ["rid 1", "rid 2", "rid 3"],
+        [1, 2, 3],
+        [True, False, True],
+    )
+    client._get.assert_called_with(
+        "AddQuota",
+        params={
+            "name": "name",
+            "description": ["description1", "description2", "description3"],
+            "referenceId": ["rid 1", "rid 2", "rid 3"],
+            "defaultValue": [1, 2, 3],
+            "assignToGroup": [True, False, True],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_delete_group(client):
+    client._get.return_value = success_response
+    response = client.GroupQuota.DeleteGroup("name")
+    client._get.assert_called_with("DeleteGroup", params={"name": "name"})
+    assert response == success_response
+
+
+def test_edit_group(client):
+    client._get.return_value = success_response
+    response = client.GroupQuota.EditGroup(
+        "name",
+        ["new name 1", "new name 2", "new name 3"],
+        ["description1", "description2", "description3"],
+        ["group1", "group2", "group3"],
+    )
+    client._get.assert_called_with(
+        "EditGroup",
+        params={
+            "name": "name",
+            "newName": ["new name 1", "new name 2", "new name 3"],
+            "description": ["description1", "description2", "description3"],
+            "conversionGroup": ["group1", "group2", "group3"],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_edit_quota(client):
+    client._get.return_value = success_response
+    response = client.GroupQuota.EditQuota(
+        "name",
+        ["rid 1", "rid 2", "rid 3"],
+        ["new rid 1", "new rid 2", "new rid 3"],
+        ["description1", "description2", "description3"],
+    )
+    client._get.assert_called_with(
+        "EditQuota",
+        params={
+            "name": "name",
+            "referenceId": ["rid 1", "rid 2", "rid 3"],
+            "newReferenceId": ["new rid 1", "new rid 2", "new rid 3"],
+            "description": ["description1", "description2", "description3"],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_group_quotas(client):
+    client._get.return_value = success_response
+    response = client.GroupQuota.GetGroupQuotas(
+        "name",
+        ["quota 1", "quota 2", "quota 3"],
+    )
+    client._get.assert_called_with(
+        "GetGroupQuotas",
+        params={
+            "name": "name",
+            "quotasnames": ["quota 1", "quota 2", "quota 3"],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_groups(client):
+    client._get.return_value = success_response
+    response = client.GroupQuota.GetGroups()
+    client._get.assert_called_with("GetGroups", params={})
+    assert response == success_response
+
+
+def test_pricing_models(client):
+    client._get.return_value = success_response
+    response = client.GroupQuota.GetPricingModels("name")
+    client._get.assert_called_with("GetPricingModels", params={"groupName": "name"})
+    assert response == success_response
+
+
+def test_get_quotas_GroupQuota(client):
+    client._get.return_value = success_response
+    response = client.GroupQuota.GetQuotas()
+    client._get.assert_called_with("GetQuotas", params={})
+    assert response == success_response
+
+
+def test_is_domain_bound(client):
+    client._get.return_value = success_response
+    response = client.GroupQuota.IsDomainBound(
+        ["checksum 1", "checksum 2", "checksum"],
+    )
+    client._get.assert_called_with(
+        "IsDomainBound",
+        params={"checksum": ["checksum 1", "checksum 2", "checksum"]},
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_remove_groupQuota(client):
+    client._get.return_value = success_response
+    response = client.GroupQuota.RemoveGroupQuota(
+        "group name",
+        "quota name",
+    )
+    client._get.assert_called_with(
+        "RemoveGroupQuota",
+        params={
+            "groupName": "group name",
+            "quotaName": "quota name",
+        },
+    )
+    assert response == success_response
+
+
+def test_remove_quota_GroupQuota(client):
+    client._get.return_value = success_response
+    response = client.GroupQuota.RemoveQuota(
+        "name",
+        [True, False, True],
+        ["rid 1", "rid 2", "rid 3"],
+    )
+    client._get.assert_called_with(
+        "RemoveQuota",
+        params={
+            "name": "name",
+            "force": [True, False, True],
+            "referenceId": ["rid 1", "rid 2", "rid 3"],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_collaboration_group(client):
+    client._get.return_value = success_response
+    response = client.GroupQuota.SetCollaborationGroup("name")
+    client._get.assert_called_with("SetCollaborationGroup", params={"name": "name"})
+    assert response == success_response
+
+
+def test_set_default_group(client):
+    client._get.return_value = success_response
+    response = client.GroupQuota.SetDefaultGroup("name")
+    client._get.assert_called_with("DefaultGroup", params={"name": "name"})
+    assert response == success_response
+
+
+def test_set_group_quota(client):
+    client._get.return_value = success_response
+    response = client.GroupQuota.SetGroupQuota(
+        "name",
+        "quota name",
+        1,
+        ["rid 1", "rid 2", "rid 3"],
+    )
+    client._get.assert_called_with(
+        "SetGroupQuota",
+        params={
+            "groupName": "name",
+            "quotaName": "quota name",
+            "value": 1,
+            "referenceId": ["rid 1", "rid 2", "rid 3"],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_set_pricing_models(client):
+    client._get.return_value = success_response
+    response = client.GroupQuota.SetPricingModels("name", "data")
+    client._get.assert_called_with(
+        "SetPricingModel", params={"groupName": "name", "data": "data"}
+    )
+    assert response == success_response
+
+
+def test_set_win_domain(client):
+    client._get.return_value = success_response
+    response = client.GroupQuota.SetWinDomain("name", 1)
+    client._get.assert_called_with(
+        "SetWinDomain", params={"groupName": "name", "winDomainId": 1}
+    )
+    assert response == success_response
+
+
+def test_unassign_hd_node_group(client):
+    client._get.return_value = success_response
+    response = client.GroupQuota.UnassignHdNodeGroup("group", "checksum")
+    client._get.assert_called_with(
+        "UnassignHdNodeGroup",
+        params={
+            "hardwareNodeGroup": "group",
+            "checksum": "checksum",
+        },
+    )
+    assert response == success_response
+
+
+def test_get_invoice_url(client):
+    client._get.return_value = success_response
+    response = client.Integration.GetInvoiceUrl(1)
+    client._get.assert_called_with("GetInvoiceUrl", params={"invoiceId": 1})
+    assert response == success_response
+
+
+def test_get_sso_url(client):
+    client._get.return_value = success_response
+    response = client.Integration.GetSSOUrl(
+        ["path 1", "path 2"],
+    )
+    client._get.assert_called_with(
+        "GetSSOUrl",
+        params={
+            "path": ["path 1", "path 2"],
+        },
+    )
+    assert response == success_response
+
+
+def test_enable_pay_method(client):
+    client._get.return_value = success_response
+    response = client.PayMethod.EnablePayMethod("pid1", 1)
+    client._get.assert_called_with(
+        "EnablePayMethod", params={"payMethodId": "pid1", "enable": 1}
+    )
+    assert response == success_response
+
+
+def test_get_default_pay_method(client):
+    client._get.return_value = success_response
+    response = client.PayMethod.GetDefaultPayMethod()
+    client._get.assert_called_with("GetDefaultPayMethod", params={})
+    assert response == success_response
+
+
+def test_get_public_token(client):
+    client._get.return_value = success_response
+    response = client.PayMethod.GetPublicToken()
+    client._get.assert_called_with("GetPublicToken", params={})
+    assert response == success_response
+
+
+def test_get_valid_pay_types(client):
+    client._get.return_value = success_response
+    response = client.PayMethod.GetValidPayTypes()
+    client._get.assert_called_with("GetValidPayTypes", params={})
+    assert response == success_response
+
+
+def test_register_bank_card(client):
+    client._get.return_value = success_response
+    response = client.PayMethod.RegisterBankCard(
+        "f_name",
+        "l_name",
+        "1111-1111-1111-1111",
+        "123",
+        8,
+        24,
+        1,
+    )
+    client._get.assert_called_with(
+        "RegisterBankCard",
+        params={
+            "firstName": "f_name",
+            "lastName": "l_name",
+            "cardNumber": "1111-1111-1111-1111",
+            "cardCode": "123",
+            "expireMonth": 8,
+            "expireYear": 24,
+            "servicePlanId": 1,
+        },
+    )
+    assert response == success_response
+
+
+def test_register_pay_method_and_pay(client):
+    client._get.return_value = success_response
+    response = client.PayMethod.RegisterPayMethodAndPay(
+        "pay type",
+        1,
+        [1, 1, 0],
+        [500, 500, 500],
+        ["WEEK", "MONTH", "WEEK"],
+    )
+    client._get.assert_called_with(
+        "RegisterPayMethodAndPay",
+        params={
+            "payMethodType": "pay type",
+            "servicePlanId": 1,
+            "autoServicePlanId": [1, 1, 0],
+            "autoRefillMinBalance": [500, 500, 500],
+            "autoRefillPeriod": ["WEEK", "MONTH", "WEEK"],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_set_default_pay_method(client):
+    client._get.return_value = success_response
+    response = client.PayMethod.SetDefaultPayMethod("pay method")
+    client._get.assert_called_with(
+        "SetDefaultPayMethod", params={"payMethodId": "pay method"}
+    )
+    assert response == success_response
+
+
+def test_setup_intent(client):
+    client._get.return_value = success_response
+    response = client.PayMethod.SetupIntent(["type1", "type2", "type3"])
+    client._get.assert_called_with(
+        "SetupIntent",
+        params={"paymentMethodType": ["type1", "type2", "type3"]},
+        delimiter=",",
+    )
+    assert response == success_response
+
+
 def test_add_pricing(client):
     client._get.return_value = success_response
     response = client.Pricing.AddPricing(
@@ -1171,5 +1694,679 @@ def test_remove_reseller_status(client):
     response = client.Reseller.SetResellerStatus(1, "status")
     client._get.assert_called_with(
         "SetResellerStatus", params={"id": 1, "status": "status"}
+    )
+    assert response == success_response
+
+
+def test_create_level_auto_pay(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.CreateLevelAutoPay(
+        1000,
+        "2024-11-11",
+        10,
+        "online",
+        5,
+    )
+    client._get.assert_called_with(
+        "CreateLevelAutoPay",
+        params={
+            "minBalance": 1000,
+            "expires": "2024-11-11",
+            "servicePlanId": 10,
+            "paymentMethodId": "online",
+            "minPeriod": 5,
+        },
+    )
+    assert response == success_response
+
+
+def test_create_regular_auto_pay(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.CreateRegularAutoPay(
+        "exp",
+        "2024-11-11",
+        "GMT+4",
+        1,
+        "online",
+    )
+    client._get.assert_called_with(
+        "CreateRegularAutoPay",
+        params={
+            "cronExpression": "exp",
+            "expires": "2024-11-11",
+            "timeZone": "GMT+4",
+            "servicePlanId": 1,
+            "paymentMethodId": "online",
+        },
+    )
+    assert response == success_response
+
+
+def test_create_service_plan(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.CreateServicePlan(
+        "name",
+        "description",
+        "one-time",
+        "ext1",
+    )
+    client._get.assert_called_with(
+        "CreateServicePlan",
+        params={
+            "name": "name",
+            "description": "description",
+            "servicePlanType": "one-time",
+            "externPlanId": "ext1",
+        },
+    )
+    assert response == success_response
+
+
+def test_delete_auto_pay(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.DeleteAutoPay(1)
+    client._get.assert_called_with("DeleteAutoPay", params={"autoPayId": 1})
+    assert response == success_response
+
+
+def test_delete_service_plan(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.DeleteServicePlan(1)
+    client._get.assert_called_with("DeleteServicePlan", params={"servicePlanId": 1})
+    assert response == success_response
+
+
+def test_enable_service_plan(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.EnableServicePlan(1, 1)
+    client._get.assert_called_with(
+        "EnableServicePlan", params={"servicePlanId": 1, "enabled": 1}
+    )
+    assert response == success_response
+
+
+def test_extended_create_service_plan(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.ExtendedCreateServicePlan(
+        "label",
+        "ext1",
+        "description",
+        True,
+        "type",
+        True,
+        "1000",
+    )
+    client._get.assert_called_with(
+        "ExtendedCreateServicePlan",
+        params={
+            "label": "label",
+            "externalPlanId": "ext1",
+            "description": "description",
+            "enabled": True,
+            "type": "type",
+            "byDefault": True,
+            "price": "1000",
+        },
+    )
+    assert response == success_response
+
+
+def test_extended_get_service_plans(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.ExtendedGetServicePlans()
+    client._get.assert_called_with("ExtendedGetServicePlans", params={})
+    assert response == success_response
+
+
+def test_extended_get_service_plan_update(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.ExtendedServicePlanUpdate(
+        1,
+        "label",
+        "ext1",
+        "description",
+        True,
+        "type",
+        True,
+        "1000",
+    )
+    client._get.assert_called_with(
+        "ExtendedServicePlanUpdate",
+        params={
+            "id": 1,
+            "label": "label",
+            "externalPlanId": "ext1",
+            "description": "description",
+            "enabled": True,
+            "type": "type",
+            "byDefault": True,
+            "price": "1000",
+        },
+    )
+    assert response == success_response
+
+
+def test_get_auto_pay_history(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.GetAutoPayHistory(1)
+    client._get.assert_called_with("GetAutoPayHistory", params={"autoPayId": 1})
+    assert response == success_response
+
+
+def test_get_auto_pays(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.GetAutoPays()
+    client._get.assert_called_with("GetAutoPays", params={})
+    assert response == success_response
+
+
+def test_get_bought_service_plans(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.GetBoughtServicePlans()
+    client._get.assert_called_with("GetBoughtServicePlans", params={})
+    assert response == success_response
+
+
+def test_get_currency(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.GetCurrency()
+    client._get.assert_called_with("GetCurrency", params={})
+    assert response == success_response
+
+
+def test_get_final_cost(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.GetFinalCost(1)
+    client._get.assert_called_with("GetFinalCost", params={"servicePlanId": 1})
+    assert response == success_response
+
+
+def test_get_payment_method_list(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.GetPayMethodList()
+    client._get.assert_called_with("GetPayMethodList", params={})
+    assert response == success_response
+
+
+def test_get_payment_news(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.GetPaymentNews()
+    client._get.assert_called_with("GetPaymentNews", params={})
+    assert response == success_response
+
+
+def test_get_service_plan(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.GetServicePlan(1)
+    client._get.assert_called_with("GetServicePlan", params={"servicePlanId": 1})
+    assert response == success_response
+
+
+def test_get_service_plan_by_type(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.GetServicePlanByType([1, 2, 3])
+    client._get.assert_called_with(
+        "GetServicePlanByType", params={"planType": [1, 2, 3]}
+    )
+    assert response == success_response
+
+
+def test_payment_news_read(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.PaymentNewsRead(1)
+    client._get.assert_called_with("PaymentNewsRead", params={"id": 1})
+    assert response == success_response
+
+
+def test_set_extern_plan_id(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.SetExternPlanId(1, 1)
+    client._get.assert_called_with(
+        "SetExternPlanId",
+        params={
+            "servicePlanId": 1,
+            "externalPlanId": 1,
+        },
+    )
+    assert response == success_response
+
+
+def test_update_service_plan(client):
+    client._get.return_value = success_response
+    response = client.ServicePlan.UpdateServicePlan(
+        1,
+        "name",
+        "description",
+        "ext1",
+    )
+    client._get.assert_called_with(
+        "UpdateServicePlan",
+        params={
+            "servicePlanId": 1,
+            "name": "name",
+            "description": "description",
+            "externServicePlanId": "ext1",
+        },
+    )
+    assert response == success_response
+
+
+def test_add_stats(client):
+    client._get.return_value = success_response
+    response = client.Order.AddStats(
+        "resource",
+        1,
+        1,
+        ["2022-11-11", "2022-11-22", "2022-11-21"],
+        ["2022-11-22", "2022-11-12", "2022-11-13"],
+        ["env1", "env2", "env3"],
+        [1, 2, 3],
+        ["note1", "note2", "note3"],
+        ["value1", "value2", "value3"],
+    )
+    client._get.assert_called_with(
+        "AddStats",
+        params={
+            "resourceName": "resource",
+            "uid": 1,
+            "value": 1,
+            "startDate": ["2022-11-11", "2022-11-22", "2022-11-21"],
+            "endDate": ["2022-11-22", "2022-11-12", "2022-11-13"],
+            "envName": ["env1", "env2", "env3"],
+            "nodeId": [1, 2, 3],
+            "note": ["note1", "note2", "note3"],
+            "valueGroup": ["value1", "value2", "value3"],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_env_resources(client):
+    now = datetime.now().date()
+    client._get.return_value = success_response
+    response = client.Order.EnvResources(now, now)
+    client._get.assert_called_with(
+        "EnvResources",
+        params={
+            "startDate": now.strftime("%Y-%m-%d"),
+            "endDate": now.strftime("%Y-%m-%d"),
+        },
+    )
+    assert response == success_response
+
+
+def test_envs_resources(client):
+    now = datetime.now().date()
+    client._get.return_value = success_response
+    response = client.Order.EnvsResources(now, now, "tid_1", "checksum")
+    client._get.assert_called_with(
+        "EnvsResources",
+        params={
+            "startDate": now.strftime("%Y-%m-%d"),
+            "endDate": now.strftime("%Y-%m-%d"),
+            "targetAppId": "tid_1",
+            "checksum": "checksum",
+        },
+    )
+    assert response == success_response
+
+
+def test_envs_resources_by_account(client):
+    now = datetime.now().date()
+    client._get.return_value = success_response
+    response = client.Order.EnvsResourcesByAccount(now, now, 1, "checksum")
+    client._get.assert_called_with(
+        "EnvsResourcesByAccount",
+        params={
+            "startDate": now.strftime("%Y-%m-%d"),
+            "endDate": now.strftime("%Y-%m-%d"),
+            "uid": 1,
+            "checksum": "checksum",
+        },
+    )
+    assert response == success_response
+
+
+def test_get_options(client):
+    client._get.return_value = success_response
+    response = client.Order.GetOptions("env", "group")
+    client._get.assert_called_with(
+        "GetOptions",
+        params={
+            "targetEnvName": "env",
+            "nodeGroup": "group",
+        },
+    )
+    assert response == success_response
+
+
+def test_set_options(client):
+    client._get.return_value = success_response
+    response = client.Order.SetOptions(
+        "env",
+        "group",
+        "option",
+        [1, 2, 3, 4],
+    )
+    client._get.assert_called_with(
+        "SetOptions",
+        params={
+            "targetEnvName": "env",
+            "nodeGroup": "group",
+            "options": "option",
+            "nodeId": [1, 2, 3, 4],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_clean_check_request_cache(client):
+    client._get.return_value = success_response
+    response = client.System.CleanCheckRequestCache(
+        [1, 2, 3],
+        [True, False, True],
+    )
+    client._get.assert_called_with(
+        "CleanCheckRequestCache",
+        params={
+            "uid": [1, 2, 3],
+            "localOnly": [True, False, True],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_event_Sys(client):
+    client._get.return_value = success_response
+    response = client.System.Event(
+        "topic",
+        "message",
+        [True, False, True],
+    )
+    client._get.assert_called_with(
+        "Event",
+        params={
+            "topic": "topic",
+            "message": "message",
+            "publishLocal": [True, False, True],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_api_description(client):
+    client._get.return_value = success_response
+    response = client.System.GetAPIDescriptions(
+        [True, False, True],
+        [True, False, True],
+    )
+    client._get.assert_called_with(
+        "GetAPIDescriptions",
+        params={
+            "isPublicOnly": [True, False, True],
+            "isToken": [True, False, True],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_get_auto_percent(client):
+    client._get.return_value = success_response
+    response = client.System.GetAutoPercent()
+    client._get.assert_called_with("GetAutoPercent", params={})
+    assert response == success_response
+
+
+def test_get_cache_stats(client):
+    client._get.return_value = success_response
+    response = client.System.GetCacheStats()
+    client._get.assert_called_with("GetCacheStats", params={})
+    assert response == success_response
+
+
+def test_get_cache_status(client):
+    client._get.return_value = success_response
+    response = client.System.GetCacheStatus()
+    client._get.assert_called_with("GetCacheStatus", params={})
+    assert response == success_response
+
+
+def test_get_instance_cache_status(client):
+    client._get.return_value = success_response
+    response = client.System.GetInstanceCacheStatus()
+    client._get.assert_called_with("GetInstanceCacheStatus", params={})
+    assert response == success_response
+
+
+def test_get_status(client):
+    client._get.return_value = success_response
+    response = client.System.GetStatus(1)
+    client._get.assert_called_with("GetStatus", params={"checksum": 1})
+    assert response == success_response
+
+
+def test_get_version(client):
+    client._get.return_value = success_response
+    response = client.System.GetVersion()
+    client._get.assert_called_with("GetVersion", params={})
+    assert response == success_response
+
+
+def test_refresh_email_templates(client):
+    client._get.return_value = success_response
+    response = client.System.RefreshEmailTemplates()
+    client._get.assert_called_with("RefreshEmailTemplates", params={})
+    assert response == success_response
+
+
+def test_refresh_user(client):
+    client._get.return_value = success_response
+    response = client.System.RefreshUser(["lang1", "lang2"])
+    client._get.assert_called_with(
+        "RefreshUser",
+        params={"language": ["lang1", "lang2"]},
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_reload_configuration(client):
+    client._get.return_value = success_response
+    response = client.System.ReloadConfiguration(
+        [1, 2, 3, 4],
+        ["place holder 1", "place holder 2", "place holder 3", "place holder 4"],
+    )
+    client._get.assert_called_with(
+        "ReloadConfiguration",
+        params={
+            "resellerId": [1, 2, 3, 4],
+            "changedPlaceholders": [
+                "place holder 1",
+                "place holder 2",
+                "place holder 3",
+                "place holder 4",
+            ],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_send_email(client):
+    client._get.return_value = success_response
+    response = client.System.SendEmail(
+        "template",
+        ["test1@email.com", "test2@email.com", "test3@email.com"],
+        ["language1", "language2", "language3"],
+        [1, 2, 3],
+    )
+    client._get.assert_called_with(
+        "SendEmail",
+        params={
+            "template": "template",
+            "email": ["test1@email.com", "test2@email.com", "test3@email.com"],
+            "language": ["language1", "language2", "language3"],
+            "timeout": [1, 2, 3],
+        },
+        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_validate(client):
+    client._get.return_value = success_response
+    response = client.System.Validate()
+    client._get.assert_called_with("Validate", params={})
+    assert response == success_response
+
+
+def test_validate_all(client):
+    client._get.return_value = success_response
+    response = client.System.ValidateAll()
+    client._get.assert_called_with("ValidateAll", params={})
+    assert response == success_response
+
+
+def test_clear_billing_history(client):
+    client._get.return_value = success_response
+    response = client.Utils.ClearBillingHistory(
+        "env",
+        1,
+        "2022-11-11",
+        "2026-11-11",
+        "checksum",
+    )
+    client._get.assert_called_with(
+        "ClearBillingHistory",
+        params={
+            "envName": "env",
+            "uid": 1,
+            "startDate": "2022-11-11",
+            "endDate": "2026-11-11",
+            "checksum": "checksum",
+        },
+    )
+    assert response == success_response
+
+
+def test_clear_month_traffic(client):
+    client._get.return_value = success_response
+    response = client.Utils.ClearMonthTraffic(
+        1,
+        "2022-11-11",
+        "checksum",
+    )
+    client._get.assert_called_with(
+        "ClearMonthTraffic",
+        params={
+            "uid": 1,
+            "monthStart": "2022-11-11",
+            "checksum": "checksum",
+        },
+    )
+    assert response == success_response
+
+
+def test_get_uid_usage_by_period(client):
+    client._get.return_value = success_response
+    response = client.Utils.GetUidUsageByPeriod(
+        1,
+        "2022-11-11",
+        "2026-11-11",
+        "checksum",
+    )
+    client._get.assert_called_with(
+        "GetUidUsageByPeriod",
+        params={
+            "uid": 1,
+            "startDate": "2022-11-11",
+            "endDate": "2026-11-11",
+            "checksum": "checksum",
+        },
+    )
+    assert response == success_response
+
+
+def test_set_account_date(client):
+    client._get.return_value = success_response
+    response = client.Utils.SetAccountDate(
+        1,
+        "type",
+        "value",
+        "checksum",
+    )
+    client._get.assert_called_with(
+        "SetAccountDate",
+        params={
+            "uid": 1,
+            "dateType": "type",
+            "dateValue": "value",
+            "checksum": "checksum",
+        },
+    )
+    assert response == success_response
+
+
+def test_set_billing_history_date(client):
+    client._get.return_value = success_response
+    response = client.Utils.SetBillingHistoryDate(
+        1,
+        "env",
+        "2022-11-11",
+        "2026-11-11",
+        "date type",
+        "value",
+        "checksum",
+    )
+    client._get.assert_called_with(
+        "SetBillingHistoryDate",
+        params={
+            "uid": 1,
+            "envName": "env",
+            "startDateFrom": "2022-11-11",
+            "startDateTo": "2026-11-11",
+            "dateType": "date type",
+            "dateValue": "value",
+            "checksum": "checksum",
+        },
+    )
+    assert response == success_response
+
+
+def test_set_month_traffic(client):
+    client._get.return_value = success_response
+    response = client.Utils.SetMonthTraffic(
+        1,
+        "2022-11-11",
+        3,
+        "checksum",
+    )
+    client._get.assert_called_with(
+        "SetMonthTraffic",
+        params={
+            "uid": 1,
+            "monthStart": "2022-11-11",
+            "externalTraffic": 3,
+            "checksum": "checksum",
+        },
+    )
+    assert response == success_response
+
+
+def test_set_signup_group(client):
+    client._get.return_value = success_response
+    response = client.GroupQuota.SetSignupGroup(
+        "group",
+    )
+    client._get.assert_called_with(
+        "SetSignupGroup",
+        params={
+            "name": "group",
+        },
     )
     assert response == success_response

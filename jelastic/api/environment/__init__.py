@@ -76,6 +76,26 @@ class Environment(ClientAbstract):
         return _Node(session=self._session, token=self._token, debug=self._debug)
 
     @property
+    def Binder(self) -> "_Binder":
+        """
+         With the platform, you can set your own external domain name for your projects instead of using the default hosting provider domain name. Binding can be done in two ways: by adding a CNAME record or by setting A Records.
+         A CNAME specifies an alias for a canonical name record in a Domain Name System (DNS) database. If you don't have your own Public IP, your URL is an alias for a single canonical name that is associated with a common platform IP address in the DNS database. In this case, it's recommended to set your own custom domain by adding a CNAME record.
+         A Record is an entry in your DNS zone file that maps each domain name to an IP address. When you type www.mycustomsite.com, the browser goes to the nameserver for mycustomsite.com and asks for the A Record. This record must point to an IP address - it will be the IP address of your web server. Setting your own custom external domain name using A Record is more appropriate if you have a personal Public IP address.
+        Also, you can bind Custom SSL to your custom domain.
+
+         >>> from jelastic import Jelastic
+         >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+         >>> jelastic.environment.Binder
+
+         Ref: https://docs.jelastic.com/api/private/#!/api/environment.Binder
+        """
+        return _Binder(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+        )
+
+    @property
     def Deployment(self) -> "_Node":
         """
         >>> from jelastic import Jelastic
@@ -902,3 +922,513 @@ class _Deployment(Environment):
 
 
 
+
+
+class _Binder(Environment):
+    """
+    With the platform, you can set your own external domain name for your projects instead of using the default hosting provider domain name. Binding can be done in two ways: by adding a CNAME record or by setting A Records.
+
+     A CNAME specifies an alias for a canonical name record in a Domain Name System (DNS) database. If you don't have your own Public IP, your URL is an alias for a single canonical name that is associated with a common platform IP address in the DNS database. In this case, it's recommended to set your own custom domain by adding a CNAME record.
+
+     A Record is an entry in your DNS zone file that maps each domain name to an IP address. When you type www.mycustomsite.com, the browser goes to the nameserver for mycustomsite.com and asks for the A Record. This record must point to an IP address - it will be the IP address of your web server. Setting your own custom external domain name using A Record is more appropriate if you have a personal Public IP address.
+
+     Also, you can bind Custom SSL to your custom domain.
+
+     Ref: https://docs.jelastic.com/api/private/#!/api/environment.Binder
+    """
+
+    _endpoint2 = "Binder"
+
+    def AddDomains(
+        self,
+        env_name: str,
+        domains: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
+        subdomain: list[str] = None,
+    ):
+        """
+        param domains: a comma- or semicolon-separated list of domains (e.g. domain1,domain2 or domain1;domain2).
+        param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
+        param node_id: unique identifier of the target node (container).
+        param subdomain: defines whether the layer/node subdomain should be attached via "-" (false) or "." (true, by default).
+        """
+        return self._get(
+            "AddDomains",
+            params={
+                "envName": env_name,
+                "domains": domains,
+                "nodeGroup": node_group,
+                "nodeId": node_id,
+                "subdomain": subdomain,
+            },
+            delimiter=",",
+        )
+
+    def AddSSLCert(
+        self,
+        env_name: str,
+        key: str,
+        cert: str,
+        interm: list[str] = None,
+    ):
+        """
+        param key: private key (can be either key body or link to download it).
+        param cert: domain certificate (can be either certificate body or link to download it).
+        param interm: intermediate certificate (CA) (can be either intermediate body or link to download it).
+        """
+        return self._get(
+            "AddSSLCert",
+            params={
+                "envName": env_name,
+                "key": key,
+                "cert": cert,
+                "interm": interm,
+            },
+            delimiter=",",
+        )
+
+    def AttachExtIp(
+        self,
+        env_name: str,
+        nodeid: int,
+        type: list[str] = None,
+    ):
+        return self._get(
+            "AttachExtIp",
+            params={
+                "envName": env_name,
+                "nodeid": nodeid,
+                "type": type,
+            },
+            delimiter=",",
+        )
+
+    def BindExtDomain(
+        self,
+        env_name: str,
+        extdomain: str,
+        cert_id: list[int] = None,
+    ):
+        return self._get(
+            "BindExtDomain",
+            params={
+                "envName": env_name,
+                "extdomain": extdomain,
+                "certId": cert_id,
+            },
+            delimiter=",",
+        )
+
+    def BindExtDomains(
+        self,
+        env_name: str,
+        extdomains: str,
+        cert_id: list[int] = None,
+    ):
+        """
+        param extdomain: a comma-separated list of external domains to be bound to the environment.
+        param cert_id: unique identifier of the SSL certificate.
+        """
+        return self._get(
+            "BindExtDomains",
+            params={
+                "envName": env_name,
+                "extdomains": extdomains,
+                "certId": cert_id,
+            },
+            delimiter=",",
+        )
+
+    def BindSSL(
+        self,
+        env_name: str,
+        cert_key: str,
+        cert: str,
+        intermediate: str,
+    ):
+        return self._get(
+            "BindSSL",
+            params={
+                "envName": env_name,
+                "cert_key": cert_key,
+                "cert": cert,
+                "intermediate": intermediate,
+            },
+        )
+
+    def BindSSLCert(
+        self,
+        env_name: str,
+        cert_id: int,
+        entry_point: list[str] = None,
+        ext_domains: list[str] = None,
+    ):
+        """
+        param cert_id: unique identifier of the SSL certificate.
+        param entry_point: entry point can be either "ENV" (for all environments domains, by default) or "SLB" (for environment domains specified in the extDomains parameter).
+        param ext_domains: a comma-separated list of external domains to be bound with the SSL certificate.
+        """
+        return self._get(
+            "BindSSLCert",
+            params={
+                "envName": env_name,
+                "certId": cert_id,
+                "entryPoint": entry_point,
+                "extDomains": ext_domains,
+            },
+            delimiter=",",
+        )
+
+    def CheckDomain(
+        self,
+        env_name: str,
+        domain: str,
+        region: list[str] = None,
+    ):
+        """
+        param domain: domain name to be checked.
+        param region: unique name of a region to be checked.
+        """
+        return self._get(
+            "CheckDomain",
+            params={
+                "envName": env_name,
+                "domain": domain,
+                "region": region,
+            },
+            delimiter=",",
+        )
+
+    def CheckExtDomain(
+        self,
+        env_name: str,
+        extdomains: str,
+    ):
+        """
+        param extdomains: external domain name to be checked.
+        """
+        return self._get(
+            "CheckExtDomain",
+            params={
+                "envName": env_name,
+                "extdomains": extdomains,
+            },
+        )
+
+    def DeleteSSL(
+        self,
+        env_name: str,
+    ):
+        return self._get(
+            "DeleteSSL",
+            params={"envName": env_name},
+        )
+
+    def DetachExtIp(
+        self,
+        env_name: str,
+        nodeid: int,
+        ip: str,
+    ):
+        """
+        param nodeid: unique identifier of the target node (container).
+        param ip: IP address that should be removed from the node.
+        """
+        return self._get(
+            "DetachExtIp",
+            params={
+                "envName": env_name,
+                "nodeid": nodeid,
+                "ip": ip,
+            },
+        )
+
+    def DisableSSL(
+        self,
+        env_name: str,
+    ):
+        return self._get(
+            "DisableSSL",
+            params={
+                "envName": env_name,
+            },
+        )
+
+    def EditSSLCert(
+        self,
+        env_name: str,
+        id: int,
+        key: list[str] = None,
+        cert: list[str] = None,
+        interm: list[str] = None,
+    ):
+        """
+        param id: unique identifier of the target SSL certificate.
+        param key: private key (can be either key body or link to download it).
+        param cert: domain certificate (can be either certificate body or link to download it).
+        param interm: intermediate certificate (CA) (can be intermediate body or link to download it); if set to "*", "null", or "none", the intermediate certificate will be removed from the platform database.
+        """
+        return self._get(
+            "EditSSLCert",
+            params={
+                "envName": env_name,
+                "id": id,
+                "key": key,
+                "cert": cert,
+                "interm": interm,
+            },
+            delimiter=",",
+        )
+
+    def GetDomainInfo(
+        self,
+        env_name: str,
+        domain: str,
+    ):
+        """
+        Returns environment appid if environment found by domain.
+
+        param domain: domain of the environment for search
+        """
+        return self._get(
+            "GetDomainInfo",
+            params={
+                "envName": env_name,
+                "domain": domain,
+            },
+        )
+
+    def GetDomains(
+        self,
+        env_name: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
+        in_short: list[bool] = None,
+    ):
+        """
+        param node_group: unique identifier of the target node group (layer) for filtering, e.g. "cp" for the default application server layer.
+        param node_id: unique identifier of the target node (container) for filtering. It has priority over the nodeGroup parameter.
+        param in_short: defines whether domains should be presented in the short (true, by default) or extended (false) form.
+        """
+        return self._get(
+            "GetDomains",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "nodeId": node_id,
+                "inShort": in_short,
+            },
+            delimiter=",",
+        )
+
+    def GetExtDomains(self, env_name: str):
+        return self._get("GetExtDomains", params={"envName": env_name})
+
+    def GetSSL(self, env_name: str):
+        return self._get("GetSSL", params={"envName": env_name})
+
+    def GetSSLCerts(self, env_name: str, ids: list[str] = None):
+        return self._get(
+            "GetSSLCerts",
+            params={"envName": env_name, "ids": ids},
+            delimiter=",",
+        )
+
+    def ManageNodeDnsState(
+        self, env_name: str, node_id: list[int] = None, enabled: list[bool] = None
+    ):
+        """
+        param env_name: target environment name.
+        param node_id: unique identifier of the target node (container).
+        param enabled: defines whether to enable (true) or disable (false) DNS records for the target node.
+        """
+        return self._get(
+            "ManageNodeDnsState",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "enabled": enabled,
+            },
+            delimiter=",",
+        )
+
+    def MoveExtIps(
+        self, env_name: str, source_node_id: int, target_node_id: int, ips: str
+    ):
+        """
+        param env_name: source environment name.
+        param source_node_id: unique identifier of the source node (from the source environment).
+        param target_node_id: unique identifier of the target node (could be from the same or different environment on the account).
+        param ips: a comma- or semicolon-separated list of IP addresses that should be transferred (use "*" to move all the source node external IP addresses).
+        """
+        return self._get(
+            "MoveExtIps",
+            params={
+                "envName": env_name,
+                "sourceNodeId": source_node_id,
+                "targetNodeId": target_node_id,
+                "ips": ips,
+            },
+        )
+
+    def RemoveDomains(
+        self,
+        env_name: str,
+        domains: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param domains: a comma- or semicolon-separated list of domains (e.g. domain1,domain2 or domain1;domain2); provide "*" to remove all custom domains.
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        param node_id: unique identifier of the target node (container).
+        """
+        return self._get(
+            "RemoveDomains",
+            params={
+                "envName": env_name,
+                "domains": domains,
+                "nodeGroup": node_group,
+                "node_id": node_id,
+            },
+            delimiter=",",
+        )
+
+    def RemoveExtDomains(
+        self,
+        env_name: str,
+        extdomain: str,
+    ):
+        """
+        param env_name: target environment name.
+        param extdomain: external domain name to be detached.
+        """
+        return self._get(
+            "RemoveExtDomains",
+            params={
+                "envName": env_name,
+                "extdomain": extdomain,
+            },
+        )
+
+    def RemoveSSL(
+        self,
+        env_name: str,
+    ):
+        """
+        param env_name: target environment name.
+        """
+        return self._get(
+            "RemoveSSL",
+            params={
+                "envName": env_name,
+            },
+        )
+
+    def RemoveSSLCerts(
+        self,
+        env_name: str,
+        ids: str,
+    ):
+        """
+        param env_name: target environment name.
+        param ids: a comma-separated list of certificate IDs (e.g. id1,id2,id3); provide "*" to remove all certificates.
+        """
+        return self._get(
+            "RemoveSSLCerts",
+            params={
+                "envName": env_name,
+                "ids": ids,
+            },
+        )
+
+    def SetExtIpCount(
+        self,
+        env_name: str,
+        type: str,
+        count: int,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param type: external IP address type ("ipv4" or "ipv6").
+        param count: number of IPs to add per container - requires the multiple IPs feature enabled on the account.
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        param node_id: unique identifier of the target node (container).
+        """
+        return self._get(
+            "SetExtIpCount",
+            params={
+                "envName": env_name,
+                "type": type,
+                "count": count,
+                "nodeGroup": node_group,
+                "node_id": node_id,
+            },
+            delimiter=",",
+        )
+
+    def SwapExtDomains(
+        self,
+        env_name: str,
+        targetappid: str,
+    ):
+        """
+        param env_name: target environment name.
+        param targetappid: Target (second) environment name.
+        """
+        return self._get(
+            "SwapExtDomains",
+            params={
+                "envName": env_name,
+                "targetappid": targetappid,
+            },
+        )
+
+    def SwapExtIps(
+        self,
+        env_name: str,
+        source_node_id: int,
+        target_node_id: int,
+        source_ip: list[str] = None,
+        target_ip: list[str] = None,
+    ):
+        """
+        param env_name: source environment name.
+        param source_node_id: unique identifier of the source node (from the source environment).
+        param target_node_id: unique identifier of the target node (could be from the same or different environment on the account).
+        param source_ip: source IP address that should be swapped (if not specified, all external IPs from source node are transferred to the target).
+        param target_ip: target IP address that should be swapped (if not specified, all external IPs from target node are transferred to the source).
+        """
+        return self._get(
+            "SwapExtIps",
+            params={
+                "envName": env_name,
+                "sourceNodeId": source_node_id,
+                "targetNodeId": target_node_id,
+                "sourceIp": source_ip,
+                "targetIp": target_ip,
+            },
+            delimiter=",",
+        )
+
+    def UnbindSSLCert(
+        self,
+        env_name: str,
+        extdomains: list[str] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param extdomain: a comma-separated list of external domains to be unbound (if not specified, SSL certificates are unbound from the environment).
+        """
+        return self._get(
+            "UnbindSSLCert",
+            params={
+                "envName": env_name,
+                "extDomains": extdomains,
+            },
+            delimiter=",",
+        )

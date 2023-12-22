@@ -10,6 +10,11 @@ Administration
    :undoc-members:
    :show-inheritance:
 
+.. autoclass:: jelastic.api.administration._Cluster
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 .. autoclass:: jelastic.api.administration._Config
    :members:
    :undoc-members:
@@ -51,6 +56,11 @@ Administration
    :show-inheritance:
 
 .. autoclass:: jelastic.api.administration._Utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. autoclass:: jelastic.api.administration._VirtualNetwork
    :members:
    :undoc-members:
    :show-inheritance:
