@@ -25,3 +25,13 @@ Environment
     :members:
     :undoc-members:
     :show-inheritance:
+
+.. autoclass:: jelastic.api.environment._Binder
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. autoclass:: jelastic.api.environment._Deployment
+    :members:
+    :undoc-members:
+    :show-inheritance:
