@@ -5,6 +5,7 @@ __all__ = ["Marketplace"]
 
 class Marketplace(ClientAbstract):
     _endpoint1 = "marketplace"
+
     @property
     def App(self) -> "_App":
         """
@@ -25,12 +26,10 @@ class _App(Marketplace):
     """
     Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.App
     """
+
     _endpoint2 = "app"
 
-    def AddApp(
-        self,
-        manifest: str
-    ):
+    def AddApp(self, manifest: str):
         """
         :param manifest: custom personal JPS (manifest body or link) to be added.
         """
@@ -41,10 +40,7 @@ class _App(Marketplace):
             },
         )
 
-    def DeleteApp(
-        self,
-        id: str
-    ):
+    def DeleteApp(self, id: str):
         """
         :param id: unique identifier of the target personal JPS manifest in the Marketplace..
         """
@@ -55,11 +51,7 @@ class _App(Marketplace):
             },
         )
 
-    def EditApp(
-        self,
-        id: str,
-        manifest: str
-    ):
+    def EditApp(self, id: str, manifest: str):
         """
         :param id: unique identifier of the target personal JPS manifest in the Marketplace..
         :param manifest: updated personal JPS (manifest body or link).
@@ -71,6 +63,7 @@ class _App(Marketplace):
                 "manifest": manifest,
             },
         )
+
     def GetAddonList(
         self,
         envName: str,
@@ -136,9 +129,7 @@ class _App(Marketplace):
         """
         return self._get(
             "GetList",
-            params={
-                "search": search
-            },
+            params={"search": search},
         )
 
     def Install(

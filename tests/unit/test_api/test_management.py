@@ -19,9 +19,7 @@ def client():
 
 def test_add_app(client):
     client._get.return_value = success_response
-    response = client.App.AddApp(
-        "manifest"
-    )
+    response = client.App.AddApp("manifest")
     client._get.assert_called_with(
         "AddApp",
         params={
@@ -33,9 +31,7 @@ def test_add_app(client):
 
 def test_delete_app(client):
     client._get.return_value = success_response
-    response = client.App.DeleteApp(
-        "1"
-    )
+    response = client.App.DeleteApp("1")
     client._get.assert_called_with(
         "DeleteApp",
         params={
@@ -119,14 +115,10 @@ def test_get_checksum(client):
 
 def test_get_list(client):
     client._get.return_value = success_response
-    response = client.App.GetList(
-        ["search1", "search2", "search3"]
-    )
+    response = client.App.GetList(["search1", "search2", "search3"])
     client._get.assert_called_with(
         "GetList",
-        params={
-            "search": ["search1", "search2", "search3"]
-        },
+        params={"search": ["search1", "search2", "search3"]},
     )
     assert response == success_response
 
@@ -185,4 +177,3 @@ def test_install_addon(client):
         delimiter=",",
     )
     assert response == success_response
-

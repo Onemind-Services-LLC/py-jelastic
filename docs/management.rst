@@ -10,4 +10,3 @@ Management
    :members:
    :undoc-members:
    :show-inheritance:
-
