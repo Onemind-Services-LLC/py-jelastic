@@ -5,3 +5,8 @@ Marketplace
    :members:
    :undoc-members:
    :show-inheritance:
+
+.. automodule:: jelastic.api.marketplace._Favorite
+   :members:
+   :undoc-members:
+   :show-inheritance:
