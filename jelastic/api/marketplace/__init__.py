@@ -20,39 +20,27 @@ class Marketplace(ClientAbstract):
             token=self._token,
             debug=self._debug,
         )
+
+
 class _Console(Marketplace):
     """
-   Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.Console
+    Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.Console
     """
 
     _endpoint2 = "console"
+
     def ClearLog(
         self,
     ):
-        return self._get(
-            "ClearLog",
-            params={
-            }
-        )
+        return self._get("ClearLog", params={})
+
     def ReadLog(
         self,
     ):
-        return self._get(
-            "ReadLog",
-            params={
-            }
-        )
-    def WriteLog(
-        self,
-            message:str
-    ):
+        return self._get("ReadLog", params={})
+
+    def WriteLog(self, message: str):
         """
         param message: a custom message to be added to the console log.
         """
-        return self._get(
-            "WriteLog",
-            params={
-                "message": message
-            }
-        )
-
+        return self._get("WriteLog", params={"message": message})
