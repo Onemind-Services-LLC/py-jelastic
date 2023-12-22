@@ -5,6 +5,15 @@ __all__ = ["Marketplace"]
 
 class Marketplace(ClientAbstract):
     _endpoint1 = "marketplace"
+
+    @property
+    def Favorite(self) -> "_Favorite":
+        return _Favorite(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+        )
+
     @property
     def Installation(self) -> "_Installation":
         """
@@ -26,15 +35,16 @@ class _Installation(Marketplace):
     The Installation service provides extensive functionality for users to manage applications installed from the Marketplace or via Import.
     Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.Installation
     """
+
     _endpoint2 = "installation"
 
     def ExecuteAction(
         self,
         app_unique_name: str,
-        action: list[str]=None,
-        settings_id: list[str]=None,
-        params: list[str]=None,
-        lang: list[str]=None,
+        action: list[str] = None,
+        settings_id: list[str] = None,
+        params: list[str] = None,
+        lang: list[str] = None,
     ):
         """
         param app_unique_name: unique identifier of the particular installation.
@@ -51,8 +61,10 @@ class _Installation(Marketplace):
                 "settingsId": settings_id,
                 "params": params,
                 "lang": lang,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
+
     def GetEnvAppid(
         self,
         app_unique_name: str,
@@ -64,8 +76,9 @@ class _Installation(Marketplace):
             "GetEnvAppid",
             params={
                 "appUniqueName": app_unique_name,
-            }
+            },
         )
+
     def GetInfo(
         self,
         app_unique_name: str,
@@ -77,19 +90,17 @@ class _Installation(Marketplace):
             "GetInfo",
             params={
                 "appUniqueName": app_unique_name,
-            }
+            },
         )
-    def GetScriptingAppid(
-        self):
-        return self._get(
-            "GetScriptingAppid",
-            params={}
-        )
+
+    def GetScriptingAppid(self):
+        return self._get("GetScriptingAppid", params={})
+
     def GetSettings(
         self,
         app_unique_name: str,
-        settings_id: list[str]=None,
-        lang: list[str]=None,
+        settings_id: list[str] = None,
+        lang: list[str] = None,
     ):
         """
         param app_unique_name: unique identifier of the particular installation.
@@ -102,12 +113,14 @@ class _Installation(Marketplace):
                 "appUniqueName": app_unique_name,
                 "settingsId": settings_id,
                 "lang": lang,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
+
     def Uninstall(
         self,
         app_unique_name: str,
-        force: list[bool]=None,
+        force: list[bool] = None,
     ):
         """
         param app_unique_name: unique identifier of the particular installation.
@@ -118,13 +131,9 @@ class _Installation(Marketplace):
             params={
                 "appUniqueName": app_unique_name,
                 "force": force,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
-
-
-
-
-
 
     @property
     def Favorite(self) -> "_Favorite":
