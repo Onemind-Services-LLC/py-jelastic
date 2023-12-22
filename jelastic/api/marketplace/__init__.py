@@ -3,7 +3,7 @@ from ..abstract import ClientAbstract
 __all__ = ["Marketplace"]
 
 class Marketplace(ClientAbstract):
-    _endpoint1 = "management"
+    _endpoint1 = "marketplace"
     @property
     def Admin(self) -> "_Admin":
         """
