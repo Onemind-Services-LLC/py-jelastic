@@ -9,7 +9,7 @@
           <link rel="stylesheet" href="../../../_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="../../../_static/documentation_options.js?v=38e1fc9f"></script>
+        <script src="../../../_static/documentation_options.js?v=0db89ace"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -587,7 +587,23 @@
 
 <span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/billing.Utils</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">_Utils</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">_Utils</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Subscription</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_Subscription&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The methods of this service provide billing information about a user account (such as UID, balance, billing history,</span>
+<span class="sd">        quotas, etc.) and allow managing it.</span>
+
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.billing.Subscription</span>
+
+<span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/billing.Subscription</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_Subscription</span><span class="p">(</span>
+            <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span>
+        <span class="p">)</span></div>
 
 
 
@@ -3178,6 +3194,383 @@
     <span class="k">def</span> <span class="nf">ValidateAll</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;ValidateAll&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{})</span></div>
 </div>
+
+
+
+<div class="viewcode-block" id="_Subscription">
+<a class="viewcode-back" href="../../../billing.html#jelastic.api.billing._Subscription">[docs]</a>
+<span class="k">class</span> <span class="nc">_Subscription</span><span class="p">(</span><span class="n">Billing</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/billing.Subscription</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_endpoint</span> <span class="o">=</span> <span class="s2">&quot;subscription&quot;</span>
+
+    <span class="k">def</span> <span class="nf">Cancel</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">immediately</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">cancel_date</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">passphrase</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">expand_fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param id: unique identifier of the target subscription.</span>
+<span class="sd">        :param immediately: defines whether the current subscription should be cancelled immediately (true) or at the end of already purchased period (false).</span>
+<span class="sd">        :param cancel_date: a specific date when the subscription should be canceled. UTC time in the ISO 8601 format, e.g. &quot;2022-11-16T00:00:00&quot;.</span>
+<span class="sd">        :param passphrase: unique code to confirm immediate subscription resources deletion.</span>
+<span class="sd">        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Cancel&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+                <span class="s2">&quot;immediately&quot;</span><span class="p">:</span> <span class="n">immediately</span><span class="p">,</span>
+                <span class="s2">&quot;cancelDate&quot;</span><span class="p">:</span> <span class="n">cancel_date</span><span class="p">,</span>
+                <span class="s2">&quot;passphrase&quot;</span><span class="p">:</span> <span class="n">passphrase</span><span class="p">,</span>
+                <span class="s2">&quot;expandFields&quot;</span><span class="p">:</span> <span class="n">expand_fields</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">CloneProduct</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">subscription_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">item_resource</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">target_env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">item_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param subscription_id: unique identifier of the target subscription.</span>
+<span class="sd">        :param item_resource: unique identifier of the target subscription item resource.</span>
+<span class="sd">        :param target_env_name: domain prefix for the cloned environment.</span>
+<span class="sd">        :param item_id: unique identifier of the target subscription item.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;CloneProduct&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;subscriptionId&quot;</span><span class="p">:</span> <span class="n">subscription_id</span><span class="p">,</span>
+                <span class="s2">&quot;itemResource&quot;</span><span class="p">:</span> <span class="n">item_resource</span><span class="p">,</span>
+                <span class="s2">&quot;targetEnvName&quot;</span><span class="p">:</span> <span class="n">target_env_name</span><span class="p">,</span>
+                <span class="s2">&quot;itemId&quot;</span><span class="p">:</span> <span class="n">item_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">DiscardUpdateSubscription</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subscription_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param subscription_id: unique identifier of the target subscription.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;DiscardUpdateSubscription&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;subscriptionId&quot;</span><span class="p">:</span> <span class="n">subscription_id</span><span class="p">}</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">GetCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expand_fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetCategories&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;expandFields&quot;</span><span class="p">:</span> <span class="n">expand_fields</span><span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">GetProducts</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">category_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">expand_fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">start_row</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">result_count</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">order_field</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">order_direction</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param id: unique identifier of the target subscription Product (for filtering).</span>
+<span class="sd">        :param category_id: unique identifier of the target subscription Category (for filtering).</span>
+<span class="sd">        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).</span>
+<span class="sd">        :param start_row: returns information starting from the specified row in the response (starts with 0, by default).</span>
+<span class="sd">        :param result_count: returns the specified number of rows from the response (0 – unlimited – by default).</span>
+<span class="sd">        :param order_field: sorts results by the specified field</span>
+<span class="sd">        :param order_direction: sorts results in the ascending (ASC) or descending (DESC) order</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetProducts&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+                <span class="s2">&quot;categoryId&quot;</span><span class="p">:</span> <span class="n">category_id</span><span class="p">,</span>
+                <span class="s2">&quot;expandFields&quot;</span><span class="p">:</span> <span class="n">expand_fields</span><span class="p">,</span>
+                <span class="s2">&quot;startRow&quot;</span><span class="p">:</span> <span class="n">start_row</span><span class="p">,</span>
+                <span class="s2">&quot;resultCount&quot;</span><span class="p">:</span> <span class="n">result_count</span><span class="p">,</span>
+                <span class="s2">&quot;orderField&quot;</span><span class="p">:</span> <span class="n">order_field</span><span class="p">,</span>
+                <span class="s2">&quot;orderDirection&quot;</span><span class="p">:</span> <span class="n">order_direction</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">GetRestrictedHardNodeGroups</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subscription_item_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param subscription_id: unique identifier of the target subscription item.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetHardNodeGroups&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;subscriptionItemId&quot;</span><span class="p">:</span> <span class="n">subscription_item_id</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">GetServicePlans</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">product_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">expand_fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param id: unique identifier of the target service plan (for filtering).</span>
+<span class="sd">        :param product_id: unique identifier of the target subscription product (for filtering).</span>
+<span class="sd">        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetServicePlans&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+                <span class="s2">&quot;productId&quot;</span><span class="p">:</span> <span class="n">product_id</span><span class="p">,</span>
+                <span class="s2">&quot;expandFields&quot;</span><span class="p">:</span> <span class="n">expand_fields</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">GetSubscriptions</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">product_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">status</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">expand_fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">start_row</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">result_count</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">order_field</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">order_direction</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param id: unique identifier of the target subscription (for filtering).</span>
+<span class="sd">        :param product_id: unique identifier of the target subscription product (for filtering).</span>
+<span class="sd">        :param status: a comma-separated list of the subscription statuses.(&quot;INCOMPLETE&quot;, &quot;INCOMPLETE_EXPIRED&quot;, &quot;TRIAL&quot;, &quot;ACTIVE&quot;, &quot;PAST_DUE&quot;, &quot;UNPAID&quot;, &quot;SUSPENDED&quot;, &quot;CANCELED&quot;, &quot;ENDED&quot;).</span>
+<span class="sd">        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).</span>
+<span class="sd">        :param start_row: returns information starting from the specified row in the response (starts with 0, by default).</span>
+<span class="sd">        :param result_count: returns the specified number of rows from the response (0 – unlimited – by default).</span>
+<span class="sd">        :param order_field: sorts results by the specified field</span>
+<span class="sd">        :param order_direction: sorts results in the ascending (ASC) or descending (DESC) order</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetSubscriptions&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+                <span class="s2">&quot;productId&quot;</span><span class="p">:</span> <span class="n">product_id</span><span class="p">,</span>
+                <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">status</span><span class="p">,</span>
+                <span class="s2">&quot;expandFields&quot;</span><span class="p">:</span> <span class="n">expand_fields</span><span class="p">,</span>
+                <span class="s2">&quot;startRow&quot;</span><span class="p">:</span> <span class="n">start_row</span><span class="p">,</span>
+                <span class="s2">&quot;resultCount&quot;</span><span class="p">:</span> <span class="n">result_count</span><span class="p">,</span>
+                <span class="s2">&quot;orderField&quot;</span><span class="p">:</span> <span class="n">order_field</span><span class="p">,</span>
+                <span class="s2">&quot;orderDirection&quot;</span><span class="p">:</span> <span class="n">order_direction</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">InstallProduct</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">subscription_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">item_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">settings</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">display_name</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">env_groups</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">region</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">lang</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param subscription_id: unique identifier of the target subscription.</span>
+<span class="sd">        :param item_id: unique identifier of the target subscription item.</span>
+<span class="sd">        :param settings: JSON object with subscription configuration.</span>
+<span class="sd">        :param env_name: target environment name</span>
+<span class="sd">        :param display_name: target environment display name</span>
+<span class="sd">        :param env_groups: target environment groups</span>
+<span class="sd">        :param region: target environment region</span>
+<span class="sd">        :param lang: target installation language</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;InstallProduct&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;subscriptionId&quot;</span><span class="p">:</span> <span class="n">subscription_id</span><span class="p">,</span>
+                <span class="s2">&quot;itemId&quot;</span><span class="p">:</span> <span class="n">item_id</span><span class="p">,</span>
+                <span class="s2">&quot;settings&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="p">,</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="n">display_name</span><span class="p">,</span>
+                <span class="s2">&quot;envGroups&quot;</span><span class="p">:</span> <span class="n">env_groups</span><span class="p">,</span>
+                <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="n">region</span><span class="p">,</span>
+                <span class="s2">&quot;lang&quot;</span><span class="p">:</span> <span class="n">lang</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">MoveProduct</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">subscription_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">item_resource_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">target_subscription_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">target_item_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">passphrase</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">item_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param subscription_id: unique identifier of the source subscription.</span>
+<span class="sd">        :param item_resource_id: unique identifier of the source subscription item resource.</span>
+<span class="sd">        :param target_subscription_id: unique identifier of the target subscription item resource.</span>
+<span class="sd">        :param target_item_id: unique identifier of the target subscription item.</span>
+<span class="sd">        :param passphrase: confirmation code for the operation (provide the “uniqueName” value from the “ItemResource” object).</span>
+<span class="sd">        :param item_id: unique identifier of the source subscription item.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;MoveProduct&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;subscriptionId&quot;</span><span class="p">:</span> <span class="n">subscription_id</span><span class="p">,</span>
+                <span class="s2">&quot;itemResourceId&quot;</span><span class="p">:</span> <span class="n">item_resource_id</span><span class="p">,</span>
+                <span class="s2">&quot;targetSubscriptionId&quot;</span><span class="p">:</span> <span class="n">target_subscription_id</span><span class="p">,</span>
+                <span class="s2">&quot;targetItemId&quot;</span><span class="p">:</span> <span class="n">target_item_id</span><span class="p">,</span>
+                <span class="s2">&quot;passphrase&quot;</span><span class="p">:</span> <span class="n">passphrase</span><span class="p">,</span>
+                <span class="s2">&quot;itemId&quot;</span><span class="p">:</span> <span class="n">item_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">SetAutopay</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">enabled</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">expand_fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param id: unique identifier of the target subscription.</span>
+<span class="sd">        :param enabled: defines whether to enable (true) or disable (false) the auto pay option for the subscription.</span>
+<span class="sd">        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;SetAutopay&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+                <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">enabled</span><span class="p">,</span>
+                <span class="s2">&quot;expandFields&quot;</span><span class="p">:</span> <span class="n">expand_fields</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">Subscribe</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">product_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">items</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">change_automatically</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">expand_fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param product_id: unique identifier of the subscription product.</span>
+<span class="sd">        :param items: JSON object with subscription details. For example: [{&quot;servicePlanId&quot;: 1, &quot;tariffPlanId&quot;: 1, &quot;quantity&quot;: 10}].</span>
+<span class="sd">        :param change_automatically: defines whether the auto pay option for the subscription should be enabled (true) or disabled (false).</span>
+<span class="sd">        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Subscribe&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;productId&quot;</span><span class="p">:</span> <span class="n">product_id</span><span class="p">,</span>
+                <span class="s2">&quot;items&quot;</span><span class="p">:</span> <span class="n">items</span><span class="p">,</span>
+                <span class="s2">&quot;chargeAutomatically&quot;</span><span class="p">:</span> <span class="n">change_automatically</span><span class="p">,</span>
+                <span class="s2">&quot;expandFields&quot;</span><span class="p">:</span> <span class="n">expand_fields</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">UndoCancel</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">expand_fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param id: unique identifier of the target subscription.</span>
+<span class="sd">        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;UndoCancel&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+                <span class="s2">&quot;expandFields&quot;</span><span class="p">:</span> <span class="n">expand_fields</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">UninstallProduct</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">subscription_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">item_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">item_resource_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">passphrase</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param subscription_id: unique identifier of the target subscription.</span>
+<span class="sd">        :param item_id: unique identifier of the target subscription item.</span>
+<span class="sd">        :param item_resource_id: unique identifier of the target subscription item resource.</span>
+<span class="sd">        :param passphrase: confirmation code for the operation (provide the “uniqueName” value from the “ItemResource” object).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;UninstallProduct&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;subscriptionId&quot;</span><span class="p">:</span> <span class="n">subscription_id</span><span class="p">,</span>
+                <span class="s2">&quot;itemId&quot;</span><span class="p">:</span> <span class="n">item_id</span><span class="p">,</span>
+                <span class="s2">&quot;itemResourceId&quot;</span><span class="p">:</span> <span class="n">item_resource_id</span><span class="p">,</span>
+                <span class="s2">&quot;passphrase&quot;</span><span class="p">:</span> <span class="n">passphrase</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">UpcomingInvoice</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">subscription_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">item_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">quantity</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param subscription_id: unique identifier of the target subscription.</span>
+<span class="sd">        :param item_id: unique identifier of the target subscription item.</span>
+<span class="sd">        :param quantity: a new installation quantity for the subscription.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;UpcomingInvoice&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;subscriptionId&quot;</span><span class="p">:</span> <span class="n">subscription_id</span><span class="p">,</span>
+                <span class="s2">&quot;itemId&quot;</span><span class="p">:</span> <span class="n">item_id</span><span class="p">,</span>
+                <span class="s2">&quot;quantity&quot;</span><span class="p">:</span> <span class="n">quantity</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">UpdateSubscription</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">subscription_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">item_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">quantity</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">expand_fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param subscription_id: unique identifier of the target subscription.</span>
+<span class="sd">        :param item_id: unique identifier of the target subscription item</span>
+<span class="sd">        :param quantity: a new installation quantity for the subscription.</span>
+<span class="sd">        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;UpdateSubscription&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;subscriptionId&quot;</span><span class="p">:</span> <span class="n">subscription_id</span><span class="p">,</span>
+                <span class="s2">&quot;itemId&quot;</span><span class="p">:</span> <span class="n">item_id</span><span class="p">,</span>
+                <span class="s2">&quot;quantity&quot;</span><span class="p">:</span> <span class="n">quantity</span><span class="p">,</span>
+                <span class="s2">&quot;expandFields&quot;</span><span class="p">:</span> <span class="n">expand_fields</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
 
 </pre></div>
 
