@@ -75,26 +75,17 @@ def test_get_app_manifest(client):
     )
     client._get.assert_called_with(
         "GetAppManifest",
-        params={
-            "envName": "env",
-            "id": 1
-        },
+        params={"envName": "env", "id": 1},
     )
     assert response == success_response
 
 
 def test_get_apps(client):
     client._get.return_value = success_response
-    response = client.Admin.GetApps(
-        "env",
-        ["search1", "search2", "search3"]
-    )
+    response = client.Admin.GetApps("env", ["search1", "search2", "search3"])
     client._get.assert_called_with(
         "GetApps",
-        params={
-            "envName": "env",
-            "search": ["search1", "search2", "search3"]
-        },
+        params={"envName": "env", "search": ["search1", "search2", "search3"]},
         delimiter=",",
     )
     assert response == success_response
@@ -102,16 +93,10 @@ def test_get_apps(client):
 
 def test_get_jps_samples(client):
     client._get.return_value = success_response
-    response = client.Admin.GetJpsSamples(
-        "env",
-        ["type1", "type2", "type3"]
-    )
+    response = client.Admin.GetJpsSamples("env", ["type1", "type2", "type3"])
     client._get.assert_called_with(
         "GetJpsSamples",
-        params={
-            "envName": "env",
-            "type": ["type1", "type2", "type3"]
-        },
+        params={"envName": "env", "type": ["type1", "type2", "type3"]},
         delimiter=",",
     )
     assert response == success_response
@@ -119,16 +104,10 @@ def test_get_jps_samples(client):
 
 def test_publish_app(client):
     client._get.return_value = success_response
-    response = client.Admin.PublishApp(
-        "env",
-        1
-    )
+    response = client.Admin.PublishApp("env", 1)
     client._get.assert_called_with(
         "PublishApp",
-        params={
-            "envName": "env",
-            "id": 1
-        },
+        params={"envName": "env", "id": 1},
     )
     assert response == success_response
 
@@ -198,10 +177,7 @@ def test_sync_system_apps(client):
 
 def test_unpublish_app(client):
     client._get.return_value = success_response
-    response = client.Admin.UnpublishApp(
-        "env",
-        1
-    )
+    response = client.Admin.UnpublishApp("env", 1)
     client._get.assert_called_with(
         "UnpublishApp",
         params={
@@ -214,11 +190,7 @@ def test_unpublish_app(client):
 
 def test_update_app_rating(client):
     client._get.return_value = success_response
-    response = client.Admin.UpdateAppRating(
-        "env",
-        1,
-        9
-    )
+    response = client.Admin.UpdateAppRating("env", 1, 9)
     client._get.assert_called_with(
         "UpdateAppRating",
         params={
@@ -232,11 +204,7 @@ def test_update_app_rating(client):
 
 def test_update_app_visibility_levels(client):
     client._get.return_value = success_response
-    response = client.Admin.UpdateAppVisibilityLevels(
-        "env",
-        1,
-        "visibility_levels"
-    )
+    response = client.Admin.UpdateAppVisibilityLevels("env", 1, "visibility_levels")
     client._get.assert_called_with(
         "UpdateAppVisibilityLevels",
         params={

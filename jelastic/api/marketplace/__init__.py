@@ -2,8 +2,10 @@ from ..abstract import ClientAbstract
 
 __all__ = ["Marketplace"]
 
+
 class Marketplace(ClientAbstract):
     _endpoint1 = "marketplace"
+
     @property
     def Admin(self) -> "_Admin":
         """
@@ -24,13 +26,10 @@ class _Admin(Marketplace):
     """
     Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.Admin
     """
+
     _endpoint2 = "account"
 
-    def AddApp(
-        self,
-        env_name: str,
-        manifest: str
-    ):
+    def AddApp(self, env_name: str, manifest: str):
         return self._get(
             "AddApp",
             params={
@@ -38,11 +37,8 @@ class _Admin(Marketplace):
                 "manifest": manifest,
             },
         )
-    def DeleteApp(
-        self,
-        env_name: str,
-        id: int
-    ):
+
+    def DeleteApp(self, env_name: str, id: int):
         return self._get(
             "DeleteApp",
             params={
@@ -51,12 +47,7 @@ class _Admin(Marketplace):
             },
         )
 
-    def EditApp(
-        self,
-        env_name: str,
-        id: int,
-        manifest: str
-    ):
+    def EditApp(self, env_name: str, id: int, manifest: str):
         return self._get(
             "EditApp",
             params={
@@ -66,55 +57,30 @@ class _Admin(Marketplace):
             },
         )
 
-    def GetAppManifest(
-        self,
-        env_name: str,
-        id: int
-    ):
+    def GetAppManifest(self, env_name: str, id: int):
         return self._get(
             "GetAppManifest",
-            params={
-                "envName": env_name,
-                "id": id
-            },
+            params={"envName": env_name, "id": id},
         )
-    def GetApps(
-        self,
-        env_name: str,
-        search: list[str] = None
-    ):
+
+    def GetApps(self, env_name: str, search: list[str] = None):
         return self._get(
             "GetApps",
-            params={
-                "envName": env_name,
-                "search": search
-            },
+            params={"envName": env_name, "search": search},
             delimiter=",",
         )
-    def GetJpsSamples(
-        self,
-        env_name: str,
-        type: list[str] = None
-    ):
+
+    def GetJpsSamples(self, env_name: str, type: list[str] = None):
         return self._get(
             "GetJpsSamples",
-            params={
-                "envName": env_name,
-                "type": type
-            },
+            params={"envName": env_name, "type": type},
             delimiter=",",
         )
-    def PublishApp(
-        self,
-        env_name: str,
-        id: int
-    ):
+
+    def PublishApp(self, env_name: str, id: int):
         return self._get(
             "PublishApp",
-            params={
-                "envName": env_name,
-                "id": id
-            },
+            params={"envName": env_name, "id": id},
         )
 
     def ScheduleAppsSync(
@@ -167,11 +133,8 @@ class _Admin(Marketplace):
                 "envName": env_name,
             },
         )
-    def UnpublishApp(
-        self,
-        env_name: str,
-        id: int
-    ):
+
+    def UnpublishApp(self, env_name: str, id: int):
         return self._get(
             "UnpublishApp",
             params={
@@ -179,6 +142,7 @@ class _Admin(Marketplace):
                 "id": id,
             },
         )
+
     def UpdateAppRating(
         self,
         env_name: str,
@@ -193,6 +157,7 @@ class _Admin(Marketplace):
                 "rating": rating,
             },
         )
+
     def UpdateAppVisibilityLevels(
         self,
         env_name: str,
@@ -207,4 +172,3 @@ class _Admin(Marketplace):
                 "visibilityLevels": visibility_levels,
             },
         )
-
