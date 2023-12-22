@@ -9,7 +9,7 @@
           <link rel="stylesheet" href="../../../_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="../../../_static/documentation_options.js?v=e772e5e5"></script>
+        <script src="../../../_static/documentation_options.js?v=38e1fc9f"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -506,7 +506,18 @@
             <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
             <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span>
             <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span>
-        <span class="p">)</span></div>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Deployment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_Node&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.environment.Deployment</span>
+
+<span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/environment.Deployment</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_Deployment</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">)</span></div>
 
 
 
@@ -813,6 +824,637 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;SendNotification&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">message</span><span class="p">})</span></div>
 </div>
+
+<div class="viewcode-block" id="_Deployment">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment">[docs]</a>
+<span class="k">class</span> <span class="nc">_Deployment</span><span class="p">(</span><span class="n">Environment</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The Deployment API methods implement extensive Deployment Manager functionality, including application installation (from archive packages and remote Git/SVN repositories) and management (update, rename, context undeploy, etc.). If working with Java projects from the VCS repository, a special Maven build node is used for the source&#39;s compilation, which requires separate API methods.</span>
+
+<span class="sd">    Based on this, three method types can be distinguished the below-listed methods can be conditionally divided into three groups:</span>
+
+<span class="sd">    for Maven build node - AddBuildProject, EditBuildProject, GetBuildProjectInfo, RemoveBuildProject, GetBuildProjects, BuildProject, BuildDeployProject, DeployProject, Update</span>
+<span class="sd">    for Deployment Manager - Deploy, DeployArchive, AddRepo, EditRepo, GetRepos, RemoveRepo</span>
+<span class="sd">    for already deployed projects - EditProject, GetProjectInfo, RenameContext, Undeploy, Update</span>
+
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/environment.Deployment</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_endpoint2</span> <span class="o">=</span> <span class="s2">&quot;deployment&quot;</span>
+<div class="viewcode-block" id="_Deployment.AddBuildProject">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.AddBuildProject">[docs]</a>
+    <span class="k">def</span> <span class="nf">AddBuildProject</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">repo</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">deployment</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">settings</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">hooks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name (with a build node).</span>
+<span class="sd">        param node_id: unique identifier of the build node.</span>
+<span class="sd">        param name: project name.</span>
+<span class="sd">        param repo: unique identifier of a repository in the Deployment Manager (e.g. 1 or {&quot;id&quot;:1}) or JSON object with repository access details {&quot;url&quot;:&quot;...&quot;, [&quot;login&quot;:&quot;...&quot;], [&quot;password&quot;:&quot;...&quot;], [&quot;branch&quot;:&quot;...&quot;], [&quot;type&quot;:&quot;GIT/SVN&quot;], [&quot;keyId&quot;:1]}</span>
+<span class="sd">        param deployment: JSON object with deployment data:</span>
+<span class="sd">        param settings: JSON object with additional deployment settings:</span>
+<span class="sd">        param hooks: JSON object with custom scripts (actual content) to be executed before and after the build/deployment operations. For example: {&quot;preDeploy&quot;:&quot;script&quot;, &quot;postDeploy&quot;:&quot;script&quot;, &quot;preBuild&quot;:&quot;script&quot;, &quot;postBuild&quot;:&quot;script&quot;}.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;AddBuildProject&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                <span class="s2">&quot;repo&quot;</span><span class="p">:</span> <span class="n">repo</span><span class="p">,</span>
+                <span class="s2">&quot;deployment&quot;</span><span class="p">:</span> <span class="n">deployment</span><span class="p">,</span>
+                <span class="s2">&quot;settings&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="p">,</span>
+                <span class="s2">&quot;hooks&quot;</span><span class="p">:</span> <span class="n">hooks</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Deployment.AddRepo">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.AddRepo">[docs]</a>
+    <span class="k">def</span> <span class="nf">AddRepo</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">branch</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">key_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">login</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">password</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param name: project name.</span>
+<span class="sd">        param url: URL to the repository with the project sources.</span>
+<span class="sd">        param type: VCS repository type (&quot;GIT&quot; or &quot;SVN&quot;).</span>
+<span class="sd">        param branch: remote repository branch (master by default).</span>
+<span class="sd">        param key_id: unique identifier of a private SSH key on the account. It can be found in the dashboard (account Settings &gt; SSH Keys &gt; Private Keys) or fetched with the GetSSHKeys method.</span>
+<span class="sd">        param login: login for authentication in VCS.</span>
+<span class="sd">        param password: password or token for authentication in VCS.</span>
+<span class="sd">        param description: custom description for the project.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;AddRepo&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">,</span>
+                <span class="s2">&quot;branch&quot;</span><span class="p">:</span> <span class="n">branch</span><span class="p">,</span>
+                <span class="s2">&quot;keyId&quot;</span><span class="p">:</span> <span class="n">key_id</span><span class="p">,</span>
+                <span class="s2">&quot;login&quot;</span><span class="p">:</span> <span class="n">login</span><span class="p">,</span>
+                <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Deployment.BuildDeployProject">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.BuildDeployProject">[docs]</a>
+    <span class="k">def</span> <span class="nf">BuildDeployProject</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">skip_update</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span><span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">delay</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name (with a build node).</span>
+<span class="sd">        param node_id: unique identifier of the build node.</span>
+<span class="sd">        param project: unique identifier or name of the project.</span>
+<span class="sd">        param skip_update: defines whether to update (false) or not (true) the project from the VCS source files.</span>
+<span class="sd">        param delay: delay (in seconds) between two consecutive deployments when using the sequential deployment type (i.e. when deployment is performed on servers one-by-one to ensure uptime).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;BuildDeployProject&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+                <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">project</span><span class="p">,</span>
+                <span class="s2">&quot;skipUpdate&quot;</span><span class="p">:</span> <span class="n">skip_update</span><span class="p">,</span>
+                <span class="s2">&quot;delay&quot;</span><span class="p">:</span> <span class="n">delay</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Deployment.BuildProject">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.BuildProject">[docs]</a>
+    <span class="k">def</span> <span class="nf">BuildProject</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">skip_upload</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span><span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">skip_update</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span><span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name (with a build node).</span>
+<span class="sd">        param node_id: unique identifier of the build node.</span>
+<span class="sd">        param project: unique identifier or name of the project.</span>
+<span class="sd">        param skip_update: defines whether to update (false) or not (true) the project from the VCS source files.</span>
+<span class="sd">        param skip_upload: defines whether to add built project to the Deployment Manager (false) or not (true).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;BuildProject&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+                <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">project</span><span class="p">,</span>
+                <span class="s2">&quot;skipUpload&quot;</span><span class="p">:</span> <span class="n">skip_upload</span><span class="p">,</span>
+                <span class="s2">&quot;skipUpdate&quot;</span><span class="p">:</span> <span class="n">skip_update</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Deployment.Deploy">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.Deploy">[docs]</a>
+    <span class="k">def</span> <span class="nf">Deploy</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">repo</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">context</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">build_node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">settings</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">hooks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">delay</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name (with a build node).</span>
+<span class="sd">        param repo: unique identifier of a repository in the Deployment Manager (e.g. 1 or {&quot;id&quot;:1}) or JSON object with repository access details {&quot;url&quot;:&quot;...&quot;, [&quot;login&quot;:&quot;...&quot;], [&quot;password&quot;:&quot;...&quot;], [&quot;branch&quot;:&quot;...&quot;], [&quot;type&quot;:&quot;GIT/SVN&quot;], [&quot;keyId&quot;:1]}</span>
+<span class="sd">        param context: target context name of the deployed project.</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.</span>
+<span class="sd">        param build_node_id: unique identifier of a Maven build node (for Java-based projects only).</span>
+<span class="sd">        param settings: JSON object with the deployment settings:</span>
+<span class="sd">        param hooks: JSON object with custom scripts (actual content) to be executed before and after the build/deployment operations. For example: {&quot;preDeploy&quot;:&quot;script&quot;, &quot;postDeploy&quot;:&quot;script&quot;, &quot;preBuild&quot;:&quot;script&quot;, &quot;postBuild&quot;:&quot;script&quot;}.</span>
+<span class="sd">        param delay: delay (in seconds) between two consecutive deployments when using the sequential deployment type (i.e. when deployment is performed on servers one-by-one to ensure uptime).</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Deploy&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;repo&quot;</span><span class="p">:</span> <span class="n">repo</span><span class="p">,</span>
+                <span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="n">context</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;buildNodeId&quot;</span><span class="p">:</span> <span class="n">build_node_id</span><span class="p">,</span>
+                <span class="s2">&quot;settings&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="p">,</span>
+                <span class="s2">&quot;hooks&quot;</span><span class="p">:</span> <span class="n">hooks</span><span class="p">,</span>
+                <span class="s2">&quot;delay&quot;</span><span class="p">:</span> <span class="n">delay</span>
+            <span class="p">},</span>
+            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Deployment.DeployArchive">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.DeployArchive">[docs]</a>
+    <span class="k">def</span> <span class="nf">DeployArchive</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">file_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">context</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">zdt</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">hooks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">delay</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name (with a build node).</span>
+<span class="sd">        param file_url: URL to the archive file.</span>
+<span class="sd">        param file_name: archive file name from the Deployment Manager storage.</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.</span>
+<span class="sd">        param context: custom context name for the deployed project (ROOT by default).</span>
+<span class="sd">        param zdt: defines whether to use zero-downtime deployment for PHP (true) or not (false).</span>
+<span class="sd">        param hooks: JSON object with custom scripts (actual content) to be executed before and after the build/deployment operations. For example: {&quot;preDeploy&quot;:&quot;script&quot;, &quot;postDeploy&quot;:&quot;script&quot;, &quot;preBuild&quot;:&quot;script&quot;, &quot;postBuild&quot;:&quot;script&quot;}.</span>
+<span class="sd">        param delay: delay (in seconds) between two consecutive deployments when using the sequential deployment type (i.e. when deployment is performed on servers one-by-one to ensure uptime).</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;DeployArchive&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;fileUrl&quot;</span><span class="p">:</span> <span class="n">file_url</span><span class="p">,</span>
+                <span class="s2">&quot;fileName&quot;</span><span class="p">:</span> <span class="n">file_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="n">context</span><span class="p">,</span>
+                <span class="s2">&quot;zdt&quot;</span><span class="p">:</span> <span class="n">zdt</span><span class="p">,</span>
+                <span class="s2">&quot;hooks&quot;</span><span class="p">:</span> <span class="n">hooks</span><span class="p">,</span>
+                <span class="s2">&quot;delay&quot;</span><span class="p">:</span> <span class="n">delay</span>
+            <span class="p">},</span>
+            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Deployment.DeployProject">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.DeployProject">[docs]</a>
+    <span class="k">def</span> <span class="nf">DeployProject</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name (with a build node).</span>
+<span class="sd">        param node_id: unique identifier of the build node.</span>
+<span class="sd">        param project: unique identifier or name of the project.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;DeployProject&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+                <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">project</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Deployment.EditBuildProject">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.EditBuildProject">[docs]</a>
+    <span class="k">def</span> <span class="nf">EditBuildProject</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">repo</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">deployment</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">settings</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">hooks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name (with a build node).</span>
+<span class="sd">        param node_id: unique identifier of the build node.</span>
+<span class="sd">        param project: unique identifier or name of the project</span>
+<span class="sd">        param name:New project name.</span>
+<span class="sd">        param repo: unique identifier of a repository in the Deployment Manager (e.g. 1 or {&quot;id&quot;:1}) or JSON object with repository access details {&quot;url&quot;:&quot;...&quot;, [&quot;login&quot;:&quot;...&quot;], [&quot;password&quot;:&quot;...&quot;], [&quot;branch&quot;:&quot;...&quot;], [&quot;type&quot;:&quot;GIT/SVN&quot;], [&quot;keyId&quot;:1]}</span>
+<span class="sd">        param deployment: JSON object with deployment data:</span>
+<span class="sd">        param settings: JSON object with additional deployment settings:</span>
+<span class="sd">        param hooks: JSON object with custom scripts (actual content) to be executed before and after the build/deployment operations. For example: {&quot;preDeploy&quot;:&quot;script&quot;, &quot;postDeploy&quot;:&quot;script&quot;, &quot;preBuild&quot;:&quot;script&quot;, &quot;postBuild&quot;:&quot;script&quot;}.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;EditBuildProject&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+                <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">project</span><span class="p">,</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                <span class="s2">&quot;repo&quot;</span><span class="p">:</span> <span class="n">repo</span><span class="p">,</span>
+                <span class="s2">&quot;deployment&quot;</span><span class="p">:</span> <span class="n">deployment</span><span class="p">,</span>
+                <span class="s2">&quot;settings&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="p">,</span>
+                <span class="s2">&quot;hooks&quot;</span><span class="p">:</span> <span class="n">hooks</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Deployment.EditProject">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.EditProject">[docs]</a>
+    <span class="k">def</span> <span class="nf">EditProject</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">context</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">new_context</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">repo</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">settings</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">hooks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">delay</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name (with a build node).</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.</span>
+<span class="sd">        param context: target context name of the deployed project.</span>
+<span class="sd">        param new_context: new context name for the project (could be the same as Context).</span>
+<span class="sd">        param repo: unique identifier of a repository in the Deployment Manager (e.g. 1 or {&quot;id&quot;:1}) or JSON object with repository access details {&quot;url&quot;:&quot;...&quot;, [&quot;login&quot;:&quot;...&quot;], [&quot;password&quot;:&quot;...&quot;], [&quot;branch&quot;:&quot;...&quot;], [&quot;type&quot;:&quot;GIT/SVN&quot;], [&quot;keyId&quot;:1]}</span>
+<span class="sd">        param deployment: JSON object with deployment data:</span>
+<span class="sd">        param settings: JSON object with additional deployment settings:</span>
+<span class="sd">        param hooks: JSON object with custom scripts (actual content) to be executed before and after the build/deployment operations. For example: {&quot;preDeploy&quot;:&quot;script&quot;, &quot;postDeploy&quot;:&quot;script&quot;, &quot;preBuild&quot;:&quot;script&quot;, &quot;postBuild&quot;:&quot;script&quot;}.</span>
+<span class="sd">        param delay: delay (in seconds) between two consecutive deployments when using the sequential deployment type (I.e. when deployment is performed on servers one-by-one to ensure uptime).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;EditProject&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="n">context</span><span class="p">,</span>
+                <span class="s2">&quot;newContext&quot;</span><span class="p">:</span> <span class="n">new_context</span><span class="p">,</span>
+                <span class="s2">&quot;repo&quot;</span><span class="p">:</span> <span class="n">repo</span><span class="p">,</span>
+                <span class="s2">&quot;settings&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="p">,</span>
+                <span class="s2">&quot;hooks&quot;</span><span class="p">:</span> <span class="n">hooks</span><span class="p">,</span>
+                <span class="s2">&quot;delay&quot;</span><span class="p">:</span> <span class="n">delay</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Deployment.EditRepo">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.EditRepo">[docs]</a>
+    <span class="k">def</span> <span class="nf">EditRepo</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">url</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">branch</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">key_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">login</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">password</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param id : unique identifier of the repository to be edited.</span>
+<span class="sd">        param name: project name.</span>
+<span class="sd">        param url: URL to the repository with the project sources.</span>
+<span class="sd">        param type: VCS repository type (&quot;GIT&quot; or &quot;SVN&quot;).</span>
+<span class="sd">        param branch: remote repository branch (master by default).</span>
+<span class="sd">        param key_id: unique identifier of a private SSH key on the account. It can be found in the dashboard (account Settings &gt; SSH Keys &gt; Private Keys) or fetched with the GetSSHKeys method.</span>
+<span class="sd">        param login: login for authentication in VCS.</span>
+<span class="sd">        param password: password or token for authentication in VCS.</span>
+<span class="sd">        param description: custom description for the project.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;EditRepo&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span><span class="nb">id</span><span class="p">,</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">,</span>
+                <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span>
+                <span class="s2">&quot;branch&quot;</span><span class="p">:</span> <span class="n">branch</span><span class="p">,</span>
+                <span class="s2">&quot;keyId&quot;</span><span class="p">:</span> <span class="n">key_id</span><span class="p">,</span>
+                <span class="s2">&quot;login&quot;</span><span class="p">:</span> <span class="n">login</span><span class="p">,</span>
+                <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Deployment.GetBuildProjectInfo">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.GetBuildProjectInfo">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetBuildProjectInfo</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name (with a build node).</span>
+<span class="sd">        param node_id: unique identifier of the build node.</span>
+<span class="sd">        param project: unique identifier or name of the project</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetBuildProjectInfo&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+                <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">project</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Deployment.GetBuildProjects">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.GetBuildProjects">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetBuildProjects</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name (with a build node).</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.</span>
+<span class="sd">        param node_id: unique identifier of the build node.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetBuildProjects&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Deployment.GetDeployments">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.GetDeployments">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetDeployments</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name (with a build node).</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetDeployments&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Deployment.GetHooks">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.GetHooks">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetHooks</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">context</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">project</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name (with a build node).</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.</span>
+<span class="sd">        param node_id: unique identifier of the target node (container).</span>
+<span class="sd">        param context: target context name of the deployed project.</span>
+<span class="sd">        param project: unique identifier or name of the project.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetHooks&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+                <span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="n">context</span><span class="p">,</span>
+                <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">project</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Deployment.GetProjectInfo">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.GetProjectInfo">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetProjectInfo</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">context</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name (with a build node).</span>
+<span class="sd">        param context: target context name of the deployed project.</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetProjectInfo&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="n">context</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Deployment.GetRepos">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.GetRepos">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetRepos</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="nb">id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param id: unique identifier of the repository.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetRepos&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Deployment.RemoveBuildProject">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.RemoveBuildProject">[docs]</a>
+    <span class="k">def</span> <span class="nf">RemoveBuildProject</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">node_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name (with a build node).</span>
+<span class="sd">        param node_id: unique identifier of the target node (container).</span>
+<span class="sd">        param project: unique identifier or name of the project.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;RemoveBuildProject&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+                <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">project</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Deployment.RemoveRepo">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.RemoveRepo">[docs]</a>
+    <span class="k">def</span> <span class="nf">RemoveRepo</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param id: unique identifier of the repository.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;RemoveRepo&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Deployment.RenameContext">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.RenameContext">[docs]</a>
+    <span class="k">def</span> <span class="nf">RenameContext</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">old_context</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">new_context</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name (with a build node).</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.</span>
+<span class="sd">        param old_context: target context name of the deployed project.</span>
+<span class="sd">        param new_context: new context name for the project (could be the same as Context).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;RenameContext&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;oldContext&quot;</span><span class="p">:</span> <span class="n">old_context</span><span class="p">,</span>
+                <span class="s2">&quot;newContext&quot;</span><span class="p">:</span> <span class="n">new_context</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Deployment.Undeploy">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.Undeploy">[docs]</a>
+    <span class="k">def</span> <span class="nf">Undeploy</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">context</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name (with a build node).</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.</span>
+<span class="sd">        param context: target context name of the deployed project.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Undeploy&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="n">context</span><span class="p">,</span>
+
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="_Deployment.Update">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Deployment.Update">[docs]</a>
+    <span class="k">def</span> <span class="nf">Update</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">context</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">project</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">delay</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name (with a build node).</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.</span>
+<span class="sd">        param node_id: unique identifier of the target node (container).</span>
+<span class="sd">        param context: target context name of the deployed project.</span>
+<span class="sd">        param project: unique identifier or name of the project.</span>
+<span class="sd">        param delay: delay (in seconds) between two consecutive deployments when using the sequential deployment type (I.e. when deployment is performed on servers one-by-one to ensure uptime).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Update&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+                <span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="n">context</span><span class="p">,</span>
+                <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">project</span><span class="p">,</span>
+                <span class="s2">&quot;delay&quot;</span><span class="p">:</span> <span class="n">delay</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+</div>
+
+
+
+
+
+
 
 
 
