@@ -2410,7 +2410,7 @@ def test_get_default_tag_info(client):
     assert response == success_response
 
 
-def test_get_default_tag_info(client):
+def test_get_domain_by_ip(client):
     client._get.return_value = success_response
     response = client.Cluster.GetDomainByIp("ips")
     client._get.assert_called_with(
@@ -2782,7 +2782,7 @@ def test_get_region_reseller_by_reseller_id(client):
     assert response == success_response
 
 
-def test_get_region(client):
+def test_get_regions(client):
     client._get.return_value = success_response
     response = client.Cluster.GetRegions()
     client._get.assert_called_with(
@@ -3179,7 +3179,7 @@ def test_remove_region_ssl(client):
     assert response == success_response
 
 
-def test_remove_region(client):
+def test_remove_template(client):
     client._get.return_value = success_response
     response = client.Cluster.RemoveTemplate("node_type")
     client._get.assert_called_with(
@@ -3288,7 +3288,7 @@ def test_set_env_status(client):
     assert response == success_response
 
 
-def test_set_env_status(client):
+def test_set_envs_status(client):
     client._get.return_value = success_response
     response = client.Cluster.SetEnvsStatus("target_appid", 1)
     client._get.assert_called_with(
@@ -3298,7 +3298,7 @@ def test_set_env_status(client):
     assert response == success_response
 
 
-def test_set_env_status(client):
+def test_set_env_status_by_uid(client):
     client._get.return_value = success_response
     response = client.Cluster.SetEnvsStatusByUid(1, 1)
     client._get.assert_called_with(
@@ -3533,7 +3533,7 @@ def test_validate(client):
     assert response == success_response
 
 
-def test_velidate_all(client):
+def test_validate_all(client):
     client._get.return_value = success_response
     response = client.Cluster.ValidateAll()
     client._get.assert_called_with(
