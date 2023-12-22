@@ -7,6 +7,21 @@ class Marketplace(ClientAbstract):
     _endpoint1 = "marketplace"
 
     @property
+    def Console(self) -> "_Console":
+        """
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.marketplace.Console
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.Console
+        """
+        return _Console(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+        )
+
+    @property
     def Favorite(self) -> "_Favorite":
         """
         >>> from jelastic import Jelastic
@@ -209,21 +224,6 @@ class _Favorite(Marketplace):
                 "lang": lang,
                 "checksum": checksum,
             },
-        )
-
-    @property
-    def Console(self) -> "_Console":
-        """
-        >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
-        >>> jelastic.marketplace.Console
-
-        Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.Console
-        """
-        return _Console(
-            session=self._session,
-            token=self._token,
-            debug=self._debug,
         )
 
 

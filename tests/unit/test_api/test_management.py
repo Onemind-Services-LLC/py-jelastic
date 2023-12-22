@@ -23,6 +23,9 @@ def test_add(client):
     client._get.assert_called_with(
         "Add",
         params={"id": "id"},
+    )
+
+
 def test_clear_log(client):
     client._get.return_value = success_response
     response = client.Console.ClearLog()
@@ -39,6 +42,9 @@ def test_read_log(client):
     client._get.assert_called_with(
         "ReadLog",
         params={},
+    )
+
+
 def test_add_manifest(client):
     client._get.return_value = success_response
     response = client.Favorite.AddManifest("manifest")
@@ -163,6 +169,9 @@ def test_uninstall(client):
             "force": [True, True],
         },
         delimiter=",",
+    )
+
+
 def test_write_log(client):
     client._get.return_value = success_response
     response = client.Console.WriteLog("message")
