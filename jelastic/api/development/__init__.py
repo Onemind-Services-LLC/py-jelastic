@@ -23,6 +23,7 @@ class Development(ClientAbstract):
             debug=self._debug,
         )
 
+
 class _Applications(Development):
     """
     Service Management applications. Used to create new applications and settings.
@@ -31,22 +32,24 @@ class _Applications(Development):
     """
 
     _endpoint2 = "applications"
+
     def AddAppToPool(
-            self,
-            name: str,
-            target_appid: str,
+        self,
+        name: str,
+        target_appid: str,
     ):
         return self._get(
             "AddAppToPool",
             params={
                 "name": name,
                 "targetAppid": target_appid,
-            }
+            },
         )
+
     def AllowAppAccess(
-            self,
-            target_appid: str,
-            allow_appid: str,
+        self,
+        target_appid: str,
+        allow_appid: str,
     ):
         """
         param target_appid: the application identifier to which you can access using the session received in another application. You can list separated by commas multiple applications. In targetAppid can specify only the application ID for which you have the rights owner (owner) or admin (administrator)
@@ -57,14 +60,11 @@ class _Applications(Development):
             params={
                 "targetAppid": target_appid,
                 "allowAppid": allow_appid,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
-    def ChangeAppInfo(
-            self,
-            target_appid: str,
-            field: str,
-            value:list[str]=None
-    ):
+
+    def ChangeAppInfo(self, target_appid: str, field: str, value: list[str] = None):
         """
         param target_appid: id editable applications
         param field: the name of the edited field. Valid values are:
@@ -76,13 +76,15 @@ class _Applications(Development):
                 "targetAppid": target_appid,
                 "field": field,
                 "value": value,
-            },delimiter=",",
+            },
+            delimiter=",",
         )
+
     def ChangeSolutionInfo(
-            self,
-            target_appid: str,
-            field: str,
-            value: str,
+        self,
+        target_appid: str,
+        field: str,
+        value: str,
     ):
         return self._get(
             "ChangeSolutionInfo",
@@ -90,36 +92,38 @@ class _Applications(Development):
                 "targetAppid": target_appid,
                 "field": field,
                 "value": value,
-            }
+            },
         )
+
     def CleanOwnerCache(
-            self,
-            user_id: int,
-            clean_all_apps: bool,
+        self,
+        user_id: int,
+        clean_all_apps: bool,
     ):
         return self._get(
             "CleanOwnerCache",
             params={
                 "userId": user_id,
                 "cleanAllApps": clean_all_apps,
-            }
+            },
         )
+
     def CloneApp(
-            self,
-            target_appid: str,
-            name: list[str]=None,
+        self,
+        target_appid: str,
+        name: list[str] = None,
     ):
         return self._get(
             "CloneApp",
             params={
                 "targetAppid": target_appid,
                 "name": name,
-            }
+            },
         )
 
     def ConfirmAppTransferRequest(
-            self,
-            key: str,
+        self,
+        key: str,
     ):
         """
         param key: disposable confirmation key
@@ -128,21 +132,23 @@ class _Applications(Development):
             "ConfirmAppTransferRequest",
             params={
                 "key": key,
-            }
+            },
         )
+
     def CreateAppsPool(
-            self,
-            name: str,
+        self,
+        name: str,
     ):
         return self._get(
             "CreateAppsPool",
             params={
                 "name": name,
-            }
+            },
         )
+
     def CreateConfirmAppTransferKey(
-            self,
-            email: str,
+        self,
+        email: str,
     ):
         """
         param email: email to generate confirmation key
@@ -151,12 +157,13 @@ class _Applications(Development):
             "CreateConfirmAppTransferKey",
             params={
                 "email": email,
-            }
+            },
         )
+
     def CreatePersistence(
-            self,
-            target_appid: str,
-            config: list[str]=None,
+        self,
+        target_appid: str,
+        config: list[str] = None,
     ):
         """
         param target_appid: unique identifier of the target application.
@@ -167,22 +174,25 @@ class _Applications(Development):
             params={
                 "targetAppid": target_appid,
                 "config": config,
-            },delimiter=",",
+            },
+            delimiter=",",
         )
+
     def CreateSolution(
-            self,
-            target_appid: str,
+        self,
+        target_appid: str,
     ):
         return self._get(
             "CreateSolution",
             params={
                 "targetAppid": target_appid,
-            }
+            },
         )
+
     def DeleteApp(
-            self,
-            password: str,
-            target_appid: str,
+        self,
+        password: str,
+        target_appid: str,
     ):
         """
         param password: the user password (for this method to re-authentication)
@@ -193,55 +203,59 @@ class _Applications(Development):
             params={
                 "password": password,
                 "targetAppid": target_appid,
-            }
+            },
         )
+
     def DeleteAppsPool(
-            self,
-            name: str,
+        self,
+        name: str,
     ):
         return self._get(
             "DeleteAppsPool",
             params={
                 "name": name,
-            }
+            },
         )
 
     def DeleteSolution(
-            self,
-            target_appid: str,
+        self,
+        target_appid: str,
     ):
         return self._get(
             "DeleteSolution",
             params={
                 "targetAppid": target_appid,
-            }
+            },
         )
+
     def ExportAppPersistance(
-            self,
-            target_appid: str,
+        self,
+        target_appid: str,
     ):
         return self._get(
             "ExportAppPersistance",
             params={
                 "targetAppid": target_appid,
-            }
+            },
         )
+
     def ExportAppResources(
-            self,
-            target_appid: str,
+        self,
+        target_appid: str,
     ):
         return self._get(
             "ExportAppResources",
             params={
                 "targetAppid": target_appid,
-            }
+            },
         )
+
     def FindSolutions(
-            self,
-            keywords:list[str]=None,
-            description:list[str]=None,
-            froms:list[int]=None,
-            count:list[int]=None,
+        self,
+        keywords: list[str] = None,
+        description: list[str] = None,
+        froms: list[int] = None,
+        count: list[int] = None,
     ):
         return self._get(
             "FindSolutions",
@@ -250,15 +264,17 @@ class _Applications(Development):
                 "description": description,
                 "froms": froms,
                 "count": count,
-            },delimiter=",",
+            },
+            delimiter=",",
         )
+
     def GenerateApp(
-            self,
-            name:str,
-            description:list[str]=None,
-            domain:list[str]=None,
-            keywords: list[str] = None,
-            config: list[str] = None,
+        self,
+        name: str,
+        description: list[str] = None,
+        domain: list[str] = None,
+        keywords: list[str] = None,
+        config: list[str] = None,
     ):
         """
         param name: the name of the application (max. 128 characters)
@@ -273,16 +289,18 @@ class _Applications(Development):
                 "domain": domain,
                 "keywords": keywords,
                 "config": config,
-            },delimiter=",",
+            },
+            delimiter=",",
         )
+
     def GenerateAppWithAppID(
-            self,
-            name:str,
-            idapp:str,
-            description:list[str]=None,
-            domain:list[str]=None,
-            keywords: list[str] = None,
-            config: list[str] = None,
+        self,
+        name: str,
+        idapp: str,
+        description: list[str] = None,
+        domain: list[str] = None,
+        keywords: list[str] = None,
+        config: list[str] = None,
     ):
         """
         param name: the name of the application (max. 128 characters)
@@ -298,16 +316,18 @@ class _Applications(Development):
                 "domain": domain,
                 "keywords": keywords,
                 "config": config,
-            },delimiter=",",
+            },
+            delimiter=",",
         )
+
     def GenerateSharedApp(
-            self,
-            owner_login:str,
-            name:str,
-            description:list[str]=None,
-            domain:list[str]=None,
-            keywords: list[str] = None,
-            config: list[str] = None,
+        self,
+        owner_login: str,
+        name: str,
+        description: list[str] = None,
+        domain: list[str] = None,
+        keywords: list[str] = None,
+        config: list[str] = None,
     ):
         """
         param owner_login: login of the environment's owner
@@ -324,39 +344,40 @@ class _Applications(Development):
                 "domain": domain,
                 "keywords": keywords,
                 "config": config,
-            },delimiter=",",
+            },
+            delimiter=",",
         )
+
     def GetApp(
-            self,
-            target_appid: str,
+        self,
+        target_appid: str,
     ):
         return self._get(
             "GetApp",
             params={
                 "targetAppid": target_appid,
-            }
+            },
         )
+
     def GetAppAccess(
-            self,
-            target_appid: str,
+        self,
+        target_appid: str,
     ):
         return self._get(
             "GetAppAccess",
             params={
                 "targetAppid": target_appid,
-            }
+            },
         )
+
     def GetAppHome(
-            self,
+        self,
     ):
-        return self._get(
-            "GetAppHome",
-            params={
-            }
-        )
+        return self._get("GetAppHome", params={})
+
     def GetAppPermission(
-            self,
-            target_appid: str,
+        self,
+        target_appid: str,
     ):
         """
         param target_appid: the application identifier for which information is requested
@@ -365,11 +386,12 @@ class _Applications(Development):
             "GetAppPermission",
             params={
                 "targetAppid": target_appid,
-            }
+            },
         )
+
     def GetApps(
-            self,
-            target_appid: str,
+        self,
+        target_appid: str,
     ):
         """
         param target_appid: the application identifier for which information is requested
@@ -378,39 +400,38 @@ class _Applications(Development):
             "GetApps",
             params={
                 "targetAppid": target_appid,
-            }
+            },
         )
+
     def GetAppsByLogin(
-            self,
-            login: str,
+        self,
+        login: str,
     ):
         return self._get(
             "GetAppsByLogin",
             params={
                 "login": login,
-            }
+            },
         )
+
     def GetAppsPools(
-            self,
-            name: list[str]=None,
+        self,
+        name: list[str] = None,
     ):
         return self._get(
             "GetAppsPools",
             params={
                 "name": name,
-            },delimiter=",",
-        )
-    def GetConfirmAppTransferKey(
-            self):
-        return self._get(
-            "GetConfirmAppTransferKey",
-            params={
-            }
+            },
+            delimiter=",",
         )
 
+    def GetConfirmAppTransferKey(self):
+        return self._get("GetConfirmAppTransferKey", params={})
+
     def GetConfirmAppTransferKeys(
-            self,
-            appid: list[str] = None,
+        self,
+        appid: list[str] = None,
     ):
         """
         param appid: comma-separated list of environment identifiers
@@ -419,11 +440,13 @@ class _Applications(Development):
             "GetConfirmAppTransferKeys",
             params={
                 "appids": appid,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
+
     def GetSharedAppsByLogin(
-            self,
-            login: str,
+        self,
+        login: str,
     ):
         """
         param login: login of the target user
@@ -432,138 +455,139 @@ class _Applications(Development):
             "GetSharedAppsByLogin",
             params={
                 "login": login,
-            }
+            },
         )
-    def GetSharedAppsByOwnerLogin(
-            self,
-            owner_login: str,
-            login: str,
-    ):
 
+    def GetSharedAppsByOwnerLogin(
+        self,
+        owner_login: str,
+        login: str,
+    ):
         return self._get(
             "GetSharedAppsByOwnerLogin",
             params={
                 "ownerLogin": owner_login,
                 "login": login,
-            }
+            },
         )
-    def GetSharedAppsByOwnerLogins(
-            self,
-            owner_login: str,
-            logins: str,
-    ):
 
+    def GetSharedAppsByOwnerLogins(
+        self,
+        owner_login: str,
+        logins: str,
+    ):
         return self._get(
             "GetSharedAppsByOwnerLogins",
             params={
                 "ownerLogin": owner_login,
                 "logins": logins,
-            }
+            },
         )
+
     def GetSolution(
-            self,
-            target_appid: str,
+        self,
+        target_appid: str,
     ):
         return self._get(
             "GetSolution",
             params={
                 "targetAppid": target_appid,
-            }
+            },
         )
+
     def GetSolutions(
-            self,
-            target_appid: list[str]=None,
+        self,
+        target_appid: list[str] = None,
     ):
         return self._get(
             "GetSolutions",
             params={
                 "targetAppid": target_appid,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
+
     def GetUserAppPermission(
-            self,
-            target_appid: str,
-            rights:list[str]=None,
+        self,
+        target_appid: str,
+        rights: list[str] = None,
     ):
         return self._get(
             "GetUserAppPermission",
             params={
                 "targetAppid": target_appid,
                 "rights": rights,
-            }
+            },
         )
+
     def ImportAppPersistance(
-            self,
-            path:str,
-            target_appid: list[str]=None,
+        self,
+        path: str,
+        target_appid: list[str] = None,
     ):
         return self._get(
             "ImportAppPersistance",
             params={
                 "path": path,
                 "targetAppid": target_appid,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
+
     def ImportAppResources(
-            self,
-            path:str,
-            target_appid: list[str]=None,
+        self,
+        path: str,
+        target_appid: list[str] = None,
     ):
         return self._get(
             "ImportAppResources",
             params={
                 "path": path,
                 "targetAppid": target_appid,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
+
     def IsAppsInstalled(
-            self,
+        self,
     ):
-        return self._get(
-            "IsAppsInstalled",
-            params={
-            }
-        )
+        return self._get("IsAppsInstalled", params={})
+
     def RebuildApp(
-            self,
-            target_appid: str,
+        self,
+        target_appid: str,
     ):
         return self._get(
             "RebuildApp",
             params={
                 "targetAppid": target_appid,
-            }
+            },
         )
-    def RemoveAppAccess(
-            self,
-            target_appid: str,
-            allow_appid:str
-    ):
+
+    def RemoveAppAccess(self, target_appid: str, allow_appid: str):
         return self._get(
             "RemoveAppAccess",
-            params={
-                "targetAppid": target_appid,
-                "allowAppid": allow_appid
-            }
+            params={"targetAppid": target_appid, "allowAppid": allow_appid},
         )
-    def RemoveAppFromPool(
-            self,
-            name:str,
-            target_appid: str,
 
+    def RemoveAppFromPool(
+        self,
+        name: str,
+        target_appid: str,
     ):
         return self._get(
             "RemoveAppFromPool",
             params={
-                "name":name,
+                "name": name,
                 "targetAppid": target_appid,
-            }
+            },
         )
+
     def SetAppPermission(
-            self,
-            target_appid: str,
-            login: str,
-            rights:list[str]=None,
+        self,
+        target_appid: str,
+        login: str,
+        rights: list[str] = None,
     ):
         return self._get(
             "SetAppPermission",
@@ -571,52 +595,6 @@ class _Applications(Development):
                 "targetAppid": target_appid,
                 "login": login,
                 "rights": rights,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
