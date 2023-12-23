@@ -11,6 +11,7 @@ class Pool(ClientAbstract):
 
     Ref: https://docs.jelastic.com/api/#!/pool
     """
+
     _endpoint1 = "pool"
 
     @property
@@ -31,17 +32,18 @@ class Pool(ClientAbstract):
 
 class _IpPool(Pool):
     """
-     Ref: https://docs.jelastic.com/api/private/#!/api/pool.IpPool
+    Ref: https://docs.jelastic.com/api/private/#!/api/pool.IpPool
     """
 
     _endpoint2 = "ippool"
 
-    def Add(self,
-            ip_from: str,
-            ip_to: str,
-            region: str,
-            checksum: str,
-            ):
+    def Add(
+        self,
+        ip_from: str,
+        ip_to: str,
+        region: str,
+        checksum: str,
+    ):
         return self._get(
             "Add",
             params={
@@ -52,12 +54,13 @@ class _IpPool(Pool):
             },
         )
 
-    def AddExt(self,
-               ip_from: str,
-               ip_to: str,
-               regions: str,
-               checksum: str,
-               ):
+    def AddExt(
+        self,
+        ip_from: str,
+        ip_to: str,
+        regions: str,
+        checksum: str,
+    ):
         return self._get(
             "AddExt",
             params={
@@ -68,11 +71,12 @@ class _IpPool(Pool):
             },
         )
 
-    def AddIpv6Network(self,
-                       network: str,
-                       regions: str,
-                       checksum: str,
-                       ):
+    def AddIpv6Network(
+        self,
+        network: str,
+        regions: str,
+        checksum: str,
+    ):
         return self._get(
             "AddIpv6Network",
             params={
@@ -82,9 +86,7 @@ class _IpPool(Pool):
             },
         )
 
-    def Get(self,
-            checksum: str
-            ):
+    def Get(self, checksum: str):
         return self._get(
             "Get",
             params={
@@ -92,13 +94,14 @@ class _IpPool(Pool):
             },
         )
 
-    def GetExt(self,
-               regions: str,
-               checksum: str,
-               type: list[str] = None,
-               node_id: list[str] = None,
-               target_app_id: list[str] = None
-               ):
+    def GetExt(
+        self,
+        regions: str,
+        checksum: str,
+        type: list[str] = None,
+        node_id: list[str] = None,
+        target_app_id: list[str] = None,
+    ):
         return self._get(
             "GetExt",
             params={
@@ -107,12 +110,11 @@ class _IpPool(Pool):
                 "type": type,
                 "nodeId": node_id,
                 "targetAppid": target_app_id,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
 
-    def GetFreePublicPort(self,
-                          checksum: str
-                          ):
+    def GetFreePublicPort(self, checksum: str):
         return self._get(
             "GetFreePublicPort",
             params={
@@ -120,10 +122,7 @@ class _IpPool(Pool):
             },
         )
 
-    def Release(self,
-                id: int,
-                checksum: str
-                ):
+    def Release(self, id: int, checksum: str):
         return self._get(
             "Release",
             params={
@@ -132,10 +131,7 @@ class _IpPool(Pool):
             },
         )
 
-    def ReleaseExt(self,
-                   id: int,
-                   checksum: str
-                   ):
+    def ReleaseExt(self, id: int, checksum: str):
         return self._get(
             "ReleaseExt",
             params={
@@ -144,10 +140,7 @@ class _IpPool(Pool):
             },
         )
 
-    def ReleaseSubnet(self,
-                      id: int,
-                      checksum: str
-                      ):
+    def ReleaseSubnet(self, id: int, checksum: str):
         return self._get(
             "ReleaseSubnet",
             params={
@@ -156,10 +149,7 @@ class _IpPool(Pool):
             },
         )
 
-    def RemoveExt(self,
-                  ips: str,
-                  checksum: str
-                  ):
+    def RemoveExt(self, ips: str, checksum: str):
         return self._get(
             "RemoveExt",
             params={
@@ -168,34 +158,25 @@ class _IpPool(Pool):
             },
         )
 
-    def RemoveFromReserve(self,
-                          checksum: str,
-                          target_app_id: str
-                          ):
+    def RemoveFromReserve(self, checksum: str, target_app_id: str):
         return self._get(
             "RemoveFromReserve",
             params={
                 "checksum": checksum,
                 "targetAppid": target_app_id,
-            }
+            },
         )
 
-    def ReserveExtIPv6(self,
-                       checksum: str,
-                       target_app_id: str
-                       ):
+    def ReserveExtIPv6(self, checksum: str, target_app_id: str):
         return self._get(
             "ReserveExtIPv6",
             params={
                 "checksum": checksum,
                 "targetAppid": target_app_id,
-            }
+            },
         )
 
-    def UnreserveExtIPv6(self,
-                         id: int,
-                         checksum: str
-                         ):
+    def UnreserveExtIPv6(self, id: int, checksum: str):
         return self._get(
             "UnreserveExtIPv6",
             params={

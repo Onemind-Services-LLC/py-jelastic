@@ -460,6 +460,7 @@ class _App(Marketplace):
             delimiter=",",
         )
 
+
 class _Admin(Marketplace):
     """
     Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.Admin
