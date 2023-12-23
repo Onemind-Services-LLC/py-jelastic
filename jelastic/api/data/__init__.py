@@ -19,6 +19,7 @@ class Data(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/#!/data
     """
+
     _endpoint1 = "data"
 
     @property
@@ -39,23 +40,23 @@ class Data(ClientAbstract):
 
 class _Base(Data):
     """
- Service provides a flexible structure to manage the database, create tables, fields, indicating the type, make notes in the tables to hold associations between data. Service is based on technology ORM (programming technique that links databases to the concepts of object-oriented programming languages, creating a "virtual object data base). Service structures has its own SQL processor (HiveQL) for the structured queries that completely eliminates the possibility of malicious injections. Service access control is also working with the structures, allowing to specify the individual rights of access as the data types, and on objects. Options for using the service:
+    Service provides a flexible structure to manage the database, create tables, fields, indicating the type, make notes in the tables to hold associations between data. Service is based on technology ORM (programming technique that links databases to the concepts of object-oriented programming languages, creating a "virtual object data base). Service structures has its own SQL processor (HiveQL) for the structured queries that completely eliminates the possibility of malicious injections. Service access control is also working with the structures, allowing to specify the individual rights of access as the data types, and on objects. Options for using the service:
 
-        The development of any applications which require storage of information;
-        Exchange of data between clients through the lens of service;
-        Construction of API to import data from your project for other developers of applications;
-        Duplication of data to reduce the risk of loss, encryption, if necessary.
+           The development of any applications which require storage of information;
+           Exchange of data between clients through the lens of service;
+           Construction of API to import data from your project for other developers of applications;
+           Duplication of data to reduce the risk of loss, encryption, if necessary.
 
-    Ref: https://docs.jelastic.com/api/private/#!/api/data.Base
+       Ref: https://docs.jelastic.com/api/private/#!/api/data.Base
     """
 
     _endpoint2 = "base"
 
     def AddField(
-            self,
-            type: str,
-            field: str,
-            field_type: list[str] = None,
+        self,
+        type: str,
+        field: str,
+        field_type: list[str] = None,
     ):
         """
         param type: name type
@@ -72,9 +73,9 @@ class _Base(Data):
         )
 
     def CreateObject(
-            self,
-            type: str,
-            data: list[str] = None,
+        self,
+        type: str,
+        data: list[str] = None,
     ):
         """
         param type: name of the data type for which the object is created
@@ -85,27 +86,25 @@ class _Base(Data):
             params={
                 "type": type,
                 "data": data,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
 
-    def CreateObjects(
-            self,
-            type: str,
-            data: str
-    ):
+    def CreateObjects(self, type: str, data: str):
         return self._get(
             "CreateObjects",
             params={
                 "type": type,
                 "data": data,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
 
     def DefineType(
-            self,
-            type: str,
-            fields: list[str] = None,
-            unique: list[str] = None,
+        self,
+        type: str,
+        fields: list[str] = None,
+        unique: list[str] = None,
     ):
         """
         param type:name for the created data type, which meets the following requirements:
@@ -121,15 +120,16 @@ class _Base(Data):
                 "type": type,
                 "fields": fields,
                 "unique": unique,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
 
     def DefineTypeByUid(
-            self,
-            uid: int,
-            type: str,
-            fields: list[str] = None,
-            unique: list[str] = None,
+        self,
+        uid: int,
+        type: str,
+        fields: list[str] = None,
+        unique: list[str] = None,
     ):
         """
         param uid: user unique identifier
@@ -144,14 +144,11 @@ class _Base(Data):
                 "type": type,
                 "fields": fields,
                 "unique": unique,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
 
-    def DeleteObject(
-            self,
-            type: str,
-            id: int
-    ):
+    def DeleteObject(self, type: str, id: int):
         """
         param type: name of the type of data
         param id: object id
@@ -161,13 +158,13 @@ class _Base(Data):
             params={
                 "type": type,
                 "id": id,
-            }
+            },
         )
 
     def DeleteObjectsByCriteria(
-            self,
-            type: str,
-            criteria: list[str] = None,
+        self,
+        type: str,
+        criteria: list[str] = None,
     ):
         """
         param type: name of the data type for which the object is created
@@ -178,27 +175,29 @@ class _Base(Data):
             params={
                 "type": type,
                 "criteria": criteria,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
 
     def GetNotEmptyType(
-            self,
-            type_like: str,
-            asc: list[bool] = None,
+        self,
+        type_like: str,
+        asc: list[bool] = None,
     ):
         return self._get(
             "GetNotEmptyType",
             params={
                 "typeLike": type_like,
                 "asc": asc,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
 
     def GetObject(
-            self,
-            type: str,
-            id: int,
-            join: list[str] = None,
+        self,
+        type: str,
+        id: int,
+        join: list[str] = None,
     ):
         """
         param type: name of the type of data
@@ -210,15 +209,16 @@ class _Base(Data):
                 "type": type,
                 "id": id,
                 "join": join,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
 
     def GetObjects(
-            self,
-            type: str,
-            froms: list[int] = None,
-            count: list[int] = None,
-            join: list[str] = None,
+        self,
+        type: str,
+        froms: list[int] = None,
+        count: list[int] = None,
+        join: list[str] = None,
     ):
         """
         param type: name of the type of data
@@ -232,17 +232,18 @@ class _Base(Data):
                 "froms": froms,
                 "count": count,
                 "join": join,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
 
     def GetObjectsByCriteria(
-            self,
-            type: str,
-            criteria: list[str] = None,
-            froms: list[int] = None,
-            count: list[int] = None,
-            join: list[str] = None,
-            projection: list[str] = None,
+        self,
+        type: str,
+        criteria: list[str] = None,
+        froms: list[int] = None,
+        count: list[int] = None,
+        join: list[str] = None,
+        projection: list[str] = None,
     ):
         """
         param type: name of the type of data
@@ -259,18 +260,19 @@ class _Base(Data):
                 "count": count,
                 "join": join,
                 "projection": projection,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
 
     def GetObjectsByRole(
-            self,
-            type: str,
-            role: str,
-            criteria: list[str] = None,
-            froms: list[int] = None,
-            count: list[int] = None,
-            join: list[str] = None,
-            projection: list[str] = None,
+        self,
+        type: str,
+        role: str,
+        criteria: list[str] = None,
+        froms: list[int] = None,
+        count: list[int] = None,
+        join: list[str] = None,
+        projection: list[str] = None,
     ):
         """
         param type: name of the type of data
@@ -288,13 +290,14 @@ class _Base(Data):
                 "count": count,
                 "join": join,
                 "projection": projection,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
 
     def GetObjectsCount(
-            self,
-            type: str,
-            criteria: list[str] = None,
+        self,
+        type: str,
+        criteria: list[str] = None,
     ):
         """
         param type: name of the data type for which the object is created
@@ -305,15 +308,16 @@ class _Base(Data):
             params={
                 "type": type,
                 "criteria": criteria,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
 
     def GetProperty(
-            self,
-            type: str,
-            id: int,
-            property: str,
-            join: list[str] = None,
+        self,
+        type: str,
+        id: int,
+        property: str,
+        join: list[str] = None,
     ):
         """
         param type: name of the type of data
@@ -327,12 +331,13 @@ class _Base(Data):
                 "id": id,
                 "property": property,
                 "join": join,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
 
     def GetType(
-            self,
-            type: str,
+        self,
+        type: str,
     ):
         """
         param type: name of the type of data
@@ -341,13 +346,13 @@ class _Base(Data):
             "GetType",
             params={
                 "type": type,
-            }
+            },
         )
 
     def GetTypes(
-            self,
-            froms: list[int] = None,
-            count: list[int] = None,
+        self,
+        froms: list[int] = None,
+        count: list[int] = None,
     ):
         """
         param froms: index which returned objects (default is 0)
@@ -358,21 +363,18 @@ class _Base(Data):
             params={
                 "froms": froms,
                 "count": count,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
 
     def GetTypesCount(
-            self,
+        self,
     ):
-        return self._get(
-            "GetTypesCount",
-            params={
-            }
-        )
+        return self._get("GetTypesCount", params={})
 
     def GetUniqueFields(
-            self,
-            type: str,
+        self,
+        type: str,
     ):
         """
         param type: name of the type of data
@@ -381,31 +383,25 @@ class _Base(Data):
             "GetUniqueFields",
             params={
                 "type": type,
-            }
+            },
         )
 
     def RemoveField(
-            self,
-            type: str,
-            field: str,
+        self,
+        type: str,
+        field: str,
     ):
         """
         param type: name of the type of data
         param field: name deleted fields (id - reserved)
         """
-        return self._get(
-            "RemoveField",
-            params={
-                "type": type,
-                "field": field
-            }
-        )
+        return self._get("RemoveField", params={"type": type, "field": field})
 
     def RenameField(
-            self,
-            type: str,
-            old_field: str,
-            new_field: str,
+        self,
+        type: str,
+        old_field: str,
+        new_field: str,
     ):
         """
         param type: name of the type of data
@@ -414,18 +410,14 @@ class _Base(Data):
         """
         return self._get(
             "RenameField",
-            params={
-                "type": type,
-                "oldField": old_field,
-                "newField": new_field
-            }
+            params={"type": type, "oldField": old_field, "newField": new_field},
         )
 
     def RenameType(
-            self,
-            type: str,
-            old_type: str,
-            new_type: str,
+        self,
+        type: str,
+        old_type: str,
+        new_type: str,
     ):
         """
         param type: name of the type of data
@@ -434,58 +426,35 @@ class _Base(Data):
         """
         return self._get(
             "RenameType",
-            params={
-                "type": type,
-                "oldType": old_type,
-                "newTyoe": new_type
-            }
+            params={"type": type, "oldType": old_type, "newTyoe": new_type},
         )
 
     def SetObject(
-            self,
-            type: str,
-            id: int,
-            data: str,
+        self,
+        type: str,
+        id: int,
+        data: str,
     ):
         """
         param type: name of the type of data
         param id: object id
         param data: the data object in the JSON
         """
-        return self._get(
-            "SetObject",
-            params={
-                "type": type,
-                "id": id,
-                "data": data
-            }
-        )
+        return self._get("SetObject", params={"type": type, "id": id, "data": data})
 
     def SetObjects(
-            self,
-            type: str,
-            data: str,
+        self,
+        type: str,
+        data: str,
     ):
         """
         param type: name of the type of data
         param id: object id
         param data: the data object in the JSON
         """
-        return self._get(
-            "SetObjects",
-            params={
-                "type": type,
-                "data": data
-            }
-        )
+        return self._get("SetObjects", params={"type": type, "data": data})
 
-    def SetProperty(
-            self,
-            type: str,
-            id: int,
-            property: str,
-            value: list[str] = None
-    ):
+    def SetProperty(self, type: str, id: int, property: str, value: list[str] = None):
         """
         param type: name of the type of data
         param id: object id
@@ -494,23 +463,18 @@ class _Base(Data):
         """
         return self._get(
             "SetProperty",
-            params={
-                "type": type,
-                "id": id,
-                "property": property,
-                "value": value
-            }
+            params={"type": type, "id": id, "property": property, "value": value},
         )
 
     def SetObjectsByCriteria(
-            self,
-            type: str,
-            property: str,
-            criteria: list[str] = None,
-            froms: list[int] = None,
-            count: list[int] = None,
-            join: list[str] = None,
-            projection: list[str] = None,
+        self,
+        type: str,
+        property: str,
+        criteria: list[str] = None,
+        froms: list[int] = None,
+        count: list[int] = None,
+        join: list[str] = None,
+        projection: list[str] = None,
     ):
         return self._get(
             "SetObjectsByCriteria",
@@ -522,13 +486,14 @@ class _Base(Data):
                 "count": count,
                 "join": join,
                 "projection": projection,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
 
     def SetUniqueFields(
-            self,
-            type: str,
-            unique: list[str] = None,
+        self,
+        type: str,
+        unique: list[str] = None,
     ):
         """
         param type:name name of the type of data
@@ -539,12 +504,13 @@ class _Base(Data):
             params={
                 "type": type,
                 "unique": unique,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
 
     def UndefineType(
-            self,
-            type: str,
+        self,
+        type: str,
     ):
         """
         param type:name name of the type of data
@@ -553,5 +519,5 @@ class _Base(Data):
             "UndefineType",
             params={
                 "type": type,
-            }
+            },
         )
