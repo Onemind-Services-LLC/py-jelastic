@@ -78,16 +78,16 @@ class Environment(ClientAbstract):
     @property
     def Binder(self) -> "_Binder":
         """
-        With the platform, you can set your own external domain name for your projects instead of using the default hosting provider domain name. Binding can be done in two ways: by adding a CNAME record or by setting A Records.
-        A CNAME specifies an alias for a canonical name record in a Domain Name System (DNS) database. If you don't have your own Public IP, your URL is an alias for a single canonical name that is associated with a common platform IP address in the DNS database. In this case, it's recommended to set your own custom domain by adding a CNAME record.
-        A Record is an entry in your DNS zone file that maps each domain name to an IP address. When you type www.mycustomsite.com, the browser goes to the nameserver for mycustomsite.com and asks for the A Record. This record must point to an IP address - it will be the IP address of your web server. Setting your own custom external domain name using A Record is more appropriate if you have a personal Public IP address.
-       Also, you can bind Custom SSL to your custom domain.
+         With the platform, you can set your own external domain name for your projects instead of using the default hosting provider domain name. Binding can be done in two ways: by adding a CNAME record or by setting A Records.
+         A CNAME specifies an alias for a canonical name record in a Domain Name System (DNS) database. If you don't have your own Public IP, your URL is an alias for a single canonical name that is associated with a common platform IP address in the DNS database. In this case, it's recommended to set your own custom domain by adding a CNAME record.
+         A Record is an entry in your DNS zone file that maps each domain name to an IP address. When you type www.mycustomsite.com, the browser goes to the nameserver for mycustomsite.com and asks for the A Record. This record must point to an IP address - it will be the IP address of your web server. Setting your own custom external domain name using A Record is more appropriate if you have a personal Public IP address.
+        Also, you can bind Custom SSL to your custom domain.
 
-        >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
-        >>> jelastic.environment.Binder
+         >>> from jelastic import Jelastic
+         >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+         >>> jelastic.environment.Binder
 
-        Ref: https://docs.jelastic.com/api/private/#!/api/environment.Binder
+         Ref: https://docs.jelastic.com/api/private/#!/api/environment.Binder
         """
         return _Binder(
             session=self._session,
@@ -118,16 +118,16 @@ class _Billing(Environment):
     _endpoint2 = "billing"
 
     def AddStats(
-            self,
-            resource_name: str,
-            uid: int,
-            start_date: date,
-            end_date: date,
-            env_name: str,
-            node_id: int,
-            value: float,
-            note: str = None,
-            value_group: str = None,
+        self,
+        resource_name: str,
+        uid: int,
+        start_date: date,
+        end_date: date,
+        env_name: str,
+        node_id: int,
+        value: float,
+        note: str = None,
+        value_group: str = None,
     ):
         return self._get(
             "AddStats",
@@ -145,11 +145,7 @@ class _Billing(Environment):
             datetime_format="%Y-%m-%d",
         )
 
-    def EnvResources(
-            self,
-            start_time: datetime,
-            end_time: datetime
-    ):
+    def EnvResources(self, start_time: datetime, end_time: datetime):
         """
         Calculate resources usage of one environment for the given period.
         """
@@ -163,11 +159,11 @@ class _Billing(Environment):
         )
 
     def EnvsResources(
-            self,
-            start_time: datetime,
-            end_time: datetime,
-            target_app_id: str,
-            checksum: str,
+        self,
+        start_time: datetime,
+        end_time: datetime,
+        target_app_id: str,
+        checksum: str,
     ):
         """
         Calculate environments resources for the given period.
@@ -188,7 +184,7 @@ class _Billing(Environment):
         )
 
     def EnvsResourcesByAccount(
-            self, start_time: datetime, end_time: datetime, uid: int, checksum: str
+        self, start_time: datetime, end_time: datetime, uid: int, checksum: str
     ):
         """
         Calculate environments resources for the given period.
@@ -217,7 +213,7 @@ class _Billing(Environment):
         )
 
     def SetOptions(
-            self, target_env_name: str, node_group: str, options: dict, node_id: int = None
+        self, target_env_name: str, node_group: str, options: dict, node_id: int = None
     ):
         """
         Sets billing options for the node group (layer) to help the platform identify installed license types.
@@ -315,13 +311,13 @@ class _JError(Environment):
     _endpoint2 = "jerror"
 
     def Error(
-            self,
-            action_name: str,
-            call_parameters: str,
-            error_code: int,
-            priority: int,
-            email: str = None,
-            error_message: str = None,
+        self,
+        action_name: str,
+        call_parameters: str,
+        error_code: int,
+        priority: int,
+        email: str = None,
+        error_message: str = None,
     ):
         return self._get(
             "Error",
@@ -365,26 +361,26 @@ class _Node(Environment):
 
 class _Binder(Environment):
     """
-   With the platform, you can set your own external domain name for your projects instead of using the default hosting provider domain name. Binding can be done in two ways: by adding a CNAME record or by setting A Records.
+    With the platform, you can set your own external domain name for your projects instead of using the default hosting provider domain name. Binding can be done in two ways: by adding a CNAME record or by setting A Records.
 
-    A CNAME specifies an alias for a canonical name record in a Domain Name System (DNS) database. If you don't have your own Public IP, your URL is an alias for a single canonical name that is associated with a common platform IP address in the DNS database. In this case, it's recommended to set your own custom domain by adding a CNAME record.
+     A CNAME specifies an alias for a canonical name record in a Domain Name System (DNS) database. If you don't have your own Public IP, your URL is an alias for a single canonical name that is associated with a common platform IP address in the DNS database. In this case, it's recommended to set your own custom domain by adding a CNAME record.
 
-    A Record is an entry in your DNS zone file that maps each domain name to an IP address. When you type www.mycustomsite.com, the browser goes to the nameserver for mycustomsite.com and asks for the A Record. This record must point to an IP address - it will be the IP address of your web server. Setting your own custom external domain name using A Record is more appropriate if you have a personal Public IP address.
+     A Record is an entry in your DNS zone file that maps each domain name to an IP address. When you type www.mycustomsite.com, the browser goes to the nameserver for mycustomsite.com and asks for the A Record. This record must point to an IP address - it will be the IP address of your web server. Setting your own custom external domain name using A Record is more appropriate if you have a personal Public IP address.
 
-    Also, you can bind Custom SSL to your custom domain.
+     Also, you can bind Custom SSL to your custom domain.
 
-    Ref: https://docs.jelastic.com/api/private/#!/api/environment.Binder
+     Ref: https://docs.jelastic.com/api/private/#!/api/environment.Binder
     """
 
     _endpoint2 = "Binder"
 
     def AddDomains(
-            self,
-            env_name: str,
-            domains: str,
-            node_group: list[str] = None,
-            node_id: list[int] = None,
-            subdomain: list[str] = None,
+        self,
+        env_name: str,
+        domains: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
+        subdomain: list[str] = None,
     ):
         """
         param domains: a comma- or semicolon-separated list of domains (e.g. domain1,domain2 or domain1;domain2).
@@ -405,11 +401,11 @@ class _Binder(Environment):
         )
 
     def AddSSLCert(
-            self,
-            env_name: str,
-            key: str,
-            cert: str,
-            interm: list[str] = None,
+        self,
+        env_name: str,
+        key: str,
+        cert: str,
+        interm: list[str] = None,
     ):
         """
         param key: private key (can be either key body or link to download it).
@@ -428,10 +424,10 @@ class _Binder(Environment):
         )
 
     def AttachExtIp(
-            self,
-            env_name: str,
-            nodeid: int,
-            type: list[str] = None,
+        self,
+        env_name: str,
+        nodeid: int,
+        type: list[str] = None,
     ):
         return self._get(
             "AttachExtIp",
@@ -444,10 +440,10 @@ class _Binder(Environment):
         )
 
     def BindExtDomain(
-            self,
-            env_name: str,
-            extdomain: str,
-            cert_id: list[int] = None,
+        self,
+        env_name: str,
+        extdomain: str,
+        cert_id: list[int] = None,
     ):
         return self._get(
             "BindExtDomain",
@@ -460,10 +456,10 @@ class _Binder(Environment):
         )
 
     def BindExtDomains(
-            self,
-            env_name: str,
-            extdomains: str,
-            cert_id: list[int] = None,
+        self,
+        env_name: str,
+        extdomains: str,
+        cert_id: list[int] = None,
     ):
         """
         param extdomain: a comma-separated list of external domains to be bound to the environment.
@@ -480,11 +476,11 @@ class _Binder(Environment):
         )
 
     def BindSSL(
-            self,
-            env_name: str,
-            cert_key: str,
-            cert: str,
-            intermediate: str,
+        self,
+        env_name: str,
+        cert_key: str,
+        cert: str,
+        intermediate: str,
     ):
         return self._get(
             "BindSSL",
@@ -493,15 +489,15 @@ class _Binder(Environment):
                 "cert_key": cert_key,
                 "cert": cert,
                 "intermediate": intermediate,
-            }
+            },
         )
 
     def BindSSLCert(
-            self,
-            env_name: str,
-            cert_id: int,
-            entry_point: list[str] = None,
-            ext_domains: list[str] = None
+        self,
+        env_name: str,
+        cert_id: int,
+        entry_point: list[str] = None,
+        ext_domains: list[str] = None,
     ):
         """
         param cert_id: unique identifier of the SSL certificate.
@@ -514,16 +510,16 @@ class _Binder(Environment):
                 "envName": env_name,
                 "certId": cert_id,
                 "entryPoint": entry_point,
-                "extDomains": ext_domains
+                "extDomains": ext_domains,
             },
             delimiter=",",
         )
 
     def CheckDomain(
-            self,
-            env_name: str,
-            domain: str,
-            region: list[str] = None,
+        self,
+        env_name: str,
+        domain: str,
+        region: list[str] = None,
     ):
         """
         param domain: domain name to be checked.
@@ -540,9 +536,9 @@ class _Binder(Environment):
         )
 
     def CheckExtDomain(
-            self,
-            env_name: str,
-            extdomains: str,
+        self,
+        env_name: str,
+        extdomains: str,
     ):
         """
         param extdomains: external domain name to be checked.
@@ -556,19 +552,19 @@ class _Binder(Environment):
         )
 
     def DeleteSSL(
-            self,
-            env_name: str,
+        self,
+        env_name: str,
     ):
-        return self._get("DeleteSSL",
-                         params={"envName": env_name
-                                 },
-                         )
+        return self._get(
+            "DeleteSSL",
+            params={"envName": env_name},
+        )
 
     def DetachExtIp(
-            self,
-            env_name: str,
-            nodeid: int,
-            ip: str,
+        self,
+        env_name: str,
+        nodeid: int,
+        ip: str,
     ):
         """
         param nodeid: unique identifier of the target node (container).
@@ -584,20 +580,23 @@ class _Binder(Environment):
         )
 
     def DisableSSL(
-            self,
-            env_name: str,
+        self,
+        env_name: str,
     ):
-        return self._get("DisableSSL", params={
-            "envName": env_name,
-        })
+        return self._get(
+            "DisableSSL",
+            params={
+                "envName": env_name,
+            },
+        )
 
     def EditSSLCert(
-            self,
-            env_name: str,
-            id: int,
-            key: list[str] = None,
-            cert: list[str] = None,
-            interm: list[str] = None,
+        self,
+        env_name: str,
+        id: int,
+        key: list[str] = None,
+        cert: list[str] = None,
+        interm: list[str] = None,
     ):
         """
         param id: unique identifier of the target SSL certificate.
@@ -612,15 +611,15 @@ class _Binder(Environment):
                 "id": id,
                 "key": key,
                 "cert": cert,
-                "interm": interm
+                "interm": interm,
             },
             delimiter=",",
         )
 
     def GetDomainInfo(
-            self,
-            env_name: str,
-            domain: str,
+        self,
+        env_name: str,
+        domain: str,
     ):
         """
         Returns environment appid if environment found by domain.
@@ -636,11 +635,11 @@ class _Binder(Environment):
         )
 
     def GetDomains(
-            self,
-            env_name: str,
-            node_group: list[str] = None,
-            node_id: list[int] = None,
-            in_short: list[bool] = None
+        self,
+        env_name: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
+        in_short: list[bool] = None,
     ):
         """
         param node_group: unique identifier of the target node group (layer) for filtering, e.g. "cp" for the default application server layer.
@@ -658,38 +657,21 @@ class _Binder(Environment):
             delimiter=",",
         )
 
-    def GetExtDomains(
-            self,
-            env_name: str
-    ):
-        return self._get("GetExtDomains", params={
-            "envName": env_name
-        })
+    def GetExtDomains(self, env_name: str):
+        return self._get("GetExtDomains", params={"envName": env_name})
 
-    def GetSSL(
-            self,
-            env_name: str
-    ):
-        return self._get("GetSSL", params={
-            "envName": env_name
-        })
+    def GetSSL(self, env_name: str):
+        return self._get("GetSSL", params={"envName": env_name})
 
-    def GetSSLCerts(
-            self,
-            env_name: str,
-            ids: list[str] = None
-    ):
-        return self._get("GetSSLCerts", params={
-            "envName": env_name,
-            "ids": ids},
-                         delimiter=",",
-                         )
+    def GetSSLCerts(self, env_name: str, ids: list[str] = None):
+        return self._get(
+            "GetSSLCerts",
+            params={"envName": env_name, "ids": ids},
+            delimiter=",",
+        )
 
     def ManageNodeDnsState(
-            self,
-            env_name: str,
-            node_id: list[int] = None,
-            enabled: list[bool] = None
+        self, env_name: str, node_id: list[int] = None, enabled: list[bool] = None
     ):
         """
         param env_name: target environment name.
@@ -707,11 +689,7 @@ class _Binder(Environment):
         )
 
     def MoveExtIps(
-            self,
-            env_name: str,
-            source_node_id: int,
-            target_node_id: int,
-            ips: str
+        self, env_name: str, source_node_id: int, target_node_id: int, ips: str
     ):
         """
         param env_name: source environment name.
@@ -725,16 +703,16 @@ class _Binder(Environment):
                 "envName": env_name,
                 "sourceNodeId": source_node_id,
                 "targetNodeId": target_node_id,
-                "ips": ips
+                "ips": ips,
             },
         )
 
     def RemoveDomains(
-            self,
-            env_name: str,
-            domains: str,
-            node_group: list[str] = None,
-            node_id: list[int] = None,
+        self,
+        env_name: str,
+        domains: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
     ):
         """
         param env_name: target environment name.
@@ -754,9 +732,9 @@ class _Binder(Environment):
         )
 
     def RemoveExtDomains(
-            self,
-            env_name: str,
-            extdomain: str,
+        self,
+        env_name: str,
+        extdomain: str,
     ):
         """
         param env_name: target environment name.
@@ -771,8 +749,8 @@ class _Binder(Environment):
         )
 
     def RemoveSSL(
-            self,
-            env_name: str,
+        self,
+        env_name: str,
     ):
         """
         param env_name: target environment name.
@@ -785,9 +763,9 @@ class _Binder(Environment):
         )
 
     def RemoveSSLCerts(
-            self,
-            env_name: str,
-            ids: str,
+        self,
+        env_name: str,
+        ids: str,
     ):
         """
         param env_name: target environment name.
@@ -802,12 +780,12 @@ class _Binder(Environment):
         )
 
     def SetExtIpCount(
-            self,
-            env_name: str,
-            type: str,
-            count: int,
-            node_group: list[str] = None,
-            node_id: list[int] = None,
+        self,
+        env_name: str,
+        type: str,
+        count: int,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
     ):
         """
         param env_name: target environment name.
@@ -829,9 +807,9 @@ class _Binder(Environment):
         )
 
     def SwapExtDomains(
-            self,
-            env_name: str,
-            targetappid: str,
+        self,
+        env_name: str,
+        targetappid: str,
     ):
         """
         param env_name: target environment name.
@@ -846,12 +824,12 @@ class _Binder(Environment):
         )
 
     def SwapExtIps(
-            self,
-            env_name: str,
-            source_node_id: int,
-            target_node_id: int,
-            source_ip: list[str] = None,
-            target_ip: list[str] = None
+        self,
+        env_name: str,
+        source_node_id: int,
+        target_node_id: int,
+        source_ip: list[str] = None,
+        target_ip: list[str] = None,
     ):
         """
         param env_name: source environment name.
@@ -867,15 +845,15 @@ class _Binder(Environment):
                 "sourceNodeId": source_node_id,
                 "targetNodeId": target_node_id,
                 "sourceIp": source_ip,
-                "targetIp": target_ip
+                "targetIp": target_ip,
             },
             delimiter=",",
         )
 
     def UnbindSSLCert(
-            self,
-            env_name: str,
-            extdomains: list[str] = None,
+        self,
+        env_name: str,
+        extdomains: list[str] = None,
     ):
         """
         param env_name: target environment name.
@@ -895,13 +873,14 @@ class _Control(Environment):
     """
     Ref: https://docs.jelastic.com/api/private/#!/api/environment.Control
     """
-    _endpoint2 = 'control'
+
+    _endpoint2 = "control"
 
     def AddBackend(
-            self,
-            env_name: str,
-            backend_node_id: int,
-            balancer_node_id: int,
+        self,
+        env_name: str,
+        backend_node_id: int,
+        balancer_node_id: int,
     ):
         return self._get(
             "AddBackend",
@@ -909,197 +888,196 @@ class _Control(Environment):
                 "envName": env_name,
                 "backendNodeId": backend_node_id,
                 "balancerNodeId": balancer_node_id,
-            }
+            },
         )
 
     def AddBackends(
-            self,
-            env_name: str,
-            backend_node_id: str,
-            balancer_node_id: str,
-
+        self,
+        env_name: str,
+        backend_node_id: str,
+        balancer_node_id: str,
     ):
         return self._get(
-            'AddBackends',
+            "AddBackends",
             params={
                 "envName": env_name,
                 "backendNodeId": backend_node_id,
                 "balancerNodeId": balancer_node_id,
-            }
+            },
         )
 
     def AddBalancerNode(
-            self,
-            env_name: str,
-            node_type: str,
-            cloud_lets: list[int] = None,
-            exp_ip: list[bool] = None,
-            flexible_cloud_lets: list[int] = None,
-            fixed_cloud_lets: list[int] = None,
-            display_name: list[str] = None,
-            node_group: list[str] = None,
-            disk_limit: list[int] = None,
-            tag: list[str] = None,
-            metadata: list[str] = None,
-            start_service: list[bool] = None,
-            exp_ipv6_count: list[int] = None,
-            exp_ip_count: list[int] = None,
-            node_group_data: list[str] = None,
+        self,
+        env_name: str,
+        node_type: str,
+        cloud_lets: list[int] = None,
+        exp_ip: list[bool] = None,
+        flexible_cloud_lets: list[int] = None,
+        fixed_cloud_lets: list[int] = None,
+        display_name: list[str] = None,
+        node_group: list[str] = None,
+        disk_limit: list[int] = None,
+        tag: list[str] = None,
+        metadata: list[str] = None,
+        start_service: list[bool] = None,
+        exp_ipv6_count: list[int] = None,
+        exp_ip_count: list[int] = None,
+        node_group_data: list[str] = None,
     ):
         return self._get(
-            'AddBalancerNode',
+            "AddBalancerNode",
             params={
                 "envName": env_name,
                 "nodeType": node_type,
                 "cloudLets": cloud_lets,
                 "expIp": exp_ip,
                 "flexibleCloudlets": flexible_cloud_lets,
-                'fixedCloudlets': fixed_cloud_lets,
-                'displayName': display_name,
-                'nodeGroup': node_group,
-                'diskLimit': disk_limit,
-                'tag': tag,
-                'metadata': metadata,
-                'startService': start_service,
-                'extIpv6Count': exp_ipv6_count,
-                'extIpCount': exp_ip_count,
-                'nodeGroupData': node_group_data,
+                "fixedCloudlets": fixed_cloud_lets,
+                "displayName": display_name,
+                "nodeGroup": node_group,
+                "diskLimit": disk_limit,
+                "tag": tag,
+                "metadata": metadata,
+                "startService": start_service,
+                "extIpv6Count": exp_ipv6_count,
+                "extIpCount": exp_ip_count,
+                "nodeGroupData": node_group_data,
             },
             delimiter=",",
         )
 
     def AddBuildNode(
-            self,
-            env_name: str,
-            node_type: str,
-            cloud_lets: list[int] = None,
-            node_id: list[int] = None,
-            exp_ip: list[bool] = None,
-            flexible_cloud_lets: list[int] = None,
-            fixed_cloud_lets: list[int] = None,
-            display_name: list[str] = None,
-            node_group: list[str] = None,
-            tag: list[str] = None,
-            metadata: list[str] = None,
-            start_service: list[bool] = None,
-            engine: list[str] = None,
-            exp_ipv6_count: list[int] = None,
-            exp_ip_count: list[int] = None,
-            node_group_data: list[str] = None,
-            disk_limit: list[int] = None,
+        self,
+        env_name: str,
+        node_type: str,
+        cloud_lets: list[int] = None,
+        node_id: list[int] = None,
+        exp_ip: list[bool] = None,
+        flexible_cloud_lets: list[int] = None,
+        fixed_cloud_lets: list[int] = None,
+        display_name: list[str] = None,
+        node_group: list[str] = None,
+        tag: list[str] = None,
+        metadata: list[str] = None,
+        start_service: list[bool] = None,
+        engine: list[str] = None,
+        exp_ipv6_count: list[int] = None,
+        exp_ip_count: list[int] = None,
+        node_group_data: list[str] = None,
+        disk_limit: list[int] = None,
     ):
         return self._get(
-            'AddBuildNode',
+            "AddBuildNode",
             params={
-                'envName': env_name,
-                'nodeType': node_type,
-                'cloudlets': cloud_lets,
-                'nodeId': node_id,
-                'expIp': exp_ip,
-                'flexibleCloudlets': flexible_cloud_lets,
-                'fixedCloudlets': fixed_cloud_lets,
-                'displayName': display_name,
-                'nodeGroup': node_group,
-                'tag': tag,
-                'metadata': metadata,
-                'startService': start_service,
-                'engine': engine,
-                'extIpv6Count': exp_ipv6_count,
-                'extIpCount': exp_ip_count,
-                'nodeGroupData': node_group_data,
-                'diskLimit': disk_limit,
+                "envName": env_name,
+                "nodeType": node_type,
+                "cloudlets": cloud_lets,
+                "nodeId": node_id,
+                "expIp": exp_ip,
+                "flexibleCloudlets": flexible_cloud_lets,
+                "fixedCloudlets": fixed_cloud_lets,
+                "displayName": display_name,
+                "nodeGroup": node_group,
+                "tag": tag,
+                "metadata": metadata,
+                "startService": start_service,
+                "engine": engine,
+                "extIpv6Count": exp_ipv6_count,
+                "extIpCount": exp_ip_count,
+                "nodeGroupData": node_group_data,
+                "diskLimit": disk_limit,
             },
             delimiter=",",
         )
 
     def AddCacheNode(
-            self,
-            env_name: str,
-            node_type: str,
-            cloud_lets: list[int] = None,
-            flexible_cloud_lets: list[int] = None,
-            fixed_cloud_lets: list[int] = None,
-            display_name: list[str] = None,
-            node_group: list[str] = None,
-            disk_limit: list[int] = None,
-            tag: list[str] = None,
-            metadata: list[str] = None,
-            start_service: list[bool] = None,
-            exp_ipv6_count: list[int] = None,
-            exp_ip_count: list[int] = None,
-            node_group_data: list[str] = None,
+        self,
+        env_name: str,
+        node_type: str,
+        cloud_lets: list[int] = None,
+        flexible_cloud_lets: list[int] = None,
+        fixed_cloud_lets: list[int] = None,
+        display_name: list[str] = None,
+        node_group: list[str] = None,
+        disk_limit: list[int] = None,
+        tag: list[str] = None,
+        metadata: list[str] = None,
+        start_service: list[bool] = None,
+        exp_ipv6_count: list[int] = None,
+        exp_ip_count: list[int] = None,
+        node_group_data: list[str] = None,
     ):
         return self._get(
-            'AddCacheNode',
+            "AddCacheNode",
             params={
-                'envName': env_name,
-                'nodeType': node_type,
-                'cloudlets': cloud_lets,
-                'flexibleCloudlets': flexible_cloud_lets,
-                'fixedCloudlets': fixed_cloud_lets,
-                'displayName': display_name,
-                'nodeGroup': node_group,
-                'diskLimit': disk_limit,
-                'tag': tag,
-                'metadata': metadata,
-                'startService': start_service,
-                'expIpv6Count': exp_ipv6_count,
-                'expIpCount': exp_ip_count,
-                'nodeGroupData': node_group_data,
+                "envName": env_name,
+                "nodeType": node_type,
+                "cloudlets": cloud_lets,
+                "flexibleCloudlets": flexible_cloud_lets,
+                "fixedCloudlets": fixed_cloud_lets,
+                "displayName": display_name,
+                "nodeGroup": node_group,
+                "diskLimit": disk_limit,
+                "tag": tag,
+                "metadata": metadata,
+                "startService": start_service,
+                "expIpv6Count": exp_ipv6_count,
+                "expIpCount": exp_ip_count,
+                "nodeGroupData": node_group_data,
             },
             delimiter=",",
         )
 
     def AddComputeNode(
-            self,
-            env_name: str,
-            node_type: str,
-            cloud_lets: list[int] = None,
-            is_master: list[int] = None,
-            exp_ip: list[bool] = None,
-            flexible_cloud_lets: list[int] = None,
-            fixed_cloud_lets: list[int] = None,
-            display_name: list[str] = None,
-            node_group: list[str] = None,
-            disk_limit: list[int] = None,
-            tag: list[str] = None,
-            metadata: list[bool] = None,
-            start_service: list[bool] = None,
-            engine: list[str] = None,
-            exp_ipv6_count: list[int] = None,
-            exp_ip_count: list[int] = None,
-            node_group_data: list[str] = None,
+        self,
+        env_name: str,
+        node_type: str,
+        cloud_lets: list[int] = None,
+        is_master: list[int] = None,
+        exp_ip: list[bool] = None,
+        flexible_cloud_lets: list[int] = None,
+        fixed_cloud_lets: list[int] = None,
+        display_name: list[str] = None,
+        node_group: list[str] = None,
+        disk_limit: list[int] = None,
+        tag: list[str] = None,
+        metadata: list[bool] = None,
+        start_service: list[bool] = None,
+        engine: list[str] = None,
+        exp_ipv6_count: list[int] = None,
+        exp_ip_count: list[int] = None,
+        node_group_data: list[str] = None,
     ):
         return self._get(
-            'AddComputeNode',
+            "AddComputeNode",
             params={
-                'envName': env_name,
-                'nodeType': node_type,
-                'cloudlets': cloud_lets,
-                'isMaster': is_master,
-                'expIp': exp_ip,
-                'flexibleCloudlets': flexible_cloud_lets,
-                'fixedCloudlets': fixed_cloud_lets,
-                'displayName': display_name,
-                'nodeGroup': node_group,
-                'diskLimit': disk_limit,
-                'tag': tag,
-                'metadata': metadata,
-                'startService': start_service,
-                'engine': engine,
-                'expIpv6Count': exp_ipv6_count,
-                'expIpCount': exp_ip_count,
-                'nodeGroupData': node_group_data,
+                "envName": env_name,
+                "nodeType": node_type,
+                "cloudlets": cloud_lets,
+                "isMaster": is_master,
+                "expIp": exp_ip,
+                "flexibleCloudlets": flexible_cloud_lets,
+                "fixedCloudlets": fixed_cloud_lets,
+                "displayName": display_name,
+                "nodeGroup": node_group,
+                "diskLimit": disk_limit,
+                "tag": tag,
+                "metadata": metadata,
+                "startService": start_service,
+                "engine": engine,
+                "expIpv6Count": exp_ipv6_count,
+                "expIpCount": exp_ip_count,
+                "nodeGroupData": node_group_data,
             },
             delimiter=",",
         )
 
     def AddContainerEnvVars(
-            self,
-            env_name: str,
-            vars: str,
-            node_group: list[str] = None,
-            node_id: list[int] = None,
+        self,
+        env_name: str,
+        vars: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
     ):
         """
         :param env_name: target environment name.
@@ -1108,52 +1086,52 @@ class _Control(Environment):
         :param node_id: unique identifier of the target node (container).
         """
         return self._get(
-            'AddContainerEnvVars',
+            "AddContainerEnvVars",
             params={
-                'envName': env_name,
-                'vars': vars,
-                'nodeGroup': node_group,
-                'nodeId': node_id,
+                "envName": env_name,
+                "vars": vars,
+                "nodeGroup": node_group,
+                "nodeId": node_id,
             },
             delimiter=",",
         )
 
     def AddContainerVolume(
-            self,
-            env_name: str,
-            node_id: int,
-            path: str,
+        self,
+        env_name: str,
+        node_id: int,
+        path: str,
     ):
         return self._get(
-            'AddContainerVolume',
+            "AddContainerVolume",
             params={
-                'envName': env_name,
-                'nodeId': node_id,
-                'path': path,
-            }
+                "envName": env_name,
+                "nodeId": node_id,
+                "path": path,
+            },
         )
 
     def AddContainerVolumeByGroup(
-            self,
-            env_name: str,
-            node_group: str,
-            path: str,
+        self,
+        env_name: str,
+        node_group: str,
+        path: str,
     ):
         return self._get(
-            'AddContainerVolumeByGroup',
+            "AddContainerVolumeByGroup",
             params={
-                'envName': env_name,
-                'nodeGroup': node_group,
-                'path': path,
-            }
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "path": path,
+            },
         )
 
     def AddContainerVolumes(
-            self,
-            env_name: str,
-            volumes: str,
-            node_group: list[str] = None,
-            node_id: list[int] = None,
+        self,
+        env_name: str,
+        volumes: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
     ):
         """
         :param env_name: target environment name
@@ -1162,159 +1140,151 @@ class _Control(Environment):
         :param node_id: unique identifier of the target node (container).
         """
         return self._get(
-            'AddContainerVolumes',
+            "AddContainerVolumes",
             params={
-                'envName': env_name,
-                'volumes': volumes,
-                'nodeGroup': node_group,
-                'nodeId': node_id,
+                "envName": env_name,
+                "volumes": volumes,
+                "nodeGroup": node_group,
+                "nodeId": node_id,
             },
             delimiter=",",
         )
 
     def AddContext(
-            self,
-            env_name: str,
-            name: str,
-            file_name: str,
-            type: str,
-            node_group: list[str] = None,
+        self,
+        env_name: str,
+        name: str,
+        file_name: str,
+        type: str,
+        node_group: list[str] = None,
     ):
         """
         :param env_name: target environment name
         :param name: context name for the application
         """
         return self._get(
-            'AddContext',
+            "AddContext",
             params={
-                'envName': env_name,
-                'name': name,
-                'fileName': file_name,
-                'type': type,
-                'nodeGroup': node_group,
+                "envName": env_name,
+                "name": name,
+                "fileName": file_name,
+                "type": type,
+                "nodeGroup": node_group,
             },
             delimiter=",",
         )
 
     def AddDBNode(
-            self,
-            env_name: str,
-            node_type: str,
-            cloud_lets: list[int] = None,
-            exp_ip: list[bool] = None,
-            password: list[str] = None,
-            flexible_cloud_lets: list[int] = None,
-            fixed_cloud_lets: list[int] = None,
-            display_name: list[str] = None,
-            node_group: list[str] = None,
-            disk_limit: list[int] = None,
-            tag: list[str] = None,
-            metadata: list[bool] = None,
-            start_service: list[bool] = None,
-            exp_ipv6_count: list[int] = None,
-            exp_ip_count: list[int] = None,
-            node_group_data: list[str] = None,
+        self,
+        env_name: str,
+        node_type: str,
+        cloud_lets: list[int] = None,
+        exp_ip: list[bool] = None,
+        password: list[str] = None,
+        flexible_cloud_lets: list[int] = None,
+        fixed_cloud_lets: list[int] = None,
+        display_name: list[str] = None,
+        node_group: list[str] = None,
+        disk_limit: list[int] = None,
+        tag: list[str] = None,
+        metadata: list[bool] = None,
+        start_service: list[bool] = None,
+        exp_ipv6_count: list[int] = None,
+        exp_ip_count: list[int] = None,
+        node_group_data: list[str] = None,
     ):
         return self._get(
-            'AddDBNode',
+            "AddDBNode",
             params={
-                'envName': env_name,
-                'nodeType': node_type,
-                'cloudlets': cloud_lets,
-                'expIp': exp_ip,
-                'password': password,
-                'flexibleCloudlets': flexible_cloud_lets,
-                'fixedCloudlets': fixed_cloud_lets,
-                'displayName': display_name,
-                'nodeGroup': node_group,
-                'diskLimit': disk_limit,
-                'tag': tag,
-                'metadata': metadata,
-                'startService': start_service,
-                'expIpv6Count': exp_ipv6_count,
-                'expIpCount': exp_ip_count,
-                'nodeGroupData': node_group_data,
+                "envName": env_name,
+                "nodeType": node_type,
+                "cloudlets": cloud_lets,
+                "expIp": exp_ip,
+                "password": password,
+                "flexibleCloudlets": flexible_cloud_lets,
+                "fixedCloudlets": fixed_cloud_lets,
+                "displayName": display_name,
+                "nodeGroup": node_group,
+                "diskLimit": disk_limit,
+                "tag": tag,
+                "metadata": metadata,
+                "startService": start_service,
+                "expIpv6Count": exp_ipv6_count,
+                "expIpCount": exp_ip_count,
+                "nodeGroupData": node_group_data,
             },
             delimiter=",",
         )
 
     def AddDockerNode(
-            self,
-            env_name: str,
-            node_type: str,
-            metadata: dict,
-            cloud_lets: list[int] = None,
-            exp_ip: list[bool] = None,
-            password: list[str] = None,
-            flexible_cloud_lets: list[int] = None,
-            fixed_cloud_lets: list[int] = None,
-            display_name: list[str] = None,
-            node_group: list[str] = None,
-            disk_limit: list[int] = None,
-            start_service: list[bool] = None,
-            exp_ipv6_count: list[int] = None,
-            exp_ip_count: list[int] = None,
-            node_group_data: list[str] = None,
+        self,
+        env_name: str,
+        node_type: str,
+        metadata: dict,
+        cloud_lets: list[int] = None,
+        exp_ip: list[bool] = None,
+        password: list[str] = None,
+        flexible_cloud_lets: list[int] = None,
+        fixed_cloud_lets: list[int] = None,
+        display_name: list[str] = None,
+        node_group: list[str] = None,
+        disk_limit: list[int] = None,
+        start_service: list[bool] = None,
+        exp_ipv6_count: list[int] = None,
+        exp_ip_count: list[int] = None,
+        node_group_data: list[str] = None,
     ):
         return self._get(
-            'AddDockerNode',
+            "AddDockerNode",
             params={
-                'envName': env_name,
-                'nodeType': node_type,
-                'metadata': metadata,
-                'cloudlets': cloud_lets,
-                'expIp': exp_ip,
-                'password': password,
-                'flexibleCloudlets': flexible_cloud_lets,
-                'fixedCloudlets': fixed_cloud_lets,
-                'displayName': display_name,
-                'nodeGroup': node_group,
-                'diskLimit': disk_limit,
-                'startService': start_service,
-                'expIpv6Count': exp_ipv6_count,
-                'expIpCount': exp_ip_count,
-                'nodeGroupData': node_group_data,
+                "envName": env_name,
+                "nodeType": node_type,
+                "metadata": metadata,
+                "cloudlets": cloud_lets,
+                "expIp": exp_ip,
+                "password": password,
+                "flexibleCloudlets": flexible_cloud_lets,
+                "fixedCloudlets": fixed_cloud_lets,
+                "displayName": display_name,
+                "nodeGroup": node_group,
+                "diskLimit": disk_limit,
+                "startService": start_service,
+                "expIpv6Count": exp_ipv6_count,
+                "expIpCount": exp_ip_count,
+                "nodeGroupData": node_group_data,
             },
             delimiter=",",
         )
 
     def AddDockerVolume(
-            self,
-            env_name: str,
-            node_id: int,
-            path: str,
+        self,
+        env_name: str,
+        node_id: int,
+        path: str,
     ):
         return self._get(
-            'AddDockerVolume',
-            params={
-                'envName': env_name,
-                'nodeId': node_id,
-                'path': path
-            }
+            "AddDockerVolume",
+            params={"envName": env_name, "nodeId": node_id, "path": path},
         )
 
     def AddDockerVolumeByGroup(
-            self,
-            env_name: str,
-            node_group: int,
-            path: str,
+        self,
+        env_name: str,
+        node_group: int,
+        path: str,
     ):
         return self._get(
-            'AddDockerVolumeByGroup',
-            params={
-                'envName': env_name,
-                'nodeGroup': node_group,
-                'path': path
-            }
+            "AddDockerVolumeByGroup",
+            params={"envName": env_name, "nodeGroup": node_group, "path": path},
         )
 
     def AddEndpoint(
-            self,
-            env_name: str,
-            node_id: int,
-            private_port: int,
-            protocol: str,
-            name: str,
+        self,
+        env_name: str,
+        node_id: int,
+        private_port: int,
+        protocol: str,
+        name: str,
     ):
         """
         :param env_name: target environment name.
@@ -1324,31 +1294,31 @@ class _Control(Environment):
         :param name: custom endpoint name.
         """
         return self._get(
-            'AddEndpoint',
+            "AddEndpoint",
             params={
-                'envName': env_name,
-                'nodeId': node_id,
-                'privatePort': private_port,
-                'protocol': protocol,
-                'name': name,
-            }
+                "envName": env_name,
+                "nodeId": node_id,
+                "privatePort": private_port,
+                "protocol": protocol,
+                "name": name,
+            },
         )
 
     def AddEnvPolicy(
-            self,
-            target_app_id: str,
-            policy: str,
+        self,
+        target_app_id: str,
+        policy: str,
     ):
         """
         :param target_app_id: target application identifier of the environment for adding policy.
         :param policy: a comma-separated list of policy. For example: "policy1,policy2".
         """
         return self._get(
-            'AddEnvPolicy',
+            "AddEnvPolicy",
             params={
-                'targetAppId': target_app_id,
-                'policy': policy,
-            }
+                "targetAppId": target_app_id,
+                "policy": policy,
+            },
         )
 
     def AddEnvProperty(self, properties: str):
@@ -1356,72 +1326,73 @@ class _Control(Environment):
         :param properties: JSON object with environment properties. For example: {"customProperty1":"value1","customProperty2":"value2"}
         """
         return self._get(
-            'AddEnvProperty',
+            "AddEnvProperty",
             params={
-                'properties': properties,
-            }
+                "properties": properties,
+            },
         )
 
     def AddExtraNode(
-            self,
-            env_name: str,
-            node_type: str,
-            cloud_lets: list[int] = None,
-            exp_ip: list[bool] = None,
-            flexible_cloud_lets: list[int] = None,
-            fixed_cloud_lets: list[int] = None,
-            display_name: list[str] = None,
-            node_group: list[str] = None,
-            disk_limit: list[int] = None,
-            tag: list[str] = None,
-            metadata: list[bool] = None,
-            start_service: list[bool] = None,
-            exp_ipv6_count: list[int] = None,
-            exp_ip_count: list[int] = None,
-            node_group_data: list[str] = None,
+        self,
+        env_name: str,
+        node_type: str,
+        cloud_lets: list[int] = None,
+        exp_ip: list[bool] = None,
+        flexible_cloud_lets: list[int] = None,
+        fixed_cloud_lets: list[int] = None,
+        display_name: list[str] = None,
+        node_group: list[str] = None,
+        disk_limit: list[int] = None,
+        tag: list[str] = None,
+        metadata: list[bool] = None,
+        start_service: list[bool] = None,
+        exp_ipv6_count: list[int] = None,
+        exp_ip_count: list[int] = None,
+        node_group_data: list[str] = None,
     ):
         return self._get(
-            'AddExtraNode',
+            "AddExtraNode",
             params={
-                'envName': env_name,
-                'nodeType': node_type,
-                'cloudlets': cloud_lets,
-                'expIp': exp_ip,
-                'flexibleCloudlets': flexible_cloud_lets,
-                'fixedCloudlets': fixed_cloud_lets,
-                'displayName': display_name,
-                'nodeGroup': node_group,
-                'diskLimit': disk_limit,
-                'tag': tag,
-                'metadata': metadata,
-                'startService': start_service,
-                'expIpv6Count': exp_ipv6_count,
-                'expIpCount': exp_ip_count,
-                'nodeGroupData': node_group_data,
+                "envName": env_name,
+                "nodeType": node_type,
+                "cloudlets": cloud_lets,
+                "expIp": exp_ip,
+                "flexibleCloudlets": flexible_cloud_lets,
+                "fixedCloudlets": fixed_cloud_lets,
+                "displayName": display_name,
+                "nodeGroup": node_group,
+                "diskLimit": disk_limit,
+                "tag": tag,
+                "metadata": metadata,
+                "startService": start_service,
+                "expIpv6Count": exp_ipv6_count,
+                "expIpCount": exp_ip_count,
+                "nodeGroupData": node_group_data,
             },
             delimiter=",",
         )
 
-    def AddNode(self,
-                env_name: str,
-                node_type: str,
-                cloud_lets: list[int] = None,
-                ext_ip: list[str] = None,
-                password: list[str] = None,
-                flexible_cloud_lets: list[int] = None,
-                fixed_cloud_lets: list[int] = None,
-                display_name: list[str] = None,
-                metadata: list[str] = None,
-                node_group: list[str] = None,
-                start_service: list[bool] = None,
-                disk_limit: list[int] = None,
-                tag: list[str] = None,
-                engine: list[str] = None,
-                exit_ipv4: list[int] = None,
-                exit_ipv6: list[int] = None,
-                node_group_data: list[str] = None,
-                options: list[str] = None,
-                ):
+    def AddNode(
+        self,
+        env_name: str,
+        node_type: str,
+        cloud_lets: list[int] = None,
+        ext_ip: list[str] = None,
+        password: list[str] = None,
+        flexible_cloud_lets: list[int] = None,
+        fixed_cloud_lets: list[int] = None,
+        display_name: list[str] = None,
+        metadata: list[str] = None,
+        node_group: list[str] = None,
+        start_service: list[bool] = None,
+        disk_limit: list[int] = None,
+        tag: list[str] = None,
+        engine: list[str] = None,
+        exit_ipv4: list[int] = None,
+        exit_ipv6: list[int] = None,
+        node_group_data: list[str] = None,
+        options: list[str] = None,
+    ):
         """
         :param env_name: name of the selected environment
         :param node_type: node type (tomcat7, mysql5, etc)
@@ -1439,38 +1410,38 @@ class _Control(Environment):
         :param exit_ipv6: IPv6 count
         """
         return self._get(
-            'AddNode',
+            "AddNode",
             params={
-                'envName': env_name,
-                'nodeType': node_type,
-                'cloudLets': cloud_lets,
-                'extIp': ext_ip,
-                'password': password,
-                'flexibleCloudLets': flexible_cloud_lets,
-                'fixedCloudLets': fixed_cloud_lets,
-                'displayName': display_name,
-                'metadata': metadata,
-                'nodeGroup': node_group,
-                'startService': start_service,
-                'diskLimit': disk_limit,
-                'tag': tag,
-                'engine': engine,
-                'extipv4': exit_ipv4,
-                'extipv6': exit_ipv6,
-                'nodeGroupData': node_group_data,
-                'options': options,
+                "envName": env_name,
+                "nodeType": node_type,
+                "cloudLets": cloud_lets,
+                "extIp": ext_ip,
+                "password": password,
+                "flexibleCloudLets": flexible_cloud_lets,
+                "fixedCloudLets": fixed_cloud_lets,
+                "displayName": display_name,
+                "metadata": metadata,
+                "nodeGroup": node_group,
+                "startService": start_service,
+                "diskLimit": disk_limit,
+                "tag": tag,
+                "engine": engine,
+                "extipv4": exit_ipv4,
+                "extipv6": exit_ipv6,
+                "nodeGroupData": node_group_data,
+                "options": options,
             },
             delimiter=",",
         )
 
     def AddPortRedirect(
-            self,
-            env_name: str,
-            node_id: int,
-            src_port: int,
-            dst_port: int,
-            protocol: str,
-            comments: list[str] = None,
+        self,
+        env_name: str,
+        node_id: int,
+        src_port: int,
+        dst_port: int,
+        protocol: str,
+        comments: list[str] = None,
     ):
         """
         :param env_name: target environment name.
@@ -1481,260 +1452,246 @@ class _Control(Environment):
         :param comments: custom comment for the redirect.
         """
         return self._get(
-            'AddPortRedirect',
+            "AddPortRedirect",
             params={
-                'envName': env_name,
-                'nodeId': node_id,
-                'srcPort': src_port,
-                'dstPort': dst_port,
-                'protocol': protocol,
-                'comments': comments,
+                "envName": env_name,
+                "nodeId": node_id,
+                "srcPort": src_port,
+                "dstPort": dst_port,
+                "protocol": protocol,
+                "comments": comments,
             },
             delimiter=",",
         )
 
     def AddStorageNode(
-            self,
-            env_name: str,
-            node_type: str,
-            cloud_lets: list[int] = None,
-            ext_ip: list[str] = None,
-            flexible_cloud_lets: list[int] = None,
-            fixed_cloud_lets: list[int] = None,
-            display_name: list[str] = None,
-            node_group: list[str] = None,
-            disk_limit: list[int] = None,
-            tag: list[str] = None,
-            metadata: list[str] = None,
-            start_service: list[bool] = None,
-            ext_ipv6_count: list[int] = None,
-            ext_ip_count: list[int] = None,
-            node_group_data: list[str] = None,
+        self,
+        env_name: str,
+        node_type: str,
+        cloud_lets: list[int] = None,
+        ext_ip: list[str] = None,
+        flexible_cloud_lets: list[int] = None,
+        fixed_cloud_lets: list[int] = None,
+        display_name: list[str] = None,
+        node_group: list[str] = None,
+        disk_limit: list[int] = None,
+        tag: list[str] = None,
+        metadata: list[str] = None,
+        start_service: list[bool] = None,
+        ext_ipv6_count: list[int] = None,
+        ext_ip_count: list[int] = None,
+        node_group_data: list[str] = None,
     ):
         return self._get(
-            'AddStorageNode',
+            "AddStorageNode",
             params={
-                'envName': env_name,
-                'nodeType': node_type,
-                'cloudlets': cloud_lets,
-                'extIp': ext_ip,
-                'flexibleCloudLets': flexible_cloud_lets,
-                'fixedCloudLets': fixed_cloud_lets,
-                'displayName': display_name,
-                'nodeGroup': node_group,
-                'diskLimit': disk_limit,
-                'tag': tag,
-                'metadata': metadata,
-                'startService': start_service,
-                'extIpv6Count': ext_ipv6_count,
-                'extIpCount': ext_ip_count,
-                'nodeGroupData': node_group_data,
+                "envName": env_name,
+                "nodeType": node_type,
+                "cloudlets": cloud_lets,
+                "extIp": ext_ip,
+                "flexibleCloudLets": flexible_cloud_lets,
+                "fixedCloudLets": fixed_cloud_lets,
+                "displayName": display_name,
+                "nodeGroup": node_group,
+                "diskLimit": disk_limit,
+                "tag": tag,
+                "metadata": metadata,
+                "startService": start_service,
+                "extIpv6Count": ext_ipv6_count,
+                "extIpCount": ext_ip_count,
+                "nodeGroupData": node_group_data,
             },
             delimiter=",",
         )
 
     def AddVdsNode(
-            self,
-            env_name: str,
-            node_type: str,
-            cloud_lets: list[int] = None,
-            ext_ip: list[str] = None,
-            password: list[str] = None,
-            flexible_cloud_lets: list[int] = None,
-            fixed_cloud_lets: list[int] = None,
-            display_name: list[str] = None,
-            node_group: list[str] = None,
-            disk_limit: list[int] = None,
-            tag: list[str] = None,
-            metadata: list[str] = None,
-            start_service: list[bool] = None,
-            ext_ipv6_count: list[int] = None,
-            ext_ip_count: list[int] = None,
-            node_group_data: list[str] = None,
+        self,
+        env_name: str,
+        node_type: str,
+        cloud_lets: list[int] = None,
+        ext_ip: list[str] = None,
+        password: list[str] = None,
+        flexible_cloud_lets: list[int] = None,
+        fixed_cloud_lets: list[int] = None,
+        display_name: list[str] = None,
+        node_group: list[str] = None,
+        disk_limit: list[int] = None,
+        tag: list[str] = None,
+        metadata: list[str] = None,
+        start_service: list[bool] = None,
+        ext_ipv6_count: list[int] = None,
+        ext_ip_count: list[int] = None,
+        node_group_data: list[str] = None,
     ):
         return self._get(
-            'AddVdsNode',
+            "AddVdsNode",
             params={
-                'envName': env_name,
-                'nodeType': node_type,
-                'cloudlets': cloud_lets,
-                'extIp': ext_ip,
-                'password': password,
-                'flexibleCloudLets': flexible_cloud_lets,
-                'fixedCloudLets': fixed_cloud_lets,
-                'displayName': display_name,
-                'nodeGroup': node_group,
-                'diskLimit': disk_limit,
-                'tag': tag,
-                'metadata': metadata,
-                'startService': start_service,
-                'extIpv6Count': ext_ipv6_count,
-                'extIpCount': ext_ip_count,
-                'nodeGroupData': node_group_data,
+                "envName": env_name,
+                "nodeType": node_type,
+                "cloudlets": cloud_lets,
+                "extIp": ext_ip,
+                "password": password,
+                "flexibleCloudLets": flexible_cloud_lets,
+                "fixedCloudLets": fixed_cloud_lets,
+                "displayName": display_name,
+                "nodeGroup": node_group,
+                "diskLimit": disk_limit,
+                "tag": tag,
+                "metadata": metadata,
+                "startService": start_service,
+                "extIpv6Count": ext_ipv6_count,
+                "extIpCount": ext_ip_count,
+                "nodeGroupData": node_group_data,
             },
             delimiter=",",
         )
 
     def AddVmNode(
-            self,
-            env_name: str,
-            node_type: str,
-            options: str,
-            ext_ip: list[str] = None,
-            display_name: list[str] = None,
-            node_group: list[str] = None,
-            disk_limit: list[int] = None,
-            ext_ipv6_count: list[int] = None,
-            ext_ip_count: list[int] = None,
-            node_group_data: list[str] = None,
-            password: list[str] = None,
+        self,
+        env_name: str,
+        node_type: str,
+        options: str,
+        ext_ip: list[str] = None,
+        display_name: list[str] = None,
+        node_group: list[str] = None,
+        disk_limit: list[int] = None,
+        ext_ipv6_count: list[int] = None,
+        ext_ip_count: list[int] = None,
+        node_group_data: list[str] = None,
+        password: list[str] = None,
     ):
         return self._get(
-            'AddVmNode',
+            "AddVmNode",
             params={
-                'envName': env_name,
-                'nodeType': node_type,
-                'options': options,
-                'extIp': ext_ip,
-                'displayName': display_name,
-                'nodeGroup': node_group,
-                'diskLimit': disk_limit,
-                'extIpv6Count': ext_ipv6_count,
-                'extIpCount': ext_ip_count,
-                'nodeGroupData': node_group_data,
-                'password': password,
+                "envName": env_name,
+                "nodeType": node_type,
+                "options": options,
+                "extIp": ext_ip,
+                "displayName": display_name,
+                "nodeGroup": node_group,
+                "diskLimit": disk_limit,
+                "extIpv6Count": ext_ipv6_count,
+                "extIpCount": ext_ip_count,
+                "nodeGroupData": node_group_data,
+                "password": password,
             },
             delimiter=",",
         )
 
     def AppendNodes(
-            self,
-            env_name: str,
-            count: int,
-            node_type: str,
+        self,
+        env_name: str,
+        count: int,
+        node_type: str,
     ):
         return self._get(
-            'AppendNodes',
+            "AppendNodes",
             params={
-                'envName': env_name,
-                'count': count,
-                'nodeType': node_type,
-            }
+                "envName": env_name,
+                "count": count,
+                "nodeType": node_type,
+            },
         )
 
     def ApplyEnvProperty(
-            self,
-            env_name: str,
-            properties: str,
+        self,
+        env_name: str,
+        properties: str,
     ):
         """
         :param env_name: target environment name.
         :param properties: JSON object with environment properties. For example: {"customProperty1":"value1","customProperty2":"value2"}
         """
         return self._get(
-            'ApplyEnvProperty',
+            "ApplyEnvProperty",
             params={
-                'envName': env_name,
-                'properties': properties,
-            }
+                "envName": env_name,
+                "properties": properties,
+            },
         )
 
     def ApplyNodeGroupData(
-            self,
-            env_name: str,
-            node_group_data: str,
-            data: str,
+        self,
+        env_name: str,
+        node_group_data: str,
+        data: str,
     ):
         return self._get(
-            'ApplyNodeGroupData',
+            "ApplyNodeGroupData",
             params={
-                'envName': env_name,
-                'nodeGroupData': node_group_data,
-                'data': data,
-            }
+                "envName": env_name,
+                "nodeGroupData": node_group_data,
+                "data": data,
+            },
         )
 
     def ApplySoftwarePackageAction(
-            self,
-            env_name: str,
-            keywords: str,
-            node_type: list[str] = None,
-            action: list[str] = None,
-            password: list[str] = None,
-            node_group: list[str] = None,
+        self,
+        env_name: str,
+        keywords: str,
+        node_type: list[str] = None,
+        action: list[str] = None,
+        password: list[str] = None,
+        node_group: list[str] = None,
     ):
         return self._get(
-            'ApplySoftwarePackageAction',
+            "ApplySoftwarePackageAction",
             params={
-                'envName': env_name,
-                'keywords': keywords,
-                'nodeType': node_type,
-                'action': action,
-                'password': password,
-                'nodeGroup': node_group,
+                "envName": env_name,
+                "keywords": keywords,
+                "nodeType": node_type,
+                "action": action,
+                "password": password,
+                "nodeGroup": node_group,
             },
             delimiter=",",
         )
 
     def AttachEnvGroup(
-            self,
-            env_name: str,
-            env_group_name: str,
+        self,
+        env_name: str,
+        env_group_name: str,
     ):
         return self._get(
-            'AttachEnvGroup',
+            "AttachEnvGroup",
             params={
-                'envName': env_name,
-                'envGroup': env_group_name,
-            }
+                "envName": env_name,
+                "envGroup": env_group_name,
+            },
         )
 
     def BuildCluster(
-            self,
-            env_name: str,
-            node_group: str,
+        self,
+        env_name: str,
+        node_group: str,
     ):
         return self._get(
-            'BuildCluster',
-            params={
-                'envName': env_name,
-                'nodeGroup': node_group
-            }
+            "BuildCluster", params={"envName": env_name, "nodeGroup": node_group}
         )
 
     def CancelTransferRequest(self):
-        return self._get(
-            'CancelTransferRequest',
-            params={}
-        )
+        return self._get("CancelTransferRequest", params={})
 
     def ChangeLimits(self, env_name: str):
-        return self._get(
-            'ChangeLimits',
-            params={'envName': env_name}
-        )
+        return self._get("ChangeLimits", params={"envName": env_name})
 
     def ChangeLimitsInner(
-            self,
-            env_name: str,
-            uid: int,
-            limit_type: list[str] = None,
+        self,
+        env_name: str,
+        uid: int,
+        limit_type: list[str] = None,
     ):
         return self._get(
-            'ChangeLimitsInner',
+            "ChangeLimitsInner",
             params={
-                'envName': env_name,
-                'uid': uid,
-                'limitType': limit_type,
-            }
+                "envName": env_name,
+                "uid": uid,
+                "limitType": limit_type,
+            },
         )
 
     def ChangeTopology(
-            self,
-            env_name: str,
-            env: dict,
-            nodes: dict,
-            action_key: list[str] = None
+        self, env_name: str, env: dict, nodes: dict, action_key: list[str] = None
     ):
         """
         :param env_name: target environment name.
@@ -1743,91 +1700,86 @@ class _Control(Environment):
         :param action_key: name of the action and domain name.
         """
         return self._get(
-            'ChangeTopology',
+            "ChangeTopology",
             params={
-                'envName': env_name,
-                'env': env,
-                'nodes': nodes,
-                'actionkey': action_key,
+                "envName": env_name,
+                "env": env,
+                "nodes": nodes,
+                "actionkey": action_key,
             },
-            delimiter=',',
+            delimiter=",",
         )
 
     def CheckDependencies(
-            self,
-            env_name: str,
-            node_id: list[int] = None,
-            filter: list[str] = None,
+        self,
+        env_name: str,
+        node_id: list[int] = None,
+        filter: list[str] = None,
     ):
         return self._get(
-            'CheckDependencies',
+            "CheckDependencies",
             params={
-                'envName': env_name,
-                'nodeId': node_id,
-                'filter': filter,
+                "envName": env_name,
+                "nodeId": node_id,
+                "filter": filter,
             },
-            delimiter=',',
+            delimiter=",",
         )
 
     def CheckExtIpCount(
-            self,
-            exp_ipv6: int,
-            exp_ipv4: list[int] = None,
-            hardware_node_group: list[str] = None,
+        self,
+        exp_ipv6: int,
+        exp_ipv4: list[int] = None,
+        hardware_node_group: list[str] = None,
     ):
         return self._get(
-            'CheckExtIpCount',
+            "CheckExtIpCount",
             params={
-                'expIpv6': exp_ipv6,
-                'expIpv4': exp_ipv4,
-                'hardwareNodeGroup': hardware_node_group,
+                "expIpv6": exp_ipv6,
+                "expIpv4": exp_ipv4,
+                "hardwareNodeGroup": hardware_node_group,
             },
-            delimiter=',',
+            delimiter=",",
         )
 
     def CheckMigrationPossibility(
-            self,
-            env_name: str,
-            hardware_node_group: list[str] = None,
+        self,
+        env_name: str,
+        hardware_node_group: list[str] = None,
     ):
         """
         :param env_name: target environment name.
         :param hardware_node_group: unique identifier of the target region (host group).
         """
         return self._get(
-            'CheckMigrationPossibility',
+            "CheckMigrationPossibility",
             params={
-                'envName': env_name,
-                'hardwareNodeGroup': hardware_node_group,
+                "envName": env_name,
+                "hardwareNodeGroup": hardware_node_group,
             },
-            delimiter=',',
+            delimiter=",",
         )
 
-    def ClearLog(
-            self,
-            env_name: str,
-            node_id: int,
-            path: str
-    ):
+    def ClearLog(self, env_name: str, node_id: int, path: str):
         """
         :param env_name: target environment name.
         :param node_id: unique identifier of the target node (container).
         :param path: path to the target log file.
         """
         return self._get(
-            'ClearLog',
+            "ClearLog",
             params={
-                'envName': env_name,
-                'nodeId': node_id,
-                'path': path,
-            }
+                "envName": env_name,
+                "nodeId": node_id,
+                "path": path,
+            },
         )
 
     def CloneEnv(
-            self,
-            src_env_name: str,
-            dit_env_name: str,
-            use_external_mounts: list[bool] = None,
+        self,
+        src_env_name: str,
+        dit_env_name: str,
+        use_external_mounts: list[bool] = None,
     ):
         """
         :param src_env_name: source environment name (one that is going to be cloned).
@@ -1835,30 +1787,30 @@ class _Control(Environment):
         :param use_external_mounts: defines whether to copy external mounts on the clone (true) or not (false).
         """
         return self._get(
-            'CloneEnv',
+            "CloneEnv",
             params={
-                'srcEnvName': src_env_name,
-                'ditEnvName': dit_env_name,
-                'useExternalMounts': use_external_mounts,
+                "srcEnvName": src_env_name,
+                "ditEnvName": dit_env_name,
+                "useExternalMounts": use_external_mounts,
             },
             delimiter=",",
         )
 
     def CloneNode(
-            self,
-            env_name: str,
-            count: int,
-            node_group: str,
-            node_id: list[int] = None,
+        self,
+        env_name: str,
+        count: int,
+        node_group: str,
+        node_id: list[int] = None,
     ):
         return self._get(
-            'CloneNode',
+            "CloneNode",
             params={
-                'envName': env_name,
-                'count': count,
-                'nodeGroup': node_group,
-                'nodeId': node_id,
-            }
+                "envName": env_name,
+                "count": count,
+                "nodeGroup": node_group,
+                "nodeId": node_id,
+            },
         )
 
     def ConfirmTransferRequest(self, key: str):
@@ -1866,19 +1818,19 @@ class _Control(Environment):
         :param key: disposable confirmation key
         """
         return self._get(
-            'ConfirmTransferRequest',
+            "ConfirmTransferRequest",
             params={
-                'key': key,
-            }
+                "key": key,
+            },
         )
 
     def CreateEnv(
-            self,
-            env_name: str,
-            settings: dict,
-            owner_uid: list[int] = None,
-            hardware_node_group: list[str] = None,
-            env_groups: list[str] = None,
+        self,
+        env_name: str,
+        settings: dict,
+        owner_uid: list[int] = None,
+        hardware_node_group: list[str] = None,
+        env_groups: list[str] = None,
     ):
         """
         :param env_name: domain of the environment
@@ -1886,24 +1838,24 @@ class _Control(Environment):
         :param owner_uid: unique identifier of the environment's owner
         """
         return self._get(
-            'CreateEnv',
+            "CreateEnv",
             params={
-                'envName': env_name,
-                'settings': settings,
-                'ownerUid': owner_uid,
-                'hardwareNodeGroups': hardware_node_group,
-                'envGroups': env_groups,
+                "envName": env_name,
+                "settings": settings,
+                "ownerUid": owner_uid,
+                "hardwareNodeGroups": hardware_node_group,
+                "envGroups": env_groups,
             },
             delimiter=",",
         )
 
     def CreateEnvironment(
-            self,
-            env: dict,
-            nodes: dict,
-            action_key: list[str] = None,
-            owner_uid: list[int] = None,
-            env_groups: list[str] = None,
+        self,
+        env: dict,
+        nodes: dict,
+        action_key: list[str] = None,
+        owner_uid: list[int] = None,
+        env_groups: list[str] = None,
     ):
         """
         :param env: JSON object with environment settings:
@@ -1913,63 +1865,63 @@ class _Control(Environment):
         :param env_groups: target group name or JSON array of group names.
         """
         return self._get(
-            'CreateEnvironment',
+            "CreateEnvironment",
             params={
-                'env': env,
-                'nodes': nodes,
-                'actionKey': action_key,
-                'ownerUid': owner_uid,
-                'envGroups': env_groups,
+                "env": env,
+                "nodes": nodes,
+                "actionKey": action_key,
+                "ownerUid": owner_uid,
+                "envGroups": env_groups,
             },
             delimiter=",",
         )
 
     def DeleteEnv(
-            self,
-            env_name: str,
-            password: list[str] = None,
+        self,
+        env_name: str,
+        password: list[str] = None,
     ):
         """
         :param env_name: target environment name.
         :param password: current user password or environment name to confirm environment deletion (depending on the 'environment.delete.confirm.type' quota).
         """
         return self._get(
-            'DeleteEnv',
+            "DeleteEnv",
             params={
-                'envName': env_name,
-                'password': password,
+                "envName": env_name,
+                "password": password,
             },
             delimiter=",",
         )
 
     def DeleteExportedFiles(
-            self,
-            env_name: str,
-            file_name: str,
+        self,
+        env_name: str,
+        file_name: str,
     ):
         """
         :param env_name: application identifier of the environment
         :param file_name: settings for export
         """
         return self._get(
-            'DeleteExportedFiles',
+            "DeleteExportedFiles",
             params={
-                'envName': env_name,
-                'fileName': file_name,
-            }
+                "envName": env_name,
+                "fileName": file_name,
+            },
         )
 
     def DeployApp(
-            self,
-            env_name: str,
-            file_url: str,
-            file_name: str,
-            context: list[str] = None,
-            atomic_deploy: list[bool] = None,
-            delay: list[int] = None,
-            node_group: list[str] = None,
-            hooks: list[str] = None,
-            is_sequential: list[bool] = None,
+        self,
+        env_name: str,
+        file_url: str,
+        file_name: str,
+        context: list[str] = None,
+        atomic_deploy: list[bool] = None,
+        delay: list[int] = None,
+        node_group: list[str] = None,
+        hooks: list[str] = None,
+        is_sequential: list[bool] = None,
     ):
         """
         :param env_name: target environment name.
@@ -1983,58 +1935,58 @@ class _Control(Environment):
         :param is_sequential: defines whether to deploy the project on application servers one-by-one to ensure uptime (true) or simultaneously (false).
         """
         return self._get(
-            'DeployApp',
+            "DeployApp",
             params={
-                'envName': env_name,
-                'fileUrl': file_url,
-                'fileName': file_name,
-                'context': context,
-                'atomicDeploy': atomic_deploy,
-                'delay': delay,
-                'nodeGroup': node_group,
-                'hooks': hooks,
-                'isSequential': is_sequential,
+                "envName": env_name,
+                "fileUrl": file_url,
+                "fileName": file_name,
+                "context": context,
+                "atomicDeploy": atomic_deploy,
+                "delay": delay,
+                "nodeGroup": node_group,
+                "hooks": hooks,
+                "isSequential": is_sequential,
             },
             delimiter=",",
         )
 
     def DetachEnvGroup(
-            self,
-            env_name: str,
-            env_group: str,
+        self,
+        env_name: str,
+        env_group: str,
     ):
         """
         :param env_name: target environment name.
         :param env_group: target group name or JSON array of group names.
         """
         return self._get(
-            'DetachEnvGroup',
+            "DetachEnvGroup",
             params={
-                'envName': env_name,
-                'envGroup': env_group,
-            }
+                "envName": env_name,
+                "envGroup": env_group,
+            },
         )
 
     def DisableReplication(
-            self,
-            env_name: str,
-            node_group: str,
+        self,
+        env_name: str,
+        node_group: str,
     ):
         return self._get(
-            'DisableReplication',
+            "DisableReplication",
             params={
-                'envName': env_name,
-                'nodeGroup': node_group,
-            }
+                "envName": env_name,
+                "nodeGroup": node_group,
+            },
         )
 
     def EditEndpoint(
-            self,
-            env_name: str,
-            id: int,
-            name: str,
-            private_port: int,
-            protocol: str,
+        self,
+        env_name: str,
+        id: int,
+        name: str,
+        private_port: int,
+        protocol: str,
     ):
         """
         :param env_name: target environment name.
@@ -2044,56 +1996,56 @@ class _Control(Environment):
         :param protocol: transport protocol (“TCP” or “UDP”).
         """
         return self._get(
-            'EditEndpoint',
+            "EditEndpoint",
             params={
-                'envName': env_name,
-                'id': id,
-                'name': name,
-                'privatePort': private_port,
-                'protocol': protocol,
-            }
+                "envName": env_name,
+                "id": id,
+                "name": name,
+                "privatePort": private_port,
+                "protocol": protocol,
+            },
         )
 
     def EditEnvSettings(
-            self,
-            env_name: str,
-            settings: dict,
+        self,
+        env_name: str,
+        settings: dict,
     ):
         """
         :param settings: {"engine":string,"sslstate":boolean}
         """
         return self._get(
-            'EditEnvSettings',
+            "EditEnvSettings",
             params={
-                'envName': env_name,
-                'settings': settings,
+                "envName": env_name,
+                "settings": settings,
             },
             delimiter=",",
         )
 
     def EditNodeGroup(
-            self,
-            env_name: str,
-            node_group: dict,
+        self,
+        env_name: str,
+        node_group: dict,
     ):
         """
         :param env_name: target environment name.
         :param node_group: JSON object with node group (layer) settings:
         """
         return self._get(
-            'EditNodeGroup',
+            "EditNodeGroup",
             params={
-                'envName': env_name,
-                'nodeGroup': node_group,
+                "envName": env_name,
+                "nodeGroup": node_group,
             },
             delimiter=",",
         )
 
     def EditRegistryCredentials(
-            self,
-            filter: dict,
-            user: list[str] = None,
-            password: list[str] = None,
+        self,
+        filter: dict,
+        user: list[str] = None,
+        password: list[str] = None,
     ):
         """
         :param filter: JSON object to list parameters that need to be updated:
@@ -2101,40 +2053,40 @@ class _Control(Environment):
         :param password: new password to access remote registry.
         """
         return self._get(
-            'EditRegistryCredentials',
+            "EditRegistryCredentials",
             params={
-                'filter': filter,
-                'user': user,
-                'password': password,
+                "filter": filter,
+                "user": user,
+                "password": password,
             },
             delimiter=",",
         )
 
     def ExecCmd(
-            self,
-            env_name: str,
-            node_type: str,
-            command_list: dict,
-            say_yes: list[bool] = None,
+        self,
+        env_name: str,
+        node_type: str,
+        command_list: dict,
+        say_yes: list[bool] = None,
     ):
         return self._get(
-            'ExecCmd',
+            "ExecCmd",
             params={
-                'envName': env_name,
-                'nodeType': node_type,
-                'commandList': command_list,
-                'sayYes': say_yes,
+                "envName": env_name,
+                "nodeType": node_type,
+                "commandList": command_list,
+                "sayYes": say_yes,
             },
             delimiter=",",
         )
 
     def ExecCmdByGroup(
-            self,
-            env_name: str,
-            node_group: str,
-            command_list: dict,
-            say_yes: list[bool] = None,
-            Async: list[bool] = None,
+        self,
+        env_name: str,
+        node_group: str,
+        command_list: dict,
+        say_yes: list[bool] = None,
+        Async: list[bool] = None,
     ):
         """
         :param env_name: target environment name.
@@ -2144,23 +2096,23 @@ class _Control(Environment):
         :param Async: defines whether to run provided commands simultaneously (true) or one-by-one (false).
         """
         return self._get(
-            'ExecCmdByGroup',
+            "ExecCmdByGroup",
             params={
-                'envName': env_name,
-                'nodeGroup': node_group,
-                'commandList': command_list,
-                'sayYes': say_yes,
-                'async': Async,
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "commandList": command_list,
+                "sayYes": say_yes,
+                "async": Async,
             },
             delimiter=",",
         )
 
     def ExecCmdById(
-            self,
-            env_name: str,
-            node_id: int,
-            command_list: dict,
-            say_yes: list[bool] = None,
+        self,
+        env_name: str,
+        node_id: int,
+        command_list: dict,
+        say_yes: list[bool] = None,
     ):
         """
         :param env_name: target environment name.
@@ -2169,150 +2121,143 @@ class _Control(Environment):
         :param say_yes: defines whether to automatically confirm any operation if prompted (true) or not (false).
         """
         return self._get(
-            'ExecCmdById',
+            "ExecCmdById",
             params={
-                'envName': env_name,
-                'nodeId': node_id,
-                'commandList': command_list,
-                'sayYes': say_yes,
+                "envName": env_name,
+                "nodeId": node_id,
+                "commandList": command_list,
+                "sayYes": say_yes,
             },
             delimiter=",",
         )
 
     def ExecCmdByType(
-            self,
-            env_name: str,
-            node_type: str,
-            command_list: dict,
-            say_yes: list[bool] = None,
+        self,
+        env_name: str,
+        node_type: str,
+        command_list: dict,
+        say_yes: list[bool] = None,
     ):
         return self._get(
-            'ExecCmdByType',
+            "ExecCmdByType",
             params={
-                'envName': env_name,
-                'nodeType': node_type,
-                'commandList': command_list,
-                'sayYes': say_yes,
+                "envName": env_name,
+                "nodeType": node_type,
+                "commandList": command_list,
+                "sayYes": say_yes,
             },
             delimiter=",",
         )
 
     def ExecCmdInner(
-            self,
-            env_name: str,
-            target_app_id: str,
-            session: str,
-            command_list: dict,
-            node_type: list[str] = None,
-            node_id: list[int] = None,
-            user_name: list[str] = None,
-            say_yes: list[bool] = None,
-            node_group: list[str] = None,
-            Async: list[bool] = None,
+        self,
+        env_name: str,
+        target_app_id: str,
+        session: str,
+        command_list: dict,
+        node_type: list[str] = None,
+        node_id: list[int] = None,
+        user_name: list[str] = None,
+        say_yes: list[bool] = None,
+        node_group: list[str] = None,
+        Async: list[bool] = None,
     ):
         return self._get(
-            'ExecCmdInner',
+            "ExecCmdInner",
             params={
-                'envName': env_name,
-                'targetAppId': target_app_id,
-                'session': session,
-                'commandList': command_list,
-                'nodeType': node_type,
-                'nodeId': node_id,
-                'userName': user_name,
-                'sayYes': say_yes,
-                'nodeGroup': node_group,
-                'async': Async,
+                "envName": env_name,
+                "targetAppId": target_app_id,
+                "session": session,
+                "commandList": command_list,
+                "nodeType": node_type,
+                "nodeId": node_id,
+                "userName": user_name,
+                "sayYes": say_yes,
+                "nodeGroup": node_group,
+                "async": Async,
             },
             delimiter=",",
         )
 
-    def ExecDockerRunCmd(
-            self,
-            env_name: str,
-            node_id: int
-    ):
+    def ExecDockerRunCmd(self, env_name: str, node_id: int):
         return self._get(
-            'ExecDockerRunCmd',
+            "ExecDockerRunCmd",
             params={
-                'envName': env_name,
-                'nodeId': node_id,
-            }
+                "envName": env_name,
+                "nodeId": node_id,
+            },
         )
 
     def Export(
-            self,
-            env_name: str,
-            settings: str,
+        self,
+        env_name: str,
+        settings: str,
     ):
         """
         :param env_name: application identifier of the environment
         :param settings: settings for export
         """
         return self._get(
-            'Export',
+            "Export",
             params={
-                'envName': env_name,
-                'settings': settings,
-            }
+                "envName": env_name,
+                "settings": settings,
+            },
         )
 
     def Finish(
-            self,
-            env_name: str,
+        self,
+        env_name: str,
     ):
-        return self._get(
-            'Finish',
-            params={'envName': env_name}
-        )
+        return self._get("Finish", params={"envName": env_name})
 
     def FireWallStatus(
-            self,
-            env_name: str,
-            node_id: int,
+        self,
+        env_name: str,
+        node_id: int,
     ):
         return self._get(
-            'FireWallStatus',
+            "FireWallStatus",
             params={
-                'envName': env_name,
-                'nodeId': node_id,
-            }
+                "envName": env_name,
+                "nodeId": node_id,
+            },
         )
 
     def GetActiveEnvs(
-            self,
-            env_name: str,
-            domain: str,
-            start_time: date,
-            end_time: date,
-            checksum: str,
+        self,
+        env_name: str,
+        domain: str,
+        start_time: date,
+        end_time: date,
+        checksum: str,
     ):
         return self._get(
-            'GetActiveEnvs',
+            "GetActiveEnvs",
             params={
-                'envName': env_name,
-                'domain': domain,
-                'starttime': start_time,
-                'endtime': end_time,
-                'checksum': checksum,
+                "envName": env_name,
+                "domain": domain,
+                "starttime": start_time,
+                "endtime": end_time,
+                "checksum": checksum,
             },
             datetime_format="%Y-%m-%d",
         )
 
     def GetAllSumStatByUid(
-            self,
-            duration: list[int] = None,
-            end_time: list[date] = None,
+        self,
+        duration: list[int] = None,
+        end_time: list[date] = None,
     ):
         """
         :param duration: period (in seconds) to show statistics for.
         :param end_time: end time (UTC) in the format “yyyy-MM-dd hh:mm:ss”, e.g. "2022-11-16 00:00:00" (duration must be passed).
         """
         return self._get(
-            'GetAllSumStatByUid',
+            "GetAllSumStatByUid",
             params={
-                'duration': duration,
-                'endtime': end_time,
+                "duration": duration,
+                "endtime": end_time,
             },
             datetime_format="%Y-%m-%d",
             delimiter=",",
@@ -2323,9 +2268,9 @@ class _Control(Environment):
         :param owner_uid: unique identifier of the target user account.
         """
         return self._get(
-            'GetBasicsEnvsInfo',
+            "GetBasicsEnvsInfo",
             params={
-                'ownerUid': owner_uid,
+                "ownerUid": owner_uid,
             },
             delimiter=",",
         )
@@ -2336,54 +2281,54 @@ class _Control(Environment):
         :param node_id: unique identifier of the target node (container).
         """
         return self._get(
-            'GetContainerEntryPoint',
+            "GetContainerEntryPoint",
             params={
-                'envName': env_name,
-                'nodeId': node_id,
-            }
+                "envName": env_name,
+                "nodeId": node_id,
+            },
         )
 
     def GetContainerEnvVars(
-            self,
-            env_name: str,
-            node_id: int,
+        self,
+        env_name: str,
+        node_id: int,
     ):
         """
-                :param env_name: target environment name.
-                :param node_id: unique identifier of the target node (container).
-                """
+        :param env_name: target environment name.
+        :param node_id: unique identifier of the target node (container).
+        """
         return self._get(
-            'GetContainerEnvVars',
+            "GetContainerEnvVars",
             params={
-                'envName': env_name,
-                'nodeId': node_id,
-            }
+                "envName": env_name,
+                "nodeId": node_id,
+            },
         )
 
     def GetContainerEnvVarsByGroup(
-            self,
-            env_name: str,
-            node_group: str,
+        self,
+        env_name: str,
+        node_group: str,
     ):
         """
-                :param env_name: target environment name.
-                :param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
-                """
+        :param env_name: target environment name.
+        :param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
+        """
         return self._get(
-            'GetContainerEnvVarsByGroup',
+            "GetContainerEnvVarsByGroup",
             params={
-                'envName': env_name,
-                'nodeGroup': node_group,
-            }
+                "envName": env_name,
+                "nodeGroup": node_group,
+            },
         )
 
     def GetContainerManifest(
-            self,
-            image: str,
-            registry: list[str] = None,
-            user_name: list[str] = None,
-            password: list[str] = None,
-            ignore_format: list[bool] = None,
+        self,
+        image: str,
+        registry: list[str] = None,
+        user_name: list[str] = None,
+        password: list[str] = None,
+        ignore_format: list[bool] = None,
     ):
         """
         :param image: container's Docker image and tag, e.g. "alpine:latest".
@@ -2393,13 +2338,13 @@ class _Control(Environment):
         :param ignore_format: defines whether to ignore image format (true) or not (false).
         """
         return self._get(
-            'GetContainerManifest',
+            "GetContainerManifest",
             params={
-                'image': image,
-                'registry': registry,
-                'userName': user_name,
-                'password': password,
-                'ignoreFormat': ignore_format,
+                "image": image,
+                "registry": registry,
+                "userName": user_name,
+                "password": password,
+                "ignoreFormat": ignore_format,
             },
             delimiter=",",
         )
@@ -2410,11 +2355,11 @@ class _Control(Environment):
         :param node_id: unique identifier of the target node (container).
         """
         return self._get(
-            'GetContainerNodeTags',
+            "GetContainerNodeTags",
             params={
-                'envName': env_name,
-                'nodeId': node_id,
-            }
+                "envName": env_name,
+                "nodeId": node_id,
+            },
         )
 
     def GetContainerRunCmd(self, env_name: str, node_id: int):
@@ -2423,11 +2368,11 @@ class _Control(Environment):
         :param node_id: unique identifier of the target node (container).
         """
         return self._get(
-            'GetContainerRunCmd',
+            "GetContainerRunCmd",
             params={
-                'envName': env_name,
-                'nodeId': node_id,
-            }
+                "envName": env_name,
+                "nodeId": node_id,
+            },
         )
 
     def GetContainerRunConfig(self, env_name: str, node_id: int):
@@ -2436,19 +2381,19 @@ class _Control(Environment):
         :param node_id: unique identifier of the target node (container).
         """
         return self._get(
-            'GetContainerRunConfig',
+            "GetContainerRunConfig",
             params={
-                'envName': env_name,
-                'nodeId': node_id,
-            }
+                "envName": env_name,
+                "nodeId": node_id,
+            },
         )
 
     def GetContainerTags(
-            self,
-            image: str,
-            registry: list[str] = None,
-            user_name: list[str] = None,
-            password: list[str] = None,
+        self,
+        image: str,
+        registry: list[str] = None,
+        user_name: list[str] = None,
+        password: list[str] = None,
     ):
         """
         :params image: container's Docker image and tag, e.g. "alpine:latest".
@@ -2457,244 +2402,241 @@ class _Control(Environment):
         :param password: password for authentication at the remote registry.
         """
         return self._get(
-            'GetContainerTags',
+            "GetContainerTags",
             params={
-                'image': image,
-                'registry': registry,
-                'userName': user_name,
-                'password': password,
+                "image": image,
+                "registry": registry,
+                "userName": user_name,
+                "password": password,
             },
             delimiter=",",
         )
 
     def GetContainerVolumesByGroup(
-            self,
-            env_name: str,
-            node_group: str,
+        self,
+        env_name: str,
+        node_group: str,
     ):
         """
         :params env_name: target environment name.
         :param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
         """
         return self._get(
-            'GetContainerVolumesByGroup',
+            "GetContainerVolumesByGroup",
             params={
-                'envName': env_name,
-                'nodeGroup': node_group,
-            }
+                "envName": env_name,
+                "nodeGroup": node_group,
+            },
         )
 
     def GetContainerVolumesById(
-            self,
-            env_name: str,
-            node_id: int,
+        self,
+        env_name: str,
+        node_id: int,
     ):
         """
         :params env_name: target environment name.
         :param node_id: unique identifier of the target node (container).
         """
         return self._get(
-            'GetContainerVolumesById',
+            "GetContainerVolumesById",
             params={
-                'envName': env_name,
-                'nodeId': node_id,
-            }
+                "envName": env_name,
+                "nodeId": node_id,
+            },
         )
 
     def GetDockerConfig(
-            self,
-            env_name: str,
-            node_id: int,
+        self,
+        env_name: str,
+        node_id: int,
     ):
         return self._get(
-            'GetDockerConfig',
+            "GetDockerConfig",
             params={
-                'envName': env_name,
-                'nodeId': node_id,
-            }
+                "envName": env_name,
+                "nodeId": node_id,
+            },
         )
 
     def GetDockerEntryPoint(
-            self,
-            env_name: str,
-            node_id: int,
+        self,
+        env_name: str,
+        node_id: int,
     ):
         return self._get(
-            'GetDockerEntryPoint',
+            "GetDockerEntryPoint",
             params={
-                'envName': env_name,
-                'nodeId': node_id,
-            }
+                "envName": env_name,
+                "nodeId": node_id,
+            },
         )
 
     def GetDockerRunCmd(
-            self,
-            env_name: str,
-            node_id: int,
+        self,
+        env_name: str,
+        node_id: int,
     ):
         return self._get(
-            'GetDockerRunCmd',
+            "GetDockerRunCmd",
             params={
-                'envName': env_name,
-                'nodeId': node_id,
-            }
+                "envName": env_name,
+                "nodeId": node_id,
+            },
         )
 
     def GetDomainsList(
-            self,
-            env_name: str,
-            checksum: str,
+        self,
+        env_name: str,
+        checksum: str,
     ):
         return self._get(
-            'GetDomainsList',
+            "GetDomainsList",
             params={
-                'envName': env_name,
-                'checksum': checksum,
-            }
+                "envName": env_name,
+                "checksum": checksum,
+            },
         )
 
     def GetEndpoints(
-            self,
-            env_name: str,
-            node_id: list[int] = None,
+        self,
+        env_name: str,
+        node_id: list[int] = None,
     ):
         """
         :param env_name: target environment name.
         :param node_id: unique identifier of the target node (container).
         """
         return self._get(
-            'GetEndpoints',
+            "GetEndpoints",
             params={
-                'envName': env_name,
-                'nodeId': node_id,
+                "envName": env_name,
+                "nodeId": node_id,
             },
             delimiter=",",
         )
 
     def GetEngineList(
-            self,
-            type: list[str] = None,
+        self,
+        type: list[str] = None,
     ):
         """
         :param type: type of the engine (java/php/ruby/js)
         """
         return self._get(
-            'GetEngineList',
+            "GetEngineList",
             params={
-                'type': type,
+                "type": type,
             },
             delimiter=",",
         )
 
     def GetEngineTypes(self):
-        return self._get(
-            'GetEngineTypes',
-            params={}
-        )
+        return self._get("GetEngineTypes", params={})
 
     def GetEnvInfo(
-            self,
-            env_name: str,
-            lazy: list[bool] = None,
+        self,
+        env_name: str,
+        lazy: list[bool] = None,
     ):
         """
         :param env_name: target environment name.
         :param lazy: defines whether to load only the main environment metadata, e.g. name, alias, domain, etc., (true) or all the environment information (false).
         """
         return self._get(
-            'GetEnvInfolazy',
+            "GetEnvInfolazy",
             params={
-                'envName': env_name,
-                'lazy': lazy,
+                "envName": env_name,
+                "lazy": lazy,
             },
             delimiter=",",
         )
 
     def GetEnvProperty(
-            self,
-            env_name: str,
-            property_keys: list[str] = None,
+        self,
+        env_name: str,
+        property_keys: list[str] = None,
     ):
         """
         :param env_name: target environment name.
         :param property_keys: a comma-separated list of property keys (all properties if “null” or “empty”). For example: "customProperty1,customProperty2".
         """
         return self._get(
-            'GetEnvProperty',
+            "GetEnvProperty",
             params={
-                'envName': env_name,
-                'propertyKeys': property_keys,
+                "envName": env_name,
+                "propertyKeys": property_keys,
             },
             delimiter=",",
         )
 
     def GetEnvs(
-            self,
-            lazy: list[bool] = None,
-            owner_uid: list[int] = None,
+        self,
+        lazy: list[bool] = None,
+        owner_uid: list[int] = None,
     ):
         """
         :param lazy: defines whether to load only the main environment metadata, e.g. name, alias, domain, etc., (true) or all the environment information (false).
         :param owner_uid: unique identifier of the target user account.
         """
         return self._get(
-            'GetEnvs',
+            "GetEnvs",
             params={
-                'lazy': lazy,
-                'ownerUid': owner_uid,
+                "lazy": lazy,
+                "ownerUid": owner_uid,
             },
             delimiter=",",
         )
 
     def GetEnvsByCriteria(
-            self,
-            criteria: dict,
-            lazy: list[bool] = None,
+        self,
+        criteria: dict,
+        lazy: list[bool] = None,
     ):
         return self._get(
-            'GetEnvsByCriteria',
+            "GetEnvsByCriteria",
             params={
-                'criteria': criteria,
-                'lazy': lazy,
+                "criteria": criteria,
+                "lazy": lazy,
             },
             delimiter=",",
         )
 
     def GetEnvsInfo(
-            self,
-            env_name: str,
-            target_app_id: list[str] = None,
+        self,
+        env_name: str,
+        target_app_id: list[str] = None,
     ):
         return self._get(
-            'GetEnvsInfo',
+            "GetEnvsInfo",
             params={
-                'envName': env_name,
-                'targetAppid': target_app_id,
+                "envName": env_name,
+                "targetAppid": target_app_id,
             },
             delimiter=",",
         )
 
     def GetLogs(
-            self,
-            env_name: str,
-            node_id: int,
-            path: list[str] = None,
+        self,
+        env_name: str,
+        node_id: int,
+        path: list[str] = None,
     ):
         return self._get(
-            'GetLogs',
+            "GetLogs",
             params={
-                'envName': env_name,
-                'nodeId': node_id,
-                'path': path,
+                "envName": env_name,
+                "nodeId": node_id,
+                "path": path,
             },
             delimiter=",",
         )
 
     def GetLogsList(
-            self,
-            env_name: str,
-            node_id: int,
-            path: list[str] = None,
+        self,
+        env_name: str,
+        node_id: int,
+        path: list[str] = None,
     ):
         """
         :param env_name: target environment name.
@@ -2702,126 +2644,120 @@ class _Control(Environment):
         :params path: custom path to the log files (/var/log by default).
         """
         return self._get(
-            'GetLogsList',
+            "GetLogsList",
             params={
-                'envName': env_name,
-                'nodeId': node_id,
-                'path': path,
+                "envName": env_name,
+                "nodeId": node_id,
+                "path": path,
             },
             delimiter=",",
         )
 
     def GetNodeGroups(
-            self,
-            env_name: str,
+        self,
+        env_name: str,
     ):
         """
         :param env_name: target environment name
         """
         return self._get(
-            'GetNodeGroups',
+            "GetNodeGroups",
             params={
-                'envName': env_name,
+                "envName": env_name,
             },
         )
 
     def GetNodeInfo(
-            self,
-            node_id: str,
+        self,
+        node_id: str,
     ):
         """
         :param node_id: node identifier
         """
         return self._get(
-            'GetNodeInfo',
+            "GetNodeInfo",
             params={
-                'GetNodeInfo': node_id,
+                "GetNodeInfo": node_id,
             },
         )
 
     def GetNodeMissions(self):
-        return self._get(
-            'GetNodeMissions',
-            params={}
-        )
+        return self._get("GetNodeMissions", params={})
 
     def GetNodeSSHKey(
-            self,
-            env_name: str,
-            node_id: int,
-            uid: int,
-            skip_node_type_check: list[bool] = None,
+        self,
+        env_name: str,
+        node_id: int,
+        uid: int,
+        skip_node_type_check: list[bool] = None,
     ):
         """
         :param node_id: unique identifier of the software node.
         :param skip_node_type_check: ignore 'jelastic.ssh.nodetype.restriction.list'
         """
         return self._get(
-            'GetNodeSSHKey',
+            "GetNodeSSHKey",
             params={
-                'envName': env_name,
-                'nodeId': node_id,
-                'uid': uid,
-                'skipNodeTypeCheck': skip_node_type_check,
+                "envName": env_name,
+                "nodeId": node_id,
+                "uid": uid,
+                "skipNodeTypeCheck": skip_node_type_check,
             },
             delimiter=",",
         )
 
     def GetNodeTags(
-            self,
-            env_name: str,
-            node_id: int,
+        self,
+        env_name: str,
+        node_id: int,
     ):
         """
         :param env_name: target environment name.
         :param node_id: unique identifier of the target node (container).
         """
         return self._get(
-            'GetNodeTags',
+            "GetNodeTags",
             params={
-                'envName': env_name,
-                'nodeId': node_id,
+                "envName": env_name,
+                "nodeId": node_id,
             },
         )
 
     def GetRegions(self):
-        return self._get(
-            'GetRegions',
-            params={}
-        )
+        return self._get("GetRegions", params={})
 
     def GetRegionsInner(
-            self,
-            group_name: str,
-            is_enabled: list[bool] = None,
+        self,
+        group_name: str,
+        is_enabled: list[bool] = None,
     ):
         """
         :param group_name: unique identifier of the target user group.
         :param is_enabled: defines whether to include only active regions (true) or not (false).
         """
         return self._get(
-            'GetRegionsInner',
+            "GetRegionsInner",
             params={
-                'groupName': group_name,
-                'isEnabled': is_enabled,
+                "groupName": group_name,
+                "isEnabled": is_enabled,
             },
             delimiter=",",
         )
 
     def GetRegistryInfo(
-            self,
-            env_name: str,
-            node_group: str,
+        self,
+        env_name: str,
+        node_group: str,
     ):
         """
         :param env_name: target environment name.
         :param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
         """
         return self._get(
-            'GetRegistryInfo',
+            "GetRegistryInfo",
             params={
-                'envName': env_name,
-                'nodeGroup': node_group,
+                "envName": env_name,
+                "nodeGroup": node_group,
             },
         )
 
@@ -2830,10 +2766,10 @@ class _Control(Environment):
         :param node_id: unique identifier of the target node (container).
         """
         return self._get(
-            'GetSSHAccessInfo',
+            "GetSSHAccessInfo",
             params={
-                'nodeId': node_id,
-            }
+                "nodeId": node_id,
+            },
         )
 
     def GetSharedEnvsByUid(self, uid: int):
@@ -2841,17 +2777,17 @@ class _Control(Environment):
         :param uid: identifier of the target user
         """
         return self._get(
-            'GetSharedEnvsByUid',
+            "GetSharedEnvsByUid",
             params={
-                'uid': uid,
-            }
+                "uid": uid,
+            },
         )
 
     def GetSoftwarePackages(
-            self,
-            env_name: str,
-            node_type: list[str] = None,
-            node_group: list[str] = None,
+        self,
+        env_name: str,
+        node_type: list[str] = None,
+        node_group: list[str] = None,
     ):
         """
         :param env_name: target environment name.
@@ -2859,24 +2795,24 @@ class _Control(Environment):
         :param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
         """
         return self._get(
-            'GetSoftwarePackages',
+            "GetSoftwarePackages",
             params={
-                'envName': env_name,
-                'nodeType': node_type,
-                'nodeGroup': node_group,
+                "envName": env_name,
+                "nodeType": node_type,
+                "nodeGroup": node_group,
             },
             delimiter=",",
         )
 
     def GetStats(
-            self,
-            env_name: str,
-            duration: int,
-            interval: int,
-            end_time: list[datetime] = None,
-            node_id: list[int] = None,
-            node_type: list[str] = None,
-            node_group: list[str] = None,
+        self,
+        env_name: str,
+        duration: int,
+        interval: int,
+        end_time: list[datetime] = None,
+        node_id: list[int] = None,
+        node_type: list[str] = None,
+        node_group: list[str] = None,
     ):
         """
         :param env_name: target environment name.
@@ -2888,25 +2824,25 @@ class _Control(Environment):
         :node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
         """
         return self._get(
-            'GetStats',
+            "GetStats",
             params={
-                'envName': env_name,
-                'duration': duration,
-                'interval': interval,
-                'endtime': end_time,
-                'nodeid': node_id,
-                'nodetype': node_type,
-                'nodeGroup': node_group,
+                "envName": env_name,
+                "duration": duration,
+                "interval": interval,
+                "endtime": end_time,
+                "nodeid": node_id,
+                "nodetype": node_type,
+                "nodeGroup": node_group,
             },
             datetime_format="%Y-%m-%d",
             delimiter=",",
         )
 
     def GetSumStat(
-            self,
-            env_name: str,
-            duration: int,
-            end_time: list[datetime] = None,
+        self,
+        env_name: str,
+        duration: int,
+        end_time: list[datetime] = None,
     ):
         """
         :param env_name: target environment name
@@ -2914,319 +2850,1411 @@ class _Control(Environment):
         :param end_time: end time (UTC) in the format “yyyy-MM-dd hh:mm:ss”, e.g. "2022-11-16 00:00:00" (duration must be passed).
         """
         return self._get(
-            'GetSumStat',
+            "GetSumStat",
             params={
-                'envName': env_name,
-                'duration': duration,
-                'endtime': end_time,
+                "envName": env_name,
+                "duration": duration,
+                "endtime": end_time,
             },
             datetime_format="%Y-%m-%d",
             delimiter=",",
         )
 
     def GetTemplateManifest(
-            self,
-            node_type: str,
-            tag: str,
+        self,
+        node_type: str,
+        tag: str,
     ):
         """
         :param node_type: unique identifier of the target node type (software stack), e.g. “tomcat11” for the Tomcat 11 stack.
         :param tag: target tag for the template.
         """
         return self._get(
-            'GetTemplateManifest',
+            "GetTemplateManifest",
             params={
-                'nodeType': node_type,
-                'tag': tag,
-            }
+                "nodeType": node_type,
+                "tag": tag,
+            },
         )
 
     def GetTemplates(
-            self,
-            type: list[str] = None,
-            owneer_uid: list[int] = None,
+        self,
+        type: list[str] = None,
+        owneer_uid: list[int] = None,
     ):
         """
         :param type: filter the list by the template type (ALL,NATIVE,CARTRIDGE,DOCKERIZED)
         :param owneer_uid: filter the list by the templates available for the specific user.
         """
         return self._get(
-            'GetTemplates',
+            "GetTemplates",
             params={
-                'type': type,
-                'ownerUid': owneer_uid,
-            }
+                "type": type,
+                "ownerUid": owneer_uid,
+            },
         )
 
     def GetTransferRequest(self):
-        return self._get(
-            'GetTransferRequest',
-            params={}
-        )
+        return self._get("GetTransferRequest", params={})
 
     def InstallPackageByGroup(
-            self,
-            env_name: str,
-            node_group: str,
-            package_name: str,
+        self,
+        env_name: str,
+        node_group: str,
+        package_name: str,
     ):
         """
         :param env_name: environment name or appid
         :param node_group: node group (cp, bl, nosql, sql)
         """
         return self._get(
-            'InstallPackageByGroup',
+            "InstallPackageByGroup",
             params={
-                'envName': env_name,
-                'nodeGroup': node_group,
-                'packageName': package_name,
-            }
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "packageName": package_name,
+            },
         )
 
     def InstallPackageById(
-            self,
-            env_name: str,
-            package_name: str,
-            node_id: list[int] = None,
+        self,
+        env_name: str,
+        package_name: str,
+        node_id: list[int] = None,
     ):
         """
         :param env_name: environment name or appid
         :node_id: id of node
         """
         return self._get(
-            'InstallPackageById',
+            "InstallPackageById",
             params={
-                'envName': env_name,
-                'packageName': package_name,
-                'nodeId': node_id,
+                "envName": env_name,
+                "packageName": package_name,
+                "nodeId": node_id,
             },
             delimiter=",",
         )
 
     def InstallSoftwarePackage(
-            self,
-            env_name: str,
-            keyword: str,
-            node_type: list[str] = None,
-            node_group: list[str] = None,
-                               ):
+        self,
+        env_name: str,
+        keyword: str,
+        node_type: list[str] = None,
+        node_group: list[str] = None,
+    ):
         return self._get(
-            'InstallSoftwarePackage',
+            "InstallSoftwarePackage",
             params={
-                'envName': env_name,
-                'keyword': keyword,
-                'nodeType': node_type,
-                'nodeGroup': node_group,
+                "envName": env_name,
+                "keyword": keyword,
+                "nodeType": node_type,
+                "nodeGroup": node_group,
             },
             delimiter=",",
         )
 
-    def LinkDockerNodes(self):
-        pass
-
-    def LinkNode(self):
-        pass
-
-    def LinkNodes(self):
-        pass
-
-    def ManageEnvAttributes(self):
-        pass
-
-    def Migrate(self):
-        pass
-
-    def ReadLog(self):
-        pass
-
-    def RedeployContainerById(self):
-        pass
-
-    def RedeployContainers(self):
-        pass
-
-    def RedeployContainersByGroup(self):
-        pass
-
-    def RemoveApp(self):
-        pass
-
-    def RemoveContainerEnvVars(self):
-        pass
-
-    def RemoveContainerVolume(self):
-        pass
-
-    def RemoveContainerVolumeByGroup(self):
-        pass
-
-    def RemoveContainerVolumes(self):
-        pass
-
-    def RemoveDockerVolume(self):
-        pass
-
-    def RemoveDockerVolumeByGroup(self):
-        pass
-
-    def RemoveEndpoint(self):
-        pass
-
-    def RemoveEnvPolicy(self):
-        pass
-
-    def RemoveEnvProperty(self):
-        pass
-
-    def RemoveLog(self):
-        pass
-
-    def RemoveNode(self):
-        pass
-
-    def RenameApp(self):
-        pass
-
-    def ReplicateNodes(self):
-        pass
-
-    def ResetContainerPassword(self):
-        pass
-
-    def ResetContainerPasswordById(self):
-        pass
-
-    def ResetContainerPasswordByType(self):
-        pass
-
-    def ResetContainersPasswordByGroup(self):
-        pass
-
-    def ResetNodePassword(self):
-        pass
-
-    def ResetNodePasswordById(self):
-        pass
-
-    def ResetNodePasswordByType(self):
-        pass
-
-    def ResetServicePassword(self):
-        pass
-
-    def RestartContainer(self):
-        pass
-
-    def RestartContainerById(self):
-        pass
-
-    def RestartContainerByType(self):
-        pass
-
-    def RestartContainersByGroup(self):
-        pass
-
-    def RestartNodeById(self):
-        pass
-
-    def RestartNodes(self):
-        pass
-
-    def RestartNodesByGroup(self):
-        pass
-
-    def RestartNodesByType(self):
-        pass
-
-    def RestartServices(self):
-        pass
-
-    def RestoreDump(self):
-        pass
-
-    def SendEnvCreatedEmail(self):
-        pass
-
-    def SendTransferRequest(self):
-        pass
-
-    def SetCloudletsCount(self):
-        pass
-
-    def SetCloudletsCountByGroup(self):
-        pass
-
-    def SetCloudletsCountById(self):
-        pass
-
-    def SetCloudletsCountByType(self):
-        pass
-
-    def SetContainerEntryPoint(self):
-        pass
-
-    def SetContainerEnvVars(self):
-        pass
-
-    def SetContainerEnvVarsByGroup(self):
-        pass
-
-    def SetContainerRunCmd(self):
-        pass
-
-    def SetDiskLimitByGroup(self):
-        pass
-
-    def SetDiskLimitById(self):
-        pass
-
-    def SetDockerEntryPoint(self):
-        pass
-
-    def SetDockerEnvVars(self):
-        pass
-
-    def SetDockerRunCmd(self):
-        pass
-
-    def SetDockerVolumesFrom(self):
-        pass
-
-    def SetEngineByGroup(self):
-        pass
-
-    def SetEnvDisplayName(self):
-        pass
-
-    def SetEnvGroup(self):
-        pass
-
-    def SetNodeDisplayName(self):
-        pass
-
-    def SetNodeGroupDisplayName(self):
-        pass
-
-    def SetSLBAccessEnabled(self):
-        pass
-
-    def SkipMessage(self):
-        pass
-
-    def SleepEnv(self):
-        pass
-
-    def StartEnv(self):
-        pass
-
-    def StopEnv(self):
-        pass
-
-    def UninstallSoftwarePackage(self):
-        pass
-
-    def UnlinkDockerNodes(self):
-        pass
-
-    def UnpackDocker(self):
-        pass
+    def LinkDockerNodes(
+        self,
+        env_name: str,
+        source_node_id: int,
+        target_node_id: int,
+        alias: str,
+        is_auto_restart: list[bool] = None,
+        group_alias: list[str] = None,
+    ):
+        return self._get(
+            "LinkDockerNodes",
+            params={
+                "envName": env_name,
+                "sourceNodeId": source_node_id,
+                "targetNodeId": target_node_id,
+                "alias": alias,
+                "isAutoRestart": is_auto_restart,
+                "groupAlias": group_alias,
+            },
+            delimiter=",",
+        )
+
+    def LinkNode(
+        self,
+        env_name: str,
+        child_node_id: int,
+        parent_node_id: int,
+    ):
+        return self._get(
+            "LinkNode",
+            params={
+                "envName": env_name,
+                "childNodeId": child_node_id,
+                "parentNodeId": parent_node_id,
+            },
+        )
+
+    def LinkNodes(
+        self,
+        env_name: str,
+        child_node: str,
+        parent_node: str,
+    ):
+        return self._get(
+            "LinkNodes",
+            params={
+                "envName": env_name,
+                "childNode": child_node,
+                "parentNode": parent_node,
+            },
+        )
+
+    def ManageEnvAttributes(
+        self,
+        target_app_id: str,
+        attributes: str,
+    ):
+        """
+        :param target_app_id: target environment name.
+        :param attributes: JSON object with required attributes. For example: "{'key1': 'value1', 'key2': null}".
+        """
+        return self._get(
+            "ManageEnvAttributes",
+            params={
+                "targetAppId": target_app_id,
+                "attributes": attributes,
+            },
+        )
+
+    def Migrate(
+        self,
+        env_name: str,
+        hardware_node_group: list[str] = None,
+        is_on_line: list[bool] = None,
+    ):
+        """
+        :param env_name: target environment name.
+        :param hardware_node_group: unique identifier of the target user region (host group).
+        :param is_on_line: defines whether to perform online migration (true) or offline (false).
+        """
+        return self._get(
+            "Migrate",
+            params={
+                "envName": env_name,
+                "hardwareNodeGroup": hardware_node_group,
+                "isOnLine": is_on_line,
+            },
+            delimiter=",",
+        )
+
+    def ReadLog(
+        self,
+        env_name: str,
+        node_id: int,
+        path: str,
+        From: list[int] = None,
+        count: list[int] = None,
+    ):
+        """
+        :param env_name: target environment name
+        :param node_id: unique identifier of the target node (container).
+        :param path: path to the required log file.
+        :param From: index number of a symbol to start returning log file data from (all preceding symbols are skipped); from start of the file if not specified.
+        :param count: number of symbols to return (all subsequent symbols are skipped); till the end of the file if not specified.
+        """
+        return self._get(
+            "ReadLog",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "path": path,
+                "from": From,
+                "count": count,
+            },
+            delimiter=",",
+        )
+
+    def RedeployContainerById(
+        self,
+        env_name: str,
+        node_id: int,
+        tag: str,
+        use_existing_volumes: list[bool] = None,
+        login: list[str] = None,
+        password: list[str] = None,
+        manage_dns_state: list[bool] = None,
+    ):
+        """
+        :param env_name: target environment name
+        :param node_id: unique identifier of the target node (container).
+        :param tag: target tag for the container redeploy.
+        :param use_existing_volumes: defines whether to keep existing volumes data (true) or erase any custom data (false).
+        :param login: new username to access remote registry.
+        :param password: new password to access remote registry.
+        :param manage_dns_state: defines whether to exclude a target node from DNS for the duration of the operation (true) or not (false, by default). This parameter only works with the sequential processes (isSequential=true) and is ignored otherwise. Enabling the parameter will bring additional delay (as the DNS records have TTL and cannot be disabled instantly), while disabling can cause some of the requests to be lost.
+        """
+        return self._get(
+            "RedeployContainerById",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "tag": tag,
+                "useExistingVolumes": use_existing_volumes,
+                "login": login,
+                "password": password,
+                "manageDNSState": manage_dns_state,
+            },
+            delimiter=",",
+        )
+
+    def RedeployContainers(
+        self,
+        env_name: str,
+        tag: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
+        use_existing_volumes: list[bool] = None,
+        login: list[str] = None,
+        password: list[str] = None,
+        manage_dns_state: list[bool] = None,
+    ):
+        """
+        :param env_name: target environment name.
+        :param tag: target tag for the container redeploy.
+        :param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        :param node_id: unique identifier of the target node (container).
+        :param use_existing_volumes: defines whether to keep existing volumes data (true) or erase any custom data (false).
+        :param login: new username to access remote registry
+        :param password: new password to access remote registry.
+        :param manage_dns_state: defines whether to exclude a target node from DNS for the duration of the operation (true) or not (false, by default). This parameter only works with the sequential processes (isSequential=true) and is ignored otherwise. Enabling the parameter will bring additional delay (as the DNS records have TTL and cannot be disabled instantly), while disabling can cause some of the requests to be lost.
+        """
+        return self._get(
+            "RedeployContainers",
+            params={
+                "envName": env_name,
+                "tag": tag,
+                "nodeGroup": node_group,
+                "nodeId": node_id,
+                "useExistingVolumes": use_existing_volumes,
+                "login": login,
+                "password": password,
+                "manageDNSState": manage_dns_state,
+            },
+            delimiter=",",
+        )
+
+    def RedeployContainersByGroup(
+        self,
+        env_name: str,
+        node_group: str,
+        tag: str,
+        is_sequential: list[bool] = None,
+        use_existing_volumes: list[bool] = None,
+        delay: list[int] = None,
+        login: list[str] = None,
+        password: list[str] = None,
+        manage_dns_state: list[bool] = None,
+    ):
+        """
+        :params env_name: target environment name.
+        :params node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        :params tag: target tag for the container redeploy.
+        :params is_sequential: defines whether to redeploy containers one-by-one to ensure uptime (true) or simultaneously (false).
+        :params use_existing_volumes: defines whether to keep existing volumes data (true) or erase any custom data (false).
+        :params delay: delay (in seconds) between two consecutive redeploys when using the sequential restart type (I.e. when redeploy is performed on servers one-by-one to ensure uptime).
+        :params login: new username to access remote registry.
+        :params password: new password to access remote registry.
+        :params manage_dns_state: defines whether to exclude a target node from DNS for the duration of the operation (true) or not (false, by default). This parameter only works with the sequential processes (isSequential=true) and is ignored otherwise. Enabling the parameter will bring additional delay (as the DNS records have TTL and cannot be disabled instantly), while disabling can cause some of the requests to be lost.
+        """
+        return self._get(
+            "RedeployContainersByGroup",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "tag": tag,
+                "isSequential": is_sequential,
+                "useExistingVolumes": use_existing_volumes,
+                "delay": delay,
+                "login": login,
+                "password": password,
+                "manageDNSState": manage_dns_state,
+            },
+            delimiter=",",
+        )
+
+    def RemoveApp(
+        self,
+        env_name: str,
+        context: str,
+        node_group: list[str] = None,
+    ):
+        """
+        :params env_name: target environment name.
+        :params context: application context to be removed.
+        :params node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        """
+        return self._get(
+            "RemoveApp",
+            params={
+                "envName": env_name,
+                "context": context,
+                "nodeGroup": node_group,
+            },
+            delimiter=",",
+        )
+
+    def RemoveContainerEnvVars(
+        self,
+        env_name: str,
+        vars: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
+    ):
+        """
+        :params env_name: target environment name.
+        :params vars: JSON array with a list of container environment variables, e.g. ["var1", "var2"].
+        :params node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        :params node_id: unique identifier of the target node (container).
+        """
+        return self._get(
+            "RemoveContainerEnvVars",
+            params={
+                "envName": env_name,
+                "vars": vars,
+                "nodeGroup": node_group,
+                "nodeId": node_id,
+            },
+            delimiter=",",
+        )
+
+    def RemoveContainerVolume(
+        self,
+        env_name: str,
+        node_id: int,
+        path: str,
+    ):
+        return self._get(
+            "RemoveContainerVolume",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "path": path,
+            },
+        )
+
+    def RemoveContainerVolumeByGroup(
+        self,
+        env_name: str,
+        node_group: str,
+        path: str,
+    ):
+        return self._get(
+            "RemoveContainerVolumeByGroup",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "path": path,
+            },
+        )
+
+    def RemoveContainerVolumes(
+        self,
+        env_name: str,
+        volumes: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
+    ):
+        """
+        :params env_name: target environment name
+        :param volumes: JSON array of data volumes to be removed, e.g. /data/volume or ["/data/volume","/data/volume2", ...].
+        :params node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.e
+        :params node_id: unique identifier of the target node (container).
+        """
+        return self._get(
+            "RemoveContainerVolumes",
+            params={
+                "envName": env_name,
+                "volumes": volumes,
+                "nodeGroup": node_group,
+                "nodeId": node_id,
+            },
+            delimiter=",",
+        )
+
+    def RemoveDockerVolume(
+        self,
+        env_name: str,
+        node_id: int,
+        path: str,
+    ):
+        return self._get(
+            "RemoveDockerVolume",
+            params={"envName": env_name, "nodeId": node_id, "path": path},
+        )
+
+    def RemoveDockerVolumeByGroup(
+        self,
+        env_name: str,
+        node_group: str,
+        path: str,
+    ):
+        return self._get(
+            "RemoveDockerVolumeByGroup",
+            params={"envName": env_name, "nodeGroup": node_group, "path": path},
+        )
+
+    def RemoveEndpoint(
+        self,
+        env_name: str,
+        id: int,
+    ):
+        """
+        :param env_name: target environment name.
+        :param id: unique identifier of the target endpoint.
+        """
+        return self._get(
+            "RemoveEndpoint",
+            params={
+                "envName": env_name,
+                "id": id,
+            },
+        )
+
+    def RemoveEnvPolicy(
+        self,
+        target_app_id: str,
+        policy: str,
+    ):
+        """
+        :param target_app_id: target application identifier of the environment for removing policy.
+        :param policy: comma-separated list of policy. For example: "policy1,policy2".
+        """
+        return self._get(
+            "RemoveEnvPolicy",
+            params={
+                "targetAppId": target_app_id,
+                "policy": policy,
+            },
+        )
+
+    def RemoveEnvProperty(
+        self,
+        env_name: str,
+        property_keys: str,
+    ):
+        """
+        :param env_name: target environment name
+        :param property_keys: comma-separated list of property keys. For example: "customProperty1,customProperty2".
+        """
+        return self._get(
+            "RemoveEnvProperty",
+            params={
+                "envName": env_name,
+                "propertyKeys": property_keys,
+            },
+        )
+
+    def RemoveLog(
+        self,
+        env_name: str,
+        node_id: int,
+        path: str,
+    ):
+        """
+        :param env_name: target environment name
+        :param node_id: unique identifier of the target node (container).
+        :param path: path to the required log file.
+        """
+        return self._get(
+            "RemoveLog",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "path": path,
+            },
+        )
+
+    def RemoveNode(self, env_name: str, node_id: int):
+        return self._get(
+            "RemoveNode",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+            },
+        )
+
+    def RenameApp(
+        self,
+        env_name: str,
+        old_context: str,
+        new_context: str,
+        node_group: list[str] = None,
+    ):
+        """
+        :param env_name: target environment name.
+        :param old_context: current context name of the application.
+        :param new_context: new context name for the application.
+        :node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        """
+        return self._get(
+            "RenameApp",
+            params={
+                "envName": env_name,
+                "oldContext": old_context,
+                "newContext": new_context,
+                "nodeGroup": node_group,
+            },
+            delimiter=",",
+        )
+
+    def ReplicateNodes(self, env_name: str, nodes: str):
+        return self._get("ReplicateNodes", params={"envName": env_name, "nodes": nodes})
+
+    def ResetContainerPassword(
+        self,
+        env_name: str,
+        node_id: int,
+        password: list[str] = None,
+    ):
+        return self._get(
+            "ResetContainerPassword",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "password": password,
+            },
+            delimiter=",",
+        )
+
+    def ResetContainerPasswordById(
+        self,
+        env_name: str,
+        node_id: int,
+        password: list[str] = None,
+    ):
+        return self._get(
+            "ResetContainerPasswordById",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "password": password,
+            },
+            delimiter=",",
+        )
+
+    def ResetContainerPasswordByType(
+        self,
+        env_name: str,
+        node_type: str,
+        password: list[str] = None,
+    ):
+        return self._get(
+            "ResetContainerPasswordByType",
+            params={
+                "envName": env_name,
+                "nodeType": node_type,
+                "password": password,
+            },
+            delimiter=",",
+        )
+
+    def ResetContainersPasswordByGroup(
+        self,
+        env_name: str,
+        node_group: str,
+        password: list[str] = None,
+    ):
+        return self._get(
+            "ResetContainersPasswordByGroup",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "password": password,
+            },
+            delimiter=",",
+        )
+
+    def ResetNodePassword(
+        self,
+        env_name: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
+        password: list[str] = None,
+    ):
+        """
+        :param env_name: target environment name.
+        :param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        :param node_id: unique identifier of the target node (container)
+        :param password: a new OS password for user container(s).
+        """
+        return self._get(
+            "ResetNodePassword",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "nodeId": node_id,
+                "password": password,
+            },
+            delimiter=",",
+        )
+
+    def ResetNodePasswordById(
+        self,
+        env_name: str,
+        node_id: int,
+        password: list[str] = None,
+    ):
+        return self._get(
+            "ResetNodePasswordById",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "password": password,
+            },
+            delimiter=",",
+        )
+
+    def ResetNodePasswordByType(
+        self,
+        env_name: str,
+        node_type: str,
+        password: list[str] = None,
+    ):
+        return self._get(
+            "ResetNodePasswordByType",
+            params={
+                "envName": env_name,
+                "nodeType": node_type,
+                "password": password,
+            },
+            delimiter=",",
+        )
+
+    def ResetServicePassword(
+        self,
+        env_name: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
+        password: list[str] = None,
+    ):
+        """
+        :param env_name: target environment name.
+        :param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        :param node_id: unique identifier of the target node (container)
+        :param password: a new OS password for user container(s)  service..
+        """
+        return self._get(
+            "ResetServicePassword",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "nodeId": node_id,
+                "password": password,
+            },
+            delimiter=",",
+        )
+
+    def RestartContainer(
+        self,
+        env_name: str,
+        node_id: int,
+        manage_dns_state: list[bool] = None,
+    ):
+        return self._get(
+            "RestartContainer",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "manageDNSState": manage_dns_state,
+            },
+            delimiter=",",
+        )
+
+    def RestartContainerById(
+        self,
+        env_name: str,
+        node_id: int,
+        manage_dns_state: list[bool] = None,
+    ):
+        return self._get(
+            "RestartContainerById",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "manageDNSState": manage_dns_state,
+            },
+            delimiter=",",
+        )
+
+    def RestartContainerByType(
+        self,
+        env_name: str,
+        node_type: str,
+        manage_dns_state: list[bool] = None,
+    ):
+        return self._get(
+            "RestartContainerByType",
+            params={
+                "envName": env_name,
+                "nodeType": node_type,
+                "manageDNSState": manage_dns_state,
+            },
+            delimiter=",",
+        )
+
+    def RestartContainersByGroup(
+        self,
+        env_name: str,
+        node_group: str,
+        delay: list[int] = None,
+        is_sequential: list[bool] = None,
+        manage_dns_state: list[bool] = None,
+    ):
+        return self._get(
+            "RestartContainersByGroup",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "delay": delay,
+                "isSequential": is_sequential,
+                "manageDNSState": manage_dns_state,
+            },
+            delimiter=",",
+        )
+
+    def RestartNodeById(
+        self,
+        env_name: str,
+        node_id: int,
+        manage_dns_state: list[bool] = None,
+    ):
+        return self._get(
+            "RestartNodeById",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "manageDNSState": manage_dns_state,
+            },
+            delimiter=",",
+        )
+
+    def RestartNodes(
+        self,
+        env_name: str,
+        node_group: str,
+        node_id: list[int] = None,
+        delay: list[int] = None,
+        is_sequential: list[bool] = None,
+        manage_dns_state: list[bool] = None,
+    ):
+        """
+        :param env_name: target environment name.
+        :param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        :param node_id: unique identifier of the target node (container).
+        :param delay: delay (in seconds) between two consecutive restarts when using the sequential restart type (I.e. when restart is performed on servers one-by-one to ensure uptime).
+        :param is_sequential: defines whether to restart containers one-by-one to ensure uptime (true) or simultaneously (false).
+        :param manage_dns_state: defines whether to exclude a target node from DNS for the duration of the operation (true) or not (false, by default). This parameter only works with the sequential processes (isSequential=true) and is ignored otherwise. Enabling the parameter will bring additional delay (as the DNS records have TTL and cannot be disabled instantly), while disabling can cause some of the requests to be lost.
+        """
+        return self._get(
+            "RestartNodes",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "nodeId": node_id,
+                "delay": delay,
+                "isSequential": is_sequential,
+                "manageDNSState": manage_dns_state,
+            },
+            delimiter=",",
+        )
+
+    def RestartNodesByGroup(
+        self,
+        env_name: str,
+        node_group: str,
+        delay: list[int] = None,
+        is_sequential: list[bool] = None,
+        manage_dns_state: list[bool] = None,
+    ):
+        return self._get(
+            "RestartNodesByGroup",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "delay": delay,
+                "isSequential": is_sequential,
+                "manageDNSState": manage_dns_state,
+            },
+            delimiter=",",
+        )
+
+    def RestartNodesByType(
+        self,
+        env_name: str,
+        node_type: str,
+        manage_dns_state: list[bool] = None,
+    ):
+        return self._get(
+            "RestartNodesByType",
+            params={
+                "envName": env_name,
+                "nodeType": node_type,
+                "manageDNSState": manage_dns_state,
+            },
+            delimiter=",",
+        )
+
+    def RestartServices(
+        self,
+        env_name: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
+        delay: list[int] = None,
+        is_sequential: list[bool] = None,
+        manage_dns_state: list[bool] = None,
+    ):
+        """
+        :param env_name: target environment name.
+        :param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        :param node_id: unique identifier of the target node (container).
+        :param delay: delay (in seconds) between two consecutive restarts when using the sequential restart type (I.e. when restart is performed on servers one-by-one to ensure uptime).
+        :param is_sequential: defines whether to restart containers one-by-one to ensure uptime (true) or simultaneously (false).
+        :param manage_dns_state: defines whether to exclude a target node from DNS for the duration of the operation (true) or not (false, by default). This parameter only works with the sequential processes (isSequential=true) and is ignored otherwise. Enabling the parameter will bring additional delay (as the DNS records have TTL and cannot be disabled instantly), while disabling can cause some of the requests to be lost.
+        """
+        return self._get(
+            "RestartServices",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "nodeId": node_id,
+                "delay": delay,
+                "isSequential": is_sequential,
+                "manageDNSState": manage_dns_state,
+            },
+            delimiter=",",
+        )
+
+    def RestoreDump(
+        self,
+        env_name: str,
+        node_type: str,
+        db_name: str,
+        password: str,
+        dump_url: str,
+        user: list[str] = None,
+    ):
+        """
+        :param env_name: target environment name.
+        :param node_type: unique identifier of the target node type (software stack), e.g. “tomcat11” for the Tomcat 11 stack.
+        :param db_name: target database name.
+        :param password: password to access database.
+        :param dump_url: URL to the database dump file.
+        :param user: username to access database.
+        """
+        return self._get(
+            "RestoreDump",
+            params={
+                "envName": env_name,
+                "nodeType": node_type,
+                "dbName": db_name,
+                "password": password,
+                "dumpUrl": dump_url,
+                "user": user,
+            },
+            delimiter=",",
+        )
+
+    def SendEnvCreatedEmail(
+        self,
+        is_import: list[bool] = None,
+    ):
+        return self._get(
+            "SendEnvCreatedEmail",
+            params={
+                "isImport": is_import,
+            },
+            delimiter=",",
+        )
+
+    def SendTransferRequest(
+        self,
+        env_name: str,
+        email: str,
+    ):
+        """
+        :param env_name: application identifier of the environment
+        :param email: email of the user which is going to be an owner
+        """
+        return self._get(
+            "SendTransferRequest",
+            params={
+                "envName": env_name,
+                "email": email,
+            },
+        )
+
+    def SetCloudletsCount(
+        self,
+        env_name: str,
+        node_type: str,
+        flexible_cloudlets: int,
+        fixed_cloudlets: int,
+    ):
+        """
+        :param env_name: target environment name
+        :param node_type: unique identifier of the target node type (software stack), e.g. “tomcat11” for the Tomcat 11 stack. Required if nodeid is not specified.
+        :param flexible_cloudlets: a number of dynamic (flexible) cloudlets to be set for the layer.
+        :param fixed_cloudlets: a number of reserved (fixed) cloudlets to be set for the layer.
+        """
+        return self._get(
+            "SetCloudletsCount",
+            params={
+                "envName": env_name,
+                "nodeType": node_type,
+                "flexibleCloudlets": flexible_cloudlets,
+                "fixedCloudlets": fixed_cloudlets,
+            },
+        )
+
+    def SetCloudletsCountByGroup(
+        self,
+        env_name: str,
+        node_group: str,
+        flexible_cloudlets: int,
+        fixed_cloudlets: int,
+        delay: list[int] = None,
+    ):
+        return self._get(
+            "SetCloudletsCountByGroup",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "flexibleCloudlets": flexible_cloudlets,
+                "fixedCloudlets": fixed_cloudlets,
+                "delay": delay,
+            },
+            delimiter=",",
+        )
+
+    def SetCloudletsCountById(
+        self,
+        env_name: str,
+        node_id: int,
+        flexible_cloudlets: int,
+        fixed_cloudlets: int,
+    ):
+        """
+        :param env_name: target environment name
+        :param node_id: unique identifier of the target node (container). If not defined, the cloudlet count will be set for all compute Nodes of the environment.
+        :param flexible_cloudlets: a number of dynamic cloudlets to be set.
+        :param fixed_cloudlets: a number of reserved cloudlets to be set.
+        """
+        return self._get(
+            "SetCloudletsCountById",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "flexibleCloudlets": flexible_cloudlets,
+                "fixedCloudlets": fixed_cloudlets,
+            },
+        )
+
+    def SetCloudletsCountByType(
+        self,
+        env_name: str,
+        node_type: str,
+        flexible_cloudlets: int,
+        fixed_cloudlets: int,
+    ):
+        return self._get(
+            "SetCloudletsCountByType",
+            params={
+                "envName": env_name,
+                "nodeType": node_type,
+                "flexibleCloudlets": flexible_cloudlets,
+                "fixedCloudlets": fixed_cloudlets,
+            },
+        )
+
+    def SetContainerEntryPoint(
+        self,
+        env_name: str,
+        node_id: int,
+        data: list[str] = None,
+    ):
+        """
+        :param env_name: target environment name.
+        :param node_id: unique identifier of the target node (container).
+        :param data: Entry point data, e.g. "/bin/sh -c"
+        """
+        return self._get(
+            "SetContainerEntryPoint",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "data": data,
+            },
+            delimiter=",",
+        )
+
+    def SetContainerEnvVars(
+        self,
+        env_name: str,
+        node_id: int,
+        vars: str,
+    ):
+        """
+        :param env_name: target environment name.
+        :param node_id: unique identifier of the target node (container).
+        :param vars: JSON object with a list of container environment variables, e.g. {"var1":"value1", "var2":"value2"}.
+        """
+        return self._get(
+            "SetContainerEnvVars",
+            params={"envName": env_name, "nodeId": node_id, "vars": vars},
+        )
+
+    def SetContainerEnvVarsByGroup(
+        self,
+        env_name: str,
+        node_group: str,
+        data: str,
+    ):
+        """
+                :param env_name: target environment name
+                :param node_group:
+        unique identifier of the target node group (layer), e.g. "cp" for the default application server layer
+                :param data: JSON object with a list of container environment variables, e.g. {"var1":"value1", "var2":"value2"}.
+        """
+        return self._get(
+            "SetContainerEnvVarsByGroup",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "data": data,
+            },
+        )
+
+    def SetContainerRunCmd(
+        self,
+        env_name: str,
+        node_id: int,
+        data: list[str] = None,
+    ):
+        """
+        :param env_name: target environment name.
+        :param node_id: unique identifier of the target node (container).
+        :param data: run command data, e.g. "service tomcat start"
+        """
+        return self._get(
+            "SetContainerRunCmd",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "data": data,
+            },
+            delimiter=",",
+        )
+
+    def SetDiskLimitByGroup(
+        self,
+        env_name: str,
+        node_group: str,
+        limit: int,
+    ):
+        return self._get(
+            "SetDiskLimitByGroup",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "limit": limit,
+            },
+        )
+
+    def SetDiskLimitById(
+        self,
+        env_name: str,
+        node_id: int,
+        limit: int,
+    ):
+        return self._get(
+            "SetDiskLimitById",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "limit": limit,
+            },
+        )
+
+    def SetDockerEntryPoint(
+        self,
+        env_name: str,
+        node_id: int,
+        data: list[str] = None,
+    ):
+        """
+        :param data: entry point
+        """
+        return self._get(
+            "SetDockerEntryPoint",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "data": data,
+            },
+            delimiter=",",
+        )
+
+    def SetDockerEnvVars(
+        self,
+        env_name: str,
+        node_id: int,
+        data: str,
+    ):
+        """
+        :param data: list of container environment variables in json format
+        """
+        return self._get(
+            "SetDockerEnvVars",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "data": data,
+            },
+        )
+
+    def SetDockerRunCmd(
+        self,
+        env_name: str,
+        node_id: int,
+        data: list[str] = None,
+    ):
+        """
+        :param data: run command
+        """
+        return self._get(
+            "SetDockerRunCmd",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "data": data,
+            },
+            delimiter=",",
+        )
+
+    def SetDockerVolumesFrom(
+        self,
+        env_name: str,
+        node_id: int,
+        data: str,
+    ):
+        """
+        :param data: json array of volumes e.g. [{"readOnly":false,"sourceNodeId":80579}]
+        """
+        return self._get(
+            "SetDockerVolumesFrom",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "data": data,
+            },
+        )
+
+    def SetEngineByGroup(
+        self,
+        env_name: str,
+        node_group: str,
+        engine: str,
+    ):
+        return self._get(
+            "SetEngineByGroup",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "engine": engine,
+            },
+        )
+
+    def SetEnvDisplayName(
+        self,
+        env_name: str,
+        dispplay_name: list[str] = None,
+    ):
+        """
+        :param env_name: target environment name.
+        :param dispplay_name: new display name of the environment
+        """
+        return self._get(
+            "SetEnvDisplayName",
+            params={
+                "envName": env_name,
+                "dispplayName": dispplay_name,
+            },
+            delimiter=",",
+        )
+
+    def SetEnvGroup(
+        self,
+        env_name: str,
+        env_group: str,
+    ):
+        return self._get(
+            "SetEnvGroup",
+            params={
+                "envName": env_name,
+                "envGroup": env_group,
+            },
+        )
+
+    def SetNodeDisplayName(
+        self,
+        env_name: str,
+        node_id: list[int] = None,
+        display_name: list[str] = None,
+    ):
+        """
+        :param env_name: target environment name.
+        :param node_id: unique identifier of the target node (container).
+        :param display_name: new display name of the node.t
+        """
+        return self._get(
+            "SetNodeDisplayName",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "displayName": display_name,
+            },
+            delimiter=",",
+        )
+
+    def SetNodeGroupDisplayName(
+        self,
+        env_name: str,
+        node_group: list[str] = None,
+        display_name: list[str] = None,
+    ):
+        """
+        :param env_name: target environment name.
+        :param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
+        :param display_name: new display name of the node.t
+        """
+        return self._get(
+            "SetNodeGroupDisplayName",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "displayName": display_name,
+            },
+            delimiter=",",
+        )
+
+    def SetSLBAccessEnabled(
+        self,
+        env_name: str,
+        node_group: str,
+        enabled: bool,
+    ):
+        return self._get(
+            "SetSLBAccessEnabled",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "enabled": enabled,
+            },
+        )
+
+    def SkipMessage(
+        self,
+        env_name: str,
+        node_id: int,
+        id: int,
+    ):
+        """
+        :param env_name: target environment name
+        :param node_id: unique identifier of the target node (container).
+        :param id: unique identifier of the target message.
+        """
+        return self._get(
+            "SkipMessage",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "id": id,
+            },
+        )
+
+    def SleepEnv(self, env_name: str):
+        return self._get(
+            "SleepEnv",
+            params={
+                "envName": env_name,
+            },
+        )
+
+    def StartEnv(self, env_name: str):
+        return self._get(
+            "StartEnv",
+            params={
+                "envName": env_name,
+            },
+        )
+
+    def StopEnv(self, env_name: str):
+        return self._get(
+            "StopEnv",
+            params={
+                "envName": env_name,
+            },
+        )
+
+    def UninstallSoftwarePackage(
+        self,
+        env_name: str,
+        keyword: str,
+        node_type: list[str] = None,
+        node_group: list[str] = None,
+    ):
+        return self._get(
+            "UninstallSoftwarePackage",
+            params={
+                "envName": env_name,
+                "keyword": keyword,
+                "nodeType": node_type,
+                "nodeGroup": node_group,
+            },
+            delimiter=",",
+        )
+
+    def UnlinkDockerNodes(
+        self,
+        env_name: str,
+        source_node_id: int,
+        target_node_id: int,
+        alias: str,
+        is_auto_restart: list[bool] = None,
+    ):
+        return self._get(
+            "UnlinkDockerNodes",
+            params={
+                "envName": env_name,
+                "sourceNodeId": source_node_id,
+                "targetNodeId": target_node_id,
+                "alias": alias,
+                "isAutoRestart": is_auto_restart,
+            },
+            delimiter=",",
+        )
+
+    def UnpackDocker(
+        self,
+        env_name: str,
+        node_id: int,
+        folders: str,
+        tag: list[str] = None,
+    ):
+        return self._get(
+            "UnpackDocker",
+            params={
+                "envName": env_name,
+                "nodeID": node_id,
+                "folders": folders,
+                "tag": tag,
+            },
+            delimiter=",",
+        )
