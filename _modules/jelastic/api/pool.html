@@ -9,7 +9,7 @@
           <link rel="stylesheet" href="../../../_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="../../../_static/documentation_options.js?v=cf91a2c3"></script>
+        <script src="../../../_static/documentation_options.js?v=0b81b898"></script>
         <script src="../../../_static/doctools.js?v=888ff710"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -440,8 +440,134 @@
             <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
             <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span>
             <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">NodePool</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_NodePool&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.pool.NodePool</span>
+
+<span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/pool.NodePool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_NodePool</span><span class="p">(</span>
+            <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
+            <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span>
+            <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span>
         <span class="p">)</span></div>
 
+
+
+<span class="k">class</span> <span class="nc">_NodePool</span><span class="p">(</span><span class="n">Pool</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/pool.NodePool</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_endpoint2</span> <span class="o">=</span> <span class="s2">&quot;nodepool&quot;</span>
+
+    <span class="k">def</span> <span class="nf">ClearOsPool</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">checksum</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param checksum: authorization checksum = md5(appid + private key)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;ClearOsPool&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;checksum&quot;</span><span class="p">:</span> <span class="n">checksum</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">ClearPool</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">hn_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param hnid: hardnode id (primary key) where OsNode to be allocated</span>
+<span class="sd">        param checksum: authorization checksum = md5(appid + private key)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;ClearPool&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;hnid&quot;</span><span class="p">:</span> <span class="n">hn_id</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">GeneratePool</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">checksum</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">hn_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GeneratePool&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;checksum&quot;</span><span class="p">:</span> <span class="n">checksum</span><span class="p">,</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">,</span>
+                <span class="s2">&quot;hnid&quot;</span><span class="p">:</span> <span class="n">hn_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">Get</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">hn_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">checksum</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">os_template</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">ct_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        info about allocated new OsNode</span>
+
+<span class="sd">        param type: OsNode type like &quot;mysql5&quot;, &quot;tomcat6&quot;, &quot;jetty6&quot; etc.</span>
+<span class="sd">        param hn_id: hardnode id (primary key) where OsNode to be allocated</span>
+<span class="sd">        param checksum: authorization checksum = md5(appid + private key)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Get&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">,</span>
+                <span class="s2">&quot;hnid&quot;</span><span class="p">:</span> <span class="n">hn_id</span><span class="p">,</span>
+                <span class="s2">&quot;checksum&quot;</span><span class="p">:</span> <span class="n">checksum</span><span class="p">,</span>
+                <span class="s2">&quot;osTemplate&quot;</span><span class="p">:</span> <span class="n">os_template</span><span class="p">,</span>
+                <span class="s2">&quot;ctid&quot;</span><span class="p">:</span> <span class="n">ct_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">GetStatus</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">checksum</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param checksum: authorization checksum = md5(appid + private key)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetStatus&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;checksum&quot;</span><span class="p">:</span> <span class="n">checksum</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">RegeneratePool</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">checksum</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param checksum: authorization checksum = md5(appid + private key)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;RegeneratePool&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">,</span>
+                <span class="s2">&quot;checksum&quot;</span><span class="p">:</span> <span class="n">checksum</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">_IpPool</span><span class="p">(</span><span class="n">Pool</span><span class="p">):</span>
