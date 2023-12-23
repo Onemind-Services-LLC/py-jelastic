@@ -1,9 +1,6 @@
 import pytest
-import datetime
 from unittest.mock import patch, Mock
 from jelastic.api import Pool
-
-CURRENT_DATETIME = datetime.datetime.now()
 success_response = {"error": "", "reason": 0, "result": 0, "source": "billing"}
 
 
