@@ -155,6 +155,7 @@ class _NodePool(Pool):
             delimiter=",",
         )
 
+
 class _IpPool(Pool):
     """
     Ref: https://docs.jelastic.com/api/private/#!/api/pool.IpPool
