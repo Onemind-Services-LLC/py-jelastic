@@ -16,18 +16,13 @@ def client():
         io._get = mock_get
         yield io
 
+
 def test_copy(client):
     client._get.return_value = success_response
-    response = client.File.Copy(
-        "src",
-        "dest"
-    )
+    response = client.File.Copy("src", "dest")
     client._get.assert_called_with(
         "Copy",
-        params={
-            "src": "src",
-            "dest": "dest"
-        },
+        params={"src": "src", "dest": "dest"},
     )
     assert response == success_response
 
@@ -51,16 +46,10 @@ def test_create(client):
 
 def test_delete(client):
     client._get.return_value = success_response
-    response = client.File.Delete(
-        "path",
-        ["ext1", "ext2", "ext3"]
-    )
+    response = client.File.Delete("path", ["ext1", "ext2", "ext3"])
     client._get.assert_called_with(
         "Delete",
-        params={
-            "path": "path",
-            "ext": ["ext1", "ext2", "ext3"]
-        },
+        params={"path": "path", "ext": ["ext1", "ext2", "ext3"]},
         delimiter=",",
     )
     assert response == success_response
@@ -69,15 +58,11 @@ def test_delete(client):
 def test_get_list(client):
     client._get.return_value = success_response
     response = client.File.GetList(
-        ["path1", "path2", "path3"],
-        ["ext1", "ext2", "ext3"]
+        ["path1", "path2", "path3"], ["ext1", "ext2", "ext3"]
     )
     client._get.assert_called_with(
         "GetList",
-        params={
-            "path": ["path1", "path2", "path3"],
-            "ext": ["ext1", "ext2", "ext3"]
-        },
+        params={"path": ["path1", "path2", "path3"], "ext": ["ext1", "ext2", "ext3"]},
         delimiter=",",
     )
     assert response == success_response
@@ -85,9 +70,7 @@ def test_get_list(client):
 
 def test_read(client):
     client._get.return_value = success_response
-    response = client.File.Read(
-        "path"
-    )
+    response = client.File.Read("path")
     client._get.assert_called_with(
         "Read",
         params={
@@ -149,4 +132,3 @@ def test_write(client):
         delimiter=",",
     )
     assert response == success_response
-
