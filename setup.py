@@ -9,7 +9,6 @@ setup(
     license="Apache2",
     include_package_data=True,
     use_scm_version=True,
-    setup_requires=["setuptools_scm"],
     packages=find_packages(exclude=["tests", "tests.*"]),
     install_requires=[
         "requests",
