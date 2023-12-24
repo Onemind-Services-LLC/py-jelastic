@@ -1,9 +1,14 @@
 from setuptools import setup, find_packages
 
+# Get the long description from the README file
+with open("README.md") as f:
+    long_description = f.read()
+
 setup(
     name="py-jelastic",
-    version="0.0.2",
+    version="0.0.3",
     description="Jelastic API client library",
+    long_description=long_description,
     url="https://github.com/Onemind-Services-LLC/py-jelastic",
     author="Abhimanyu Saharan",
     author_email="asaharan@onemindservices.com",
