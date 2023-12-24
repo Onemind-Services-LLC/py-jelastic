@@ -2,6 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="py-jelastic",
+    version="0.0.1",
     description="Jelastic API client library",
     url="https://github.com/Onemind-Services-LLC/py-jelastic",
     author="Abhimanyu Saharan",
@@ -9,7 +10,6 @@ setup(
     license="Apache2",
     include_package_data=True,
     use_scm_version=True,
-    setup_requires=["setuptools_scm"],
     packages=find_packages(exclude=["tests", "tests.*"]),
     install_requires=[
         "requests",

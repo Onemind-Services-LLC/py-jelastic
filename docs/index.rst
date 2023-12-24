@@ -81,6 +81,16 @@ Project
    support
    changes
 
+Links
+-----
+
+.. toctree::
+   :maxdepth: 2
+
+   Website <https://cloudmydc.com>
+   Application <https://app.xapp.cloudmydc.com>
+   Github <https://github.com/Onemind-Services-LLC/py-jelastic>
+
 .. Indices and tables
    ==================
    * :ref:`genindex`
