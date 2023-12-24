@@ -134,6 +134,23 @@ class Environment(ClientAbstract):
         """
         return _Deployment(session=self._session, token=self._token, debug=self._debug)
 
+    @property
+    def File(self) -> "_File":
+        """
+        The File Manager API service gives you access to the container’s home directory and your environment's configuration files. You can read, write, create, delete, and adjust your application files and settings.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.environment.File
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/environment.File
+        """
+        return _File(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+        )
+
 
 class _Billing(Environment):
     """
@@ -5296,6 +5313,698 @@ class _Control(Environment):
                 "nodeID": node_id,
                 "folders": folders,
                 "tag": tag,
+            },
+            delimiter=",",
+        )
+
+
+class _File(Environment):
+    """
+    The File Manager API service gives you access to the container’s home directory and your environment's configuration files. You can read, write, create, delete, and adjust your application files and settings.
+
+     Ref: https://docs.jelastic.com/api/private/#!/api/environment.File
+    """
+
+    _endpoint2 = "file"
+
+    def AddFavorite(
+        self,
+        env_name: str,
+        path: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
+        keyword: list[str] = None,
+        filter: list[str] = None,
+        is_dir: list[bool] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param path: absolute path to the file or directory for quick access.
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        param node_id: unique identifier of the target node (container).
+        param keyword: custom name of the favorite shortcut.
+        param filter: regex expression to filter a list of files displayed via the shortcut (up to 255 characters).
+        param is_dir: defines whether shortcut points to the directory (true) or file (false).
+        """
+        return self._get(
+            "AddFavorite",
+            params={
+                "envName": env_name,
+                "path": path,
+                "nodeGroup": node_group,
+                "nodeId": node_id,
+                "keyword": keyword,
+                "filter": filter,
+                "isDir": is_dir,
+            },
+            delimiter=",",
+        )
+
+    def AddMountPointByGroup(
+        self,
+        env_name: str,
+        node_group: str,
+        path: str,
+        source_path: str,
+        protocol: list[str] = None,
+        source_host: list[str] = None,
+        source_node_id: list[int] = None,
+        name: list[str] = None,
+        read_only: list[bool] = None,
+        source_address_type: list[str] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        param path: absolute path to the local folder where remote data will be shown at
+        param source_path: absolute path to the files on your remote node/server where the data is physically stored.
+        param source_host: host or IP address of the remote server where the data is physically stored.
+        param source_node_id: unique identifier of the remote node where the data is physically stored.
+        param name: custom name for the mount point (local folder name is used if not specified).
+        param read_only: defines access rights for the mounted files - read only (true) or read and write (false).
+        param source_address_type: source address type ("IP" or 0 | "DOMAIN" or 1 | "NODE_GROUP" or 2).
+        """
+        return self._get(
+            "AddMountPointByGroup",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "path": path,
+                "sourcePath": source_path,
+                "protocol": protocol,
+                "sourceHost": source_host,
+                "sourceNodeId": source_node_id,
+                "name": name,
+                "readOnly": read_only,
+                "sourceAddressType": source_address_type,
+            },
+            delimiter=",",
+        )
+
+    def AddMountPointById(
+        self,
+        env_name: str,
+        node_id: int,
+        path: str,
+        source_path: str,
+        protocol: list[str] = None,
+        source_host: list[str] = None,
+        source_node_id: list[int] = None,
+        name: list[str] = None,
+        read_only: list[bool] = None,
+        source_address_type: list[str] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param node_id : unique identifier of the target node (container).
+        param path: absolute path to the local folder where remote data will be shown at
+        param source_path: absolute path to the files on your remote node/server where the data is physically stored.
+        param source_host: host or IP address of the remote server where the data is physically stored.
+        param source_node_id: unique identifier of the remote node where the data is physically stored.
+        param name: custom name for the mount point (local folder name is used if not specified).
+        param read_only: defines access rights for the mounted files - read only (true) or read and write (false).
+        param source_address_type: source address type ("IP" or 0 | "DOMAIN" or 1 | "NODE_GROUP" or 2).
+        """
+        return self._get(
+            "AddMountPointById",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "path": path,
+                "sourcePath": source_path,
+                "protocol": protocol,
+                "sourceHost": source_host,
+                "sourceNodeId": source_node_id,
+                "name": name,
+                "readOnly": read_only,
+                "sourceAddressType": source_address_type,
+            },
+            delimiter=",",
+        )
+
+    def Append(
+        self,
+        env_name: str,
+        path: str,
+        body: list[str] = None,
+        node_type: list[str] = None,
+        node_group: list[str] = None,
+        master_only: list[bool] = None,
+        node_id: list[int] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param path: absolute path to the file, where the text should be added.
+        param body: text that should be added to the file.
+        param node_type: unique identifier of the target node type (software stack), e.g. "tomcat11" for the Tomcat 11 stack.
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        param master_only: defines whether to execute the command on the master/primary node only (true) or on all nodes in the layer (false).
+        param node_id: unique identifier of the target node (container).
+        """
+        return self._get(
+            "Append",
+            params={
+                "envName": env_name,
+                "path": path,
+                "body": body,
+                "nodeType": node_type,
+                "nodeGroup": node_group,
+                "masterOnly": master_only,
+                "nodeId": node_id,
+            },
+            delimiter=",",
+        )
+
+    def CheckCrossMount(self, env_name: str, node_id: int, source_node_id: int):
+        """
+        param env_name: target environment name.
+        param node_id : unique identifier of the target node (container).
+        param source_node_id: unique identifier of the remote node where the data is physically stored.
+        """
+        return self._get(
+            "CheckCrossMount",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "sourceNodeId": source_node_id,
+            },
+        )
+
+    def CloneMountPoints(
+        self,
+        env_name: str,
+        node_id: int,
+        source_node_id: int,
+        mount_points: list[str] = None,
+    ):
+        return self._get(
+            "CloneMountPoints",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "sourceNodeId": source_node_id,
+                "mountPoints": mount_points,
+            },
+            delimiter=",",
+        )
+
+    def Copy(
+        self,
+        env_name: str,
+        src: str,
+        dest: str,
+        node_type: list[str] = None,
+        node_group: list[str] = None,
+        master_only: list[bool] = None,
+        node_id: list[int] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param src: absolute path to the source file that should be copied.
+        param dest: absolute path to the destination, where the file copy should be placed.
+        param node_type: unique identifier of the target node type (software stack), e.g. "tomcat11" for the Tomcat 11 stack.
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        param master_only: defines whether to execute the command on the master/primary node only (true) or on all nodes in the layer (false).
+        param node_id: unique identifier of the target node (container).
+        """
+        return self._get(
+            "Copy",
+            params={
+                "envName": env_name,
+                "src": src,
+                "dest": dest,
+                "nodeType": node_type,
+                "nodeGroup": node_group,
+                "masterOnly": master_only,
+                "nodeId": node_id,
+            },
+            delimiter=",",
+        )
+
+    def Create(
+        self,
+        env_name: str,
+        path: str,
+        node_type: list[str] = None,
+        node_group: list[str] = None,
+        master_only: list[bool] = None,
+        isdir: list[bool] = None,
+        node_id: list[int] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param path: absolute path to the file that should be created.
+        param node_type: unique identifier of the target node type (software stack), e.g. "tomcat11" for the Tomcat 11 stack.
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        param master_only: defines whether to execute the command on the master/primary node only (true) or on all nodes in the layer (false).
+        param isdir: defines whether to create directory (true) or file (false).
+        param node_id: unique identifier of the target node (container).
+        """
+        return self._get(
+            "Create",
+            params={
+                "envName": env_name,
+                "path": path,
+                "nodeType": node_type,
+                "nodeGroup": node_group,
+                "masterOnly": master_only,
+                "isdir": isdir,
+                "nodeId": node_id,
+            },
+            delimiter=",",
+        )
+
+    def Delete(
+        self,
+        env_name: str,
+        path: str,
+        node_type: list[str] = None,
+        node_group: list[str] = None,
+        master_only: list[bool] = None,
+        node_id: list[int] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param path: absolute path to the file that should be created.
+        param node_type: unique identifier of the target node type (software stack), e.g. "tomcat11" for the Tomcat 11 stack.
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        param master_only: defines whether to execute the command on the master/primary node only (true) or on all nodes in the layer (false).
+        param node_id: unique identifier of the target node (container).
+        """
+        return self._get(
+            "Delete",
+            params={
+                "envName": env_name,
+                "path": path,
+                "nodeType": node_type,
+                "nodeGroup": node_group,
+                "masterOnly": master_only,
+                "nodeId": node_id,
+            },
+            delimiter=",",
+        )
+
+    def GetExportedList(
+        self,
+        env_name: str,
+        node_id: int,
+        path: list[str] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param node_id: unique identifier of the target node (container).
+        param path: absolute path to the file that should be created.
+        """
+        return self._get(
+            "GetExportedList",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "path": path,
+            },
+            delimiter=",",
+        )
+
+    def GetFavorites(
+        self,
+        env_name: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        param node_id: unique identifier of the target node (container).
+        """
+        return self._get(
+            "GetFavorites",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "nodeId": node_id,
+            },
+            delimiter=",",
+        )
+
+    def GetList(
+        self,
+        env_name: str,
+        path: list[str] = None,
+        node_type: list[str] = None,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
+        filter: list[int] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param path: absolute path to the directory with files.
+        param node_type: unique identifier of the target node type (software stack), e.g. "tomcat11" for the Tomcat 11 stack.
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        param node_id: unique identifier of the target node (container).
+        param filter: regex expression to filter the list of returned files (up to 255 characters).
+        """
+        return self._get(
+            "GetList",
+            params={
+                "envName": env_name,
+                "path": path,
+                "nodeType": node_type,
+                "nodeGroup": node_group,
+                "nodeId": node_id,
+                "filter": filter,
+            },
+            delimiter=",",
+        )
+
+    def GetMountPoints(
+        self,
+        env_name: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        param node_id: unique identifier of the target node (container).
+        """
+        return self._get(
+            "GetMountPoints",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "nodeId": node_id,
+            },
+            delimiter=",",
+        )
+
+    def PrepareMountPoints(self, env_name: str, data: str):
+        return self._get(
+            "PrepareMountPoints",
+            params={"envName": env_name, "data": data},
+        )
+
+    def Read(
+        self,
+        env_name: str,
+        path: str,
+        node_type: list[str] = None,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param path: absolute path to the directory with files.
+        param node_type: unique identifier of the target node type (software stack), e.g. "tomcat11" for the Tomcat 11 stack.
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        param node_id: unique identifier of the target node (container).
+        """
+        return self._get(
+            "Read",
+            params={
+                "envName": env_name,
+                "path": path,
+                "nodeType": node_type,
+                "nodeGroup": node_group,
+                "nodeId": node_id,
+            },
+            delimiter=",",
+        )
+
+    def RemoveExport(
+        self,
+        env_name: str,
+        node_id: int,
+        path: str,
+        client_node_id: int,
+        client_path: str,
+    ):
+        """
+        param env_name: target environment name.
+        param node_id: unique identifier of the target node (container).
+        param path: absolute path to the directory with files.
+        param client_node_id: unique identifier of the remote client node.
+        param client_path: absolute path to the directory on the remote client node through which local files can be accessed.
+        """
+        return self._get(
+            "RemoveExport",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "path": path,
+                "clientNodeId": client_node_id,
+                "clientPath": client_path,
+            },
+        )
+
+    def RemoveFavorite(
+        self,
+        env_name: str,
+        path: str,
+        node_type: list[str] = None,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param path: absolute path to the directory with files.
+        param node_type: unique identifier of the target node type (software stack), e.g. "tomcat11" for the Tomcat 11 stack.
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        param node_id: unique identifier of the target node (container).
+        """
+        return self._get(
+            "RemoveFavorite",
+            params={
+                "envName": env_name,
+                "path": path,
+                "nodeType": node_type,
+                "nodeGroup": node_group,
+                "nodeId": node_id,
+            },
+            delimiter=",",
+        )
+
+    def RemoveMountPointByGroup(
+        self,
+        env_name: str,
+        path: str,
+        node_group: str,
+    ):
+        """
+        param env_name: target environment name.
+        param path: absolute path to the directory with files.
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        """
+        return self._get(
+            "RemoveMountPointByGroup",
+            params={
+                "envName": env_name,
+                "path": path,
+                "nodeGroup": node_group,
+            },
+        )
+
+    def RemoveMountPointById(
+        self,
+        env_name: str,
+        path: str,
+        node_id: str,
+    ):
+        """
+        param env_name: target environment name.
+        param path: absolute path to the directory with files.
+        param node_id: unique identifier of the target node (container).
+        """
+        return self._get(
+            "RemoveMountPointById",
+            params={
+                "envName": env_name,
+                "path": path,
+                "nodeId": node_id,
+            },
+        )
+
+    def Rename(
+        self,
+        env_name: str,
+        old_path: str,
+        new_path: str,
+        node_type: list[str] = None,
+        node_group: list[str] = None,
+        master_only: list[bool] = None,
+        node_id: list[int] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param old_path: absolute path to the file to be renamed.
+        param new_path: absolute path with the new filename.
+        param node_type: unique identifier of the target node type (software stack), e.g. "tomcat11" for the Tomcat 11 stack.
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        param master_only: defines whether to execute the command on the master/primary node only (true) or on all nodes in the layer (false).
+        param node_id: unique identifier of the target node (container).
+        """
+        return self._get(
+            "Rename",
+            params={
+                "envName": env_name,
+                "oldPath": old_path,
+                "newPath": new_path,
+                "nodeType": node_type,
+                "nodeGroup": node_group,
+                "masterOnly": master_only,
+                "nodeId": node_id,
+            },
+            delimiter=",",
+        )
+
+    def ReplaceInBody(
+        self,
+        env_name: str,
+        path: str,
+        pattern: str,
+        replacement: str,
+        nth: list[int] = None,
+        node_type: list[str] = None,
+        node_group: list[str] = None,
+        master_only: list[bool] = None,
+        node_id: list[int] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param path: absolute path to the file that should be created.
+        param pattern: regex expression (in a SED-compatible format) to locate text for replacement.
+        param replacement: replacement text (in a plain text format).
+        param nth: maximum number of entries for replacement.
+        param node_type: unique identifier of the target node type (software stack), e.g. "tomcat11" for the Tomcat 11 stack.
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        param master_only: defines whether to execute the command on the master/primary node only (true) or on all nodes in the layer (false).
+        param node_id: unique identifier of the target node (container).
+        """
+        return self._get(
+            "ReplaceInBody",
+            params={
+                "envName": env_name,
+                "path": path,
+                "pattern": pattern,
+                "replacement": replacement,
+                "nth": nth,
+                "nodeType": node_type,
+                "nodeGroup": node_group,
+                "masterOnly": master_only,
+                "nodeId": node_id,
+            },
+            delimiter=",",
+        )
+
+    def UnpackById(
+        self, env_name: str, path: str, node_id: str, source_path: str, dest_path: str
+    ):
+        """
+        param env_name: target environment name.
+        param path: absolute path to the directory with files.
+        param node_id: unique identifier of the target node (container).
+        param source_path: absolute path to the target archive file.
+        param dest_path: absolute path to extract files to.
+        """
+        return self._get(
+            "UnpackById",
+            params={
+                "envName": env_name,
+                "path": path,
+                "nodeId": node_id,
+                "sourcePath": source_path,
+                "destPath": dest_path,
+            },
+        )
+
+    def UnpackByType(
+        self, env_name: str, path: str, node_type: str, source_path: str, dest_path: str
+    ):
+        """
+        param env_name: target environment name.
+        param path: absolute path to the directory with files.
+        param node_type: unique identifier of the target node type (software stack), e.g. "tomcat11" for the Tomcat 11 stack.
+        param source_path: absolute path to the target archive file.
+        param dest_path: absolute path to extract files to.
+        """
+        return self._get(
+            "UnpackByType",
+            params={
+                "envName": env_name,
+                "path": path,
+                "nodeType": node_type,
+                "sourcePath": source_path,
+                "destPath": dest_path,
+            },
+        )
+
+    def Upload(
+        self,
+        env_name: str,
+        source_path: str,
+        dest_path: str,
+        node_type: list[str] = None,
+        node_group: list[str] = None,
+        master_only: list[bool] = None,
+        node_id: list[int] = None,
+        overwrite: list[bool] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param source_path: URL of the target file to be uploaded.
+        param dest_path: absolute path (on the target container) to save uploaded file at.
+        param node_type: unique identifier of the target node type (software stack), e.g. "tomcat11" for the Tomcat 11 stack.
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        param master_only: defines whether to execute the command on the master/primary node only (true) or on all nodes in the layer (false).
+        param node_id: unique identifier of the target node (container).
+        param overwrite: defines whether to overwrite (true) or skip (false) file if it already exists at the destination directory.
+        """
+        return self._get(
+            "Upload",
+            params={
+                "envName": env_name,
+                "sourcePath": source_path,
+                "destPath": dest_path,
+                "nodeType": node_type,
+                "nodeGroup": node_group,
+                "masterOnly": master_only,
+                "nodeId": node_id,
+                "overwrite": overwrite,
+            },
+            delimiter=",",
+        )
+
+    def Write(
+        self,
+        env_name: str,
+        path: str,
+        body: list[str] = None,
+        node_type: list[str] = None,
+        node_group: list[str] = None,
+        master_only: list[bool] = None,
+        node_id: list[int] = None,
+        is_append_mode: list[int] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param path: absolute path to the file that should be created.
+        param body: text that should be written to the file.
+        param node_type: unique identifier of the target node type (software stack), e.g. "tomcat11" for the Tomcat 11 stack.
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        param master_only: defines whether to execute the command on the master/primary node only (true) or on all nodes in the layer (false).
+        param node_id: unique identifier of the target node (container).
+        param is_append_mode: defines whether to overwrite the file content (false) or append the existing text (false)
+        """
+        return self._get(
+            "Write",
+            params={
+                "envName": env_name,
+                "path": path,
+                "body": body,
+                "nodeType": node_type,
+                "nodeGroup": node_group,
+                "masterOnly": master_only,
+                "nodeId": node_id,
+                "isAppendMode": is_append_mode,
             },
             delimiter=",",
         )
