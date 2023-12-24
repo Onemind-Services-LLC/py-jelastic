@@ -5,6 +5,7 @@ __all__ = ["Marketplace"]
 
 class Marketplace(ClientAbstract):
     _endpoint1 = "marketplace"
+
     @property
     def Jps(self) -> "_Jps":
         """
@@ -25,15 +26,16 @@ class _Jps(Marketplace):
     """
     Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.Jps
     """
+
     _endpoint2 = "jps"
 
     def ExecuteAppAction(
         self,
         app_unique_name: str,
-        action: list[str]=None,
-        settings_id: list[str]=None,
-        params: list[str]=None,
-        lang: list[str]=None,
+        action: list[str] = None,
+        settings_id: list[str] = None,
+        params: list[str] = None,
+        lang: list[str] = None,
     ):
         return self._get(
             "ExecuteAppAction",
@@ -43,13 +45,15 @@ class _Jps(Marketplace):
                 "settingsId": settings_id,
                 "params": params,
                 "lang": lang,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
+
     def GetAppInfo(
         self,
-        jps: list[str]=None,
-        lang: list[str]=None,
-        owner_uid: list[str]=None,
+        jps: list[str] = None,
+        lang: list[str] = None,
+        owner_uid: list[str] = None,
     ):
         """
         param jps: custom JPS (manifest body, link, or application ID from the Marketplace).
@@ -62,13 +66,15 @@ class _Jps(Marketplace):
                 "jps": jps,
                 "lang": lang,
                 "ownerUid": owner_uid,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
+
     def GetAppSettings(
         self,
         app_unique_name: str,
-        settings_id: list[str]=None,
-        lang: list[str]=None,
+        settings_id: list[str] = None,
+        lang: list[str] = None,
     ):
         return self._get(
             "GetAppSettings",
@@ -76,35 +82,29 @@ class _Jps(Marketplace):
                 "appUniqueName": app_unique_name,
                 "settingsId": settings_id,
                 "lang": lang,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
-    def GetEngineVersion(
-        self):
-        return self._get(
-            "GetEngineVersion",
-            params={
-            }
-        )
-    def GetScriptingAppid(
-        self):
-        return self._get(
-            "GetScriptingAppid",
-            params={
-            }
-        )
+
+    def GetEngineVersion(self):
+        return self._get("GetEngineVersion", params={})
+
+    def GetScriptingAppid(self):
+        return self._get("GetScriptingAppid", params={})
+
     def Install(
         self,
         jps: str,
-        env_name: list[str]=None,
-        settings: list[str]=None,
-        node_group: list[str]=None,
-        display_name: list[str]=None,
-        region: list[str]=None,
-        env_groups: list[str]=None,
-        owner_uid: list[int]=None,
-        logs_path: list[str]=None,
-        write_output_tasks: list[bool]=None,
-        skip_node_emails: list[bool]=None,
+        env_name: list[str] = None,
+        settings: list[str] = None,
+        node_group: list[str] = None,
+        display_name: list[str] = None,
+        region: list[str] = None,
+        env_groups: list[str] = None,
+        owner_uid: list[int] = None,
+        logs_path: list[str] = None,
+        write_output_tasks: list[bool] = None,
+        skip_node_emails: list[bool] = None,
     ):
         """
         param jps: custom JPS (manifest body, link, or application ID from the Marketplace).
@@ -133,24 +133,20 @@ class _Jps(Marketplace):
                 "logsPath": logs_path,
                 "writeOutputTasks": write_output_tasks,
                 "skipNodeEmails": skip_node_emails,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
 
     def Uninstall(
-            self,
-            app_unique_name: str,
-            force: list[bool] = None,
+        self,
+        app_unique_name: str,
+        force: list[bool] = None,
     ):
         return self._get(
             "Uninstall",
             params={
                 "appUniqueName": app_unique_name,
                 "force": force,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
-
-
-
-
-
-

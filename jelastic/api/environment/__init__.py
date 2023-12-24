@@ -357,6 +357,8 @@ class _Node(Environment):
         :param name: title of the message
         """
         return self._get("SendNotification", params={"name": name, "message": message})
+
+
 class _Deployment(Environment):
     """
     The Deployment API methods implement extensive Deployment Manager functionality, including application installation (from archive packages and remote Git/SVN repositories) and management (update, rename, context undeploy, etc.). If working with Java projects from the VCS repository, a special Maven build node is used for the source's compilation, which requires separate API methods.
@@ -371,6 +373,7 @@ class _Deployment(Environment):
     """
 
     _endpoint2 = "deployment"
+
     def AddBuildProject(
         self,
         env_name: str,
@@ -379,7 +382,7 @@ class _Deployment(Environment):
         repo: str,
         deployment: dict = None,
         settings: dict = None,
-        hooks: list[str]= None
+        hooks: list[str] = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -403,6 +406,7 @@ class _Deployment(Environment):
             },
             delimeter=",",
         )
+
     def AddRepo(
         self,
         name: str,
@@ -438,13 +442,14 @@ class _Deployment(Environment):
             },
             delimeter=",",
         )
+
     def BuildDeployProject(
         self,
         env_name: str,
         node_id: int,
         project: str,
-        skip_update: list[bool]= None,
-        delay: list[int]= None
+        skip_update: list[bool] = None,
+        delay: list[int] = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -464,13 +469,14 @@ class _Deployment(Environment):
             },
             delimeter=",",
         )
+
     def BuildProject(
         self,
         env_name: str,
         node_id: int,
         project: str,
-        skip_upload: list[bool]= None,
-        skip_update: list[bool]= None,
+        skip_upload: list[bool] = None,
+        skip_update: list[bool] = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -523,10 +529,11 @@ class _Deployment(Environment):
                 "buildNodeId": build_node_id,
                 "settings": settings,
                 "hooks": hooks,
-                "delay": delay
+                "delay": delay,
             },
             delimeter=",",
         )
+
     def DeployArchive(
         self,
         env_name: str,
@@ -559,10 +566,11 @@ class _Deployment(Environment):
                 "context": context,
                 "zdt": zdt,
                 "hooks": hooks,
-                "delay": delay
+                "delay": delay,
             },
             delimeter=",",
         )
+
     def DeployProject(
         self,
         env_name: str,
@@ -583,16 +591,17 @@ class _Deployment(Environment):
             },
             delimeter=",",
         )
+
     def EditBuildProject(
         self,
         env_name: str,
         node_id: int,
         project: str,
-        name: list[str]=None,
-        repo: list[str]=None,
+        name: list[str] = None,
+        repo: list[str] = None,
         deployment: dict = None,
         settings: dict = None,
-        hooks: list[str]= None
+        hooks: list[str] = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -618,16 +627,17 @@ class _Deployment(Environment):
             },
             delimeter=",",
         )
+
     def EditProject(
         self,
         env_name: str,
         node_group: str,
         context: str,
-        new_context: list[str]=None,
-        repo: list[str]=None,
+        new_context: list[str] = None,
+        repo: list[str] = None,
         settings: dict = None,
-        hooks: list[str]= None,
-        delay: list[int]= None
+        hooks: list[str] = None,
+        delay: list[int] = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -657,7 +667,7 @@ class _Deployment(Environment):
 
     def EditRepo(
         self,
-        id:int,
+        id: int,
         name: list[str] = None,
         type: list[str] = None,
         url: list[str] = None,
@@ -681,7 +691,7 @@ class _Deployment(Environment):
         return self._get(
             "EditRepo",
             params={
-                "id":id,
+                "id": id,
                 "name": name,
                 "type": type,
                 "url": url,
@@ -693,6 +703,7 @@ class _Deployment(Environment):
             },
             delimeter=",",
         )
+
     def GetBuildProjectInfo(
         self,
         env_name: str,
@@ -713,11 +724,12 @@ class _Deployment(Environment):
             },
             delimeter=",",
         )
+
     def GetBuildProjects(
         self,
         env_name: str,
-        node_group: list[str]=None,
-        node_id: list[int]=None,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -733,11 +745,8 @@ class _Deployment(Environment):
             },
             delimeter=",",
         )
-    def GetDeployments(
-        self,
-        env_name: str,
-        node_group: str
-    ):
+
+    def GetDeployments(self, env_name: str, node_group: str):
         """
         param env_name: target environment name (with a build node).
         param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
@@ -752,12 +761,12 @@ class _Deployment(Environment):
         )
 
     def GetHooks(
-            self,
-            env_name: str,
-            node_group: list[str] = None,
-            node_id: list[int] = None,
-            context: list[str] = None,
-            project: list[str] = None,
+        self,
+        env_name: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
+        context: list[str] = None,
+        project: list[str] = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -777,11 +786,12 @@ class _Deployment(Environment):
             },
             delimeter=",",
         )
+
     def GetProjectInfo(
-            self,
-            env_name: str,
-            context: str,
-            node_group: list[str] = None,
+        self,
+        env_name: str,
+        context: str,
+        node_group: list[str] = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -797,9 +807,10 @@ class _Deployment(Environment):
             },
             delimeter=",",
         )
+
     def GetRepos(
-            self,
-            id: list[int] = None,
+        self,
+        id: list[int] = None,
     ):
         """
         param id: unique identifier of the repository.
@@ -813,10 +824,10 @@ class _Deployment(Environment):
         )
 
     def RemoveBuildProject(
-            self,
-            env_name: str,
-            node_id: str,
-            project: str,
+        self,
+        env_name: str,
+        node_id: str,
+        project: str,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -832,10 +843,8 @@ class _Deployment(Environment):
             },
             delimeter=",",
         )
-    def RemoveRepo(
-            self,
-            id: int
-    ):
+
+    def RemoveRepo(self, id: int):
         """
         param id: unique identifier of the repository.
         """
@@ -845,12 +854,13 @@ class _Deployment(Environment):
                 "id": id,
             },
         )
+
     def RenameContext(
         self,
         env_name: str,
         node_group: str,
         old_context: str,
-        new_context:str,
+        new_context: str,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -867,6 +877,7 @@ class _Deployment(Environment):
                 "newContext": new_context,
             },
         )
+
     def Undeploy(
         self,
         env_name: str,
@@ -884,17 +895,17 @@ class _Deployment(Environment):
                 "envName": env_name,
                 "nodeGroup": node_group,
                 "context": context,
-
             },
         )
+
     def Update(
-            self,
-            env_name: str,
-            node_group: list[str] = None,
-            node_id: list[int] = None,
-            context: list[str] = None,
-            project: list[str] = None,
-            delay: list[str] = None,
+        self,
+        env_name: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
+        context: list[str] = None,
+        project: list[str] = None,
+        delay: list[str] = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -916,12 +927,6 @@ class _Deployment(Environment):
             },
             delimeter=",",
         )
-
-
-
-
-
-
 
 
 class _Binder(Environment):
