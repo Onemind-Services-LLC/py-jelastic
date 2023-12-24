@@ -94,22 +94,24 @@ class Environment(ClientAbstract):
             token=self._token,
             debug=self._debug,
         )
+
     @property
     def Windows(self) -> "_Windows":
         """
-         Service provides a flexible structure to manage Environment, obtain statistic information etc.
+        Service provides a flexible structure to manage Environment, obtain statistic information etc.
 
-         >>> from jelastic import Jelastic
-         >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
-         >>> jelastic.environment.Windows
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.environment.Windows
 
-         Ref: https://docs.jelastic.com/api/private/#!/api/environment.Windows
+        Ref: https://docs.jelastic.com/api/private/#!/api/environment.Windows
         """
         return _Windows(
             session=self._session,
             token=self._token,
             debug=self._debug,
         )
+
 
 class _Billing(Environment):
     """
@@ -871,21 +873,23 @@ class _Binder(Environment):
             },
             delimiter=",",
         )
+
+
 class _Windows(Environment):
     """
-   Service provides a flexible structure to manage Environment, obtain statistic information etc.
+    Service provides a flexible structure to manage Environment, obtain statistic information etc.
 
-    Ref: https://docs.jelastic.com/api/private/#!/api/environment.Windows
+     Ref: https://docs.jelastic.com/api/private/#!/api/environment.Windows
     """
 
     _endpoint2 = "windows"
 
     def AddDomain(
-            self,
-            name: str,
-            username: str,
-            password: str,
-            dns_server: list[str] = None,
+        self,
+        name: str,
+        username: str,
+        password: str,
+        dns_server: list[str] = None,
     ):
         """
         param password: password of the domain user
@@ -900,19 +904,20 @@ class _Windows(Environment):
             },
             delimiter=",",
         )
+
     def EditDomain(
-            self,
-            id:int,
-            name:list[str] = None,
-            username: list[str] = None,
-            old_password: list[str] = None,
-            password: list[str] = None,
-            dns_server: list[str] = None,
+        self,
+        id: int,
+        name: list[str] = None,
+        username: list[str] = None,
+        old_password: list[str] = None,
+        password: list[str] = None,
+        dns_server: list[str] = None,
     ):
         return self._get(
             "EditDomain",
             params={
-                "id":id,
+                "id": id,
                 "name": name,
                 "username": username,
                 "oldPassword": old_password,
@@ -921,37 +926,28 @@ class _Windows(Environment):
             },
             delimiter=",",
         )
-    def GetList(
-            self):
-        return self._get(
-            "GetList",
-            params={
-            })
+
+    def GetList(self):
+        return self._get("GetList", params={})
+
     def IsDomainExists(
-            self,
-            id:int,
-            checksum:list[str] = None,
+        self,
+        id: int,
+        checksum: list[str] = None,
     ):
         return self._get(
             "IsDomainExists",
-            params={
-                "id":id,
-                "checksum": checksum
-            },
+            params={"id": id, "checksum": checksum},
             delimiter=",",
         )
+
     def RemoveDomain(
-            self,
-            id:int,
+        self,
+        id: int,
     ):
         return self._get(
             "RemoveDomain",
             params={
-                "id":id,
-            }
+                "id": id,
+            },
         )
-
-
-
-
-
