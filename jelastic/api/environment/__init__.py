@@ -224,6 +224,23 @@ class Environment(ClientAbstract):
             debug=self._debug,
         )
 
+    @property
+    def Tracking(self) -> "_Tracking":
+        """
+        This service is responsible for the monitoring of actions performed by the user. Learn more in the documentation.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.environment.Tracking
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/environment.Tracking
+        """
+        return _Tracking(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+        )
+
 
 class _Billing(Environment):
     """
@@ -6798,4 +6815,172 @@ class _System(Environment):
             params={
                 "checksum": checksum,
             },
+        )
+
+
+class _Tracking(Environment):
+    """
+    This service is responsible for the monitoring of actions performed by the user. Learn more in the documentation.
+
+    Ref: https://docs.jelastic.com/api/private/#!/api/environment.Tracking
+    """
+
+    _endpoint2 = "tracking"
+
+    def GetAction(
+        self,
+        id: list[int] = None,
+    ):
+        """
+        param id: unique identifier of the target action. An error occurs if the specified action does not exist or does not belong to the current user.
+        """
+        return self._get(
+            "GetAction",
+            params={
+                "id": id,
+            },
+            delimiter=",",
+        )
+
+    def GetActions(self, start_time: datetime, end_time: list[datetime] = None):
+        return self._get(
+            "GetActions",
+            params={
+                "starttime": start_time,
+                "endtime": end_time,
+            },
+            datetime_format="%Y-%m-%d %H:%M:%S",
+        )
+
+    def GetAllServiceName(
+        self,
+        add_services_wildcard: list[bool] = None,
+        type: list[str] = None,
+    ):
+        return self._get(
+            "GetAllServiceName",
+            params={"addServicesWildcard": add_services_wildcard, "type": type},
+            delimiter=",",
+        )
+
+    def GetCurrentActions(
+        self,
+    ):
+        return self._get("GetCurrentActions", params={})
+
+    def GetEnvActions(
+        self,
+        start_time: datetime,
+        end_time: list[datetime] = None,
+        offset: list[int] = None,
+        count: list[int] = None,
+    ):
+        return self._get(
+            "GetEnvActions",
+            params={
+                "starttime": start_time,
+                "endtime": end_time,
+                "offset": offset,
+                "count": count,
+            },
+            datetime_format="%Y-%m-%d %H:%M:%S",
+        )
+
+    def GetServerUTCTime(
+        self,
+    ):
+        return self._get("GetServerUTCTime", params={})
+
+    def GetUidActions(
+        self,
+        count: list[int] = None,
+        start_time: list[datetime] = None,
+        end_time: list[datetime] = None,
+        action_types: list[str] = None,
+    ):
+        """
+        param count: returns the specified number of actions from the response (10 by default).
+        param start_time: start time (UTC) of a period for which actions should be shown. In the format “yyyy-MM-dd hh:mm:ss”, e.g. "2022-11-16 00:00:00".
+        param end_time: end time (UTC) of a period for which actions should be shown. In the format “yyyy-MM-dd hh:mm:ss”, e.g. "2022-11-16 00:00:00".
+        param action_types: a comma-separated list of action types to return (supported values: PUBLIC, SYSTEM).
+        """
+        return self._get(
+            "GetUidActions",
+            params={
+                "count": count,
+                "starttime": start_time,
+                "endtime": end_time,
+                "actionTypes": action_types,
+            },
+            datetime_format="%Y-%m-%d %H:%M:%S",
+        )
+
+    def GetUidActionsAdmin(
+        self,
+        uid: int,
+        start_row: int,
+        start_time: datetime,
+        end_time: datetime,
+        result_count: list[int] = None,
+        servicename: list[str] = None,
+        order_field: list[str] = None,
+        order_direction: list[str] = None,
+        search_text: list[str] = None,
+    ):
+        """
+        param start_row: returns information starting from the specified row in the response (starts with 0, by default).
+        param start_time: start time in the format “yyyy-MM-dd hh:mm:ss”, e.g. "2022-11-16 00:00:00".
+        param end_time: end time in the format “yyyy-MM-dd hh:mm:ss”, e.g. "2022-11-16 00:00:00".
+        param servicename: name of the service and corresponding method, e.g. "AccountService.SetQuota".
+        param order_field: oder results by the field name.
+        param order_direction: order direction "asc" or "desc".
+        param search_text: optional parameter for filtering by the specified text.
+        """
+        return self._get(
+            "GetUidActionsAdmin",
+            params={
+                "uid": uid,
+                "startRow": start_row,
+                "starttime": start_time,
+                "endtime": end_time,
+                "resultCount": result_count,
+                "servicename": servicename,
+                "orderField": order_field,
+                "orderDirection": order_direction,
+                "searchText": search_text,
+            },
+            datetime_format="%Y-%m-%d %H:%M:%S",
+        )
+
+    def SearchActions(self, session: str, search: dict):
+        """
+        param session: user session or personal access token.
+        param search: JSON object with the search parameters:
+        """
+        return self._get(
+            "SearchActions",
+            params={"session": session, "search": search},
+            delimiter=",",
+        )
+
+    def StoreAuditAdminActions(self, session: str, trackedevent: dict):
+        """
+        param session: user session or personal access token.
+        param trackedevent: JSON
+        """
+        return self._get(
+            "StoreAuditAdminActions",
+            params={"session": session, "trackedevent": trackedevent},
+            delimiter=",",
+        )
+
+    def StoreUserActions(self, session: str, tracked_action_event: dict):
+        """
+        param session: user session or personal access token.
+        param trackedActionEvent: JSON
+        """
+        return self._get(
+            "StoreUserActions",
+            params={"session": session, "trackedActionEvent": tracked_action_event},
+            delimiter=",",
         )
