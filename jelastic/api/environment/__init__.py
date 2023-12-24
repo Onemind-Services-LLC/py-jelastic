@@ -343,15 +343,18 @@ class _Node(Environment):
         :param name: title of the message
         """
         return self._get("SendNotification", params={"name": name, "message": message})
+
+
 class _Build(Environment):
     """
-   This service provides methods to manage Java project deployment from the version control system (VCS) repositories. The process requires a dedicated Maven build automation node that will build and deploy Java projects. With Maven, you can add any public or private project directly from your VCS repository (Git or SVN) using the appropriate link type: http, https, git (or svn). After the addition, Java projects can be deployed to the appropriate application servers.
-    resources that grouped by account.
+    This service provides methods to manage Java project deployment from the version control system (VCS) repositories. The process requires a dedicated Maven build automation node that will build and deploy Java projects. With Maven, you can add any public or private project directly from your VCS repository (Git or SVN) using the appropriate link type: http, https, git (or svn). After the addition, Java projects can be deployed to the appropriate application servers.
+     resources that grouped by account.
 
-    Ref: https://docs.jelastic.com/api/private/#!/api/environment.Build
+     Ref: https://docs.jelastic.com/api/private/#!/api/environment.Build
     """
 
     _endpoint2 = "build"
+
     def AddProject(
         self,
         autoupdate: bool,
@@ -361,19 +364,19 @@ class _Build(Environment):
         name: str,
         type: str,
         path: str,
-        key_id:list[int]=None,
-        login:list[str]=None,
-        password:list[str]=None,
-        target_env: list[str]=None,
-        context:list[str]=None,
-        branch:list[str]=None,
-        interval:list[str]=None,
-        delay:list[int]=None,
-        deploy_now:list[bool]=None,
-        hooks:list[str]=None,
-        work_dir:list[str]=None,
-        target_node_group:list[str]=None,
-        is_sequential:list[bool]=None
+        key_id: list[int] = None,
+        login: list[str] = None,
+        password: list[str] = None,
+        target_env: list[str] = None,
+        context: list[str] = None,
+        branch: list[str] = None,
+        interval: list[str] = None,
+        delay: list[int] = None,
+        deploy_now: list[bool] = None,
+        hooks: list[str] = None,
+        work_dir: list[str] = None,
+        target_node_group: list[str] = None,
+        is_sequential: list[bool] = None,
     ):
         return self._get(
             "AddProject",
@@ -403,24 +406,24 @@ class _Build(Environment):
         )
 
     def AddProjectWithCreds(
-            self,
-            autoupdate: bool,
-            auto_resolve_conflict: bool,
-            env_name: str,
-            node_id: int,
-            name: str,
-            type: str,
-            path: str,
-            target_env: list[str] = None,
-            login: list[str] = None,
-            password: list[str] = None,
-            context: list[str] = None,
-            branch: list[str] = None,
-            interval: list[str] = None,
-            delay: list[int] = None,
-            deploy_now: list[bool] = None,
-            hooks: list[str] = None,
-            work_dir: list[str] = None,
+        self,
+        autoupdate: bool,
+        auto_resolve_conflict: bool,
+        env_name: str,
+        node_id: int,
+        name: str,
+        type: str,
+        path: str,
+        target_env: list[str] = None,
+        login: list[str] = None,
+        password: list[str] = None,
+        context: list[str] = None,
+        branch: list[str] = None,
+        interval: list[str] = None,
+        delay: list[int] = None,
+        deploy_now: list[bool] = None,
+        hooks: list[str] = None,
+        work_dir: list[str] = None,
     ):
         """
         param autoupdate: defines whether to enable (true) or disable (false) automatic project updates (only upon code changes in the remote repository); auto-update frequency is set with the interval parameter.
@@ -464,24 +467,25 @@ class _Build(Environment):
             },
             delimiter=",",
         )
+
     def AddProjectWithKey(
-            self,
-            autoupdate: bool,
-            auto_resolve_conflict: bool,
-            env_name: str,
-            node_id: int,
-            name: str,
-            type: str,
-            path: str,
-            target_env: list[str] = None,
-            key_id: list[int] = None,
-            context: list[str] = None,
-            branch: list[str] = None,
-            interval: list[str] = None,
-            delay: list[int] = None,
-            deploy_now: list[bool] = None,
-            hooks: list[str] = None,
-            work_dir: list[str] = None,
+        self,
+        autoupdate: bool,
+        auto_resolve_conflict: bool,
+        env_name: str,
+        node_id: int,
+        name: str,
+        type: str,
+        path: str,
+        target_env: list[str] = None,
+        key_id: list[int] = None,
+        context: list[str] = None,
+        branch: list[str] = None,
+        interval: list[str] = None,
+        delay: list[int] = None,
+        deploy_now: list[bool] = None,
+        hooks: list[str] = None,
+        work_dir: list[str] = None,
     ):
         """
         param autoupdate: Defines whether to enable (true) or disable (false) automatic project updates (only upon code changes in the remote repository); auto-update frequency is set with the interval parameter.
@@ -524,11 +528,7 @@ class _Build(Environment):
             delimiter=",",
         )
 
-    def BuildDeploy(
-            self,
-            env_name: str,
-            project_name:str
-    ):
+    def BuildDeploy(self, env_name: str, project_name: str):
         """
         param env_name: source environment name (with a build node).
         param project_name: project name.
@@ -538,18 +538,17 @@ class _Build(Environment):
             params={
                 "envName": env_name,
                 "projectName": project_name,
-
             },
         )
-    def BuildDeployProject(
-            self,
-            env_name: str,
-            node_id: int,
-            project_id:str,
-            delay: list[int] = None,
-            update:list[bool] = None,
-            is_sequential: list[bool] = None
 
+    def BuildDeployProject(
+        self,
+        env_name: str,
+        node_id: int,
+        project_id: str,
+        delay: list[int] = None,
+        update: list[bool] = None,
+        is_sequential: list[bool] = None,
     ):
         """
         param env_name: target environment name.
@@ -567,20 +566,19 @@ class _Build(Environment):
                 "projectid": project_id,
                 "delay": delay,
                 "update": update,
-                "isSequential":is_sequential
+                "isSequential": is_sequential,
             },
             delimiter=",",
         )
 
     def BuildProject(
-            self,
-            env_name: str,
-            node_id: int,
-            project_id:str,
-            update:list[bool] = None,
-            skip_publish:list[bool] = None,
-            asyncs: list[bool] = None
-
+        self,
+        env_name: str,
+        node_id: int,
+        project_id: str,
+        update: list[bool] = None,
+        skip_publish: list[bool] = None,
+        asyncs: list[bool] = None,
     ):
         """
         param env_name: source environment name (with a build node).
@@ -597,20 +595,19 @@ class _Build(Environment):
                 "nodeid": node_id,
                 "projectid": project_id,
                 "update": update,
-                "skipPublish":skip_publish,
-                "async":asyncs
+                "skipPublish": skip_publish,
+                "async": asyncs,
             },
             delimiter=",",
         )
+
     def DeployProject(
-            self,
-            env_name: str,
-            node_id: int,
-            project_id:str,
-            delay: list[int] = None,
-            is_sequential: list[bool] = None
-
-
+        self,
+        env_name: str,
+        node_id: int,
+        project_id: str,
+        delay: list[int] = None,
+        is_sequential: list[bool] = None,
     ):
         """
         param env_name: source environment name (with a build node).
@@ -626,32 +623,32 @@ class _Build(Environment):
                 "nodeid": node_id,
                 "projectid": project_id,
                 "delay": delay,
-                "isSequential":is_sequential
+                "isSequential": is_sequential,
             },
             delimiter=",",
         )
+
     def EditProject(
         self,
-
         env_name: str,
         node_id: int,
         project_id: int,
         name: str,
         type: str,
         path: str,
-        key_id:list[int]=None,
-        login:list[str]=None,
-        password:list[str]=None,
-        env: list[str]=None,
-        context:list[str]=None,
-        branch:list[str]=None,
+        key_id: list[int] = None,
+        login: list[str] = None,
+        password: list[str] = None,
+        env: list[str] = None,
+        context: list[str] = None,
+        branch: list[str] = None,
         autoupdate: list[bool] = None,
-        interval:list[str]=None,
+        interval: list[str] = None,
         auto_resolve_conflict: list[bool] = None,
-        delay:list[int]=None,
-        hooks:list[str]=None,
-        work_dir:list[str]=None,
-        target_node_group:list[str]=None,
+        delay: list[int] = None,
+        hooks: list[str] = None,
+        work_dir: list[str] = None,
+        target_node_group: list[str] = None,
     ):
         """
         param env_name: source environment name (with a build node).
@@ -677,8 +674,6 @@ class _Build(Environment):
         return self._get(
             "EditProject",
             params={
-
-
                 "envName": env_name,
                 "nodeid": node_id,
                 "projectid": project_id,
@@ -701,12 +696,13 @@ class _Build(Environment):
             },
             delimiter=",",
         )
+
     def GetProjectInfo(
         self,
         env_name: str,
         node_id: int,
-        project_id: list[int]=None,
-        project_name: list[str]=None
+        project_id: list[int] = None,
+        project_name: list[str] = None,
     ):
         """
         param env_name: source environment name (with a build node).
@@ -724,12 +720,12 @@ class _Build(Environment):
             },
             delimiter=",",
         )
+
     def GetProjects(
         self,
         env_name: str,
-        node_group: list[int]=None,
-        node_id: list[int]=None,
-
+        node_group: list[int] = None,
+        node_id: list[int] = None,
     ):
         """
         param env_name: source environment name (with a build node).
@@ -745,6 +741,7 @@ class _Build(Environment):
             },
             delimiter=",",
         )
+
     def RemoveProject(
         self,
         env_name: str,
@@ -765,12 +762,13 @@ class _Build(Environment):
             },
             delimiter=",",
         )
+
     def Update(
         self,
         env_name: str,
         node_id: int,
-        project_id: list[int]=None,
-        context: list[str]=None,
+        project_id: list[int] = None,
+        context: list[str] = None,
     ):
         """
         param env_name: source environment name (with a build node).
