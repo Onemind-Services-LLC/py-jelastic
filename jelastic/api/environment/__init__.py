@@ -3470,7 +3470,7 @@ class _Control(Environment):
         :param owner_uid: unique identifier of the target user account.
         """
         return self._get(
-            "GetBasicsEnvsInfo",
+            "GetBasicEnvsInfo",
             params={
                 "ownerUid": owner_uid,
             },
