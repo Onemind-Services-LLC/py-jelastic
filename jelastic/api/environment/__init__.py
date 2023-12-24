@@ -261,6 +261,23 @@ class Environment(ClientAbstract):
             debug=self._debug,
         )
 
+    @property
+    def Vcs(self) -> "_Vcs":
+        """
+        This service is the tool for managing your VCS (version control system) projects. Configure periodic automatic deployment of the committed changes, and you can work with GIT/SVN repository only. Just commit the updated code to your VCS project. The platform will detect changes and automatically push them to the assigned environment. In contrast to the GIT hooks, the auto-deploy feature does not require configuration on the GIT side and works with SVN.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.environment.Vcs
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/environment.Vcs
+        """
+        return _Vcs(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+        )
+
 
 class _Billing(Environment):
     """
@@ -7358,4 +7375,206 @@ class _Trigger(Environment):
         return self._get(
             "SetTriggerEnabled",
             params={"envName": env_name, "id": id, "enabled": enabled},
+        )
+
+
+class _Vcs(Environment):
+    """
+    This service is the tool for managing your VCS (version control system) projects. Configure periodic automatic deployment of the committed changes, and you can work with GIT/SVN repository only. Just commit the updated code to your VCS project. The platform will detect changes and automatically push them to the assigned environment. In contrast to the GIT hooks, the auto-deploy feature does not require configuration on the GIT side and works with SVN.
+
+    Ref: https://docs.jelastic.com/api/private/#!/api/environment.Vcs
+    """
+
+    _endpoint2 = "vcs"
+
+    def CreateProject(
+        self,
+        env_name: str,
+        type: str,
+        context: str,
+        url: str,
+        branch: list[str] = None,
+        key_id: list[int] = None,
+        login: list[str] = None,
+        password: list[str] = None,
+        auto_update: list[bool] = None,
+        interval: list[str] = None,
+        auto_resolve_conflict: list[bool] = None,
+        zdt: list[bool] = None,
+        update_now: list[bool] = None,
+        node_group: list[str] = None,
+        hooks: list[str] = None,
+        delay: list[int] = None,
+        repo_hash: list[str] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param type: VCS repository type ("GIT" or "SVN").
+        param context: custom context name for the deployed project (ROOT by default).
+        param url: URL to the repository (including protocol).
+        param branch: remote repository branch (master by default).
+        param key_id: unique identifier of a private SSH key on the account. It can be found in the dashboard (account Settings > SSH Keys > Private Keys) or fetched with the Management > Account > GetSSHKeys method.
+        param login: login for authentication in VCS.
+        param password: password or token for authentication in VCS.
+        param auto_update: defines whether to enable (true) or disable (false) automatic project updates (only upon code changes in the remote repository); auto-update frequency is set with the interval parameter.
+        param interval: delay (in minutes) for automatic project updates.
+        param auto_resolve_conflict: defines whether to automatically resolve (true) or not (false) merge conflicts (by updating the contradictory files to the repository version, i.e. locally made changes are discarded).
+        param zdt: defines whether to use zero-downtime deployment for PHP (true) or not (false).
+        param update_now: defines whether to deploy your project immediately after its creation (true) or postpone this operation (false).
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        param hooks: JSON object with custom scripts (actual content) to be executed before and after the build/deployment operations. For example: {"preDeploy":"script", "postDeploy":"script", "preBuild":"script", "postBuild":"script"}.
+        param delay: delay (in seconds) between two consecutive deployments when using the sequential deployment type (i.e. when deployment is performed on servers one-by-one to ensure uptime).
+        param repo_hash: target repository hash.
+        """
+        return self._get(
+            "CreateProject",
+            params={
+                "envName": env_name,
+                "type": type,
+                "context": context,
+                "url": url,
+                "branch": branch,
+                "keyId": key_id,
+                "login": login,
+                "password": password,
+                "autoupdate": auto_update,
+                "interval": interval,
+                "autoResolveConflict": auto_resolve_conflict,
+                "zdt": zdt,
+                "updateNow": update_now,
+                "nodeGroup": node_group,
+                "hooks": hooks,
+                "delay": delay,
+                "repoHash": repo_hash,
+            },
+            delimiter=",",
+        )
+
+    def DeleteProject(
+        self,
+        env_name: str,
+        context: str,
+        node_group: list[str] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param context: custom context name for the deployed project (ROOT by default).
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        """
+        return self._get(
+            "DeleteProject",
+            params={
+                "envName": env_name,
+                "context": context,
+                "nodeGroup": node_group,
+            },
+            delimiter=",",
+        )
+
+    def EditProject(
+        self,
+        env_name: str,
+        type: str,
+        oldcontext: str,
+        newcontext: str,
+        url: str,
+        branch: str,
+        auto_update: bool,
+        auto_resolve_conflict: bool,
+        zdt: bool,
+        key_id: list[int] = None,
+        login: list[str] = None,
+        password: list[str] = None,
+        interval: list[str] = None,
+        node_group: list[str] = None,
+        hooks: list[str] = None,
+        delay: list[int] = None,
+        repo_hash: list[str] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param type: VCS repository type ("GIT" or "SVN").
+        param oldcontext: context name of the existing project.
+        param newcontext: new context name for the edited project.
+        param url: URL to the repository (including protocol).
+        param branch: remote repository branch (master by default).
+        param key_id: unique identifier of a private SSH key on the account. It can be found in the dashboard (account Settings > SSH Keys > Private Keys) or fetched with the Management > Account > GetSSHKeys method.
+        param login: login for authentication in VCS.
+        param password: password or token for authentication in VCS.
+        param auto_update: defines whether to enable (true) or disable (false) automatic project updates (only upon code changes in the remote repository); auto-update frequency is set with the interval parameter.
+        param interval: delay (in minutes) for automatic project updates.
+        param auto_resolve_conflict: defines whether to automatically resolve (true) or not (false) merge conflicts (by updating the contradictory files to the repository version, i.e. locally made changes are discarded).
+        param zdt: defines whether to use zero-downtime deployment for PHP (true) or not (false).
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        param hooks: JSON object with custom scripts (actual content) to be executed before and after the build/deployment operations. For example: {"preDeploy":"script", "postDeploy":"script", "preBuild":"script", "postBuild":"script"}.
+        param delay: delay (in seconds) between two consecutive deployments when using the sequential deployment type (i.e. when deployment is performed on servers one-by-one to ensure uptime).
+        param repo_hash: target repository hash.
+        """
+        return self._get(
+            "EditProject",
+            params={
+                "envName": env_name,
+                "type": type,
+                "oldcontext": oldcontext,
+                "newcontext": newcontext,
+                "url": url,
+                "branch": branch,
+                "autoupdate": auto_update,
+                "autoResolveConflict": auto_resolve_conflict,
+                "zdt": zdt,
+                "keyId": key_id,
+                "login": login,
+                "password": password,
+                "interval": interval,
+                "nodeGroup": node_group,
+                "hooks": hooks,
+                "delay": delay,
+                "repoHash": repo_hash,
+            },
+            delimiter=",",
+        )
+
+    def GetProject(
+        self,
+        env_name: str,
+        context: list[str] = None,
+        node_group: list[str] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param context: custom context name for the deployed project (ROOT by default).
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        """
+        return self._get(
+            "GetProject",
+            params={
+                "envName": env_name,
+                "context": context,
+                "nodeGroup": node_group,
+            },
+            delimiter=",",
+        )
+
+    def Update(
+        self,
+        env_name: str,
+        context: str,
+        node_group: list[str] = None,
+        delay: list[int] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param context: custom context name for the deployed project (ROOT by default).
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        param delay: delay (in seconds) between two consecutive restarts when using the sequential restart type (i.e. when restart is performed on servers one-by-one to ensure uptime).
+        """
+        return self._get(
+            "Update",
+            params={
+                "envName": env_name,
+                "context": context,
+                "nodeGroup": node_group,
+                "delay": delay,
+            },
+            delimiter=",",
         )

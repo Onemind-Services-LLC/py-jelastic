@@ -84,3 +84,8 @@ Environment
     :members:
     :undoc-members:
     :show-inheritance:
+
+.. autoclass:: jelastic.api.environment._Vcs
+    :members:
+    :undoc-members:
+    :show-inheritance:
