@@ -174,9 +174,9 @@ class ClientAbstract(ABC):
         datetime_format: str = None,
     ) -> dict[str, Any]:
         if self._debug:
-            getattr(self, "_log_debug")("get", *args, params=params)
+            self._log_debug("get", *args, params=params)
 
-        url = getattr(self, "_endpoint")(
+        url = self._endpoint(
             *args, params=params, delimiter=delimiter, datetime_format=datetime_format
         )
         request = self._session.build_request(
@@ -184,4 +184,11 @@ class ClientAbstract(ABC):
             url=url,
         )
 
-        return getattr(self, "_handle_response")(self._session.send(request).json())
+        response = self._session.send(request)
+        if response.is_error:
+            if response.status_code == 404:
+                raise JelasticApiError(f"API endpoint not found: {url}")
+
+            raise JelasticApiError(response.text)
+
+        return self._handle_response(response.json())
