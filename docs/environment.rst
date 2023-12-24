@@ -30,3 +30,67 @@ Environment
     :members:
     :undoc-members:
     :show-inheritance:
+
+.. autoclass:: jelastic.api.environment._Deployment
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. autoclass:: jelastic.api.environment._Build
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. autoclass:: jelastic.api.environment._Control
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+.. autoclass:: jelastic.api.environment._File
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+.. autoclass:: jelastic.api.environment._Group
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+.. autoclass:: jelastic.api.environment._NodeGroup
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. autoclass:: jelastic.api.environment._Security
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+.. autoclass:: jelastic.api.environment._System
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. autoclass:: jelastic.api.environment._Tracking
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. autoclass:: jelastic.api.environment._Trigger
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. autoclass:: jelastic.api.environment._Vcs
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. autoclass:: jelastic.api.environment._Windows
+    :members:
+    :undoc-members:
+    :show-inheritance:
