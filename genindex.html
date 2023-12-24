@@ -10,7 +10,7 @@
           <link rel="stylesheet" href="_static/theme.css " type="text/css" />
       
       <!-- sphinx script_files -->
-        <script src="_static/documentation_options.js?v=be1b9fec"></script>
+        <script src="_static/documentation_options.js?v=7026087e"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
 
@@ -458,6 +458,8 @@
 </li>
       <li><a href="s3.html#jelastic.api.s3._Bucket">_Bucket (class in jelastic.api.s3)</a>
 </li>
+      <li><a href="environment.html#jelastic.api.environment._Build">_Build (class in jelastic.api.environment)</a>
+</li>
       <li><a href="administration.html#jelastic.api.administration._Cluster">_Cluster (class in jelastic.api.administration)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Config">_Config (class in jelastic.api.administration)</a>
@@ -486,10 +488,10 @@
 </li>
       <li><a href="billing.html#jelastic.api.billing._Invoice">_Invoice (class in jelastic.api.billing)</a>
 </li>
-      <li><a href="environment.html#jelastic.api.environment._JError">_JError (class in jelastic.api.environment)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="environment.html#jelastic.api.environment._JError">_JError (class in jelastic.api.environment)</a>
+</li>
       <li><a href="abstract.html#jelastic.api.abstract.ClientAbstract._log_debug">_log_debug() (jelastic.api.abstract.ClientAbstract method)</a>
 </li>
       <li><a href="migration.html#jelastic.api.migration._Migration">_Migration (class in jelastic.api.migration)</a>
@@ -596,6 +598,12 @@
 </li>
       <li><a href="administration.html#jelastic.api.administration._Subscription.AddProduct">AddProduct() (jelastic.api.administration._Subscription method)</a>
 </li>
+      <li><a href="environment.html#jelastic.api.environment._Build.AddProject">AddProject() (jelastic.api.environment._Build method)</a>
+</li>
+      <li><a href="environment.html#jelastic.api.environment._Build.AddProjectWithCreds">AddProjectWithCreds() (jelastic.api.environment._Build method)</a>
+</li>
+      <li><a href="environment.html#jelastic.api.environment._Build.AddProjectWithKey">AddProjectWithKey() (jelastic.api.environment._Build method)</a>
+</li>
       <li><a href="billing.html#jelastic.api.billing._GroupQuota.AddQuota">AddQuota() (jelastic.api.billing._GroupQuota method)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Cluster.AddRegion">AddRegion() (jelastic.api.administration._Cluster method)</a>
@@ -606,10 +614,10 @@
 </li>
       <li><a href="administration.html#jelastic.api.administration._Cluster.AddRegionSsl">AddRegionSsl() (jelastic.api.administration._Cluster method)</a>
 </li>
-      <li><a href="environment.html#jelastic.api.environment._Deployment.AddRepo">AddRepo() (jelastic.api.environment._Deployment method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="environment.html#jelastic.api.environment._Deployment.AddRepo">AddRepo() (jelastic.api.environment._Deployment method)</a>
+</li>
       <li><a href="billing.html#jelastic.api.billing._Pricing.AddResource">AddResource() (jelastic.api.billing._Pricing method)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Subscription.AddServicePlan">AddServicePlan() (jelastic.api.administration._Subscription method)</a>
@@ -692,22 +700,34 @@
       </ul></li>
       <li><a href="environment.html#jelastic.api.environment.Environment.Binder">Binder (jelastic.api.environment.Environment property)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="environment.html#jelastic.api.environment._Binder.BindExtDomain">BindExtDomain() (jelastic.api.environment._Binder method)</a>
 </li>
       <li><a href="environment.html#jelastic.api.environment._Binder.BindExtDomains">BindExtDomains() (jelastic.api.environment._Binder method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="environment.html#jelastic.api.environment._Binder.BindSSL">BindSSL() (jelastic.api.environment._Binder method)</a>
 </li>
       <li><a href="environment.html#jelastic.api.environment._Binder.BindSSLCert">BindSSLCert() (jelastic.api.environment._Binder method)</a>
 </li>
       <li><a href="s3.html#jelastic.api.s3.S3.Bucket">Bucket (jelastic.api.s3.S3 property)</a>
 </li>
-      <li><a href="environment.html#jelastic.api.environment._Deployment.BuildDeployProject">BuildDeployProject() (jelastic.api.environment._Deployment method)</a>
+      <li><a href="environment.html#jelastic.api.environment.Environment.Build">Build (jelastic.api.environment.Environment property)</a>
 </li>
-      <li><a href="environment.html#jelastic.api.environment._Deployment.BuildProject">BuildProject() (jelastic.api.environment._Deployment method)</a>
+      <li><a href="environment.html#jelastic.api.environment._Build.BuildDeploy">BuildDeploy() (jelastic.api.environment._Build method)</a>
 </li>
+      <li><a href="environment.html#jelastic.api.environment._Build.BuildDeployProject">BuildDeployProject() (jelastic.api.environment._Build method)</a>
+
+      <ul>
+        <li><a href="environment.html#jelastic.api.environment._Deployment.BuildDeployProject">(jelastic.api.environment._Deployment method)</a>
+</li>
+      </ul></li>
+      <li><a href="environment.html#jelastic.api.environment._Build.BuildProject">BuildProject() (jelastic.api.environment._Build method)</a>
+
+      <ul>
+        <li><a href="environment.html#jelastic.api.environment._Deployment.BuildProject">(jelastic.api.environment._Deployment method)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -856,14 +876,14 @@
 </li>
       <li><a href="administration.html#jelastic.api.administration._Cluster.DeleteHDNode">DeleteHDNode() (jelastic.api.administration._Cluster method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="data.html#jelastic.api.data._Base.DeleteObject">DeleteObject() (jelastic.api.data._Base method)</a>
 
       <ul>
         <li><a href="s3.html#jelastic.api.s3._Bucket.DeleteObject">(jelastic.api.s3._Bucket method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="data.html#jelastic.api.data._Base.DeleteObjectsByCriteria">DeleteObjectsByCriteria() (jelastic.api.data._Base method)</a>
 </li>
       <li><a href="s3.html#jelastic.api.s3._Bucket.DeletePolicy">DeletePolicy() (jelastic.api.s3._Bucket method)</a>
@@ -888,8 +908,12 @@
 </li>
       <li><a href="environment.html#jelastic.api.environment.Environment.Deployment">Deployment (jelastic.api.environment.Environment property)</a>
 </li>
-      <li><a href="environment.html#jelastic.api.environment._Deployment.DeployProject">DeployProject() (jelastic.api.environment._Deployment method)</a>
+      <li><a href="environment.html#jelastic.api.environment._Build.DeployProject">DeployProject() (jelastic.api.environment._Build method)</a>
+
+      <ul>
+        <li><a href="environment.html#jelastic.api.environment._Deployment.DeployProject">(jelastic.api.environment._Deployment method)</a>
 </li>
+      </ul></li>
       <li><a href="environment.html#jelastic.api.environment._Binder.DetachExtIp">DetachExtIp() (jelastic.api.environment._Binder method)</a>
 </li>
       <li><a href="billing.html#jelastic.api.billing._Pricing.DetachTariff">DetachTariff() (jelastic.api.billing._Pricing method)</a>
@@ -932,8 +956,12 @@
 </li>
       <li><a href="administration.html#jelastic.api.administration._Subscription.EditProduct">EditProduct() (jelastic.api.administration._Subscription method)</a>
 </li>
-      <li><a href="environment.html#jelastic.api.environment._Deployment.EditProject">EditProject() (jelastic.api.environment._Deployment method)</a>
+      <li><a href="environment.html#jelastic.api.environment._Build.EditProject">EditProject() (jelastic.api.environment._Build method)</a>
+
+      <ul>
+        <li><a href="environment.html#jelastic.api.environment._Deployment.EditProject">(jelastic.api.environment._Deployment method)</a>
 </li>
+      </ul></li>
       <li><a href="billing.html#jelastic.api.billing._GroupQuota.EditQuota">EditQuota() (jelastic.api.billing._GroupQuota method)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Cluster.EditRegion">EditRegion() (jelastic.api.administration._Cluster method)</a>
@@ -952,10 +980,10 @@
 </li>
       <li><a href="utils.html#jelastic.api.utils._Scheduler.EditTask">EditTask() (jelastic.api.utils._Scheduler method)</a>
 </li>
-      <li><a href="administration.html#jelastic.api.administration._Cluster.EditTemplate">EditTemplate() (jelastic.api.administration._Cluster method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="administration.html#jelastic.api.administration._Cluster.EditTemplate">EditTemplate() (jelastic.api.administration._Cluster method)</a>
+</li>
       <li><a href="administration.html#jelastic.api.administration._Cluster.EditTemplateRegistry">EditTemplateRegistry() (jelastic.api.administration._Cluster method)</a>
 </li>
       <li><a href="message.html#jelastic.api.message.Message.Email">Email (jelastic.api.message.Message property)</a>
@@ -1228,10 +1256,10 @@
 </li>
       <li><a href="administration.html#jelastic.api.administration._Cluster.GetHdNodes">GetHdNodes() (jelastic.api.administration._Cluster method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="administration.html#jelastic.api.administration._Cluster.GetHdNodesLoad">GetHdNodesLoad() (jelastic.api.administration._Cluster method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="administration.html#jelastic.api.administration._Cluster.GetHdNodesLoadInfo">GetHdNodesLoadInfo() (jelastic.api.administration._Cluster method)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Cluster.GetHdNodeStatus">GetHdNodeStatus() (jelastic.api.administration._Cluster method)</a>
@@ -1320,7 +1348,13 @@
 </li>
       <li><a href="administration.html#jelastic.api.administration._Subscription.GetProducts">GetProducts() (jelastic.api.administration._Subscription method)</a>
 </li>
-      <li><a href="environment.html#jelastic.api.environment._Deployment.GetProjectInfo">GetProjectInfo() (jelastic.api.environment._Deployment method)</a>
+      <li><a href="environment.html#jelastic.api.environment._Build.GetProjectInfo">GetProjectInfo() (jelastic.api.environment._Build method)</a>
+
+      <ul>
+        <li><a href="environment.html#jelastic.api.environment._Deployment.GetProjectInfo">(jelastic.api.environment._Deployment method)</a>
+</li>
+      </ul></li>
+      <li><a href="environment.html#jelastic.api.environment._Build.GetProjects">GetProjects() (jelastic.api.environment._Build method)</a>
 </li>
       <li><a href="data.html#jelastic.api.data._Base.GetProperty">GetProperty() (jelastic.api.data._Base method)</a>
 </li>
@@ -1922,6 +1956,8 @@
 </li>
       <li><a href="administration.html#jelastic.api.administration._Host.RemoveLabels">RemoveLabels() (jelastic.api.administration._Host method)</a>
 </li>
+      <li><a href="environment.html#jelastic.api.environment._Build.RemoveProject">RemoveProject() (jelastic.api.environment._Build method)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="billing.html#jelastic.api.billing._Account.RemoveQuota">RemoveQuota() (jelastic.api.billing._Account method)</a>
@@ -2184,9 +2220,11 @@
 </li>
       <li><a href="administration.html#jelastic.api.administration.Administration.Update">Update (jelastic.api.administration.Administration property)</a>
 </li>
-      <li><a href="environment.html#jelastic.api.environment._Deployment.Update">Update() (jelastic.api.environment._Deployment method)</a>
+      <li><a href="environment.html#jelastic.api.environment._Build.Update">Update() (jelastic.api.environment._Build method)</a>
 
       <ul>
+        <li><a href="environment.html#jelastic.api.environment._Deployment.Update">(jelastic.api.environment._Deployment method)</a>
+</li>
         <li><a href="iaas.html#jelastic.api.iaas._Project.Update">(jelastic.api.iaas._Project method)</a>
 </li>
       </ul></li>
