@@ -47,7 +47,6 @@ class Users(ClientAbstract):
             session=self._session, token=self._token, debug=self._debug
         )
 
-
     @property
     def SSO(self) -> "_SSO":
         """
@@ -746,6 +745,7 @@ class _SSO(Users):
             "SigninByToken",
             params={"token": token},
         )
+
 
 class _Registration(Users):
     """
