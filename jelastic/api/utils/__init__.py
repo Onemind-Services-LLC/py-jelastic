@@ -96,8 +96,6 @@ class _Scheduler(Utils):
 
         :param script: custom script name to be executed by the task.
         :param trigger: condition or frequency of the script execution (in the format: "trigger_type:value", supported
-            trigger types: "cron", "rate", "date", "oninit", "once_delay", supported value depends on the trigger_type).
-            Examples: "cron:0 0 * * * *", "once_delay:1000".
         :param description: custom description for the task.
         :param params: JSON object with additional trigger parameters.
         """
@@ -126,8 +124,6 @@ class _Scheduler(Utils):
 
         :param script: custom script name to be executed by the task.
         :param trigger: condition or frequency of the script execution (in the format: "trigger_type:value", supported
-            trigger types: "cron", "rate", "date", "oninit", "once_delay", supported value depends on the trigger_type).
-            Examples: "cron:0 0 * * * *", "once_delay:1000".
         :param description: custom description for the task.
         :param params: JSON object with additional trigger parameters.
         """
@@ -165,8 +161,6 @@ class _Scheduler(Utils):
 
         :param script: custom script name to be executed by the task.
         :param trigger: condition or frequency of the script execution (in the format: "trigger_type:value", supported
-            trigger types: "cron", "rate", "date", "oninit", "once_delay", supported value depends on the trigger_type).
-            Examples: "cron:0 0 * * * *", "once_delay:1000".
         :param id: unique identifier of the target task.
         :param description: custom description for the task.
         :param params: JSON object with additional trigger parameters.

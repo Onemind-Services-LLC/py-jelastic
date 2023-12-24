@@ -176,6 +176,22 @@ class Billing(ClientAbstract):
         """
         return _Utils(session=self._session, token=self._token, debug=self._debug)
 
+    @property
+    def Subscription(self) -> "_Subscription":
+        """
+        The methods of this service provide billing information about a user account (such as UID, balance, billing history,
+        quotas, etc.) and allow managing it.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.billing.Subscription
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/billing.Subscription
+        """
+        return _Subscription(
+            session=self._session, token=self._token, debug=self._debug
+        )
+
 
 class _Account(Billing):
     """
@@ -2315,3 +2331,377 @@ class _System(Billing):
 
     def ValidateAll(self):
         return self._get("ValidateAll", params={})
+
+
+class _Subscription(Billing):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/billing.Subscription
+    """
+
+    _endpoint = "subscription"
+
+    def Cancel(
+        self,
+        id: int,
+        immediately: list[bool] = None,
+        cancel_date: list[str] = None,
+        passphrase: list[str] = None,
+        expand_fields: list[str] = None,
+    ):
+        """
+        :param id: unique identifier of the target subscription.
+        :param immediately: defines whether the current subscription should be cancelled immediately (true) or at the end of already purchased period (false).
+        :param cancel_date: a specific date when the subscription should be canceled. UTC time in the ISO 8601 format, e.g. "2022-11-16T00:00:00".
+        :param passphrase: unique code to confirm immediate subscription resources deletion.
+        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).
+        """
+        return self._get(
+            "Cancel",
+            params={
+                "id": id,
+                "immediately": immediately,
+                "cancelDate": cancel_date,
+                "passphrase": passphrase,
+                "expandFields": expand_fields,
+            },
+            delimiter=",",
+        )
+
+    def CloneProduct(
+        self,
+        subscription_id: int,
+        item_resource: int,
+        target_env_name: str,
+        item_id: list[int] = None,
+    ):
+        """
+        :param subscription_id: unique identifier of the target subscription.
+        :param item_resource: unique identifier of the target subscription item resource.
+        :param target_env_name: domain prefix for the cloned environment.
+        :param item_id: unique identifier of the target subscription item.
+        """
+        return self._get(
+            "CloneProduct",
+            params={
+                "subscriptionId": subscription_id,
+                "itemResource": item_resource,
+                "targetEnvName": target_env_name,
+                "itemId": item_id,
+            },
+            delimiter=",",
+        )
+
+    def DiscardUpdateSubscription(self, subscription_id: int):
+        """
+        :param subscription_id: unique identifier of the target subscription.
+        """
+        return self._get(
+            "DiscardUpdateSubscription", params={"subscriptionId": subscription_id}
+        )
+
+    def GetCategories(self, expand_fields: list[str] = None):
+        """
+        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).
+        """
+        return self._get(
+            "GetCategories",
+            params={"expandFields": expand_fields},
+            delimiter=",",
+        )
+
+    def GetProducts(
+        self,
+        id: list[int] = None,
+        category_id: list[int] = None,
+        expand_fields: list[str] = None,
+        start_row: list[int] = None,
+        result_count: list[int] = None,
+        order_field: list[str] = None,
+        order_direction: list[str] = None,
+    ):
+        """
+        :param id: unique identifier of the target subscription Product (for filtering).
+        :param category_id: unique identifier of the target subscription Category (for filtering).
+        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).
+        :param start_row: returns information starting from the specified row in the response (starts with 0, by default).
+        :param result_count: returns the specified number of rows from the response (0 – unlimited – by default).
+        :param order_field: sorts results by the specified field
+        :param order_direction: sorts results in the ascending (ASC) or descending (DESC) order
+        """
+        return self._get(
+            "GetProducts",
+            params={
+                "id": id,
+                "categoryId": category_id,
+                "expandFields": expand_fields,
+                "startRow": start_row,
+                "resultCount": result_count,
+                "orderField": order_field,
+                "orderDirection": order_direction,
+            },
+            delimiter=",",
+        )
+
+    def GetRestrictedHardNodeGroups(self, subscription_item_id: int):
+        """
+        :param subscription_id: unique identifier of the target subscription item.
+        """
+        return self._get(
+            "GetHardNodeGroups",
+            params={
+                "subscriptionItemId": subscription_item_id,
+            },
+        )
+
+    def GetServicePlans(
+        self,
+        id: list[int] = None,
+        product_id: list[int] = None,
+        expand_fields: list[str] = None,
+    ):
+        """
+        :param id: unique identifier of the target service plan (for filtering).
+        :param product_id: unique identifier of the target subscription product (for filtering).
+        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).
+        """
+        return self._get(
+            "GetServicePlans",
+            params={
+                "id": id,
+                "productId": product_id,
+                "expandFields": expand_fields,
+            },
+            delimiter=",",
+        )
+
+    def GetSubscriptions(
+        self,
+        id: list[int] = None,
+        product_id: list[int] = None,
+        status: list[str] = None,
+        expand_fields: list[str] = None,
+        start_row: list[int] = None,
+        result_count: list[int] = None,
+        order_field: list[str] = None,
+        order_direction: list[str] = None,
+    ):
+        """
+        :param id: unique identifier of the target subscription (for filtering).
+        :param product_id: unique identifier of the target subscription product (for filtering).
+        :param status: a comma-separated list of the subscription statuses.("INCOMPLETE", "INCOMPLETE_EXPIRED", "TRIAL", "ACTIVE", "PAST_DUE", "UNPAID", "SUSPENDED", "CANCELED", "ENDED").
+        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).
+        :param start_row: returns information starting from the specified row in the response (starts with 0, by default).
+        :param result_count: returns the specified number of rows from the response (0 – unlimited – by default).
+        :param order_field: sorts results by the specified field
+        :param order_direction: sorts results in the ascending (ASC) or descending (DESC) order
+        """
+        return self._get(
+            "GetSubscriptions",
+            params={
+                "id": id,
+                "productId": product_id,
+                "status": status,
+                "expandFields": expand_fields,
+                "startRow": start_row,
+                "resultCount": result_count,
+                "orderField": order_field,
+                "orderDirection": order_direction,
+            },
+            delimiter=",",
+        )
+
+    def InstallProduct(
+        self,
+        subscription_id: int,
+        item_id: list[int] = None,
+        settings: list[str] = None,
+        env_name: list[str] = None,
+        display_name: list[str] = None,
+        env_groups: list[str] = None,
+        region: list[str] = None,
+        lang: list[str] = None,
+    ):
+        """
+        :param subscription_id: unique identifier of the target subscription.
+        :param item_id: unique identifier of the target subscription item.
+        :param settings: JSON object with subscription configuration.
+        :param env_name: target environment name
+        :param display_name: target environment display name
+        :param env_groups: target environment groups
+        :param region: target environment region
+        :param lang: target installation language
+        """
+        return self._get(
+            "InstallProduct",
+            params={
+                "subscriptionId": subscription_id,
+                "itemId": item_id,
+                "settings": settings,
+                "envName": env_name,
+                "displayName": display_name,
+                "envGroups": env_groups,
+                "region": region,
+                "lang": lang,
+            },
+            delimiter=",",
+        )
+
+    def MoveProduct(
+        self,
+        subscription_id: int,
+        item_resource_id: int,
+        target_subscription_id: int,
+        target_item_id: int,
+        passphrase: str,
+        item_id: list[int] = None,
+    ):
+        """
+        :param subscription_id: unique identifier of the source subscription.
+        :param item_resource_id: unique identifier of the source subscription item resource.
+        :param target_subscription_id: unique identifier of the target subscription item resource.
+        :param target_item_id: unique identifier of the target subscription item.
+        :param passphrase: confirmation code for the operation (provide the “uniqueName” value from the “ItemResource” object).
+        :param item_id: unique identifier of the source subscription item.
+        """
+        return self._get(
+            "MoveProduct",
+            params={
+                "subscriptionId": subscription_id,
+                "itemResourceId": item_resource_id,
+                "targetSubscriptionId": target_subscription_id,
+                "targetItemId": target_item_id,
+                "passphrase": passphrase,
+                "itemId": item_id,
+            },
+            delimiter=",",
+        )
+
+    def SetAutopay(
+        self,
+        id: int,
+        enabled: bool,
+        expand_fields: list[str] = None,
+    ):
+        """
+        :param id: unique identifier of the target subscription.
+        :param enabled: defines whether to enable (true) or disable (false) the auto pay option for the subscription.
+        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).
+        """
+        return self._get(
+            "SetAutopay",
+            params={
+                "id": id,
+                "enabled": enabled,
+                "expandFields": expand_fields,
+            },
+            delimiter=",",
+        )
+
+    def Subscribe(
+        self,
+        product_id: int,
+        items: str,
+        change_automatically: list[bool] = None,
+        expand_fields: list[str] = None,
+    ):
+        """
+        :param product_id: unique identifier of the subscription product.
+        :param items: JSON object with subscription details. For example: [{"servicePlanId": 1, "tariffPlanId": 1, "quantity": 10}].
+        :param change_automatically: defines whether the auto pay option for the subscription should be enabled (true) or disabled (false).
+        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).
+        """
+        return self._get(
+            "Subscribe",
+            params={
+                "productId": product_id,
+                "items": items,
+                "chargeAutomatically": change_automatically,
+                "expandFields": expand_fields,
+            },
+            delimiter=",",
+        )
+
+    def UndoCancel(
+        self,
+        id: int,
+        expand_fields: list[str] = None,
+    ):
+        """
+        :param id: unique identifier of the target subscription.
+        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).
+        """
+        return self._get(
+            "UndoCancel",
+            params={
+                "id": id,
+                "expandFields": expand_fields,
+            },
+            delimiter=",",
+        )
+
+    def UninstallProduct(
+        self,
+        subscription_id: int,
+        item_id: int,
+        item_resource_id: int,
+        passphrase: str,
+    ):
+        """
+        :param subscription_id: unique identifier of the target subscription.
+        :param item_id: unique identifier of the target subscription item.
+        :param item_resource_id: unique identifier of the target subscription item resource.
+        :param passphrase: confirmation code for the operation (provide the “uniqueName” value from the “ItemResource” object).
+        """
+        return self._get(
+            "UninstallProduct",
+            params={
+                "subscriptionId": subscription_id,
+                "itemId": item_id,
+                "itemResourceId": item_resource_id,
+                "passphrase": passphrase,
+            },
+        )
+
+    def UpcomingInvoice(
+        self,
+        subscription_id: int,
+        item_id: int,
+        quantity: int,
+    ):
+        """
+        :param subscription_id: unique identifier of the target subscription.
+        :param item_id: unique identifier of the target subscription item.
+        :param quantity: a new installation quantity for the subscription.
+        """
+        return self._get(
+            "UpcomingInvoice",
+            params={
+                "subscriptionId": subscription_id,
+                "itemId": item_id,
+                "quantity": quantity,
+            },
+        )
+
+    def UpdateSubscription(
+        self,
+        subscription_id: int,
+        item_id: int,
+        quantity: int,
+        expand_fields: list[str] = None,
+    ):
+        """
+        :param subscription_id: unique identifier of the target subscription.
+        :param item_id: unique identifier of the target subscription item
+        :param quantity: a new installation quantity for the subscription.
+        :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).
+        """
+        return self._get(
+            "UpdateSubscription",
+            params={
+                "subscriptionId": subscription_id,
+                "itemId": item_id,
+                "quantity": quantity,
+                "expandFields": expand_fields,
+            },
+            delimiter=",",
+        )
