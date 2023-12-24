@@ -1,8 +1,8 @@
+from datetime import datetime
+
 from ..abstract import ClientAbstract
 
 __all__ = ["Users"]
-
-from datetime import datetime
 
 
 class Users(ClientAbstract):
@@ -14,6 +14,31 @@ class Users(ClientAbstract):
     """
 
     _endpoint1 = "users"
+
+    @property
+    def Account(self) -> "_Account":
+        """
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.users.Account
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/users.Account
+        """
+        return _Account(session=self._session, token=self._token, debug=self._debug)
+
+    @property
+    def Authentication(self) -> "_Authentication":
+        """
+        This service is responsible for the identification and authentication of registered users. It includes sign-in/out actions, session and tokens management, etc.
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.users.Authentication
+        Ref: https://docs.jelastic.com/api/private/#!/api/users.Authentication
+        """
+        return _Authentication(
+            session=self._session, token=self._token, debug=self._debug
+        )
 
     @property
     def Collaboration(self) -> "_Collaboration":
@@ -43,6 +68,627 @@ class Users(ClientAbstract):
         Ref: https://docs.jelastic.com/api/private/#!/api/users.Team
         """
         return _Team(session=self._session, token=self._token, debug=self._debug)
+
+
+    @property
+    def Registration(self) -> "_Registration":
+        """
+        Registration of new users.
+         >>> from jelastic import Jelastic
+         >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+         >>> jelastic.users.Registration
+         Ref: https://docs.jelastic.com/api/private/#!/api/users.Registration
+        """
+        return _Registration(
+            session=self._session, token=self._token, debug=self._debug
+        )
+
+    @property
+    def SSO(self) -> "_SSO":
+        """
+        SSO methods
+         >>> from jelastic import Jelastic
+         >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+         >>> jelastic.users.SSO
+         Ref: https://docs.jelastic.com/api/private/#!/api/users.SSO
+        """
+        return _SSO(session=self._session, token=self._token, debug=self._debug)
+
+
+class _Account(Users):
+    """
+    >>> from jelastic import Jelastic
+    >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+    >>> jelastic.users.Account
+
+     Ref: https://docs.jelastic.com/api/private/#!/api/users.Account
+    """
+
+    _endpoint2 = "account"
+
+    def AddAccount(
+        self,
+        email: str,
+        password: str,
+        name: list[str] = None,
+        notify: list[bool] = None,
+        reseller_id: list[int] = None,
+    ):
+        """
+        param email: unique email address of the new account.
+        param password: password for the new account.
+        param name: an account's name.
+        param notify: defines whether to send a confirmation letter to the new user email upon success (true) or not (false).
+        param reseller_id: unique identifier of the target reseller platform.
+        """
+        return self._get(
+            "AddAccount",
+            params={
+                "email": email,
+                "password": password,
+                "name": name,
+                "notify": notify,
+                "resellerId": reseller_id,
+            },
+            delimiter=",",
+        )
+
+    def AddSSHKey(
+        self,
+        title: str,
+        ssh_key: str,
+        is_private: bool,
+    ):
+        """
+        Response which contains new key data and operation result.
+
+        param title: title of the ssh key.
+        param ssh_key: value of the ssh key.
+        """
+        return self._get(
+            "AddSSHKey",
+            params={
+                "title": title,
+                "sshKey": ssh_key,
+                "isPrivate": is_private,
+            },
+        )
+
+    def ChangeEmail(
+        self,
+        email: str,
+        redirect_url: list[str] = None,
+    ):
+        """
+        param email: new account email address (provided by the user).
+        param redirect_url: a link to display in user email message.
+        """
+        return self._get(
+            "ChangeEmail",
+            params={
+                "email": email,
+                "redirectUrl": redirect_url,
+            },
+            delimiter=",",
+        )
+
+    def ChangeName(
+        self,
+        name: str,
+    ):
+        """
+        param name: new account name (provided by the user).
+        """
+        return self._get(
+            "ChangeName",
+            params={
+                "name": name,
+            },
+        )
+
+    def ChangePassword(
+        self,
+        old_password: str,
+        new_password: str,
+        invalidate_sessions: list[str] = None,
+    ):
+        """
+        param old_password: user's current password (as specified by the user).
+        param new_password: user's new password (as specified by the user).
+        param invalidate_sessions: defines whether to invalidate all active user sessions except the current one (true) or not (false, by default).
+        """
+        return self._get(
+            "ChangePassword",
+            params={
+                "oldPassword": old_password,
+                "newPassword": new_password,
+                "invalidateSessions": invalidate_sessions,
+            },
+            delimiter=",",
+        )
+
+    def CheckUser(
+        self,
+        login: str,
+    ):
+        return self._get(
+            "CheckUser",
+            params={
+                "login": login,
+            },
+        )
+
+    def DeleteSSHKey(
+        self,
+        id: int,
+    ):
+        """
+        param id: unique identifier of the ssh key.
+        """
+        return self._get(
+            "DeleteSSHKey",
+            params={
+                "id": id,
+            },
+        )
+
+    def Disable2FA(
+        self,
+        password: list[str] = None,
+    ):
+        return self._get(
+            "Disable2FA",
+            params={
+                "password": password,
+            },
+            delimiter=",",
+        )
+
+    def Enable2FA(
+        self,
+        code: str,
+        password: list[str] = None,
+    ):
+        return self._get(
+            "Enable2FA",
+            params={
+                "code": code,
+                "password": password,
+            },
+            delimiter=",",
+        )
+
+    def Get2FABackupCodes(
+        self,
+        password: list[str] = None,
+    ):
+        return self._get(
+            "Get2FABackupCodes",
+            params={
+                "password": password,
+            },
+            delimiter=",",
+        )
+
+    def Get2FAConfig(
+        self,
+        password: list[str] = None,
+    ):
+        return self._get(
+            "Get2FAConfig",
+            params={
+                "password": password,
+            },
+            delimiter=",",
+        )
+
+    def GetSSHKeys(
+        self,
+        is_private: list[str] = None,
+    ):
+        return self._get(
+            "GetSSHKeys",
+            params={
+                "isPrivate": is_private,
+            },
+            delimiter=",",
+        )
+
+    def GetUserInfo(
+        self,
+    ):
+        return self._get("GetUserInfo", params={})
+
+    def GetUserInfoInner(
+        self,
+        login: str,
+    ):
+        return self._get(
+            "GetUserInfoInner",
+            params={
+                "login": login,
+            },
+        )
+
+    def RecoverPassword(self, email: str, lang: list[str] = None):
+        return self._get(
+            "RecoverPassword",
+            params={
+                "email": email,
+                "lang": lang,
+            },
+            delimiter=",",
+        )
+
+    def Regenerate2FABackupCodes(
+        self,
+        password: list[str] = None,
+    ):
+        return self._get(
+            "Regenerate2FABackupCodes",
+            params={
+                "password": password,
+            },
+            delimiter=",",
+        )
+
+    def SetAsTenantHost(
+        self,
+        uid: int,
+        force_change: bool,
+    ):
+        """
+        param uid: unique identifier of the target user.
+        param force_change: defines whether to change tenant host if one already exists (true) or not (false).
+        """
+        return self._get(
+            "SetAsTenantHost",
+            params={
+                "uid": uid,
+                "forceChange": force_change,
+            },
+        )
+
+    def SetPassword(
+        self,
+        auth_key: str,
+        invalidate_sessions: list[bool] = None,
+    ):
+        """
+        param auth_key: authentication key to confirm the operation.
+        param invalidate_sessions: defines whether to invalidate all active user sessions except the current one (true) or not (false, by default).
+        """
+        return self._get(
+            "SetPassword",
+            params={
+                "authKey": auth_key,
+                "invalidateSessions": invalidate_sessions,
+            },
+            delimiter=",",
+        )
+
+    def SetUserData(
+        self,
+        data: str,
+    ):
+        return self._get(
+            "SetUserData",
+            params={
+                "data": data,
+            },
+        )
+
+
+class _Authentication(Users):
+    """
+    >>> from jelastic import Jelastic
+    >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+    >>> jelastic.users.Authentication
+     Ref: https://docs.jelastic.com/api/private/#!/api/users.Authentication
+    """
+
+    _endpoint2 = "authentication"
+
+    def ChangeSession(
+        self,
+    ):
+        return self._get(
+            "ChangeSession",
+            params={},
+        )
+
+    def CheckAuthKey(self, auth_key: str):
+        return self._get(
+            "CheckAuthKey",
+            params={"authKey": auth_key},
+        )
+
+    def CheckPassword(self, password: str):
+        return self._get(
+            "CheckPassword",
+            params={"password": password},
+        )
+
+    def CheckSign(
+        self,
+    ):
+        return self._get(
+            "CheckSign",
+            params={},
+        )
+
+    def CheckUser(self, login: str):
+        return self._get(
+            "CheckUser",
+            params={"login": login},
+        )
+
+    def ClearApiListData(
+        self,
+    ):
+        return self._get(
+            "ClearApiListData",
+            params={},
+        )
+
+    def ClearApiListDataInner(
+        self,
+    ):
+        return self._get(
+            "ClearApiListDataInner",
+            params={},
+        )
+
+    def CreateToken(
+        self,
+        description: str,
+        password: list[str] = None,
+        token_template: list[str] = None,
+        api_list: list[str] = None,
+        expires_at: list[datetime] = None,
+    ):
+        """
+        param description: custom description for the created token.
+        param password: password for authenticating the current user.
+        param token_template: one of standard tokens configurations with the predefined permissions (Marketplace, Maven Plugin, IDE Plugins, Extended Access). You can get the full list with the "GetTokenTemplates" method. If not specified, a "Custom" token with manually provided "apiList" will be created.
+        param api_list: a comma-separated list of API methods that are allowed by the token. You can get the full list with the "GetTokenApiList" method. For example: ["env.control.CreateEnvironment", "env.control.RedeployContainersByGroup", "env.file.AddMountPointByGroup"].
+        param expires_at: expiration date (UTC) for the token. In the format “yyyy-MM-dd hh:mm:ss”, e.g. "2022-11-16 00:00:00".
+        """
+        return self._get(
+            "CreateToken",
+            params={
+                "description": description,
+                "password": password,
+                "tokenTemplate": token_template,
+                "apiList": api_list,
+                "expiresAt": expires_at,
+            },
+            delimiter=",",
+        )
+
+    def CreateTokenInner(
+        self,
+        login: str,
+        description: str,
+        token_template: list[str] = None,
+        api_list: list[str] = None,
+        expires_at: list[datetime] = None,
+        is_protected: list[bool] = None,
+        skip_notification: list[bool] = None,
+    ):
+        return self._get(
+            "CreateTokenInner",
+            params={
+                "login": login,
+                "description": description,
+                "tokenTemplate": token_template,
+                "apiList": api_list,
+                "expiresAt": expires_at,
+                "isProtected": is_protected,
+                "skipNotification": skip_notification,
+            },
+            delimiter=",",
+        )
+
+    def DeleteTokens(
+        self,
+        ids: str,
+        password: list[str] = None,
+    ):
+        """
+        param ids: a comma- or semicolon-separated list of target token IDs. For example: 1;4;6. Also, you can use * for selecting all your tokens.
+        param password: password for authenticating the current user.
+        """
+        return self._get(
+            "DeleteTokens",
+            params={"ids": ids, "password": password},
+            delimiter=",",
+        )
+
+    def EditToken(
+        self,
+        id: int,
+        password: list[str] = None,
+        description: list[str] = None,
+        token_template: list[str] = None,
+        api_list: list[str] = None,
+        expires_at: list[datetime] = None,
+    ):
+        """
+        param id: unique identifier of the target token.
+        param description: custom description for the created token.
+        param password: password for authenticating the current user.
+        param token_template: one of standard tokens configurations with the predefined permissions (Marketplace, Maven Plugin, IDE Plugins, Extended Access). You can get the full list with the "GetTokenTemplates" method. If not specified, a "Custom" token with manually provided "apiList" will be created.
+        param api_list: a comma-separated list of API methods that are allowed by the token. You can get the full list with the "GetTokenApiList" method. For example: ["env.control.CreateEnvironment", "env.control.RedeployContainersByGroup", "env.file.AddMountPointByGroup"].
+        param expires_at: expiration date (UTC) for the token. In the format “yyyy-MM-dd hh:mm:ss”, e.g. "2022-11-16 00:00:00".
+        """
+        return self._get(
+            "EditToken",
+            params={
+                "id": id,
+                "password": password,
+                "description": description,
+                "tokenTemplate": token_template,
+                "apiList": api_list,
+                "expiresAt": expires_at,
+            },
+            delimiter=",",
+        )
+
+    def GetAuthKey(self, auth_key: str):
+        return self._get(
+            "GetAuthKey",
+            params={"authKey": auth_key},
+        )
+
+    def GetDescriptionByToken(self, checksum: str):
+        return self._get(
+            "GetDescriptionByToken",
+            params={"checksum": checksum},
+        )
+
+    def GetDeviceSignature(
+        self,
+    ):
+        return self._get(
+            "GetDeviceSignature",
+            params={},
+        )
+
+    def GetPolicyMethods(
+        self,
+        unique_name: list[str] = None,
+    ):
+        return self._get(
+            "GetPolicyMethods",
+            params={"uniqueName": unique_name},
+            delimiter=",",
+        )
+
+    def GetSessions(
+        self,
+    ):
+        return self._get(
+            "GetSessions",
+            params={},
+        )
+
+    def GetSigninAttempts(self, search: list[str] = None):
+        return self._get(
+            "GetSigninAttempts",
+            params={"search": search},
+            delimiter=",",
+        )
+
+    def GetTokenApiList(
+        self, show_private: list[str] = None, sort_param: list[str] = None
+    ):
+        """
+        param show_private: showPrivate : "boolean" (optional)
+        param sort_param: filter by method name.
+        """
+        return self._get(
+            "GetTokenApiList",
+            params={
+                "showPrivate": show_private,
+                "sortParam": sort_param,
+            },
+            delimiter=",",
+        )
+
+    def GetTokenTemplates(
+        self,
+    ):
+        return self._get(
+            "GetTokenTemplates",
+            params={},
+        )
+
+    def GetTokens(self, ids: list[str] = None):
+        """
+        param ids: a comma- or semicolon-separated list of target token IDs. For example: 1;4;6. Also, you can use * for selecting all your tokens.
+        """
+        return self._get(
+            "GetTokens",
+            params={"ids": ids},
+            delimiter=",",
+        )
+
+    def GetUidByToken(self, checksum: str):
+        return self._get(
+            "GetUidByToken",
+            params={"checksum": checksum},
+        )
+
+    def RegenerateToken(
+        self,
+        ids: str,
+        password: list[str] = None,
+    ):
+        """
+        param ids: unique identifier of the target token.
+        param password: password for authenticating the current user.
+        """
+        return self._get(
+            "RegenerateToken",
+            params={"ids": ids, "password": password},
+            delimiter=",",
+        )
+
+    def ResetSigninAttempts(
+        self,
+        login: list[str] = None,
+        ip_address: list[str] = None,
+    ):
+        return self._get(
+            "ResetSigninAttempts",
+            params={"login": login, "ipAddress": ip_address},
+            delimiter=",",
+        )
+
+    def Signin(self, login: str, password: str):
+        return self._get("Signin", params={"login": login, "password": password})
+
+    def SigninByAuthKey(self, auth_key: str):
+        return self._get(
+            "SigninByAuthKey",
+            params={"authKey": auth_key},
+        )
+
+    def SigninByToken(self, token: str, user_headers: str):
+        return self._get(
+            "SigninByToken",
+            params={"token": token, "userHeaders": user_headers},
+        )
+
+    def Signout(
+        self,
+    ):
+        return self._get(
+            "Signout",
+            params={},
+        )
+
+    def SignoutSessions(self, ids: str):
+        """
+        param ids: a comma- or semicolon-separated list of target token IDs. For example: 1;4;6. Also, you can use * for selecting all your tokens.
+        """
+        return self._get(
+            "SignoutSessions",
+            params={"ids": ids},
+        )
+
+    def ValidateCaptcha(self, code: str):
+        return self._get(
+            "ValidateCaptcha",
+            params={"code": code},
+        )
+
+    def Verify2FACode(self, code: str):
+        return self._get(
+            "Verify2FACode",
+            params={"code": code},
+        )
 
 
 class _Collaboration(Users):
@@ -670,6 +1316,251 @@ class _Collaboration(Users):
             "SuspendMember",
             params={"id": id, "ownerUid": owner_uid},
             delimeter=",",
+        )
+
+
+class _SSO(Users):
+    """
+    >>> from jelastic import Jelastic
+    >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+    >>> jelastic.users.SSO
+     Ref: https://docs.jelastic.com/api/private/#!/api/users.SSO
+    """
+
+    _endpoint2 = "sso"
+
+    def GetAuthEndpoint(self, redirect_uri: str):
+        """
+        param redirectUri: a link to display after the authentication.
+        """
+        return self._get(
+            "GetAuthEndpoint",
+            params={"redirectUri": redirect_uri},
+        )
+
+    def GetImpersonationData(self, uid: int):
+        """
+        param uid: application identifier of the platform.
+        """
+        return self._get(
+            "GetImpersonationData",
+            params={"uid": uid},
+        )
+
+    def GetSettings(self):
+        return self._get(
+            "GetSettings",
+            params={},
+        )
+
+    def ResetPassword(self):
+        return self._get(
+            "ResetPassword",
+            params={},
+        )
+
+    def SigninByCode(self, code: str, redirect_uri: str):
+        """
+        param code: a security code for SSO authentication.
+        param redirectUri: a link to display after the authentication.
+        """
+        return self._get(
+            "SigninByCode",
+            params={"code": code, "redirectUri": redirect_uri},
+        )
+
+    def SigninByToken(self, token: str):
+        """
+        param token: an access token for SSO authentication.
+        """
+        return self._get(
+            "SigninByToken",
+            params={"token": token},
+        )
+
+
+class _Registration(Users):
+    """
+    >>> from jelastic import Jelastic
+    >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+    >>> jelastic.users.Registration
+     Ref: https://docs.jelastic.com/api/private/#!/api/users.Registration
+    """
+
+    _endpoint2 = "registration"
+
+    def Activate(
+        self,
+        key: str,
+        password: list[str] = None,
+        skip_send_email: list[bool] = None,
+        code: list[str] = None,
+        reseller_id: list[int] = None,
+    ):
+        """
+        param key: activation key received after registration. The activation key is sent to the email address provided during registration.
+        param password: password for the new user.
+        param skip_send_email: defines whether to send the activation email (false) or not (true).
+        param code: custom code to be executed upon activation.
+        param reseller_id: unique identifier of the target reseller platform.
+        """
+        return self._get(
+            "Activate",
+            params={
+                "key": key,
+                "password": password,
+                "skipSendEmail": skip_send_email,
+                "code": code,
+                "resellerId": reseller_id,
+            },
+            delimiter=",",
+        )
+
+    def CheckEmailExist(
+        self,
+        email: str,
+    ):
+        """
+        param email: verifiable e-mail address
+        """
+        return self._get("CheckEmailExist", params={"email": email})
+
+    def CheckEmailRegistration(
+        self,
+        email: str,
+    ):
+        """
+        param email: verifiable e-mail address
+        """
+        return self._get("CheckEmailRegistration", params={"email": email})
+
+    def CheckPassword(
+        self,
+        password: str,
+    ):
+        return self._get("CheckPassword", params={"password": password})
+
+    def ClearSmsListData(
+        self,
+        email: str,
+    ):
+        """
+        param email: email to generate confirmation key
+        """
+        return self._get("ClearSmsListData", params={"email": email})
+
+    def CreateAccount(
+        self,
+        email: str,
+        password: str,
+        name: list[str] = None,
+        check_email: list[bool] = None,
+        welcome: list[str] = None,
+        skip_send_email: list[bool] = None,
+        reseller_id: list[int] = None,
+    ):
+        """
+        param email: mailing address to which will be sent an activation key (as specified by user). The key activation is valid 24 hours after registration, if the key was not activated during this time, the user is automatically deleted, the key is not valid
+        param password: password for the new user.
+        param name: user name
+        param check_email: verifying the existence of e-mail address (default is false)
+        param welcome: optional. if invitation letter should be sent, url to redirect to after activation
+        param skip_send_email: defines whether to send the activation email (false) or not (true).
+        param reseller_id: unique identifier of the target reseller platform.
+        """
+        return self._get(
+            "CreateAccount",
+            params={
+                "email": email,
+                "password": password,
+                "name": name,
+                "checkEmail": check_email,
+                "welcome": welcome,
+                "skipSendEmail": skip_send_email,
+                "resellerId": reseller_id,
+            },
+            delimiter=",",
+        )
+
+    def CreateAuthKey(
+        self,
+        login: str,
+        solution: str,
+        auth_type: list[str] = None,
+        expires_at: list[datetime] = None,
+        type: list[str] = None,
+    ):
+        return self._get(
+            "CreateAuthKey",
+            params={
+                "login": login,
+                "solution": solution,
+                "authType": auth_type,
+                "expiresAt": expires_at,
+                "type": type,
+            },
+            delimiter=",",
+        )
+
+    def CreateConfirmLinkUserKey(
+        self,
+        email: str,
+        role: str,
+        target_app_id: list[str] = None,
+        application_right: list[str] = None,
+    ):
+        """
+        param email: email to generate confirmation key
+        param role: role that will be applied to a linked user after confirmation
+        """
+        return self._get(
+            "CreateConfirmLinkUserKey",
+            params={
+                "email": email,
+                "role": role,
+                "targetAppid": target_app_id,
+                "applicationRight": application_right,
+            },
+            delimiter=",",
+        )
+
+    def GeneratePassword(
+        self,
+        length: list[int] = None,
+    ):
+        """
+        param length: define password length (default value is set by password policy: minLength, can not be less than minLength)
+        """
+        return self._get("GeneratePassword", params={"length": length})
+
+    def GetSmsListData(
+        self,
+    ):
+        return self._get("GetSmsListData", params={})
+
+    def ResendInvitation(self, welcome: str):
+        return self._get("ResendInvitation", params={"welcome": welcome})
+
+    def SendSms(
+        self,
+        activation_key: str,
+        email: str,
+        phone: str,
+        lang: list[str] = None,
+    ):
+        """
+        param email: email to generate confirmation key
+        param phone: phone number of user that receive message with verification code.
+        param lang: localization language in standart ISO 639-1
+        """
+        return self._get(
+            "SendSms",
+            params={
+                "activationKey ": activation_key,
+                "email ": email,
+                "phone ": phone,
+                "lang ": lang,
+            },
         )
 
 
