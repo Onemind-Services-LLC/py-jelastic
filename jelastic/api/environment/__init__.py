@@ -98,13 +98,13 @@ class Environment(ClientAbstract):
     @property
     def Tracking(self) -> "_Tracking":
         """
-         This service is responsible for the monitoring of actions performed by the user. Learn more in the documentation.
+        This service is responsible for the monitoring of actions performed by the user. Learn more in the documentation.
 
-         >>> from jelastic import Jelastic
-         >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
-         >>> jelastic.environment.Tracking
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.environment.Tracking
 
-         Ref: https://docs.jelastic.com/api/private/#!/api/environment.Tracking
+        Ref: https://docs.jelastic.com/api/private/#!/api/environment.Tracking
         """
         return _Tracking(
             session=self._session,
@@ -124,16 +124,16 @@ class _Billing(Environment):
     _endpoint2 = "billing"
 
     def AddStats(
-            self,
-            resource_name: str,
-            uid: int,
-            start_date: date,
-            end_date: date,
-            env_name: str,
-            node_id: int,
-            value: float,
-            note: str = None,
-            value_group: str = None,
+        self,
+        resource_name: str,
+        uid: int,
+        start_date: date,
+        end_date: date,
+        env_name: str,
+        node_id: int,
+        value: float,
+        note: str = None,
+        value_group: str = None,
     ):
         return self._get(
             "AddStats",
@@ -165,11 +165,11 @@ class _Billing(Environment):
         )
 
     def EnvsResources(
-            self,
-            start_time: datetime,
-            end_time: datetime,
-            target_app_id: str,
-            checksum: str,
+        self,
+        start_time: datetime,
+        end_time: datetime,
+        target_app_id: str,
+        checksum: str,
     ):
         """
         Calculate environments resources for the given period.
@@ -190,7 +190,7 @@ class _Billing(Environment):
         )
 
     def EnvsResourcesByAccount(
-            self, start_time: datetime, end_time: datetime, uid: int, checksum: str
+        self, start_time: datetime, end_time: datetime, uid: int, checksum: str
     ):
         """
         Calculate environments resources for the given period.
@@ -219,7 +219,7 @@ class _Billing(Environment):
         )
 
     def SetOptions(
-            self, target_env_name: str, node_group: str, options: dict, node_id: int = None
+        self, target_env_name: str, node_group: str, options: dict, node_id: int = None
     ):
         """
         Sets billing options for the node group (layer) to help the platform identify installed license types.
@@ -317,13 +317,13 @@ class _JError(Environment):
     _endpoint2 = "jerror"
 
     def Error(
-            self,
-            action_name: str,
-            call_parameters: str,
-            error_code: int,
-            priority: int,
-            email: str = None,
-            error_message: str = None,
+        self,
+        action_name: str,
+        call_parameters: str,
+        error_code: int,
+        priority: int,
+        email: str = None,
+        error_message: str = None,
     ):
         return self._get(
             "Error",
@@ -381,12 +381,12 @@ class _Binder(Environment):
     _endpoint2 = "Binder"
 
     def AddDomains(
-            self,
-            env_name: str,
-            domains: str,
-            node_group: list[str] = None,
-            node_id: list[int] = None,
-            subdomain: list[str] = None,
+        self,
+        env_name: str,
+        domains: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
+        subdomain: list[str] = None,
     ):
         """
         param domains: a comma- or semicolon-separated list of domains (e.g. domain1,domain2 or domain1;domain2).
@@ -407,11 +407,11 @@ class _Binder(Environment):
         )
 
     def AddSSLCert(
-            self,
-            env_name: str,
-            key: str,
-            cert: str,
-            interm: list[str] = None,
+        self,
+        env_name: str,
+        key: str,
+        cert: str,
+        interm: list[str] = None,
     ):
         """
         param key: private key (can be either key body or link to download it).
@@ -430,10 +430,10 @@ class _Binder(Environment):
         )
 
     def AttachExtIp(
-            self,
-            env_name: str,
-            nodeid: int,
-            type: list[str] = None,
+        self,
+        env_name: str,
+        nodeid: int,
+        type: list[str] = None,
     ):
         return self._get(
             "AttachExtIp",
@@ -446,10 +446,10 @@ class _Binder(Environment):
         )
 
     def BindExtDomain(
-            self,
-            env_name: str,
-            extdomain: str,
-            cert_id: list[int] = None,
+        self,
+        env_name: str,
+        extdomain: str,
+        cert_id: list[int] = None,
     ):
         return self._get(
             "BindExtDomain",
@@ -462,10 +462,10 @@ class _Binder(Environment):
         )
 
     def BindExtDomains(
-            self,
-            env_name: str,
-            extdomains: str,
-            cert_id: list[int] = None,
+        self,
+        env_name: str,
+        extdomains: str,
+        cert_id: list[int] = None,
     ):
         """
         param extdomain: a comma-separated list of external domains to be bound to the environment.
@@ -482,11 +482,11 @@ class _Binder(Environment):
         )
 
     def BindSSL(
-            self,
-            env_name: str,
-            cert_key: str,
-            cert: str,
-            intermediate: str,
+        self,
+        env_name: str,
+        cert_key: str,
+        cert: str,
+        intermediate: str,
     ):
         return self._get(
             "BindSSL",
@@ -499,11 +499,11 @@ class _Binder(Environment):
         )
 
     def BindSSLCert(
-            self,
-            env_name: str,
-            cert_id: int,
-            entry_point: list[str] = None,
-            ext_domains: list[str] = None,
+        self,
+        env_name: str,
+        cert_id: int,
+        entry_point: list[str] = None,
+        ext_domains: list[str] = None,
     ):
         """
         param cert_id: unique identifier of the SSL certificate.
@@ -522,10 +522,10 @@ class _Binder(Environment):
         )
 
     def CheckDomain(
-            self,
-            env_name: str,
-            domain: str,
-            region: list[str] = None,
+        self,
+        env_name: str,
+        domain: str,
+        region: list[str] = None,
     ):
         """
         param domain: domain name to be checked.
@@ -542,9 +542,9 @@ class _Binder(Environment):
         )
 
     def CheckExtDomain(
-            self,
-            env_name: str,
-            extdomains: str,
+        self,
+        env_name: str,
+        extdomains: str,
     ):
         """
         param extdomains: external domain name to be checked.
@@ -558,8 +558,8 @@ class _Binder(Environment):
         )
 
     def DeleteSSL(
-            self,
-            env_name: str,
+        self,
+        env_name: str,
     ):
         return self._get(
             "DeleteSSL",
@@ -567,10 +567,10 @@ class _Binder(Environment):
         )
 
     def DetachExtIp(
-            self,
-            env_name: str,
-            nodeid: int,
-            ip: str,
+        self,
+        env_name: str,
+        nodeid: int,
+        ip: str,
     ):
         """
         param nodeid: unique identifier of the target node (container).
@@ -586,8 +586,8 @@ class _Binder(Environment):
         )
 
     def DisableSSL(
-            self,
-            env_name: str,
+        self,
+        env_name: str,
     ):
         return self._get(
             "DisableSSL",
@@ -597,12 +597,12 @@ class _Binder(Environment):
         )
 
     def EditSSLCert(
-            self,
-            env_name: str,
-            id: int,
-            key: list[str] = None,
-            cert: list[str] = None,
-            interm: list[str] = None,
+        self,
+        env_name: str,
+        id: int,
+        key: list[str] = None,
+        cert: list[str] = None,
+        interm: list[str] = None,
     ):
         """
         param id: unique identifier of the target SSL certificate.
@@ -623,9 +623,9 @@ class _Binder(Environment):
         )
 
     def GetDomainInfo(
-            self,
-            env_name: str,
-            domain: str,
+        self,
+        env_name: str,
+        domain: str,
     ):
         """
         Returns environment appid if environment found by domain.
@@ -641,11 +641,11 @@ class _Binder(Environment):
         )
 
     def GetDomains(
-            self,
-            env_name: str,
-            node_group: list[str] = None,
-            node_id: list[int] = None,
-            in_short: list[bool] = None,
+        self,
+        env_name: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
+        in_short: list[bool] = None,
     ):
         """
         param node_group: unique identifier of the target node group (layer) for filtering, e.g. "cp" for the default application server layer.
@@ -677,7 +677,7 @@ class _Binder(Environment):
         )
 
     def ManageNodeDnsState(
-            self, env_name: str, node_id: list[int] = None, enabled: list[bool] = None
+        self, env_name: str, node_id: list[int] = None, enabled: list[bool] = None
     ):
         """
         param env_name: target environment name.
@@ -695,7 +695,7 @@ class _Binder(Environment):
         )
 
     def MoveExtIps(
-            self, env_name: str, source_node_id: int, target_node_id: int, ips: str
+        self, env_name: str, source_node_id: int, target_node_id: int, ips: str
     ):
         """
         param env_name: source environment name.
@@ -714,11 +714,11 @@ class _Binder(Environment):
         )
 
     def RemoveDomains(
-            self,
-            env_name: str,
-            domains: str,
-            node_group: list[str] = None,
-            node_id: list[int] = None,
+        self,
+        env_name: str,
+        domains: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
     ):
         """
         param env_name: target environment name.
@@ -738,9 +738,9 @@ class _Binder(Environment):
         )
 
     def RemoveExtDomains(
-            self,
-            env_name: str,
-            extdomain: str,
+        self,
+        env_name: str,
+        extdomain: str,
     ):
         """
         param env_name: target environment name.
@@ -755,8 +755,8 @@ class _Binder(Environment):
         )
 
     def RemoveSSL(
-            self,
-            env_name: str,
+        self,
+        env_name: str,
     ):
         """
         param env_name: target environment name.
@@ -769,9 +769,9 @@ class _Binder(Environment):
         )
 
     def RemoveSSLCerts(
-            self,
-            env_name: str,
-            ids: str,
+        self,
+        env_name: str,
+        ids: str,
     ):
         """
         param env_name: target environment name.
@@ -786,12 +786,12 @@ class _Binder(Environment):
         )
 
     def SetExtIpCount(
-            self,
-            env_name: str,
-            type: str,
-            count: int,
-            node_group: list[str] = None,
-            node_id: list[int] = None,
+        self,
+        env_name: str,
+        type: str,
+        count: int,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
     ):
         """
         param env_name: target environment name.
@@ -813,9 +813,9 @@ class _Binder(Environment):
         )
 
     def SwapExtDomains(
-            self,
-            env_name: str,
-            targetappid: str,
+        self,
+        env_name: str,
+        targetappid: str,
     ):
         """
         param env_name: target environment name.
@@ -830,12 +830,12 @@ class _Binder(Environment):
         )
 
     def SwapExtIps(
-            self,
-            env_name: str,
-            source_node_id: int,
-            target_node_id: int,
-            source_ip: list[str] = None,
-            target_ip: list[str] = None,
+        self,
+        env_name: str,
+        source_node_id: int,
+        target_node_id: int,
+        source_ip: list[str] = None,
+        target_ip: list[str] = None,
     ):
         """
         param env_name: source environment name.
@@ -857,9 +857,9 @@ class _Binder(Environment):
         )
 
     def UnbindSSLCert(
-            self,
-            env_name: str,
-            extdomains: list[str] = None,
+        self,
+        env_name: str,
+        extdomains: list[str] = None,
     ):
         """
         param env_name: target environment name.
@@ -885,8 +885,8 @@ class _Tracking(Environment):
     _endpoint2 = "tracking"
 
     def GetAction(
-            self,
-            id: list[int] = None,
+        self,
+        id: list[int] = None,
     ):
         """
         param id: unique identifier of the target action. An error occurs if the specified action does not exist or does not belong to the current user.
@@ -910,53 +910,51 @@ class _Tracking(Environment):
         )
 
     def GetAllServiceName(
-            self,
-            add_services_wildcard: list[bool] = None,
-            type: list[str] = None,
+        self,
+        add_services_wildcard: list[bool] = None,
+        type: list[str] = None,
     ):
         return self._get(
             "GetAllServiceName",
-            params={
-                "addServicesWildcard": add_services_wildcard,
-                "type": type
-            },
+            params={"addServicesWildcard": add_services_wildcard, "type": type},
             delimiter=",",
         )
 
     def GetCurrentActions(
-            self,
+        self,
     ):
-        return self._get(
-            "GetCurrentActions",
-            params={
-            }
-        )
+        return self._get("GetCurrentActions", params={})
 
-    def GetEnvActions(self, start_time: datetime, end_time: list[datetime] = None,
-                      offset: list[int] = None, count: list[int] = None):
+    def GetEnvActions(
+        self,
+        start_time: datetime,
+        end_time: list[datetime] = None,
+        offset: list[int] = None,
+        count: list[int] = None,
+    ):
         return self._get(
             "GetEnvActions",
             params={
                 "starttime": start_time,
                 "endtime": end_time,
                 "offset": offset,
-                "count": count
+                "count": count,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def GetServerUTCTime(
-            self,
+        self,
     ):
-        return self._get(
-            "GetServerUTCTime",
-            params={
-            }
-        )
+        return self._get("GetServerUTCTime", params={})
 
-    def GetUidActions(self,
-                      count: list[int] = None, start_time: list[datetime] = None, end_time: list[datetime] = None,
-                      action_types: list[str] = None, ):
+    def GetUidActions(
+        self,
+        count: list[int] = None,
+        start_time: list[datetime] = None,
+        end_time: list[datetime] = None,
+        action_types: list[str] = None,
+    ):
         """
         param count: returns the specified number of actions from the response (10 by default).
         param start_time: start time (UTC) of a period for which actions should be shown. In the format “yyyy-MM-dd hh:mm:ss”, e.g. "2022-11-16 00:00:00".
@@ -969,23 +967,22 @@ class _Tracking(Environment):
                 "count": count,
                 "starttime": start_time,
                 "endtime": end_time,
-                "actionTypes": action_types
-
+                "actionTypes": action_types,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def GetUidActionsAdmin(
-            self,
-            uid: int,
-            start_row: int,
-            start_time: datetime,
-            end_time: datetime,
-            result_count: list[int] = None,
-            servicename: list[str] = None,
-            order_field: list[str] = None,
-            order_direction: list[str] = None,
-            search_text: list[str] = None
+        self,
+        uid: int,
+        start_row: int,
+        start_time: datetime,
+        end_time: datetime,
+        result_count: list[int] = None,
+        servicename: list[str] = None,
+        order_field: list[str] = None,
+        order_direction: list[str] = None,
+        search_text: list[str] = None,
     ):
         """
         param start_row: returns information starting from the specified row in the response (starts with 0, by default).
@@ -1008,56 +1005,39 @@ class _Tracking(Environment):
                 "orderField": order_field,
                 "orderDirection": order_direction,
                 "searchText": search_text,
-            }, datetime_format="%Y-%m-%d %H:%M:%S",
+            },
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
-    def SearchActions(
-            self,
-            session: str,
-            search: dict
-    ):
+    def SearchActions(self, session: str, search: dict):
         """
         param session: user session or personal access token.
         param search: JSON object with the search parameters:
         """
         return self._get(
             "SearchActions",
-            params={
-                "session": session,
-                "search": search
-            }, delimiter=",",
+            params={"session": session, "search": search},
+            delimiter=",",
         )
 
-    def StoreAuditAdminActions(
-            self,
-            session: str,
-            trackedevent: dict
-    ):
+    def StoreAuditAdminActions(self, session: str, trackedevent: dict):
         """
         param session: user session or personal access token.
         param trackedevent: JSON
         """
         return self._get(
             "StoreAuditAdminActions",
-            params={
-                "session": session,
-                "trackedevent": trackedevent
-            }, delimiter=",",
+            params={"session": session, "trackedevent": trackedevent},
+            delimiter=",",
         )
 
-    def StoreUserActions(
-            self,
-            session: str,
-            tracked_action_event: dict
-    ):
+    def StoreUserActions(self, session: str, tracked_action_event: dict):
         """
         param session: user session or personal access token.
         param trackedActionEvent: JSON
         """
         return self._get(
             "StoreUserActions",
-            params={
-                "session": session,
-                "trackedActionEvent": tracked_action_event
-            }, delimiter=",",
+            params={"session": session, "trackedActionEvent": tracked_action_event},
+            delimiter=",",
         )
