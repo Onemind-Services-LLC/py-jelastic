@@ -43,6 +43,10 @@ Billing
    :undoc-members:
    :show-inheritance:
 
+.. autoclass:: jelastic.api.billing._Subscription
+   :undoc-members:
+   :show-inheritance:
+
 .. autoclass:: jelastic.api.billing._Order
    :members:
    :undoc-members:
