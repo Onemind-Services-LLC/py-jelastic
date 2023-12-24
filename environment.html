@@ -626,6 +626,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#jelastic.api.environment.Environment.Tracking"><code class="docutils literal notranslate"><span class="pre">Environment.Tracking</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#jelastic.api.environment.Environment.Trigger"><code class="docutils literal notranslate"><span class="pre">Environment.Trigger</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#jelastic.api.environment.Environment.Vcs"><code class="docutils literal notranslate"><span class="pre">Environment.Vcs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#jelastic.api.environment.Environment.Windows"><code class="docutils literal notranslate"><span class="pre">Environment.Windows</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#jelastic.api.environment._Billing"><code class="docutils literal notranslate"><span class="pre">_Billing</span></code></a><ul>
@@ -1034,6 +1035,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#jelastic.api.environment._Vcs.EditProject"><code class="docutils literal notranslate"><span class="pre">_Vcs.EditProject()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#jelastic.api.environment._Vcs.GetProject"><code class="docutils literal notranslate"><span class="pre">_Vcs.GetProject()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#jelastic.api.environment._Vcs.Update"><code class="docutils literal notranslate"><span class="pre">_Vcs.Update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#jelastic.api.environment._Windows"><code class="docutils literal notranslate"><span class="pre">_Windows</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#jelastic.api.environment._Windows.AddDomain"><code class="docutils literal notranslate"><span class="pre">_Windows.AddDomain()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#jelastic.api.environment._Windows.EditDomain"><code class="docutils literal notranslate"><span class="pre">_Windows.EditDomain()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#jelastic.api.environment._Windows.GetList"><code class="docutils literal notranslate"><span class="pre">_Windows.GetList()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#jelastic.api.environment._Windows.IsDomainExists"><code class="docutils literal notranslate"><span class="pre">_Windows.IsDomainExists()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#jelastic.api.environment._Windows.RemoveDomain"><code class="docutils literal notranslate"><span class="pre">_Windows.RemoveDomain()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -1494,6 +1503,18 @@ load alert - custom conditions for email notifications based on the nodes’ loa
 </pre></div>
 </div>
 <p>Ref: <a class="reference external" href="https://docs.jelastic.com/api/private/#!/api/environment.Vcs">https://docs.jelastic.com/api/private/#!/api/environment.Vcs</a></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="jelastic.api.environment.Environment.Windows">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Windows</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#jelastic.api.environment._Windows" title="jelastic.api.environment._Windows"><span class="pre">_Windows</span></a></em><a class="headerlink" href="#jelastic.api.environment.Environment.Windows" title="Link to this definition"></a></dt>
+<dd><p>Service provides a flexible structure to manage Environment, obtain statistic information etc.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jelastic</span> <span class="kn">import</span> <span class="n">Jelastic</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jelastic</span> <span class="o">=</span> <span class="n">Jelastic</span><span class="p">(</span><span class="s1">&#39;https://jca.xapp.cloudmydc.com&#39;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s1">&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jelastic</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">Windows</span>
+</pre></div>
+</div>
+<p>Ref: <a class="reference external" href="https://docs.jelastic.com/api/private/#!/api/environment.Windows">https://docs.jelastic.com/api/private/#!/api/environment.Windows</a></p>
 </dd></dl>
 
 </dd></dl>
@@ -4950,6 +4971,42 @@ param context: custom context name for the deployed project (ROOT by default).
 param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
 param delay: delay (in seconds) between two consecutive restarts when using the sequential restart type (i.e. when restart is performed on servers one-by-one to ensure uptime).</p>
 </dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="jelastic.api.environment._Windows">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jelastic.api.environment.</span></span><span class="sig-name descname"><span class="pre">_Windows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/environment.html#_Windows"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.environment._Windows" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#jelastic.api.environment.Environment" title="jelastic.api.environment.Environment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Environment</span></code></a></p>
+<p>Service provides a flexible structure to manage Environment, obtain statistic information etc.</p>
+<blockquote>
+<div><p>Ref: <a class="reference external" href="https://docs.jelastic.com/api/private/#!/api/environment.Windows">https://docs.jelastic.com/api/private/#!/api/environment.Windows</a></p>
+</div></blockquote>
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.environment._Windows.AddDomain">
+<span class="sig-name descname"><span class="pre">AddDomain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dns_server</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/environment.html#_Windows.AddDomain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.environment._Windows.AddDomain" title="Link to this definition"></a></dt>
+<dd><p>param password: password of the domain user</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.environment._Windows.EditDomain">
+<span class="sig-name descname"><span class="pre">EditDomain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dns_server</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/environment.html#_Windows.EditDomain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.environment._Windows.EditDomain" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.environment._Windows.GetList">
+<span class="sig-name descname"><span class="pre">GetList</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/environment.html#_Windows.GetList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.environment._Windows.GetList" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.environment._Windows.IsDomainExists">
+<span class="sig-name descname"><span class="pre">IsDomainExists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checksum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/environment.html#_Windows.IsDomainExists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.environment._Windows.IsDomainExists" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.environment._Windows.RemoveDomain">
+<span class="sig-name descname"><span class="pre">RemoveDomain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/environment.html#_Windows.RemoveDomain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.environment._Windows.RemoveDomain" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 

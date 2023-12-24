@@ -623,6 +623,7 @@
 <li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment.Environment.Tracking"><code class="docutils literal notranslate"><span class="pre">Environment.Tracking</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment.Environment.Trigger"><code class="docutils literal notranslate"><span class="pre">Environment.Trigger</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment.Environment.Vcs"><code class="docutils literal notranslate"><span class="pre">Environment.Vcs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment.Environment.Windows"><code class="docutils literal notranslate"><span class="pre">Environment.Windows</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="environment.html#jelastic.api.environment._Billing"><code class="docutils literal notranslate"><span class="pre">_Billing</span></code></a><ul>
@@ -1033,6 +1034,14 @@
 <li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment._Vcs.Update"><code class="docutils literal notranslate"><span class="pre">_Vcs.Update()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="environment.html#jelastic.api.environment._Windows"><code class="docutils literal notranslate"><span class="pre">_Windows</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment._Windows.AddDomain"><code class="docutils literal notranslate"><span class="pre">_Windows.AddDomain()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment._Windows.EditDomain"><code class="docutils literal notranslate"><span class="pre">_Windows.EditDomain()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment._Windows.GetList"><code class="docutils literal notranslate"><span class="pre">_Windows.GetList()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment._Windows.IsDomainExists"><code class="docutils literal notranslate"><span class="pre">_Windows.IsDomainExists()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment._Windows.RemoveDomain"><code class="docutils literal notranslate"><span class="pre">_Windows.RemoveDomain()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="exceptions.html">Exceptions</a><ul>
@@ -1429,6 +1438,8 @@
 </li>
       <li><a href="administration.html#jelastic.api.administration._VirtualNetwork">_VirtualNetwork (class in jelastic.api.administration)</a>
 </li>
+      <li><a href="environment.html#jelastic.api.environment._Windows">_Windows (class in jelastic.api.environment)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -1488,6 +1499,8 @@
       <li><a href="environment.html#jelastic.api.environment._Control.AddDockerVolume">AddDockerVolume() (jelastic.api.environment._Control method)</a>
 </li>
       <li><a href="environment.html#jelastic.api.environment._Control.AddDockerVolumeByGroup">AddDockerVolumeByGroup() (jelastic.api.environment._Control method)</a>
+</li>
+      <li><a href="environment.html#jelastic.api.environment._Windows.AddDomain">AddDomain() (jelastic.api.environment._Windows method)</a>
 </li>
       <li><a href="environment.html#jelastic.api.environment._Binder.AddDomains">AddDomains() (jelastic.api.environment._Binder method)</a>
 </li>
@@ -1994,6 +2007,8 @@
       <li><a href="environment.html#jelastic.api.environment._Deployment.EditBuildProject">EditBuildProject() (jelastic.api.environment._Deployment method)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Subscription.EditCategory">EditCategory() (jelastic.api.administration._Subscription method)</a>
+</li>
+      <li><a href="environment.html#jelastic.api.environment._Windows.EditDomain">EditDomain() (jelastic.api.environment._Windows method)</a>
 </li>
       <li><a href="environment.html#jelastic.api.environment._Control.EditEndpoint">EditEndpoint() (jelastic.api.environment._Control method)</a>
 </li>
@@ -2510,6 +2525,8 @@
       <ul>
         <li><a href="environment.html#jelastic.api.environment._File.GetList">(jelastic.api.environment._File method)</a>
 </li>
+        <li><a href="environment.html#jelastic.api.environment._Windows.GetList">(jelastic.api.environment._Windows method)</a>
+</li>
       </ul></li>
       <li><a href="environment.html#jelastic.api.environment._Trigger.GetLoadAlertTriggers">GetLoadAlertTriggers() (jelastic.api.environment._Trigger method)</a>
 </li>
@@ -2790,6 +2807,8 @@
       <li><a href="pool.html#jelastic.api.pool.Pool.IpPool">IpPool (jelastic.api.pool.Pool property)</a>
 </li>
       <li><a href="billing.html#jelastic.api.billing._GroupQuota.IsDomainBound">IsDomainBound() (jelastic.api.billing._GroupQuota method)</a>
+</li>
+      <li><a href="environment.html#jelastic.api.environment._Windows.IsDomainExists">IsDomainExists() (jelastic.api.environment._Windows method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -3340,6 +3359,8 @@
 </li>
       <li><a href="environment.html#jelastic.api.environment._Control.RemoveDockerVolumeByGroup">RemoveDockerVolumeByGroup() (jelastic.api.environment._Control method)</a>
 </li>
+      <li><a href="environment.html#jelastic.api.environment._Windows.RemoveDomain">RemoveDomain() (jelastic.api.environment._Windows method)</a>
+</li>
       <li><a href="environment.html#jelastic.api.environment._Binder.RemoveDomains">RemoveDomains() (jelastic.api.environment._Binder method)</a>
 </li>
       <li><a href="environment.html#jelastic.api.environment._Control.RemoveEndpoint">RemoveEndpoint() (jelastic.api.environment._Control method)</a>
@@ -3374,10 +3395,10 @@
 </li>
       <li><a href="environment.html#jelastic.api.environment._File.RemoveMountPointByGroup">RemoveMountPointByGroup() (jelastic.api.environment._File method)</a>
 </li>
-      <li><a href="environment.html#jelastic.api.environment._File.RemoveMountPointById">RemoveMountPointById() (jelastic.api.environment._File method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="environment.html#jelastic.api.environment._File.RemoveMountPointById">RemoveMountPointById() (jelastic.api.environment._File method)</a>
+</li>
       <li><a href="environment.html#jelastic.api.environment._Control.RemoveNode">RemoveNode() (jelastic.api.environment._Control method)</a>
 </li>
       <li><a href="environment.html#jelastic.api.environment._Build.RemoveProject">RemoveProject() (jelastic.api.environment._Build method)</a>
@@ -3884,10 +3905,12 @@
 <h2 id="W">W</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="billing.html#jelastic.api.billing._Account.WithdrawAccounts">WithdrawAccounts() (jelastic.api.billing._Account method)</a>
+      <li><a href="environment.html#jelastic.api.environment.Environment.Windows">Windows (jelastic.api.environment.Environment property)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="billing.html#jelastic.api.billing._Account.WithdrawAccounts">WithdrawAccounts() (jelastic.api.billing._Account method)</a>
+</li>
       <li><a href="environment.html#jelastic.api.environment._File.Write">Write() (jelastic.api.environment._File method)</a>
 </li>
   </ul></td>
