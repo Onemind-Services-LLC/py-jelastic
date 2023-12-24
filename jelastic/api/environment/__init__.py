@@ -3745,7 +3745,7 @@ class _Control(Environment):
         :param lazy: defines whether to load only the main environment metadata, e.g. name, alias, domain, etc., (true) or all the environment information (false).
         """
         return self._get(
-            "GetEnvInfolazy",
+            "GetEnvInfo",
             params={
                 "envName": env_name,
                 "lazy": lazy,
