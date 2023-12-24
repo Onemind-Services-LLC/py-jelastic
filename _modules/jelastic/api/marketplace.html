@@ -1087,6 +1087,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../marketplace.html#jelastic.api.marketplace.Marketplace.Console"><code class="docutils literal notranslate"><span class="pre">Marketplace.Console</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../marketplace.html#jelastic.api.marketplace.Marketplace.Favorite"><code class="docutils literal notranslate"><span class="pre">Marketplace.Favorite</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../marketplace.html#jelastic.api.marketplace.Marketplace.Installation"><code class="docutils literal notranslate"><span class="pre">Marketplace.Installation</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../marketplace.html#jelastic.api.marketplace.Marketplace.Jps"><code class="docutils literal notranslate"><span class="pre">Marketplace.Jps</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -1364,6 +1365,21 @@
 <span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.Installation</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">_Installation</span><span class="p">(</span>
+            <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
+            <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span>
+            <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Jps</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_Jps&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The JPS service provides methods for working with custom JPS manifests.</span>
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.marketplace.Jps</span>
+<span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.Jps</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_Jps</span><span class="p">(</span>
             <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
             <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span>
             <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span>
@@ -1901,6 +1917,136 @@
                 <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
                 <span class="s2">&quot;visibilityLevels&quot;</span><span class="p">:</span> <span class="n">visibility_levels</span><span class="p">,</span>
             <span class="p">},</span>
+        <span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">_Jps</span><span class="p">(</span><span class="n">Marketplace</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.Jps</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_endpoint2</span> <span class="o">=</span> <span class="s2">&quot;jps&quot;</span>
+
+    <span class="k">def</span> <span class="nf">ExecuteAppAction</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">app_unique_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">action</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">settings_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">params</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">lang</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;ExecuteAppAction&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;appUniqueName&quot;</span><span class="p">:</span> <span class="n">app_unique_name</span><span class="p">,</span>
+                <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="n">action</span><span class="p">,</span>
+                <span class="s2">&quot;settingsId&quot;</span><span class="p">:</span> <span class="n">settings_id</span><span class="p">,</span>
+                <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="n">params</span><span class="p">,</span>
+                <span class="s2">&quot;lang&quot;</span><span class="p">:</span> <span class="n">lang</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">GetAppInfo</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">jps</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">lang</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param jps: custom JPS (manifest body, link, or application ID from the Marketplace).</span>
+<span class="sd">        param lang: target installation language.</span>
+<span class="sd">        param owner_uid: unique identifier of the target user account.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetAppInfo&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;jps&quot;</span><span class="p">:</span> <span class="n">jps</span><span class="p">,</span>
+                <span class="s2">&quot;lang&quot;</span><span class="p">:</span> <span class="n">lang</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">GetAppSettings</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">app_unique_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">settings_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">lang</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetAppSettings&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;appUniqueName&quot;</span><span class="p">:</span> <span class="n">app_unique_name</span><span class="p">,</span>
+                <span class="s2">&quot;settingsId&quot;</span><span class="p">:</span> <span class="n">settings_id</span><span class="p">,</span>
+                <span class="s2">&quot;lang&quot;</span><span class="p">:</span> <span class="n">lang</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">GetEngineVersion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetEngineVersion&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{})</span>
+
+    <span class="k">def</span> <span class="nf">GetScriptingAppid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetScriptingAppid&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{})</span>
+
+    <span class="k">def</span> <span class="nf">Install</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">jps</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">settings</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">display_name</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">region</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">env_groups</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">logs_path</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">write_output_tasks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">skip_node_emails</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param jps: custom JPS (manifest body, link, or application ID from the Marketplace).</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param settings: JSON object with custom settings for the JPS manifest.</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.</span>
+<span class="sd">        param display_name: custom alias (display name) for the deployed JPS application.</span>
+<span class="sd">        param region: target environment region.</span>
+<span class="sd">        param env_groups: target environment group name or JSON array of group names.</span>
+<span class="sd">        param owner_uid: unique identifier of the target user account.</span>
+<span class="sd">        param logs_path: a relative path to the JPS installation log file, which is created in the user&#39;s application in the Backend-as-a-Service system. &#39;cs.log&#39; by default.</span>
+<span class="sd">        param write_output_tasks: defines whether write internal installation events (true) or not (false). It is used with the nested manifest installations.</span>
+<span class="sd">        param skip_node_emails: defines whether to send emails after the new nodes creation (false) or not (true).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Install&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;jps&quot;</span><span class="p">:</span> <span class="n">jps</span><span class="p">,</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;settingsId&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="n">display_name</span><span class="p">,</span>
+                <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="n">region</span><span class="p">,</span>
+                <span class="s2">&quot;envGroups&quot;</span><span class="p">:</span> <span class="n">env_groups</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+                <span class="s2">&quot;logsPath&quot;</span><span class="p">:</span> <span class="n">logs_path</span><span class="p">,</span>
+                <span class="s2">&quot;writeOutputTasks&quot;</span><span class="p">:</span> <span class="n">write_output_tasks</span><span class="p">,</span>
+                <span class="s2">&quot;skipNodeEmails&quot;</span><span class="p">:</span> <span class="n">skip_node_emails</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">Uninstall</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">app_unique_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">force</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Uninstall&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;appUniqueName&quot;</span><span class="p">:</span> <span class="n">app_unique_name</span><span class="p">,</span>
+                <span class="s2">&quot;force&quot;</span><span class="p">:</span> <span class="n">force</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 </pre></div>
 
