@@ -113,7 +113,7 @@ class Environment(ClientAbstract):
         )
 
     @property
-    def Deployment(self) -> "_Node":
+    def Deployment(self) -> "_Deployment":
         """
         >>> from jelastic import Jelastic
         >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')

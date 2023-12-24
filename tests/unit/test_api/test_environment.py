@@ -1206,7 +1206,7 @@ def test_build_deploy(client):
     assert response == success_response
 
 
-def test_build_deploy_project(client):
+def test_build_build_deploy_project(client):
     client._get.return_value = success_response
     response = client.Build.BuildDeployProject(
         "env_name", 1, "project_id", [1, 1], [True, False], [True, False]
@@ -1226,7 +1226,7 @@ def test_build_deploy_project(client):
     )
 
 
-def test_build_project(client):
+def test_build_build_project(client):
     client._get.return_value = success_response
     response = client.Build.BuildProject(
         "env_name", 1, "project_id", [True, False], [True, False], [True, False]
@@ -1246,7 +1246,7 @@ def test_build_project(client):
     )
 
 
-def test_deploy_project(client):
+def test_build_deploy_project(client):
     client._get.return_value = success_response
     response = client.Build.DeployProject(
         "env_name", 1, "project_id", [1, 1], [True, False]
@@ -1265,7 +1265,7 @@ def test_deploy_project(client):
     )
 
 
-def test_edit_project(client):
+def test_build_edit_project(client):
     client._get.return_value = success_response
     response = client.Build.EditProject(
         "env_name",
@@ -1316,7 +1316,7 @@ def test_edit_project(client):
     assert response == success_response
 
 
-def test_get_project_info(client):
+def test_build_get_project_info(client):
     client._get.return_value = success_response
     response = client.Build.GetProjectInfo(
         "env_name", 1, [1, 1], ["project1", "project2"]
@@ -1366,7 +1366,7 @@ def test_remove_project(client):
     )
 
 
-def test_update(client):
+def test_build_update(client):
     client._get.return_value = success_response
     response = client.Build.Update("env_name", 1, [1, 1], ["context1", "context2"])
     assert response == success_response
