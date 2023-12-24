@@ -560,6 +560,18 @@ future imports. Learn more in the documentation.</p>
 <p>Ref: <a class="reference external" href="https://docs.jelastic.com/api/private/#!/api/environment.Node">https://docs.jelastic.com/api/private/#!/api/environment.Node</a></p>
 </dd></dl>
 
+<dl class="py property">
+<dt class="sig sig-object py" id="jelastic.api.environment.Environment.NodeGroup">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">NodeGroup</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#jelastic.api.environment._NodeGroup" title="jelastic.api.environment._NodeGroup"><span class="pre">_NodeGroup</span></a></em><a class="headerlink" href="#jelastic.api.environment.Environment.NodeGroup" title="Link to this definition">¶</a></dt>
+<dd><p>The nodeGroup API service is used to manage data (parameters) and custom options of the environment layers.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jelastic</span> <span class="kn">import</span> <span class="n">Jelastic</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jelastic</span> <span class="o">=</span> <span class="n">Jelastic</span><span class="p">(</span><span class="s1">&#39;https://jca.xapp.cloudmydc.com&#39;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s1">&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jelastic</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">NodeGroup</span>
+</pre></div>
+</div>
+<p>Ref: <a class="reference external" href="https://docs.jelastic.com/api/private/#!/api/environment.NodeGroup">https://docs.jelastic.com/api/private/#!/api/environment.NodeGroup</a></p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -3439,6 +3451,37 @@ param target_appid: if specified, redefines the target environment. For example,
 param group_name: target environment group name.
 param enabled: defines whether isolate (true) or not (false) environments within the group.
 param owner_uid: unique identifier of the target account’s owner. Required if the operation is performed by the collaboration member on the shared account.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="jelastic.api.environment._NodeGroup">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jelastic.api.environment.</span></span><span class="sig-name descname"><span class="pre">_NodeGroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/environment.html#_NodeGroup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.environment._NodeGroup" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#jelastic.api.environment.Environment" title="jelastic.api.environment.Environment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Environment</span></code></a></p>
+<p>The nodeGroup API service is used to manage data (parameters) and custom options of the environment layers.</p>
+<p>Ref: <a class="reference external" href="https://docs.jelastic.com/api/private/#!/api/environment.NodeGroup">https://docs.jelastic.com/api/private/#!/api/environment.NodeGroup</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.environment._NodeGroup.ApplyData">
+<span class="sig-name descname"><span class="pre">ApplyData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/environment.html#_NodeGroup.ApplyData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.environment._NodeGroup.ApplyData" title="Link to this definition">¶</a></dt>
+<dd><p>param env_name: target environment name.
+param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
+param data: JSON object with the node group data (parameters), e.g. {“redeployContainerDelay”:20, “customProperty”:”value”}.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.environment._NodeGroup.Get">
+<span class="sig-name descname"><span class="pre">Get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/environment.html#_NodeGroup.Get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.environment._NodeGroup.Get" title="Link to this definition">¶</a></dt>
+<dd><p>param env_name: target environment name.
+param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.environment._NodeGroup.SetSLBAccessEnabled">
+<span class="sig-name descname"><span class="pre">SetSLBAccessEnabled</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enabled</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/environment.html#_NodeGroup.SetSLBAccessEnabled"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.environment._NodeGroup.SetSLBAccessEnabled" title="Link to this definition">¶</a></dt>
+<dd><p>param env_name: target environment name.
+param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
+param enabled: defines whether allow (true) or deny (false) access to the layer via Shared Load Balancer.</p>
 </dd></dl>
 
 </dd></dl>
