@@ -3146,13 +3146,13 @@ def test_set_container_entry_point(client):
 
 def test_set_container_env_vars(client):
     client._get.return_value = success_response
-    response = client.Control.SetContainerEnvVars("env", 1, "vars")
+    response = client.Control.SetContainerEnvVars("env", 1, {"key": "value"})
     client._get.assert_called_once_with(
         "SetContainerEnvVars",
         params={
             "envName": "env",
             "nodeId": 1,
-            "vars": "vars",
+            "vars": '{"key": "value"}',
         },
     )
     assert response == success_response
