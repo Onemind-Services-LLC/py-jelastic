@@ -69,7 +69,6 @@ class Users(ClientAbstract):
         """
         return _Team(session=self._session, token=self._token, debug=self._debug)
 
-
     @property
     def Registration(self) -> "_Registration":
         """
