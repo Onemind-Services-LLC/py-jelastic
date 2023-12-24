@@ -620,6 +620,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment.Environment.NodeGroup"><code class="docutils literal notranslate"><span class="pre">Environment.NodeGroup</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment.Environment.Security"><code class="docutils literal notranslate"><span class="pre">Environment.Security</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment.Environment.System"><code class="docutils literal notranslate"><span class="pre">Environment.System</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment.Environment.Tracking"><code class="docutils literal notranslate"><span class="pre">Environment.Tracking</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Billing"><code class="docutils literal notranslate"><span class="pre">_Billing</span></code></a><ul>
@@ -985,6 +986,20 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._System.SendEmail"><code class="docutils literal notranslate"><span class="pre">_System.SendEmail()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._System.SurchargeBillableItems"><code class="docutils literal notranslate"><span class="pre">_System.SurchargeBillableItems()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._System.SynchEnvs"><code class="docutils literal notranslate"><span class="pre">_System.SynchEnvs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Tracking"><code class="docutils literal notranslate"><span class="pre">_Tracking</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Tracking.GetAction"><code class="docutils literal notranslate"><span class="pre">_Tracking.GetAction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Tracking.GetActions"><code class="docutils literal notranslate"><span class="pre">_Tracking.GetActions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Tracking.GetAllServiceName"><code class="docutils literal notranslate"><span class="pre">_Tracking.GetAllServiceName()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Tracking.GetCurrentActions"><code class="docutils literal notranslate"><span class="pre">_Tracking.GetCurrentActions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Tracking.GetEnvActions"><code class="docutils literal notranslate"><span class="pre">_Tracking.GetEnvActions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Tracking.GetServerUTCTime"><code class="docutils literal notranslate"><span class="pre">_Tracking.GetServerUTCTime()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Tracking.GetUidActions"><code class="docutils literal notranslate"><span class="pre">_Tracking.GetUidActions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Tracking.GetUidActionsAdmin"><code class="docutils literal notranslate"><span class="pre">_Tracking.GetUidActionsAdmin()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Tracking.SearchActions"><code class="docutils literal notranslate"><span class="pre">_Tracking.SearchActions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Tracking.StoreAuditAdminActions"><code class="docutils literal notranslate"><span class="pre">_Tracking.StoreAuditAdminActions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Tracking.StoreUserActions"><code class="docutils literal notranslate"><span class="pre">_Tracking.StoreUserActions()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -1451,6 +1466,23 @@
 <span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/environment.System</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">_System</span><span class="p">(</span>
+            <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
+            <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span>
+            <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Tracking</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_Tracking&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This service is responsible for the monitoring of actions performed by the user. Learn more in the documentation.</span>
+
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.environment.Tracking</span>
+
+<span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/environment.Tracking</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_Tracking</span><span class="p">(</span>
             <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
             <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span>
             <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span>
@@ -9046,6 +9078,210 @@
             <span class="n">params</span><span class="o">=</span><span class="p">{</span>
                 <span class="s2">&quot;checksum&quot;</span><span class="p">:</span> <span class="n">checksum</span><span class="p">,</span>
             <span class="p">},</span>
+        <span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="_Tracking">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Tracking">[docs]</a>
+<span class="k">class</span> <span class="nc">_Tracking</span><span class="p">(</span><span class="n">Environment</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This service is responsible for the monitoring of actions performed by the user. Learn more in the documentation.</span>
+
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/environment.Tracking</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_endpoint2</span> <span class="o">=</span> <span class="s2">&quot;tracking&quot;</span>
+
+<div class="viewcode-block" id="_Tracking.GetAction">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Tracking.GetAction">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetAction</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param id: unique identifier of the target action. An error occurs if the specified action does not exist or does not belong to the current user.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetAction&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Tracking.GetActions">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Tracking.GetActions">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetActions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">end_time</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetActions&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;starttime&quot;</span><span class="p">:</span> <span class="n">start_time</span><span class="p">,</span>
+                <span class="s2">&quot;endtime&quot;</span><span class="p">:</span> <span class="n">end_time</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">datetime_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Tracking.GetAllServiceName">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Tracking.GetAllServiceName">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetAllServiceName</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">add_services_wildcard</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetAllServiceName&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;addServicesWildcard&quot;</span><span class="p">:</span> <span class="n">add_services_wildcard</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Tracking.GetCurrentActions">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Tracking.GetCurrentActions">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetCurrentActions</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetCurrentActions&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{})</span></div>
+
+
+<div class="viewcode-block" id="_Tracking.GetEnvActions">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Tracking.GetEnvActions">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetEnvActions</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
+        <span class="n">end_time</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">offset</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">count</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetEnvActions&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;starttime&quot;</span><span class="p">:</span> <span class="n">start_time</span><span class="p">,</span>
+                <span class="s2">&quot;endtime&quot;</span><span class="p">:</span> <span class="n">end_time</span><span class="p">,</span>
+                <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="n">offset</span><span class="p">,</span>
+                <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="n">count</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">datetime_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Tracking.GetServerUTCTime">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Tracking.GetServerUTCTime">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetServerUTCTime</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GetServerUTCTime&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{})</span></div>
+
+
+<div class="viewcode-block" id="_Tracking.GetUidActions">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Tracking.GetUidActions">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetUidActions</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">count</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">start_time</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">end_time</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">action_types</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param count: returns the specified number of actions from the response (10 by default).</span>
+<span class="sd">        param start_time: start time (UTC) of a period for which actions should be shown. In the format “yyyy-MM-dd hh:mm:ss”, e.g. &quot;2022-11-16 00:00:00&quot;.</span>
+<span class="sd">        param end_time: end time (UTC) of a period for which actions should be shown. In the format “yyyy-MM-dd hh:mm:ss”, e.g. &quot;2022-11-16 00:00:00&quot;.</span>
+<span class="sd">        param action_types: a comma-separated list of action types to return (supported values: PUBLIC, SYSTEM).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetUidActions&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="n">count</span><span class="p">,</span>
+                <span class="s2">&quot;starttime&quot;</span><span class="p">:</span> <span class="n">start_time</span><span class="p">,</span>
+                <span class="s2">&quot;endtime&quot;</span><span class="p">:</span> <span class="n">end_time</span><span class="p">,</span>
+                <span class="s2">&quot;actionTypes&quot;</span><span class="p">:</span> <span class="n">action_types</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">datetime_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Tracking.GetUidActionsAdmin">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Tracking.GetUidActionsAdmin">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetUidActionsAdmin</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">uid</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">start_row</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">start_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
+        <span class="n">end_time</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span>
+        <span class="n">result_count</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">servicename</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">order_field</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">order_direction</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">search_text</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param start_row: returns information starting from the specified row in the response (starts with 0, by default).</span>
+<span class="sd">        param start_time: start time in the format “yyyy-MM-dd hh:mm:ss”, e.g. &quot;2022-11-16 00:00:00&quot;.</span>
+<span class="sd">        param end_time: end time in the format “yyyy-MM-dd hh:mm:ss”, e.g. &quot;2022-11-16 00:00:00&quot;.</span>
+<span class="sd">        param servicename: name of the service and corresponding method, e.g. &quot;AccountService.SetQuota&quot;.</span>
+<span class="sd">        param order_field: oder results by the field name.</span>
+<span class="sd">        param order_direction: order direction &quot;asc&quot; or &quot;desc&quot;.</span>
+<span class="sd">        param search_text: optional parameter for filtering by the specified text.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetUidActionsAdmin&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;uid&quot;</span><span class="p">:</span> <span class="n">uid</span><span class="p">,</span>
+                <span class="s2">&quot;startRow&quot;</span><span class="p">:</span> <span class="n">start_row</span><span class="p">,</span>
+                <span class="s2">&quot;starttime&quot;</span><span class="p">:</span> <span class="n">start_time</span><span class="p">,</span>
+                <span class="s2">&quot;endtime&quot;</span><span class="p">:</span> <span class="n">end_time</span><span class="p">,</span>
+                <span class="s2">&quot;resultCount&quot;</span><span class="p">:</span> <span class="n">result_count</span><span class="p">,</span>
+                <span class="s2">&quot;servicename&quot;</span><span class="p">:</span> <span class="n">servicename</span><span class="p">,</span>
+                <span class="s2">&quot;orderField&quot;</span><span class="p">:</span> <span class="n">order_field</span><span class="p">,</span>
+                <span class="s2">&quot;orderDirection&quot;</span><span class="p">:</span> <span class="n">order_direction</span><span class="p">,</span>
+                <span class="s2">&quot;searchText&quot;</span><span class="p">:</span> <span class="n">search_text</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">datetime_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Tracking.SearchActions">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Tracking.SearchActions">[docs]</a>
+    <span class="k">def</span> <span class="nf">SearchActions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">search</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param session: user session or personal access token.</span>
+<span class="sd">        param search: JSON object with the search parameters:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;SearchActions&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;session&quot;</span><span class="p">:</span> <span class="n">session</span><span class="p">,</span> <span class="s2">&quot;search&quot;</span><span class="p">:</span> <span class="n">search</span><span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Tracking.StoreAuditAdminActions">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Tracking.StoreAuditAdminActions">[docs]</a>
+    <span class="k">def</span> <span class="nf">StoreAuditAdminActions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">trackedevent</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param session: user session or personal access token.</span>
+<span class="sd">        param trackedevent: JSON</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;StoreAuditAdminActions&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;session&quot;</span><span class="p">:</span> <span class="n">session</span><span class="p">,</span> <span class="s2">&quot;trackedevent&quot;</span><span class="p">:</span> <span class="n">trackedevent</span><span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Tracking.StoreUserActions">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Tracking.StoreUserActions">[docs]</a>
+    <span class="k">def</span> <span class="nf">StoreUserActions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tracked_action_event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param session: user session or personal access token.</span>
+<span class="sd">        param trackedActionEvent: JSON</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;StoreUserActions&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;session&quot;</span><span class="p">:</span> <span class="n">session</span><span class="p">,</span> <span class="s2">&quot;trackedActionEvent&quot;</span><span class="p">:</span> <span class="n">tracked_action_event</span><span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
 </div>
 

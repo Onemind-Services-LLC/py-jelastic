@@ -620,6 +620,7 @@
 <li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment.Environment.NodeGroup"><code class="docutils literal notranslate"><span class="pre">Environment.NodeGroup</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment.Environment.Security"><code class="docutils literal notranslate"><span class="pre">Environment.Security</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment.Environment.System"><code class="docutils literal notranslate"><span class="pre">Environment.System</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment.Environment.Tracking"><code class="docutils literal notranslate"><span class="pre">Environment.Tracking</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="environment.html#jelastic.api.environment._Billing"><code class="docutils literal notranslate"><span class="pre">_Billing</span></code></a><ul>
@@ -987,6 +988,20 @@
 <li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment._System.SynchEnvs"><code class="docutils literal notranslate"><span class="pre">_System.SynchEnvs()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="environment.html#jelastic.api.environment._Tracking"><code class="docutils literal notranslate"><span class="pre">_Tracking</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment._Tracking.GetAction"><code class="docutils literal notranslate"><span class="pre">_Tracking.GetAction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment._Tracking.GetActions"><code class="docutils literal notranslate"><span class="pre">_Tracking.GetActions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment._Tracking.GetAllServiceName"><code class="docutils literal notranslate"><span class="pre">_Tracking.GetAllServiceName()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment._Tracking.GetCurrentActions"><code class="docutils literal notranslate"><span class="pre">_Tracking.GetCurrentActions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment._Tracking.GetEnvActions"><code class="docutils literal notranslate"><span class="pre">_Tracking.GetEnvActions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment._Tracking.GetServerUTCTime"><code class="docutils literal notranslate"><span class="pre">_Tracking.GetServerUTCTime()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment._Tracking.GetUidActions"><code class="docutils literal notranslate"><span class="pre">_Tracking.GetUidActions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment._Tracking.GetUidActionsAdmin"><code class="docutils literal notranslate"><span class="pre">_Tracking.GetUidActionsAdmin()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment._Tracking.SearchActions"><code class="docutils literal notranslate"><span class="pre">_Tracking.SearchActions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment._Tracking.StoreAuditAdminActions"><code class="docutils literal notranslate"><span class="pre">_Tracking.StoreAuditAdminActions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment._Tracking.StoreUserActions"><code class="docutils literal notranslate"><span class="pre">_Tracking.StoreUserActions()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="exceptions.html">Exceptions</a><ul>
@@ -1313,10 +1328,10 @@
 </li>
       <li><a href="billing.html#jelastic.api.billing._Invoice">_Invoice (class in jelastic.api.billing)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="environment.html#jelastic.api.environment._JError">_JError (class in jelastic.api.environment)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="abstract.html#jelastic.api.abstract.ClientAbstract._log_debug">_log_debug() (jelastic.api.abstract.ClientAbstract method)</a>
 </li>
       <li><a href="migration.html#jelastic.api.migration._Migration">_Migration (class in jelastic.api.migration)</a>
@@ -1364,6 +1379,8 @@
       <li><a href="pricing.html#jelastic.api.pricing._Tariff">_Tariff (class in jelastic.api.pricing)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Template">_Template (class in jelastic.api.administration)</a>
+</li>
+      <li><a href="environment.html#jelastic.api.environment._Tracking">_Tracking (class in jelastic.api.environment)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Update">_Update (class in jelastic.api.administration)</a>
 </li>
@@ -2139,6 +2156,10 @@
 </li>
       <li><a href="billing.html#jelastic.api.billing._Account.GetAccountsForDestroying">GetAccountsForDestroying() (jelastic.api.billing._Account method)</a>
 </li>
+      <li><a href="environment.html#jelastic.api.environment._Tracking.GetAction">GetAction() (jelastic.api.environment._Tracking method)</a>
+</li>
+      <li><a href="environment.html#jelastic.api.environment._Tracking.GetActions">GetActions() (jelastic.api.environment._Tracking method)</a>
+</li>
       <li><a href="environment.html#jelastic.api.environment._Control.GetActiveEnvs">GetActiveEnvs() (jelastic.api.environment._Control method)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Cluster.GetAddHdNodeCmd">GetAddHdNodeCmd() (jelastic.api.administration._Cluster method)</a>
@@ -2158,6 +2179,8 @@
       <li><a href="administration.html#jelastic.api.administration._Config.GetAllKeyConfigByType">GetAllKeyConfigByType() (jelastic.api.administration._Config method)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Cluster.GetAllRegionReseller">GetAllRegionReseller() (jelastic.api.administration._Cluster method)</a>
+</li>
+      <li><a href="environment.html#jelastic.api.environment._Tracking.GetAllServiceName">GetAllServiceName() (jelastic.api.environment._Tracking method)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Cluster.GetAllSumStatByUid">GetAllSumStatByUid() (jelastic.api.administration._Cluster method)</a>
 
@@ -2261,6 +2284,8 @@
 </li>
       <li><a href="billing.html#jelastic.api.billing._Pricing.GetCurrencies">GetCurrencies() (jelastic.api.billing._Pricing method)</a>
 </li>
+      <li><a href="environment.html#jelastic.api.environment._Tracking.GetCurrentActions">GetCurrentActions() (jelastic.api.environment._Tracking method)</a>
+</li>
       <li><a href="administration.html#jelastic.api.administration._Utils.GetDBCreationStat">GetDBCreationStat() (jelastic.api.administration._Utils method)</a>
 </li>
       <li><a href="billing.html#jelastic.api.billing._PayMethod.GetDefaultPayMethod">GetDefaultPayMethod() (jelastic.api.billing._PayMethod method)</a>
@@ -2302,6 +2327,8 @@
 </li>
       </ul></li>
       <li><a href="platform.html#jelastic.api.platform._Engine.GetEntryPoint">GetEntryPoint() (jelastic.api.platform._Engine method)</a>
+</li>
+      <li><a href="environment.html#jelastic.api.environment._Tracking.GetEnvActions">GetEnvActions() (jelastic.api.environment._Tracking method)</a>
 </li>
       <li><a href="billing.html#jelastic.api.billing._Account.GetEnvBillingHistoryByPeriod">GetEnvBillingHistoryByPeriod() (jelastic.api.billing._Account method)</a>
 </li>
@@ -2361,14 +2388,14 @@
 </li>
       <li><a href="billing.html#jelastic.api.billing._GroupQuota.GetGroupQuotas">GetGroupQuotas() (jelastic.api.billing._GroupQuota method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="billing.html#jelastic.api.billing._GroupQuota.GetGroups">GetGroups() (jelastic.api.billing._GroupQuota method)</a>
 
       <ul>
         <li><a href="environment.html#jelastic.api.environment._Group.GetGroups">(jelastic.api.environment._Group method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="administration.html#jelastic.api.administration._Cluster.GetHdNodeGroups">GetHdNodeGroups() (jelastic.api.administration._Cluster method)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Cluster.GetHdNodes">GetHdNodes() (jelastic.api.administration._Cluster method)</a>
@@ -2541,6 +2568,8 @@
 </li>
       <li><a href="environment.html#jelastic.api.environment._Security.GetRules">GetRules() (jelastic.api.environment._Security method)</a>
 </li>
+      <li><a href="environment.html#jelastic.api.environment._Tracking.GetServerUTCTime">GetServerUTCTime() (jelastic.api.environment._Tracking method)</a>
+</li>
       <li><a href="administration.html#jelastic.api.administration._Subscription.GetServicePlans">GetServicePlans() (jelastic.api.administration._Subscription method)</a>
 </li>
       <li><a href="environment.html#jelastic.api.environment._Control.GetSharedEnvsByUid">GetSharedEnvsByUid() (jelastic.api.environment._Control method)</a>
@@ -2612,6 +2641,10 @@
       <li><a href="data.html#jelastic.api.data._Base.GetTypes">GetTypes() (jelastic.api.data._Base method)</a>
 </li>
       <li><a href="data.html#jelastic.api.data._Base.GetTypesCount">GetTypesCount() (jelastic.api.data._Base method)</a>
+</li>
+      <li><a href="environment.html#jelastic.api.environment._Tracking.GetUidActions">GetUidActions() (jelastic.api.environment._Tracking method)</a>
+</li>
+      <li><a href="environment.html#jelastic.api.environment._Tracking.GetUidActionsAdmin">GetUidActionsAdmin() (jelastic.api.environment._Tracking method)</a>
 </li>
       <li><a href="automation.html#jelastic.api.automation._Utils.GetUidUsageByPeriod">GetUidUsageByPeriod() (jelastic.api.automation._Utils method)</a>
 
@@ -3386,6 +3419,8 @@
 </li>
       <li><a href="utils.html#jelastic.api.utils.Utils.Scheduler">Scheduler (jelastic.api.utils.Utils property)</a>
 </li>
+      <li><a href="environment.html#jelastic.api.environment._Tracking.SearchActions">SearchActions() (jelastic.api.environment._Tracking method)</a>
+</li>
       <li><a href="administration.html#jelastic.api.administration._Cluster.SearchEnvs">SearchEnvs() (jelastic.api.administration._Cluster method)</a>
 </li>
       <li><a href="billing.html#jelastic.api.billing._Invoice.SearchInvoices">SearchInvoices() (jelastic.api.billing._Invoice method)</a>
@@ -3604,6 +3639,10 @@
       </ul></li>
       <li><a href="administration.html#jelastic.api.administration._Cluster.StopEvacuation">StopEvacuation() (jelastic.api.administration._Cluster method)</a>
 </li>
+      <li><a href="environment.html#jelastic.api.environment._Tracking.StoreAuditAdminActions">StoreAuditAdminActions() (jelastic.api.environment._Tracking method)</a>
+</li>
+      <li><a href="environment.html#jelastic.api.environment._Tracking.StoreUserActions">StoreUserActions() (jelastic.api.environment._Tracking method)</a>
+</li>
       <li><a href="administration.html#jelastic.api.administration.Administration.Subscription">Subscription (jelastic.api.administration.Administration property)</a>
 
       <ul>
@@ -3653,6 +3692,8 @@
       <li><a href="administration.html#jelastic.api.administration._HostGroup.TestEndpoints">TestEndpoints() (jelastic.api.administration._HostGroup method)</a>
 </li>
       <li><a href="thirdparty.html#jelastic.api.thirdparty.ThirdParty">ThirdParty (class in jelastic.api.thirdparty)</a>
+</li>
+      <li><a href="environment.html#jelastic.api.environment.Environment.Tracking">Tracking (jelastic.api.environment.Environment property)</a>
 </li>
   </ul></td>
 </tr></table>
