@@ -2,6 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="py-jelastic",
+    version="0.0.1",
     description="Jelastic API client library",
     url="https://github.com/Onemind-Services-LLC/py-jelastic",
     author="Abhimanyu Saharan",
