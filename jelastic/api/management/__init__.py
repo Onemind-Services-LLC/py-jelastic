@@ -5,6 +5,7 @@ __all__ = ["Management"]
 
 class Management(ClientAbstract):
     _endpoint1 = "management"
+
     @property
     def Account(self) -> "_Account":
         """
@@ -25,57 +26,37 @@ class _Account(Management):
     """
     Ref: https://docs.jelastic.com/api/private/#!/api/management.Account
     """
+
     _endpoint2 = "account"
 
-    def AddPrivateSSHKey(
-        self,
-        title: str,
-        ssh_key: str
-    ):
+    def AddPrivateSSHKey(self, title: str, ssh_key: str):
         """
         :param title: title of the ssh key.
         :param sshKey: value of the ssh key.
         """
         return self._get(
             "AddPrivateSSHKey",
-            params={
-                "title": title,
-                "sshKey": ssh_key
-            },
+            params={"title": title, "sshKey": ssh_key},
         )
-    def AddPublicSSHKey(
-        self,
-        title: str,
-        ssh_key: str
-    ):
+
+    def AddPublicSSHKey(self, title: str, ssh_key: str):
         """
         :param title: title of the ssh key.
         :param sshKey: value of the ssh key.
         """
         return self._get(
             "AddPublicSSHKey",
-            params={
-                "title": title,
-                "sshKey": ssh_key
-            },
+            params={"title": title, "sshKey": ssh_key},
         )
-    def AddSSHKey(
-        self,
-        title: str,
-        ssh_key: str,
-        is_private: bool
-    ):
+
+    def AddSSHKey(self, title: str, ssh_key: str, is_private: bool):
         """
         :param title: title of the ssh key.
         :param sshKey: value of the ssh key.
         """
         return self._get(
             "AddSSHKey",
-            params={
-                "title": title,
-                "sshKey": ssh_key,
-                "isPrivate": is_private
-            },
+            params={"title": title, "sshKey": ssh_key, "isPrivate": is_private},
         )
 
     def AdjustContainersLimitsForAllUsers(
@@ -97,10 +78,7 @@ class _Account(Management):
             },
         )
 
-    def DeleteSSHKey(
-        self,
-        id: int
-    ):
+    def DeleteSSHKey(self, id: int):
         """
         :param id: unique identifier of the ssh key.
         """
@@ -124,18 +102,13 @@ class _Account(Management):
             },
         )
 
-    def GetSSHKeys(
-        self,
-        is_private: bool
-    ):
+    def GetSSHKeys(self, is_private: bool):
         """
         :param isPrivate: defines whether to return the account's private (true) or public (false) SSH keys.
         """
         return self._get(
             "GetSSHKeys",
-            params={
-                "isPrivate": is_private
-            },
+            params={"isPrivate": is_private},
         )
 
     def GetSSHKeysInner(
