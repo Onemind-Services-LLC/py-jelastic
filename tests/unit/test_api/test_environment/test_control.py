@@ -1584,13 +1584,12 @@ def test_get_all_sum_stat_by_uid(client):
 
 def test_get_basic_envs_info(client):
     client._get.return_value = success_response
-    response = client.Control.GetBasicEnvsInfo([1, 2, 3])
+    response = client.Control.GetBasicEnvsInfo(123)
     client._get.assert_called_once_with(
         "GetBasicsEnvsInfo",
         params={
-            "ownerUid": [1, 2, 3],
+            "ownerUid": 123,
         },
-        delimiter=",",
     )
     assert response == success_response
 

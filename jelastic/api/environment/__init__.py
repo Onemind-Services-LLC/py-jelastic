@@ -3465,7 +3465,7 @@ class _Control(Environment):
             delimiter=",",
         )
 
-    def GetBasicEnvsInfo(self, owner_uid: list[int]):
+    def GetBasicEnvsInfo(self, owner_uid: int = None):
         """
         :param owner_uid: unique identifier of the target user account.
         """
@@ -3474,7 +3474,6 @@ class _Control(Environment):
             params={
                 "ownerUid": owner_uid,
             },
-            delimiter=",",
         )
 
     def GetContainerEntryPoint(self, env_name: str, node_id: int):
