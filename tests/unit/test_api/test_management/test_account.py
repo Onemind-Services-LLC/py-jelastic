@@ -1,20 +1,4 @@
-from datetime import datetime
-from unittest.mock import patch, Mock
-
-import pytest
-
-from jelastic.api import Management
-
-success_response = {"error": "", "reason": 0, "result": 0, "source": "billing"}
-CURRENT_DATETIME = datetime.now()
-
-
-@pytest.fixture
-def client():
-    with patch("jelastic.api.abstract.ClientAbstract._get") as mock_get:
-        management = Management(session=Mock(), token="token")
-        management._get = mock_get
-        yield management
+from . import *
 
 
 def test_add_private_ssh_key(client):
