@@ -79,3 +79,8 @@ Environment
     :members:
     :undoc-members:
     :show-inheritance:
+
+.. autoclass:: jelastic.api.environment._Trigger
+    :members:
+    :undoc-members:
+    :show-inheritance:
