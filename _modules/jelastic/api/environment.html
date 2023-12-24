@@ -562,6 +562,23 @@
             <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
             <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span>
             <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Group</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_Group&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Categorize environments in the account with the help of the group management API. Such user-defined groups can filter the environment list, allowing a clear-cut view of the projects. Learn more in the documentation.</span>
+
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.environment.Group</span>
+
+<span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/environment.Group</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_Group</span><span class="p">(</span>
+            <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
+            <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span>
+            <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span>
         <span class="p">)</span></div>
 
 
@@ -7275,6 +7292,217 @@
                 <span class="s2">&quot;masterOnly&quot;</span><span class="p">:</span> <span class="n">master_only</span><span class="p">,</span>
                 <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
                 <span class="s2">&quot;isAppendMode&quot;</span><span class="p">:</span> <span class="n">is_append_mode</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="_Group">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Group">[docs]</a>
+<span class="k">class</span> <span class="nc">_Group</span><span class="p">(</span><span class="n">Environment</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Categorize environments in the account with the help of the group management API. Such user-defined groups can filter the environment list, allowing a clear-cut view of the projects.</span>
+
+<span class="sd">     Ref: https://docs.jelastic.com/api/private/#!/api/environment.Group</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_endpoint2</span> <span class="o">=</span> <span class="s2">&quot;group&quot;</span>
+
+<div class="viewcode-block" id="_Group.AttachEnv">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Group.AttachEnv">[docs]</a>
+    <span class="k">def</span> <span class="nf">AttachEnv</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">env_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">target_appid</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: source environment name.</span>
+<span class="sd">        param env_group: a comma-separated list of the target environment group names.</span>
+<span class="sd">        param target_appid: if specified, redefines the target environment. For example, to the environment shared via the collaboration feature.</span>
+<span class="sd">        param owner_uid: unique identifier of the target account’s owner. Required if the operation is performed by the collaboration member on the shared account.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;AttachEnv&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;envGroup&quot;</span><span class="p">:</span> <span class="n">env_group</span><span class="p">,</span>
+                <span class="s2">&quot;targetAppid&quot;</span><span class="p">:</span> <span class="n">target_appid</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Group.CreateGroup">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Group.CreateGroup">[docs]</a>
+    <span class="k">def</span> <span class="nf">CreateGroup</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">env_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: source environment name.</span>
+<span class="sd">        param env_group: a comma-separated list of the target environment group names.</span>
+<span class="sd">        param data : JSON object with the new group settings:</span>
+<span class="sd">        param owner_uid: unique identifier of the target account’s owner. Required if the operation is performed by the collaboration member on the shared account.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;CreateGroup&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;envGroup&quot;</span><span class="p">:</span> <span class="n">env_group</span><span class="p">,</span>
+                <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Group.DetachEnv">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Group.DetachEnv">[docs]</a>
+    <span class="k">def</span> <span class="nf">DetachEnv</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">env_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">target_appid</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: source environment name.</span>
+<span class="sd">        param env_group: a comma-separated list of the target environment group names.</span>
+<span class="sd">        param target_appid: if specified, redefines the target environment. For example, to the environment shared via the collaboration feature.</span>
+<span class="sd">        param owner_uid: unique identifier of the target account’s owner. Required if the operation is performed by the collaboration member on the shared account.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;DetachEnv&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;envGroup&quot;</span><span class="p">:</span> <span class="n">env_group</span><span class="p">,</span>
+                <span class="s2">&quot;targetAppid&quot;</span><span class="p">:</span> <span class="n">target_appid</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Group.EditGroup">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Group.EditGroup">[docs]</a>
+    <span class="k">def</span> <span class="nf">EditGroup</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">src_group_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">dst_group_name</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: source environment name.</span>
+<span class="sd">        param src_group_name: target environment group name.</span>
+<span class="sd">        param dst_group_name: New environment group name (renames srcGroupName).</span>
+<span class="sd">        param data : JSON object with the new group settings:</span>
+<span class="sd">        param owner_uid: unique identifier of the target account’s owner. Required if the operation is performed by the collaboration member on the shared account.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;EditGroup&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;srcGroupName&quot;</span><span class="p">:</span> <span class="n">src_group_name</span><span class="p">,</span>
+                <span class="s2">&quot;dstGroupName&quot;</span><span class="p">:</span> <span class="n">dst_group_name</span><span class="p">,</span>
+                <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Group.GetGroups">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Group.GetGroups">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetGroups</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target_appid</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: source environment name.</span>
+<span class="sd">        param target_appid: if specified, redefines the target environment. For example, to the environment shared via the collaboration feature.</span>
+<span class="sd">        param owner_uid: unique identifier of the target account’s owner. Required if the operation is performed by the collaboration member on the shared account.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetGroups&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;targetAppid&quot;</span><span class="p">:</span> <span class="n">target_appid</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Group.RemoveGroup">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Group.RemoveGroup">[docs]</a>
+    <span class="k">def</span> <span class="nf">RemoveGroup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">env_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: source environment name.</span>
+<span class="sd">        param env_group: a comma-separated list of the target environment group names.</span>
+<span class="sd">        param owner_uid: unique identifier of the target account’s owner. Required if the operation is performed by the collaboration member on the shared account.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;RemoveGroup&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;envGroup&quot;</span><span class="p">:</span> <span class="n">env_group</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Group.SetEnv">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Group.SetEnv">[docs]</a>
+    <span class="k">def</span> <span class="nf">SetEnv</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">env_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">target_appid</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: source environment name.</span>
+<span class="sd">        param env_group: a comma-separated list of the target environment group names.</span>
+<span class="sd">        param target_appid: if specified, redefines the target environment. For example, to the environment shared via the collaboration feature.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;SetEnv&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;envGroup&quot;</span><span class="p">:</span> <span class="n">env_group</span><span class="p">,</span>
+                <span class="s2">&quot;targetAppid&quot;</span><span class="p">:</span> <span class="n">target_appid</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Group.SetIsolationEnabled">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Group.SetIsolationEnabled">[docs]</a>
+    <span class="k">def</span> <span class="nf">SetIsolationEnabled</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">group_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">enabled</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: source environment name.</span>
+<span class="sd">        param group_name: target environment group name.</span>
+<span class="sd">        param enabled: defines whether isolate (true) or not (false) environments within the group.</span>
+<span class="sd">        param owner_uid: unique identifier of the target account’s owner. Required if the operation is performed by the collaboration member on the shared account.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;SetIsolationEnabled&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;groupName&quot;</span><span class="p">:</span> <span class="n">group_name</span><span class="p">,</span>
+                <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">enabled</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
             <span class="p">},</span>
             <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
