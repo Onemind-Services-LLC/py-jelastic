@@ -52,8 +52,8 @@ class _Applications(Development):
         allow_appid: str,
     ):
         """
-        param target_appid: the application identifier to which you can access using the session received in another application. You can list separated by commas multiple applications. In targetAppid can specify only the application ID for which you have the rights owner (owner) or admin (administrator)
-        param allow_appid: application Identifier session which can be used in the identifier specified in targetAppid. In allowAppid can specify any existing application ID
+        :param target_appid: the application identifier to which you can access using the session received in another application. You can list separated by commas multiple applications. In targetAppid can specify only the application ID for which you have the rights owner (owner) or admin (administrator)
+        :param allow_appid: application Identifier session which can be used in the identifier specified in targetAppid. In allowAppid can specify any existing application ID
         """
         return self._get(
             "AllowAppAccess",
@@ -66,9 +66,9 @@ class _Applications(Development):
 
     def ChangeAppInfo(self, target_appid: str, field: str, value: list[str] = None):
         """
-        param target_appid: id editable applications
-        param field: the name of the edited field. Valid values are:
-        param value: new value field
+        :param target_appid: id editable applications
+        :param field: the name of the edited field. Valid values are:
+        :param value: new value field
         """
         return self._get(
             "ChangeAppInfo",
@@ -126,7 +126,7 @@ class _Applications(Development):
         key: str,
     ):
         """
-        param key: disposable confirmation key
+        :param key: disposable confirmation key
         """
         return self._get(
             "ConfirmAppTransferRequest",

@@ -97,11 +97,11 @@ class _Installation(Marketplace):
         lang: list[str] = None,
     ):
         """
-        param app_unique_name: unique identifier of the particular installation.
-        param action: unique identifier of the custom action name to be executed.
-        param settings_id: unique identifier of the settings section of the manifest. Default settings form ID is 'main'.
-        param params: JSON object with custom settings for the JPS manifest.
-        param lang: target localization language.
+        :param app_unique_name: unique identifier of the particular installation.
+        :param action: unique identifier of the custom action name to be executed.
+        :param settings_id: unique identifier of the settings section of the manifest. Default settings form ID is 'main'.
+        :param params: JSON object with custom settings for the JPS manifest.
+        :param lang: target localization language.
         """
         return self._get(
             "ExecuteAction",

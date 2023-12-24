@@ -43,17 +43,24 @@ class Users(ClientAbstract):
     @property
     def Collaboration(self) -> "_Collaboration":
         """
-               This service is responsible for managing the accounts collaboration feature on the platform. The core idea is that users can share the necessary environments and access to some account features with other platform customers. Complete control over the shared management permissions makes the feature suitable for most possible use cases.
+        This service is responsible for managing the accounts collaboration feature on the platform. The core idea is
+        that users can share the necessary environments and access to some account features with other platform
+        customers. Complete control over the shared management permissions makes the feature suitable for most
+        possible use cases.
 
-        Collaboration owner - a primary account where shared environments are hosted. All charges for the shared environments (including actions performed by collaborators) are applied to this account.
-        Collaboration member - user account with partial access to the collaboration owner account. Shared functionality is defined by the collaboration owner.
+        Collaboration owner - a primary account where shared environments are hosted. All charges for the shared
+        environments (including actions performed by collaborators) are applied to this account.
+        Collaboration member - user account with partial access to the collaboration owner account. Shared
+        functionality is defined by the collaboration owner.
         Collaboration (shared) resources - instances (environments, groups) shared in the collaboration.
         Collaboration policies - small API sets that allow specific operations.
         Collaboration roles - a combination of policies that create the required range of actions to share with members.
-                >>> from jelastic import Jelastic
-                >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
-                >>> jelastic.users.Collaboration
-                Ref: https://docs.jelastic.com/api/private/#!/api/users.Collaboration
+
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.users.Collaboration
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/users.Collaboration
         """
         return _Collaboration(
             session=self._session, token=self._token, debug=self._debug
@@ -62,9 +69,10 @@ class Users(ClientAbstract):
     @property
     def Team(self) -> "_Team":
         """
-            >>> from jelastic import Jelastic
-            >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
-            >>> jelastic.users.Team
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.users.Team
+
         Ref: https://docs.jelastic.com/api/private/#!/api/users.Team
         """
         return _Team(session=self._session, token=self._token, debug=self._debug)
@@ -114,11 +122,11 @@ class _Account(Users):
         reseller_id: list[int] = None,
     ):
         """
-        param email: unique email address of the new account.
-        param password: password for the new account.
-        param name: an account's name.
-        param notify: defines whether to send a confirmation letter to the new user email upon success (true) or not (false).
-        param reseller_id: unique identifier of the target reseller platform.
+        :param email: unique email address of the new account.
+        :param password: password for the new account.
+        :param name: an account's name.
+        :param notify: defines whether to send a confirmation letter to the new user email upon success (true) or not (false).
+        :param reseller_id: unique identifier of the target reseller platform.
         """
         return self._get(
             "AddAccount",

@@ -58,7 +58,7 @@ class _NodePool(Pool):
         type: list[str] = None,
     ):
         """
-        param checksum: authorization checksum = md5(appid + private key)
+        :param checksum: authorization checksum = md5(appid + private key)
         """
         return self._get(
             "ClearOsPool",
@@ -72,8 +72,8 @@ class _NodePool(Pool):
         type: list[str] = None,
     ):
         """
-        param hnid: hardnode id (primary key) where OsNode to be allocated
-        param checksum: authorization checksum = md5(appid + private key)
+        :param hnid: hardnode id (primary key) where OsNode to be allocated
+        :param checksum: authorization checksum = md5(appid + private key)
         """
         return self._get(
             "ClearPool",
@@ -108,9 +108,9 @@ class _NodePool(Pool):
         """
         info about allocated new OsNode
 
-        param type: OsNode type like "mysql5", "tomcat6", "jetty6" etc.
-        param hn_id: hardnode id (primary key) where OsNode to be allocated
-        param checksum: authorization checksum = md5(appid + private key)
+        :param type: OsNode type like "mysql5", "tomcat6", "jetty6" etc.
+        :param hn_id: hardnode id (primary key) where OsNode to be allocated
+        :param checksum: authorization checksum = md5(appid + private key)
         """
         return self._get(
             "Get",
@@ -129,7 +129,7 @@ class _NodePool(Pool):
         checksum: str,
     ):
         """
-        param checksum: authorization checksum = md5(appid + private key)
+        :param checksum: authorization checksum = md5(appid + private key)
         """
         return self._get(
             "GetStatus",
@@ -144,7 +144,7 @@ class _NodePool(Pool):
         checksum: str,
     ):
         """
-        param checksum: authorization checksum = md5(appid + private key)
+        :param checksum: authorization checksum = md5(appid + private key)
         """
         return self._get(
             "RegeneratePool",

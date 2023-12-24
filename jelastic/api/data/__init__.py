@@ -59,9 +59,9 @@ class _Base(Data):
         field_type: list[str] = None,
     ):
         """
-        param type: name type
-        param field: name added a field (id - reserved)
-        param field_type: type of added fields
+        :param type: name type
+        :param field: name added a field (id - reserved)
+        :param field_type: type of added fields
         """
         return self._get(
             "AddField",
@@ -78,8 +78,8 @@ class _Base(Data):
         data: list[str] = None,
     ):
         """
-        param type: name of the data type for which the object is created
-        param data:the data object in the JSON
+        :param type: name of the data type for which the object is created
+        :param data: the data object in the JSON
         """
         return self._get(
             "CreateObject",
@@ -107,12 +107,10 @@ class _Base(Data):
         unique: list[str] = None,
     ):
         """
-        param type:name for the created data type, which meets the following requirements:
-            is unique for the specified appid
-            does not start with a digit
-            contains only latin letters, digits and underscore
-        param fields:A list of fields for the created data type specified in the { fieldname : "datatype", ... }, { fieldname : "datatype", ... }, … format.
-        param unique: A unique fields data type in the { fields : [ "field_name", ... ] }, { ... } format.
+        :param type: name for the created data type, which meets the following requirements:
+            is unique for the specified appid does not start with a digit contains only latin letters, digits and underscore
+        :param fields: A list of fields for the created data type specified in the { fieldname : "datatype", ... }, { fieldname : "datatype", ... }, … format.
+        :param unique: A unique fields data type in the { fields : [ "field_name", ... ] }, { ... } format.
         """
         return self._get(
             "DefineType",

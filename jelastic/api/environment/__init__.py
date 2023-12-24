@@ -95,9 +95,16 @@ class Environment(ClientAbstract):
     @property
     def Binder(self) -> "_Binder":
         """
-         With the platform, you can set your own external domain name for your projects instead of using the default hosting provider domain name. Binding can be done in two ways: by adding a CNAME record or by setting A Records.
-         A CNAME specifies an alias for a canonical name record in a Domain Name System (DNS) database. If you don't have your own Public IP, your URL is an alias for a single canonical name that is associated with a common platform IP address in the DNS database. In this case, it's recommended to set your own custom domain by adding a CNAME record.
-         A Record is an entry in your DNS zone file that maps each domain name to an IP address. When you type www.mycustomsite.com, the browser goes to the nameserver for mycustomsite.com and asks for the A Record. This record must point to an IP address - it will be the IP address of your web server. Setting your own custom external domain name using A Record is more appropriate if you have a personal Public IP address.
+        With the platform, you can set your own external domain name for your projects instead of using the default
+        hosting provider domain name. Binding can be done in two ways: by adding a CNAME record or by setting A Records.
+        A CNAME specifies an alias for a canonical name record in a Domain Name System (DNS) database. If you don't
+        have your own Public IP, your URL is an alias for a single canonical name that is associated with a common
+        platform IP address in the DNS database. In this case, it's recommended to set your own custom domain by adding
+        a CNAME record.
+        A Record is an entry in your DNS zone file that maps each domain name to an IP address. When you type
+        www.mycustomsite.com, the browser goes to the nameserver for mycustomsite.com and asks for the A Record. This
+        record must point to an IP address - it will be the IP address of your web server. Setting your own custom
+        external domain name using A Record is more appropriate if you have a personal Public IP address.
         Also, you can bind Custom SSL to your custom domain.
 
          >>> from jelastic import Jelastic
@@ -2572,7 +2579,7 @@ class _Control(Environment):
         :param node_id: unique identifier of the target node (container).
         :param src_port: source port on the container.
         :param dst_port: destination port on the container.
-        :param protocol:transport protocol (“TCP” or “UDP”).
+        :param protocol: transport protocol (“TCP” or “UDP”).
         :param comments: custom comment for the redirect.
         """
         return self._get(
@@ -5022,16 +5029,17 @@ class _Control(Environment):
         self,
         env_name: str,
         node_id: int,
-        vars: str,
+        var: dict,
     ):
         """
         :param env_name: target environment name.
         :param node_id: unique identifier of the target node (container).
-        :param vars: JSON object with a list of container environment variables, e.g. {"var1":"value1", "var2":"value2"}.
+        :param var: JSON object with a list of container environment variables, e.g {"var1":"value1", "var2":"value2"}.
         """
+        var = json.dumps(var)
         return self._get(
             "SetContainerEnvVars",
-            params={"envName": env_name, "nodeId": node_id, "vars": vars},
+            params={"envName": env_name, "nodeId": node_id, "vars": var},
         )
 
     def SetContainerEnvVarsByGroup(
@@ -5041,10 +5049,9 @@ class _Control(Environment):
         data: str,
     ):
         """
-                :param env_name: target environment name
-                :param node_group:
-        unique identifier of the target node group (layer), e.g. "cp" for the default application server layer
-                :param data: JSON object with a list of container environment variables, e.g. {"var1":"value1", "var2":"value2"}.
+        :param env_name: target environment name
+        :param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer
+        :param data: JSON object with a list of container environment variables, e.g. {"var1":"value1", "var2":"value2"}.
         """
         return self._get(
             "SetContainerEnvVarsByGroup",
