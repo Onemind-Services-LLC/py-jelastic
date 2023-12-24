@@ -821,7 +821,9 @@ class _Invoice(Billing):
     """
     Ref: https://docs.jelastic.com/api/private/#!/api/billing.Invoice
     """
+
     _endpoint2 = "invoice"
+
     def Event(
         self,
         extern_id: str,
@@ -1923,19 +1925,20 @@ class _Order(Billing):
     """
     Ref: https://docs.jelastic.com/api/private/#!/api/billing.Order
     """
-    _endpoint2 = 'order'
+
+    _endpoint2 = "order"
 
     def AddStats(
-            self,
-            resource_name: str,
-            uid: int,
-            value: int,
-            start_date: list[str] = None,
-            end_date: list[str] = None,
-            env_name: list[str] = None,
-            node_id: list[int] = None,
-            note: list[str] = None,
-            value_group: list[str] = None,
+        self,
+        resource_name: str,
+        uid: int,
+        value: int,
+        start_date: list[str] = None,
+        end_date: list[str] = None,
+        env_name: list[str] = None,
+        node_id: list[int] = None,
+        note: list[str] = None,
+        value_group: list[str] = None,
     ):
         return self._get(
             "AddStats",
@@ -1954,9 +1957,9 @@ class _Order(Billing):
         )
 
     def EnvResources(
-            self,
-            start_date: date,
-            end_date: date,
+        self,
+        start_date: date,
+        end_date: date,
     ):
         start_date = start_date.strftime("%Y-%m-%d")
         end_date = end_date.strftime("%Y-%m-%d")
@@ -1969,11 +1972,11 @@ class _Order(Billing):
         )
 
     def EnvsResources(
-            self,
-            start_date: date,
-            end_date: date,
-            target_app_id: str,
-            checksum: str,
+        self,
+        start_date: date,
+        end_date: date,
+        target_app_id: str,
+        checksum: str,
     ):
         start_date = start_date.strftime("%Y-%m-%d")
         end_date = end_date.strftime("%Y-%m-%d")
@@ -1988,11 +1991,11 @@ class _Order(Billing):
         )
 
     def EnvsResourcesByAccount(
-            self,
-            start_date: date,
-            end_date: date,
-            uid: int,
-            checksum: str,
+        self,
+        start_date: date,
+        end_date: date,
+        uid: int,
+        checksum: str,
     ):
         """
         :param checksum: required but not used
@@ -2011,9 +2014,9 @@ class _Order(Billing):
         )
 
     def GetOptions(
-            self,
-            target_env_name: str,
-            node_group: str,
+        self,
+        target_env_name: str,
+        node_group: str,
     ):
         """
         :param target_env_name: env which holds nodeGroup
@@ -2028,11 +2031,11 @@ class _Order(Billing):
         )
 
     def SetOptions(
-            self,
-            target_env_name: str,
-            node_group: str,
-            options: str,
-            node_id: list[int] = None,
+        self,
+        target_env_name: str,
+        node_group: str,
+        options: str,
+        node_id: list[int] = None,
     ):
         """
         :param target_env_name: target environment name with the required node group (layer).
