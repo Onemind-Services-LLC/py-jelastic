@@ -47,7 +47,9 @@ def test_env_resources(client):
 
 def test_envs_resources(client):
     client._get.return_value = success_response
-    response = client.Order.EnvsResources(CURRENT_DATETIME, CURRENT_DATETIME, "tid_1", "checksum")
+    response = client.Order.EnvsResources(
+        CURRENT_DATETIME, CURRENT_DATETIME, "tid_1", "checksum"
+    )
     client._get.assert_called_with(
         "EnvsResources",
         params={
@@ -62,7 +64,9 @@ def test_envs_resources(client):
 
 def test_envs_resources_by_account(client):
     client._get.return_value = success_response
-    response = client.Order.EnvsResourcesByAccount(CURRENT_DATETIME, CURRENT_DATETIME, 1, "checksum")
+    response = client.Order.EnvsResourcesByAccount(
+        CURRENT_DATETIME, CURRENT_DATETIME, 1, "checksum"
+    )
     client._get.assert_called_with(
         "EnvsResourcesByAccount",
         params={

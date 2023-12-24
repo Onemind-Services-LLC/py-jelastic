@@ -141,7 +141,9 @@ def test_export_account_billing_history_by_period(client):
 
 def test_export_env_billing_history_by_period(client):
     client._get.return_value = success_response
-    response = client.Account.ExportEnvBillingHistoryByPeriod(CURRENT_DATETIME, CURRENT_DATETIME, 10, "DAY", True)
+    response = client.Account.ExportEnvBillingHistoryByPeriod(
+        CURRENT_DATETIME, CURRENT_DATETIME, 10, "DAY", True
+    )
     client._get.assert_called_with(
         "ExportEnvBillingHistoryByPeriod",
         params={
@@ -306,7 +308,9 @@ def test_get_accounts_for_destroying(client):
 
 def test_get_agg_cluster_billing_history(client):
     client._get.return_value = success_response
-    response = client.Account.GetAggClusterBillingHistory(CURRENT_DATETIME, CURRENT_DATETIME, 10, ["CPU"], True)
+    response = client.Account.GetAggClusterBillingHistory(
+        CURRENT_DATETIME, CURRENT_DATETIME, 10, ["CPU"], True
+    )
     client._get.assert_called_with(
         "GetAggClusterBillingHistory",
         params={
@@ -352,7 +356,9 @@ def test_get_billing_info(client):
 
 def test_get_cluster_billing_history(client):
     client._get.return_value = success_response
-    response = client.Account.GetClusterBillingHistory(CURRENT_DATETIME, CURRENT_DATETIME, 10)
+    response = client.Account.GetClusterBillingHistory(
+        CURRENT_DATETIME, CURRENT_DATETIME, 10
+    )
     client._get.assert_called_with(
         "GetClusterBillingHistory",
         params={
@@ -409,7 +415,9 @@ def test_get_country_states(client):
 
 def test_get_env_billing_history_by_period(client):
     client._get.return_value = success_response
-    response = client.Account.GetEnvBillingHistoryByPeriod(CURRENT_DATETIME, CURRENT_DATETIME, "period", 10, True)
+    response = client.Account.GetEnvBillingHistoryByPeriod(
+        CURRENT_DATETIME, CURRENT_DATETIME, "period", 10, True
+    )
     client._get.assert_called_with(
         "GetEnvBillingHistoryByPeriod",
         params={
@@ -470,7 +478,9 @@ def test_get_external_user_by_id(client):
 
 def test_get_fund_account_history(client):
     client._get.return_value = success_response
-    response = client.Account.GetFundAccountHistory(CURRENT_DATETIME, CURRENT_DATETIME, 123)
+    response = client.Account.GetFundAccountHistory(
+        CURRENT_DATETIME, CURRENT_DATETIME, 123
+    )
     client._get.assert_called_with(
         "GetFundAccountHistory",
         params={
