@@ -241,6 +241,26 @@ class Environment(ClientAbstract):
             debug=self._debug,
         )
 
+    @property
+    def Trigger(self) -> "_Trigger":
+        """
+                This service implements the environment's trigger handling and management functionality. There are two types of triggers:
+
+        auto-scaling - custom conditions for nodes' addition (scale out) and removal (scale in) based on the load, which allows implementing automatic horizontal scaling. Learn more in the documentation.
+        load alert - custom conditions for email notifications based on the nodes' load, i.e. a particular resource type is above/below the stated value for the designated period.
+
+                 >>> from jelastic import Jelastic
+                 >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+                 >>> jelastic.environment.Trigger
+
+                 Ref: https://docs.jelastic.com/api/private/#!/api/environment.Trigger
+        """
+        return _Trigger(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+        )
+
 
 class _Billing(Environment):
     """
@@ -6983,4 +7003,359 @@ class _Tracking(Environment):
             "StoreUserActions",
             params={"session": session, "trackedActionEvent": tracked_action_event},
             delimiter=",",
+        )
+
+
+class _Trigger(Environment):
+    """
+        This service implements the environment's trigger handling and management functionality. There are two types of triggers:
+
+    auto-scaling - custom conditions for nodes' addition (scale out) and removal (scale in) based on the load, which allows implementing automatic horizontal scaling. Learn more in the documentation.
+    load alert - custom conditions for email notifications based on the nodes' load, i.e. a particular resource type is above/below the stated value for the designated period.
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/environment.Trigger
+    """
+
+    _endpoint2 = "trigger"
+
+    def AddAutoScalingTrigger(
+        self,
+        env_name: str,
+        data: dict,
+    ):
+        """
+        param env_name: target environment name.
+        param data: JSON object with trigger's configuration.
+        """
+        return self._get(
+            "AddAutoScalingTrigger",
+            params={
+                "envName": env_name,
+                "data": data,
+            },
+            delimiter=",",
+        )
+
+    def AddLoadAlertTrigger(
+        self,
+        env_name: str,
+        data: dict,
+    ):
+        """
+        param env_name: target environment name.
+        param data: JSON object with trigger's configuration.
+        """
+        return self._get(
+            "AddLoadAlertTrigger",
+            params={
+                "envName": env_name,
+                "data": data,
+            },
+            delimiter=",",
+        )
+
+    def AddTrigger(
+        self,
+        env_name: str,
+        data: dict,
+    ):
+        """
+        param env_name: target environment name.
+        param data: JSON object with trigger's configuration.
+        """
+        return self._get(
+            "AddTrigger",
+            params={
+                "envName": env_name,
+                "data": data,
+            },
+            delimiter=",",
+        )
+
+    def AutoScalingHistory(
+        self,
+        env_name: str,
+        start_row: int,
+        result_count: int,
+        trigger_id: list[int] = None,
+        action_types: list[str] = None,
+        start_time: list[datetime] = None,
+        end_time: list[datetime] = None,
+        order_field: list[str] = None,
+        order_direction: list[str] = None,
+        skip_results: list[str] = None,
+        node_group: list[str] = None,
+        resource_types: list[str] = None,
+        trigger_log_id: list[int] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param start_row: returns information starting from the specified row in the response (starts with 0, by default).
+        param result_count: returns the specified number of rows from the response (10 by default).
+        param trigger_id: unique identifier of the target auto-scaling trigger.
+        param action_types: a semicolon-separated list of triggers' action types (for filtering). (supported values: ADDNODE, REMOVENODE).
+        param start_time: start time (UTC) of a period for which actions should be shown. In the format “yyyy-MM-dd hh:mm:ss”, e.g. "2022-11-16 00:00:00".
+        param end_time: end time (UTC) of a period for which actions should be shown. In the format “yyyy-MM-dd hh:mm:ss”, e.g. "2022-11-16 00:00:00".
+        param order_field: sorts results by the specified field.
+        param order_direction: sorts results in the ascending (ASC) or descending (DESC) order.
+        param skip_results: skips results with matching text (for filtering).
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        param resource_type: a semicolon-separated list of triggers' resource types (for filtering).
+        param trigger_log_id: unique identifier of the target log file.
+        """
+        return self._get(
+            "AutoScalingHistory",
+            params={
+                "envName": env_name,
+                "startRow": start_row,
+                "resultCount": result_count,
+                "triggerId": trigger_id,
+                "actionTypes": action_types,
+                "startTime": start_time,
+                "endTime": end_time,
+                "orderField": order_field,
+                "orderDirection": order_direction,
+                "skipResults": skip_results,
+                "nodeGroup": node_group,
+                "resourceTypes": resource_types,
+                "triggerLogId": trigger_log_id,
+            },
+            datetime_format="%Y-%m-%d %H:%M:%S",
+        )
+
+    def DeleteAutoScalingTrigger(
+        self,
+        env_name: str,
+        id: int,
+    ):
+        """
+        param env_name: target environment name.
+        param id : unique identifier of the target auto-scaling trigger
+        """
+        return self._get(
+            "DeleteAutoScalingTrigger",
+            params={
+                "envName": env_name,
+                "id": id,
+            },
+        )
+
+    def DeleteLoadAlertTrigger(
+        self,
+        env_name: str,
+        id: int,
+    ):
+        """
+        param env_name: target environment name.
+        param id : unique identifier of the target load alert trigger.
+        """
+        return self._get(
+            "DeleteLoadAlertTrigger",
+            params={
+                "envName": env_name,
+                "id": id,
+            },
+        )
+
+    def DeleteTrigger(
+        self,
+        env_name: str,
+        id: int,
+    ):
+        return self._get(
+            "DeleteTrigger",
+            params={
+                "envName": env_name,
+                "id": id,
+            },
+        )
+
+    def EditAutoScalingTrigger(self, env_name: str, id: int, data: str):
+        """
+        param env_name: target environment name.
+        param id : unique identifier of the target load alert trigger.
+        param data : JSON object with trigger's configuration.
+        """
+        return self._get(
+            "EditAutoScalingTrigger",
+            params={"envName": env_name, "id": id, "data": data},
+        )
+
+    def EditLoadAlertTrigger(self, env_name: str, id: int, data: str):
+        """
+        param env_name: target environment name.
+        param id : unique identifier of the target load alert trigger.
+        param data : JSON object with trigger's configuration.
+        """
+        return self._get(
+            "EditLoadAlertTrigger",
+            params={"envName": env_name, "id": id, "data": data},
+        )
+
+    def EditTrigger(self, env_name: str, id: int, data: str):
+        return self._get(
+            "EditTrigger",
+            params={"envName": env_name, "id": id, "data": data},
+        )
+
+    def GetAutoScalingTriggers(self, env_name: str, action_types: list[str] = None):
+        """
+        param env_name: target environment name
+        param action_types: a semicolon-separated list of the trigger action types (for filtering).
+        """
+        return self._get(
+            "GetAutoScalingTriggers",
+            params={
+                "envName": env_name,
+                "actionTypes": action_types,
+            },
+            delimiter=",",
+        )
+
+    def GetLoadAlertTriggers(self, env_name: str, action_types: list[str] = None):
+        """
+        param env_name: target environment name
+        param action_types: a semicolon-separated list of the trigger action types (for filtering).
+        """
+        return self._get(
+            "GetLoadAlertTriggers",
+            params={
+                "envName": env_name,
+                "actionTypes": action_types,
+            },
+            delimiter=",",
+        )
+
+    def GetTriggerLogs(
+        self,
+        env_name: str,
+        start_row: int,
+        result_count: int,
+        trigger_id: list[int] = None,
+        action_types: list[str] = None,
+        start_time: list[datetime] = None,
+        end_time: list[datetime] = None,
+        order_field: list[str] = None,
+        order_direction: list[str] = None,
+        skip_results: list[str] = None,
+        node_group: list[str] = None,
+        resource_types: list[str] = None,
+        trigger_log_id: list[int] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param start_row: returns information starting from the specified row in the response (starts with 0, by default).
+        param result_count: returns the specified number of rows from the response (10 by default).
+        param trigger_id: unique identifier of the target auto-scaling trigger.
+        param action_types: a semicolon-separated list of triggers' action types (for filtering). (supported values: ADDNODE, REMOVENODE).
+        param start_time: start time (UTC) of a period for which actions should be shown. In the format “yyyy-MM-dd hh:mm:ss”, e.g. "2022-11-16 00:00:00".
+        param end_time: end time (UTC) of a period for which actions should be shown. In the format “yyyy-MM-dd hh:mm:ss”, e.g. "2022-11-16 00:00:00".
+        param order_field: sorts results by the specified field.
+        param order_direction: sorts results in the ascending (ASC) or descending (DESC) order.
+        param skip_results: skips results with matching text (for filtering).
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        param resource_type: a semicolon-separated list of triggers' resource types (for filtering).
+        param trigger_log_id: unique identifier of the target log file.
+        """
+        return self._get(
+            "GetTriggerLogs",
+            params={
+                "envName": env_name,
+                "startRow": start_row,
+                "resultCount": result_count,
+                "triggerId": trigger_id,
+                "actionTypes": action_types,
+                "startTime": start_time,
+                "endTime": end_time,
+                "orderField": order_field,
+                "orderDirection": order_direction,
+                "skipResults": skip_results,
+                "nodeGroup": node_group,
+                "resourceTypes": resource_types,
+                "triggerLogId": trigger_log_id,
+            },
+            datetime_format="%Y-%m-%d %H:%M:%S",
+        )
+
+    def GetTriggers(self, env_name: str, action_types: list[str] = None):
+        """
+        param env_name: target environment name
+        param action_types: a semicolon-separated list of the trigger action types (for filtering).
+        """
+        return self._get(
+            "GetTriggers",
+            params={
+                "envName": env_name,
+                "actionTypes": action_types,
+            },
+            delimiter=",",
+        )
+
+    def LoadAlertHistory(
+        self,
+        env_name: str,
+        start_row: int,
+        result_count: int,
+        trigger_id: list[int] = None,
+        action_types: list[str] = None,
+        start_time: list[datetime] = None,
+        end_time: list[datetime] = None,
+        order_field: list[str] = None,
+        order_direction: list[str] = None,
+        skip_results: list[str] = None,
+        node_group: list[str] = None,
+        resource_types: list[str] = None,
+        trigger_log_id: list[int] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param start_row: returns information starting from the specified row in the response (starts with 0, by default).
+        param result_count: returns the specified number of rows from the response (10 by default).
+        param trigger_id: unique identifier of the target auto-scaling trigger.
+        param action_types: a semicolon-separated list of triggers' action types (for filtering). (supported values: ADDNODE, REMOVENODE).
+        param start_time: start time (UTC) of a period for which actions should be shown. In the format “yyyy-MM-dd hh:mm:ss”, e.g. "2022-11-16 00:00:00".
+        param end_time: end time (UTC) of a period for which actions should be shown. In the format “yyyy-MM-dd hh:mm:ss”, e.g. "2022-11-16 00:00:00".
+        param order_field: sorts results by the specified field.
+        param order_direction: sorts results in the ascending (ASC) or descending (DESC) order.
+        param skip_results: skips results with matching text (for filtering).
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        param resource_type: a semicolon-separated list of triggers' resource types (for filtering).
+        param trigger_log_id: unique identifier of the target log file.
+        """
+        return self._get(
+            "LoadAlertHistory",
+            params={
+                "envName": env_name,
+                "startRow": start_row,
+                "resultCount": result_count,
+                "triggerId": trigger_id,
+                "actionTypes": action_types,
+                "startTime": start_time,
+                "endTime": end_time,
+                "orderField": order_field,
+                "orderDirection": order_direction,
+                "skipResults": skip_results,
+                "nodeGroup": node_group,
+                "resourceTypes": resource_types,
+                "triggerLogId": trigger_log_id,
+            },
+            datetime_format="%Y-%m-%d %H:%M:%S",
+        )
+
+    def SetAutoScalingTriggerEnabled(self, env_name: str, id: int, enabled: bool):
+        return self._get(
+            "SetAutoScalingTriggerEnabled",
+            params={"envName": env_name, "id": id, "enabled": enabled},
+        )
+
+    def SetLoadAlertTriggerEnabled(self, env_name: str, id: int, enabled: bool):
+        return self._get(
+            "SetLoadAlertTriggerEnabled",
+            params={"envName": env_name, "id": id, "enabled": enabled},
+        )
+
+    def SetTriggerEnabled(self, env_name: str, id: int, enabled: bool):
+        return self._get(
+            "SetTriggerEnabled",
+            params={"envName": env_name, "id": id, "enabled": enabled},
         )
