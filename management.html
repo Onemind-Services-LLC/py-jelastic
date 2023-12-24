@@ -1077,7 +1077,10 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Management</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#jelastic.api.management.Management"><code class="docutils literal notranslate"><span class="pre">Management</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#jelastic.api.management.Management"><code class="docutils literal notranslate"><span class="pre">Management</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#jelastic.api.management.Management.Account"><code class="docutils literal notranslate"><span class="pre">Management.Account</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="marketplace.html">Marketplace</a><ul>
@@ -1290,9 +1293,21 @@
 <dt class="sig sig-object py" id="jelastic.api.management.Management">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jelastic.api.management.</span></span><span class="sig-name descname"><span class="pre">Management</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/management.html#Management"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.management.Management" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="abstract.html#jelastic.api.abstract.ClientAbstract" title="jelastic.api.abstract.ClientAbstract"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClientAbstract</span></code></a></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="jelastic.api.management.Management.Account">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Account</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">_Account</span></em><a class="headerlink" href="#jelastic.api.management.Management.Account" title="Link to this definition"></a></dt>
+<dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jelastic</span> <span class="kn">import</span> <span class="n">Jelastic</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jelastic</span> <span class="o">=</span> <span class="n">Jelastic</span><span class="p">(</span><span class="s1">&#39;https://jca.xapp.cloudmydc.com&#39;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s1">&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jelastic</span><span class="o">.</span><span class="n">management</span><span class="o">.</span><span class="n">Account</span>
+</pre></div>
+</div>
+<p>Ref: <a class="reference external" href="https://docs.jelastic.com/api/private/#!/api/management.Account">https://docs.jelastic.com/api/private/#!/api/management.Account</a></p>
+</dd></dl>
+
 </dd></dl>
 
 <p id="module-jelastic.api.marketplace._App">Ref: <a class="reference external" href="https://docs.jelastic.com/api/private/#!/api/marketplace.App">https://docs.jelastic.com/api/private/#!/api/marketplace.App</a></p>
+<p id="module-jelastic.api.management._Account">Ref: <a class="reference external" href="https://docs.jelastic.com/api/private/#!/api/management.Account">https://docs.jelastic.com/api/private/#!/api/management.Account</a></p>
 </section>
 
 
