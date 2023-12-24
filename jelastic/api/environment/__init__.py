@@ -202,6 +202,21 @@ class Environment(ClientAbstract):
             debug=self._debug,
         )
 
+    @property
+    def System(self) -> "_System":
+        """
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.environment.System
+
+        Ref: https://docs.jelastic.com/api/private/#!/api/environment.System
+        """
+        return _System(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+        )
+
 
 class _Billing(Environment):
     """
@@ -6493,4 +6508,287 @@ class _Security(Environment):
                 "nodeGroup": node_group,
             },
             delimiter=",",
+        )
+
+
+class _System(Environment):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/environment.System
+    """
+
+    _endpoint2 = "system"
+
+    def CheckDBConnection(self, checksum: str):
+        return self._get(
+            "CheckDBConnection",
+            params={
+                "checksum": checksum,
+            },
+        )
+
+    def CheckError(self, code: list[int] = None):
+        return self._get(
+            "CheckError",
+            params={
+                "code": code,
+            },
+            delimiter=",",
+        )
+
+    def CleanCheckRequestCache(self, uid: list[int] = None):
+        return self._get(
+            "CleanCheckRequestCache",
+            params={
+                "uid": uid,
+            },
+            delimiter=",",
+        )
+
+    def CleanCheckRequestCacheInner(self, uid: list[int] = None):
+        return self._get(
+            "CleanCheckRequestCacheInner",
+            params={
+                "uid": uid,
+            },
+            delimiter=",",
+        )
+
+    def CleanTemplateManifestCache(
+        self,
+    ):
+        return self._get(
+            "CleanTemplateManifestCache",
+            params={},
+        )
+
+    def DeleteOldEnvs(self, updatedon: str, status: str, debug: bool, checksum: str):
+        return self._get(
+            "DeleteOldEnvs",
+            params={
+                "updatedon": updatedon,
+                "status": status,
+                "debug": debug,
+                "checksum": checksum,
+            },
+        )
+
+    def Event(self, message: str, publish_local: list[bool] = None):
+        return self._get(
+            "Event",
+            params={
+                "message": message,
+                "publishLocal": publish_local,
+            },
+            delimiter=",",
+        )
+
+    def FixDuplicates(self, debug: list[bool] = None):
+        return self._get(
+            "FixDuplicates",
+            params={
+                "debug": debug,
+            },
+            delimiter=",",
+        )
+
+    def FixStuckEnvs(
+        self,
+        checksum: str,
+    ):
+        return self._get(
+            "FixStuckEnvs",
+            params={
+                "checksum": checksum,
+            },
+        )
+
+    def GetAPIDescriptions(
+        self, is_public_only: list[bool] = None, is_token: list[bool] = None
+    ):
+        return self._get(
+            "GetAPIDescriptions",
+            params={
+                "isPublicOnly": is_public_only,
+                "isToken": is_token,
+            },
+            delimiter=",",
+        )
+
+    def GetAllAPIDescriptions(
+        self, is_public_only: list[bool] = None, is_token: list[bool] = None
+    ):
+        return self._get(
+            "GetAllAPIDescriptions",
+            params={
+                "isPublicOnly": is_public_only,
+                "isToken": is_token,
+            },
+            delimiter=",",
+        )
+
+    def GetBillableItems(
+        self,
+    ):
+        return self._get(
+            "GetBillableItems",
+            params={},
+        )
+
+    def GetCacheStats(
+        self,
+    ):
+        return self._get(
+            "GetCacheStats",
+            params={},
+        )
+
+    def GetCacheStatus(
+        self,
+    ):
+        return self._get(
+            "GetCacheStatus",
+            params={},
+        )
+
+    def GetContCountStatus(self, starttime: datetime, endtime: datetime):
+        return self._get(
+            "GetContCountStatus",
+            params={"starttime": starttime, "endtime": endtime},
+            datetime_format="%Y-%m-%d %H:%M:%S",
+        )
+
+    def GetInstanceCacheStatus(
+        self,
+    ):
+        return self._get(
+            "GetInstanceCacheStatus",
+            params={},
+        )
+
+    def GetIpsByType(self, checksum: str, node_type: str, hnip: list[str] = None):
+        return self._get(
+            "GetIpsByType",
+            params={"checksum": checksum, "nodeType": node_type, "hnip": hnip},
+            delimiter=",",
+        )
+
+    def GetKeyword(
+        self,
+        checksum: str,
+    ):
+        return self._get(
+            "GetKeyword",
+            params={
+                "checksum": checksum,
+            },
+        )
+
+    def GetPlatformStatus(self, checksum: str, check_smtp: list[bool] = None):
+        return self._get(
+            "GetPlatformStatus",
+            params={"checksum": checksum, "checkSMTP": check_smtp},
+        )
+
+    def GetStatCollectorStatus(
+        self,
+    ):
+        return self._get(
+            "GetStatCollectorStatus",
+            params={},
+        )
+
+    def GetVersion(
+        self,
+    ):
+        return self._get(
+            "GetVersion",
+            params={},
+        )
+
+    def RefreshEmailTemplates(
+        self,
+    ):
+        return self._get(
+            "RefreshEmailTemplates",
+            params={},
+        )
+
+    def RefreshUser(self, language: list[str] = None):
+        return self._get(
+            "RefreshUser",
+            params={"language": language},
+            delimiter=",",
+        )
+
+    def RegisterEnvContainer(
+        self,
+        env_name: str,
+        node_type: str,
+        ip_address: str,
+        env_id: str,
+        ct_id: str,
+        passwd: str,
+        hn_ip_address: str,
+    ):
+        return self._get(
+            "RegisterEnvContainer",
+            params={
+                "envName": env_name,
+                "nodeType": node_type,
+                "ipAddress": ip_address,
+                "envId": env_id,
+                "ctId": ct_id,
+                "passwd": passwd,
+                "hnIpAddress": hn_ip_address,
+            },
+        )
+
+    def ReloadConfiguration(
+        self,
+        reseller_id: list[int] = None,
+        changed_placeholders: list[str] = None,
+    ):
+        return self._get(
+            "ReloadConfiguration",
+            params={
+                "resellerId": reseller_id,
+                "changedPlaceholders": changed_placeholders,
+            },
+            delimiter=",",
+        )
+
+    def SendEmail(
+        self,
+        templates: str,
+        email: list[str] = None,
+        language: list[str] = None,
+        timeout: list[int] = None,
+    ):
+        return self._get(
+            "SendEmail",
+            params={
+                "templates": templates,
+                "email": email,
+                "language": language,
+                "timeout": timeout,
+            },
+            delimiter=",",
+        )
+
+    def SurchargeBillableItems(self, starttime: datetime, endtime: datetime):
+        return self._get(
+            "SurchargeBillableItems",
+            params={"startTime": starttime, "endTime": endtime},
+            datetime_format="%Y-%m-%d %H:%M:%S",
+        )
+
+    def SynchEnvs(
+        self,
+        checksum: str,
+    ):
+        return self._get(
+            "SynchEnvs",
+            params={
+                "checksum": checksum,
+            },
         )
