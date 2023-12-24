@@ -545,7 +545,24 @@
 
 <span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/environment.Deployment</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">_Deployment</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">_Deployment</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">File</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_File&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The File Manager API service gives you access to the container’s home directory and your environment&#39;s configuration files. You can read, write, create, delete, and adjust your application files and settings.</span>
+
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.environment.File</span>
+
+<span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/environment.File</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_File</span><span class="p">(</span>
+            <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
+            <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span>
+            <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span>
+        <span class="p">)</span></div>
 
 
 
@@ -6488,6 +6505,776 @@
                 <span class="s2">&quot;nodeID&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
                 <span class="s2">&quot;folders&quot;</span><span class="p">:</span> <span class="n">folders</span><span class="p">,</span>
                 <span class="s2">&quot;tag&quot;</span><span class="p">:</span> <span class="n">tag</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="_File">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._File">[docs]</a>
+<span class="k">class</span> <span class="nc">_File</span><span class="p">(</span><span class="n">Environment</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The File Manager API service gives you access to the container’s home directory and your environment&#39;s configuration files. You can read, write, create, delete, and adjust your application files and settings.</span>
+
+<span class="sd">     Ref: https://docs.jelastic.com/api/private/#!/api/environment.File</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_endpoint2</span> <span class="o">=</span> <span class="s2">&quot;file&quot;</span>
+
+<div class="viewcode-block" id="_File.AddFavorite">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._File.AddFavorite">[docs]</a>
+    <span class="k">def</span> <span class="nf">AddFavorite</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">keyword</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">filter</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">is_dir</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param path: absolute path to the file or directory for quick access.</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. &quot;cp&quot; for the default application server layer.</span>
+<span class="sd">        param node_id: unique identifier of the target node (container).</span>
+<span class="sd">        param keyword: custom name of the favorite shortcut.</span>
+<span class="sd">        param filter: regex expression to filter a list of files displayed via the shortcut (up to 255 characters).</span>
+<span class="sd">        param is_dir: defines whether shortcut points to the directory (true) or file (false).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;AddFavorite&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">path</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+                <span class="s2">&quot;keyword&quot;</span><span class="p">:</span> <span class="n">keyword</span><span class="p">,</span>
+                <span class="s2">&quot;filter&quot;</span><span class="p">:</span> <span class="nb">filter</span><span class="p">,</span>
+                <span class="s2">&quot;isDir&quot;</span><span class="p">:</span> <span class="n">is_dir</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_File.AddMountPointByGroup">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._File.AddMountPointByGroup">[docs]</a>
+    <span class="k">def</span> <span class="nf">AddMountPointByGroup</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">source_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">protocol</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">source_host</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">source_node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">read_only</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">source_address_type</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. &quot;cp&quot; for the default application server layer.</span>
+<span class="sd">        param path: absolute path to the local folder where remote data will be shown at</span>
+<span class="sd">        param source_path: absolute path to the files on your remote node/server where the data is physically stored.</span>
+<span class="sd">        param source_host: host or IP address of the remote server where the data is physically stored.</span>
+<span class="sd">        param source_node_id: unique identifier of the remote node where the data is physically stored.</span>
+<span class="sd">        param name: custom name for the mount point (local folder name is used if not specified).</span>
+<span class="sd">        param read_only: defines access rights for the mounted files - read only (true) or read and write (false).</span>
+<span class="sd">        param source_address_type: source address type (&quot;IP&quot; or 0 | &quot;DOMAIN&quot; or 1 | &quot;NODE_GROUP&quot; or 2).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;AddMountPointByGroup&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">path</span><span class="p">,</span>
+                <span class="s2">&quot;sourcePath&quot;</span><span class="p">:</span> <span class="n">source_path</span><span class="p">,</span>
+                <span class="s2">&quot;protocol&quot;</span><span class="p">:</span> <span class="n">protocol</span><span class="p">,</span>
+                <span class="s2">&quot;sourceHost&quot;</span><span class="p">:</span> <span class="n">source_host</span><span class="p">,</span>
+                <span class="s2">&quot;sourceNodeId&quot;</span><span class="p">:</span> <span class="n">source_node_id</span><span class="p">,</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                <span class="s2">&quot;readOnly&quot;</span><span class="p">:</span> <span class="n">read_only</span><span class="p">,</span>
+                <span class="s2">&quot;sourceAddressType&quot;</span><span class="p">:</span> <span class="n">source_address_type</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_File.AddMountPointById">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._File.AddMountPointById">[docs]</a>
+    <span class="k">def</span> <span class="nf">AddMountPointById</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">source_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">protocol</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">source_host</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">source_node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">read_only</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">source_address_type</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param node_id : unique identifier of the target node (container).</span>
+<span class="sd">        param path: absolute path to the local folder where remote data will be shown at</span>
+<span class="sd">        param source_path: absolute path to the files on your remote node/server where the data is physically stored.</span>
+<span class="sd">        param source_host: host or IP address of the remote server where the data is physically stored.</span>
+<span class="sd">        param source_node_id: unique identifier of the remote node where the data is physically stored.</span>
+<span class="sd">        param name: custom name for the mount point (local folder name is used if not specified).</span>
+<span class="sd">        param read_only: defines access rights for the mounted files - read only (true) or read and write (false).</span>
+<span class="sd">        param source_address_type: source address type (&quot;IP&quot; or 0 | &quot;DOMAIN&quot; or 1 | &quot;NODE_GROUP&quot; or 2).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;AddMountPointById&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+                <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">path</span><span class="p">,</span>
+                <span class="s2">&quot;sourcePath&quot;</span><span class="p">:</span> <span class="n">source_path</span><span class="p">,</span>
+                <span class="s2">&quot;protocol&quot;</span><span class="p">:</span> <span class="n">protocol</span><span class="p">,</span>
+                <span class="s2">&quot;sourceHost&quot;</span><span class="p">:</span> <span class="n">source_host</span><span class="p">,</span>
+                <span class="s2">&quot;sourceNodeId&quot;</span><span class="p">:</span> <span class="n">source_node_id</span><span class="p">,</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                <span class="s2">&quot;readOnly&quot;</span><span class="p">:</span> <span class="n">read_only</span><span class="p">,</span>
+                <span class="s2">&quot;sourceAddressType&quot;</span><span class="p">:</span> <span class="n">source_address_type</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_File.Append">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._File.Append">[docs]</a>
+    <span class="k">def</span> <span class="nf">Append</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">body</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_type</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">master_only</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param path: absolute path to the file, where the text should be added.</span>
+<span class="sd">        param body: text that should be added to the file.</span>
+<span class="sd">        param node_type: unique identifier of the target node type (software stack), e.g. &quot;tomcat11&quot; for the Tomcat 11 stack.</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. &quot;cp&quot; for the default application server layer.</span>
+<span class="sd">        param master_only: defines whether to execute the command on the master/primary node only (true) or on all nodes in the layer (false).</span>
+<span class="sd">        param node_id: unique identifier of the target node (container).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Append&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">path</span><span class="p">,</span>
+                <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">body</span><span class="p">,</span>
+                <span class="s2">&quot;nodeType&quot;</span><span class="p">:</span> <span class="n">node_type</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;masterOnly&quot;</span><span class="p">:</span> <span class="n">master_only</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_File.CheckCrossMount">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._File.CheckCrossMount">[docs]</a>
+    <span class="k">def</span> <span class="nf">CheckCrossMount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">node_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">source_node_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param node_id : unique identifier of the target node (container).</span>
+<span class="sd">        param source_node_id: unique identifier of the remote node where the data is physically stored.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;CheckCrossMount&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+                <span class="s2">&quot;sourceNodeId&quot;</span><span class="p">:</span> <span class="n">source_node_id</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_File.CloneMountPoints">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._File.CloneMountPoints">[docs]</a>
+    <span class="k">def</span> <span class="nf">CloneMountPoints</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">source_node_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">mount_points</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;CloneMountPoints&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+                <span class="s2">&quot;sourceNodeId&quot;</span><span class="p">:</span> <span class="n">source_node_id</span><span class="p">,</span>
+                <span class="s2">&quot;mountPoints&quot;</span><span class="p">:</span> <span class="n">mount_points</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_File.Copy">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._File.Copy">[docs]</a>
+    <span class="k">def</span> <span class="nf">Copy</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">src</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">dest</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_type</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">master_only</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param src: absolute path to the source file that should be copied.</span>
+<span class="sd">        param dest: absolute path to the destination, where the file copy should be placed.</span>
+<span class="sd">        param node_type: unique identifier of the target node type (software stack), e.g. &quot;tomcat11&quot; for the Tomcat 11 stack.</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. &quot;cp&quot; for the default application server layer.</span>
+<span class="sd">        param master_only: defines whether to execute the command on the master/primary node only (true) or on all nodes in the layer (false).</span>
+<span class="sd">        param node_id: unique identifier of the target node (container).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Copy&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="n">src</span><span class="p">,</span>
+                <span class="s2">&quot;dest&quot;</span><span class="p">:</span> <span class="n">dest</span><span class="p">,</span>
+                <span class="s2">&quot;nodeType&quot;</span><span class="p">:</span> <span class="n">node_type</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;masterOnly&quot;</span><span class="p">:</span> <span class="n">master_only</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_File.Create">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._File.Create">[docs]</a>
+    <span class="k">def</span> <span class="nf">Create</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_type</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">master_only</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">isdir</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param path: absolute path to the file that should be created.</span>
+<span class="sd">        param node_type: unique identifier of the target node type (software stack), e.g. &quot;tomcat11&quot; for the Tomcat 11 stack.</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. &quot;cp&quot; for the default application server layer.</span>
+<span class="sd">        param master_only: defines whether to execute the command on the master/primary node only (true) or on all nodes in the layer (false).</span>
+<span class="sd">        param isdir: defines whether to create directory (true) or file (false).</span>
+<span class="sd">        param node_id: unique identifier of the target node (container).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Create&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">path</span><span class="p">,</span>
+                <span class="s2">&quot;nodeType&quot;</span><span class="p">:</span> <span class="n">node_type</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;masterOnly&quot;</span><span class="p">:</span> <span class="n">master_only</span><span class="p">,</span>
+                <span class="s2">&quot;isdir&quot;</span><span class="p">:</span> <span class="n">isdir</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_File.Delete">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._File.Delete">[docs]</a>
+    <span class="k">def</span> <span class="nf">Delete</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_type</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">master_only</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param path: absolute path to the file that should be created.</span>
+<span class="sd">        param node_type: unique identifier of the target node type (software stack), e.g. &quot;tomcat11&quot; for the Tomcat 11 stack.</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. &quot;cp&quot; for the default application server layer.</span>
+<span class="sd">        param master_only: defines whether to execute the command on the master/primary node only (true) or on all nodes in the layer (false).</span>
+<span class="sd">        param node_id: unique identifier of the target node (container).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Delete&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">path</span><span class="p">,</span>
+                <span class="s2">&quot;nodeType&quot;</span><span class="p">:</span> <span class="n">node_type</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;masterOnly&quot;</span><span class="p">:</span> <span class="n">master_only</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_File.GetExportedList">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._File.GetExportedList">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetExportedList</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param node_id: unique identifier of the target node (container).</span>
+<span class="sd">        param path: absolute path to the file that should be created.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetExportedList&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+                <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">path</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_File.GetFavorites">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._File.GetFavorites">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetFavorites</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. &quot;cp&quot; for the default application server layer.</span>
+<span class="sd">        param node_id: unique identifier of the target node (container).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetFavorites&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_File.GetList">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._File.GetList">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetList</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_type</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">filter</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param path: absolute path to the directory with files.</span>
+<span class="sd">        param node_type: unique identifier of the target node type (software stack), e.g. &quot;tomcat11&quot; for the Tomcat 11 stack.</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. &quot;cp&quot; for the default application server layer.</span>
+<span class="sd">        param node_id: unique identifier of the target node (container).</span>
+<span class="sd">        param filter: regex expression to filter the list of returned files (up to 255 characters).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetList&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">path</span><span class="p">,</span>
+                <span class="s2">&quot;nodeType&quot;</span><span class="p">:</span> <span class="n">node_type</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+                <span class="s2">&quot;filter&quot;</span><span class="p">:</span> <span class="nb">filter</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_File.GetMountPoints">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._File.GetMountPoints">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetMountPoints</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. &quot;cp&quot; for the default application server layer.</span>
+<span class="sd">        param node_id: unique identifier of the target node (container).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetMountPoints&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_File.PrepareMountPoints">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._File.PrepareMountPoints">[docs]</a>
+    <span class="k">def</span> <span class="nf">PrepareMountPoints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;PrepareMountPoints&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_File.Read">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._File.Read">[docs]</a>
+    <span class="k">def</span> <span class="nf">Read</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_type</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param path: absolute path to the directory with files.</span>
+<span class="sd">        param node_type: unique identifier of the target node type (software stack), e.g. &quot;tomcat11&quot; for the Tomcat 11 stack.</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. &quot;cp&quot; for the default application server layer.</span>
+<span class="sd">        param node_id: unique identifier of the target node (container).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Read&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">path</span><span class="p">,</span>
+                <span class="s2">&quot;nodeType&quot;</span><span class="p">:</span> <span class="n">node_type</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_File.RemoveExport">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._File.RemoveExport">[docs]</a>
+    <span class="k">def</span> <span class="nf">RemoveExport</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">client_node_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">client_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param node_id: unique identifier of the target node (container).</span>
+<span class="sd">        param path: absolute path to the directory with files.</span>
+<span class="sd">        param client_node_id: unique identifier of the remote client node.</span>
+<span class="sd">        param client_path: absolute path to the directory on the remote client node through which local files can be accessed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;RemoveExport&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+                <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">path</span><span class="p">,</span>
+                <span class="s2">&quot;clientNodeId&quot;</span><span class="p">:</span> <span class="n">client_node_id</span><span class="p">,</span>
+                <span class="s2">&quot;clientPath&quot;</span><span class="p">:</span> <span class="n">client_path</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_File.RemoveFavorite">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._File.RemoveFavorite">[docs]</a>
+    <span class="k">def</span> <span class="nf">RemoveFavorite</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_type</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param path: absolute path to the directory with files.</span>
+<span class="sd">        param node_type: unique identifier of the target node type (software stack), e.g. &quot;tomcat11&quot; for the Tomcat 11 stack.</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. &quot;cp&quot; for the default application server layer.</span>
+<span class="sd">        param node_id: unique identifier of the target node (container).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;RemoveFavorite&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">path</span><span class="p">,</span>
+                <span class="s2">&quot;nodeType&quot;</span><span class="p">:</span> <span class="n">node_type</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_File.RemoveMountPointByGroup">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._File.RemoveMountPointByGroup">[docs]</a>
+    <span class="k">def</span> <span class="nf">RemoveMountPointByGroup</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param path: absolute path to the directory with files.</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. &quot;cp&quot; for the default application server layer.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;RemoveMountPointByGroup&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">path</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_File.RemoveMountPointById">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._File.RemoveMountPointById">[docs]</a>
+    <span class="k">def</span> <span class="nf">RemoveMountPointById</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param path: absolute path to the directory with files.</span>
+<span class="sd">        param node_id: unique identifier of the target node (container).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;RemoveMountPointById&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">path</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_File.Rename">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._File.Rename">[docs]</a>
+    <span class="k">def</span> <span class="nf">Rename</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">old_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">new_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_type</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">master_only</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param old_path: absolute path to the file to be renamed.</span>
+<span class="sd">        param new_path: absolute path with the new filename.</span>
+<span class="sd">        param node_type: unique identifier of the target node type (software stack), e.g. &quot;tomcat11&quot; for the Tomcat 11 stack.</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. &quot;cp&quot; for the default application server layer.</span>
+<span class="sd">        param master_only: defines whether to execute the command on the master/primary node only (true) or on all nodes in the layer (false).</span>
+<span class="sd">        param node_id: unique identifier of the target node (container).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Rename&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;oldPath&quot;</span><span class="p">:</span> <span class="n">old_path</span><span class="p">,</span>
+                <span class="s2">&quot;newPath&quot;</span><span class="p">:</span> <span class="n">new_path</span><span class="p">,</span>
+                <span class="s2">&quot;nodeType&quot;</span><span class="p">:</span> <span class="n">node_type</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;masterOnly&quot;</span><span class="p">:</span> <span class="n">master_only</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_File.ReplaceInBody">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._File.ReplaceInBody">[docs]</a>
+    <span class="k">def</span> <span class="nf">ReplaceInBody</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">replacement</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">nth</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_type</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">master_only</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param path: absolute path to the file that should be created.</span>
+<span class="sd">        param pattern: regex expression (in a SED-compatible format) to locate text for replacement.</span>
+<span class="sd">        param replacement: replacement text (in a plain text format).</span>
+<span class="sd">        param nth: maximum number of entries for replacement.</span>
+<span class="sd">        param node_type: unique identifier of the target node type (software stack), e.g. &quot;tomcat11&quot; for the Tomcat 11 stack.</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. &quot;cp&quot; for the default application server layer.</span>
+<span class="sd">        param master_only: defines whether to execute the command on the master/primary node only (true) or on all nodes in the layer (false).</span>
+<span class="sd">        param node_id: unique identifier of the target node (container).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;ReplaceInBody&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">path</span><span class="p">,</span>
+                <span class="s2">&quot;pattern&quot;</span><span class="p">:</span> <span class="n">pattern</span><span class="p">,</span>
+                <span class="s2">&quot;replacement&quot;</span><span class="p">:</span> <span class="n">replacement</span><span class="p">,</span>
+                <span class="s2">&quot;nth&quot;</span><span class="p">:</span> <span class="n">nth</span><span class="p">,</span>
+                <span class="s2">&quot;nodeType&quot;</span><span class="p">:</span> <span class="n">node_type</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;masterOnly&quot;</span><span class="p">:</span> <span class="n">master_only</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_File.UnpackById">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._File.UnpackById">[docs]</a>
+    <span class="k">def</span> <span class="nf">UnpackById</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">node_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">source_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dest_path</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param path: absolute path to the directory with files.</span>
+<span class="sd">        param node_id: unique identifier of the target node (container).</span>
+<span class="sd">        param source_path: absolute path to the target archive file.</span>
+<span class="sd">        param dest_path: absolute path to extract files to.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;UnpackById&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">path</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+                <span class="s2">&quot;sourcePath&quot;</span><span class="p">:</span> <span class="n">source_path</span><span class="p">,</span>
+                <span class="s2">&quot;destPath&quot;</span><span class="p">:</span> <span class="n">dest_path</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_File.UnpackByType">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._File.UnpackByType">[docs]</a>
+    <span class="k">def</span> <span class="nf">UnpackByType</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">node_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">source_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dest_path</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param path: absolute path to the directory with files.</span>
+<span class="sd">        param node_type: unique identifier of the target node type (software stack), e.g. &quot;tomcat11&quot; for the Tomcat 11 stack.</span>
+<span class="sd">        param source_path: absolute path to the target archive file.</span>
+<span class="sd">        param dest_path: absolute path to extract files to.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;UnpackByType&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">path</span><span class="p">,</span>
+                <span class="s2">&quot;nodeType&quot;</span><span class="p">:</span> <span class="n">node_type</span><span class="p">,</span>
+                <span class="s2">&quot;sourcePath&quot;</span><span class="p">:</span> <span class="n">source_path</span><span class="p">,</span>
+                <span class="s2">&quot;destPath&quot;</span><span class="p">:</span> <span class="n">dest_path</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_File.Upload">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._File.Upload">[docs]</a>
+    <span class="k">def</span> <span class="nf">Upload</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">source_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">dest_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_type</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">master_only</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">overwrite</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param source_path: URL of the target file to be uploaded.</span>
+<span class="sd">        param dest_path: absolute path (on the target container) to save uploaded file at.</span>
+<span class="sd">        param node_type: unique identifier of the target node type (software stack), e.g. &quot;tomcat11&quot; for the Tomcat 11 stack.</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. &quot;cp&quot; for the default application server layer.</span>
+<span class="sd">        param master_only: defines whether to execute the command on the master/primary node only (true) or on all nodes in the layer (false).</span>
+<span class="sd">        param node_id: unique identifier of the target node (container).</span>
+<span class="sd">        param overwrite: defines whether to overwrite (true) or skip (false) file if it already exists at the destination directory.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Upload&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;sourcePath&quot;</span><span class="p">:</span> <span class="n">source_path</span><span class="p">,</span>
+                <span class="s2">&quot;destPath&quot;</span><span class="p">:</span> <span class="n">dest_path</span><span class="p">,</span>
+                <span class="s2">&quot;nodeType&quot;</span><span class="p">:</span> <span class="n">node_type</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;masterOnly&quot;</span><span class="p">:</span> <span class="n">master_only</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+                <span class="s2">&quot;overwrite&quot;</span><span class="p">:</span> <span class="n">overwrite</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_File.Write">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._File.Write">[docs]</a>
+    <span class="k">def</span> <span class="nf">Write</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">body</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_type</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">master_only</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">is_append_mode</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param path: absolute path to the file that should be created.</span>
+<span class="sd">        param body: text that should be written to the file.</span>
+<span class="sd">        param node_type: unique identifier of the target node type (software stack), e.g. &quot;tomcat11&quot; for the Tomcat 11 stack.</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. &quot;cp&quot; for the default application server layer.</span>
+<span class="sd">        param master_only: defines whether to execute the command on the master/primary node only (true) or on all nodes in the layer (false).</span>
+<span class="sd">        param node_id: unique identifier of the target node (container).</span>
+<span class="sd">        param is_append_mode: defines whether to overwrite the file content (false) or append the existing text (false)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Write&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">path</span><span class="p">,</span>
+                <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">body</span><span class="p">,</span>
+                <span class="s2">&quot;nodeType&quot;</span><span class="p">:</span> <span class="n">node_type</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;masterOnly&quot;</span><span class="p">:</span> <span class="n">master_only</span><span class="p">,</span>
+                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
+                <span class="s2">&quot;isAppendMode&quot;</span><span class="p">:</span> <span class="n">is_append_mode</span><span class="p">,</span>
             <span class="p">},</span>
             <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
