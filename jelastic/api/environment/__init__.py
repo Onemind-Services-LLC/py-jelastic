@@ -98,16 +98,16 @@ class Environment(ClientAbstract):
     @property
     def Trigger(self) -> "_Trigger":
         """
-        This service implements the environment's trigger handling and management functionality. There are two types of triggers:
+                This service implements the environment's trigger handling and management functionality. There are two types of triggers:
 
-auto-scaling - custom conditions for nodes' addition (scale out) and removal (scale in) based on the load, which allows implementing automatic horizontal scaling. Learn more in the documentation.
-load alert - custom conditions for email notifications based on the nodes' load, i.e. a particular resource type is above/below the stated value for the designated period.
+        auto-scaling - custom conditions for nodes' addition (scale out) and removal (scale in) based on the load, which allows implementing automatic horizontal scaling. Learn more in the documentation.
+        load alert - custom conditions for email notifications based on the nodes' load, i.e. a particular resource type is above/below the stated value for the designated period.
 
-         >>> from jelastic import Jelastic
-         >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
-         >>> jelastic.environment.Trigger
+                 >>> from jelastic import Jelastic
+                 >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+                 >>> jelastic.environment.Trigger
 
-         Ref: https://docs.jelastic.com/api/private/#!/api/environment.Trigger
+                 Ref: https://docs.jelastic.com/api/private/#!/api/environment.Trigger
         """
         return _Trigger(
             session=self._session,
@@ -127,16 +127,16 @@ class _Billing(Environment):
     _endpoint2 = "billing"
 
     def AddStats(
-            self,
-            resource_name: str,
-            uid: int,
-            start_date: date,
-            end_date: date,
-            env_name: str,
-            node_id: int,
-            value: float,
-            note: str = None,
-            value_group: str = None,
+        self,
+        resource_name: str,
+        uid: int,
+        start_date: date,
+        end_date: date,
+        env_name: str,
+        node_id: int,
+        value: float,
+        note: str = None,
+        value_group: str = None,
     ):
         return self._get(
             "AddStats",
@@ -168,11 +168,11 @@ class _Billing(Environment):
         )
 
     def EnvsResources(
-            self,
-            start_time: datetime,
-            end_time: datetime,
-            target_app_id: str,
-            checksum: str,
+        self,
+        start_time: datetime,
+        end_time: datetime,
+        target_app_id: str,
+        checksum: str,
     ):
         """
         Calculate environments resources for the given period.
@@ -193,7 +193,7 @@ class _Billing(Environment):
         )
 
     def EnvsResourcesByAccount(
-            self, start_time: datetime, end_time: datetime, uid: int, checksum: str
+        self, start_time: datetime, end_time: datetime, uid: int, checksum: str
     ):
         """
         Calculate environments resources for the given period.
@@ -222,7 +222,7 @@ class _Billing(Environment):
         )
 
     def SetOptions(
-            self, target_env_name: str, node_group: str, options: dict, node_id: int = None
+        self, target_env_name: str, node_group: str, options: dict, node_id: int = None
     ):
         """
         Sets billing options for the node group (layer) to help the platform identify installed license types.
@@ -320,13 +320,13 @@ class _JError(Environment):
     _endpoint2 = "jerror"
 
     def Error(
-            self,
-            action_name: str,
-            call_parameters: str,
-            error_code: int,
-            priority: int,
-            email: str = None,
-            error_message: str = None,
+        self,
+        action_name: str,
+        call_parameters: str,
+        error_code: int,
+        priority: int,
+        email: str = None,
+        error_message: str = None,
     ):
         return self._get(
             "Error",
@@ -384,12 +384,12 @@ class _Binder(Environment):
     _endpoint2 = "Binder"
 
     def AddDomains(
-            self,
-            env_name: str,
-            domains: str,
-            node_group: list[str] = None,
-            node_id: list[int] = None,
-            subdomain: list[str] = None,
+        self,
+        env_name: str,
+        domains: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
+        subdomain: list[str] = None,
     ):
         """
         param domains: a comma- or semicolon-separated list of domains (e.g. domain1,domain2 or domain1;domain2).
@@ -410,11 +410,11 @@ class _Binder(Environment):
         )
 
     def AddSSLCert(
-            self,
-            env_name: str,
-            key: str,
-            cert: str,
-            interm: list[str] = None,
+        self,
+        env_name: str,
+        key: str,
+        cert: str,
+        interm: list[str] = None,
     ):
         """
         param key: private key (can be either key body or link to download it).
@@ -433,10 +433,10 @@ class _Binder(Environment):
         )
 
     def AttachExtIp(
-            self,
-            env_name: str,
-            nodeid: int,
-            type: list[str] = None,
+        self,
+        env_name: str,
+        nodeid: int,
+        type: list[str] = None,
     ):
         return self._get(
             "AttachExtIp",
@@ -449,10 +449,10 @@ class _Binder(Environment):
         )
 
     def BindExtDomain(
-            self,
-            env_name: str,
-            extdomain: str,
-            cert_id: list[int] = None,
+        self,
+        env_name: str,
+        extdomain: str,
+        cert_id: list[int] = None,
     ):
         return self._get(
             "BindExtDomain",
@@ -465,10 +465,10 @@ class _Binder(Environment):
         )
 
     def BindExtDomains(
-            self,
-            env_name: str,
-            extdomains: str,
-            cert_id: list[int] = None,
+        self,
+        env_name: str,
+        extdomains: str,
+        cert_id: list[int] = None,
     ):
         """
         param extdomain: a comma-separated list of external domains to be bound to the environment.
@@ -485,11 +485,11 @@ class _Binder(Environment):
         )
 
     def BindSSL(
-            self,
-            env_name: str,
-            cert_key: str,
-            cert: str,
-            intermediate: str,
+        self,
+        env_name: str,
+        cert_key: str,
+        cert: str,
+        intermediate: str,
     ):
         return self._get(
             "BindSSL",
@@ -502,11 +502,11 @@ class _Binder(Environment):
         )
 
     def BindSSLCert(
-            self,
-            env_name: str,
-            cert_id: int,
-            entry_point: list[str] = None,
-            ext_domains: list[str] = None,
+        self,
+        env_name: str,
+        cert_id: int,
+        entry_point: list[str] = None,
+        ext_domains: list[str] = None,
     ):
         """
         param cert_id: unique identifier of the SSL certificate.
@@ -525,10 +525,10 @@ class _Binder(Environment):
         )
 
     def CheckDomain(
-            self,
-            env_name: str,
-            domain: str,
-            region: list[str] = None,
+        self,
+        env_name: str,
+        domain: str,
+        region: list[str] = None,
     ):
         """
         param domain: domain name to be checked.
@@ -545,9 +545,9 @@ class _Binder(Environment):
         )
 
     def CheckExtDomain(
-            self,
-            env_name: str,
-            extdomains: str,
+        self,
+        env_name: str,
+        extdomains: str,
     ):
         """
         param extdomains: external domain name to be checked.
@@ -561,8 +561,8 @@ class _Binder(Environment):
         )
 
     def DeleteSSL(
-            self,
-            env_name: str,
+        self,
+        env_name: str,
     ):
         return self._get(
             "DeleteSSL",
@@ -570,10 +570,10 @@ class _Binder(Environment):
         )
 
     def DetachExtIp(
-            self,
-            env_name: str,
-            nodeid: int,
-            ip: str,
+        self,
+        env_name: str,
+        nodeid: int,
+        ip: str,
     ):
         """
         param nodeid: unique identifier of the target node (container).
@@ -589,8 +589,8 @@ class _Binder(Environment):
         )
 
     def DisableSSL(
-            self,
-            env_name: str,
+        self,
+        env_name: str,
     ):
         return self._get(
             "DisableSSL",
@@ -600,12 +600,12 @@ class _Binder(Environment):
         )
 
     def EditSSLCert(
-            self,
-            env_name: str,
-            id: int,
-            key: list[str] = None,
-            cert: list[str] = None,
-            interm: list[str] = None,
+        self,
+        env_name: str,
+        id: int,
+        key: list[str] = None,
+        cert: list[str] = None,
+        interm: list[str] = None,
     ):
         """
         param id: unique identifier of the target SSL certificate.
@@ -626,9 +626,9 @@ class _Binder(Environment):
         )
 
     def GetDomainInfo(
-            self,
-            env_name: str,
-            domain: str,
+        self,
+        env_name: str,
+        domain: str,
     ):
         """
         Returns environment appid if environment found by domain.
@@ -644,11 +644,11 @@ class _Binder(Environment):
         )
 
     def GetDomains(
-            self,
-            env_name: str,
-            node_group: list[str] = None,
-            node_id: list[int] = None,
-            in_short: list[bool] = None,
+        self,
+        env_name: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
+        in_short: list[bool] = None,
     ):
         """
         param node_group: unique identifier of the target node group (layer) for filtering, e.g. "cp" for the default application server layer.
@@ -680,7 +680,7 @@ class _Binder(Environment):
         )
 
     def ManageNodeDnsState(
-            self, env_name: str, node_id: list[int] = None, enabled: list[bool] = None
+        self, env_name: str, node_id: list[int] = None, enabled: list[bool] = None
     ):
         """
         param env_name: target environment name.
@@ -698,7 +698,7 @@ class _Binder(Environment):
         )
 
     def MoveExtIps(
-            self, env_name: str, source_node_id: int, target_node_id: int, ips: str
+        self, env_name: str, source_node_id: int, target_node_id: int, ips: str
     ):
         """
         param env_name: source environment name.
@@ -717,11 +717,11 @@ class _Binder(Environment):
         )
 
     def RemoveDomains(
-            self,
-            env_name: str,
-            domains: str,
-            node_group: list[str] = None,
-            node_id: list[int] = None,
+        self,
+        env_name: str,
+        domains: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
     ):
         """
         param env_name: target environment name.
@@ -741,9 +741,9 @@ class _Binder(Environment):
         )
 
     def RemoveExtDomains(
-            self,
-            env_name: str,
-            extdomain: str,
+        self,
+        env_name: str,
+        extdomain: str,
     ):
         """
         param env_name: target environment name.
@@ -758,8 +758,8 @@ class _Binder(Environment):
         )
 
     def RemoveSSL(
-            self,
-            env_name: str,
+        self,
+        env_name: str,
     ):
         """
         param env_name: target environment name.
@@ -772,9 +772,9 @@ class _Binder(Environment):
         )
 
     def RemoveSSLCerts(
-            self,
-            env_name: str,
-            ids: str,
+        self,
+        env_name: str,
+        ids: str,
     ):
         """
         param env_name: target environment name.
@@ -789,12 +789,12 @@ class _Binder(Environment):
         )
 
     def SetExtIpCount(
-            self,
-            env_name: str,
-            type: str,
-            count: int,
-            node_group: list[str] = None,
-            node_id: list[int] = None,
+        self,
+        env_name: str,
+        type: str,
+        count: int,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
     ):
         """
         param env_name: target environment name.
@@ -816,9 +816,9 @@ class _Binder(Environment):
         )
 
     def SwapExtDomains(
-            self,
-            env_name: str,
-            targetappid: str,
+        self,
+        env_name: str,
+        targetappid: str,
     ):
         """
         param env_name: target environment name.
@@ -833,12 +833,12 @@ class _Binder(Environment):
         )
 
     def SwapExtIps(
-            self,
-            env_name: str,
-            source_node_id: int,
-            target_node_id: int,
-            source_ip: list[str] = None,
-            target_ip: list[str] = None,
+        self,
+        env_name: str,
+        source_node_id: int,
+        target_node_id: int,
+        source_ip: list[str] = None,
+        target_ip: list[str] = None,
     ):
         """
         param env_name: source environment name.
@@ -860,9 +860,9 @@ class _Binder(Environment):
         )
 
     def UnbindSSLCert(
-            self,
-            env_name: str,
-            extdomains: list[str] = None,
+        self,
+        env_name: str,
+        extdomains: list[str] = None,
     ):
         """
         param env_name: target environment name.
@@ -876,21 +876,24 @@ class _Binder(Environment):
             },
             delimiter=",",
         )
+
+
 class _Trigger(Environment):
     """
-    This service implements the environment's trigger handling and management functionality. There are two types of triggers:
+        This service implements the environment's trigger handling and management functionality. There are two types of triggers:
 
-auto-scaling - custom conditions for nodes' addition (scale out) and removal (scale in) based on the load, which allows implementing automatic horizontal scaling. Learn more in the documentation.
-load alert - custom conditions for email notifications based on the nodes' load, i.e. a particular resource type is above/below the stated value for the designated period.
+    auto-scaling - custom conditions for nodes' addition (scale out) and removal (scale in) based on the load, which allows implementing automatic horizontal scaling. Learn more in the documentation.
+    load alert - custom conditions for email notifications based on the nodes' load, i.e. a particular resource type is above/below the stated value for the designated period.
 
-    Ref: https://docs.jelastic.com/api/private/#!/api/environment.Trigger
+        Ref: https://docs.jelastic.com/api/private/#!/api/environment.Trigger
     """
 
     _endpoint2 = "trigger"
+
     def AddAutoScalingTrigger(
-            self,
-            env_name:str,
-            data: dict,
+        self,
+        env_name: str,
+        data: dict,
     ):
         """
         param env_name: target environment name.
@@ -899,15 +902,16 @@ load alert - custom conditions for email notifications based on the nodes' load,
         return self._get(
             "AddAutoScalingTrigger",
             params={
-                "envName":env_name,
+                "envName": env_name,
                 "data": data,
             },
             delimiter=",",
         )
+
     def AddLoadAlertTrigger(
-            self,
-            env_name: str,
-            data: dict,
+        self,
+        env_name: str,
+        data: dict,
     ):
         """
         param env_name: target environment name.
@@ -921,10 +925,11 @@ load alert - custom conditions for email notifications based on the nodes' load,
             },
             delimiter=",",
         )
+
     def AddTrigger(
-            self,
-            env_name: str,
-            data: dict,
+        self,
+        env_name: str,
+        data: dict,
     ):
         """
         param env_name: target environment name.
@@ -938,22 +943,22 @@ load alert - custom conditions for email notifications based on the nodes' load,
             },
             delimiter=",",
         )
-    def AutoScalingHistory(
-            self,
-            env_name: str,
-            start_row: int,
-            result_count: int,
-            trigger_id: list[int]=None,
-            action_types: list[str]=None,
-            start_time: list[datetime]=None,
-            end_time: list[datetime]=None,
-            order_field:list[str]=None,
-            order_direction:list[str]=None,
-            skip_results:list[str]=None,
-            node_group:list[str]=None,
-            resource_types:list[str]=None,
-            trigger_log_id:list[int]=None
 
+    def AutoScalingHistory(
+        self,
+        env_name: str,
+        start_row: int,
+        result_count: int,
+        trigger_id: list[int] = None,
+        action_types: list[str] = None,
+        start_time: list[datetime] = None,
+        end_time: list[datetime] = None,
+        order_field: list[str] = None,
+        order_direction: list[str] = None,
+        skip_results: list[str] = None,
+        node_group: list[str] = None,
+        resource_types: list[str] = None,
+        trigger_log_id: list[int] = None,
     ):
         """
         param env_name: target environment name.
@@ -989,10 +994,11 @@ load alert - custom conditions for email notifications based on the nodes' load,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
+
     def DeleteAutoScalingTrigger(
-            self,
-            env_name:str,
-            id: int,
+        self,
+        env_name: str,
+        id: int,
     ):
         """
         param env_name: target environment name.
@@ -1001,14 +1007,15 @@ load alert - custom conditions for email notifications based on the nodes' load,
         return self._get(
             "DeleteAutoScalingTrigger",
             params={
-                "envName":env_name,
+                "envName": env_name,
                 "id": id,
             },
         )
+
     def DeleteLoadAlertTrigger(
-            self,
-            env_name:str,
-            id: int,
+        self,
+        env_name: str,
+        id: int,
     ):
         """
         param env_name: target environment name.
@@ -1017,79 +1024,53 @@ load alert - custom conditions for email notifications based on the nodes' load,
         return self._get(
             "DeleteLoadAlertTrigger",
             params={
-                "envName":env_name,
+                "envName": env_name,
                 "id": id,
             },
         )
+
     def DeleteTrigger(
-            self,
-            env_name:str,
-            id: int,
+        self,
+        env_name: str,
+        id: int,
     ):
         return self._get(
             "DeleteTrigger",
             params={
-                "envName":env_name,
+                "envName": env_name,
                 "id": id,
             },
         )
-    def EditAutoScalingTrigger(
-            self,
-            env_name:str,
-            id: int,
-            data:str
-    ):
+
+    def EditAutoScalingTrigger(self, env_name: str, id: int, data: str):
         """
-              param env_name: target environment name.
-              param id : unique identifier of the target load alert trigger.
-              param data : JSON object with trigger's configuration.
-              """
+        param env_name: target environment name.
+        param id : unique identifier of the target load alert trigger.
+        param data : JSON object with trigger's configuration.
+        """
         return self._get(
             "EditAutoScalingTrigger",
-            params={
-                "envName":env_name,
-                "id": id,
-                "data":data
-            },
+            params={"envName": env_name, "id": id, "data": data},
         )
-    def EditLoadAlertTrigger(
-            self,
-            env_name:str,
-            id: int,
-            data:str
-    ):
+
+    def EditLoadAlertTrigger(self, env_name: str, id: int, data: str):
         """
-              param env_name: target environment name.
-              param id : unique identifier of the target load alert trigger.
-              param data : JSON object with trigger's configuration.
-              """
+        param env_name: target environment name.
+        param id : unique identifier of the target load alert trigger.
+        param data : JSON object with trigger's configuration.
+        """
         return self._get(
             "EditLoadAlertTrigger",
-            params={
-                "envName":env_name,
-                "id": id,
-                "data":data
-            },
+            params={"envName": env_name, "id": id, "data": data},
         )
-    def EditTrigger(
-            self,
-            env_name:str,
-            id: int,
-            data:str
-    ):
+
+    def EditTrigger(self, env_name: str, id: int, data: str):
         return self._get(
             "EditTrigger",
-            params={
-                "envName":env_name,
-                "id": id,
-                "data":data
-            },
+            params={"envName": env_name, "id": id, "data": data},
         )
-    def GetAutoScalingTriggers(
-            self,
-            env_name:str,
-            action_types:list[str]=None
-    ):
+
+    def GetAutoScalingTriggers(self, env_name: str, action_types: list[str] = None):
         """
         param env_name: target environment name
         param action_types: a semicolon-separated list of the trigger action types (for filtering).
@@ -1097,15 +1078,13 @@ load alert - custom conditions for email notifications based on the nodes' load,
         return self._get(
             "GetAutoScalingTriggers",
             params={
-                "envName":env_name,
+                "envName": env_name,
                 "actionTypes": action_types,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
-    def GetLoadAlertTriggers(
-            self,
-            env_name:str,
-            action_types:list[str]=None
-    ):
+
+    def GetLoadAlertTriggers(self, env_name: str, action_types: list[str] = None):
         """
         param env_name: target environment name
         param action_types: a semicolon-separated list of the trigger action types (for filtering).
@@ -1113,26 +1092,27 @@ load alert - custom conditions for email notifications based on the nodes' load,
         return self._get(
             "GetLoadAlertTriggers",
             params={
-                "envName":env_name,
+                "envName": env_name,
                 "actionTypes": action_types,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
-    def GetTriggerLogs(
-            self,
-            env_name: str,
-            start_row: int,
-            result_count: int,
-            trigger_id: list[int]=None,
-            action_types: list[str]=None,
-            start_time: list[datetime]=None,
-            end_time: list[datetime]=None,
-            order_field:list[str]=None,
-            order_direction:list[str]=None,
-            skip_results:list[str]=None,
-            node_group:list[str]=None,
-            resource_types:list[str]=None,
-            trigger_log_id:list[int]=None
 
+    def GetTriggerLogs(
+        self,
+        env_name: str,
+        start_row: int,
+        result_count: int,
+        trigger_id: list[int] = None,
+        action_types: list[str] = None,
+        start_time: list[datetime] = None,
+        end_time: list[datetime] = None,
+        order_field: list[str] = None,
+        order_direction: list[str] = None,
+        skip_results: list[str] = None,
+        node_group: list[str] = None,
+        resource_types: list[str] = None,
+        trigger_log_id: list[int] = None,
     ):
         """
         param env_name: target environment name.
@@ -1168,11 +1148,8 @@ load alert - custom conditions for email notifications based on the nodes' load,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
-    def GetTriggers(
-            self,
-            env_name:str,
-            action_types:list[str]=None
-    ):
+
+    def GetTriggers(self, env_name: str, action_types: list[str] = None):
         """
         param env_name: target environment name
         param action_types: a semicolon-separated list of the trigger action types (for filtering).
@@ -1180,26 +1157,27 @@ load alert - custom conditions for email notifications based on the nodes' load,
         return self._get(
             "GetTriggers",
             params={
-                "envName":env_name,
+                "envName": env_name,
                 "actionTypes": action_types,
-            }, delimiter=",",
+            },
+            delimiter=",",
         )
-    def LoadAlertHistory(
-            self,
-            env_name: str,
-            start_row: int,
-            result_count: int,
-            trigger_id: list[int]=None,
-            action_types: list[str]=None,
-            start_time: list[datetime]=None,
-            end_time: list[datetime]=None,
-            order_field:list[str]=None,
-            order_direction:list[str]=None,
-            skip_results:list[str]=None,
-            node_group:list[str]=None,
-            resource_types:list[str]=None,
-            trigger_log_id:list[int]=None
 
+    def LoadAlertHistory(
+        self,
+        env_name: str,
+        start_row: int,
+        result_count: int,
+        trigger_id: list[int] = None,
+        action_types: list[str] = None,
+        start_time: list[datetime] = None,
+        end_time: list[datetime] = None,
+        order_field: list[str] = None,
+        order_direction: list[str] = None,
+        skip_results: list[str] = None,
+        node_group: list[str] = None,
+        resource_types: list[str] = None,
+        trigger_log_id: list[int] = None,
     ):
         """
         param env_name: target environment name.
@@ -1236,59 +1214,20 @@ load alert - custom conditions for email notifications based on the nodes' load,
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
-    def SetAutoScalingTriggerEnabled(
-            self,
-            env_name:str,
-            id: int,
-            enabled:bool
-    ):
+    def SetAutoScalingTriggerEnabled(self, env_name: str, id: int, enabled: bool):
         return self._get(
             "SetAutoScalingTriggerEnabled",
-            params={
-                "envName":env_name,
-                "id": id,
-                "enabled": enabled
-            },
+            params={"envName": env_name, "id": id, "enabled": enabled},
         )
-    def SetLoadAlertTriggerEnabled(
-            self,
-            env_name:str,
-            id: int,
-            enabled:bool
-    ):
+
+    def SetLoadAlertTriggerEnabled(self, env_name: str, id: int, enabled: bool):
         return self._get(
             "SetLoadAlertTriggerEnabled",
-            params={
-                "envName":env_name,
-                "id": id,
-                "enabled": enabled
-            },
+            params={"envName": env_name, "id": id, "enabled": enabled},
         )
-    def SetTriggerEnabled(
-            self,
-            env_name:str,
-            id: int,
-            enabled:bool
-    ):
+
+    def SetTriggerEnabled(self, env_name: str, id: int, enabled: bool):
         return self._get(
             "SetTriggerEnabled",
-            params={
-                "envName":env_name,
-                "id": id,
-                "enabled": enabled
-            },
+            params={"envName": env_name, "id": id, "enabled": enabled},
         )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
