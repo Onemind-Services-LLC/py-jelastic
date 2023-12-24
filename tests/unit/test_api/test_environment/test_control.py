@@ -1586,7 +1586,7 @@ def test_get_basic_envs_info(client):
     client._get.return_value = success_response
     response = client.Control.GetBasicEnvsInfo(123)
     client._get.assert_called_once_with(
-        "GetBasicsEnvsInfo",
+        "GetBasicEnvsInfo",
         params={
             "ownerUid": 123,
         },
