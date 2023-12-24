@@ -34,6 +34,17 @@ class Users(ClientAbstract):
             session=self._session, token=self._token, debug=self._debug
         )
 
+    @property
+    def SSO(self) -> "_SSO":
+        """
+        SSO methods
+         >>> from jelastic import Jelastic
+         >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+         >>> jelastic.users.SSO
+         Ref: https://docs.jelastic.com/api/private/#!/api/users.SSO
+        """
+        return _SSO(session=self._session, token=self._token, debug=self._debug)
+
 
 class _Collaboration(Users):
     """
@@ -660,4 +671,64 @@ class _Collaboration(Users):
             "SuspendMember",
             params={"id": id, "ownerUid": owner_uid},
             delimeter=",",
+        )
+
+
+class _SSO(Users):
+    """
+    >>> from jelastic import Jelastic
+    >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+    >>> jelastic.users.SSO
+     Ref: https://docs.jelastic.com/api/private/#!/api/users.SSO
+    """
+
+    _endpoint2 = "sso"
+
+    def GetAuthEndpoint(self, redirect_uri: str):
+        """
+        param redirectUri: a link to display after the authentication.
+        """
+        return self._get(
+            "GetAuthEndpoint",
+            params={"redirectUri": redirect_uri},
+        )
+
+    def GetImpersonationData(self, uid: int):
+        """
+        param uid: application identifier of the platform.
+        """
+        return self._get(
+            "GetImpersonationData",
+            params={"uid": uid},
+        )
+
+    def GetSettings(self):
+        return self._get(
+            "GetSettings",
+            params={},
+        )
+
+    def ResetPassword(self):
+        return self._get(
+            "ResetPassword",
+            params={},
+        )
+
+    def SigninByCode(self, code: str, redirect_uri: str):
+        """
+        param code: a security code for SSO authentication.
+        param redirectUri: a link to display after the authentication.
+        """
+        return self._get(
+            "SigninByCode",
+            params={"code": code, "redirectUri": redirect_uri},
+        )
+
+    def SigninByToken(self, token: str):
+        """
+        param token: an access token for SSO authentication.
+        """
+        return self._get(
+            "SigninByToken",
+            params={"token": token},
         )
