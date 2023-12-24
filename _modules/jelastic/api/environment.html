@@ -613,6 +613,21 @@
             <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
             <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span>
             <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">System</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_System&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.environment.System</span>
+
+<span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/environment.System</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_System</span><span class="p">(</span>
+            <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
+            <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span>
+            <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span>
         <span class="p">)</span></div>
 
 
@@ -7835,6 +7850,376 @@
                 <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
             <span class="p">},</span>
             <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="_System">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System">[docs]</a>
+<span class="k">class</span> <span class="nc">_System</span><span class="p">(</span><span class="n">Environment</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/environment.System</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_endpoint2</span> <span class="o">=</span> <span class="s2">&quot;system&quot;</span>
+
+<div class="viewcode-block" id="_System.CheckDBConnection">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.CheckDBConnection">[docs]</a>
+    <span class="k">def</span> <span class="nf">CheckDBConnection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">checksum</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;CheckDBConnection&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;checksum&quot;</span><span class="p">:</span> <span class="n">checksum</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_System.CheckError">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.CheckError">[docs]</a>
+    <span class="k">def</span> <span class="nf">CheckError</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;CheckError&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="n">code</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_System.CleanCheckRequestCache">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.CleanCheckRequestCache">[docs]</a>
+    <span class="k">def</span> <span class="nf">CleanCheckRequestCache</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;CleanCheckRequestCache&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;uid&quot;</span><span class="p">:</span> <span class="n">uid</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_System.CleanCheckRequestCacheInner">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.CleanCheckRequestCacheInner">[docs]</a>
+    <span class="k">def</span> <span class="nf">CleanCheckRequestCacheInner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;CleanCheckRequestCacheInner&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;uid&quot;</span><span class="p">:</span> <span class="n">uid</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_System.CleanTemplateManifestCache">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.CleanTemplateManifestCache">[docs]</a>
+    <span class="k">def</span> <span class="nf">CleanTemplateManifestCache</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;CleanTemplateManifestCache&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_System.DeleteOldEnvs">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.DeleteOldEnvs">[docs]</a>
+    <span class="k">def</span> <span class="nf">DeleteOldEnvs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">updatedon</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">debug</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">checksum</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;DeleteOldEnvs&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;updatedon&quot;</span><span class="p">:</span> <span class="n">updatedon</span><span class="p">,</span>
+                <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">status</span><span class="p">,</span>
+                <span class="s2">&quot;debug&quot;</span><span class="p">:</span> <span class="n">debug</span><span class="p">,</span>
+                <span class="s2">&quot;checksum&quot;</span><span class="p">:</span> <span class="n">checksum</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_System.Event">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.Event">[docs]</a>
+    <span class="k">def</span> <span class="nf">Event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">publish_local</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Event&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">message</span><span class="p">,</span>
+                <span class="s2">&quot;publishLocal&quot;</span><span class="p">:</span> <span class="n">publish_local</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_System.FixDuplicates">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.FixDuplicates">[docs]</a>
+    <span class="k">def</span> <span class="nf">FixDuplicates</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">debug</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;FixDuplicates&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;debug&quot;</span><span class="p">:</span> <span class="n">debug</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_System.FixStuckEnvs">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.FixStuckEnvs">[docs]</a>
+    <span class="k">def</span> <span class="nf">FixStuckEnvs</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">checksum</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;FixStuckEnvs&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;checksum&quot;</span><span class="p">:</span> <span class="n">checksum</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_System.GetAPIDescriptions">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.GetAPIDescriptions">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetAPIDescriptions</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">is_public_only</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">is_token</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetAPIDescriptions&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;isPublicOnly&quot;</span><span class="p">:</span> <span class="n">is_public_only</span><span class="p">,</span>
+                <span class="s2">&quot;isToken&quot;</span><span class="p">:</span> <span class="n">is_token</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_System.GetAllAPIDescriptions">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.GetAllAPIDescriptions">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetAllAPIDescriptions</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">is_public_only</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">is_token</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetAllAPIDescriptions&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;isPublicOnly&quot;</span><span class="p">:</span> <span class="n">is_public_only</span><span class="p">,</span>
+                <span class="s2">&quot;isToken&quot;</span><span class="p">:</span> <span class="n">is_token</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_System.GetBillableItems">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.GetBillableItems">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetBillableItems</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetBillableItems&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_System.GetCacheStats">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.GetCacheStats">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetCacheStats</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetCacheStats&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_System.GetCacheStatus">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.GetCacheStatus">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetCacheStatus</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetCacheStatus&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_System.GetContCountStatus">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.GetContCountStatus">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetContCountStatus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">starttime</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">endtime</span><span class="p">:</span> <span class="n">datetime</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetContCountStatus&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;starttime&quot;</span><span class="p">:</span> <span class="n">starttime</span><span class="p">,</span> <span class="s2">&quot;endtime&quot;</span><span class="p">:</span> <span class="n">endtime</span><span class="p">},</span>
+            <span class="n">datetime_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_System.GetInstanceCacheStatus">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.GetInstanceCacheStatus">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetInstanceCacheStatus</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetInstanceCacheStatus&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_System.GetIpsByType">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.GetIpsByType">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetIpsByType</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">checksum</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">node_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">hnip</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetIpsByType&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;checksum&quot;</span><span class="p">:</span> <span class="n">checksum</span><span class="p">,</span> <span class="s2">&quot;nodeType&quot;</span><span class="p">:</span> <span class="n">node_type</span><span class="p">,</span> <span class="s2">&quot;hnip&quot;</span><span class="p">:</span> <span class="n">hnip</span><span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_System.GetKeyword">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.GetKeyword">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetKeyword</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">checksum</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetKeyword&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;checksum&quot;</span><span class="p">:</span> <span class="n">checksum</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_System.GetPlatformStatus">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.GetPlatformStatus">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetPlatformStatus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">checksum</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">check_smtp</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetPlatformStatus&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;checksum&quot;</span><span class="p">:</span> <span class="n">checksum</span><span class="p">,</span> <span class="s2">&quot;checkSMTP&quot;</span><span class="p">:</span> <span class="n">check_smtp</span><span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_System.GetStatCollectorStatus">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.GetStatCollectorStatus">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetStatCollectorStatus</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetStatCollectorStatus&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_System.GetVersion">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.GetVersion">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetVersion</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetVersion&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_System.RefreshEmailTemplates">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.RefreshEmailTemplates">[docs]</a>
+    <span class="k">def</span> <span class="nf">RefreshEmailTemplates</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;RefreshEmailTemplates&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_System.RefreshUser">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.RefreshUser">[docs]</a>
+    <span class="k">def</span> <span class="nf">RefreshUser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">language</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;RefreshUser&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;language&quot;</span><span class="p">:</span> <span class="n">language</span><span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_System.RegisterEnvContainer">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.RegisterEnvContainer">[docs]</a>
+    <span class="k">def</span> <span class="nf">RegisterEnvContainer</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">ip_address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">env_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">ct_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">passwd</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">hn_ip_address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;RegisterEnvContainer&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;nodeType&quot;</span><span class="p">:</span> <span class="n">node_type</span><span class="p">,</span>
+                <span class="s2">&quot;ipAddress&quot;</span><span class="p">:</span> <span class="n">ip_address</span><span class="p">,</span>
+                <span class="s2">&quot;envId&quot;</span><span class="p">:</span> <span class="n">env_id</span><span class="p">,</span>
+                <span class="s2">&quot;ctId&quot;</span><span class="p">:</span> <span class="n">ct_id</span><span class="p">,</span>
+                <span class="s2">&quot;passwd&quot;</span><span class="p">:</span> <span class="n">passwd</span><span class="p">,</span>
+                <span class="s2">&quot;hnIpAddress&quot;</span><span class="p">:</span> <span class="n">hn_ip_address</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_System.ReloadConfiguration">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.ReloadConfiguration">[docs]</a>
+    <span class="k">def</span> <span class="nf">ReloadConfiguration</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">reseller_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">changed_placeholders</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;ReloadConfiguration&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;resellerId&quot;</span><span class="p">:</span> <span class="n">reseller_id</span><span class="p">,</span>
+                <span class="s2">&quot;changedPlaceholders&quot;</span><span class="p">:</span> <span class="n">changed_placeholders</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_System.SendEmail">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.SendEmail">[docs]</a>
+    <span class="k">def</span> <span class="nf">SendEmail</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">templates</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">email</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">language</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">timeout</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;SendEmail&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;templates&quot;</span><span class="p">:</span> <span class="n">templates</span><span class="p">,</span>
+                <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">email</span><span class="p">,</span>
+                <span class="s2">&quot;language&quot;</span><span class="p">:</span> <span class="n">language</span><span class="p">,</span>
+                <span class="s2">&quot;timeout&quot;</span><span class="p">:</span> <span class="n">timeout</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_System.SurchargeBillableItems">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.SurchargeBillableItems">[docs]</a>
+    <span class="k">def</span> <span class="nf">SurchargeBillableItems</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">starttime</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">endtime</span><span class="p">:</span> <span class="n">datetime</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;SurchargeBillableItems&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;startTime&quot;</span><span class="p">:</span> <span class="n">starttime</span><span class="p">,</span> <span class="s2">&quot;endTime&quot;</span><span class="p">:</span> <span class="n">endtime</span><span class="p">},</span>
+            <span class="n">datetime_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_System.SynchEnvs">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._System.SynchEnvs">[docs]</a>
+    <span class="k">def</span> <span class="nf">SynchEnvs</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">checksum</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;SynchEnvs&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;checksum&quot;</span><span class="p">:</span> <span class="n">checksum</span><span class="p">,</span>
+            <span class="p">},</span>
         <span class="p">)</span></div>
 </div>
 
