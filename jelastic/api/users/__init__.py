@@ -29,7 +29,6 @@ class Users(ClientAbstract):
             session=self._session, token=self._token, debug=self._debug
         )
 
-
     @property
     def Collaboration(self) -> "_Collaboration":
         """
@@ -72,6 +71,7 @@ class Users(ClientAbstract):
          Ref: https://docs.jelastic.com/api/private/#!/api/users.SSO
         """
         return _SSO(session=self._session, token=self._token, debug=self._debug)
+
 
 class _Authentication(Users):
     """

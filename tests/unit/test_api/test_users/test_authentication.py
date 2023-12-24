@@ -1,19 +1,4 @@
-import pytest
-from unittest.mock import patch, Mock
-from jelastic.api import Users
-from datetime import datetime
-
-success_response = {"error": "", "reason": 0, "result": 0, "source": "billing"}
-
-CURRENT_DATETIME = datetime.now()
-
-
-@pytest.fixture
-def client():
-    with patch("jelastic.api.abstract.ClientAbstract._get") as mock_get:
-        users = Users(session=Mock(), token="token")
-        users._get = mock_get
-        yield users
+from . import *
 
 
 def test_change_session(client):
