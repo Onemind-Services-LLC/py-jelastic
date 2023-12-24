@@ -677,7 +677,7 @@ def test_add_repo(client):
     assert response == success_response
 
 
-def test_build_deploy_project(client):
+def test_deployment_build_deploy_project(client):
     client._get.return_value = success_response
     response = client.Deployment.BuildDeployProject(
         "env_name", 1, "project", [True, True], [1, 1]
