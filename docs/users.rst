@@ -10,3 +10,8 @@ Users
    :members:
    :undoc-members:
    :show-inheritance:
+
+.. automodule:: jelastic.api.users._Team
+   :members:
+   :undoc-members:
+   :show-inheritance:

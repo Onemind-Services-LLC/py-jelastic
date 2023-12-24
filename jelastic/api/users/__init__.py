@@ -34,6 +34,16 @@ class Users(ClientAbstract):
             session=self._session, token=self._token, debug=self._debug
         )
 
+    @property
+    def Team(self) -> "_Team":
+        """
+            >>> from jelastic import Jelastic
+            >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+            >>> jelastic.users.Team
+        Ref: https://docs.jelastic.com/api/private/#!/api/users.Team
+        """
+        return _Team(session=self._session, token=self._token, debug=self._debug)
+
 
 class _Collaboration(Users):
     """
@@ -659,5 +669,130 @@ class _Collaboration(Users):
         return self._get(
             "SuspendMember",
             params={"id": id, "ownerUid": owner_uid},
+            delimeter=",",
+        )
+
+
+class _Team(Users):
+    """
+    >>> from jelastic import Jelastic
+    >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+    >>> jelastic.users.Team
+     Ref: https://docs.jelastic.com/api/private/#!/api/users.Team
+    """
+
+    _endpoint2 = "team"
+
+    def Create(self, display_name: str, owner_uid: list[int] = None):
+        """
+        param owner_uid: unique identifier of the collaboration Team owner.
+        """
+        return self._get(
+            "Create",
+            params={
+                "displayName": display_name,
+                "ownerUid": owner_uid,
+            },
+            delimeter=",",
+        )
+
+    def Delete(self, team_id: int, owner_uid: list[int] = None):
+        """
+        param team_id: unique identifier of the target collaboration Team.
+        param owner_uid: unique identifier of the collaboration Team owner.
+        """
+        return self._get(
+            "Delete",
+            params={
+                "teamId": team_id,
+                "ownerUid": owner_uid,
+            },
+            delimeter=",",
+        )
+
+    def DeleteMember(self, member_id: int, owner_uid: list[int] = None):
+        """
+        param member_id: unique identifier of the collaboration Team member.
+        param owner_uid: unique identifier of the collaboration Team owner.
+        """
+        return self._get(
+            "DeleteMember",
+            params={
+                "memberId": member_id,
+                "ownerUid": owner_uid,
+            },
+            delimeter=",",
+        )
+
+    def Edit(
+        self,
+        team_id: int,
+        display_name: list[str] = None,
+        external_id: list[str] = None,
+        owner_uid: list[int] = None,
+    ):
+        """
+        param team_id:  unique identifier of the collaboration Team
+        param external_id: unique identifier of the collaboration Team that links it with external resources.
+        param owner_uid: unique identifier of the collaboration Team owner.
+        """
+        return self._get(
+            "Edit",
+            params={
+                "teamId": team_id,
+                "displayName": display_name,
+                "externalId": external_id,
+                "ownerUid": owner_uid,
+            },
+            delimeter=",",
+        )
+
+    def Get(self, owner_uid: list[int] = None):
+        """
+        param owner_uid: unique identifier of the collaboration Team owner.
+        """
+        return self._get(
+            "Get",
+            params={
+                "ownerUid": owner_uid,
+            },
+            delimeter=",",
+        )
+
+    def Invite(
+        self,
+        email: str,
+        team_id: int,
+        display_name: list[str] = None,
+        owner_uid: list[int] = None,
+    ):
+        """
+        param email: email address to send an invitation to.
+        param team_id:  unique identifier of the collaboration Team
+        param display_name: invited user's display name (in the collaboration Team owner dashboard).
+        param owner_uid: unique identifier of the collaboration Team owner.
+        """
+        return self._get(
+            "Invite",
+            params={
+                "email": email,
+                "teamId": team_id,
+                "displayName": display_name,
+                "ownerUid": owner_uid,
+            },
+            delimeter=",",
+        )
+
+    def ResendInvite(self, member_id: int, owner_uid: list[int] = None):
+        """
+        param member_id: unique identifier of the collaboration Team member.
+        param owner_uid: unique identifier of the collaboration Team owner.
+        """
+        return self._get(
+            "ResendInvite",
+            params={
+                "memberId": member_id,
+                "ownerUid": owner_uid,
+            },
             delimeter=",",
         )
