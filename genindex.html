@@ -622,6 +622,7 @@
 <li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment.Environment.System"><code class="docutils literal notranslate"><span class="pre">Environment.System</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment.Environment.Tracking"><code class="docutils literal notranslate"><span class="pre">Environment.Tracking</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment.Environment.Trigger"><code class="docutils literal notranslate"><span class="pre">Environment.Trigger</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment.Environment.Vcs"><code class="docutils literal notranslate"><span class="pre">Environment.Vcs</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="environment.html#jelastic.api.environment._Billing"><code class="docutils literal notranslate"><span class="pre">_Billing</span></code></a><ul>
@@ -1024,6 +1025,14 @@
 <li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment._Trigger.SetTriggerEnabled"><code class="docutils literal notranslate"><span class="pre">_Trigger.SetTriggerEnabled()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="environment.html#jelastic.api.environment._Vcs"><code class="docutils literal notranslate"><span class="pre">_Vcs</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment._Vcs.CreateProject"><code class="docutils literal notranslate"><span class="pre">_Vcs.CreateProject()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment._Vcs.DeleteProject"><code class="docutils literal notranslate"><span class="pre">_Vcs.DeleteProject()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment._Vcs.EditProject"><code class="docutils literal notranslate"><span class="pre">_Vcs.EditProject()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment._Vcs.GetProject"><code class="docutils literal notranslate"><span class="pre">_Vcs.GetProject()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment.html#jelastic.api.environment._Vcs.Update"><code class="docutils literal notranslate"><span class="pre">_Vcs.Update()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="exceptions.html">Exceptions</a><ul>
@@ -1352,10 +1361,10 @@
 </li>
       <li><a href="environment.html#jelastic.api.environment._JError">_JError (class in jelastic.api.environment)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="abstract.html#jelastic.api.abstract.ClientAbstract._log_debug">_log_debug() (jelastic.api.abstract.ClientAbstract method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="migration.html#jelastic.api.migration._Migration">_Migration (class in jelastic.api.migration)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Monitoring">_Monitoring (class in jelastic.api.administration)</a>
@@ -1416,6 +1425,8 @@
         <li><a href="billing.html#jelastic.api.billing._Utils">(class in jelastic.api.billing)</a>
 </li>
       </ul></li>
+      <li><a href="environment.html#jelastic.api.environment._Vcs">_Vcs (class in jelastic.api.environment)</a>
+</li>
       <li><a href="administration.html#jelastic.api.administration._VirtualNetwork">_VirtualNetwork (class in jelastic.api.administration)</a>
 </li>
   </ul></td>
@@ -1840,6 +1851,8 @@
 </li>
       <li><a href="data.html#jelastic.api.data._Base.CreateObjects">CreateObjects() (jelastic.api.data._Base method)</a>
 </li>
+      <li><a href="environment.html#jelastic.api.environment._Vcs.CreateProject">CreateProject() (jelastic.api.environment._Vcs method)</a>
+</li>
       <li><a href="administration.html#jelastic.api.administration._Config.CreatingConfigType">CreatingConfigType() (jelastic.api.administration._Config method)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Config.CreatingKeyConfig">CreatingKeyConfig() (jelastic.api.administration._Config method)</a>
@@ -1919,6 +1932,8 @@
       <li><a href="billing.html#jelastic.api.billing._Pricing.DeletePricing">DeletePricing() (jelastic.api.billing._Pricing method)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Subscription.DeleteProduct">DeleteProduct() (jelastic.api.administration._Subscription method)</a>
+</li>
+      <li><a href="environment.html#jelastic.api.environment._Vcs.DeleteProject">DeleteProject() (jelastic.api.environment._Vcs method)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Subscription.DeleteServicePlan">DeleteServicePlan() (jelastic.api.administration._Subscription method)</a>
 </li>
@@ -2013,6 +2028,8 @@
       <ul>
         <li><a href="environment.html#jelastic.api.environment._Deployment.EditProject">(jelastic.api.environment._Deployment method)</a>
 </li>
+        <li><a href="environment.html#jelastic.api.environment._Vcs.EditProject">(jelastic.api.environment._Vcs method)</a>
+</li>
       </ul></li>
       <li><a href="billing.html#jelastic.api.billing._GroupQuota.EditQuota">EditQuota() (jelastic.api.billing._GroupQuota method)</a>
 </li>
@@ -2036,10 +2053,10 @@
 </li>
       <li><a href="utils.html#jelastic.api.utils._Scheduler.EditTask">EditTask() (jelastic.api.utils._Scheduler method)</a>
 </li>
-      <li><a href="administration.html#jelastic.api.administration._Cluster.EditTemplate">EditTemplate() (jelastic.api.administration._Cluster method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="administration.html#jelastic.api.administration._Cluster.EditTemplate">EditTemplate() (jelastic.api.administration._Cluster method)</a>
+</li>
       <li><a href="administration.html#jelastic.api.administration._Cluster.EditTemplateRegistry">EditTemplateRegistry() (jelastic.api.administration._Cluster method)</a>
 </li>
       <li><a href="environment.html#jelastic.api.environment._Trigger.EditTrigger">EditTrigger() (jelastic.api.environment._Trigger method)</a>
@@ -2571,6 +2588,8 @@
       <li><a href="billing.html#jelastic.api.billing._GroupQuota.GetPricingModels">GetPricingModels() (jelastic.api.billing._GroupQuota method)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Subscription.GetProducts">GetProducts() (jelastic.api.administration._Subscription method)</a>
+</li>
+      <li><a href="environment.html#jelastic.api.environment._Vcs.GetProject">GetProject() (jelastic.api.environment._Vcs method)</a>
 </li>
       <li><a href="environment.html#jelastic.api.environment._Build.GetProjectInfo">GetProjectInfo() (jelastic.api.environment._Build method)</a>
 
@@ -3792,6 +3811,8 @@
       <ul>
         <li><a href="environment.html#jelastic.api.environment._Deployment.Update">(jelastic.api.environment._Deployment method)</a>
 </li>
+        <li><a href="environment.html#jelastic.api.environment._Vcs.Update">(jelastic.api.environment._Vcs method)</a>
+</li>
         <li><a href="iaas.html#jelastic.api.iaas._Project.Update">(jelastic.api.iaas._Project method)</a>
 </li>
       </ul></li>
@@ -3843,15 +3864,17 @@
         <li><a href="billing.html#jelastic.api.billing._System.ValidateAll">(jelastic.api.billing._System method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="billing.html#jelastic.api.billing._Pricing.ValidateEnvironment">ValidateEnvironment() (jelastic.api.billing._Pricing method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="billing.html#jelastic.api.billing._Pricing.ValidateNode">ValidateNode() (jelastic.api.billing._Pricing method)</a>
 </li>
       <li><a href="billing.html#jelastic.api.billing._Pricing.ValidateNodeInner">ValidateNodeInner() (jelastic.api.billing._Pricing method)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Cluster.ValidateSsl">ValidateSsl() (jelastic.api.administration._Cluster method)</a>
+</li>
+      <li><a href="environment.html#jelastic.api.environment.Environment.Vcs">Vcs (jelastic.api.environment.Environment property)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration.Administration.VirtualNetwork">VirtualNetwork (jelastic.api.administration.Administration property)</a>
 </li>

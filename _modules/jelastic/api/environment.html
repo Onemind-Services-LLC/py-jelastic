@@ -622,6 +622,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment.Environment.System"><code class="docutils literal notranslate"><span class="pre">Environment.System</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment.Environment.Tracking"><code class="docutils literal notranslate"><span class="pre">Environment.Tracking</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment.Environment.Trigger"><code class="docutils literal notranslate"><span class="pre">Environment.Trigger</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment.Environment.Vcs"><code class="docutils literal notranslate"><span class="pre">Environment.Vcs</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Billing"><code class="docutils literal notranslate"><span class="pre">_Billing</span></code></a><ul>
@@ -1022,6 +1023,14 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Trigger.SetAutoScalingTriggerEnabled"><code class="docutils literal notranslate"><span class="pre">_Trigger.SetAutoScalingTriggerEnabled()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Trigger.SetLoadAlertTriggerEnabled"><code class="docutils literal notranslate"><span class="pre">_Trigger.SetLoadAlertTriggerEnabled()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Trigger.SetTriggerEnabled"><code class="docutils literal notranslate"><span class="pre">_Trigger.SetTriggerEnabled()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Vcs"><code class="docutils literal notranslate"><span class="pre">_Vcs</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Vcs.CreateProject"><code class="docutils literal notranslate"><span class="pre">_Vcs.CreateProject()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Vcs.DeleteProject"><code class="docutils literal notranslate"><span class="pre">_Vcs.DeleteProject()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Vcs.EditProject"><code class="docutils literal notranslate"><span class="pre">_Vcs.EditProject()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Vcs.GetProject"><code class="docutils literal notranslate"><span class="pre">_Vcs.GetProject()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Vcs.Update"><code class="docutils literal notranslate"><span class="pre">_Vcs.Update()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -1525,6 +1534,23 @@
 <span class="sd">                 Ref: https://docs.jelastic.com/api/private/#!/api/environment.Trigger</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">_Trigger</span><span class="p">(</span>
+            <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
+            <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span>
+            <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">Vcs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_Vcs&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This service is the tool for managing your VCS (version control system) projects. Configure periodic automatic deployment of the committed changes, and you can work with GIT/SVN repository only. Just commit the updated code to your VCS project. The platform will detect changes and automatically push them to the assigned environment. In contrast to the GIT hooks, the auto-deploy feature does not require configuration on the GIT side and works with SVN.</span>
+
+<span class="sd">        &gt;&gt;&gt; from jelastic import Jelastic</span>
+<span class="sd">        &gt;&gt;&gt; jelastic = Jelastic(&#39;https://jca.xapp.cloudmydc.com&#39;, token=&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; jelastic.environment.Vcs</span>
+
+<span class="sd">        Ref: https://docs.jelastic.com/api/private/#!/api/environment.Vcs</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_Vcs</span><span class="p">(</span>
             <span class="n">session</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="p">,</span>
             <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">,</span>
             <span class="n">debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">,</span>
@@ -9736,6 +9762,226 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
             <span class="s2">&quot;SetTriggerEnabled&quot;</span><span class="p">,</span>
             <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span> <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span> <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">enabled</span><span class="p">},</span>
+        <span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="_Vcs">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Vcs">[docs]</a>
+<span class="k">class</span> <span class="nc">_Vcs</span><span class="p">(</span><span class="n">Environment</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This service is the tool for managing your VCS (version control system) projects. Configure periodic automatic deployment of the committed changes, and you can work with GIT/SVN repository only. Just commit the updated code to your VCS project. The platform will detect changes and automatically push them to the assigned environment. In contrast to the GIT hooks, the auto-deploy feature does not require configuration on the GIT side and works with SVN.</span>
+
+<span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/environment.Vcs</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_endpoint2</span> <span class="o">=</span> <span class="s2">&quot;vcs&quot;</span>
+
+<div class="viewcode-block" id="_Vcs.CreateProject">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Vcs.CreateProject">[docs]</a>
+    <span class="k">def</span> <span class="nf">CreateProject</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">context</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">branch</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">key_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">login</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">password</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">auto_update</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">interval</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">auto_resolve_conflict</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">zdt</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">update_now</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">hooks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">delay</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">repo_hash</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param type: VCS repository type (&quot;GIT&quot; or &quot;SVN&quot;).</span>
+<span class="sd">        param context: custom context name for the deployed project (ROOT by default).</span>
+<span class="sd">        param url: URL to the repository (including protocol).</span>
+<span class="sd">        param branch: remote repository branch (master by default).</span>
+<span class="sd">        param key_id: unique identifier of a private SSH key on the account. It can be found in the dashboard (account Settings &gt; SSH Keys &gt; Private Keys) or fetched with the Management &gt; Account &gt; GetSSHKeys method.</span>
+<span class="sd">        param login: login for authentication in VCS.</span>
+<span class="sd">        param password: password or token for authentication in VCS.</span>
+<span class="sd">        param auto_update: defines whether to enable (true) or disable (false) automatic project updates (only upon code changes in the remote repository); auto-update frequency is set with the interval parameter.</span>
+<span class="sd">        param interval: delay (in minutes) for automatic project updates.</span>
+<span class="sd">        param auto_resolve_conflict: defines whether to automatically resolve (true) or not (false) merge conflicts (by updating the contradictory files to the repository version, i.e. locally made changes are discarded).</span>
+<span class="sd">        param zdt: defines whether to use zero-downtime deployment for PHP (true) or not (false).</span>
+<span class="sd">        param update_now: defines whether to deploy your project immediately after its creation (true) or postpone this operation (false).</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. &quot;cp&quot; for the default application server layer.</span>
+<span class="sd">        param hooks: JSON object with custom scripts (actual content) to be executed before and after the build/deployment operations. For example: {&quot;preDeploy&quot;:&quot;script&quot;, &quot;postDeploy&quot;:&quot;script&quot;, &quot;preBuild&quot;:&quot;script&quot;, &quot;postBuild&quot;:&quot;script&quot;}.</span>
+<span class="sd">        param delay: delay (in seconds) between two consecutive deployments when using the sequential deployment type (i.e. when deployment is performed on servers one-by-one to ensure uptime).</span>
+<span class="sd">        param repo_hash: target repository hash.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;CreateProject&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">,</span>
+                <span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="n">context</span><span class="p">,</span>
+                <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span>
+                <span class="s2">&quot;branch&quot;</span><span class="p">:</span> <span class="n">branch</span><span class="p">,</span>
+                <span class="s2">&quot;keyId&quot;</span><span class="p">:</span> <span class="n">key_id</span><span class="p">,</span>
+                <span class="s2">&quot;login&quot;</span><span class="p">:</span> <span class="n">login</span><span class="p">,</span>
+                <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span>
+                <span class="s2">&quot;autoupdate&quot;</span><span class="p">:</span> <span class="n">auto_update</span><span class="p">,</span>
+                <span class="s2">&quot;interval&quot;</span><span class="p">:</span> <span class="n">interval</span><span class="p">,</span>
+                <span class="s2">&quot;autoResolveConflict&quot;</span><span class="p">:</span> <span class="n">auto_resolve_conflict</span><span class="p">,</span>
+                <span class="s2">&quot;zdt&quot;</span><span class="p">:</span> <span class="n">zdt</span><span class="p">,</span>
+                <span class="s2">&quot;updateNow&quot;</span><span class="p">:</span> <span class="n">update_now</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;hooks&quot;</span><span class="p">:</span> <span class="n">hooks</span><span class="p">,</span>
+                <span class="s2">&quot;delay&quot;</span><span class="p">:</span> <span class="n">delay</span><span class="p">,</span>
+                <span class="s2">&quot;repoHash&quot;</span><span class="p">:</span> <span class="n">repo_hash</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Vcs.DeleteProject">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Vcs.DeleteProject">[docs]</a>
+    <span class="k">def</span> <span class="nf">DeleteProject</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">context</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param context: custom context name for the deployed project (ROOT by default).</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. &quot;cp&quot; for the default application server layer.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;DeleteProject&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="n">context</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Vcs.EditProject">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Vcs.EditProject">[docs]</a>
+    <span class="k">def</span> <span class="nf">EditProject</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">oldcontext</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">newcontext</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">branch</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">auto_update</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">auto_resolve_conflict</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">zdt</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">key_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">login</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">password</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">interval</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">hooks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">delay</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">repo_hash</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param type: VCS repository type (&quot;GIT&quot; or &quot;SVN&quot;).</span>
+<span class="sd">        param oldcontext: context name of the existing project.</span>
+<span class="sd">        param newcontext: new context name for the edited project.</span>
+<span class="sd">        param url: URL to the repository (including protocol).</span>
+<span class="sd">        param branch: remote repository branch (master by default).</span>
+<span class="sd">        param key_id: unique identifier of a private SSH key on the account. It can be found in the dashboard (account Settings &gt; SSH Keys &gt; Private Keys) or fetched with the Management &gt; Account &gt; GetSSHKeys method.</span>
+<span class="sd">        param login: login for authentication in VCS.</span>
+<span class="sd">        param password: password or token for authentication in VCS.</span>
+<span class="sd">        param auto_update: defines whether to enable (true) or disable (false) automatic project updates (only upon code changes in the remote repository); auto-update frequency is set with the interval parameter.</span>
+<span class="sd">        param interval: delay (in minutes) for automatic project updates.</span>
+<span class="sd">        param auto_resolve_conflict: defines whether to automatically resolve (true) or not (false) merge conflicts (by updating the contradictory files to the repository version, i.e. locally made changes are discarded).</span>
+<span class="sd">        param zdt: defines whether to use zero-downtime deployment for PHP (true) or not (false).</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. &quot;cp&quot; for the default application server layer.</span>
+<span class="sd">        param hooks: JSON object with custom scripts (actual content) to be executed before and after the build/deployment operations. For example: {&quot;preDeploy&quot;:&quot;script&quot;, &quot;postDeploy&quot;:&quot;script&quot;, &quot;preBuild&quot;:&quot;script&quot;, &quot;postBuild&quot;:&quot;script&quot;}.</span>
+<span class="sd">        param delay: delay (in seconds) between two consecutive deployments when using the sequential deployment type (i.e. when deployment is performed on servers one-by-one to ensure uptime).</span>
+<span class="sd">        param repo_hash: target repository hash.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;EditProject&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">,</span>
+                <span class="s2">&quot;oldcontext&quot;</span><span class="p">:</span> <span class="n">oldcontext</span><span class="p">,</span>
+                <span class="s2">&quot;newcontext&quot;</span><span class="p">:</span> <span class="n">newcontext</span><span class="p">,</span>
+                <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span>
+                <span class="s2">&quot;branch&quot;</span><span class="p">:</span> <span class="n">branch</span><span class="p">,</span>
+                <span class="s2">&quot;autoupdate&quot;</span><span class="p">:</span> <span class="n">auto_update</span><span class="p">,</span>
+                <span class="s2">&quot;autoResolveConflict&quot;</span><span class="p">:</span> <span class="n">auto_resolve_conflict</span><span class="p">,</span>
+                <span class="s2">&quot;zdt&quot;</span><span class="p">:</span> <span class="n">zdt</span><span class="p">,</span>
+                <span class="s2">&quot;keyId&quot;</span><span class="p">:</span> <span class="n">key_id</span><span class="p">,</span>
+                <span class="s2">&quot;login&quot;</span><span class="p">:</span> <span class="n">login</span><span class="p">,</span>
+                <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span>
+                <span class="s2">&quot;interval&quot;</span><span class="p">:</span> <span class="n">interval</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;hooks&quot;</span><span class="p">:</span> <span class="n">hooks</span><span class="p">,</span>
+                <span class="s2">&quot;delay&quot;</span><span class="p">:</span> <span class="n">delay</span><span class="p">,</span>
+                <span class="s2">&quot;repoHash&quot;</span><span class="p">:</span> <span class="n">repo_hash</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Vcs.GetProject">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Vcs.GetProject">[docs]</a>
+    <span class="k">def</span> <span class="nf">GetProject</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">context</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param context: custom context name for the deployed project (ROOT by default).</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. &quot;cp&quot; for the default application server layer.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;GetProject&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="n">context</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="_Vcs.Update">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Vcs.Update">[docs]</a>
+    <span class="k">def</span> <span class="nf">Update</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">context</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">delay</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        param env_name: target environment name.</span>
+<span class="sd">        param context: custom context name for the deployed project (ROOT by default).</span>
+<span class="sd">        param node_group: unique identifier of the target node group (layer), e.g. &quot;cp&quot; for the default application server layer.</span>
+<span class="sd">        param delay: delay (in seconds) between two consecutive restarts when using the sequential restart type (i.e. when restart is performed on servers one-by-one to ensure uptime).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="s2">&quot;Update&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
+                <span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="n">context</span><span class="p">,</span>
+                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
+                <span class="s2">&quot;delay&quot;</span><span class="p">:</span> <span class="n">delay</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
 </div>
 
