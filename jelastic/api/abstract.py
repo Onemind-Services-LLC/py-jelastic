@@ -187,7 +187,7 @@ class ClientAbstract(ABC):
         response = self._session.send(request)
         if response.is_error:
             if response.status_code == 404:
-                raise JelasticApiError(f"API endpoint not found: {url}")
+                raise JelasticResourceNotFound(f"API endpoint not found: {url}")
 
             raise JelasticApiError(response.text)
 
