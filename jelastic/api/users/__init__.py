@@ -26,7 +26,6 @@ class Users(ClientAbstract):
         """
         return _Account(session=self._session, token=self._token, debug=self._debug)
 
-
     @property
     def Authentication(self) -> "_Authentication":
         """
@@ -83,6 +82,7 @@ class Users(ClientAbstract):
          Ref: https://docs.jelastic.com/api/private/#!/api/users.SSO
         """
         return _SSO(session=self._session, token=self._token, debug=self._debug)
+
 
 class _Account(Users):
     """

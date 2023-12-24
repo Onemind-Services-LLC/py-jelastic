@@ -1,16 +1,4 @@
-import pytest
-from unittest.mock import patch, Mock
-from jelastic.api import Users
-
-success_response = {"error": "", "reason": 0, "result": 0, "source": "billing"}
-
-
-@pytest.fixture
-def client():
-    with patch("jelastic.api.abstract.ClientAbstract._get") as mock_get:
-        users = Users(session=Mock(), token="token")
-        users._get = mock_get
-        yield users
+from . import *
 
 
 def test_add_account(client):
