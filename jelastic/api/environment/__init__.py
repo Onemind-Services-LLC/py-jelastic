@@ -375,6 +375,7 @@ class _Node(Environment):
         """
         return self._get("SendNotification", params={"name": name, "message": message})
 
+
 class _Build(Environment):
     """
     This service provides methods to manage Java project deployment from the version control system (VCS) repositories. The process requires a dedicated Maven build automation node that will build and deploy Java projects. With Maven, you can add any public or private project directly from your VCS repository (Git or SVN) using the appropriate link type: http, https, git (or svn). After the addition, Java projects can be deployed to the appropriate application servers.
@@ -816,6 +817,8 @@ class _Build(Environment):
             },
             delimiter=",",
         )
+
+
 class _Deployment(Environment):
     """
     The Deployment API methods implement extensive Deployment Manager functionality, including application installation (from archive packages and remote Git/SVN repositories) and management (update, rename, context undeploy, etc.). If working with Java projects from the VCS repository, a special Maven build node is used for the source's compilation, which requires separate API methods.
