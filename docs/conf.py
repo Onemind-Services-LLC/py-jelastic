@@ -85,7 +85,7 @@ html_baseurl = "https://onemind-services-llc.github.io/py-jelastic/"
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 
-html_theme = "press"
+html_theme = "sphinx_rtd_theme"
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -106,19 +106,12 @@ html_static_path = ["_static"]
 # default: ``['localtoc.html', 'relations.html', 'sourcelink.html',
 # 'searchbox.html']``.
 #
-html_sidebars = {
-    "**": [
-        "util/searchbox.html",
-        "util/sidetoc.html",
-    ]
-}
+# html_sidebars = {"**": ["globaltoc.html", "relations.html", "searchbox.html"]}
+
 
 html_theme_options = {
-    "external_links": [
-        ("Website", "https://cloudmydc.com"),
-        ("App", "https://app.xapp.cloudmydc.com/"),
-        ("Github", "https://github.com/Onemind-Services-LLC/py-jelastic"),
-    ],
+    "style_external_links": True,
+    "collapse_navigation": False,
 }
 
 # configuration for sphinx_sitemap extension

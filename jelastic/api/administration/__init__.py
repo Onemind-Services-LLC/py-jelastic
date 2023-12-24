@@ -1016,7 +1016,7 @@ class _Cluster(Administration):
         rows ordered by time asc not more than 1000 rows
 
         :param start: slice start in date and time in ISO 8601
-        :param end:slice end in date and time in ISO 8601
+        :param end: slice end in date and time in ISO 8601
         """
         return self._get(
             "GetEnvironmentGroupPopulations",
