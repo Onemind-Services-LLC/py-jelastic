@@ -107,6 +107,16 @@ def test_get(client):
     client._get("path")
     client._log_debug.assert_called()
 
+    # Test for 404 error
+    client._session.send = Mock(return_value=Response(404))
+    with pytest.raises(JelasticResourceNotFound):
+        client._get("path")
+
+    # Test for 500 error
+    client._session.send = Mock(return_value=Response(500))
+    with pytest.raises(JelasticApiError):
+        client._get("path")
+
 
 def test_log_debug(capsys, client):
     client._log_debug("get", "path", params={"key": "value"})
