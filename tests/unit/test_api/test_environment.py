@@ -211,7 +211,11 @@ def test_node_send_notification(client):
 def test_add_domains(client):
     client._get.return_value = success_response
     response = client.Binder.AddDomains(
-        "env_name", "domains", ["node_group1", "node_group2"], [1, 2], ["subdomain1", "subdomain2"]
+        "env_name",
+        "domains",
+        ["node_group1", "node_group2"],
+        [1, 2],
+        ["subdomain1", "subdomain2"],
     )
     client._get.assert_called_with(
         "AddDomains",
@@ -220,7 +224,7 @@ def test_add_domains(client):
             "domains": "domains",
             "nodeGroup": ["node_group1", "node_group2"],
             "nodeId": [1, 2],
-            "subdomain": ["subdomain1", "subdomain2"]
+            "subdomain": ["subdomain1", "subdomain2"],
         },
         delimiter=",",
     )
@@ -238,7 +242,7 @@ def test_add_ssl_cert(client):
             "envName": "env_name",
             "key": "key",
             "cert": "cert",
-            "interm": ["interm1", "interm2"]
+            "interm": ["interm1", "interm2"],
         },
         delimiter=",",
     )
@@ -247,16 +251,10 @@ def test_add_ssl_cert(client):
 
 def test_attach_ext_ip(client):
     client._get.return_value = success_response
-    response = client.Binder.AttachExtIp(
-        "env_name", "nodeid", ["type1", "type2"]
-    )
+    response = client.Binder.AttachExtIp("env_name", "nodeid", ["type1", "type2"])
     client._get.assert_called_with(
         "AttachExtIp",
-        params={
-            "envName": "env_name",
-            "nodeid": "nodeid",
-            "type": ["type1", "type2"]
-        },
+        params={"envName": "env_name", "nodeid": "nodeid", "type": ["type1", "type2"]},
         delimiter=",",
     )
     assert response == success_response
@@ -264,16 +262,10 @@ def test_attach_ext_ip(client):
 
 def test_bind_ext_domain(client):
     client._get.return_value = success_response
-    response = client.Binder.BindExtDomain(
-        "env_name", "extdomain", [1, 2]
-    )
+    response = client.Binder.BindExtDomain("env_name", "extdomain", [1, 2])
     client._get.assert_called_with(
         "BindExtDomain",
-        params={
-            "envName": "env_name",
-            "extdomain": "extdomain",
-            "certId": [1, 2]
-        },
+        params={"envName": "env_name", "extdomain": "extdomain", "certId": [1, 2]},
         delimiter=",",
     )
     assert response == success_response
@@ -281,16 +273,10 @@ def test_bind_ext_domain(client):
 
 def test_bind_ext_domains(client):
     client._get.return_value = success_response
-    response = client.Binder.BindExtDomains(
-        "env_name", "extdomains", [1, 2]
-    )
+    response = client.Binder.BindExtDomains("env_name", "extdomains", [1, 2])
     client._get.assert_called_with(
         "BindExtDomains",
-        params={
-            "envName": "env_name",
-            "extdomains": "extdomains",
-            "certId": [1, 2]
-        },
+        params={"envName": "env_name", "extdomains": "extdomains", "certId": [1, 2]},
         delimiter=",",
     )
     assert response == success_response
@@ -298,18 +284,15 @@ def test_bind_ext_domains(client):
 
 def test_bind_ssl(client):
     client._get.return_value = success_response
-    response = client.Binder.BindSSL(
-        "env_name", "cert_key", "cert", "intermediate"
-    )
+    response = client.Binder.BindSSL("env_name", "cert_key", "cert", "intermediate")
     client._get.assert_called_with(
         "BindSSL",
         params={
             "envName": "env_name",
             "cert_key": "cert_key",
             "cert": "cert",
-            "intermediate": "intermediate"
+            "intermediate": "intermediate",
         },
-
     )
     assert response == success_response
 
@@ -317,7 +300,10 @@ def test_bind_ssl(client):
 def test_bind_ssl_cert(client):
     client._get.return_value = success_response
     response = client.Binder.BindSSLCert(
-        "env_name", 1, ["entry_point1", "entry_point2"], ["ext_domains1", "ext_domains2"]
+        "env_name",
+        1,
+        ["entry_point1", "entry_point2"],
+        ["ext_domains1", "ext_domains2"],
     )
     client._get.assert_called_with(
         "BindSSLCert",
@@ -325,7 +311,7 @@ def test_bind_ssl_cert(client):
             "envName": "env_name",
             "certId": 1,
             "entryPoint": ["entry_point1", "entry_point2"],
-            "extDomains": ["ext_domains1", "ext_domains2"]
+            "extDomains": ["ext_domains1", "ext_domains2"],
         },
         delimiter=",",
     )
@@ -334,15 +320,13 @@ def test_bind_ssl_cert(client):
 
 def test_check_domain(client):
     client._get.return_value = success_response
-    response = client.Binder.CheckDomain(
-        "env_name", "domain", ["region1", "region2"]
-    )
+    response = client.Binder.CheckDomain("env_name", "domain", ["region1", "region2"])
     client._get.assert_called_with(
         "CheckDomain",
         params={
             "envName": "env_name",
             "domain": "domain",
-            "region": ["region1", "region2"]
+            "region": ["region1", "region2"],
         },
         delimiter=",",
     )
@@ -351,9 +335,7 @@ def test_check_domain(client):
 
 def test_check_ext_domain(client):
     client._get.return_value = success_response
-    response = client.Binder.CheckExtDomain(
-        "env_name", "extdomains"
-    )
+    response = client.Binder.CheckExtDomain("env_name", "extdomains")
     client._get.assert_called_with(
         "CheckExtDomain",
         params={
@@ -380,9 +362,7 @@ def test_delete_ssl(client):
 
 def test_detach_ext_ip(client):
     client._get.return_value = success_response
-    response = client.Binder.DetachExtIp(
-        "env_name", 1, "ip"
-    )
+    response = client.Binder.DetachExtIp("env_name", 1, "ip")
     client._get.assert_called_with(
         "DetachExtIp",
         params={
@@ -411,8 +391,7 @@ def test_disable_ssl(client):
 def test_edit_ssl_cert(client):
     client._get.return_value = success_response
     response = client.Binder.EditSSLCert(
-        "env_name",
-        1, ["key1", "key2"], ["cert1", "cert2"], ["interm1", "interm2"]
+        "env_name", 1, ["key1", "key2"], ["cert1", "cert2"], ["interm1", "interm2"]
     )
     client._get.assert_called_with(
         "EditSSLCert",
@@ -421,7 +400,7 @@ def test_edit_ssl_cert(client):
             "id": 1,
             "key": ["key1", "key2"],
             "cert": ["cert1", "cert2"],
-            "interm": ["interm1", "interm2"]
+            "interm": ["interm1", "interm2"],
         },
         delimiter=",",
     )
@@ -430,10 +409,7 @@ def test_edit_ssl_cert(client):
 
 def test_get_domain_info(client):
     client._get.return_value = success_response
-    response = client.Binder.GetDomainInfo(
-        "env_name",
-        "domain"
-    )
+    response = client.Binder.GetDomainInfo("env_name", "domain")
     client._get.assert_called_with(
         "GetDomainInfo",
         params={
@@ -455,7 +431,7 @@ def test_get_domains(client):
             "envName": "env_name",
             "nodeGroup": ["node_group1", "node_group2"],
             "nodeId": [1, 2],
-            "inShort": [True, True]
+            "inShort": [True, True],
         },
         delimiter=",",
     )
@@ -492,47 +468,36 @@ def test_get_ssl(client):
 
 def test_get_ssl_certs(client):
     client._get.return_value = success_response
-    response = client.Binder.GetSSLCerts(
-        "env_name", ["id1", "id2"]
-    )
+    response = client.Binder.GetSSLCerts("env_name", ["id1", "id2"])
     client._get.assert_called_with(
         "GetSSLCerts",
-        params={
-            "envName": "env_name",
-            "ids": ["id1", "id2"]
-        }, delimiter=",",
+        params={"envName": "env_name", "ids": ["id1", "id2"]},
+        delimiter=",",
     )
     assert response == success_response
 
 
 def test_manage_node_dns_state(client):
     client._get.return_value = success_response
-    response = client.Binder.ManageNodeDnsState(
-        "env_name", [1, 2], [True, True]
-    )
+    response = client.Binder.ManageNodeDnsState("env_name", [1, 2], [True, True])
     client._get.assert_called_with(
         "ManageNodeDnsState",
-        params={
-            "envName": "env_name",
-            "nodeId": [1, 2],
-            "enabled": [True, True]
-        }, delimiter=",",
+        params={"envName": "env_name", "nodeId": [1, 2], "enabled": [True, True]},
+        delimiter=",",
     )
     assert response == success_response
 
 
 def test_move_ext_ips(client):
     client._get.return_value = success_response
-    response = client.Binder.MoveExtIps(
-        "env_name", 1, 2, "ips"
-    )
+    response = client.Binder.MoveExtIps("env_name", 1, 2, "ips")
     client._get.assert_called_with(
         "MoveExtIps",
         params={
             "envName": "env_name",
             "sourceNodeId": 1,
             "targetNodeId": 2,
-            "ips": "ips"
+            "ips": "ips",
         },
     )
     assert response == success_response
@@ -558,9 +523,7 @@ def test_remove_domains(client):
 
 def test_remove_ext_domains(client):
     client._get.return_value = success_response
-    response = client.Binder.RemoveExtDomains(
-        "env_name", "extdomains"
-    )
+    response = client.Binder.RemoveExtDomains("env_name", "extdomains")
     client._get.assert_called_with(
         "RemoveExtDomains",
         params={
@@ -573,9 +536,7 @@ def test_remove_ext_domains(client):
 
 def test_remove_ssl(client):
     client._get.return_value = success_response
-    response = client.Binder.RemoveSSL(
-        "env_name"
-    )
+    response = client.Binder.RemoveSSL("env_name")
     client._get.assert_called_with(
         "RemoveSSL",
         params={
@@ -587,9 +548,7 @@ def test_remove_ssl(client):
 
 def test_remove_ssl_certs(client):
     client._get.return_value = success_response
-    response = client.Binder.RemoveSSLCerts(
-        "env_name", "ids"
-    )
+    response = client.Binder.RemoveSSLCerts("env_name", "ids")
     client._get.assert_called_with(
         "RemoveSSLCerts",
         params={
@@ -621,9 +580,7 @@ def test_set_ext_ip_count(client):
 
 def test_swap_ext_domains(client):
     client._get.return_value = success_response
-    response = client.Binder.SwapExtDomains(
-        "env_name", "targetappid"
-    )
+    response = client.Binder.SwapExtDomains("env_name", "targetappid")
     client._get.assert_called_with(
         "SwapExtDomains",
         params={
@@ -646,8 +603,7 @@ def test_swap_ext_ips(client):
             "sourceNodeId": 1,
             "targetNodeId": 2,
             "sourceIp": ["source_ip1", "source_ip2"],
-            "targetIp": ["target_ip1", "target_ip2"]
-
+            "targetIp": ["target_ip1", "target_ip2"],
         },
         delimiter=",",
     )
@@ -656,16 +612,10 @@ def test_swap_ext_ips(client):
 
 def test_unbind_ssl_cert(client):
     client._get.return_value = success_response
-    response = client.Binder.UnbindSSLCert(
-        "env_name", ["extdomains1", "extdomains2"]
-    )
+    response = client.Binder.UnbindSSLCert("env_name", ["extdomains1", "extdomains2"])
     client._get.assert_called_with(
         "UnbindSSLCert",
-        params={
-            "envName": "env_name",
-            "extDomains": ["extdomains1", "extdomains2"]
-
-        },
+        params={"envName": "env_name", "extDomains": ["extdomains1", "extdomains2"]},
         delimiter=",",
     )
     assert response == success_response
@@ -673,14 +623,11 @@ def test_unbind_ssl_cert(client):
 
 def test_check_db_connection(client):
     client._get.return_value = success_response
-    response = client.System.CheckDBConnection(
-        "checksum"
-    )
+    response = client.System.CheckDBConnection("checksum")
     client._get.assert_called_with(
         "CheckDBConnection",
         params={
             "checksum": "checksum",
-
         },
     )
     assert response == success_response
@@ -688,15 +635,10 @@ def test_check_db_connection(client):
 
 def test_check_error(client):
     client._get.return_value = success_response
-    response = client.System.CheckError(
-        [1, 1]
-    )
+    response = client.System.CheckError([1, 1])
     client._get.assert_called_with(
         "CheckError",
-        params={
-            "code": [1, 1]
-
-        },
+        params={"code": [1, 1]},
         delimiter=",",
     )
     assert response == success_response
@@ -704,14 +646,10 @@ def test_check_error(client):
 
 def test_clean_check_request_cache(client):
     client._get.return_value = success_response
-    response = client.System.CleanCheckRequestCache(
-        [1, 1]
-    )
+    response = client.System.CleanCheckRequestCache([1, 1])
     client._get.assert_called_with(
         "CleanCheckRequestCache",
-        params={
-            "uid": [1, 1]
-        },
+        params={"uid": [1, 1]},
         delimiter=",",
     )
     assert response == success_response
@@ -719,14 +657,10 @@ def test_clean_check_request_cache(client):
 
 def test_clean_check_request_cache_inner(client):
     client._get.return_value = success_response
-    response = client.System.CleanCheckRequestCacheInner(
-        [1, 1]
-    )
+    response = client.System.CleanCheckRequestCacheInner([1, 1])
     client._get.assert_called_with(
         "CleanCheckRequestCacheInner",
-        params={
-            "uid": [1, 1]
-        },
+        params={"uid": [1, 1]},
         delimiter=",",
     )
     assert response == success_response
@@ -734,29 +668,24 @@ def test_clean_check_request_cache_inner(client):
 
 def test_clean_template_manifest_cache(client):
     client._get.return_value = success_response
-    response = client.System.CleanTemplateManifestCache(
-    )
+    response = client.System.CleanTemplateManifestCache()
     client._get.assert_called_with(
         "CleanTemplateManifestCache",
-        params={
-        },
+        params={},
     )
     assert response == success_response
 
 
 def test_delete_old_envs(client):
     client._get.return_value = success_response
-    response = client.System.DeleteOldEnvs(
-        "updatedon", 1, True, "checksum"
-    )
+    response = client.System.DeleteOldEnvs("updatedon", 1, True, "checksum")
     client._get.assert_called_with(
         "DeleteOldEnvs",
         params={
             "updatedon": "updatedon",
             "status": 1,
             "debug": True,
-            "checksum": "checksum"
-
+            "checksum": "checksum",
         },
     )
     assert response == success_response
@@ -765,7 +694,8 @@ def test_delete_old_envs(client):
 def test_event(client):
     client._get.return_value = success_response
     response = client.System.Event(
-        "message", [True, False],
+        "message",
+        [True, False],
     )
     client._get.assert_called_with(
         "Event",
@@ -795,29 +725,20 @@ def test_fix_duplicates(client):
 
 def test_fix_stuck_envs(client):
     client._get.return_value = success_response
-    response = client.System.FixStuckEnvs(
-        "checksum"
-    )
+    response = client.System.FixStuckEnvs("checksum")
     client._get.assert_called_with(
         "FixStuckEnvs",
-        params={
-            "checksum": "checksum"
-        },
+        params={"checksum": "checksum"},
     )
     assert response == success_response
 
 
 def test_get_api_descriptions(client):
     client._get.return_value = success_response
-    response = client.System.GetAPIDescriptions(
-        [True, True], [True, True]
-    )
+    response = client.System.GetAPIDescriptions([True, True], [True, True])
     client._get.assert_called_with(
         "GetAPIDescriptions",
-        params={
-            "isPublicOnly": [True, True],
-            "isToken": [True, True]
-        },
+        params={"isPublicOnly": [True, True], "isToken": [True, True]},
         delimiter=",",
     )
     assert response == success_response
@@ -825,15 +746,10 @@ def test_get_api_descriptions(client):
 
 def test_get_all_api_descriptions(client):
     client._get.return_value = success_response
-    response = client.System.GetAllAPIDescriptions(
-        [True, True], [True, True]
-    )
+    response = client.System.GetAllAPIDescriptions([True, True], [True, True])
     client._get.assert_called_with(
         "GetAllAPIDescriptions",
-        params={
-            "isPublicOnly": [True, True],
-            "isToken": [True, True]
-        },
+        params={"isPublicOnly": [True, True], "isToken": [True, True]},
         delimiter=",",
     )
     assert response == success_response
@@ -841,36 +757,30 @@ def test_get_all_api_descriptions(client):
 
 def test_get_billable_items(client):
     client._get.return_value = success_response
-    response = client.System.GetBillableItems(
-    )
+    response = client.System.GetBillableItems()
     client._get.assert_called_with(
         "GetBillableItems",
-        params={
-        },
+        params={},
     )
     assert response == success_response
 
 
 def test_get_cache_stats(client):
     client._get.return_value = success_response
-    response = client.System.GetCacheStats(
-    )
+    response = client.System.GetCacheStats()
     client._get.assert_called_with(
         "GetCacheStats",
-        params={
-        },
+        params={},
     )
     assert response == success_response
 
 
 def test_get_cache_status(client):
     client._get.return_value = success_response
-    response = client.System.GetCacheStatus(
-    )
+    response = client.System.GetCacheStatus()
     client._get.assert_called_with(
         "GetCacheStatus",
-        params={
-        },
+        params={},
     )
     assert response == success_response
 
@@ -891,26 +801,23 @@ def test_get_cont_count_status(client):
 
 def test_get_instance_cache_status(client):
     client._get.return_value = success_response
-    response = client.System.GetInstanceCacheStatus(
-    )
+    response = client.System.GetInstanceCacheStatus()
     client._get.assert_called_with(
         "GetInstanceCacheStatus",
-        params={
-        },
+        params={},
     )
     assert response == success_response
 
 
 def test_get_ips_by_type(client):
     client._get.return_value = success_response
-    response = client.System.GetIpsByType("checksum", "node_type", ['hnip1', "hnip2"]
-                                          )
+    response = client.System.GetIpsByType("checksum", "node_type", ["hnip1", "hnip2"])
     client._get.assert_called_with(
         "GetIpsByType",
         params={
             "checksum": "checksum",
             "nodeType": "node_type",
-            "hnip": ['hnip1', "hnip2"]
+            "hnip": ["hnip1", "hnip2"],
         },
         delimiter=",",
     )
@@ -919,79 +826,61 @@ def test_get_ips_by_type(client):
 
 def test_get_keyword(client):
     client._get.return_value = success_response
-    response = client.System.GetKeyword(
-        "checksum"
-    )
+    response = client.System.GetKeyword("checksum")
     client._get.assert_called_with(
         "GetKeyword",
-        params={
-            "checksum": "checksum"
-        },
+        params={"checksum": "checksum"},
     )
     assert response == success_response
 
 
 def test_get_platform_status(client):
     client._get.return_value = success_response
-    response = client.System.GetPlatformStatus(
-        "checksum", [True, True]
-    )
+    response = client.System.GetPlatformStatus("checksum", [True, True])
     client._get.assert_called_with(
         "GetPlatformStatus",
-        params={
-            "checksum": "checksum",
-            "checkSMTP": [True, True]
-        },
+        params={"checksum": "checksum", "checkSMTP": [True, True]},
     )
     assert response == success_response
 
 
 def test_get_stat_collector_status(client):
     client._get.return_value = success_response
-    response = client.System.GetStatCollectorStatus(
-    )
+    response = client.System.GetStatCollectorStatus()
     client._get.assert_called_with(
         "GetStatCollectorStatus",
-        params={
-        },
+        params={},
     )
     assert response == success_response
 
 
 def test_get_version(client):
     client._get.return_value = success_response
-    response = client.System.GetVersion(
-    )
+    response = client.System.GetVersion()
     client._get.assert_called_with(
         "GetVersion",
-        params={
-        },
+        params={},
     )
     assert response == success_response
 
 
 def test_refresh_email_templates(client):
     client._get.return_value = success_response
-    response = client.System.RefreshEmailTemplates(
-    )
+    response = client.System.RefreshEmailTemplates()
     client._get.assert_called_with(
         "RefreshEmailTemplates",
-        params={
-        },
+        params={},
     )
     assert response == success_response
 
 
 def test_refresh_user(client):
     client._get.return_value = success_response
-    response = client.System.RefreshUser(
-        ["language1", "language2"]
-    )
+    response = client.System.RefreshUser(["language1", "language2"])
     client._get.assert_called_with(
         "RefreshUser",
-        params={
-            "language": ["language1", "language2"]
-        }, delimiter=",",
+        params={"language": ["language1", "language2"]},
+        delimiter=",",
     )
     assert response == success_response
 
@@ -999,7 +888,13 @@ def test_refresh_user(client):
 def test_register_env_container(client):
     client._get.return_value = success_response
     response = client.System.RegisterEnvContainer(
-        "env_name", "node_type", "ip_address", "env_id", "ct_id", "passwd", "hn_ip_address"
+        "env_name",
+        "node_type",
+        "ip_address",
+        "env_id",
+        "ct_id",
+        "passwd",
+        "hn_ip_address",
     )
     client._get.assert_called_with(
         "RegisterEnvContainer",
@@ -1010,8 +905,8 @@ def test_register_env_container(client):
             "envId": "env_id",
             "ctId": "ct_id",
             "passwd": "passwd",
-            "hnIpAddress": "hn_ip_address"
-        }
+            "hnIpAddress": "hn_ip_address",
+        },
     )
     assert response == success_response
 
@@ -1025,8 +920,9 @@ def test_reload_configuration(client):
         "ReloadConfiguration",
         params={
             "resellerId": [1, 1],
-            "changedPlaceholders": ["changed_placeholders1", "changed_placeholders2"]
-        }, delimiter=",",
+            "changedPlaceholders": ["changed_placeholders1", "changed_placeholders2"],
+        },
+        delimiter=",",
     )
     assert response == success_response
 
@@ -1042,8 +938,9 @@ def test_send_email(client):
             "templates": "templates",
             "email": ["email1", "email2"],
             "language": ["language1", "language2"],
-            "timeout": [1, 3]
-        }, delimiter=",",
+            "timeout": [1, 3],
+        },
+        delimiter=",",
     )
     assert response == success_response
 
@@ -1064,13 +961,9 @@ def test_surcharge_billable_items(client):
 
 def test_synch_envs(client):
     client._get.return_value = success_response
-    response = client.System.SynchEnvs(
-        "checksum"
-    )
+    response = client.System.SynchEnvs("checksum")
     client._get.assert_called_with(
         "SynchEnvs",
-        params={
-            "checksum": "checksum"
-        },
+        params={"checksum": "checksum"},
     )
     assert response == success_response

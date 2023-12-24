@@ -78,16 +78,16 @@ class Environment(ClientAbstract):
     @property
     def Binder(self) -> "_Binder":
         """
-        With the platform, you can set your own external domain name for your projects instead of using the default hosting provider domain name. Binding can be done in two ways: by adding a CNAME record or by setting A Records.
-        A CNAME specifies an alias for a canonical name record in a Domain Name System (DNS) database. If you don't have your own Public IP, your URL is an alias for a single canonical name that is associated with a common platform IP address in the DNS database. In this case, it's recommended to set your own custom domain by adding a CNAME record.
-        A Record is an entry in your DNS zone file that maps each domain name to an IP address. When you type www.mycustomsite.com, the browser goes to the nameserver for mycustomsite.com and asks for the A Record. This record must point to an IP address - it will be the IP address of your web server. Setting your own custom external domain name using A Record is more appropriate if you have a personal Public IP address.
-       Also, you can bind Custom SSL to your custom domain.
+         With the platform, you can set your own external domain name for your projects instead of using the default hosting provider domain name. Binding can be done in two ways: by adding a CNAME record or by setting A Records.
+         A CNAME specifies an alias for a canonical name record in a Domain Name System (DNS) database. If you don't have your own Public IP, your URL is an alias for a single canonical name that is associated with a common platform IP address in the DNS database. In this case, it's recommended to set your own custom domain by adding a CNAME record.
+         A Record is an entry in your DNS zone file that maps each domain name to an IP address. When you type www.mycustomsite.com, the browser goes to the nameserver for mycustomsite.com and asks for the A Record. This record must point to an IP address - it will be the IP address of your web server. Setting your own custom external domain name using A Record is more appropriate if you have a personal Public IP address.
+        Also, you can bind Custom SSL to your custom domain.
 
-        >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
-        >>> jelastic.environment.Binder
+         >>> from jelastic import Jelastic
+         >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+         >>> jelastic.environment.Binder
 
-        Ref: https://docs.jelastic.com/api/private/#!/api/environment.Binder
+         Ref: https://docs.jelastic.com/api/private/#!/api/environment.Binder
         """
         return _Binder(
             session=self._session,
@@ -361,17 +361,19 @@ class _Node(Environment):
         :param name: title of the message
         """
         return self._get("SendNotification", params={"name": name, "message": message})
+
+
 class _Binder(Environment):
     """
-   With the platform, you can set your own external domain name for your projects instead of using the default hosting provider domain name. Binding can be done in two ways: by adding a CNAME record or by setting A Records.
+    With the platform, you can set your own external domain name for your projects instead of using the default hosting provider domain name. Binding can be done in two ways: by adding a CNAME record or by setting A Records.
 
-    A CNAME specifies an alias for a canonical name record in a Domain Name System (DNS) database. If you don't have your own Public IP, your URL is an alias for a single canonical name that is associated with a common platform IP address in the DNS database. In this case, it's recommended to set your own custom domain by adding a CNAME record.
+     A CNAME specifies an alias for a canonical name record in a Domain Name System (DNS) database. If you don't have your own Public IP, your URL is an alias for a single canonical name that is associated with a common platform IP address in the DNS database. In this case, it's recommended to set your own custom domain by adding a CNAME record.
 
-    A Record is an entry in your DNS zone file that maps each domain name to an IP address. When you type www.mycustomsite.com, the browser goes to the nameserver for mycustomsite.com and asks for the A Record. This record must point to an IP address - it will be the IP address of your web server. Setting your own custom external domain name using A Record is more appropriate if you have a personal Public IP address.
+     A Record is an entry in your DNS zone file that maps each domain name to an IP address. When you type www.mycustomsite.com, the browser goes to the nameserver for mycustomsite.com and asks for the A Record. This record must point to an IP address - it will be the IP address of your web server. Setting your own custom external domain name using A Record is more appropriate if you have a personal Public IP address.
 
-    Also, you can bind Custom SSL to your custom domain.
+     Also, you can bind Custom SSL to your custom domain.
 
-    Ref: https://docs.jelastic.com/api/private/#!/api/environment.Binder
+     Ref: https://docs.jelastic.com/api/private/#!/api/environment.Binder
     """
 
     _endpoint2 = "Binder"
@@ -401,6 +403,7 @@ class _Binder(Environment):
             },
             delimiter=",",
         )
+
     def AddSSLCert(
         self,
         env_name: str,
@@ -439,6 +442,7 @@ class _Binder(Environment):
             },
             delimiter=",",
         )
+
     def BindExtDomain(
         self,
         env_name: str,
@@ -456,10 +460,10 @@ class _Binder(Environment):
         )
 
     def BindExtDomains(
-            self,
-            env_name: str,
-            extdomains: str,
-            cert_id: list[int] = None,
+        self,
+        env_name: str,
+        extdomains: str,
+        cert_id: list[int] = None,
     ):
         """
         param extdomain: a comma-separated list of external domains to be bound to the environment.
@@ -476,11 +480,11 @@ class _Binder(Environment):
         )
 
     def BindSSL(
-            self,
-            env_name: str,
-            cert_key: str,
-            cert: str,
-            intermediate: str,
+        self,
+        env_name: str,
+        cert_key: str,
+        cert: str,
+        intermediate: str,
     ):
         return self._get(
             "BindSSL",
@@ -489,14 +493,15 @@ class _Binder(Environment):
                 "cert_key": cert_key,
                 "cert": cert,
                 "intermediate": intermediate,
-            }
+            },
         )
+
     def BindSSLCert(
-            self,
-            env_name: str,
-            cert_id: int,
-            entry_point:list[str]=None,
-            ext_domains :list[str]=None
+        self,
+        env_name: str,
+        cert_id: int,
+        entry_point: list[str] = None,
+        ext_domains: list[str] = None,
     ):
         """
         param cert_id: unique identifier of the SSL certificate.
@@ -509,15 +514,16 @@ class _Binder(Environment):
                 "envName": env_name,
                 "certId": cert_id,
                 "entryPoint": entry_point,
-                "extDomains": ext_domains
+                "extDomains": ext_domains,
             },
             delimiter=",",
         )
+
     def CheckDomain(
-            self,
-            env_name: str,
-            domain: str,
-            region:list[str]=None,
+        self,
+        env_name: str,
+        domain: str,
+        region: list[str] = None,
     ):
         """
         param domain: domain name to be checked.
@@ -532,10 +538,11 @@ class _Binder(Environment):
             },
             delimiter=",",
         )
+
     def CheckExtDomain(
-            self,
-            env_name: str,
-            extdomains: str,
+        self,
+        env_name: str,
+        extdomains: str,
     ):
         """
         param extdomains: external domain name to be checked.
@@ -547,20 +554,21 @@ class _Binder(Environment):
                 "extdomains": extdomains,
             },
         )
+
     def DeleteSSL(
-            self,
-            env_name: str,
+        self,
+        env_name: str,
     ):
-        return self._get("DeleteSSL",
-            params={ "envName": env_name
-            },
+        return self._get(
+            "DeleteSSL",
+            params={"envName": env_name},
         )
 
     def DetachExtIp(
-            self,
-            env_name: str,
-            nodeid: int,
-            ip: str,
+        self,
+        env_name: str,
+        nodeid: int,
+        ip: str,
     ):
         """
         param nodeid: unique identifier of the target node (container).
@@ -576,20 +584,23 @@ class _Binder(Environment):
         )
 
     def DisableSSL(
-            self,
-            env_name: str,
+        self,
+        env_name: str,
     ):
-        return self._get("DisableSSL",params={
-            "envName": env_name,
-        })
+        return self._get(
+            "DisableSSL",
+            params={
+                "envName": env_name,
+            },
+        )
 
     def EditSSLCert(
-            self,
-            env_name: str,
-            id: int,
-            key: list[str]=None,
-            cert: list[str]=None,
-            interm: list[str] = None,
+        self,
+        env_name: str,
+        id: int,
+        key: list[str] = None,
+        cert: list[str] = None,
+        interm: list[str] = None,
     ):
         """
         param id: unique identifier of the target SSL certificate.
@@ -604,14 +615,15 @@ class _Binder(Environment):
                 "id": id,
                 "key": key,
                 "cert": cert,
-                "interm": interm
+                "interm": interm,
             },
             delimiter=",",
         )
+
     def GetDomainInfo(
-            self,
-            env_name: str,
-            domain: str,
+        self,
+        env_name: str,
+        domain: str,
     ):
         """
         Returns environment appid if environment found by domain.
@@ -625,12 +637,13 @@ class _Binder(Environment):
                 "domain": domain,
             },
         )
+
     def GetDomains(
-            self,
-            env_name: str,
-            node_group:list[str]=None,
-            node_id:list[int]=None,
-            in_short:list[bool]=None
+        self,
+        env_name: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
+        in_short: list[bool] = None,
     ):
         """
         param node_group: unique identifier of the target node group (layer) for filtering, e.g. "cp" for the default application server layer.
@@ -648,37 +661,21 @@ class _Binder(Environment):
             delimiter=",",
         )
 
-    def GetExtDomains(
-            self,
-            env_name: str
-    ):
-        return self._get("GetExtDomains", params={
-            "envName": env_name
-        })
+    def GetExtDomains(self, env_name: str):
+        return self._get("GetExtDomains", params={"envName": env_name})
 
-    def GetSSL(
-            self,
-            env_name: str
-    ):
-        return self._get("GetSSL", params={
-            "envName": env_name
-        })
-    def GetSSLCerts(
-            self,
-            env_name: str,
-            ids:list[str]=None
-    ):
-        return self._get("GetSSLCerts", params={
-            "envName": env_name,
-            "ids":ids},
-                         delimiter=",",
-                         )
+    def GetSSL(self, env_name: str):
+        return self._get("GetSSL", params={"envName": env_name})
+
+    def GetSSLCerts(self, env_name: str, ids: list[str] = None):
+        return self._get(
+            "GetSSLCerts",
+            params={"envName": env_name, "ids": ids},
+            delimiter=",",
+        )
 
     def ManageNodeDnsState(
-            self,
-            env_name:str,
-            node_id: list[int] = None,
-            enabled: list[bool] = None
+        self, env_name: str, node_id: list[int] = None, enabled: list[bool] = None
     ):
         """
         param env_name: target environment name.
@@ -694,12 +691,9 @@ class _Binder(Environment):
             },
             delimiter=",",
         )
+
     def MoveExtIps(
-            self,
-            env_name:str,
-            source_node_id:int,
-            target_node_id: int,
-            ips: str
+        self, env_name: str, source_node_id: int, target_node_id: int, ips: str
     ):
         """
         param env_name: source environment name.
@@ -713,15 +707,16 @@ class _Binder(Environment):
                 "envName": env_name,
                 "sourceNodeId": source_node_id,
                 "targetNodeId": target_node_id,
-                "ips":ips
+                "ips": ips,
             },
         )
+
     def RemoveDomains(
-            self,
-            env_name:str,
-            domains:str,
-            node_group: list[str] = None,
-            node_id: list[int] = None,
+        self,
+        env_name: str,
+        domains: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
     ):
         """
         param env_name: target environment name.
@@ -739,10 +734,11 @@ class _Binder(Environment):
             },
             delimiter=",",
         )
+
     def RemoveExtDomains(
-            self,
-            env_name:str,
-            extdomain:str,
+        self,
+        env_name: str,
+        extdomain: str,
     ):
         """
         param env_name: target environment name.
@@ -755,9 +751,10 @@ class _Binder(Environment):
                 "extdomain": extdomain,
             },
         )
+
     def RemoveSSL(
-            self,
-            env_name:str,
+        self,
+        env_name: str,
     ):
         """
         param env_name: target environment name.
@@ -768,10 +765,11 @@ class _Binder(Environment):
                 "envName": env_name,
             },
         )
+
     def RemoveSSLCerts(
-            self,
-            env_name:str,
-            ids:str,
+        self,
+        env_name: str,
+        ids: str,
     ):
         """
         param env_name: target environment name.
@@ -784,13 +782,14 @@ class _Binder(Environment):
                 "ids": ids,
             },
         )
+
     def SetExtIpCount(
-            self,
-            env_name:str,
-            type:str,
-            count: int,
-            node_group: list[str] = None,
-            node_id: list[int] = None,
+        self,
+        env_name: str,
+        type: str,
+        count: int,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
     ):
         """
         param env_name: target environment name.
@@ -804,16 +803,17 @@ class _Binder(Environment):
             params={
                 "envName": env_name,
                 "type": type,
-                "count":count,
+                "count": count,
                 "nodeGroup": node_group,
                 "node_id": node_id,
             },
             delimiter=",",
         )
+
     def SwapExtDomains(
-            self,
-            env_name:str,
-            targetappid:str,
+        self,
+        env_name: str,
+        targetappid: str,
     ):
         """
         param env_name: target environment name.
@@ -828,12 +828,12 @@ class _Binder(Environment):
         )
 
     def SwapExtIps(
-            self,
-            env_name:str,
-            source_node_id:int,
-            target_node_id: int,
-            source_ip: list[str]=None,
-            target_ip: list[str]=None
+        self,
+        env_name: str,
+        source_node_id: int,
+        target_node_id: int,
+        source_ip: list[str] = None,
+        target_ip: list[str] = None,
     ):
         """
         param env_name: source environment name.
@@ -848,15 +848,16 @@ class _Binder(Environment):
                 "envName": env_name,
                 "sourceNodeId": source_node_id,
                 "targetNodeId": target_node_id,
-                "sourceIp":source_ip,
-                "targetIp":target_ip
+                "sourceIp": source_ip,
+                "targetIp": target_ip,
             },
             delimiter=",",
         )
+
     def UnbindSSLCert(
-            self,
-            env_name:str,
-            extdomains:list[str]=None,
+        self,
+        env_name: str,
+        extdomains: list[str] = None,
     ):
         """
         param env_name: target environment name.
@@ -870,26 +871,24 @@ class _Binder(Environment):
             },
             delimiter=",",
         )
+
+
 class _System(Environment):
     """
     Ref: https://docs.jelastic.com/api/private/#!/api/environment.System
     """
 
     _endpoint2 = "system"
-    def CheckDBConnection(
-            self,
-            checksum:str
-    ):
+
+    def CheckDBConnection(self, checksum: str):
         return self._get(
             "CheckDBConnection",
             params={
                 "checksum": checksum,
             },
         )
-    def CheckError(
-            self,
-            code:list[int]=None
-    ):
+
+    def CheckError(self, code: list[int] = None):
         return self._get(
             "CheckError",
             params={
@@ -897,10 +896,8 @@ class _System(Environment):
             },
             delimiter=",",
         )
-    def CleanCheckRequestCache(
-            self,
-            uid:list[int]=None
-    ):
+
+    def CleanCheckRequestCache(self, uid: list[int] = None):
         return self._get(
             "CleanCheckRequestCache",
             params={
@@ -908,10 +905,8 @@ class _System(Environment):
             },
             delimiter=",",
         )
-    def CleanCheckRequestCacheInner(
-            self,
-            uid:list[int]=None
-    ):
+
+    def CleanCheckRequestCacheInner(self, uid: list[int] = None):
         return self._get(
             "CleanCheckRequestCacheInner",
             params={
@@ -919,36 +914,27 @@ class _System(Environment):
             },
             delimiter=",",
         )
+
     def CleanTemplateManifestCache(
-            self,
+        self,
     ):
         return self._get(
             "CleanTemplateManifestCache",
-            params={
-            },
+            params={},
         )
-    def DeleteOldEnvs(
-            self,
-            updatedon:str,
-            status:str,
-            debug:bool,
-            checksum:str
-    ):
+
+    def DeleteOldEnvs(self, updatedon: str, status: str, debug: bool, checksum: str):
         return self._get(
             "DeleteOldEnvs",
             params={
                 "updatedon": updatedon,
                 "status": status,
                 "debug": debug,
-                "checksum": checksum
-
+                "checksum": checksum,
             },
         )
-    def Event(
-            self,
-            message:str,
-            publish_local:list[bool]=None
-    ):
+
+    def Event(self, message: str, publish_local: list[bool] = None):
         return self._get(
             "Event",
             params={
@@ -957,10 +943,8 @@ class _System(Environment):
             },
             delimiter=",",
         )
-    def FixDuplicates(
-            self,
-            debug:list[bool]=None
-    ):
+
+    def FixDuplicates(self, debug: list[bool] = None):
         return self._get(
             "FixDuplicates",
             params={
@@ -968,9 +952,10 @@ class _System(Environment):
             },
             delimiter=",",
         )
+
     def FixStuckEnvs(
-            self,
-            checksum: str,
+        self,
+        checksum: str,
     ):
         return self._get(
             "FixStuckEnvs",
@@ -978,10 +963,9 @@ class _System(Environment):
                 "checksum": checksum,
             },
         )
+
     def GetAPIDescriptions(
-            self,
-            is_public_only:list[bool]=None,
-            is_token:list[bool]=None
+        self, is_public_only: list[bool] = None, is_token: list[bool] = None
     ):
         return self._get(
             "GetAPIDescriptions",
@@ -991,10 +975,9 @@ class _System(Environment):
             },
             delimiter=",",
         )
+
     def GetAllAPIDescriptions(
-            self,
-            is_public_only:list[bool]=None,
-            is_token:list[bool]=None
+        self, is_public_only: list[bool] = None, is_token: list[bool] = None
     ):
         return self._get(
             "GetAllAPIDescriptions",
@@ -1004,69 +987,56 @@ class _System(Environment):
             },
             delimiter=",",
         )
+
     def GetBillableItems(
-            self,
+        self,
     ):
         return self._get(
             "GetBillableItems",
-            params={
-            },
+            params={},
         )
+
     def GetCacheStats(
-            self,
+        self,
     ):
         return self._get(
             "GetCacheStats",
-            params={
-            },
+            params={},
         )
+
     def GetCacheStatus(
-            self,
+        self,
     ):
         return self._get(
             "GetCacheStatus",
-            params={
-            },
+            params={},
         )
-    def GetContCountStatus(
-            self,
-            starttime:datetime,
-            endtime:datetime
-    ):
+
+    def GetContCountStatus(self, starttime: datetime, endtime: datetime):
         return self._get(
             "GetContCountStatus",
-            params={
-                "starttime": starttime,
-                "endtime": endtime
-            },
+            params={"starttime": starttime, "endtime": endtime},
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
+
     def GetInstanceCacheStatus(
-            self,
+        self,
     ):
         return self._get(
             "GetInstanceCacheStatus",
-            params={
-            },
+            params={},
         )
-    def GetIpsByType(
-            self,
-            checksum:str,
-            node_type:str,
-            hnip:list[str]=None
-    ):
+
+    def GetIpsByType(self, checksum: str, node_type: str, hnip: list[str] = None):
         return self._get(
             "GetIpsByType",
-            params={
-                "checksum": checksum,
-                "nodeType": node_type,
-                "hnip":hnip
-            },
+            params={"checksum": checksum, "nodeType": node_type, "hnip": hnip},
             delimiter=",",
         )
+
     def GetKeyword(
-            self,
-            checksum: str,
+        self,
+        checksum: str,
     ):
         return self._get(
             "GetKeyword",
@@ -1074,62 +1044,53 @@ class _System(Environment):
                 "checksum": checksum,
             },
         )
-    def GetPlatformStatus(
-            self,
-            checksum: str,
-            check_smtp:list[bool]=None
-    ):
+
+    def GetPlatformStatus(self, checksum: str, check_smtp: list[bool] = None):
         return self._get(
             "GetPlatformStatus",
-            params={
-                "checksum": checksum,
-                "checkSMTP": check_smtp
-            },
+            params={"checksum": checksum, "checkSMTP": check_smtp},
         )
 
     def GetStatCollectorStatus(
-            self,
+        self,
     ):
         return self._get(
             "GetStatCollectorStatus",
-            params={
-            },
+            params={},
         )
+
     def GetVersion(
-            self,
+        self,
     ):
         return self._get(
             "GetVersion",
-            params={
-            },
+            params={},
         )
+
     def RefreshEmailTemplates(
-            self,
+        self,
     ):
         return self._get(
             "RefreshEmailTemplates",
-            params={
-            },
+            params={},
         )
-    def RefreshUser(
-            self,
-            language:list[str]=None
-    ):
+
+    def RefreshUser(self, language: list[str] = None):
         return self._get(
             "RefreshUser",
-            params={
-                "language": language
-            }, delimiter=",",
+            params={"language": language},
+            delimiter=",",
         )
+
     def RegisterEnvContainer(
-            self,
-            env_name:str,
-            node_type:str,
-            ip_address:str,
-            env_id:str,
-            ct_id:str,
-            passwd:str,
-            hn_ip_address:str,
+        self,
+        env_name: str,
+        node_type: str,
+        ip_address: str,
+        env_id: str,
+        ct_id: str,
+        passwd: str,
+        hn_ip_address: str,
     ):
         return self._get(
             "RegisterEnvContainer",
@@ -1140,27 +1101,30 @@ class _System(Environment):
                 "envId": env_id,
                 "ctId": ct_id,
                 "passwd": passwd,
-                "hnIpAddress": hn_ip_address
-            }
+                "hnIpAddress": hn_ip_address,
+            },
         )
+
     def ReloadConfiguration(
-            self,
-            reseller_id:list[int]=None,
-            changed_placeholders:list[str]=None,
+        self,
+        reseller_id: list[int] = None,
+        changed_placeholders: list[str] = None,
     ):
         return self._get(
             "ReloadConfiguration",
             params={
                 "resellerId": reseller_id,
                 "changedPlaceholders": changed_placeholders,
-            },delimiter=",",
+            },
+            delimiter=",",
         )
+
     def SendEmail(
-            self,
-            templates:str,
-            email:list[str]=None,
-            language:list[str]=None,
-            timeout: list[int] = None,
+        self,
+        templates: str,
+        email: list[str] = None,
+        language: list[str] = None,
+        timeout: list[int] = None,
     ):
         return self._get(
             "SendEmail",
@@ -1169,24 +1133,20 @@ class _System(Environment):
                 "email": email,
                 "language": language,
                 "timeout": timeout,
-            },delimiter=",",
+            },
+            delimiter=",",
         )
-    def SurchargeBillableItems(
-            self,
-            starttime:datetime,
-            endtime:datetime
-    ):
+
+    def SurchargeBillableItems(self, starttime: datetime, endtime: datetime):
         return self._get(
             "SurchargeBillableItems",
-            params={
-                "startTime": starttime,
-                "endTime": endtime
-            },
+            params={"startTime": starttime, "endTime": endtime},
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
+
     def SynchEnvs(
-            self,
-            checksum: str,
+        self,
+        checksum: str,
     ):
         return self._get(
             "SynchEnvs",
@@ -1194,31 +1154,3 @@ class _System(Environment):
                 "checksum": checksum,
             },
         )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
