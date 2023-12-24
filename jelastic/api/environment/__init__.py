@@ -185,6 +185,23 @@ class Environment(ClientAbstract):
             debug=self._debug,
         )
 
+    @property
+    def Security(self) -> "_Security":
+        """
+        This service is responsible for managing the environment firewall feature. You can get a rules list, manage specific rules, and enable/disable firewalls for environments. Learn more in the documentation.
+
+         >>> from jelastic import Jelastic
+         >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+         >>> jelastic.environment.Security
+
+         Ref: https://docs.jelastic.com/api/private/#!/api/environment.Security
+        """
+        return _Security(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+        )
+
 
 class _Billing(Environment):
     """
@@ -6292,4 +6309,188 @@ class _NodeGroup(Environment):
                 "nodeGroup": node_group,
                 "enabled": enabled,
             },
+        )
+
+
+class _Security(Environment):
+    """
+    This service is responsible for managing the environment firewall feature. You can get a rules list, manage specific rules, and enable/disable firewalls for environments. Learn more in the documentation.
+
+    Ref: https://docs.jelastic.com/api/private/#!/api/environment.Security
+    """
+
+    _endpoint2 = "security"
+
+    def AddRule(
+        self,
+        env_name: str,
+        rule: dict,
+        node_group: list[str] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param rule: JSON object with a new firewall rule:
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        """
+        return self._get(
+            "AddRule",
+            params={
+                "envName": env_name,
+                "rule": rule,
+                "nodeGroup": node_group,
+            },
+            delimiter=",",
+        )
+
+    def AddRules(
+        self,
+        env_name: str,
+        rules: str,
+        node_group: list[str] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param rule: JSON object with a new firewall rule:
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        """
+        return self._get(
+            "AddRules",
+            params={
+                "envName": env_name,
+                "rules": rules,
+                "nodeGroup": node_group,
+            },
+            delimiter=",",
+        )
+
+    def EditRule(
+        self,
+        env_name: str,
+        rule: dict,
+    ):
+        """
+        param env_name: target environment name.
+        param rule: JSON object with a new firewall rule:
+        """
+        return self._get(
+            "EditRule",
+            params={
+                "envName": env_name,
+                "rule": rule,
+            },
+            delimiter=",",
+        )
+
+    def GetRules(
+        self,
+        env_name: str,
+        node_group: list[str] = None,
+        direction: list[str] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        param direction: filters returned list to show just inbound (INPUT or IN) or outbound (OUTPUT or OUT) rules
+        """
+        return self._get(
+            "GetRules",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "direction": direction,
+            },
+            delimiter=",",
+        )
+
+    def RegenerateIsolationSets(
+        self,
+    ):
+        return self._get(
+            "RegenerateIsolationSets",
+            params={},
+        )
+
+    def RemoveRule(self, env_name: str, id: int):
+        """
+        param env_name: target environment name
+        param id: Unique identifier of the target firewall rule.
+        """
+        return self._get(
+            "RemoveRule",
+            params={
+                "envName": env_name,
+                "id": id,
+            },
+        )
+
+    def RemoveRules(self, env_name: str, ids: list[int]):
+        """
+        param env_name: target environment name
+        param id: Unique identifier of the target firewall rule.
+        """
+        return self._get(
+            "RemoveRules",
+            params={
+                "envName": env_name,
+                "ids": ids,
+            },
+            delimiter=",",
+        )
+
+    def SetFirewallEnabled(
+        self,
+        env_name: str,
+        enabled: bool,
+    ):
+        """
+        param env_name: target environment name
+        param enabled: defines whether to enable (true) or disable (false) the environment firewall feature.
+        """
+        return self._get(
+            "SetFirewallEnabled",
+            params={
+                "envName": env_name,
+                "enabled": enabled,
+            },
+        )
+
+    def SetRuleEnabled(
+        self,
+        env_name: str,
+        id: int,
+        enabled: bool,
+    ):
+        """
+        param env_name: target environment name
+        param id: Unique identifier of the target firewall
+        param enabled: defines whether to enable (true) or disable (false) the environment firewall feature.
+        """
+        return self._get(
+            "SetRuleEnabled",
+            params={
+                "envName": env_name,
+                "id": id,
+                "enabled": enabled,
+            },
+        )
+
+    def SetRules(
+        self,
+        env_name: str,
+        rules: str,
+        node_group: list[str] = None,
+    ):
+        """
+        param env_name: target environment name.
+        param rule: JSON object with an array of firewall rules to be set instead of the existing ones.
+        param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
+        """
+        return self._get(
+            "SetRules",
+            params={
+                "envName": env_name,
+                "rules": rules,
+                "nodeGroup": node_group,
+            },
+            delimiter=",",
         )
