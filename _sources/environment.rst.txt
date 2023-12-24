@@ -63,3 +63,8 @@ Environment
     :members:
     :undoc-members:
     :show-inheritance:
+
+.. autoclass:: jelastic.api.environment._Security
+    :members:
+    :undoc-members:
+    :show-inheritance:

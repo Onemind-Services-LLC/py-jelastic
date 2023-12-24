@@ -572,6 +572,20 @@ future imports. Learn more in the documentation.</p>
 <p>Ref: <a class="reference external" href="https://docs.jelastic.com/api/private/#!/api/environment.NodeGroup">https://docs.jelastic.com/api/private/#!/api/environment.NodeGroup</a></p>
 </dd></dl>
 
+<dl class="py property">
+<dt class="sig sig-object py" id="jelastic.api.environment.Environment.Security">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Security</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#jelastic.api.environment._Security" title="jelastic.api.environment._Security"><span class="pre">_Security</span></a></em><a class="headerlink" href="#jelastic.api.environment.Environment.Security" title="Link to this definition">¶</a></dt>
+<dd><p>This service is responsible for managing the environment firewall feature. You can get a rules list, manage specific rules, and enable/disable firewalls for environments. Learn more in the documentation.</p>
+<blockquote>
+<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jelastic</span> <span class="kn">import</span> <span class="n">Jelastic</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jelastic</span> <span class="o">=</span> <span class="n">Jelastic</span><span class="p">(</span><span class="s1">&#39;https://jca.xapp.cloudmydc.com&#39;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s1">&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jelastic</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">Security</span>
+</pre></div>
+</div>
+<p>Ref: <a class="reference external" href="https://docs.jelastic.com/api/private/#!/api/environment.Security">https://docs.jelastic.com/api/private/#!/api/environment.Security</a></p>
+</div></blockquote>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -3482,6 +3496,87 @@ param node_group: unique identifier of the target node group (layer), e.g. “cp
 <dd><p>param env_name: target environment name.
 param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
 param enabled: defines whether allow (true) or deny (false) access to the layer via Shared Load Balancer.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="jelastic.api.environment._Security">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">jelastic.api.environment.</span></span><span class="sig-name descname"><span class="pre">_Security</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/environment.html#_Security"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.environment._Security" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#jelastic.api.environment.Environment" title="jelastic.api.environment.Environment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Environment</span></code></a></p>
+<p>This service is responsible for managing the environment firewall feature. You can get a rules list, manage specific rules, and enable/disable firewalls for environments. Learn more in the documentation.</p>
+<p>Ref: <a class="reference external" href="https://docs.jelastic.com/api/private/#!/api/environment.Security">https://docs.jelastic.com/api/private/#!/api/environment.Security</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.environment._Security.AddRule">
+<span class="sig-name descname"><span class="pre">AddRule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/environment.html#_Security.AddRule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.environment._Security.AddRule" title="Link to this definition">¶</a></dt>
+<dd><p>param env_name: target environment name.
+param rule: JSON object with a new firewall rule:
+param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.environment._Security.AddRules">
+<span class="sig-name descname"><span class="pre">AddRules</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rules</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/environment.html#_Security.AddRules"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.environment._Security.AddRules" title="Link to this definition">¶</a></dt>
+<dd><p>param env_name: target environment name.
+param rule: JSON object with a new firewall rule:
+param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.environment._Security.EditRule">
+<span class="sig-name descname"><span class="pre">EditRule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/environment.html#_Security.EditRule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.environment._Security.EditRule" title="Link to this definition">¶</a></dt>
+<dd><p>param env_name: target environment name.
+param rule: JSON object with a new firewall rule:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.environment._Security.GetRules">
+<span class="sig-name descname"><span class="pre">GetRules</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/environment.html#_Security.GetRules"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.environment._Security.GetRules" title="Link to this definition">¶</a></dt>
+<dd><p>param env_name: target environment name.
+param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
+param direction: filters returned list to show just inbound (INPUT or IN) or outbound (OUTPUT or OUT) rules</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.environment._Security.RegenerateIsolationSets">
+<span class="sig-name descname"><span class="pre">RegenerateIsolationSets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/environment.html#_Security.RegenerateIsolationSets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.environment._Security.RegenerateIsolationSets" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.environment._Security.RemoveRule">
+<span class="sig-name descname"><span class="pre">RemoveRule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/environment.html#_Security.RemoveRule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.environment._Security.RemoveRule" title="Link to this definition">¶</a></dt>
+<dd><p>param env_name: target environment name
+param id: Unique identifier of the target firewall rule.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.environment._Security.RemoveRules">
+<span class="sig-name descname"><span class="pre">RemoveRules</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/environment.html#_Security.RemoveRules"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.environment._Security.RemoveRules" title="Link to this definition">¶</a></dt>
+<dd><p>param env_name: target environment name
+param id: Unique identifier of the target firewall rule.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.environment._Security.SetFirewallEnabled">
+<span class="sig-name descname"><span class="pre">SetFirewallEnabled</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enabled</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/environment.html#_Security.SetFirewallEnabled"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.environment._Security.SetFirewallEnabled" title="Link to this definition">¶</a></dt>
+<dd><p>param env_name: target environment name
+param enabled: defines whether to enable (true) or disable (false) the environment firewall feature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.environment._Security.SetRuleEnabled">
+<span class="sig-name descname"><span class="pre">SetRuleEnabled</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enabled</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/environment.html#_Security.SetRuleEnabled"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.environment._Security.SetRuleEnabled" title="Link to this definition">¶</a></dt>
+<dd><p>param env_name: target environment name
+param id: Unique identifier of the target firewall
+param enabled: defines whether to enable (true) or disable (false) the environment firewall feature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="jelastic.api.environment._Security.SetRules">
+<span class="sig-name descname"><span class="pre">SetRules</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rules</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/jelastic/api/environment.html#_Security.SetRules"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#jelastic.api.environment._Security.SetRules" title="Link to this definition">¶</a></dt>
+<dd><p>param env_name: target environment name.
+param rule: JSON object with an array of firewall rules to be set instead of the existing ones.
+param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.</p>
 </dd></dl>
 
 </dd></dl>
