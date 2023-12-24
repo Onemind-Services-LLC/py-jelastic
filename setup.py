@@ -6,9 +6,10 @@ with open("README.md") as f:
 
 setup(
     name="py-jelastic",
-    version="0.0.3",
+    version="0.0.4",
     description="Jelastic API client library",
     long_description=long_description,
+    long_description_content_type="text/markdown",
     url="https://github.com/Onemind-Services-LLC/py-jelastic",
     author="Abhimanyu Saharan",
     author_email="asaharan@onemindservices.com",
