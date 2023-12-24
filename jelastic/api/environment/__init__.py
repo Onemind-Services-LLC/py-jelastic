@@ -548,8 +548,6 @@ class _Node(Environment):
         return self._get("SendNotification", params={"name": name, "message": message})
 
 
-
-
 class _Build(Environment):
     """
     This service provides methods to manage Java project deployment from the version control system (VCS) repositories. The process requires a dedicated Maven build automation node that will build and deploy Java projects. With Maven, you can add any public or private project directly from your VCS repository (Git or SVN) using the appropriate link type: http, https, git (or svn). After the addition, Java projects can be deployed to the appropriate application servers.
@@ -1358,11 +1356,12 @@ class _Deployment(Environment):
             },
             delimiter=",",
         )
+
     def GetBuildProjects(
         self,
         env_name: str,
-        node_group: list[str]=None,
-        node_id: list[int]=None,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1394,12 +1393,12 @@ class _Deployment(Environment):
         )
 
     def GetHooks(
-            self,
-            env_name: str,
-            node_group: list[str] = None,
-            node_id: list[int] = None,
-            context: list[str] = None,
-            project: list[str] = None,
+        self,
+        env_name: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
+        context: list[str] = None,
+        project: list[str] = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1419,11 +1418,12 @@ class _Deployment(Environment):
             },
             delimiter=",",
         )
+
     def GetProjectInfo(
-            self,
-            env_name: str,
-            context: str,
-            node_group: list[str] = None,
+        self,
+        env_name: str,
+        context: str,
+        node_group: list[str] = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1439,9 +1439,10 @@ class _Deployment(Environment):
             },
             delimiter=",",
         )
+
     def GetRepos(
-            self,
-            id: list[int] = None,
+        self,
+        id: list[int] = None,
     ):
         """
         param id: unique identifier of the repository.
@@ -1455,10 +1456,10 @@ class _Deployment(Environment):
         )
 
     def RemoveBuildProject(
-            self,
-            env_name: str,
-            node_id: str,
-            project: str,
+        self,
+        env_name: str,
+        node_id: str,
+        project: str,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1474,10 +1475,8 @@ class _Deployment(Environment):
             },
             delimiter=",",
         )
-    def RemoveRepo(
-            self,
-            id: int
-    ):
+
+    def RemoveRepo(self, id: int):
         """
         param id: unique identifier of the repository.
         """
@@ -1487,12 +1486,13 @@ class _Deployment(Environment):
                 "id": id,
             },
         )
+
     def RenameContext(
         self,
         env_name: str,
         node_group: str,
         old_context: str,
-        new_context:str,
+        new_context: str,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1509,6 +1509,7 @@ class _Deployment(Environment):
                 "newContext": new_context,
             },
         )
+
     def Undeploy(
         self,
         env_name: str,
@@ -1526,17 +1527,17 @@ class _Deployment(Environment):
                 "envName": env_name,
                 "nodeGroup": node_group,
                 "context": context,
-
             },
         )
+
     def Update(
-            self,
-            env_name: str,
-            node_group: list[str] = None,
-            node_id: list[int] = None,
-            context: list[str] = None,
-            project: list[str] = None,
-            delay: list[str] = None,
+        self,
+        env_name: str,
+        node_group: list[str] = None,
+        node_id: list[int] = None,
+        context: list[str] = None,
+        project: list[str] = None,
+        delay: list[str] = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1558,12 +1559,6 @@ class _Deployment(Environment):
             },
             delimiter=",",
         )
-
-
-
-
-
-
 
 
 class _Binder(Environment):

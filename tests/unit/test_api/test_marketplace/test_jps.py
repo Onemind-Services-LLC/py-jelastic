@@ -1,20 +1,4 @@
-from datetime import datetime
-from unittest.mock import patch, Mock
-
-import pytest
-
-from jelastic.api import Marketplace
-
-success_response = {"error": "", "reason": 0, "result": 0, "source": "billing"}
-CURRENT_DATETIME = datetime.now()
-
-
-@pytest.fixture
-def client():
-    with patch("jelastic.api.abstract.ClientAbstract._get") as mock_get:
-        marketplace = Marketplace(session=Mock(), token="token")
-        marketplace._get = mock_get
-        yield marketplace
+from . import *
 
 
 def test_execute_app_action(client):

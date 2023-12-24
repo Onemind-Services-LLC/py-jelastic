@@ -95,7 +95,6 @@ class Marketplace(ClientAbstract):
         )
 
 
-
 class _Installation(Marketplace):
     """
     The Installation service provides extensive functionality for users to manage applications installed from the Marketplace or via Import.
@@ -627,6 +626,7 @@ class _Admin(Marketplace):
                 "visibilityLevels": visibility_levels,
             },
         )
+
 
 class _Jps(Marketplace):
     """
