@@ -1480,9 +1480,9 @@
         <span class="n">datetime_format</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_debug</span><span class="p">:</span>
-            <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_log_debug&quot;</span><span class="p">)(</span><span class="s2">&quot;get&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log_debug</span><span class="p">(</span><span class="s2">&quot;get&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
 
-        <span class="n">url</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_endpoint&quot;</span><span class="p">)(</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_endpoint</span><span class="p">(</span>
             <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="n">delimiter</span><span class="p">,</span> <span class="n">datetime_format</span><span class="o">=</span><span class="n">datetime_format</span>
         <span class="p">)</span>
         <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="o">.</span><span class="n">build_request</span><span class="p">(</span>
@@ -1490,7 +1490,14 @@
             <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
         <span class="p">)</span>
 
-        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_handle_response&quot;</span><span class="p">)(</span><span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">())</span></div>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">is_error</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">JelasticResourceNotFound</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;API endpoint not found: </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="k">raise</span> <span class="n">JelasticApiError</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_response</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span></div>
 
 </pre></div>
 
