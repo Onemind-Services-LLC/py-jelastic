@@ -98,13 +98,13 @@ class Environment(ClientAbstract):
     @property
     def Vcs(self) -> "_Vcs":
         """
-         This service is the tool for managing your VCS (version control system) projects. Configure periodic automatic deployment of the committed changes, and you can work with GIT/SVN repository only. Just commit the updated code to your VCS project. The platform will detect changes and automatically push them to the assigned environment. In contrast to the GIT hooks, the auto-deploy feature does not require configuration on the GIT side and works with SVN.
+        This service is the tool for managing your VCS (version control system) projects. Configure periodic automatic deployment of the committed changes, and you can work with GIT/SVN repository only. Just commit the updated code to your VCS project. The platform will detect changes and automatically push them to the assigned environment. In contrast to the GIT hooks, the auto-deploy feature does not require configuration on the GIT side and works with SVN.
 
-         >>> from jelastic import Jelastic
-         >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
-         >>> jelastic.environment.Vcs
+        >>> from jelastic import Jelastic
+        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic.environment.Vcs
 
-         Ref: https://docs.jelastic.com/api/private/#!/api/environment.Vcs
+        Ref: https://docs.jelastic.com/api/private/#!/api/environment.Vcs
         """
         return _Vcs(
             session=self._session,
@@ -873,6 +873,8 @@ class _Binder(Environment):
             },
             delimiter=",",
         )
+
+
 class _Vcs(Environment):
     """
     This service is the tool for managing your VCS (version control system) projects. Configure periodic automatic deployment of the committed changes, and you can work with GIT/SVN repository only. Just commit the updated code to your VCS project. The platform will detect changes and automatically push them to the assigned environment. In contrast to the GIT hooks, the auto-deploy feature does not require configuration on the GIT side and works with SVN.
@@ -881,6 +883,7 @@ class _Vcs(Environment):
     """
 
     _endpoint2 = "vcs"
+
     def CreateProject(
         self,
         env_name: str,
@@ -943,6 +946,7 @@ class _Vcs(Environment):
             },
             delimiter=",",
         )
+
     def DeleteProject(
         self,
         env_name: str,
@@ -963,6 +967,7 @@ class _Vcs(Environment):
             },
             delimiter=",",
         )
+
     def EditProject(
         self,
         env_name: str,
@@ -1025,6 +1030,7 @@ class _Vcs(Environment):
             },
             delimiter=",",
         )
+
     def GetProject(
         self,
         env_name: str,
@@ -1045,6 +1051,7 @@ class _Vcs(Environment):
             },
             delimiter=",",
         )
+
     def Update(
         self,
         env_name: str,
@@ -1064,13 +1071,7 @@ class _Vcs(Environment):
                 "envName": env_name,
                 "context": context,
                 "nodeGroup": node_group,
-                "delay": delay
+                "delay": delay,
             },
             delimiter=",",
         )
-
-
-
-
-
-
