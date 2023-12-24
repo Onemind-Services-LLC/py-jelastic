@@ -31,6 +31,34 @@ Environment
     :undoc-members:
     :show-inheritance:
 
+.. autoclass:: jelastic.api.environment._Deployment
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. autoclass:: jelastic.api.environment._Build
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. autoclass:: jelastic.api.environment._Control
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+.. autoclass:: jelastic.api.environment._File
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+.. autoclass:: jelastic.api.environment._Group
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
 .. autoclass:: jelastic.api.environment._NodeGroup
     :members:
     :undoc-members:
