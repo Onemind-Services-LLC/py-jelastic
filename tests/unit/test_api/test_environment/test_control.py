@@ -3159,13 +3159,13 @@ def test_set_container_env_vars(client):
 
 def test_set_container_env_vars_by_group(client):
     client._get.return_value = success_response
-    response = client.Control.SetContainerEnvVarsByGroup("env", "group", "data")
+    response = client.Control.SetContainerEnvVarsByGroup("env", "group", {"key": "value"})
     client._get.assert_called_once_with(
         "SetContainerEnvVarsByGroup",
         params={
             "envName": "env",
             "nodeGroup": "group",
-            "data": "data",
+            "data": '{"key": "value"}',
         },
     )
     assert response == success_response

@@ -5116,13 +5116,15 @@ class _Control(Environment):
         self,
         env_name: str,
         node_group: str,
-        data: str,
+        data: dict,
     ):
         """
         :param env_name: target environment name
         :param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer
         :param data: JSON object with a list of container environment variables, e.g. {"var1":"value1", "var2":"value2"}.
         """
+        data = json.dumps(data)
+
         return self._get(
             "SetContainerEnvVarsByGroup",
             params={
