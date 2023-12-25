@@ -862,10 +862,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.ResetNodePasswordByType"><code class="docutils literal notranslate"><span class="pre">_Control.ResetNodePasswordByType()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.ResetServicePassword"><code class="docutils literal notranslate"><span class="pre">_Control.ResetServicePassword()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.RestartContainer"><code class="docutils literal notranslate"><span class="pre">_Control.RestartContainer()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.RestartContainerById"><code class="docutils literal notranslate"><span class="pre">_Control.RestartContainerById()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.RestartContainerByType"><code class="docutils literal notranslate"><span class="pre">_Control.RestartContainerByType()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.RestartContainersByGroup"><code class="docutils literal notranslate"><span class="pre">_Control.RestartContainersByGroup()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.RestartNodeById"><code class="docutils literal notranslate"><span class="pre">_Control.RestartNodeById()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.RestartNodes"><code class="docutils literal notranslate"><span class="pre">_Control.RestartNodes()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.RestartNodesByGroup"><code class="docutils literal notranslate"><span class="pre">_Control.RestartNodesByGroup()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.RestartNodesByType"><code class="docutils literal notranslate"><span class="pre">_Control.RestartNodesByType()</span></code></a></li>
@@ -6725,25 +6723,6 @@
         <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="_Control.RestartContainerById">
-<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Control.RestartContainerById">[docs]</a>
-    <span class="k">def</span> <span class="nf">RestartContainerById</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">node_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">manage_dns_state</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
-            <span class="s2">&quot;RestartContainerById&quot;</span><span class="p">,</span>
-            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
-                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
-                <span class="s2">&quot;manageDNSState&quot;</span><span class="p">:</span> <span class="n">manage_dns_state</span><span class="p">,</span>
-            <span class="p">},</span>
-            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
-        <span class="p">)</span></div>
-
-
 <div class="viewcode-block" id="_Control.RestartContainerByType">
 <a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Control.RestartContainerByType">[docs]</a>
     <span class="k">def</span> <span class="nf">RestartContainerByType</span><span class="p">(</span>
@@ -6780,25 +6759,6 @@
                 <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
                 <span class="s2">&quot;delay&quot;</span><span class="p">:</span> <span class="n">delay</span><span class="p">,</span>
                 <span class="s2">&quot;isSequential&quot;</span><span class="p">:</span> <span class="n">is_sequential</span><span class="p">,</span>
-                <span class="s2">&quot;manageDNSState&quot;</span><span class="p">:</span> <span class="n">manage_dns_state</span><span class="p">,</span>
-            <span class="p">},</span>
-            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
-        <span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="_Control.RestartNodeById">
-<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Control.RestartNodeById">[docs]</a>
-    <span class="k">def</span> <span class="nf">RestartNodeById</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">node_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">manage_dns_state</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
-            <span class="s2">&quot;RestartNodeById&quot;</span><span class="p">,</span>
-            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
-                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
                 <span class="s2">&quot;manageDNSState&quot;</span><span class="p">:</span> <span class="n">manage_dns_state</span><span class="p">,</span>
             <span class="p">},</span>
             <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
