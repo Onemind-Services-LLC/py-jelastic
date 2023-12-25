@@ -2820,23 +2820,6 @@ def test_restart_container(client):
     assert response == success_response
 
 
-def test_restart_container_by_id(client):
-    client._get.return_value = success_response
-    response = client.Control.RestartContainerById(
-        "env",
-        1,
-        [True, False, True],
-    )
-    client._get.assert_called_once_with(
-        "RestartContainerById",
-        params={
-            "envName": "env",
-            "nodeId": 1,
-            "manageDNSState": [True, False, True],
-        },
-        delimiter=",",
-    )
-    assert response == success_response
 
 
 def test_restart_container_by_type(client):
@@ -2881,23 +2864,6 @@ def test_restart_containers_by_group(client):
     assert response == success_response
 
 
-def test_restart_node_by_id(client):
-    client._get.return_value = success_response
-    response = client.Control.RestartNodeById(
-        "env",
-        1,
-        [True, False, True],
-    )
-    client._get.assert_called_once_with(
-        "RestartNodeById",
-        params={
-            "envName": "env",
-            "nodeId": 1,
-            "manageDNSState": [True, False, True],
-        },
-        delimiter=",",
-    )
-    assert response == success_response
 
 
 def test_restart_nodes(client):

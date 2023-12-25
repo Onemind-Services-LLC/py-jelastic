@@ -4768,22 +4768,6 @@ class _Control(Environment):
             delimiter=",",
         )
 
-    def RestartContainerById(
-        self,
-        env_name: str,
-        node_id: int,
-        manage_dns_state: list[bool] = None,
-    ):
-        return self._get(
-            "RestartContainerById",
-            params={
-                "envName": env_name,
-                "nodeId": node_id,
-                "manageDNSState": manage_dns_state,
-            },
-            delimiter=",",
-        )
-
     def RestartContainerByType(
         self,
         env_name: str,
@@ -4815,22 +4799,6 @@ class _Control(Environment):
                 "nodeGroup": node_group,
                 "delay": delay,
                 "isSequential": is_sequential,
-                "manageDNSState": manage_dns_state,
-            },
-            delimiter=",",
-        )
-
-    def RestartNodeById(
-        self,
-        env_name: str,
-        node_id: int,
-        manage_dns_state: list[bool] = None,
-    ):
-        return self._get(
-            "RestartNodeById",
-            params={
-                "envName": env_name,
-                "nodeId": node_id,
                 "manageDNSState": manage_dns_state,
             },
             delimiter=",",
