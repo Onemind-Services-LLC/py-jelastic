@@ -1832,7 +1832,7 @@ def test_get_env_info(client):
     client._get.return_value = success_response
     response = client.Control.GetEnvInfo("env", [True, False, True])
     client._get.assert_called_once_with(
-        "GetEnvInfolazy",
+        "GetEnvInfo",
         params={
             "envName": "env",
             "lazy": [True, False, True],
