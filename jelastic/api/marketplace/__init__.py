@@ -343,19 +343,19 @@ class _App(Marketplace):
 
     def GetAddonList(
         self,
-        envName: str,
+        env_name: str,
         node_group: list[str] = None,
         search: dict = None,
     ):
         """
-        :param envName: target environment name.
+        :param env_name: target environment name.
         :param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
         :param search: JSON object with the search parameters. For example (all fields are optional):
         """
         return self._get(
             "GetAddonList",
             params={
-                "envName": envName,
+                "envName": env_name,
                 "nodeGroup": node_group,
                 "search": search,
             },
