@@ -452,12 +452,14 @@ class _App(Marketplace):
 
     def InstallAddon(
         self,
+        env_name: str,
         app_id: str,
         settings: dict = None,
         node_group: list[str] = None,
         skip_email: list[bool] = None,
     ):
         """
+        :param env_name: target environment name.
         :param app_id: unique identifier of the target JPS manifest in the Marketplace.
         :param settings: JSON object with custom settings for the JPS manifest.
         :param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
@@ -467,6 +469,7 @@ class _App(Marketplace):
             "InstallAddon",
             params={
                 "id": app_id,
+                "envName": env_name,
                 "settings": settings,
                 "nodeGroup": node_group,
                 "skipEmail": skip_email,
