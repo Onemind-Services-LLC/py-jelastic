@@ -14,94 +14,36 @@ class Statistic(ClientAbstract):
     _endpoint1 = "statistic"
 
     @property
-    def System(self) -> "_System":
+    def Utils(self) -> "_Utils":
         """
         >>> from jelastic import Jelastic
         >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
-        >>> jelastic.statistic.System
-        Ref: https://docs.jelastic.com/api/private/#!/api/statistic.System
+        >>> jelastic.statistic.Utils
+        Ref: https://docs.jelastic.com/api/private/#!/api/statistic.Utils
         """
-        return _System(session=self._session, token=self._token, debug=self._debug)
+        return _Utils(session=self._session, token=self._token, debug=self._debug)
 
 
-class _System(Statistic):
+class _Utils(Statistic):
     """
-    Ref: https://docs.jelastic.com/api/private/#!/api/statistic.System
+    Ref: https://docs.jelastic.com/api/private/#!/api/statistic.Utils
     """
 
-    _endpoint2 = "system"
+    _endpoint2 = "utils"
 
-    def Event(
+    def GenerateStatistics(
         self,
-        topic: str,
-        publish_local: list[bool] = None,
+        duration_hours: int,
+        node_id: int,
+        stat_json: str,
+        checksum: str,
     ):
         return self._get(
-            "Event",
+            "GenerateStatistics",
             params={
-                "topic": topic,
-                "publishLocal": publish_local,
-            },
-        )
-
-    def GetAPIDescriptions(
-        self,
-        is_public_only: list[bool] = None,
-        is_token: list[bool] = None,
-    ):
-        return self._get(
-            "GetAPIDescriptions",
-            params={
-                "isPublicOnly": is_public_only,
-                "isToken": is_token,
-            },
-        )
-
-    def GetCacheStatus(
-        self,
-    ):
-        return self._get(
-            "GetCacheStatus",
-            params={},
-        )
-
-    def GetInstanceCacheStatus(
-        self,
-    ):
-        return self._get(
-            "GetInstanceCacheStatus",
-            params={},
-        )
-
-    def GetVersion(
-        self,
-    ):
-        return self._get(
-            "GetVersion",
-            params={},
-        )
-
-    def RefreshEmailTemplates(
-        self,
-    ):
-        return self._get(
-            "RefreshEmailTemplates",
-            params={},
-        )
-
-    def RefreshUser(self, language: list[str] = None):
-        return self._get(
-            "RefreshUser",
-            params={"language": language},
-        )
-
-    def ReloadConfiguration(
-        self, reseller_id: list[int] = None, changed_place_holders: list[str] = None
-    ):
-        return self._get(
-            "ReloadConfiguration",
-            params={
-                "resellerId": reseller_id,
-                "changedPlaceholders": changed_place_holders,
+                "durationHours": duration_hours,
+                "nodeId": node_id,
+                "statJSON": stat_json,
+                "checksum": checksum,
             },
         )
