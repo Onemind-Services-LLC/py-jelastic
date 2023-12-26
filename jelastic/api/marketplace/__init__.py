@@ -296,7 +296,6 @@ class _Console(Marketplace):
 
 
 class _App(Marketplace):
-
     """
     Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.App
     """
@@ -453,13 +452,13 @@ class _App(Marketplace):
 
     def InstallAddon(
         self,
-        id: str,
-        settings: list[str] = None,
+        app_id: str,
+        settings: dict = None,
         node_group: list[str] = None,
         skip_email: list[bool] = None,
     ):
         """
-        :param id: unique identifier of the target JPS manifest in the Marketplace.
+        :param app_id: unique identifier of the target JPS manifest in the Marketplace.
         :param settings: JSON object with custom settings for the JPS manifest.
         :param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
         :param skip_email: defines whether to send email after the successful installation (false) or not (true).
@@ -467,7 +466,7 @@ class _App(Marketplace):
         return self._get(
             "InstallAddon",
             params={
-                "id": id,
+                "id": app_id,
                 "settings": settings,
                 "nodeGroup": node_group,
                 "skipEmail": skip_email,

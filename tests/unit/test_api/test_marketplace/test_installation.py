@@ -77,7 +77,7 @@ def test_install_addon(client):
     client._get.return_value = success_response
     response = client.App.InstallAddon(
         "2",
-        ["setting1", "setting2", "setting3"],
+        {"key": "value"},
         ["nodeGroup1", "nodeGroup2", "nodeGroup3"],
         [False, True, False],
     )
@@ -85,7 +85,7 @@ def test_install_addon(client):
         "InstallAddon",
         params={
             "id": "2",
-            "settings": ["setting1", "setting2", "setting3"],
+            "settings": {"key": "value"},
             "nodeGroup": ["nodeGroup1", "nodeGroup2", "nodeGroup3"],
             "skipEmail": [False, True, False],
         },
