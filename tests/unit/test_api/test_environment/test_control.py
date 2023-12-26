@@ -2820,8 +2820,6 @@ def test_restart_container(client):
     assert response == success_response
 
 
-
-
 def test_restart_container_by_type(client):
     client._get.return_value = success_response
     response = client.Control.RestartContainerByType(
@@ -2862,8 +2860,6 @@ def test_restart_containers_by_group(client):
         delimiter=",",
     )
     assert response == success_response
-
-
 
 
 def test_restart_nodes(client):
@@ -3125,7 +3121,9 @@ def test_set_container_env_vars(client):
 
 def test_set_container_env_vars_by_group(client):
     client._get.return_value = success_response
-    response = client.Control.SetContainerEnvVarsByGroup("env", "group", {"key": "value"})
+    response = client.Control.SetContainerEnvVarsByGroup(
+        "env", "group", {"key": "value"}
+    )
     client._get.assert_called_once_with(
         "SetContainerEnvVarsByGroup",
         params={
