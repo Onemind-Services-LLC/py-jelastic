@@ -2473,7 +2473,6 @@ def test_remove_container_env_vars(client):
             "nodeGroup": ["group1", "group2", "group3"],
             "nodeId": [1, 2, 3],
         },
-        delimiter=",",
     )
     assert response == success_response
 
