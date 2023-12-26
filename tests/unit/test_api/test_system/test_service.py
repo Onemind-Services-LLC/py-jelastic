@@ -75,7 +75,7 @@ def test_get_apps(client):
     client._get.return_value = success_response
     response = client.Service.GetApps("checksum")
     client._get.assert_called_once_with(
-        "GetApp",
+        "GetApps",
         params={
             "checksum": "checksum",
         },

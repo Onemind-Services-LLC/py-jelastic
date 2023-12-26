@@ -683,7 +683,7 @@ class _Service(System):
 
     def GetApps(self, checksum: str):
         return self._get(
-            "GetApp",
+            "GetApps",
             params={
                 "checksum": checksum,
             },
