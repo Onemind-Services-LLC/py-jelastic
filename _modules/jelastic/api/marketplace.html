@@ -1590,7 +1590,6 @@
 
 
 <span class="k">class</span> <span class="nc">_App</span><span class="p">(</span><span class="n">Marketplace</span><span class="p">):</span>
-
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.App</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1747,13 +1746,13 @@
 
     <span class="k">def</span> <span class="nf">InstallAddon</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">settings</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">app_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">settings</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">skip_email</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        :param id: unique identifier of the target JPS manifest in the Marketplace.</span>
+<span class="sd">        :param app_id: unique identifier of the target JPS manifest in the Marketplace.</span>
 <span class="sd">        :param settings: JSON object with custom settings for the JPS manifest.</span>
 <span class="sd">        :param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.</span>
 <span class="sd">        :param skip_email: defines whether to send email after the successful installation (false) or not (true).</span>
@@ -1761,7 +1760,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
             <span class="s2">&quot;InstallAddon&quot;</span><span class="p">,</span>
             <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">app_id</span><span class="p">,</span>
                 <span class="s2">&quot;settings&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="p">,</span>
                 <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
                 <span class="s2">&quot;skipEmail&quot;</span><span class="p">:</span> <span class="n">skip_email</span><span class="p">,</span>
