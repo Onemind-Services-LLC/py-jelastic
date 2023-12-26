@@ -1479,19 +1479,24 @@
     <span class="k">def</span> <span class="nf">Uninstall</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">app_unique_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">force</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">target_app_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">app_template_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        param app_unique_name: unique identifier of the particular installation.</span>
-<span class="sd">        param force: defines whether to proceed (true) or interrupt (false) the operation in case of errors.</span>
+<span class="sd">        :param app_unique_name: unique identifier of the particular installation.</span>
+<span class="sd">        :param target_app_id: unique identifier of the target application.</span>
+<span class="sd">        :param app_template_id: unique identifier of the target application template.</span>
+<span class="sd">        :param force: defines whether to proceed (true) or interrupt (false) the operation in case of errors.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
             <span class="s2">&quot;Uninstall&quot;</span><span class="p">,</span>
             <span class="n">params</span><span class="o">=</span><span class="p">{</span>
                 <span class="s2">&quot;appUniqueName&quot;</span><span class="p">:</span> <span class="n">app_unique_name</span><span class="p">,</span>
+                <span class="s2">&quot;targetAppId&quot;</span><span class="p">:</span> <span class="n">target_app_id</span><span class="p">,</span>
+                <span class="s2">&quot;appTemplateId&quot;</span><span class="p">:</span> <span class="n">app_template_id</span><span class="p">,</span>
                 <span class="s2">&quot;force&quot;</span><span class="p">:</span> <span class="n">force</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
 
@@ -1750,7 +1755,7 @@
         <span class="n">app_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">settings</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">skip_email</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">skip_email</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param env_name: target environment name.</span>
@@ -2035,20 +2040,6 @@
                 <span class="s2">&quot;logsPath&quot;</span><span class="p">:</span> <span class="n">logs_path</span><span class="p">,</span>
                 <span class="s2">&quot;writeOutputTasks&quot;</span><span class="p">:</span> <span class="n">write_output_tasks</span><span class="p">,</span>
                 <span class="s2">&quot;skipNodeEmails&quot;</span><span class="p">:</span> <span class="n">skip_node_emails</span><span class="p">,</span>
-            <span class="p">},</span>
-            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
-        <span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">Uninstall</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">app_unique_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">force</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
-            <span class="s2">&quot;Uninstall&quot;</span><span class="p">,</span>
-            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-                <span class="s2">&quot;appUniqueName&quot;</span><span class="p">:</span> <span class="n">app_unique_name</span><span class="p">,</span>
-                <span class="s2">&quot;force&quot;</span><span class="p">:</span> <span class="n">force</span><span class="p">,</span>
             <span class="p">},</span>
             <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
