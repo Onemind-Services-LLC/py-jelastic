@@ -106,10 +106,10 @@ class _Installation(Marketplace):
     def ExecuteAction(
         self,
         app_unique_name: str,
-        action: list[str] = None,
-        settings_id: list[str] = None,
-        params: list[str] = None,
-        lang: list[str] = None,
+        action: str,
+        settings_id: str = "main",
+        params: dict = None,
+        lang: str = None,
     ):
         """
         :param app_unique_name: unique identifier of the particular installation.
@@ -127,7 +127,6 @@ class _Installation(Marketplace):
                 "params": params,
                 "lang": lang,
             },
-            delimiter=",",
         )
 
     def GetEnvAppid(

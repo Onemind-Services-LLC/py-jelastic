@@ -5,21 +5,20 @@ def test_execute_action(client):
     client._get.return_value = success_response
     response = client.Installation.ExecuteAction(
         "app_unique_name",
-        ["action1", "action2"],
-        ["settings_id1", "settings_id2"],
-        ["params1", "params2"],
-        ["lang1", "lang2"],
+        "action",
+        "other",
+        {"key": "value"},
+        "en",
     )
     client._get.assert_called_with(
         "ExecuteAction",
         params={
             "appUniqueName": "app_unique_name",
-            "action": ["action1", "action2"],
-            "settingsId": ["settings_id1", "settings_id2"],
-            "params": ["params1", "params2"],
-            "lang": ["lang1", "lang2"],
+            "action": "action",
+            "settingsId": "other",
+            "params": {"key": "value"},
+            "lang": "en",
         },
-        delimiter=",",
     )
     assert response == success_response
 
