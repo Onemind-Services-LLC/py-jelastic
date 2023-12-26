@@ -185,19 +185,24 @@ class _Installation(Marketplace):
     def Uninstall(
         self,
         app_unique_name: str,
-        force: list[bool] = None,
+        target_app_id: str,
+        app_template_id: str,
+        force: bool = False,
     ):
         """
-        param app_unique_name: unique identifier of the particular installation.
-        param force: defines whether to proceed (true) or interrupt (false) the operation in case of errors.
+        :param app_unique_name: unique identifier of the particular installation.
+        :param target_app_id: unique identifier of the target application.
+        :param app_template_id: unique identifier of the target application template.
+        :param force: defines whether to proceed (true) or interrupt (false) the operation in case of errors.
         """
         return self._get(
             "Uninstall",
             params={
                 "appUniqueName": app_unique_name,
+                "targetAppId": target_app_id,
+                "appTemplateId": app_template_id,
                 "force": force,
             },
-            delimiter=",",
         )
 
 
@@ -456,7 +461,7 @@ class _App(Marketplace):
         app_id: str,
         settings: dict = None,
         node_group: list[str] = None,
-        skip_email: list[bool] = None,
+        skip_email: bool = False,
     ):
         """
         :param env_name: target environment name.
@@ -741,20 +746,6 @@ class _Jps(Marketplace):
                 "logsPath": logs_path,
                 "writeOutputTasks": write_output_tasks,
                 "skipNodeEmails": skip_node_emails,
-            },
-            delimiter=",",
-        )
-
-    def Uninstall(
-        self,
-        app_unique_name: str,
-        force: list[bool] = None,
-    ):
-        return self._get(
-            "Uninstall",
-            params={
-                "appUniqueName": app_unique_name,
-                "force": force,
             },
             delimiter=",",
         )

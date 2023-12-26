@@ -109,20 +109,3 @@ def test_install(client):
         delimiter=",",
     )
     assert response == success_response
-
-
-def test_uninstall(client):
-    client._get.return_value = success_response
-    response = client.Jps.Uninstall(
-        "app_unique_name",
-        [True, False],
-    )
-    client._get.assert_called_with(
-        "Uninstall",
-        params={
-            "appUniqueName": "app_unique_name",
-            "force": [True, False],
-        },
-        delimiter=",",
-    )
-    assert response == success_response

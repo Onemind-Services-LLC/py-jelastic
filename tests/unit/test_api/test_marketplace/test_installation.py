@@ -80,7 +80,7 @@ def test_install_addon(client):
         "2",
         {"key": "value"},
         ["nodeGroup1", "nodeGroup2", "nodeGroup3"],
-        [False, True, False],
+        True,
     )
     client._get.assert_called_with(
         "InstallAddon",
@@ -89,7 +89,7 @@ def test_install_addon(client):
             "envName": "env_name",
             "settings": {"key": "value"},
             "nodeGroup": ["nodeGroup1", "nodeGroup2", "nodeGroup3"],
-            "skipEmail": [False, True, False],
+            "skipEmail": True,
         },
         delimiter=",",
     )
@@ -99,14 +99,15 @@ def test_install_addon(client):
 def test_uninstall(client):
     client._get.return_value = success_response
     response = client.Installation.Uninstall(
-        "app_unique_name",
-        [True, True],
+        "app_unique_name", "target_app_id", "app_template_id", True
     )
     client._get.assert_called_with(
         "Uninstall",
         params={
             "appUniqueName": "app_unique_name",
-            "force": [True, True],
+            "targetAppId": "target_app_id",
+            "appTemplateId": "app_template_id",
+            "force": True,
         },
-        delimiter=",",
     )
+    assert response == success_response
