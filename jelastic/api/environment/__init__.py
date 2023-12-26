@@ -3268,8 +3268,8 @@ class _Control(Environment):
         self,
         env_name: str,
         node_type: str,
-        command_list: dict,
-        say_yes: list[bool] = None,
+        command_list: list[dict],
+        say_yes: bool = True,
     ):
         return self._get(
             "ExecCmd",
@@ -3279,16 +3279,15 @@ class _Control(Environment):
                 "commandList": command_list,
                 "sayYes": say_yes,
             },
-            delimiter=",",
         )
 
     def ExecCmdByGroup(
         self,
         env_name: str,
         node_group: str,
-        command_list: dict,
-        say_yes: list[bool] = None,
-        Async: list[bool] = None,
+        command_list: list[dict],
+        say_yes: bool = True,
+        asynchronous: bool = False,
     ):
         """
         :param env_name: target environment name.
@@ -3304,7 +3303,7 @@ class _Control(Environment):
                 "nodeGroup": node_group,
                 "commandList": command_list,
                 "sayYes": say_yes,
-                "async": Async,
+                "async": asynchronous,
             },
             delimiter=",",
         )
@@ -3313,8 +3312,8 @@ class _Control(Environment):
         self,
         env_name: str,
         node_id: int,
-        command_list: dict,
-        say_yes: list[bool] = None,
+        command_list: list[dict],
+        say_yes: bool = True,
     ):
         """
         :param env_name: target environment name.
@@ -3330,15 +3329,14 @@ class _Control(Environment):
                 "commandList": command_list,
                 "sayYes": say_yes,
             },
-            delimiter=",",
         )
 
     def ExecCmdByType(
         self,
         env_name: str,
         node_type: str,
-        command_list: dict,
-        say_yes: list[bool] = None,
+        command_list: list[dict],
+        say_yes: bool = True,
     ):
         return self._get(
             "ExecCmdByType",
@@ -3348,37 +3346,6 @@ class _Control(Environment):
                 "commandList": command_list,
                 "sayYes": say_yes,
             },
-            delimiter=",",
-        )
-
-    def ExecCmdInner(
-        self,
-        env_name: str,
-        target_app_id: str,
-        session: str,
-        command_list: dict,
-        node_type: list[str] = None,
-        node_id: list[int] = None,
-        user_name: list[str] = None,
-        say_yes: list[bool] = None,
-        node_group: list[str] = None,
-        Async: list[bool] = None,
-    ):
-        return self._get(
-            "ExecCmdInner",
-            params={
-                "envName": env_name,
-                "targetAppId": target_app_id,
-                "session": session,
-                "commandList": command_list,
-                "nodeType": node_type,
-                "nodeId": node_id,
-                "userName": user_name,
-                "sayYes": say_yes,
-                "nodeGroup": node_group,
-                "async": Async,
-            },
-            delimiter=",",
         )
 
     def ExecDockerRunCmd(self, env_name: str, node_id: int):
@@ -3390,7 +3357,7 @@ class _Control(Environment):
             },
         )
 
-    def Export(
+    def ExportEnv(
         self,
         env_name: str,
         settings: str,
@@ -3400,7 +3367,7 @@ class _Control(Environment):
         :param settings: settings for export
         """
         return self._get(
-            "Export",
+            "ExportEnv",
             params={
                 "envName": env_name,
                 "settings": settings,
