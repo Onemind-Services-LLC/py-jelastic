@@ -779,9 +779,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.ExecCmdByGroup"><code class="docutils literal notranslate"><span class="pre">_Control.ExecCmdByGroup()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.ExecCmdById"><code class="docutils literal notranslate"><span class="pre">_Control.ExecCmdById()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.ExecCmdByType"><code class="docutils literal notranslate"><span class="pre">_Control.ExecCmdByType()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.ExecCmdInner"><code class="docutils literal notranslate"><span class="pre">_Control.ExecCmdInner()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.ExecDockerRunCmd"><code class="docutils literal notranslate"><span class="pre">_Control.ExecDockerRunCmd()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.Export"><code class="docutils literal notranslate"><span class="pre">_Control.Export()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.ExportEnv"><code class="docutils literal notranslate"><span class="pre">_Control.ExportEnv()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.Finish"><code class="docutils literal notranslate"><span class="pre">_Control.Finish()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.FireWallStatus"><code class="docutils literal notranslate"><span class="pre">_Control.FireWallStatus()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.GetActiveEnvs"><code class="docutils literal notranslate"><span class="pre">_Control.GetActiveEnvs()</span></code></a></li>
@@ -4968,8 +4967,8 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">node_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">command_list</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
-        <span class="n">say_yes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">command_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span>
+        <span class="n">say_yes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
             <span class="s2">&quot;ExecCmd&quot;</span><span class="p">,</span>
@@ -4979,7 +4978,6 @@
                 <span class="s2">&quot;commandList&quot;</span><span class="p">:</span> <span class="n">command_list</span><span class="p">,</span>
                 <span class="s2">&quot;sayYes&quot;</span><span class="p">:</span> <span class="n">say_yes</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
 
 
@@ -4989,9 +4987,9 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">node_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">command_list</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
-        <span class="n">say_yes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">Async</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">command_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span>
+        <span class="n">say_yes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">asynchronous</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param env_name: target environment name.</span>
@@ -5007,7 +5005,7 @@
                 <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
                 <span class="s2">&quot;commandList&quot;</span><span class="p">:</span> <span class="n">command_list</span><span class="p">,</span>
                 <span class="s2">&quot;sayYes&quot;</span><span class="p">:</span> <span class="n">say_yes</span><span class="p">,</span>
-                <span class="s2">&quot;async&quot;</span><span class="p">:</span> <span class="n">Async</span><span class="p">,</span>
+                <span class="s2">&quot;async&quot;</span><span class="p">:</span> <span class="n">asynchronous</span><span class="p">,</span>
             <span class="p">},</span>
             <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
@@ -5019,8 +5017,8 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">node_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">command_list</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
-        <span class="n">say_yes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">command_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span>
+        <span class="n">say_yes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param env_name: target environment name.</span>
@@ -5036,7 +5034,6 @@
                 <span class="s2">&quot;commandList&quot;</span><span class="p">:</span> <span class="n">command_list</span><span class="p">,</span>
                 <span class="s2">&quot;sayYes&quot;</span><span class="p">:</span> <span class="n">say_yes</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
 
 
@@ -5046,8 +5043,8 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">node_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">command_list</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
-        <span class="n">say_yes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">command_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span>
+        <span class="n">say_yes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
             <span class="s2">&quot;ExecCmdByType&quot;</span><span class="p">,</span>
@@ -5057,40 +5054,6 @@
                 <span class="s2">&quot;commandList&quot;</span><span class="p">:</span> <span class="n">command_list</span><span class="p">,</span>
                 <span class="s2">&quot;sayYes&quot;</span><span class="p">:</span> <span class="n">say_yes</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
-        <span class="p">)</span></div>
-
-
-<div class="viewcode-block" id="_Control.ExecCmdInner">
-<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Control.ExecCmdInner">[docs]</a>
-    <span class="k">def</span> <span class="nf">ExecCmdInner</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">target_app_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">session</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">command_list</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
-        <span class="n">node_type</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">node_id</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">user_name</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">say_yes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">Async</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
-            <span class="s2">&quot;ExecCmdInner&quot;</span><span class="p">,</span>
-            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
-                <span class="s2">&quot;targetAppId&quot;</span><span class="p">:</span> <span class="n">target_app_id</span><span class="p">,</span>
-                <span class="s2">&quot;session&quot;</span><span class="p">:</span> <span class="n">session</span><span class="p">,</span>
-                <span class="s2">&quot;commandList&quot;</span><span class="p">:</span> <span class="n">command_list</span><span class="p">,</span>
-                <span class="s2">&quot;nodeType&quot;</span><span class="p">:</span> <span class="n">node_type</span><span class="p">,</span>
-                <span class="s2">&quot;nodeId&quot;</span><span class="p">:</span> <span class="n">node_id</span><span class="p">,</span>
-                <span class="s2">&quot;userName&quot;</span><span class="p">:</span> <span class="n">user_name</span><span class="p">,</span>
-                <span class="s2">&quot;sayYes&quot;</span><span class="p">:</span> <span class="n">say_yes</span><span class="p">,</span>
-                <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
-                <span class="s2">&quot;async&quot;</span><span class="p">:</span> <span class="n">Async</span><span class="p">,</span>
-            <span class="p">},</span>
-            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
 
 
@@ -5106,9 +5069,9 @@
         <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="_Control.Export">
-<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Control.Export">[docs]</a>
-    <span class="k">def</span> <span class="nf">Export</span><span class="p">(</span>
+<div class="viewcode-block" id="_Control.ExportEnv">
+<a class="viewcode-back" href="../../../environment.html#jelastic.api.environment._Control.ExportEnv">[docs]</a>
+    <span class="k">def</span> <span class="nf">ExportEnv</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">settings</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -5118,7 +5081,7 @@
 <span class="sd">        :param settings: settings for export</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
-            <span class="s2">&quot;Export&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ExportEnv&quot;</span><span class="p">,</span>
             <span class="n">params</span><span class="o">=</span><span class="p">{</span>
                 <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
                 <span class="s2">&quot;settings&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="p">,</span>
