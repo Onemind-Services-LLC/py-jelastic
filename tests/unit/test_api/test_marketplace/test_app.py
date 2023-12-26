@@ -46,14 +46,14 @@ def test_get_addon_list(client):
     response = client.App.GetAddonList(
         "env",
         ["nodegroup1", "nodegroup2", "nodegroup3"],
-        ["search1", "search2", "search3"],
+        {"search1": "value1", "search2": "value2", "search3": "value3"},
     )
     client._get.assert_called_with(
         "GetAddonList",
         params={
             "envName": "env",
             "nodeGroup": ["nodegroup1", "nodegroup2", "nodegroup3"],
-            "search": ["search1", "search2", "search3"],
+            "search": {"search1": "value1", "search2": "value2", "search3": "value3"},
         },
     )
     assert response == success_response
