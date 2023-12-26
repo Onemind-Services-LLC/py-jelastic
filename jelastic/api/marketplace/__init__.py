@@ -342,7 +342,7 @@ class _App(Marketplace):
         self,
         envName: str,
         node_group: list[str] = None,
-        search: list[str] = None,
+        search: dict = None,
     ):
         """
         :param envName: target environment name.
