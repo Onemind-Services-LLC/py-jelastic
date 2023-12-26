@@ -4404,7 +4404,7 @@ class _Control(Environment):
     def RemoveContainerEnvVars(
         self,
         env_name: str,
-        vars: str,
+        vars: list[str],
         node_group: list[str] = None,
         node_id: list[int] = None,
     ):
@@ -4422,7 +4422,6 @@ class _Control(Environment):
                 "nodeGroup": node_group,
                 "nodeId": node_id,
             },
-            delimiter=",",
         )
 
     def RemoveContainerVolume(
