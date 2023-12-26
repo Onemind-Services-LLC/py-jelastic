@@ -1637,19 +1637,19 @@
 
     <span class="k">def</span> <span class="nf">GetAddonList</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">envName</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">env_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">node_group</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">search</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        :param envName: target environment name.</span>
+<span class="sd">        :param env_name: target environment name.</span>
 <span class="sd">        :param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.</span>
 <span class="sd">        :param search: JSON object with the search parameters. For example (all fields are optional):</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
             <span class="s2">&quot;GetAddonList&quot;</span><span class="p">,</span>
             <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">envName</span><span class="p">,</span>
+                <span class="s2">&quot;envName&quot;</span><span class="p">:</span> <span class="n">env_name</span><span class="p">,</span>
                 <span class="s2">&quot;nodeGroup&quot;</span><span class="p">:</span> <span class="n">node_group</span><span class="p">,</span>
                 <span class="s2">&quot;search&quot;</span><span class="p">:</span> <span class="n">search</span><span class="p">,</span>
             <span class="p">},</span>
