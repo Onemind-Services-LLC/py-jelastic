@@ -1,5 +1,4 @@
 import json
-import logging
 from abc import ABC
 from datetime import date, datetime
 from typing import Any, Literal, Optional
@@ -12,8 +11,6 @@ from .exceptions import *
 
 RequestData = dict[Any, Any]
 VALID_METHODS = Literal["get", "post"]
-
-logger = logging.getLogger(__name__)
 
 __all__ = ["ClientAbstract"]
 
