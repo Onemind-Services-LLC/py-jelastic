@@ -1373,12 +1373,7 @@ def test_exec_cmd_by_group(client):
 
 def test_exec_cmd_by_id(client):
     client._get.return_value = success_response
-    response = client.Control.ExecCmdById(
-        "env",
-        1,
-        [{"key": "value"}],
-        True
-    )
+    response = client.Control.ExecCmdById("env", 1, [{"key": "value"}], True)
     client._get.assert_called_once_with(
         "ExecCmdById",
         params={
@@ -1393,24 +1388,17 @@ def test_exec_cmd_by_id(client):
 
 def test_exec_cmd_by_type(client):
     client._get.return_value = success_response
-    response = client.Control.ExecCmdByType(
-        "env",
-        "type",
-        [{"key": "value"}],
-        True
-    )
+    response = client.Control.ExecCmdByType("env", "type", [{"key": "value"}], True)
     client._get.assert_called_once_with(
         "ExecCmdByType",
         params={
             "envName": "env",
             "nodeType": "type",
             "commandList": [{"key": "value"}],
-            "sayYes": True
+            "sayYes": True,
         },
     )
     assert response == success_response
-
-
 
 
 def test_exec_docker_run_cmd(client):

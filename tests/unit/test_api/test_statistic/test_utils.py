@@ -1,17 +1,4 @@
-from unittest.mock import patch, Mock
-import pytest
-
-from jelastic.api import Statistic
-
-success_response = {"error": "", "reason": 0, "result": 0, "source": "billing"}
-
-
-@pytest.fixture
-def client():
-    with patch("jelastic.api.abstract.ClientAbstract._get") as mock_get:
-        statistic = Statistic(session=Mock(), token="token")
-        statistic._get = mock_get
-        yield statistic
+from . import *
 
 
 def test_generate_statistics(client):

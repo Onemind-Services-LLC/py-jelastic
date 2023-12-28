@@ -1,14 +1,6 @@
 from . import *
 
 
-@pytest.fixture
-def client():
-    with patch("jelastic.api.abstract.ClientAbstract._get") as mock_get:
-        security = Security(session=Mock(), token="token")
-        security._get = mock_get
-        yield security
-
-
 def test_activate(client):
     client._get.return_value = success_response
     response = client.License.Activate(
