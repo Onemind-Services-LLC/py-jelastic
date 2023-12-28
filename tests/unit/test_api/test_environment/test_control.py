@@ -1321,30 +1321,17 @@ def test_exec_cmd(client):
     response = client.Control.ExecCmd(
         "env",
         "type",
-        {
-            "command1": "val1",
-            "command2": "val2",
-            "command3": "val3",
-            "command4": "val4",
-            "command5": "val5",
-        },
-        [True, False, True],
+        [{"key": "value"}],
+        True,
     )
     client._get.assert_called_once_with(
         "ExecCmd",
         params={
             "envName": "env",
             "nodeType": "type",
-            "commandList": {
-                "command1": "val1",
-                "command2": "val2",
-                "command3": "val3",
-                "command4": "val4",
-                "command5": "val5",
-            },
-            "sayYes": [True, False, True],
+            "commandList": [{"key": "value"}],
+            "sayYes": True,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -1386,111 +1373,30 @@ def test_exec_cmd_by_group(client):
 
 def test_exec_cmd_by_id(client):
     client._get.return_value = success_response
-    response = client.Control.ExecCmdById(
-        "env",
-        1,
-        {
-            "command1": "val1",
-            "command2": "val2",
-            "command3": "val3",
-            "command4": "val4",
-            "command5": "val5",
-        },
-        [True, False, True],
-    )
+    response = client.Control.ExecCmdById("env", 1, [{"key": "value"}], True)
     client._get.assert_called_once_with(
         "ExecCmdById",
         params={
             "envName": "env",
             "nodeId": 1,
-            "commandList": {
-                "command1": "val1",
-                "command2": "val2",
-                "command3": "val3",
-                "command4": "val4",
-                "command5": "val5",
-            },
-            "sayYes": [True, False, True],
+            "commandList": [{"key": "value"}],
+            "sayYes": True,
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_exec_cmd_by_type(client):
     client._get.return_value = success_response
-    response = client.Control.ExecCmdByType(
-        "env",
-        "type",
-        {
-            "command1": "val1",
-            "command2": "val2",
-            "command3": "val3",
-            "command4": "val4",
-            "command5": "val5",
-        },
-        [True, False, True],
-    )
+    response = client.Control.ExecCmdByType("env", "type", [{"key": "value"}], True)
     client._get.assert_called_once_with(
         "ExecCmdByType",
         params={
             "envName": "env",
             "nodeType": "type",
-            "commandList": {
-                "command1": "val1",
-                "command2": "val2",
-                "command3": "val3",
-                "command4": "val4",
-                "command5": "val5",
-            },
-            "sayYes": [True, False, True],
+            "commandList": [{"key": "value"}],
+            "sayYes": True,
         },
-        delimiter=",",
-    )
-    assert response == success_response
-
-
-def test_exec_cmd_inner(client):
-    client._get.return_value = success_response
-    response = client.Control.ExecCmdInner(
-        "env",
-        "app id",
-        "session",
-        {
-            "command1": "val1",
-            "command2": "val2",
-            "command3": "val3",
-            "command4": "val4",
-            "command5": "val5",
-        },
-        ["type1", "type2", "type3"],
-        [1, 2, 3],
-        ["name1", "name2", "name3"],
-        [True, False, True],
-        ["group1", "group2", "group3"],
-        [True, False, True],
-    )
-    client._get.assert_called_once_with(
-        "ExecCmdInner",
-        params={
-            "envName": "env",
-            "targetAppId": "app id",
-            "session": "session",
-            "commandList": {
-                "command1": "val1",
-                "command2": "val2",
-                "command3": "val3",
-                "command4": "val4",
-                "command5": "val5",
-            },
-            "nodeType": ["type1", "type2", "type3"],
-            "nodeId": [1, 2, 3],
-            "userName": ["name1", "name2", "name3"],
-            "sayYes": [True, False, True],
-            "nodeGroup": ["group1", "group2", "group3"],
-            "async": [True, False, True],
-        },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -1508,11 +1414,11 @@ def test_exec_docker_run_cmd(client):
     assert response == success_response
 
 
-def test_export(client):
+def test_export_env(client):
     client._get.return_value = success_response
-    response = client.Control.Export("env", "settings")
+    response = client.Control.ExportEnv("env", "settings")
     client._get.assert_called_once_with(
-        "Export",
+        "ExportEnv",
         params={
             "envName": "env",
             "settings": "settings",
@@ -2461,7 +2367,7 @@ def test_remove_container_env_vars(client):
     client._get.return_value = success_response
     response = client.Control.RemoveContainerEnvVars(
         "env",
-        "vars",
+        ["var1", "var2"],
         ["group1", "group2", "group3"],
         [1, 2, 3],
     )
@@ -2469,11 +2375,10 @@ def test_remove_container_env_vars(client):
         "RemoveContainerEnvVars",
         params={
             "envName": "env",
-            "vars": "vars",
+            "vars": ["var1", "var2"],
             "nodeGroup": ["group1", "group2", "group3"],
             "nodeId": [1, 2, 3],
         },
-        delimiter=",",
     )
     assert response == success_response
 

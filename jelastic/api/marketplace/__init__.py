@@ -106,10 +106,10 @@ class _Installation(Marketplace):
     def ExecuteAction(
         self,
         app_unique_name: str,
-        action: list[str] = None,
-        settings_id: list[str] = None,
-        params: list[str] = None,
-        lang: list[str] = None,
+        action: str,
+        settings_id: str = "main",
+        params: dict = None,
+        lang: str = None,
     ):
         """
         :param app_unique_name: unique identifier of the particular installation.
@@ -127,7 +127,6 @@ class _Installation(Marketplace):
                 "params": params,
                 "lang": lang,
             },
-            delimiter=",",
         )
 
     def GetEnvAppid(
@@ -185,19 +184,24 @@ class _Installation(Marketplace):
     def Uninstall(
         self,
         app_unique_name: str,
-        force: list[bool] = None,
+        target_app_id: str,
+        app_template_id: str,
+        force: bool = False,
     ):
         """
-        param app_unique_name: unique identifier of the particular installation.
-        param force: defines whether to proceed (true) or interrupt (false) the operation in case of errors.
+        :param app_unique_name: unique identifier of the particular installation.
+        :param target_app_id: unique identifier of the target application.
+        :param app_template_id: unique identifier of the target application template.
+        :param force: defines whether to proceed (true) or interrupt (false) the operation in case of errors.
         """
         return self._get(
             "Uninstall",
             params={
                 "appUniqueName": app_unique_name,
+                "targetAppId": target_app_id,
+                "appTemplateId": app_template_id,
                 "force": force,
             },
-            delimiter=",",
         )
 
 
@@ -296,7 +300,6 @@ class _Console(Marketplace):
 
 
 class _App(Marketplace):
-
     """
     Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.App
     """
@@ -340,19 +343,19 @@ class _App(Marketplace):
 
     def GetAddonList(
         self,
-        envName: str,
+        env_name: str,
         node_group: list[str] = None,
-        search: list[str] = None,
+        search: dict = None,
     ):
         """
-        :param envName: target environment name.
+        :param env_name: target environment name.
         :param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
         :param search: JSON object with the search parameters. For example (all fields are optional):
         """
         return self._get(
             "GetAddonList",
             params={
-                "envName": envName,
+                "envName": env_name,
                 "nodeGroup": node_group,
                 "search": search,
             },
@@ -453,13 +456,15 @@ class _App(Marketplace):
 
     def InstallAddon(
         self,
-        id: str,
-        settings: list[str] = None,
+        env_name: str,
+        app_id: str,
+        settings: dict = None,
         node_group: list[str] = None,
-        skip_email: list[bool] = None,
+        skip_email: bool = False,
     ):
         """
-        :param id: unique identifier of the target JPS manifest in the Marketplace.
+        :param env_name: target environment name.
+        :param app_id: unique identifier of the target JPS manifest in the Marketplace.
         :param settings: JSON object with custom settings for the JPS manifest.
         :param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
         :param skip_email: defines whether to send email after the successful installation (false) or not (true).
@@ -467,7 +472,8 @@ class _App(Marketplace):
         return self._get(
             "InstallAddon",
             params={
-                "id": id,
+                "id": app_id,
+                "envName": env_name,
                 "settings": settings,
                 "nodeGroup": node_group,
                 "skipEmail": skip_email,
@@ -739,20 +745,6 @@ class _Jps(Marketplace):
                 "logsPath": logs_path,
                 "writeOutputTasks": write_output_tasks,
                 "skipNodeEmails": skip_node_emails,
-            },
-            delimiter=",",
-        )
-
-    def Uninstall(
-        self,
-        app_unique_name: str,
-        force: list[bool] = None,
-    ):
-        return self._get(
-            "Uninstall",
-            params={
-                "appUniqueName": app_unique_name,
-                "force": force,
             },
             delimiter=",",
         )
