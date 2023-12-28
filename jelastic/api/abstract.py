@@ -1,11 +1,9 @@
 import json
+import requests
 from abc import ABC
 from datetime import date, datetime
 from typing import Any, Literal, Optional
 from urllib.parse import urlencode
-
-from httpx import Client
-from httpx._types import QueryParamTypes
 
 from .exceptions import *
 
@@ -34,7 +32,7 @@ class ClientAbstract(ABC):
     _endpoint2: str
     _required_permission: str
 
-    def __init__(self, session: Client, token: str, debug: bool = False) -> None:
+    def __init__(self, session: requests.Session, token: str, debug: bool = False) -> None:
         """
         Initialize the client with the given session and token.
 
@@ -166,7 +164,7 @@ class ClientAbstract(ABC):
     def _get(
         self,
         *args: str,
-        params: QueryParamTypes = None,
+        params: dict[str, Any] = None,
         delimiter: str = None,
         datetime_format: str = None,
     ) -> dict[str, Any]:
@@ -176,13 +174,13 @@ class ClientAbstract(ABC):
         url = self._endpoint(
             *args, params=params, delimiter=delimiter, datetime_format=datetime_format
         )
-        request = self._session.build_request(
-            method="GET",
-            url=url,
-        )
 
-        response = self._session.send(request)
-        if response.is_error:
+        # Get the X-Base-Url header and remove it from the session
+        base_url = self._session.headers.pop("X-Base-Url")
+        url = f"{base_url}{url}"
+
+        response = self._session.get(url)
+        if not response.ok:
             if response.status_code == 404:
                 raise JelasticResourceNotFound(f"API endpoint not found: {url}")
 

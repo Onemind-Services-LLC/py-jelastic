@@ -13,7 +13,7 @@ def client():
 
 
 def test_init(client):
-    assert client._session.base_url == "https://api.jelastic.com/1.0/"
+    assert client._session.headers.get('X-Base-Url') == "https://api.jelastic.com/1.0/"
     assert client._token == "token"
     assert client._debug is False
     assert client._state == ClientState.UNOPENED
@@ -24,7 +24,7 @@ def test_init_without_http_prefix(client):
         base_url="api.jelastic.com",
         token="token",
     )
-    assert client._session.base_url == "https://api.jelastic.com/1.0/"
+    assert client._session.headers.get('X-Base-Url') == "https://api.jelastic.com/1.0/"
 
 
 def test_init_with_trailing_slash(client):
@@ -32,7 +32,7 @@ def test_init_with_trailing_slash(client):
         base_url="https://api.jelastic.com/",
         token="token",
     )
-    assert client._session.base_url == "https://api.jelastic.com/1.0/"
+    assert client._session.headers.get('X-Base-Url') == "https://api.jelastic.com/1.0/"
 
 
 def test_enter(client):
