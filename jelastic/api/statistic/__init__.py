@@ -37,7 +37,6 @@ class Statistic(ClientAbstract):
         return _Utils(session=self._session, token=self._token, debug=self._debug)
 
 
-
 class _Statistic(Statistic):
     """
     Ref: https://docs.jelastic.com/api/private/#!/api/statistic.Statistic
@@ -227,6 +226,7 @@ class _Statistic(Statistic):
             "SearchNodes",
             params={"checksum": checksum, "search": search},
         )
+
 
 class _Utils(Statistic):
     """

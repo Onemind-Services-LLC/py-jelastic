@@ -212,6 +212,7 @@ def test_search_nodes(client):
     )
     assert response == success_response
 
+
 def test_generate_statistics(client):
     client._get.return_value = success_response
     response = client.Utils.GenerateStatistics(1, 1, "stat_json", "checksum")
