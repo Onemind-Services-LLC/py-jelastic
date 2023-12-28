@@ -1,14 +1,6 @@
 from . import *
 
 
-@pytest.fixture
-def client():
-    with patch("jelastic.api.abstract.ClientAbstract._get") as mock_get:
-        system = System(session=Mock(), token="token")
-        system._get = mock_get
-        yield system
-
-
 def test_add_app(client):
     client._get.return_value = success_response
     response = client.Cluster.AddApp("app id")
