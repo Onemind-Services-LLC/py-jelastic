@@ -11,6 +11,12 @@ Statistic
    :undoc-members:
    :show-inheritance:
 
+.. automodule:: jelastic.api.statistic._Statistic
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
 .. automodule:: jelastic.api.statistic._System
    :members:
    :undoc-members:
