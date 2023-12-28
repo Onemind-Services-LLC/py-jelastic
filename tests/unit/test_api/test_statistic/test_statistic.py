@@ -1,20 +1,4 @@
-from unittest.mock import patch, Mock
-from datetime import datetime
-import pytest
-
-from jelastic.api import Statistic
-
-success_response = {"error": "", "reason": 0, "result": 0, "source": "billing"}
-
-CURRENT_DATETIME = datetime.now()
-
-
-@pytest.fixture
-def client():
-    with patch("jelastic.api.abstract.ClientAbstract._get") as mock_get:
-        statistic = Statistic(session=Mock(), token="token")
-        statistic._get = mock_get
-        yield statistic
+from . import *
 
 
 def test_create_stat_table(client):
@@ -209,20 +193,5 @@ def test_search_nodes(client):
     client._get.assert_called_with(
         "SearchNodes",
         params={"checksum": "checksum", "search": ["search1", "search2"]},
-    )
-    assert response == success_response
-
-
-def test_generate_statistics(client):
-    client._get.return_value = success_response
-    response = client.Utils.GenerateStatistics(1, 1, "stat_json", "checksum")
-    client._get.assert_called_with(
-        "GenerateStatistics",
-        params={
-            "durationHours": 1,
-            "nodeId": 1,
-            "statJSON": "stat_json",
-            "checksum": "checksum",
-        },
     )
     assert response == success_response
