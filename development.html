@@ -604,6 +604,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Development</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#jelastic.api.development.Development"><code class="docutils literal notranslate"><span class="pre">Development</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#jelastic.api.development.Development.Applications"><code class="docutils literal notranslate"><span class="pre">Development.Applications</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#jelastic.api.development.Development.Scripting"><code class="docutils literal notranslate"><span class="pre">Development.Scripting</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -1309,10 +1310,25 @@
 </div></blockquote>
 </dd></dl>
 
+<dl class="py property">
+<dt class="sig sig-object py" id="jelastic.api.development.Development.Scripting">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Scripting</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">_Scripting</span></em><a class="headerlink" href="#jelastic.api.development.Development.Scripting" title="Link to this definition"></a></dt>
+<dd><p>Service Management applications. Used to create new applications and settings.</p>
+<blockquote>
+<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">jelastic</span> <span class="kn">import</span> <span class="n">Jelastic</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jelastic</span> <span class="o">=</span> <span class="n">Jelastic</span><span class="p">(</span><span class="s1">&#39;https://jca.xapp.cloudmydc.com&#39;</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="s1">&#39;d6f4e314a5b5fefd164995169f28ae32d987704f&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jelastic</span><span class="o">.</span><span class="n">development</span><span class="o">.</span><span class="n">Scripting</span>
+</pre></div>
+</div>
+<p>Ref: <a class="reference external" href="https://docs.jelastic.com/api/private/#!/api/development.Scripting">https://docs.jelastic.com/api/private/#!/api/development.Scripting</a></p>
+</div></blockquote>
+</dd></dl>
+
 </dd></dl>
 
 <p id="module-jelastic.api.development._Applications">Service Management applications. Used to create new applications and settings.</p>
 <p>Ref: <a class="reference external" href="https://docs.jelastic.com/api/private/#!/api/development.Applications">https://docs.jelastic.com/api/private/#!/api/development.Applications</a></p>
+<p id="module-jelastic.api.development._Scripting">Ref: <a class="reference external" href="https://docs.jelastic.com/api/private/#!/api/development.Scripting">https://docs.jelastic.com/api/private/#!/api/development.Scripting</a></p>
 </section>
 
 
