@@ -2771,7 +2771,7 @@ def test_restart_nodes(client):
     client._get.return_value = success_response
     response = client.Control.RestartNodes(
         "env",
-        "group",
+        ["group1", "group2", "group3"],
         [1, 2, 3],
         [1, 2, 3],
         [True, False, True],
@@ -2781,7 +2781,7 @@ def test_restart_nodes(client):
         "RestartNodes",
         params={
             "envName": "env",
-            "nodeGroup": "group",
+            "nodeGroup": ["group1", "group2", "group3"],
             "nodeId": [1, 2, 3],
             "delay": [1, 2, 3],
             "isSequential": [True, False, True],
