@@ -10,3 +10,8 @@ Development
    :members:
    :undoc-members:
    :show-inheritance:
+
+.. automodule:: jelastic.api.development._Scripting
+   :members:
+   :undoc-members:
+   :show-inheritance:
