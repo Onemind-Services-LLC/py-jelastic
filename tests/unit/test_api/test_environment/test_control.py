@@ -2771,23 +2771,22 @@ def test_restart_nodes(client):
     client._get.return_value = success_response
     response = client.Control.RestartNodes(
         "env",
-        ["group1", "group2", "group3"],
-        [1, 2, 3],
-        [1, 2, 3],
-        [True, False, True],
-        [True, False, True],
+        "group",
+        1,
+        2,
+        True,
+        True,
     )
     client._get.assert_called_once_with(
         "RestartNodes",
         params={
             "envName": "env",
-            "nodeGroup": ["group1", "group2", "group3"],
-            "nodeId": [1, 2, 3],
-            "delay": [1, 2, 3],
-            "isSequential": [True, False, True],
-            "manageDNSState": [True, False, True],
+            "nodeGroup": "group",
+            "nodeId": 1,
+            "delay": 2,
+            "isSequential": True,
+            "manageDNSState": True,
         },
-        delimiter=",",
     )
     assert response == success_response
 

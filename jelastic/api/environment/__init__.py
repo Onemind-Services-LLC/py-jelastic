@@ -4773,11 +4773,11 @@ class _Control(Environment):
     def RestartNodes(
         self,
         env_name: str,
-        node_group: list[str] = None,
-        node_id: list[int] = None,
-        delay: list[int] = None,
-        is_sequential: list[bool] = None,
-        manage_dns_state: list[bool] = None,
+        node_group: str = None,
+        node_id: int = None,
+        delay: int = None,
+        is_sequential: bool = False,
+        manage_dns_state: bool = False,
     ):
         """
         :param env_name: target environment name.
@@ -4797,7 +4797,6 @@ class _Control(Environment):
                 "isSequential": is_sequential,
                 "manageDNSState": manage_dns_state,
             },
-            delimiter=",",
         )
 
     def RestartNodesByGroup(
