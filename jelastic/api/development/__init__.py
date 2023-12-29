@@ -23,6 +23,23 @@ class Development(ClientAbstract):
             debug=self._debug,
         )
 
+    @property
+    def Scripting(self) -> "_Scripting":
+        """
+        Service Management applications. Used to create new applications and settings.
+
+         >>> from jelastic import Jelastic
+         >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+         >>> jelastic.development.Scripting
+
+         Ref: https://docs.jelastic.com/api/private/#!/api/development.Scripting
+        """
+        return _Scripting(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+        )
+
 
 class _Applications(Development):
     """
@@ -595,6 +612,138 @@ class _Applications(Development):
                 "targetAppid": target_appid,
                 "login": login,
                 "rights": rights,
+            },
+            delimiter=",",
+        )
+
+
+class _Scripting(Development):
+    """
+    Ref: https://docs.jelastic.com/api/private/#!/api/development.Scripting
+    """
+
+    _endpoint2 = "scripting"
+
+    def Build(
+        self,
+        script: str,
+    ):
+        return self._get(
+            "Build",
+            params={
+                "script": script,
+            },
+        )
+
+    def BuildStubs(self):
+        return self._get("BuildStubs", params={})
+
+    def ChangeScript(
+        self,
+        name: str,
+        field: str,
+        value: list[str] = None,
+    ):
+        return self._get(
+            "ChangeScript",
+            params={
+                "name": name,
+                "field": field,
+                "value": value,
+            },
+            delimiter=",",
+        )
+
+    def CreateScript(
+        self,
+        name: str,
+        type: str,
+        code: list[str] = None,
+        annotation: list[str] = None,
+    ):
+        return self._get(
+            "CreateScript",
+            params={
+                "name": name,
+                "type": type,
+                "code": code,
+                "annotation": annotation,
+            },
+            delimiter=",",
+        )
+
+    def DeleteScript(self, name: str):
+        return self._get(
+            "DeleteScript",
+            params={
+                "name": name,
+            },
+        )
+
+    def Eval(
+        self,
+        script: str,
+        params: list[any] = None,
+    ):
+        return self._get(
+            "Eval",
+            params={
+                "script": script,
+                "params": params,
+            },
+            delimiter=",",
+        )
+
+    def EvalCode(
+        self,
+        code: str,
+        type: str,
+        annotation: list[str] = None,
+        params: list[any] = None,
+    ):
+        return self._get(
+            "EvalCode",
+            params={
+                "code": code,
+                "type": type,
+                "annotation": annotation,
+                "params": params,
+            },
+            delimiter=",",
+        )
+
+    def ExportScripts(self, overwrite: list[bool] = None):
+        return self._get(
+            "ExportScripts",
+            params={
+                "overwrite": overwrite,
+            },
+            delimiter=",",
+        )
+
+    def GetEngineInfo(self):
+        return self._get("GetEngineInfo", params={})
+
+    def GetScript(self, name: str):
+        return self._get(
+            "GetScript",
+            params={
+                "name": name,
+            },
+        )
+
+    def GetScripts(
+        self,
+        type: list[str] = None,
+        From: list[int] = None,
+        count: list[int] = None,
+    ):
+        return self._get(
+            "GetScripts",
+            params={
+                "type": type,
+                "from": From,
+                "count": count,
             },
             delimiter=",",
         )
