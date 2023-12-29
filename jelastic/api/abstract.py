@@ -178,7 +178,8 @@ class ClientAbstract(ABC):
         )
 
         # Get the X-Base-Url header and remove it from the session
-        base_url = self._session.headers.pop("X-Base-Url")
+        base_url = self._session.headers.get("X-Base-Url", None)
+        assert base_url is not None
         url = f"{base_url}{url}"
 
         response = self._session.get(url)
