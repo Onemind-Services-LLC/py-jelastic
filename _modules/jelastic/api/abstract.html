@@ -1485,7 +1485,8 @@
         <span class="p">)</span>
 
         <span class="c1"># Get the X-Base-Url header and remove it from the session</span>
-        <span class="n">base_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;X-Base-Url&quot;</span><span class="p">)</span>
+        <span class="n">base_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;X-Base-Url&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">base_url</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
         <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_url</span><span class="si">}{</span><span class="n">url</span><span class="si">}</span><span class="s2">&quot;</span>
 
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
