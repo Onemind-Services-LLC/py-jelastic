@@ -17,9 +17,12 @@ def test_build(client):
 def test_build_stubs(client):
     client._get.return_value = success_response
     response = client.Scripting.BuildStubs("app_id")
-    client._get.assert_called_once_with("BuildStubs", params={
-        "appid": "app_id",
-    })
+    client._get.assert_called_once_with(
+        "BuildStubs",
+        params={
+            "appid": "app_id",
+        },
+    )
     assert response == success_response
 
 
@@ -67,7 +70,7 @@ def test_create_script(client):
 
 def test_delete_script(client):
     client._get.return_value = success_response
-    response = client.Scripting.DeleteScript("app_id","name")
+    response = client.Scripting.DeleteScript("app_id", "name")
     client._get.assert_called_once_with(
         "DeleteScript",
         params={
@@ -99,11 +102,7 @@ def test_eval(client):
 def test_eval_code(client):
     client._get.return_value = success_response
     response = client.Scripting.EvalCode(
-        "app_id",
-        "code",
-        "type",
-        "annotations",
-        "params"
+        "app_id", "code", "type", "annotations", "params"
     )
     client._get.assert_called_once_with(
         "EvalCode",
@@ -120,7 +119,7 @@ def test_eval_code(client):
 
 def test_export_scripts(client):
     client._get.return_value = success_response
-    response = client.Scripting.ExportScripts("app_id",True)
+    response = client.Scripting.ExportScripts("app_id", True)
     client._get.assert_called_once_with(
         "ExportScripts",
         params={
@@ -134,15 +133,18 @@ def test_export_scripts(client):
 def test_get_engine_info(client):
     client._get.return_value = success_response
     response = client.Scripting.GetEngineInfo("app_id")
-    client._get.assert_called_once_with("GetEngineInfo", params={
-        "appid": "app_id",
-    })
+    client._get.assert_called_once_with(
+        "GetEngineInfo",
+        params={
+            "appid": "app_id",
+        },
+    )
     assert response == success_response
 
 
 def test_get_script(client):
     client._get.return_value = success_response
-    response = client.Scripting.GetScript("app_id","name")
+    response = client.Scripting.GetScript("app_id", "name")
     client._get.assert_called_once_with(
         "GetScript",
         params={
@@ -155,12 +157,7 @@ def test_get_script(client):
 
 def test_get_scripts(client):
     client._get.return_value = success_response
-    response = client.Scripting.GetScripts(
-        "app_id",
-        "type",
-        1,
-        2
-    )
+    response = client.Scripting.GetScripts("app_id", "type", 1, 2)
     client._get.assert_called_once_with(
         "GetScripts",
         params={
