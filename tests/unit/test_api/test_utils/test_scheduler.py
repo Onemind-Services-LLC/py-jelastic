@@ -34,7 +34,7 @@ def test_create_env_task(client):
         "CreateEnvTask",
         params={
             "script": "script1",
-            "trigger": '{"cron": "* * * * *"}',
+            "trigger": "cron:* * * * *",
             "envName": "env name",
             "description": "Trigger script on before install",
             "params": '{"key": "value"}',

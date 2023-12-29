@@ -129,7 +129,8 @@ class _Scheduler(Utils):
         :param description: custom description for the task.
         :param params: JSON object with additional trigger parameters.
         """
-        trigger = json.dumps(trigger)
+        trigger_key, trigger_value = next(iter(trigger.items()))
+        trigger = f"{trigger_key}:{trigger_value}"
         params = json.dumps(params)
 
         return self._get(
