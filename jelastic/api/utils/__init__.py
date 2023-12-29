@@ -115,6 +115,7 @@ class _Scheduler(Utils):
         self,
         script: str,
         trigger: dict[TRIGGER_TYPE, str | int],
+        env_name: str,
         description: str = None,
         params: dict = None,
     ):
@@ -124,6 +125,7 @@ class _Scheduler(Utils):
 
         :param script: custom script name to be executed by the task.
         :param trigger: condition or frequency of the script execution (in the format: "trigger_type:value", supported
+        :param env_name: target environment name.
         :param description: custom description for the task.
         :param params: JSON object with additional trigger parameters.
         """
@@ -135,6 +137,7 @@ class _Scheduler(Utils):
             params={
                 "script": script,
                 "trigger": trigger,
+                "envName": env_name,
                 "description": description,
                 "params": params,
             },
