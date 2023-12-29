@@ -1,6 +1,6 @@
 from enum import Enum
 
-from httpx import Client
+import requests
 
 # Import all API endpoints
 from .api import *
@@ -39,8 +39,9 @@ class Jelastic:
         if base_url.endswith("/"):
             base_url = base_url[:-1]
 
-        base_url = f"{base_url}/{version}"
-        self._session = Client(base_url=base_url, timeout=None)
+        base_url = f"{base_url}/{version}/"
+        self._session = requests.Session()
+        self._session.headers.update({"X-Base-Url": base_url})
         self._state = ClientState.UNOPENED
         self._token = token
         self._debug = debug

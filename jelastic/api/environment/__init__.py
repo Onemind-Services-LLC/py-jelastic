@@ -4773,7 +4773,7 @@ class _Control(Environment):
     def RestartNodes(
         self,
         env_name: str,
-        node_group: str,
+        node_group: list[str] = None,
         node_id: list[int] = None,
         delay: list[int] = None,
         is_sequential: list[bool] = None,
