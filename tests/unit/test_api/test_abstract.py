@@ -1,8 +1,10 @@
-import pytest
 from datetime import datetime
-from httpx import Response
-from unittest.mock import Mock
+from unittest.mock import Mock, MagicMock
 from urllib.parse import urlencode
+
+import pytest
+import requests
+
 from jelastic.api.abstract import ClientAbstract
 from jelastic.api.exceptions import *
 
@@ -91,29 +93,45 @@ def test_handle_response(client):
 
 
 def test_get(client):
-    client._session.send = Mock(return_value=Response(200, json={"result": 0}))
-    response = client._get("path")
-    assert response == {"result": 0}
+    # Create a mock response object
+    response = MagicMock(spec=requests.Response)
+    response.status_code = 200
+    response.json.return_value = {"result": 0}
+    client._session.get = Mock(return_value=response)
+    result = client._get("path")
+    assert result == {"result": 0}
 
-    client._session.send = Mock(
-        return_value=Response(200, json={"result": 1, "error": "Error"})
-    )
+    response = MagicMock(spec=requests.Response)
+    response.status_code = 200
+    response.json.return_value = {"result": 1, "error": "Error"}
+    client._session.get = Mock(return_value=response)
     with pytest.raises(JelasticApiError):
         client._get("path")
 
+    response = MagicMock(spec=requests.Response)
+    response.status_code = 200
+    response.json.return_value = {"result": 0}
     client._debug = True
     client._log_debug = Mock()
-    client._session.send = Mock(return_value=Response(200, json={"result": 0}))
+    client._session.get = Mock(return_value=response)
     client._get("path")
     client._log_debug.assert_called()
 
     # Test for 404 error
-    client._session.send = Mock(return_value=Response(404))
+    response = MagicMock(spec=requests.Response)
+    response.status_code = 404
+    response.ok = False
+    response.text = "Not Found"
+    client._session.get = Mock(return_value=response)
     with pytest.raises(JelasticResourceNotFound):
         client._get("path")
 
     # Test for 500 error
-    client._session.send = Mock(return_value=Response(500))
+    response = MagicMock(spec=requests.Response)
+    response.status_code = 500
+    response.ok = False
+    response.text = "Internal Server Error"
+    client._session.get = Mock(return_value=response)
     with pytest.raises(JelasticApiError):
         client._get("path")
 
