@@ -115,7 +115,7 @@ class _Scheduler(Utils):
         self,
         script: str,
         trigger: dict[TRIGGER_TYPE, str | int],
-        env_name: list[str] = None,
+        env_name: str,
         description: str = None,
         params: dict = None,
     ):

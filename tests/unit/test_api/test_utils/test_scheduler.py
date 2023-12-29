@@ -26,7 +26,7 @@ def test_create_env_task(client):
     response = client.Scheduler.CreateEnvTask(
         "script1",
         {"cron": "* * * * *"},
-        ["env1", "env2", "env3"],
+        "env name",
         "Trigger script on before install",
         {"key": "value"},
     )
@@ -35,7 +35,7 @@ def test_create_env_task(client):
         params={
             "script": "script1",
             "trigger": '{"cron": "* * * * *"}',
-            "envName": ["env1", "env2", "env3"],
+            "envName": "env name",
             "description": "Trigger script on before install",
             "params": '{"key": "value"}',
         },
