@@ -1,3 +1,4 @@
+from typing import Any
 from ..abstract import ClientAbstract
 
 __all__ = ["Development"]
@@ -626,124 +627,143 @@ class _Scripting(Development):
 
     def Build(
         self,
+        app_id: str,
         script: str,
     ):
         return self._get(
             "Build",
             params={
+                "appid": app_id,
                 "script": script,
             },
         )
 
-    def BuildStubs(self):
-        return self._get("BuildStubs", params={})
+    def BuildStubs(self, app_id: str):
+        return self._get(
+            "BuildStubs",
+            params={
+                "appid": app_id,
+            },
+        )
 
     def ChangeScript(
         self,
+        app_id: str,
         name: str,
         field: str,
-        value: list[str] = None,
+        value: str = None,
     ):
         return self._get(
             "ChangeScript",
             params={
+                "appid": app_id,
                 "name": name,
                 "field": field,
                 "value": value,
             },
-            delimiter=",",
         )
 
     def CreateScript(
         self,
+        app_id: str,
         name: str,
         type: str,
-        code: list[str] = None,
-        annotation: list[str] = None,
+        code: str = None,
+        annotations: str = None,
     ):
         return self._get(
             "CreateScript",
             params={
+                "appid": app_id,
                 "name": name,
                 "type": type,
                 "code": code,
-                "annotation": annotation,
+                "annotations": annotations,
             },
-            delimiter=",",
         )
 
-    def DeleteScript(self, name: str):
+    def DeleteScript(self, app_id: str, name: str):
         return self._get(
             "DeleteScript",
             params={
+                "appid": app_id,
                 "name": name,
             },
         )
 
     def Eval(
         self,
+        app_id: str,
         script: str,
-        params: list[any] = None,
+        params: Any = None,
     ):
         return self._get(
             "Eval",
             params={
+                "appid": app_id,
                 "script": script,
                 "params": params,
             },
-            delimiter=",",
         )
 
     def EvalCode(
         self,
+        app_id: str,
         code: str,
         type: str,
-        annotation: list[str] = None,
-        params: list[any] = None,
+        annotations: str = None,
+        params: Any = None,
     ):
         return self._get(
             "EvalCode",
             params={
+                "appid": app_id,
                 "code": code,
                 "type": type,
-                "annotation": annotation,
+                "annotations": annotations,
                 "params": params,
             },
-            delimiter=",",
         )
 
-    def ExportScripts(self, overwrite: list[bool] = None):
+    def ExportScripts(self, app_id: str, overwrite: bool = None):
         return self._get(
             "ExportScripts",
             params={
+                "appid": app_id,
                 "overwrite": overwrite,
             },
-            delimiter=",",
         )
 
-    def GetEngineInfo(self):
-        return self._get("GetEngineInfo", params={})
+    def GetEngineInfo(self, app_id: str):
+        return self._get(
+            "GetEngineInfo",
+            params={
+                "appid": app_id,
+            },
+        )
 
-    def GetScript(self, name: str):
+    def GetScript(self, app_id: str, name: str):
         return self._get(
             "GetScript",
             params={
+                "appid": app_id,
                 "name": name,
             },
         )
 
     def GetScripts(
         self,
-        type: list[str] = None,
-        From: list[int] = None,
-        count: list[int] = None,
+        app_id: str,
+        type: str = None,
+        From: int = None,
+        count: int = None,
     ):
         return self._get(
             "GetScripts",
             params={
+                "appid": app_id,
                 "type": type,
                 "from": From,
                 "count": count,
             },
-            delimiter=",",
         )

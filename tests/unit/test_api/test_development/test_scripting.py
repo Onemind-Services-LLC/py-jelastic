@@ -3,42 +3,42 @@ from . import *
 
 def test_build(client):
     client._get.return_value = success_response
-    response = client.Scripting.Build('script')
+    response = client.Scripting.Build("app_id", "script")
     client._get.assert_called_once_with(
         "Build",
         params={
-            "script": 'script',
-        }
+            "appid": "app_id",
+            "script": "script",
+        },
     )
     assert response == success_response
 
 
 def test_build_stubs(client):
     client._get.return_value = success_response
-    response = client.Scripting.BuildStubs()
-    client._get.assert_called_once_with(
-        "BuildStubs",
-        params={
-        }
-    )
+    response = client.Scripting.BuildStubs("app_id")
+    client._get.assert_called_once_with("BuildStubs", params={
+        "appid": "app_id",
+    })
     assert response == success_response
 
 
 def test_change_script(client):
     client._get.return_value = success_response
     response = client.Scripting.ChangeScript(
-        'name',
-        'field',
-        ['value1', 'value2', 'value3'],
+        "app_id",
+        "name",
+        "field",
+        "value",
     )
     client._get.assert_called_once_with(
-        'ChangeScript',
+        "ChangeScript",
         params={
-            'name': 'name',
-            'field': 'field',
-            'value': ['value1', 'value2', 'value3'],
+            "appid": "app_id",
+            "name": "name",
+            "field": "field",
+            "value": "value",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -46,32 +46,34 @@ def test_change_script(client):
 def test_create_script(client):
     client._get.return_value = success_response
     response = client.Scripting.CreateScript(
-        'name',
-        'type',
-        ['code1', 'code2', 'code3'],
-        ['annotation1', 'annotation2', 'annotation3'],
+        "app_id",
+        "name",
+        "type",
+        "code",
+        "annotations",
     )
     client._get.assert_called_once_with(
-        'CreateScript',
+        "CreateScript",
         params={
-            'name': 'name',
-            'type': 'type',
-            'code': ['code1', 'code2', 'code3'],
-            'annotation': ['annotation1', 'annotation2', 'annotation3'],
+            "appid": "app_id",
+            "name": "name",
+            "type": "type",
+            "code": "code",
+            "annotations": "annotations",
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_delete_script(client):
     client._get.return_value = success_response
-    response = client.Scripting.DeleteScript('name')
+    response = client.Scripting.DeleteScript("app_id","name")
     client._get.assert_called_once_with(
         "DeleteScript",
         params={
-            "name": 'name',
-        }
+            "appid": "app_id",
+            "name": "name",
+        },
     )
     assert response == success_response
 
@@ -79,16 +81,17 @@ def test_delete_script(client):
 def test_eval(client):
     client._get.return_value = success_response
     response = client.Scripting.Eval(
-        'script',
-        ['code1', 'code2', 'code3'],
+        "app_id",
+        "script",
+        "code",
     )
     client._get.assert_called_once_with(
-        'Eval',
+        "Eval",
         params={
-            'script': 'script',
-            'params': ['code1', 'code2', 'code3'],
+            "appid": "app_id",
+            "script": "script",
+            "params": "code",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -96,56 +99,56 @@ def test_eval(client):
 def test_eval_code(client):
     client._get.return_value = success_response
     response = client.Scripting.EvalCode(
-        'code',
-        'type',
-        ['annotation1', 'annotation2', 'annotation3'],
-        ['code1', 'code2', 'code3'],
+        "app_id",
+        "code",
+        "type",
+        "annotations",
+        "params"
     )
     client._get.assert_called_once_with(
-        'EvalCode',
+        "EvalCode",
         params={
-            'code': 'code',
-            'type': 'type',
-            'annotation': ['annotation1', 'annotation2', 'annotation3'],
-            'params': ['code1', 'code2', 'code3'],
+            "appid": "app_id",
+            "code": "code",
+            "type": "type",
+            "annotations": "annotations",
+            "params": "params",
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_export_scripts(client):
     client._get.return_value = success_response
-    response = client.Scripting.ExportScripts([True, False, True])
+    response = client.Scripting.ExportScripts("app_id",True)
     client._get.assert_called_once_with(
-        'ExportScripts',
+        "ExportScripts",
         params={
-            'overwrite': [True, False, True],
+            "appid": "app_id",
+            "overwrite": True,
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_get_engine_info(client):
     client._get.return_value = success_response
-    response = client.Scripting.GetEngineInfo()
-    client._get.assert_called_once_with(
-        "GetEngineInfo",
-        params={
-        }
-    )
+    response = client.Scripting.GetEngineInfo("app_id")
+    client._get.assert_called_once_with("GetEngineInfo", params={
+        "appid": "app_id",
+    })
     assert response == success_response
 
 
 def test_get_script(client):
     client._get.return_value = success_response
-    response = client.Scripting.GetScript('name')
+    response = client.Scripting.GetScript("app_id","name")
     client._get.assert_called_once_with(
         "GetScript",
         params={
-            "name": 'name',
-        }
+            "appid": "app_id",
+            "name": "name",
+        },
     )
     assert response == success_response
 
@@ -153,17 +156,18 @@ def test_get_script(client):
 def test_get_scripts(client):
     client._get.return_value = success_response
     response = client.Scripting.GetScripts(
-        ['type1', 'type2', 'type3'],
-        [1, 2, 3],
-        [1, 2, 3],
+        "app_id",
+        "type",
+        1,
+        2
     )
     client._get.assert_called_once_with(
         "GetScripts",
         params={
-            'type': ['type1', 'type2', 'type3'],
-            'from': [1, 2, 3],
-            'count': [1, 2, 3],
+            "appid": "app_id",
+            "type": "type",
+            "from": 1,
+            "count": 2,
         },
-        delimiter=",",
     )
     assert response == success_response
