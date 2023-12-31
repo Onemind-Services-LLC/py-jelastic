@@ -228,7 +228,7 @@ def test_add_container_env_vars(client):
     client._get.return_value = success_response
     response = client.Control.AddContainerEnvVars(
         "env",
-        "vars",
+        {"key": "value"},
         ["group1", "group2", "group3"],
         [1, 2, 3],
     )
@@ -236,7 +236,7 @@ def test_add_container_env_vars(client):
         "AddContainerEnvVars",
         params={
             "envName": "env",
-            "vars": "vars",
+            "vars": {"key": "value"},
             "nodeGroup": ["group1", "group2", "group3"],
             "nodeId": [1, 2, 3],
         },

@@ -2277,7 +2277,7 @@ class _Control(Environment):
     def AddContainerEnvVars(
         self,
         env_name: str,
-        vars: str,
+        vars: dict,
         node_group: list[str] = None,
         node_id: list[int] = None,
     ):
