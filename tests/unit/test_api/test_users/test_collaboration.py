@@ -46,7 +46,7 @@ def test_add_resources(client):
             "resources": "resources",
             "createRoleIfNeeded": [True, True],
         },
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -65,7 +65,7 @@ def test_add_role(client):
             "receiveNotification": True,
             "description": ["description1", "description2"],
         },
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -79,7 +79,7 @@ def test_check_environment_rights(client):
     client._get.assert_called_with(
         "CheckEnvironmentRights",
         params={"serviceMethod": "service_method", "isAny": [True, True]},
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -91,7 +91,7 @@ def test_delete_member(client):
     client._get.assert_called_with(
         "DeleteMember",
         params={"id": 1, "ownerUid": [1, 1]},
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -132,7 +132,7 @@ def test_delete_resources(client):
             "collaborationId": "collaboration_id",
             "ids": ["ids1", "ids2"],
         },
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -147,7 +147,7 @@ def test_delete_resources_inner(client):
             "resourceType": "resource_type",
             "resourceId": "resource_id",
         },
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -178,7 +178,7 @@ def test_edit_collaboration(client):
             "id": 1,
             "displayName": ["display_name1", "display_name2"],
         },
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -196,7 +196,7 @@ def test_edit_member(client):
             "displayName": ["display_name1", "display_name2"],
             "ownerUid": [1, 2],
         },
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -215,7 +215,7 @@ def test_edit_policy(client):
             "name": ["name1", "name2"],
             "description": ["description1", "description2"],
         },
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -239,7 +239,7 @@ def test_edit_role(client):
             "description": ["description1", "description2"],
             "receiveNotification": [True, True],
         },
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -256,7 +256,7 @@ def test_get_collaboration_resource_methods(client):
             "resourceType": "resource_type",
             "resourceId": "resource_id",
         },
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -274,7 +274,7 @@ def test_get_collaboration_resource(client):
             "type": ["type1", "type2"],
             "resourceGroup": ["resource_group1", "resource_group2"],
         },
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -293,7 +293,7 @@ def test_get_collaboration_resource_inner(client):
             "type": ["type1", "type2"],
             "resourceGroup": ["resource_group1", "resource_group2"],
         },
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -308,7 +308,7 @@ def test_get_collaboration_role_methods(client):
             "collaborationId": [1, 1],
             "roleId": [1, 1],
         },
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -326,7 +326,7 @@ def test_get_collaboration(client):
             "ownerUid": [1, 1],
             "collaborationType": ["collaboration_type1", "collaboration_type2"],
         },
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -355,7 +355,7 @@ def test_get_member_resources(client):
             "memberId": [1, 1],
             "resourceGroup": ["resource_group1", "resource_group2"],
         },
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -367,7 +367,7 @@ def test_get_member(client):
     client._get.assert_called_with(
         "GetMembers",
         params={"id": 1, "ownerUid": [1, 1]},
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -418,7 +418,7 @@ def test_get_resource_roles(client):
             "resourceId": "resource_id",
             "resourceType": ["resource_type1", "resource_type2"],
         },
-        delimeter=",",
+        delimiter=",",
     )
     assert response == success_response
 
@@ -438,7 +438,7 @@ def test_get_roles(client):
     client._get.assert_called_with(
         "GetRoles",
         params={"id": 1, "ownerUid": [1, 1]},
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -456,7 +456,7 @@ def test_invite_member(client):
             "displayName": ["display_name1", "display_name2"],
             "ownerUid": [1, 1],
         },
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -494,7 +494,7 @@ def test_resend_member_invitation(client):
     client._get.assert_called_with(
         "ResendMemberInvitation",
         params={"id": 1, "ownerUid": [1, 1]},
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -520,7 +520,7 @@ def test_set_resource(client):
             "ownerUid": [1, 1],
             "createRoleIfNeeded": [True, True],
         },
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -536,7 +536,7 @@ def test_set_resources(client):
             "resource": "resource",
             "createRoleIfNeeded": [True, True],
         },
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -548,7 +548,7 @@ def test_suspend_member(client):
     client._get.assert_called_with(
         "SuspendMember",
         params={"id": 1, "ownerUid": [1, 1]},
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response

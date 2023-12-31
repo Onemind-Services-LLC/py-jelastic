@@ -100,7 +100,7 @@ class _Statistic(Statistic):
                 "checksum": checksum,
                 "endtime": end_time,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def GetAllAggSumStatByUid(
@@ -131,7 +131,7 @@ class _Statistic(Statistic):
                 "checksum": checksum,
                 "endtime": end_time,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def GetCurrentStatisticsForAllContainers(
@@ -203,7 +203,7 @@ class _Statistic(Statistic):
                 "checksum": checksum,
                 "endtime": end_time,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def GetSumStatsByPeriod(
@@ -228,7 +228,7 @@ class _Statistic(Statistic):
                 "checksum": checksum,
                 "endtime": end_time,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def SearchNodes(self, checksum: str, search: list[str] = None):

@@ -10,7 +10,7 @@ def test_create(client):
             "displayName": ["display_name1", "display_name2"],
             "ownerUid": [1, 1],
         },
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -25,7 +25,7 @@ def test_delete(client):
             "teamId": 1,
             "ownerUid": [1, 1],
         },
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -40,7 +40,7 @@ def test_delete_member_team(client):
             "memberId": 1,
             "ownerUid": [1, 1],
         },
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -59,7 +59,7 @@ def test_edit(client):
             "externalId": ["external_id1", "external_id2"],
             "ownerUid": [1, 1],
         },
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -73,7 +73,7 @@ def test_get(client):
         params={
             "ownerUid": [1, 1],
         },
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -92,7 +92,7 @@ def test_invite(client):
             "displayName": ["display_name1", "display_name2"],
             "ownerUid": [1, 1],
         },
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response
@@ -107,7 +107,7 @@ def test_resend_invite(client):
             "memberId": 1,
             "ownerUid": [1, 1],
         },
-        delimeter=",",
+        delimiter=",",
     )
 
     assert response == success_response

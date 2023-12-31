@@ -760,7 +760,7 @@ class _Collaboration(Users):
                 "resources": resources,
                 "createRoleIfNeeded": create_role_if_needed,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def AddRole(
@@ -784,7 +784,7 @@ class _Collaboration(Users):
                 "receiveNotification": receive_notification,
                 "description": description,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def CheckEnvironmentRights(
@@ -799,7 +799,7 @@ class _Collaboration(Users):
         return self._get(
             "CheckEnvironmentRights",
             params={"serviceMethod": service_method, "isAny": is_any},
-            delimeter=",",
+            delimiter=",",
         )
 
     def DeleteMember(
@@ -814,7 +814,7 @@ class _Collaboration(Users):
         return self._get(
             "DeleteMember",
             params={"id": id, "ownerUid": owner_uid},
-            delimeter=",",
+            delimiter=",",
         )
 
     def DeletePolicy(
@@ -860,7 +860,7 @@ class _Collaboration(Users):
                 "collaborationId": collaboration_id,
                 "ids": ids,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def DeleteResourcesInner(self, resource_type: str, resource_id: str):
@@ -870,7 +870,7 @@ class _Collaboration(Users):
                 "resourceType": resource_type,
                 "resourceId": resource_id,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def DeleteRole(
@@ -898,7 +898,7 @@ class _Collaboration(Users):
                 "id": id,
                 "displayName": display_name,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def EditMember(
@@ -916,7 +916,7 @@ class _Collaboration(Users):
                 "displayName": display_name,
                 "ownerUid": owner_uid,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def EditPolicy(
@@ -940,7 +940,7 @@ class _Collaboration(Users):
                 "name": name,
                 "description": description,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def EditRole(
@@ -967,7 +967,7 @@ class _Collaboration(Users):
                 "description": description,
                 "receiveNotification": receive_notification,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def GetCollaborationResourceMethods(self, resource_type: str, resource_id: str):
@@ -981,7 +981,7 @@ class _Collaboration(Users):
                 "resourceType": resource_type,
                 "resourceId": resource_id,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def GetCollaborationResources(
@@ -1002,7 +1002,7 @@ class _Collaboration(Users):
                 "type": type,
                 "resourceGroup": resource_group,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def GetCollaborationResourcesInner(
@@ -1026,7 +1026,7 @@ class _Collaboration(Users):
                 "type": type,
                 "resourceGroup": resource_group,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def GetCollaborationRoleMethods(
@@ -1044,7 +1044,7 @@ class _Collaboration(Users):
                 "collaborationId": collaboration_id,
                 "roleId": role_id,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def GetCollaborations(
@@ -1065,7 +1065,7 @@ class _Collaboration(Users):
                 "ownerUid": owner_uid,
                 "collaborationType": collaboration_type,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def GetCollaborationsInner(
@@ -1094,7 +1094,7 @@ class _Collaboration(Users):
                 "memberId": member_id,
                 "resourceGroup": resource_group,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def GetMembers(
@@ -1109,7 +1109,7 @@ class _Collaboration(Users):
         return self._get(
             "GetMembers",
             params={"id": id, "ownerUid": owner_uid},
-            delimeter=",",
+            delimiter=",",
         )
 
     def GetMembersInner(
@@ -1169,7 +1169,7 @@ class _Collaboration(Users):
                 "resourceId": resource_id,
                 "resourceType": resource_type,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def GetResourceRolesInner(
@@ -1195,7 +1195,7 @@ class _Collaboration(Users):
         return self._get(
             "GetRoles",
             params={"id": id, "ownerUid": owner_uid},
-            delimeter=",",
+            delimiter=",",
         )
 
     def InviteMember(
@@ -1213,7 +1213,7 @@ class _Collaboration(Users):
                 "displayName": display_name,
                 "ownerUid": owner_uid,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def LeaveCollaboration(
@@ -1256,7 +1256,7 @@ class _Collaboration(Users):
         return self._get(
             "ResendMemberInvitation",
             params={"id": id, "ownerUid": owner_uid},
-            delimeter=",",
+            delimiter=",",
         )
 
     def SetResource(
@@ -1286,7 +1286,7 @@ class _Collaboration(Users):
                 "ownerUid": owner_uid,
                 "createRoleIfNeeded": create_role_if_needed,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def SetResources(
@@ -1307,7 +1307,7 @@ class _Collaboration(Users):
                 "resource": resource,
                 "createRoleIfNeeded": create_role_if_needed,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def SuspendMember(
@@ -1322,7 +1322,7 @@ class _Collaboration(Users):
         return self._get(
             "SuspendMember",
             params={"id": id, "ownerUid": owner_uid},
-            delimeter=",",
+            delimiter=",",
         )
 
 
@@ -1591,7 +1591,7 @@ class _Team(Users):
                 "displayName": display_name,
                 "ownerUid": owner_uid,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def Delete(self, team_id: int, owner_uid: list[int] = None):
@@ -1605,7 +1605,7 @@ class _Team(Users):
                 "teamId": team_id,
                 "ownerUid": owner_uid,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def DeleteMember(self, member_id: int, owner_uid: list[int] = None):
@@ -1619,7 +1619,7 @@ class _Team(Users):
                 "memberId": member_id,
                 "ownerUid": owner_uid,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def Edit(
@@ -1642,7 +1642,7 @@ class _Team(Users):
                 "externalId": external_id,
                 "ownerUid": owner_uid,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def Get(self, owner_uid: list[int] = None):
@@ -1654,7 +1654,7 @@ class _Team(Users):
             params={
                 "ownerUid": owner_uid,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def Invite(
@@ -1678,7 +1678,7 @@ class _Team(Users):
                 "displayName": display_name,
                 "ownerUid": owner_uid,
             },
-            delimeter=",",
+            delimiter=",",
         )
 
     def ResendInvite(self, member_id: int, owner_uid: list[int] = None):
@@ -1692,5 +1692,5 @@ class _Team(Users):
                 "memberId": member_id,
                 "ownerUid": owner_uid,
             },
-            delimeter=",",
+            delimiter=",",
         )

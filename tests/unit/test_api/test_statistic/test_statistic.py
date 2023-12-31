@@ -42,7 +42,7 @@ def test_get_agg_stats(client):
             "checksum": "checksum",
             "endtime": [CURRENT_DATETIME, CURRENT_DATETIME],
         },
-        delimeter=",",
+        delimiter=",",
     )
     assert response == success_response
 
@@ -80,7 +80,7 @@ def test_get_all_sum_stat_by_uid(client):
             "checksum": "checksum",
             "endtime": [CURRENT_DATETIME, CURRENT_DATETIME],
         },
-        delimeter=",",
+        delimiter=",",
     )
     assert response == success_response
 
@@ -161,7 +161,7 @@ def test_get_all_sum_stat(client):
             "checksum": "checksum",
             "endtime": [CURRENT_DATETIME, CURRENT_DATETIME],
         },
-        delimeter=",",
+        delimiter=",",
     )
     assert response == success_response
 
@@ -182,7 +182,7 @@ def test_get_sum_stats_by_period(client):
             "checksum": "checksum",
             "endtime": [CURRENT_DATETIME, CURRENT_DATETIME],
         },
-        delimeter=",",
+        delimiter=",",
     )
     assert response == success_response
 
