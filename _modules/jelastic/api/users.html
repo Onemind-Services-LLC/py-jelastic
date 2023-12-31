@@ -2054,7 +2054,7 @@
                 <span class="s2">&quot;resources&quot;</span><span class="p">:</span> <span class="n">resources</span><span class="p">,</span>
                 <span class="s2">&quot;createRoleIfNeeded&quot;</span><span class="p">:</span> <span class="n">create_role_if_needed</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">AddRole</span><span class="p">(</span>
@@ -2078,7 +2078,7 @@
                 <span class="s2">&quot;receiveNotification&quot;</span><span class="p">:</span> <span class="n">receive_notification</span><span class="p">,</span>
                 <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">CheckEnvironmentRights</span><span class="p">(</span>
@@ -2093,7 +2093,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
             <span class="s2">&quot;CheckEnvironmentRights&quot;</span><span class="p">,</span>
             <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;serviceMethod&quot;</span><span class="p">:</span> <span class="n">service_method</span><span class="p">,</span> <span class="s2">&quot;isAny&quot;</span><span class="p">:</span> <span class="n">is_any</span><span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">DeleteMember</span><span class="p">(</span>
@@ -2108,7 +2108,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
             <span class="s2">&quot;DeleteMember&quot;</span><span class="p">,</span>
             <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span> <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">DeletePolicy</span><span class="p">(</span>
@@ -2154,7 +2154,7 @@
                 <span class="s2">&quot;collaborationId&quot;</span><span class="p">:</span> <span class="n">collaboration_id</span><span class="p">,</span>
                 <span class="s2">&quot;ids&quot;</span><span class="p">:</span> <span class="n">ids</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">DeleteResourcesInner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">resource_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
@@ -2164,7 +2164,7 @@
                 <span class="s2">&quot;resourceType&quot;</span><span class="p">:</span> <span class="n">resource_type</span><span class="p">,</span>
                 <span class="s2">&quot;resourceId&quot;</span><span class="p">:</span> <span class="n">resource_id</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">DeleteRole</span><span class="p">(</span>
@@ -2192,7 +2192,7 @@
                 <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
                 <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="n">display_name</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">EditMember</span><span class="p">(</span>
@@ -2210,7 +2210,7 @@
                 <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="n">display_name</span><span class="p">,</span>
                 <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">EditPolicy</span><span class="p">(</span>
@@ -2234,7 +2234,7 @@
                 <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
                 <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">EditRole</span><span class="p">(</span>
@@ -2261,7 +2261,7 @@
                 <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
                 <span class="s2">&quot;receiveNotification&quot;</span><span class="p">:</span> <span class="n">receive_notification</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">GetCollaborationResourceMethods</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">resource_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
@@ -2275,7 +2275,7 @@
                 <span class="s2">&quot;resourceType&quot;</span><span class="p">:</span> <span class="n">resource_type</span><span class="p">,</span>
                 <span class="s2">&quot;resourceId&quot;</span><span class="p">:</span> <span class="n">resource_id</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">GetCollaborationResources</span><span class="p">(</span>
@@ -2296,7 +2296,7 @@
                 <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">,</span>
                 <span class="s2">&quot;resourceGroup&quot;</span><span class="p">:</span> <span class="n">resource_group</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">GetCollaborationResourcesInner</span><span class="p">(</span>
@@ -2320,7 +2320,7 @@
                 <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">,</span>
                 <span class="s2">&quot;resourceGroup&quot;</span><span class="p">:</span> <span class="n">resource_group</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">GetCollaborationRoleMethods</span><span class="p">(</span>
@@ -2338,7 +2338,7 @@
                 <span class="s2">&quot;collaborationId&quot;</span><span class="p">:</span> <span class="n">collaboration_id</span><span class="p">,</span>
                 <span class="s2">&quot;roleId&quot;</span><span class="p">:</span> <span class="n">role_id</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">GetCollaborations</span><span class="p">(</span>
@@ -2359,7 +2359,7 @@
                 <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
                 <span class="s2">&quot;collaborationType&quot;</span><span class="p">:</span> <span class="n">collaboration_type</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">GetCollaborationsInner</span><span class="p">(</span>
@@ -2388,7 +2388,7 @@
                 <span class="s2">&quot;memberId&quot;</span><span class="p">:</span> <span class="n">member_id</span><span class="p">,</span>
                 <span class="s2">&quot;resourceGroup&quot;</span><span class="p">:</span> <span class="n">resource_group</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">GetMembers</span><span class="p">(</span>
@@ -2403,7 +2403,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
             <span class="s2">&quot;GetMembers&quot;</span><span class="p">,</span>
             <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span> <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">GetMembersInner</span><span class="p">(</span>
@@ -2463,7 +2463,7 @@
                 <span class="s2">&quot;resourceId&quot;</span><span class="p">:</span> <span class="n">resource_id</span><span class="p">,</span>
                 <span class="s2">&quot;resourceType&quot;</span><span class="p">:</span> <span class="n">resource_type</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">GetResourceRolesInner</span><span class="p">(</span>
@@ -2489,7 +2489,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
             <span class="s2">&quot;GetRoles&quot;</span><span class="p">,</span>
             <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span> <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">InviteMember</span><span class="p">(</span>
@@ -2507,7 +2507,7 @@
                 <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="n">display_name</span><span class="p">,</span>
                 <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">LeaveCollaboration</span><span class="p">(</span>
@@ -2550,7 +2550,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
             <span class="s2">&quot;ResendMemberInvitation&quot;</span><span class="p">,</span>
             <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span> <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">SetResource</span><span class="p">(</span>
@@ -2580,7 +2580,7 @@
                 <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
                 <span class="s2">&quot;createRoleIfNeeded&quot;</span><span class="p">:</span> <span class="n">create_role_if_needed</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">SetResources</span><span class="p">(</span>
@@ -2601,7 +2601,7 @@
                 <span class="s2">&quot;resource&quot;</span><span class="p">:</span> <span class="n">resource</span><span class="p">,</span>
                 <span class="s2">&quot;createRoleIfNeeded&quot;</span><span class="p">:</span> <span class="n">create_role_if_needed</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">SuspendMember</span><span class="p">(</span>
@@ -2616,7 +2616,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
             <span class="s2">&quot;SuspendMember&quot;</span><span class="p">,</span>
             <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span> <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
 
@@ -2885,7 +2885,7 @@
                 <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="n">display_name</span><span class="p">,</span>
                 <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">Delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
@@ -2899,7 +2899,7 @@
                 <span class="s2">&quot;teamId&quot;</span><span class="p">:</span> <span class="n">team_id</span><span class="p">,</span>
                 <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">DeleteMember</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">member_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
@@ -2913,7 +2913,7 @@
                 <span class="s2">&quot;memberId&quot;</span><span class="p">:</span> <span class="n">member_id</span><span class="p">,</span>
                 <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">Edit</span><span class="p">(</span>
@@ -2936,7 +2936,7 @@
                 <span class="s2">&quot;externalId&quot;</span><span class="p">:</span> <span class="n">external_id</span><span class="p">,</span>
                 <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">Get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
@@ -2948,7 +2948,7 @@
             <span class="n">params</span><span class="o">=</span><span class="p">{</span>
                 <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">Invite</span><span class="p">(</span>
@@ -2972,7 +2972,7 @@
                 <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="n">display_name</span><span class="p">,</span>
                 <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">ResendInvite</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">member_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
@@ -2986,7 +2986,7 @@
                 <span class="s2">&quot;memberId&quot;</span><span class="p">:</span> <span class="n">member_id</span><span class="p">,</span>
                 <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimeter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
+            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 </pre></div>
 
