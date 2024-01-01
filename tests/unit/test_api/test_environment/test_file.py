@@ -543,25 +543,24 @@ def test_write(client):
     response = client.File.Write(
         "env_name",
         "path",
-        ["body1", "body2"],
-        ["node_type1", "node_type2"],
-        ["node_group1", "node_group2"],
-        [True, True],
-        [1, 1],
-        [True, True],
+        "body",
+        "node_type",
+        "nodeGroup",
+        True,
+        1,
+        False,
     )
     client._get.assert_called_with(
         "Write",
         params={
             "envName": "env_name",
             "path": "path",
-            "body": ["body1", "body2"],
-            "nodeType": ["node_type1", "node_type2"],
-            "nodeGroup": ["node_group1", "node_group2"],
-            "masterOnly": [True, True],
-            "nodeId": [1, 1],
-            "isAppendMode": [True, True],
+            "body": "body",
+            "nodeType": "node_type",
+            "nodeGroup": "nodeGroup",
+            "masterOnly": True,
+            "nodeId": 1,
+            "isAppendMode": False,
         },
-        delimiter=",",
     )
     assert response == success_response

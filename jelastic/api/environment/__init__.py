@@ -6055,12 +6055,12 @@ class _File(Environment):
         self,
         env_name: str,
         path: str,
-        body: list[str] = None,
-        node_type: list[str] = None,
-        node_group: list[str] = None,
-        master_only: list[bool] = None,
-        node_id: list[int] = None,
-        is_append_mode: list[int] = None,
+        body: str = None,
+        node_type: str = None,
+        node_group: str = None,
+        master_only: bool = False,
+        node_id: int = None,
+        is_append_mode: bool = False,
     ):
         """
         param env_name: target environment name.
@@ -6084,7 +6084,6 @@ class _File(Environment):
                 "nodeId": node_id,
                 "isAppendMode": is_append_mode,
             },
-            delimiter=",",
         )
 
 
