@@ -13,7 +13,7 @@ def test_create_account_task(client):
         "CreateAccountTask",
         params={
             "script": "script1",
-            "trigger": '{"cron": "* * * * *"}',
+            "trigger": "cron:* * * * *",
             "description": "Trigger script on before install",
             "params": '{"key": "value"}',
         },
@@ -65,7 +65,7 @@ def test_edit_task(client):
         "EditTask",
         params={
             "script": "script1",
-            "trigger": '{"cron": "* * * * *"}',
+            "trigger": "cron:* * * * *",
             "id": 1,
             "description": "Trigger script on before install",
             "params": '{"key": "value"}',

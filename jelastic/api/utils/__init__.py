@@ -99,8 +99,9 @@ class _Scheduler(Utils):
         :param description: custom description for the task.
         :param params: JSON object with additional trigger parameters.
         """
-        trigger = json.dumps(trigger)
-        params = json.dumps(params)
+        trigger_key, trigger_value = next(iter(trigger.items()))
+        trigger = f"{trigger_key}:{trigger_value}"
+        params = json.dumps(params or {})
         return self._get(
             "CreateAccountTask",
             params={
@@ -131,7 +132,7 @@ class _Scheduler(Utils):
         """
         trigger_key, trigger_value = next(iter(trigger.items()))
         trigger = f"{trigger_key}:{trigger_value}"
-        params = json.dumps(params)
+        params = json.dumps(params or {})
 
         return self._get(
             "CreateEnvTask",
@@ -169,8 +170,9 @@ class _Scheduler(Utils):
         :param description: custom description for the task.
         :param params: JSON object with additional trigger parameters.
         """
-        trigger = json.dumps(trigger)
-        params = json.dumps(params)
+        trigger_key, trigger_value = next(iter(trigger.items()))
+        trigger = f"{trigger_key}:{trigger_value}"
+        params = json.dumps(params or {})
 
         return self._get(
             "EditTask",
