@@ -4313,12 +4313,12 @@ class _Control(Environment):
         env_name: str,
         node_group: str,
         tag: str,
-        is_sequential: list[bool] = None,
-        use_existing_volumes: list[bool] = None,
-        delay: list[int] = None,
-        login: list[str] = None,
-        password: list[str] = None,
-        manage_dns_state: list[bool] = None,
+        is_sequential: bool = False,
+        use_existing_volumes: bool = True,
+        delay: int = 0,
+        login: str = None,
+        password: str = None,
+        manage_dns_state: bool = False,
     ):
         """
         :params env_name: target environment name.
@@ -4344,7 +4344,6 @@ class _Control(Environment):
                 "password": password,
                 "manageDNSState": manage_dns_state,
             },
-            delimiter=",",
         )
 
     def RemoveApp(
