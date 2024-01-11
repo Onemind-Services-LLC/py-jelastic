@@ -14,15 +14,10 @@ def test_get_action(client):
 
 def test_get_actions(client):
     client._get.return_value = success_response
-    response = client.Tracking.GetActions(
-        CURRENT_DATETIME, [CURRENT_DATETIME, CURRENT_DATETIME]
-    )
+    response = client.Tracking.GetActions(CURRENT_DATETIME, CURRENT_DATETIME)
     client._get.assert_called_with(
         "GetActions",
-        params={
-            "starttime": CURRENT_DATETIME,
-            "endtime": [CURRENT_DATETIME, CURRENT_DATETIME],
-        },
+        params={"starttime": CURRENT_DATETIME, "endtime": CURRENT_DATETIME},
         datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response

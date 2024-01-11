@@ -6829,7 +6829,7 @@ class _Tracking(Environment):
             delimiter=",",
         )
 
-    def GetActions(self, start_time: datetime, end_time: list[datetime] = None):
+    def GetActions(self, start_time: datetime, end_time: datetime = None):
         return self._get(
             "GetActions",
             params={
