@@ -487,7 +487,7 @@ class _Admin(Marketplace):
     Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.Admin
     """
 
-    _endpoint2 = "account"
+    _endpoint2 = "admin"
 
     def AddApp(self, env_name: str, manifest: str):
         return self._get(
