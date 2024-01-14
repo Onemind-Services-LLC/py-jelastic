@@ -412,16 +412,16 @@ class _App(Marketplace):
     def Install(
         self,
         id: str,
-        env_name: list[str] = None,
-        settings: list[str] = None,
-        display_name: list[str] = None,
-        region: list[str] = None,
+        env_name: str = None,
+        settings: dict = None,
+        display_name: str = None,
+        region: str = None,
         env_groups: list[str] = None,
-        owner_uid: list[int] = None,
-        nodes: list[str] = None,
-        override_nodes: list[bool] = None,
-        skip_email: list[bool] = None,
-        skip_node_emails: list[bool] = None,
+        owner_uid: int = None,
+        nodes: dict = None,
+        override_nodes: bool = None,
+        skip_email: bool = False,
+        skip_node_emails: bool = False,
     ):
         """
         :param id: unique identifier of the target JPS manifest in the Marketplace.
@@ -451,7 +451,6 @@ class _App(Marketplace):
                 "skipEmail": skip_email,
                 "skipNodeEmails": skip_node_emails,
             },
-            delimiter=",",
         )
 
     def InstallAddon(
@@ -707,16 +706,16 @@ class _Jps(Marketplace):
     def Install(
         self,
         jps: str,
-        env_name: list[str] = None,
-        settings: list[str] = None,
-        node_group: list[str] = None,
-        display_name: list[str] = None,
-        region: list[str] = None,
+        env_name: str = None,
+        settings: dict = None,
+        node_group: str = None,
+        display_name: str = None,
+        region: str = None,
         env_groups: list[str] = None,
-        owner_uid: list[int] = None,
-        logs_path: list[str] = None,
-        write_output_tasks: list[bool] = None,
-        skip_node_emails: list[bool] = None,
+        owner_uid: int = None,
+        logs_path: str = None,
+        write_output_tasks: bool = False,
+        skip_node_emails: bool = False,
     ):
         """
         param jps: custom JPS (manifest body, link, or application ID from the Marketplace).
@@ -736,7 +735,7 @@ class _Jps(Marketplace):
             params={
                 "jps": jps,
                 "envName": env_name,
-                "settingsId": settings,
+                "settings": settings,
                 "nodeGroup": node_group,
                 "displayName": display_name,
                 "region": region,
@@ -746,5 +745,4 @@ class _Jps(Marketplace):
                 "writeOutputTasks": write_output_tasks,
                 "skipNodeEmails": skip_node_emails,
             },
-            delimiter=",",
         )

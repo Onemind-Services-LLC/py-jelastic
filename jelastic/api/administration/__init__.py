@@ -2679,6 +2679,7 @@ class _Utils(Administration):
     """
     Ref: https://docs.jelastic.com/api/private/#!/api/administration.Utils
     """
+
     _endpoint2 = "utils"
 
     def AddSystemExternalDNSRecord(
