@@ -598,7 +598,7 @@ class _IdentityProvider(System):
     Ref: https://docs.jelastic.com/api/private/#!/api/system.IdentityProvider
     """
 
-    _endpoint2 = "identityProvider"
+    _endpoint2 = "identityprovider"
 
     def CreateUser(
         self,

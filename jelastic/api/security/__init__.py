@@ -53,7 +53,7 @@ class _AccessControl(Security):
     Ref: https://docs.jelastic.com/api/private/#!/api/security.AccessControl
     """
 
-    _endpoint2 = "accessControl"
+    _endpoint2 = "accesscontrol"
 
     def AddPolicy(self, role: str, object: str, rights: str):
         """

@@ -2461,7 +2461,7 @@ class _HostGroup(Administration):
     Ref: https://docs.jelastic.com/api/private/#!/api/administration.HostGroup
     """
 
-    _endpoint2 = "hostGroup"
+    _endpoint2 = "hostgroup"
 
     def Add(
         self,
@@ -3372,7 +3372,7 @@ class _VirtualNetwork(Administration):
     Ref: https://docs.jelastic.com/api/private/#!/api/administration.VirtualNetwork
     """
 
-    _endpoint2 = "virtualNetwork"
+    _endpoint2 = "virtualnetwork"
 
     def AddVirtualNetwork(
         self,

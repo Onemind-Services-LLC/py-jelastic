@@ -1046,7 +1046,7 @@ class _GroupQuota(Billing):
     Ref: https://docs.jelastic.com/api/#!/api/billing.GroupQuota
     """
 
-    _endpoint2 = "getQuota"
+    _endpoint2 = "getquota"
 
     def AddGroup(
         self,
@@ -1300,7 +1300,7 @@ class _PayMethod(Billing):
     Ref: https://docs.jelastic.com/api/private/#!/api/billing.PayMethod
     """
 
-    _endpoint2 = "payMethod"
+    _endpoint2 = "paymethod"
 
     def EnablePayMethod(
         self,
@@ -1715,7 +1715,7 @@ class _ServicePlan(Billing):
     Ref: https://docs.jelastic.com/api/private/#!/api/billing.ServicePlan
     """
 
-    _endpoint2 = "servicePlan"
+    _endpoint2 = "serviceplan"
 
     def CreateLevelAutoPay(
         self,
