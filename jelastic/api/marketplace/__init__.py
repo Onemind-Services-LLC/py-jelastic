@@ -255,17 +255,17 @@ class _Favorite(Marketplace):
 
     def GetList(
         self,
-        search: list[str] = None,
-        lang: list[str] = None,
-        checksum: list[str] = None,
+        search:dict = None,
+        lang:str = None,
+        checksum:str = None,
     ):
         """
         param search: JSON object with the search parameters
         param lang: target localization language.
-        param checksum: hecksum of the Marketplace applications (to verify that you possess the most recent checksum and applications copy). If you send the same 'checksum' parameter as received in the previous response and if this 'checksum' hasn't changed on the server side, then the server assumes you have the latest local copy of applications on the client side. In this case, it will return an empty applications list, speeding up the response time.
+        param checksum: checksum of the Marketplace applications (to verify that you possess the most recent checksum and applications copy). If you send the same 'checksum' parameter as received in the previous response and if this 'checksum' hasn't changed on the server side, then the server assumes you have the latest local copy of applications on the client side. In this case, it will return an empty applications list, speeding up the response time.
         """
         return self._get(
-            "Delete",
+            "GetList",
             params={
                 "search": search,
                 "lang": lang,
