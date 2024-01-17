@@ -567,19 +567,19 @@ class _Build(Environment):
         name: str,
         type: str,
         path: str,
-        key_id: list[int] = None,
-        login: list[str] = None,
-        password: list[str] = None,
-        target_env: list[str] = None,
-        context: list[str] = None,
-        branch: list[str] = None,
-        interval: list[str] = None,
-        delay: list[int] = None,
-        deploy_now: list[bool] = None,
-        hooks: list[str] = None,
-        work_dir: list[str] = None,
-        target_node_group: list[str] = None,
-        is_sequential: list[bool] = None,
+        key_id: int = None,
+        login: str = None,
+        password: str = None,
+        target_env: str = None,
+        context: str = None,
+        branch: str = None,
+        interval: str = None,
+        delay: int = None,
+        deploy_now: bool = None,
+        hooks: str = None,
+        work_dir: str = None,
+        target_node_group: str = None,
+        is_sequential: bool = None,
     ):
         return self._get(
             "AddProject",
@@ -605,7 +605,6 @@ class _Build(Environment):
                 "targetNodeGroup": target_node_group,
                 "isSequential": is_sequential,
             },
-            delimiter=",",
         )
 
     def AddProjectWithCreds(
@@ -617,16 +616,16 @@ class _Build(Environment):
         name: str,
         type: str,
         path: str,
-        target_env: list[str] = None,
-        login: list[str] = None,
-        password: list[str] = None,
-        context: list[str] = None,
-        branch: list[str] = None,
-        interval: list[str] = None,
-        delay: list[int] = None,
-        deploy_now: list[bool] = None,
-        hooks: list[str] = None,
-        work_dir: list[str] = None,
+        target_env: str = None,
+        login: str = None,
+        password: str = None,
+        context: str = None,
+        branch: str = None,
+        interval: str = None,
+        delay: int = None,
+        deploy_now: bool = None,
+        hooks: str = None,
+        work_dir: str = None,
     ):
         """
         param autoupdate: defines whether to enable (true) or disable (false) automatic project updates (only upon code changes in the remote repository); auto-update frequency is set with the interval parameter.
@@ -668,7 +667,6 @@ class _Build(Environment):
                 "hooks": hooks,
                 "workDir": work_dir,
             },
-            delimiter=",",
         )
 
     def AddProjectWithKey(
@@ -680,15 +678,15 @@ class _Build(Environment):
         name: str,
         type: str,
         path: str,
-        target_env: list[str] = None,
-        key_id: list[int] = None,
-        context: list[str] = None,
-        branch: list[str] = None,
-        interval: list[str] = None,
-        delay: list[int] = None,
-        deploy_now: list[bool] = None,
-        hooks: list[str] = None,
-        work_dir: list[str] = None,
+        target_env: str = None,
+        key_id: int = None,
+        context: str = None,
+        branch: str = None,
+        interval: str = None,
+        delay: int = None,
+        deploy_now: bool = None,
+        hooks: str = None,
+        work_dir: str = None,
     ):
         """
         param autoupdate: Defines whether to enable (true) or disable (false) automatic project updates (only upon code changes in the remote repository); auto-update frequency is set with the interval parameter.
@@ -728,7 +726,6 @@ class _Build(Environment):
                 "hooks": hooks,
                 "workDir": work_dir,
             },
-            delimiter=",",
         )
 
     def BuildDeploy(self, env_name: str, project_name: str):
@@ -749,9 +746,9 @@ class _Build(Environment):
         env_name: str,
         node_id: int,
         project_id: str,
-        delay: list[int] = None,
-        update: list[bool] = None,
-        is_sequential: list[bool] = None,
+        delay: int = None,
+        update: bool = None,
+        is_sequential: bool = None,
     ):
         """
         param env_name: target environment name.
@@ -771,7 +768,6 @@ class _Build(Environment):
                 "update": update,
                 "isSequential": is_sequential,
             },
-            delimiter=",",
         )
 
     def BuildProject(
@@ -779,9 +775,9 @@ class _Build(Environment):
         env_name: str,
         node_id: int,
         project_id: str,
-        update: list[bool] = None,
-        skip_publish: list[bool] = None,
-        asyncs: list[bool] = None,
+        update: bool = None,
+        skip_publish: bool = None,
+        asyncs: bool = None,
     ):
         """
         param env_name: source environment name (with a build node).
@@ -801,7 +797,6 @@ class _Build(Environment):
                 "skipPublish": skip_publish,
                 "async": asyncs,
             },
-            delimiter=",",
         )
 
     def DeployProject(
@@ -809,8 +804,8 @@ class _Build(Environment):
         env_name: str,
         node_id: int,
         project_id: str,
-        delay: list[int] = None,
-        is_sequential: list[bool] = None,
+        delay: int = None,
+        is_sequential: bool = None,
     ):
         """
         param env_name: source environment name (with a build node).
@@ -828,7 +823,6 @@ class _Build(Environment):
                 "delay": delay,
                 "isSequential": is_sequential,
             },
-            delimiter=",",
         )
 
     def EditProject(
@@ -839,19 +833,19 @@ class _Build(Environment):
         name: str,
         type: str,
         path: str,
-        key_id: list[int] = None,
-        login: list[str] = None,
-        password: list[str] = None,
-        env: list[str] = None,
-        context: list[str] = None,
-        branch: list[str] = None,
-        autoupdate: list[bool] = None,
-        interval: list[str] = None,
-        auto_resolve_conflict: list[bool] = None,
-        delay: list[int] = None,
-        hooks: list[str] = None,
-        work_dir: list[str] = None,
-        target_node_group: list[str] = None,
+        key_id: int = None,
+        login: str = None,
+        password: str = None,
+        env: str = None,
+        context: str = None,
+        branch: str = None,
+        autoupdate: bool = None,
+        interval: str = None,
+        auto_resolve_conflict: bool = None,
+        delay: int = None,
+        hooks: str = None,
+        work_dir: str = None,
+        target_node_group: str = None,
     ):
         """
         param env_name: source environment name (with a build node).
@@ -897,15 +891,14 @@ class _Build(Environment):
                 "workDir": work_dir,
                 "targetNodeGroup": target_node_group,
             },
-            delimiter=",",
         )
 
     def GetProjectInfo(
         self,
         env_name: str,
         node_id: int,
-        project_id: list[int] = None,
-        project_name: list[str] = None,
+        project_id: int = None,
+        project_name: str = None,
     ):
         """
         param env_name: source environment name (with a build node).
@@ -921,14 +914,13 @@ class _Build(Environment):
                 "projectid": project_id,
                 "projectName": project_name,
             },
-            delimiter=",",
         )
 
     def GetProjects(
         self,
         env_name: str,
-        node_group: list[int] = None,
-        node_id: list[int] = None,
+        node_group: str = None,
+        node_id: int = None,
     ):
         """
         param env_name: source environment name (with a build node).
@@ -942,7 +934,6 @@ class _Build(Environment):
                 "nodeGroup": node_group,
                 "nodeid": node_id,
             },
-            delimiter=",",
         )
 
     def RemoveProject(
@@ -963,15 +954,14 @@ class _Build(Environment):
                 "nodeid": nodeid,
                 "projectid": projectid,
             },
-            delimiter=",",
         )
 
     def Update(
         self,
         env_name: str,
         node_id: int,
-        project_id: list[int] = None,
-        context: list[str] = None,
+        project_id: int = None,
+        context: str = None,
     ):
         """
         param env_name: source environment name (with a build node).
@@ -987,7 +977,6 @@ class _Build(Environment):
                 "projectId": project_id,
                 "context": context,
             },
-            delimiter=",",
         )
 
 
@@ -1014,7 +1003,7 @@ class _Deployment(Environment):
         repo: str,
         deployment: dict = None,
         settings: dict = None,
-        hooks: list[str] = None,
+        hooks: str = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1036,19 +1025,18 @@ class _Deployment(Environment):
                 "settings": settings,
                 "hooks": hooks,
             },
-            delimiter=",",
         )
 
     def AddRepo(
         self,
         name: str,
         url: str,
-        type: list[str] = None,
-        branch: list[str] = None,
-        key_id: list[int] = None,
-        login: list[str] = None,
-        password: list[str] = None,
-        description: list[str] = None,
+        type: str = None,
+        branch: str = None,
+        key_id: int = None,
+        login: str = None,
+        password: str = None,
+        description: str = None,
     ):
         """
         param name: project name.
@@ -1072,7 +1060,6 @@ class _Deployment(Environment):
                 "password": password,
                 "description": description,
             },
-            delimiter=",",
         )
 
     def BuildDeployProject(
@@ -1080,8 +1067,8 @@ class _Deployment(Environment):
         env_name: str,
         node_id: int,
         project: str,
-        skip_update: list[bool] = None,
-        delay: list[int] = None,
+        skip_update: bool = None,
+        delay: bool = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1099,7 +1086,6 @@ class _Deployment(Environment):
                 "skipUpdate": skip_update,
                 "delay": delay,
             },
-            delimiter=",",
         )
 
     def BuildProject(
@@ -1107,8 +1093,8 @@ class _Deployment(Environment):
         env_name: str,
         node_id: int,
         project: str,
-        skip_upload: list[bool] = None,
-        skip_update: list[bool] = None,
+        skip_upload: bool = None,
+        skip_update: bool = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1126,7 +1112,6 @@ class _Deployment(Environment):
                 "skipUpload": skip_upload,
                 "skipUpdate": skip_update,
             },
-            delimiter=",",
         )
 
     def Deploy(
@@ -1134,11 +1119,11 @@ class _Deployment(Environment):
         env_name: str,
         repo: str,
         context: str,
-        node_group: list[str] = None,
-        build_node_id: list[int] = None,
+        node_group: str = None,
+        build_node_id: int = None,
         settings: dict = None,
-        hooks: list[str] = None,
-        delay: list[int] = None,
+        hooks: str = None,
+        delay: int = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1163,7 +1148,6 @@ class _Deployment(Environment):
                 "hooks": hooks,
                 "delay": delay,
             },
-            delimiter=",",
         )
 
     def DeployArchive(
@@ -1171,11 +1155,11 @@ class _Deployment(Environment):
         env_name: str,
         file_url: str,
         file_name: str,
-        node_group: list[str] = None,
-        context: list[str] = None,
-        zdt: list[bool] = None,
-        hooks: list[str] = None,
-        delay: list[int] = None,
+        node_group: str = None,
+        context: str = None,
+        zdt: bool = None,
+        hooks: str = None,
+        delay: int = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1200,7 +1184,6 @@ class _Deployment(Environment):
                 "hooks": hooks,
                 "delay": delay,
             },
-            delimiter=",",
         )
 
     def DeployProject(
@@ -1221,7 +1204,6 @@ class _Deployment(Environment):
                 "nodeId": node_id,
                 "project": project,
             },
-            delimiter=",",
         )
 
     def EditBuildProject(
@@ -1229,11 +1211,11 @@ class _Deployment(Environment):
         env_name: str,
         node_id: int,
         project: str,
-        name: list[str] = None,
-        repo: list[str] = None,
+        name: str = None,
+        repo: str = None,
         deployment: dict = None,
         settings: dict = None,
-        hooks: list[str] = None,
+        hooks: str = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1257,7 +1239,6 @@ class _Deployment(Environment):
                 "settings": settings,
                 "hooks": hooks,
             },
-            delimiter=",",
         )
 
     def EditProject(
@@ -1265,11 +1246,11 @@ class _Deployment(Environment):
         env_name: str,
         node_group: str,
         context: str,
-        new_context: list[str] = None,
-        repo: list[str] = None,
+        new_context: str = None,
+        repo: str = None,
         settings: dict = None,
-        hooks: list[str] = None,
-        delay: list[int] = None,
+        hooks: str = None,
+        delay: int = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1294,20 +1275,19 @@ class _Deployment(Environment):
                 "hooks": hooks,
                 "delay": delay,
             },
-            delimiter=",",
         )
 
     def EditRepo(
         self,
         id: int,
-        name: list[str] = None,
-        type: list[str] = None,
-        url: list[str] = None,
-        branch: list[str] = None,
-        key_id: list[int] = None,
-        login: list[str] = None,
-        password: list[str] = None,
-        description: list[str] = None,
+        name: str = None,
+        type: str = None,
+        url: str = None,
+        branch: str = None,
+        key_id: int = None,
+        login: str = None,
+        password: str = None,
+        description: str = None,
     ):
         """
         param id : unique identifier of the repository to be edited.
@@ -1333,7 +1313,6 @@ class _Deployment(Environment):
                 "password": password,
                 "description": description,
             },
-            delimiter=",",
         )
 
     def GetBuildProjectInfo(
@@ -1354,14 +1333,13 @@ class _Deployment(Environment):
                 "nodeId": node_id,
                 "project": project,
             },
-            delimiter=",",
         )
 
     def GetBuildProjects(
         self,
         env_name: str,
-        node_group: list[str] = None,
-        node_id: list[int] = None,
+        node_group: str = None,
+        node_id: int = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1375,7 +1353,6 @@ class _Deployment(Environment):
                 "nodeGroup": node_group,
                 "nodeId": node_id,
             },
-            delimiter=",",
         )
 
     def GetDeployments(self, env_name: str, node_group: str):
@@ -1389,16 +1366,15 @@ class _Deployment(Environment):
                 "envName": env_name,
                 "nodeGroup": node_group,
             },
-            delimiter=",",
         )
 
     def GetHooks(
         self,
         env_name: str,
-        node_group: list[str] = None,
-        node_id: list[int] = None,
-        context: list[str] = None,
-        project: list[str] = None,
+        node_group: str = None,
+        node_id: int = None,
+        context: str = None,
+        project: str = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1416,14 +1392,13 @@ class _Deployment(Environment):
                 "context": context,
                 "project": project,
             },
-            delimiter=",",
         )
 
     def GetProjectInfo(
         self,
         env_name: str,
         context: str,
-        node_group: list[str] = None,
+        node_group: str = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1437,12 +1412,11 @@ class _Deployment(Environment):
                 "context": context,
                 "nodeGroup": node_group,
             },
-            delimiter=",",
         )
 
     def GetRepos(
         self,
-        id: list[int] = None,
+        id: int = None,
     ):
         """
         param id: unique identifier of the repository.
@@ -1452,7 +1426,6 @@ class _Deployment(Environment):
             params={
                 "id": id,
             },
-            delimiter=",",
         )
 
     def RemoveBuildProject(
@@ -1473,7 +1446,6 @@ class _Deployment(Environment):
                 "nodeId": node_id,
                 "project": project,
             },
-            delimiter=",",
         )
 
     def RemoveRepo(self, id: int):
@@ -1533,11 +1505,11 @@ class _Deployment(Environment):
     def Update(
         self,
         env_name: str,
-        node_group: list[str] = None,
-        node_id: list[int] = None,
-        context: list[str] = None,
-        project: list[str] = None,
-        delay: list[str] = None,
+        node_group: str = None,
+        node_id: int = None,
+        context: str = None,
+        project: str = None,
+        delay: str = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1557,7 +1529,6 @@ class _Deployment(Environment):
                 "project": project,
                 "delay": delay,
             },
-            delimiter=",",
         )
 
 
@@ -1574,15 +1545,15 @@ class _Binder(Environment):
      Ref: https://docs.jelastic.com/api/private/#!/api/environment.Binder
     """
 
-    _endpoint2 = "binder"
+    _endpoint2 = "Binder"
 
     def AddDomains(
         self,
         env_name: str,
-        domains: str,
-        node_group: list[str] = None,
-        node_id: list[int] = None,
-        subdomain: list[str] = None,
+        domains: list[str] = None,
+        node_group: str = None,
+        node_id: int = None,
+        subdomain: str = None,
     ):
         """
         param domains: a comma- or semicolon-separated list of domains (e.g. domain1,domain2 or domain1;domain2).
@@ -1607,7 +1578,7 @@ class _Binder(Environment):
         env_name: str,
         key: str,
         cert: str,
-        interm: list[str] = None,
+        interm: str = None,
     ):
         """
         param key: private key (can be either key body or link to download it).
@@ -1622,14 +1593,13 @@ class _Binder(Environment):
                 "cert": cert,
                 "interm": interm,
             },
-            delimiter=",",
         )
 
     def AttachExtIp(
         self,
         env_name: str,
         nodeid: int,
-        type: list[str] = None,
+        type: str = None,
     ):
         return self._get(
             "AttachExtIp",
@@ -1638,14 +1608,13 @@ class _Binder(Environment):
                 "nodeid": nodeid,
                 "type": type,
             },
-            delimiter=",",
         )
 
     def BindExtDomain(
         self,
         env_name: str,
         extdomain: str,
-        cert_id: list[int] = None,
+        cert_id: int = None,
     ):
         return self._get(
             "BindExtDomain",
@@ -1654,14 +1623,13 @@ class _Binder(Environment):
                 "extdomain": extdomain,
                 "certId": cert_id,
             },
-            delimiter=",",
         )
 
     def BindExtDomains(
         self,
         env_name: str,
-        extdomains: str,
-        cert_id: list[int] = None,
+        extdomains: list[str] = None,
+        cert_id: int = None,
     ):
         """
         param extdomain: a comma-separated list of external domains to be bound to the environment.
@@ -1698,7 +1666,7 @@ class _Binder(Environment):
         self,
         env_name: str,
         cert_id: int,
-        entry_point: list[str] = None,
+        entry_point: str = None,
         ext_domains: list[str] = None,
     ):
         """
@@ -1721,7 +1689,7 @@ class _Binder(Environment):
         self,
         env_name: str,
         domain: str,
-        region: list[str] = None,
+        region: str = None,
     ):
         """
         param domain: domain name to be checked.
@@ -1734,7 +1702,6 @@ class _Binder(Environment):
                 "domain": domain,
                 "region": region,
             },
-            delimiter=",",
         )
 
     def CheckExtDomain(
@@ -1796,9 +1763,9 @@ class _Binder(Environment):
         self,
         env_name: str,
         id: int,
-        key: list[str] = None,
-        cert: list[str] = None,
-        interm: list[str] = None,
+        key: str = None,
+        cert: str = None,
+        interm: str = None,
     ):
         """
         param id: unique identifier of the target SSL certificate.
@@ -1815,7 +1782,6 @@ class _Binder(Environment):
                 "cert": cert,
                 "interm": interm,
             },
-            delimiter=",",
         )
 
     def GetDomainInfo(
@@ -1839,9 +1805,9 @@ class _Binder(Environment):
     def GetDomains(
         self,
         env_name: str,
-        node_group: list[str] = None,
-        node_id: list[int] = None,
-        in_short: list[bool] = None,
+        node_group: str = None,
+        node_id: int = None,
+        in_short: bool = None,
     ):
         """
         param node_group: unique identifier of the target node group (layer) for filtering, e.g. "cp" for the default application server layer.
@@ -1856,7 +1822,6 @@ class _Binder(Environment):
                 "nodeId": node_id,
                 "inShort": in_short,
             },
-            delimiter=",",
         )
 
     def GetExtDomains(self, env_name: str):
@@ -1873,7 +1838,7 @@ class _Binder(Environment):
         )
 
     def ManageNodeDnsState(
-        self, env_name: str, node_id: list[int] = None, enabled: list[bool] = None
+        self, env_name: str, node_id: int = None, enabled: bool = None
     ):
         """
         param env_name: target environment name.
@@ -1887,11 +1852,14 @@ class _Binder(Environment):
                 "nodeId": node_id,
                 "enabled": enabled,
             },
-            delimiter=",",
         )
 
     def MoveExtIps(
-        self, env_name: str, source_node_id: int, target_node_id: int, ips: str
+        self,
+        env_name: str,
+        source_node_id: int,
+        target_node_id: int,
+        ips: list[str] = None,
     ):
         """
         param env_name: source environment name.
@@ -1907,14 +1875,15 @@ class _Binder(Environment):
                 "targetNodeId": target_node_id,
                 "ips": ips,
             },
+            delimiter=",",
         )
 
     def RemoveDomains(
         self,
         env_name: str,
-        domains: str,
-        node_group: list[str] = None,
-        node_id: list[int] = None,
+        domains: list[str] = None,
+        node_group: str = None,
+        node_id: int = None,
     ):
         """
         param env_name: target environment name.
@@ -1967,7 +1936,7 @@ class _Binder(Environment):
     def RemoveSSLCerts(
         self,
         env_name: str,
-        ids: str,
+        ids: list[str] = None,
     ):
         """
         param env_name: target environment name.
@@ -1979,6 +1948,7 @@ class _Binder(Environment):
                 "envName": env_name,
                 "ids": ids,
             },
+            delimiter=",",
         )
 
     def SetExtIpCount(
@@ -1986,8 +1956,8 @@ class _Binder(Environment):
         env_name: str,
         type: str,
         count: int,
-        node_group: list[str] = None,
-        node_id: list[int] = None,
+        node_group: str = None,
+        node_id: int = None,
     ):
         """
         param env_name: target environment name.
@@ -2005,7 +1975,6 @@ class _Binder(Environment):
                 "nodeGroup": node_group,
                 "node_id": node_id,
             },
-            delimiter=",",
         )
 
     def SwapExtDomains(
@@ -2030,8 +1999,8 @@ class _Binder(Environment):
         env_name: str,
         source_node_id: int,
         target_node_id: int,
-        source_ip: list[str] = None,
-        target_ip: list[str] = None,
+        source_ip: str = None,
+        target_ip: str = None,
     ):
         """
         param env_name: source environment name.
@@ -2049,7 +2018,6 @@ class _Binder(Environment):
                 "sourceIp": source_ip,
                 "targetIp": target_ip,
             },
-            delimiter=",",
         )
 
     def UnbindSSLCert(
@@ -2112,19 +2080,19 @@ class _Control(Environment):
         self,
         env_name: str,
         node_type: str,
-        cloud_lets: list[int] = None,
-        exp_ip: list[bool] = None,
-        flexible_cloud_lets: list[int] = None,
-        fixed_cloud_lets: list[int] = None,
-        display_name: list[str] = None,
-        node_group: list[str] = None,
-        disk_limit: list[int] = None,
-        tag: list[str] = None,
-        metadata: list[str] = None,
-        start_service: list[bool] = None,
-        exp_ipv6_count: list[int] = None,
-        exp_ip_count: list[int] = None,
-        node_group_data: list[str] = None,
+        cloud_lets: int = None,
+        exp_ip: bool = None,
+        flexible_cloud_lets: int = None,
+        fixed_cloud_lets: int = None,
+        display_name: str = None,
+        node_group: str = None,
+        disk_limit: int = None,
+        tag: str = None,
+        metadata: str = None,
+        start_service: bool = None,
+        exp_ipv6_count: int = None,
+        exp_ip_count: int = None,
+        node_group_data: str = None,
     ):
         return self._get(
             "AddBalancerNode",
@@ -2145,28 +2113,27 @@ class _Control(Environment):
                 "extIpCount": exp_ip_count,
                 "nodeGroupData": node_group_data,
             },
-            delimiter=",",
         )
 
     def AddBuildNode(
         self,
         env_name: str,
         node_type: str,
-        cloud_lets: list[int] = None,
-        node_id: list[int] = None,
-        exp_ip: list[bool] = None,
-        flexible_cloud_lets: list[int] = None,
-        fixed_cloud_lets: list[int] = None,
-        display_name: list[str] = None,
-        node_group: list[str] = None,
-        tag: list[str] = None,
-        metadata: list[str] = None,
-        start_service: list[bool] = None,
-        engine: list[str] = None,
-        exp_ipv6_count: list[int] = None,
-        exp_ip_count: list[int] = None,
-        node_group_data: list[str] = None,
-        disk_limit: list[int] = None,
+        cloud_lets: int = None,
+        node_id: int = None,
+        exp_ip: bool = None,
+        flexible_cloud_lets: int = None,
+        fixed_cloud_lets: int = None,
+        display_name: str = None,
+        node_group: str = None,
+        tag: str = None,
+        metadata: str = None,
+        start_service: bool = None,
+        engine: str = None,
+        exp_ipv6_count: int = None,
+        exp_ip_count: int = None,
+        node_group_data: str = None,
+        disk_limit: int = None,
     ):
         return self._get(
             "AddBuildNode",
@@ -2189,25 +2156,24 @@ class _Control(Environment):
                 "nodeGroupData": node_group_data,
                 "diskLimit": disk_limit,
             },
-            delimiter=",",
         )
 
     def AddCacheNode(
         self,
         env_name: str,
         node_type: str,
-        cloud_lets: list[int] = None,
-        flexible_cloud_lets: list[int] = None,
-        fixed_cloud_lets: list[int] = None,
-        display_name: list[str] = None,
-        node_group: list[str] = None,
-        disk_limit: list[int] = None,
-        tag: list[str] = None,
-        metadata: list[str] = None,
-        start_service: list[bool] = None,
-        exp_ipv6_count: list[int] = None,
-        exp_ip_count: list[int] = None,
-        node_group_data: list[str] = None,
+        cloud_lets: int = None,
+        flexible_cloud_lets: int = None,
+        fixed_cloud_lets: int = None,
+        display_name: str = None,
+        node_group: str = None,
+        disk_limit: int = None,
+        tag: str = None,
+        metadata: str = None,
+        start_service: bool = None,
+        exp_ipv6_count: int = None,
+        exp_ip_count: int = None,
+        node_group_data: str = None,
     ):
         return self._get(
             "AddCacheNode",
@@ -2227,28 +2193,27 @@ class _Control(Environment):
                 "expIpCount": exp_ip_count,
                 "nodeGroupData": node_group_data,
             },
-            delimiter=",",
         )
 
     def AddComputeNode(
         self,
         env_name: str,
         node_type: str,
-        cloud_lets: list[int] = None,
-        is_master: list[int] = None,
-        exp_ip: list[bool] = None,
-        flexible_cloud_lets: list[int] = None,
-        fixed_cloud_lets: list[int] = None,
-        display_name: list[str] = None,
-        node_group: list[str] = None,
-        disk_limit: list[int] = None,
-        tag: list[str] = None,
-        metadata: list[bool] = None,
-        start_service: list[bool] = None,
-        engine: list[str] = None,
-        exp_ipv6_count: list[int] = None,
-        exp_ip_count: list[int] = None,
-        node_group_data: list[str] = None,
+        cloud_lets: int = None,
+        is_master: int = None,
+        exp_ip: bool = None,
+        flexible_cloud_lets: int = None,
+        fixed_cloud_lets: int = None,
+        display_name: str = None,
+        node_group: str = None,
+        disk_limit: int = None,
+        tag: str = None,
+        metadata: bool = None,
+        start_service: bool = None,
+        engine: str = None,
+        exp_ipv6_count: int = None,
+        exp_ip_count: int = None,
+        node_group_data: str = None,
     ):
         return self._get(
             "AddComputeNode",
@@ -2271,15 +2236,14 @@ class _Control(Environment):
                 "expIpCount": exp_ip_count,
                 "nodeGroupData": node_group_data,
             },
-            delimiter=",",
         )
 
     def AddContainerEnvVars(
         self,
         env_name: str,
         vars: dict,
-        node_group: list[str] = None,
-        node_id: list[int] = None,
+        node_group: str = None,
+        node_id: int = None,
     ):
         """
         :param env_name: target environment name.
@@ -2295,7 +2259,6 @@ class _Control(Environment):
                 "nodeGroup": node_group,
                 "nodeId": node_id,
             },
-            delimiter=",",
         )
 
     def AddContainerVolume(
@@ -2332,8 +2295,8 @@ class _Control(Environment):
         self,
         env_name: str,
         volumes: str,
-        node_group: list[str] = None,
-        node_id: list[int] = None,
+        node_group: str = None,
+        node_id: int = None,
     ):
         """
         :param env_name: target environment name
@@ -2349,7 +2312,6 @@ class _Control(Environment):
                 "nodeGroup": node_group,
                 "nodeId": node_id,
             },
-            delimiter=",",
         )
 
     def AddContext(
@@ -2358,7 +2320,7 @@ class _Control(Environment):
         name: str,
         file_name: str,
         type: str,
-        node_group: list[str] = None,
+        node_group: str = None,
     ):
         """
         :param env_name: target environment name
@@ -2373,27 +2335,26 @@ class _Control(Environment):
                 "type": type,
                 "nodeGroup": node_group,
             },
-            delimiter=",",
         )
 
     def AddDBNode(
         self,
         env_name: str,
         node_type: str,
-        cloud_lets: list[int] = None,
-        exp_ip: list[bool] = None,
-        password: list[str] = None,
-        flexible_cloud_lets: list[int] = None,
-        fixed_cloud_lets: list[int] = None,
-        display_name: list[str] = None,
-        node_group: list[str] = None,
-        disk_limit: list[int] = None,
-        tag: list[str] = None,
-        metadata: list[bool] = None,
-        start_service: list[bool] = None,
-        exp_ipv6_count: list[int] = None,
-        exp_ip_count: list[int] = None,
-        node_group_data: list[str] = None,
+        cloud_lets: int = None,
+        exp_ip: bool = None,
+        password: str = None,
+        flexible_cloud_lets: int = None,
+        fixed_cloud_lets: int = None,
+        display_name: str = None,
+        node_group: str = None,
+        disk_limit: int = None,
+        tag: str = None,
+        metadata: bool = None,
+        start_service: bool = None,
+        exp_ipv6_count: int = None,
+        exp_ip_count: int = None,
+        node_group_data: str = None,
     ):
         return self._get(
             "AddDBNode",
@@ -2415,7 +2376,6 @@ class _Control(Environment):
                 "expIpCount": exp_ip_count,
                 "nodeGroupData": node_group_data,
             },
-            delimiter=",",
         )
 
     def AddDockerNode(
@@ -2423,18 +2383,18 @@ class _Control(Environment):
         env_name: str,
         node_type: str,
         metadata: dict,
-        cloud_lets: list[int] = None,
-        exp_ip: list[bool] = None,
-        password: list[str] = None,
-        flexible_cloud_lets: list[int] = None,
-        fixed_cloud_lets: list[int] = None,
-        display_name: list[str] = None,
-        node_group: list[str] = None,
-        disk_limit: list[int] = None,
-        start_service: list[bool] = None,
-        exp_ipv6_count: list[int] = None,
-        exp_ip_count: list[int] = None,
-        node_group_data: list[str] = None,
+        cloud_lets: int = None,
+        exp_ip: bool = None,
+        password: str = None,
+        flexible_cloud_lets: int = None,
+        fixed_cloud_lets: int = None,
+        display_name: str = None,
+        node_group: str = None,
+        disk_limit: int = None,
+        start_service: bool = None,
+        exp_ipv6_count: int = None,
+        exp_ip_count: int = None,
+        node_group_data: str = None,
     ):
         return self._get(
             "AddDockerNode",
@@ -2455,7 +2415,6 @@ class _Control(Environment):
                 "expIpCount": exp_ip_count,
                 "nodeGroupData": node_group_data,
             },
-            delimiter=",",
         )
 
     def AddDockerVolume(
@@ -2538,19 +2497,19 @@ class _Control(Environment):
         self,
         env_name: str,
         node_type: str,
-        cloud_lets: list[int] = None,
-        exp_ip: list[bool] = None,
-        flexible_cloud_lets: list[int] = None,
-        fixed_cloud_lets: list[int] = None,
-        display_name: list[str] = None,
-        node_group: list[str] = None,
-        disk_limit: list[int] = None,
-        tag: list[str] = None,
-        metadata: list[bool] = None,
-        start_service: list[bool] = None,
-        exp_ipv6_count: list[int] = None,
-        exp_ip_count: list[int] = None,
-        node_group_data: list[str] = None,
+        cloud_lets: int = None,
+        exp_ip: bool = None,
+        flexible_cloud_lets: int = None,
+        fixed_cloud_lets: int = None,
+        display_name: str = None,
+        node_group: str = None,
+        disk_limit: int = None,
+        tag: str = None,
+        metadata: bool = None,
+        start_service: bool = None,
+        exp_ipv6_count: int = None,
+        exp_ip_count: int = None,
+        node_group_data: str = None,
     ):
         return self._get(
             "AddExtraNode",
@@ -2571,29 +2530,28 @@ class _Control(Environment):
                 "expIpCount": exp_ip_count,
                 "nodeGroupData": node_group_data,
             },
-            delimiter=",",
         )
 
     def AddNode(
         self,
         env_name: str,
         node_type: str,
-        cloud_lets: list[int] = None,
-        ext_ip: list[str] = None,
-        password: list[str] = None,
-        flexible_cloud_lets: list[int] = None,
-        fixed_cloud_lets: list[int] = None,
-        display_name: list[str] = None,
-        metadata: list[str] = None,
-        node_group: list[str] = None,
-        start_service: list[bool] = None,
-        disk_limit: list[int] = None,
-        tag: list[str] = None,
-        engine: list[str] = None,
-        exit_ipv4: list[int] = None,
-        exit_ipv6: list[int] = None,
-        node_group_data: list[str] = None,
-        options: list[str] = None,
+        cloud_lets: int = None,
+        ext_ip: str = None,
+        password: str = None,
+        flexible_cloud_lets: int = None,
+        fixed_cloud_lets: int = None,
+        display_name: str = None,
+        metadata: str = None,
+        node_group: str = None,
+        start_service: bool = None,
+        disk_limit: int = None,
+        tag: str = None,
+        engine: str = None,
+        exit_ipv4: int = None,
+        exit_ipv6: int = None,
+        node_group_data: str = None,
+        options: str = None,
     ):
         """
         :param env_name: name of the selected environment
@@ -2633,7 +2591,6 @@ class _Control(Environment):
                 "nodeGroupData": node_group_data,
                 "options": options,
             },
-            delimiter=",",
         )
 
     def AddPortRedirect(
@@ -2643,7 +2600,7 @@ class _Control(Environment):
         src_port: int,
         dst_port: int,
         protocol: str,
-        comments: list[str] = None,
+        comments: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -2663,26 +2620,25 @@ class _Control(Environment):
                 "protocol": protocol,
                 "comments": comments,
             },
-            delimiter=",",
         )
 
     def AddStorageNode(
         self,
         env_name: str,
         node_type: str,
-        cloud_lets: list[int] = None,
-        ext_ip: list[str] = None,
-        flexible_cloud_lets: list[int] = None,
-        fixed_cloud_lets: list[int] = None,
-        display_name: list[str] = None,
-        node_group: list[str] = None,
-        disk_limit: list[int] = None,
-        tag: list[str] = None,
-        metadata: list[str] = None,
-        start_service: list[bool] = None,
-        ext_ipv6_count: list[int] = None,
-        ext_ip_count: list[int] = None,
-        node_group_data: list[str] = None,
+        cloud_lets: int = None,
+        ext_ip: str = None,
+        flexible_cloud_lets: int = None,
+        fixed_cloud_lets: int = None,
+        display_name: str = None,
+        node_group: str = None,
+        disk_limit: int = None,
+        tag: str = None,
+        metadata: str = None,
+        start_service: bool = None,
+        ext_ipv6_count: int = None,
+        ext_ip_count: int = None,
+        node_group_data: str = None,
     ):
         return self._get(
             "AddStorageNode",
@@ -2703,27 +2659,26 @@ class _Control(Environment):
                 "extIpCount": ext_ip_count,
                 "nodeGroupData": node_group_data,
             },
-            delimiter=",",
         )
 
     def AddVdsNode(
         self,
         env_name: str,
         node_type: str,
-        cloud_lets: list[int] = None,
-        ext_ip: list[str] = None,
-        password: list[str] = None,
-        flexible_cloud_lets: list[int] = None,
-        fixed_cloud_lets: list[int] = None,
-        display_name: list[str] = None,
-        node_group: list[str] = None,
-        disk_limit: list[int] = None,
-        tag: list[str] = None,
-        metadata: list[str] = None,
-        start_service: list[bool] = None,
-        ext_ipv6_count: list[int] = None,
-        ext_ip_count: list[int] = None,
-        node_group_data: list[str] = None,
+        cloud_lets: int = None,
+        ext_ip: str = None,
+        password: str = None,
+        flexible_cloud_lets: int = None,
+        fixed_cloud_lets: int = None,
+        display_name: str = None,
+        node_group: str = None,
+        disk_limit: int = None,
+        tag: str = None,
+        metadata: str = None,
+        start_service: bool = None,
+        ext_ipv6_count: int = None,
+        ext_ip_count: int = None,
+        node_group_data: str = None,
     ):
         return self._get(
             "AddVdsNode",
@@ -2745,7 +2700,6 @@ class _Control(Environment):
                 "extIpCount": ext_ip_count,
                 "nodeGroupData": node_group_data,
             },
-            delimiter=",",
         )
 
     def AddVmNode(
@@ -2753,14 +2707,14 @@ class _Control(Environment):
         env_name: str,
         node_type: str,
         options: str,
-        ext_ip: list[str] = None,
-        display_name: list[str] = None,
-        node_group: list[str] = None,
-        disk_limit: list[int] = None,
-        ext_ipv6_count: list[int] = None,
-        ext_ip_count: list[int] = None,
-        node_group_data: list[str] = None,
-        password: list[str] = None,
+        ext_ip: str = None,
+        display_name: str = None,
+        node_group: str = None,
+        disk_limit: int = None,
+        ext_ipv6_count: int = None,
+        ext_ip_count: int = None,
+        node_group_data: str = None,
+        password: str = None,
     ):
         return self._get(
             "AddVmNode",
@@ -2777,7 +2731,6 @@ class _Control(Environment):
                 "nodeGroupData": node_group_data,
                 "password": password,
             },
-            delimiter=",",
         )
 
     def AppendNodes(
@@ -2831,10 +2784,10 @@ class _Control(Environment):
         self,
         env_name: str,
         keywords: str,
-        node_type: list[str] = None,
-        action: list[str] = None,
-        password: list[str] = None,
-        node_group: list[str] = None,
+        node_type: str = None,
+        action: str = None,
+        password: str = None,
+        node_group: str = None,
     ):
         return self._get(
             "ApplySoftwarePackageAction",
@@ -2846,7 +2799,6 @@ class _Control(Environment):
                 "password": password,
                 "nodeGroup": node_group,
             },
-            delimiter=",",
         )
 
     def AttachEnvGroup(
@@ -2881,7 +2833,7 @@ class _Control(Environment):
         self,
         env_name: str,
         uid: int,
-        limit_type: list[str] = None,
+        limit_type: str = None,
     ):
         return self._get(
             "ChangeLimitsInner",
@@ -2893,7 +2845,7 @@ class _Control(Environment):
         )
 
     def ChangeTopology(
-        self, env_name: str, env: dict, nodes: dict, action_key: list[str] = None
+        self, env_name: str, env: dict, nodes: dict, action_key: str = None
     ):
         """
         :param env_name: target environment name.
@@ -2909,14 +2861,13 @@ class _Control(Environment):
                 "nodes": nodes,
                 "actionkey": action_key,
             },
-            delimiter=",",
         )
 
     def CheckDependencies(
         self,
         env_name: str,
-        node_id: list[int] = None,
-        filter: list[str] = None,
+        node_id: int = None,
+        filter: str = None,
     ):
         return self._get(
             "CheckDependencies",
@@ -2925,14 +2876,13 @@ class _Control(Environment):
                 "nodeId": node_id,
                 "filter": filter,
             },
-            delimiter=",",
         )
 
     def CheckExtIpCount(
         self,
         exp_ipv6: int,
-        exp_ipv4: list[int] = None,
-        hardware_node_group: list[str] = None,
+        exp_ipv4: int = None,
+        hardware_node_group: str = None,
     ):
         return self._get(
             "CheckExtIpCount",
@@ -2941,13 +2891,12 @@ class _Control(Environment):
                 "expIpv4": exp_ipv4,
                 "hardwareNodeGroup": hardware_node_group,
             },
-            delimiter=",",
         )
 
     def CheckMigrationPossibility(
         self,
         env_name: str,
-        hardware_node_group: list[str] = None,
+        hardware_node_group: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -2959,7 +2908,6 @@ class _Control(Environment):
                 "envName": env_name,
                 "hardwareNodeGroup": hardware_node_group,
             },
-            delimiter=",",
         )
 
     def ClearLog(self, env_name: str, node_id: int, path: str):
@@ -2981,7 +2929,7 @@ class _Control(Environment):
         self,
         src_env_name: str,
         dit_env_name: str,
-        use_external_mounts: list[bool] = None,
+        use_external_mounts: bool = None,
     ):
         """
         :param src_env_name: source environment name (one that is going to be cloned).
@@ -2995,7 +2943,6 @@ class _Control(Environment):
                 "ditEnvName": dit_env_name,
                 "useExternalMounts": use_external_mounts,
             },
-            delimiter=",",
         )
 
     def CloneNode(
@@ -3003,7 +2950,7 @@ class _Control(Environment):
         env_name: str,
         count: int,
         node_group: str,
-        node_id: list[int] = None,
+        node_id: int = None,
     ):
         return self._get(
             "CloneNode",
@@ -3030,9 +2977,9 @@ class _Control(Environment):
         self,
         env_name: str,
         settings: dict,
-        owner_uid: list[int] = None,
-        hardware_node_group: list[str] = None,
-        env_groups: list[str] = None,
+        owner_uid: int = None,
+        hardware_node_group: str = None,
+        env_groups: str = None,
     ):
         """
         :param env_name: domain of the environment
@@ -3048,16 +2995,15 @@ class _Control(Environment):
                 "hardwareNodeGroups": hardware_node_group,
                 "envGroups": env_groups,
             },
-            delimiter=",",
         )
 
     def CreateEnvironment(
         self,
         env: dict,
         nodes: dict,
-        action_key: list[str] = None,
-        owner_uid: list[int] = None,
-        env_groups: list[str] = None,
+        action_key: str = None,
+        owner_uid: int = None,
+        env_groups: str = None,
     ):
         """
         :param env: JSON object with environment settings:
@@ -3075,13 +3021,12 @@ class _Control(Environment):
                 "ownerUid": owner_uid,
                 "envGroups": env_groups,
             },
-            delimiter=",",
         )
 
     def DeleteEnv(
         self,
         env_name: str,
-        password: list[str] = None,
+        password: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -3093,7 +3038,6 @@ class _Control(Environment):
                 "envName": env_name,
                 "password": password,
             },
-            delimiter=",",
         )
 
     def DeleteExportedFiles(
@@ -3118,12 +3062,12 @@ class _Control(Environment):
         env_name: str,
         file_url: str,
         file_name: str,
-        context: list[str] = None,
-        atomic_deploy: list[bool] = None,
-        delay: list[int] = None,
-        node_group: list[str] = None,
-        hooks: list[str] = None,
-        is_sequential: list[bool] = None,
+        context: str = None,
+        atomic_deploy: bool = None,
+        delay: int = None,
+        node_group: str = None,
+        hooks: str = None,
+        is_sequential: bool = None,
     ):
         """
         :param env_name: target environment name.
@@ -3149,7 +3093,6 @@ class _Control(Environment):
                 "hooks": hooks,
                 "isSequential": is_sequential,
             },
-            delimiter=",",
         )
 
     def DetachEnvGroup(
@@ -3222,7 +3165,6 @@ class _Control(Environment):
                 "envName": env_name,
                 "settings": settings,
             },
-            delimiter=",",
         )
 
     def EditNodeGroup(
@@ -3240,14 +3182,13 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeGroup": node_group,
             },
-            delimiter=",",
         )
 
     def EditRegistryCredentials(
         self,
         filter: dict,
-        user: list[str] = None,
-        password: list[str] = None,
+        user: str = None,
+        password: str = None,
     ):
         """
         :param filter: JSON object to list parameters that need to be updated:
@@ -3261,7 +3202,6 @@ class _Control(Environment):
                 "user": user,
                 "password": password,
             },
-            delimiter=",",
         )
 
     def ExecCmd(
@@ -3305,7 +3245,6 @@ class _Control(Environment):
                 "sayYes": say_yes,
                 "async": asynchronous,
             },
-            delimiter=",",
         )
 
     def ExecCmdById(
@@ -3344,6 +3283,33 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeType": node_type,
                 "commandList": command_list,
+                "sayYes": say_yes,
+            },
+        )
+
+    def ExecCmdInner(
+        self,
+        env_name: str,
+        target_app_id: str,
+        command_list: list[dict],
+        node_type: str = None,
+        node_id: int = None,
+        user_name: str = None,
+        node_group: str = None,
+        asynchronous: bool = None,
+        say_yes: bool = True,
+    ):
+        return self._get(
+            "ExecCmdInner",
+            params={
+                "envName": env_name,
+                "targetAppid": target_app_id,
+                "commandList": command_list,
+                "nodeType": node_type,
+                "nodeId": node_id,
+                "userName": user_name,
+                "nodeGroup": node_group,
+                "async": asynchronous,
                 "sayYes": say_yes,
             },
         )
@@ -3397,8 +3363,8 @@ class _Control(Environment):
         self,
         env_name: str,
         domain: str,
-        start_time: date,
-        end_time: date,
+        start_time: datetime,
+        end_time: datetime,
         checksum: str,
     ):
         return self._get(
@@ -3410,13 +3376,13 @@ class _Control(Environment):
                 "endtime": end_time,
                 "checksum": checksum,
             },
-            datetime_format="%Y-%m-%d",
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def GetAllSumStatByUid(
         self,
-        duration: list[int] = None,
-        end_time: list[date] = None,
+        duration: int = None,
+        end_time: datetime = None,
     ):
         """
         :param duration: period (in seconds) to show statistics for.
@@ -3428,8 +3394,7 @@ class _Control(Environment):
                 "duration": duration,
                 "endtime": end_time,
             },
-            datetime_format="%Y-%m-%d",
-            delimiter=",",
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def GetBasicEnvsInfo(self, owner_uid: int = None):
@@ -3493,10 +3458,10 @@ class _Control(Environment):
     def GetContainerManifest(
         self,
         image: str,
-        registry: list[str] = None,
-        user_name: list[str] = None,
-        password: list[str] = None,
-        ignore_format: list[bool] = None,
+        registry: str = None,
+        user_name: str = None,
+        password: str = None,
+        ignore_format: bool = None,
     ):
         """
         :param image: container's Docker image and tag, e.g. "alpine:latest".
@@ -3514,7 +3479,6 @@ class _Control(Environment):
                 "password": password,
                 "ignoreFormat": ignore_format,
             },
-            delimiter=",",
         )
 
     def GetContainerNodeTags(self, env_name: str, node_id: int):
@@ -3559,9 +3523,9 @@ class _Control(Environment):
     def GetContainerTags(
         self,
         image: str,
-        registry: list[str] = None,
-        user_name: list[str] = None,
-        password: list[str] = None,
+        registry: str = None,
+        user_name: str = None,
+        password: str = None,
     ):
         """
         :params image: container's Docker image and tag, e.g. "alpine:latest".
@@ -3577,7 +3541,6 @@ class _Control(Environment):
                 "userName": user_name,
                 "password": password,
             },
-            delimiter=",",
         )
 
     def GetContainerVolumesByGroup(
@@ -3669,7 +3632,7 @@ class _Control(Environment):
     def GetEndpoints(
         self,
         env_name: str,
-        node_id: list[int] = None,
+        node_id: int = None,
     ):
         """
         :param env_name: target environment name.
@@ -3686,7 +3649,7 @@ class _Control(Environment):
 
     def GetEngineList(
         self,
-        type: list[str] = None,
+        type: str = None,
     ):
         """
         :param type: type of the engine (java/php/ruby/js)
@@ -3696,7 +3659,6 @@ class _Control(Environment):
             params={
                 "type": type,
             },
-            delimiter=",",
         )
 
     def GetEngineTypes(self):
@@ -3705,7 +3667,7 @@ class _Control(Environment):
     def GetEnvInfo(
         self,
         env_name: str,
-        lazy: list[bool] = None,
+        lazy: bool = None,
     ):
         """
         :param env_name: target environment name.
@@ -3717,7 +3679,6 @@ class _Control(Environment):
                 "envName": env_name,
                 "lazy": lazy,
             },
-            delimiter=",",
         )
 
     def GetEnvProperty(
@@ -3740,8 +3701,8 @@ class _Control(Environment):
 
     def GetEnvs(
         self,
-        lazy: list[bool] = None,
-        owner_uid: list[int] = None,
+        lazy: bool = None,
+        owner_uid: int = None,
     ):
         """
         :param lazy: defines whether to load only the main environment metadata, e.g. name, alias, domain, etc., (true) or all the environment information (false).
@@ -3753,13 +3714,12 @@ class _Control(Environment):
                 "lazy": lazy,
                 "ownerUid": owner_uid,
             },
-            delimiter=",",
         )
 
     def GetEnvsByCriteria(
         self,
         criteria: dict,
-        lazy: list[bool] = None,
+        lazy: bool = None,
     ):
         return self._get(
             "GetEnvsByCriteria",
@@ -3767,13 +3727,12 @@ class _Control(Environment):
                 "criteria": criteria,
                 "lazy": lazy,
             },
-            delimiter=",",
         )
 
     def GetEnvsInfo(
         self,
         env_name: str,
-        target_app_id: list[str] = None,
+        target_app_id: str = None,
     ):
         return self._get(
             "GetEnvsInfo",
@@ -3781,14 +3740,13 @@ class _Control(Environment):
                 "envName": env_name,
                 "targetAppid": target_app_id,
             },
-            delimiter=",",
         )
 
     def GetLogs(
         self,
         env_name: str,
         node_id: int,
-        path: list[str] = None,
+        path: str = None,
     ):
         return self._get(
             "GetLogs",
@@ -3797,14 +3755,13 @@ class _Control(Environment):
                 "nodeId": node_id,
                 "path": path,
             },
-            delimiter=",",
         )
 
     def GetLogsList(
         self,
         env_name: str,
         node_id: int,
-        path: list[str] = None,
+        path: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -3818,7 +3775,6 @@ class _Control(Environment):
                 "nodeId": node_id,
                 "path": path,
             },
-            delimiter=",",
         )
 
     def GetNodeGroups(
@@ -3857,7 +3813,7 @@ class _Control(Environment):
         env_name: str,
         node_id: int,
         uid: int,
-        skip_node_type_check: list[bool] = None,
+        skip_node_type_check: bool = None,
     ):
         """
         :param node_id: unique identifier of the software node.
@@ -3871,7 +3827,6 @@ class _Control(Environment):
                 "uid": uid,
                 "skipNodeTypeCheck": skip_node_type_check,
             },
-            delimiter=",",
         )
 
     def GetNodeTags(
@@ -3897,7 +3852,7 @@ class _Control(Environment):
     def GetRegionsInner(
         self,
         group_name: str,
-        is_enabled: list[bool] = None,
+        is_enabled: bool = None,
     ):
         """
         :param group_name: unique identifier of the target user group.
@@ -3909,7 +3864,6 @@ class _Control(Environment):
                 "groupName": group_name,
                 "isEnabled": is_enabled,
             },
-            delimiter=",",
         )
 
     def GetRegistryInfo(
@@ -3954,8 +3908,8 @@ class _Control(Environment):
     def GetSoftwarePackages(
         self,
         env_name: str,
-        node_type: list[str] = None,
-        node_group: list[str] = None,
+        node_type: str = None,
+        node_group: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -3969,7 +3923,6 @@ class _Control(Environment):
                 "nodeType": node_type,
                 "nodeGroup": node_group,
             },
-            delimiter=",",
         )
 
     def GetStats(
@@ -3977,10 +3930,10 @@ class _Control(Environment):
         env_name: str,
         duration: int,
         interval: int,
-        end_time: list[datetime] = None,
-        node_id: list[int] = None,
-        node_type: list[str] = None,
-        node_group: list[str] = None,
+        end_time: datetime = None,
+        node_id: int = None,
+        node_type: str = None,
+        node_group: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -4002,15 +3955,14 @@ class _Control(Environment):
                 "nodetype": node_type,
                 "nodeGroup": node_group,
             },
-            datetime_format="%Y-%m-%d",
-            delimiter=",",
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def GetSumStat(
         self,
         env_name: str,
         duration: int,
-        end_time: list[datetime] = None,
+        end_time: datetime = None,
     ):
         """
         :param env_name: target environment name
@@ -4024,8 +3976,7 @@ class _Control(Environment):
                 "duration": duration,
                 "endtime": end_time,
             },
-            datetime_format="%Y-%m-%d",
-            delimiter=",",
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def GetTemplateManifest(
@@ -4047,8 +3998,8 @@ class _Control(Environment):
 
     def GetTemplates(
         self,
-        type: list[str] = None,
-        owneer_uid: list[int] = None,
+        type: str = None,
+        owner_uid: int = None,
     ):
         """
         :param type: filter the list by the template type (ALL,NATIVE,CARTRIDGE,DOCKERIZED)
@@ -4058,7 +4009,7 @@ class _Control(Environment):
             "GetTemplates",
             params={
                 "type": type,
-                "ownerUid": owneer_uid,
+                "ownerUid": owner_uid,
             },
         )
 
@@ -4088,7 +4039,7 @@ class _Control(Environment):
         self,
         env_name: str,
         package_name: str,
-        node_id: list[int] = None,
+        node_id: int = None,
     ):
         """
         :param env_name: environment name or appid
@@ -4101,15 +4052,14 @@ class _Control(Environment):
                 "packageName": package_name,
                 "nodeId": node_id,
             },
-            delimiter=",",
         )
 
     def InstallSoftwarePackage(
         self,
         env_name: str,
         keyword: str,
-        node_type: list[str] = None,
-        node_group: list[str] = None,
+        node_type: str = None,
+        node_group: str = None,
     ):
         return self._get(
             "InstallSoftwarePackage",
@@ -4119,7 +4069,6 @@ class _Control(Environment):
                 "nodeType": node_type,
                 "nodeGroup": node_group,
             },
-            delimiter=",",
         )
 
     def LinkDockerNodes(
@@ -4128,8 +4077,8 @@ class _Control(Environment):
         source_node_id: int,
         target_node_id: int,
         alias: str,
-        is_auto_restart: list[bool] = None,
-        group_alias: list[str] = None,
+        is_auto_restart: bool = None,
+        group_alias: str = None,
     ):
         return self._get(
             "LinkDockerNodes",
@@ -4141,7 +4090,6 @@ class _Control(Environment):
                 "isAutoRestart": is_auto_restart,
                 "groupAlias": group_alias,
             },
-            delimiter=",",
         )
 
     def LinkNode(
@@ -4194,8 +4142,8 @@ class _Control(Environment):
     def Migrate(
         self,
         env_name: str,
-        hardware_node_group: list[str] = None,
-        is_on_line: list[bool] = None,
+        hardware_node_group: str = None,
+        is_on_line: bool = None,
     ):
         """
         :param env_name: target environment name.
@@ -4209,7 +4157,6 @@ class _Control(Environment):
                 "hardwareNodeGroup": hardware_node_group,
                 "isOnLine": is_on_line,
             },
-            delimiter=",",
         )
 
     def ReadLog(
@@ -4217,8 +4164,8 @@ class _Control(Environment):
         env_name: str,
         node_id: int,
         path: str,
-        From: list[int] = None,
-        count: list[int] = None,
+        From: int = None,
+        count: int = None,
     ):
         """
         :param env_name: target environment name
@@ -4236,7 +4183,6 @@ class _Control(Environment):
                 "from": From,
                 "count": count,
             },
-            delimiter=",",
         )
 
     def RedeployContainerById(
@@ -4244,10 +4190,10 @@ class _Control(Environment):
         env_name: str,
         node_id: int,
         tag: str,
-        use_existing_volumes: list[bool] = None,
-        login: list[str] = None,
-        password: list[str] = None,
-        manage_dns_state: list[bool] = None,
+        use_existing_volumes: bool = None,
+        login: str = None,
+        password: str = None,
+        manage_dns_state: bool = None,
     ):
         """
         :param env_name: target environment name
@@ -4269,19 +4215,18 @@ class _Control(Environment):
                 "password": password,
                 "manageDNSState": manage_dns_state,
             },
-            delimiter=",",
         )
 
     def RedeployContainers(
         self,
         env_name: str,
         tag: str,
-        node_group: list[str] = None,
-        node_id: list[int] = None,
-        use_existing_volumes: list[bool] = None,
-        login: list[str] = None,
-        password: list[str] = None,
-        manage_dns_state: list[bool] = None,
+        node_group: str = None,
+        node_id: int = None,
+        use_existing_volumes: bool = None,
+        login: str = None,
+        password: str = None,
+        manage_dns_state: bool = None,
     ):
         """
         :param env_name: target environment name.
@@ -4305,7 +4250,6 @@ class _Control(Environment):
                 "password": password,
                 "manageDNSState": manage_dns_state,
             },
-            delimiter=",",
         )
 
     def RedeployContainersByGroup(
@@ -4313,12 +4257,12 @@ class _Control(Environment):
         env_name: str,
         node_group: str,
         tag: str,
-        is_sequential: bool = False,
-        use_existing_volumes: bool = True,
-        delay: int = 0,
+        is_sequential: bool = None,
+        use_existing_volumes: bool = None,
+        delay: int = None,
         login: str = None,
         password: str = None,
-        manage_dns_state: bool = False,
+        manage_dns_state: bool = None,
     ):
         """
         :params env_name: target environment name.
@@ -4350,7 +4294,7 @@ class _Control(Environment):
         self,
         env_name: str,
         context: str,
-        node_group: list[str] = None,
+        node_group: str = None,
     ):
         """
         :params env_name: target environment name.
@@ -4364,15 +4308,14 @@ class _Control(Environment):
                 "context": context,
                 "nodeGroup": node_group,
             },
-            delimiter=",",
         )
 
     def RemoveContainerEnvVars(
         self,
         env_name: str,
-        vars: list[str],
-        node_group: list[str] = None,
-        node_id: list[int] = None,
+        vars: str,
+        node_group: str = None,
+        node_id: int = None,
     ):
         """
         :params env_name: target environment name.
@@ -4424,8 +4367,8 @@ class _Control(Environment):
         self,
         env_name: str,
         volumes: str,
-        node_group: list[str] = None,
-        node_id: list[int] = None,
+        node_group: str = None,
+        node_id: int = None,
     ):
         """
         :params env_name: target environment name
@@ -4441,7 +4384,6 @@ class _Control(Environment):
                 "nodeGroup": node_group,
                 "nodeId": node_id,
             },
-            delimiter=",",
         )
 
     def RemoveDockerVolume(
@@ -4486,7 +4428,7 @@ class _Control(Environment):
     def RemoveEnvPolicy(
         self,
         target_app_id: str,
-        policy: str,
+        policy: list[str],
     ):
         """
         :param target_app_id: target application identifier of the environment for removing policy.
@@ -4498,12 +4440,13 @@ class _Control(Environment):
                 "targetAppId": target_app_id,
                 "policy": policy,
             },
+            delimiter=",",
         )
 
     def RemoveEnvProperty(
         self,
         env_name: str,
-        property_keys: str,
+        property_keys: list[str],
     ):
         """
         :param env_name: target environment name
@@ -4515,6 +4458,7 @@ class _Control(Environment):
                 "envName": env_name,
                 "propertyKeys": property_keys,
             },
+            delimiter=",",
         )
 
     def RemoveLog(
@@ -4551,7 +4495,7 @@ class _Control(Environment):
         env_name: str,
         old_context: str,
         new_context: str,
-        node_group: list[str] = None,
+        node_group: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -4567,7 +4511,6 @@ class _Control(Environment):
                 "newContext": new_context,
                 "nodeGroup": node_group,
             },
-            delimiter=",",
         )
 
     def ReplicateNodes(self, env_name: str, nodes: str):
@@ -4577,7 +4520,7 @@ class _Control(Environment):
         self,
         env_name: str,
         node_id: int,
-        password: list[str] = None,
+        password: str = None,
     ):
         return self._get(
             "ResetContainerPassword",
@@ -4586,14 +4529,13 @@ class _Control(Environment):
                 "nodeId": node_id,
                 "password": password,
             },
-            delimiter=",",
         )
 
     def ResetContainerPasswordById(
         self,
         env_name: str,
         node_id: int,
-        password: list[str] = None,
+        password: str = None,
     ):
         return self._get(
             "ResetContainerPasswordById",
@@ -4602,14 +4544,13 @@ class _Control(Environment):
                 "nodeId": node_id,
                 "password": password,
             },
-            delimiter=",",
         )
 
     def ResetContainerPasswordByType(
         self,
         env_name: str,
         node_type: str,
-        password: list[str] = None,
+        password: str = None,
     ):
         return self._get(
             "ResetContainerPasswordByType",
@@ -4618,14 +4559,13 @@ class _Control(Environment):
                 "nodeType": node_type,
                 "password": password,
             },
-            delimiter=",",
         )
 
     def ResetContainersPasswordByGroup(
         self,
         env_name: str,
         node_group: str,
-        password: list[str] = None,
+        password: str = None,
     ):
         return self._get(
             "ResetContainersPasswordByGroup",
@@ -4634,15 +4574,14 @@ class _Control(Environment):
                 "nodeGroup": node_group,
                 "password": password,
             },
-            delimiter=",",
         )
 
     def ResetNodePassword(
         self,
         env_name: str,
-        node_group: list[str] = None,
-        node_id: list[int] = None,
-        password: list[str] = None,
+        node_group: str = None,
+        node_id: int = None,
+        password: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -4658,14 +4597,13 @@ class _Control(Environment):
                 "nodeId": node_id,
                 "password": password,
             },
-            delimiter=",",
         )
 
     def ResetNodePasswordById(
         self,
         env_name: str,
         node_id: int,
-        password: list[str] = None,
+        password: str = None,
     ):
         return self._get(
             "ResetNodePasswordById",
@@ -4674,14 +4612,13 @@ class _Control(Environment):
                 "nodeId": node_id,
                 "password": password,
             },
-            delimiter=",",
         )
 
     def ResetNodePasswordByType(
         self,
         env_name: str,
         node_type: str,
-        password: list[str] = None,
+        password: str = None,
     ):
         return self._get(
             "ResetNodePasswordByType",
@@ -4690,15 +4627,14 @@ class _Control(Environment):
                 "nodeType": node_type,
                 "password": password,
             },
-            delimiter=",",
         )
 
     def ResetServicePassword(
         self,
         env_name: str,
-        node_group: list[str] = None,
-        node_id: list[int] = None,
-        password: list[str] = None,
+        node_group: str = None,
+        node_id: int = None,
+        password: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -4714,14 +4650,13 @@ class _Control(Environment):
                 "nodeId": node_id,
                 "password": password,
             },
-            delimiter=",",
         )
 
     def RestartContainer(
         self,
         env_name: str,
         node_id: int,
-        manage_dns_state: list[bool] = None,
+        manage_dns_state: bool = None,
     ):
         return self._get(
             "RestartContainer",
@@ -4730,14 +4665,28 @@ class _Control(Environment):
                 "nodeId": node_id,
                 "manageDNSState": manage_dns_state,
             },
-            delimiter=",",
+        )
+
+    def RestartContainerById(
+        self,
+        env_name: str,
+        node_id: int,
+        manage_dns_state: bool = None,
+    ):
+        return self._get(
+            "RestartContainerById",
+            params={
+                "envName": env_name,
+                "nodeid": node_id,
+                "manageDNSState": manage_dns_state,
+            },
         )
 
     def RestartContainerByType(
         self,
         env_name: str,
         node_type: str,
-        manage_dns_state: list[bool] = None,
+        manage_dns_state: bool = None,
     ):
         return self._get(
             "RestartContainerByType",
@@ -4746,16 +4695,15 @@ class _Control(Environment):
                 "nodeType": node_type,
                 "manageDNSState": manage_dns_state,
             },
-            delimiter=",",
         )
 
     def RestartContainersByGroup(
         self,
         env_name: str,
         node_group: str,
-        delay: list[int] = None,
-        is_sequential: list[bool] = None,
-        manage_dns_state: list[bool] = None,
+        delay: int = None,
+        is_sequential: bool = None,
+        manage_dns_state: bool = None,
     ):
         return self._get(
             "RestartContainersByGroup",
@@ -4766,7 +4714,21 @@ class _Control(Environment):
                 "isSequential": is_sequential,
                 "manageDNSState": manage_dns_state,
             },
-            delimiter=",",
+        )
+
+    def RestartNodeById(
+        self,
+        env_name: str,
+        node_id: int,
+        manage_dns_state: bool = None,
+    ):
+        return self._get(
+            "RestartNodeById",
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "manageDNSState": manage_dns_state,
+            },
         )
 
     def RestartNodes(
@@ -4802,9 +4764,9 @@ class _Control(Environment):
         self,
         env_name: str,
         node_group: str,
-        delay: list[int] = None,
-        is_sequential: list[bool] = None,
-        manage_dns_state: list[bool] = None,
+        delay: int = None,
+        is_sequential: bool = None,
+        manage_dns_state: bool = None,
     ):
         return self._get(
             "RestartNodesByGroup",
@@ -4815,14 +4777,13 @@ class _Control(Environment):
                 "isSequential": is_sequential,
                 "manageDNSState": manage_dns_state,
             },
-            delimiter=",",
         )
 
     def RestartNodesByType(
         self,
         env_name: str,
         node_type: str,
-        manage_dns_state: list[bool] = None,
+        manage_dns_state: bool = None,
     ):
         return self._get(
             "RestartNodesByType",
@@ -4831,17 +4792,16 @@ class _Control(Environment):
                 "nodeType": node_type,
                 "manageDNSState": manage_dns_state,
             },
-            delimiter=",",
         )
 
     def RestartServices(
         self,
         env_name: str,
-        node_group: list[str] = None,
-        node_id: list[int] = None,
-        delay: list[int] = None,
-        is_sequential: list[bool] = None,
-        manage_dns_state: list[bool] = None,
+        node_group: str = None,
+        node_id: int = None,
+        delay: int = None,
+        is_sequential: bool = None,
+        manage_dns_state: bool = None,
     ):
         """
         :param env_name: target environment name.
@@ -4861,7 +4821,6 @@ class _Control(Environment):
                 "isSequential": is_sequential,
                 "manageDNSState": manage_dns_state,
             },
-            delimiter=",",
         )
 
     def RestoreDump(
@@ -4871,7 +4830,7 @@ class _Control(Environment):
         db_name: str,
         password: str,
         dump_url: str,
-        user: list[str] = None,
+        user: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -4891,19 +4850,17 @@ class _Control(Environment):
                 "dumpUrl": dump_url,
                 "user": user,
             },
-            delimiter=",",
         )
 
     def SendEnvCreatedEmail(
         self,
-        is_import: list[bool] = None,
+        is_import: bool = None,
     ):
         return self._get(
             "SendEnvCreatedEmail",
             params={
                 "isImport": is_import,
             },
-            delimiter=",",
         )
 
     def SendTransferRequest(
@@ -4952,7 +4909,7 @@ class _Control(Environment):
         node_group: str,
         flexible_cloudlets: int,
         fixed_cloudlets: int,
-        delay: list[int] = None,
+        delay: int = None,
     ):
         return self._get(
             "SetCloudletsCountByGroup",
@@ -4963,7 +4920,6 @@ class _Control(Environment):
                 "fixedCloudlets": fixed_cloudlets,
                 "delay": delay,
             },
-            delimiter=",",
         )
 
     def SetCloudletsCountById(
@@ -5010,7 +4966,7 @@ class _Control(Environment):
         self,
         env_name: str,
         node_id: int,
-        data: list[str] = None,
+        data: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -5024,7 +4980,6 @@ class _Control(Environment):
                 "nodeId": node_id,
                 "data": data,
             },
-            delimiter=",",
         )
 
     def SetContainerEnvVars(
@@ -5070,7 +5025,7 @@ class _Control(Environment):
         self,
         env_name: str,
         node_id: int,
-        data: list[str] = None,
+        data: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -5084,7 +5039,6 @@ class _Control(Environment):
                 "nodeId": node_id,
                 "data": data,
             },
-            delimiter=",",
         )
 
     def SetDiskLimitByGroup(
@@ -5121,7 +5075,7 @@ class _Control(Environment):
         self,
         env_name: str,
         node_id: int,
-        data: list[str] = None,
+        data: str = None,
     ):
         """
         :param data: entry point
@@ -5133,7 +5087,6 @@ class _Control(Environment):
                 "nodeId": node_id,
                 "data": data,
             },
-            delimiter=",",
         )
 
     def SetDockerEnvVars(
@@ -5158,7 +5111,7 @@ class _Control(Environment):
         self,
         env_name: str,
         node_id: int,
-        data: list[str] = None,
+        data: str = None,
     ):
         """
         :param data: run command
@@ -5170,7 +5123,6 @@ class _Control(Environment):
                 "nodeId": node_id,
                 "data": data,
             },
-            delimiter=",",
         )
 
     def SetDockerVolumesFrom(
@@ -5209,7 +5161,7 @@ class _Control(Environment):
     def SetEnvDisplayName(
         self,
         env_name: str,
-        dispplay_name: list[str] = None,
+        display_name: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -5219,9 +5171,8 @@ class _Control(Environment):
             "SetEnvDisplayName",
             params={
                 "envName": env_name,
-                "dispplayName": dispplay_name,
+                "displayName": display_name,
             },
-            delimiter=",",
         )
 
     def SetEnvGroup(
@@ -5240,8 +5191,8 @@ class _Control(Environment):
     def SetNodeDisplayName(
         self,
         env_name: str,
-        node_id: list[int] = None,
-        display_name: list[str] = None,
+        node_id: int = None,
+        display_name: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -5255,14 +5206,13 @@ class _Control(Environment):
                 "nodeId": node_id,
                 "displayName": display_name,
             },
-            delimiter=",",
         )
 
     def SetNodeGroupDisplayName(
         self,
         env_name: str,
-        node_group: list[str] = None,
-        display_name: list[str] = None,
+        node_group: str = None,
+        display_name: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -5276,7 +5226,6 @@ class _Control(Environment):
                 "nodeGroup": node_group,
                 "displayName": display_name,
             },
-            delimiter=",",
         )
 
     def SetSLBAccessEnabled(
@@ -5342,8 +5291,8 @@ class _Control(Environment):
         self,
         env_name: str,
         keyword: str,
-        node_type: list[str] = None,
-        node_group: list[str] = None,
+        node_type: str = None,
+        node_group: str = None,
     ):
         return self._get(
             "UninstallSoftwarePackage",
@@ -5353,7 +5302,6 @@ class _Control(Environment):
                 "nodeType": node_type,
                 "nodeGroup": node_group,
             },
-            delimiter=",",
         )
 
     def UnlinkDockerNodes(
@@ -5362,7 +5310,7 @@ class _Control(Environment):
         source_node_id: int,
         target_node_id: int,
         alias: str,
-        is_auto_restart: list[bool] = None,
+        is_auto_restart: bool = None,
     ):
         return self._get(
             "UnlinkDockerNodes",
@@ -5373,7 +5321,6 @@ class _Control(Environment):
                 "alias": alias,
                 "isAutoRestart": is_auto_restart,
             },
-            delimiter=",",
         )
 
     def UnpackDocker(
@@ -5381,7 +5328,7 @@ class _Control(Environment):
         env_name: str,
         node_id: int,
         folders: str,
-        tag: list[str] = None,
+        tag: str = None,
     ):
         return self._get(
             "UnpackDocker",
@@ -5391,7 +5338,6 @@ class _Control(Environment):
                 "folders": folders,
                 "tag": tag,
             },
-            delimiter=",",
         )
 
 
@@ -5408,11 +5354,11 @@ class _File(Environment):
         self,
         env_name: str,
         path: str,
-        node_group: list[str] = None,
-        node_id: list[int] = None,
-        keyword: list[str] = None,
-        filter: list[str] = None,
-        is_dir: list[bool] = None,
+        node_group: str = None,
+        node_id: int = None,
+        keyword: str = None,
+        filter: str = None,
+        is_dir: bool = None,
     ):
         """
         param env_name: target environment name.
@@ -5434,7 +5380,6 @@ class _File(Environment):
                 "filter": filter,
                 "isDir": is_dir,
             },
-            delimiter=",",
         )
 
     def AddMountPointByGroup(
@@ -5443,12 +5388,12 @@ class _File(Environment):
         node_group: str,
         path: str,
         source_path: str,
-        protocol: list[str] = None,
-        source_host: list[str] = None,
-        source_node_id: list[int] = None,
-        name: list[str] = None,
-        read_only: list[bool] = None,
-        source_address_type: list[str] = None,
+        protocol: str = None,
+        source_host: str = None,
+        source_node_id: int = None,
+        name: str = None,
+        read_only: bool = None,
+        source_address_type: str = None,
     ):
         """
         param env_name: target environment name.
@@ -5475,7 +5420,6 @@ class _File(Environment):
                 "readOnly": read_only,
                 "sourceAddressType": source_address_type,
             },
-            delimiter=",",
         )
 
     def AddMountPointById(
@@ -5484,12 +5428,12 @@ class _File(Environment):
         node_id: int,
         path: str,
         source_path: str,
-        protocol: list[str] = None,
-        source_host: list[str] = None,
-        source_node_id: list[int] = None,
-        name: list[str] = None,
-        read_only: list[bool] = None,
-        source_address_type: list[str] = None,
+        protocol: str = None,
+        source_host: str = None,
+        source_node_id: int = None,
+        name: str = None,
+        read_only: bool = None,
+        source_address_type: str = None,
     ):
         """
         param env_name: target environment name.
@@ -5516,18 +5460,17 @@ class _File(Environment):
                 "readOnly": read_only,
                 "sourceAddressType": source_address_type,
             },
-            delimiter=",",
         )
 
     def Append(
         self,
         env_name: str,
         path: str,
-        body: list[str] = None,
-        node_type: list[str] = None,
-        node_group: list[str] = None,
-        master_only: list[bool] = None,
-        node_id: list[int] = None,
+        body: str = None,
+        node_type: str = None,
+        node_group: str = None,
+        master_only: bool = None,
+        node_id: int = None,
     ):
         """
         param env_name: target environment name.
@@ -5549,7 +5492,6 @@ class _File(Environment):
                 "masterOnly": master_only,
                 "nodeId": node_id,
             },
-            delimiter=",",
         )
 
     def CheckCrossMount(self, env_name: str, node_id: int, source_node_id: int):
@@ -5572,7 +5514,7 @@ class _File(Environment):
         env_name: str,
         node_id: int,
         source_node_id: int,
-        mount_points: list[str] = None,
+        mount_points: str = None,
     ):
         return self._get(
             "CloneMountPoints",
@@ -5582,7 +5524,6 @@ class _File(Environment):
                 "sourceNodeId": source_node_id,
                 "mountPoints": mount_points,
             },
-            delimiter=",",
         )
 
     def Copy(
@@ -5590,10 +5531,10 @@ class _File(Environment):
         env_name: str,
         src: str,
         dest: str,
-        node_type: list[str] = None,
-        node_group: list[str] = None,
-        master_only: list[bool] = None,
-        node_id: list[int] = None,
+        node_type: str = None,
+        node_group: str = None,
+        master_only: bool = None,
+        node_id: int = None,
     ):
         """
         param env_name: target environment name.
@@ -5615,18 +5556,17 @@ class _File(Environment):
                 "masterOnly": master_only,
                 "nodeId": node_id,
             },
-            delimiter=",",
         )
 
     def Create(
         self,
         env_name: str,
         path: str,
-        node_type: list[str] = None,
-        node_group: list[str] = None,
-        master_only: list[bool] = None,
-        isdir: list[bool] = None,
-        node_id: list[int] = None,
+        node_type: str = None,
+        node_group: str = None,
+        master_only: bool = None,
+        isdir: bool = None,
+        node_id: int = None,
     ):
         """
         param env_name: target environment name.
@@ -5648,17 +5588,16 @@ class _File(Environment):
                 "isdir": isdir,
                 "nodeId": node_id,
             },
-            delimiter=",",
         )
 
     def Delete(
         self,
         env_name: str,
         path: str,
-        node_type: list[str] = None,
-        node_group: list[str] = None,
-        master_only: list[bool] = None,
-        node_id: list[int] = None,
+        node_type: str = None,
+        node_group: str = None,
+        master_only: bool = None,
+        node_id: int = None,
     ):
         """
         param env_name: target environment name.
@@ -5678,14 +5617,13 @@ class _File(Environment):
                 "masterOnly": master_only,
                 "nodeId": node_id,
             },
-            delimiter=",",
         )
 
     def GetExportedList(
         self,
         env_name: str,
         node_id: int,
-        path: list[str] = None,
+        path: str = None,
     ):
         """
         param env_name: target environment name.
@@ -5699,14 +5637,13 @@ class _File(Environment):
                 "nodeId": node_id,
                 "path": path,
             },
-            delimiter=",",
         )
 
     def GetFavorites(
         self,
         env_name: str,
-        node_group: list[str] = None,
-        node_id: list[int] = None,
+        node_group: str = None,
+        node_id: int = None,
     ):
         """
         param env_name: target environment name.
@@ -5720,17 +5657,16 @@ class _File(Environment):
                 "nodeGroup": node_group,
                 "nodeId": node_id,
             },
-            delimiter=",",
         )
 
     def GetList(
         self,
         env_name: str,
-        path: list[str] = None,
-        node_type: list[str] = None,
-        node_group: list[str] = None,
-        node_id: list[int] = None,
-        filter: list[int] = None,
+        path: str = None,
+        node_type: str = None,
+        node_group: str = None,
+        node_id: int = None,
+        filter: int = None,
     ):
         """
         param env_name: target environment name.
@@ -5750,14 +5686,13 @@ class _File(Environment):
                 "nodeId": node_id,
                 "filter": filter,
             },
-            delimiter=",",
         )
 
     def GetMountPoints(
         self,
         env_name: str,
-        node_group: list[str] = None,
-        node_id: list[int] = None,
+        node_group: str = None,
+        node_id: int = None,
     ):
         """
         param env_name: target environment name.
@@ -5771,7 +5706,6 @@ class _File(Environment):
                 "nodeGroup": node_group,
                 "nodeId": node_id,
             },
-            delimiter=",",
         )
 
     def PrepareMountPoints(self, env_name: str, data: str):
@@ -5784,9 +5718,9 @@ class _File(Environment):
         self,
         env_name: str,
         path: str,
-        node_type: list[str] = None,
-        node_group: list[str] = None,
-        node_id: list[int] = None,
+        node_type: str = None,
+        node_group: str = None,
+        node_id: int = None,
     ):
         """
         param env_name: target environment name.
@@ -5804,7 +5738,6 @@ class _File(Environment):
                 "nodeGroup": node_group,
                 "nodeId": node_id,
             },
-            delimiter=",",
         )
 
     def RemoveExport(
@@ -5837,9 +5770,9 @@ class _File(Environment):
         self,
         env_name: str,
         path: str,
-        node_type: list[str] = None,
-        node_group: list[str] = None,
-        node_id: list[int] = None,
+        node_type: str = None,
+        node_group: str = None,
+        node_id: int = None,
     ):
         """
         param env_name: target environment name.
@@ -5857,7 +5790,6 @@ class _File(Environment):
                 "nodeGroup": node_group,
                 "nodeId": node_id,
             },
-            delimiter=",",
         )
 
     def RemoveMountPointByGroup(
@@ -5905,10 +5837,10 @@ class _File(Environment):
         env_name: str,
         old_path: str,
         new_path: str,
-        node_type: list[str] = None,
-        node_group: list[str] = None,
-        master_only: list[bool] = None,
-        node_id: list[int] = None,
+        node_type: str = None,
+        node_group: str = None,
+        master_only: bool = None,
+        node_id: int = None,
     ):
         """
         param env_name: target environment name.
@@ -5930,7 +5862,6 @@ class _File(Environment):
                 "masterOnly": master_only,
                 "nodeId": node_id,
             },
-            delimiter=",",
         )
 
     def ReplaceInBody(
@@ -5939,11 +5870,11 @@ class _File(Environment):
         path: str,
         pattern: str,
         replacement: str,
-        nth: list[int] = None,
-        node_type: list[str] = None,
-        node_group: list[str] = None,
-        master_only: list[bool] = None,
-        node_id: list[int] = None,
+        nth: int = None,
+        node_type: str = None,
+        node_group: str = None,
+        master_only: bool = None,
+        node_id: int = None,
     ):
         """
         param env_name: target environment name.
@@ -5969,7 +5900,6 @@ class _File(Environment):
                 "masterOnly": master_only,
                 "nodeId": node_id,
             },
-            delimiter=",",
         )
 
     def UnpackById(
@@ -6019,11 +5949,11 @@ class _File(Environment):
         env_name: str,
         source_path: str,
         dest_path: str,
-        node_type: list[str] = None,
-        node_group: list[str] = None,
-        master_only: list[bool] = None,
-        node_id: list[int] = None,
-        overwrite: list[bool] = None,
+        node_type: str = None,
+        node_group: str = None,
+        master_only: bool = None,
+        node_id: int = None,
+        overwrite: bool = None,
     ):
         """
         param env_name: target environment name.
@@ -6047,7 +5977,6 @@ class _File(Environment):
                 "nodeId": node_id,
                 "overwrite": overwrite,
             },
-            delimiter=",",
         )
 
     def Write(
@@ -6098,9 +6027,9 @@ class _Group(Environment):
     def AttachEnv(
         self,
         env_name: str,
-        env_group: str,
-        target_appid: list[str] = None,
-        owner_uid: list[int] = None,
+        env_group: list[str],
+        target_appid: str = None,
+        owner_uid: int = None,
     ):
         """
         param env_name: source environment name.
@@ -6124,7 +6053,7 @@ class _Group(Environment):
         env_name: str,
         env_group: list[str] = None,
         data: dict = None,
-        owner_uid: list[int] = None,
+        owner_uid: int = None,
     ):
         """
         param env_name: source environment name.
@@ -6146,9 +6075,9 @@ class _Group(Environment):
     def DetachEnv(
         self,
         env_name: str,
-        env_group: str,
-        target_appid: list[str] = None,
-        owner_uid: list[int] = None,
+        env_group: list[str],
+        target_appid: str = None,
+        owner_uid: int = None,
     ):
         """
         param env_name: source environment name.
@@ -6171,9 +6100,9 @@ class _Group(Environment):
         self,
         env_name: str,
         src_group_name: str,
-        dst_group_name: list[str] = None,
+        dst_group_name: str = None,
         data: dict = None,
-        owner_uid: list[int] = None,
+        owner_uid: int = None,
     ):
         """
         param env_name: source environment name.
@@ -6191,12 +6120,9 @@ class _Group(Environment):
                 "data": data,
                 "ownerUid": owner_uid,
             },
-            delimiter=",",
         )
 
-    def GetGroups(
-        self, env_name: str, target_appid: list[str] = None, owner_uid: list[int] = None
-    ):
+    def GetGroups(self, env_name: str, target_appid: str = None, owner_uid: int = None):
         """
         param env_name: source environment name.
         param target_appid: if specified, redefines the target environment. For example, to the environment shared via the collaboration feature.
@@ -6209,10 +6135,9 @@ class _Group(Environment):
                 "targetAppid": target_appid,
                 "ownerUid": owner_uid,
             },
-            delimiter=",",
         )
 
-    def RemoveGroup(self, env_name: str, env_group: str, owner_uid: list[int] = None):
+    def RemoveGroup(self, env_name: str, env_group: list[str], owner_uid: int = None):
         """
         param env_name: source environment name.
         param env_group: a comma-separated list of the target environment group names.
@@ -6231,8 +6156,8 @@ class _Group(Environment):
     def SetEnv(
         self,
         env_name: str,
-        env_group: str,
-        target_appid: list[str] = None,
+        env_group: list[str],
+        target_appid: str = None,
     ):
         """
         param env_name: source environment name.
@@ -6277,13 +6202,13 @@ class _NodeGroup(Environment):
     Ref: https://docs.jelastic.com/api/private/#!/api/environment.NodeGroup
     """
 
-    _endpoint2 = "nodegroup"
+    _endpoint2 = "nodeGroup"
 
     def ApplyData(
         self,
         env_name: str,
         node_group: str,
-        data: str,
+        data: dict,
     ):
         """
         param env_name: target environment name.
@@ -6350,7 +6275,7 @@ class _Security(Environment):
         self,
         env_name: str,
         rule: dict,
-        node_group: list[str] = None,
+        node_group: str = None,
     ):
         """
         param env_name: target environment name.
@@ -6364,14 +6289,13 @@ class _Security(Environment):
                 "rule": rule,
                 "nodeGroup": node_group,
             },
-            delimiter=",",
         )
 
     def AddRules(
         self,
         env_name: str,
         rules: str,
-        node_group: list[str] = None,
+        node_group: str = None,
     ):
         """
         param env_name: target environment name.
@@ -6385,7 +6309,6 @@ class _Security(Environment):
                 "rules": rules,
                 "nodeGroup": node_group,
             },
-            delimiter=",",
         )
 
     def EditRule(
@@ -6403,14 +6326,13 @@ class _Security(Environment):
                 "envName": env_name,
                 "rule": rule,
             },
-            delimiter=",",
         )
 
     def GetRules(
         self,
         env_name: str,
-        node_group: list[str] = None,
-        direction: list[str] = None,
+        node_group: str = None,
+        direction: str = None,
     ):
         """
         param env_name: target environment name.
@@ -6424,7 +6346,6 @@ class _Security(Environment):
                 "nodeGroup": node_group,
                 "direction": direction,
             },
-            delimiter=",",
         )
 
     def RegenerateIsolationSets(
@@ -6503,7 +6424,7 @@ class _Security(Environment):
         self,
         env_name: str,
         rules: str,
-        node_group: list[str] = None,
+        node_group: str = None,
     ):
         """
         param env_name: target environment name.
@@ -6517,7 +6438,6 @@ class _Security(Environment):
                 "rules": rules,
                 "nodeGroup": node_group,
             },
-            delimiter=",",
         )
 
 
@@ -6536,31 +6456,28 @@ class _System(Environment):
             },
         )
 
-    def CheckError(self, code: list[int] = None):
+    def CheckError(self, code: int = None):
         return self._get(
             "CheckError",
             params={
                 "code": code,
             },
-            delimiter=",",
         )
 
-    def CleanCheckRequestCache(self, uid: list[int] = None):
+    def CleanCheckRequestCache(self, uid: int = None):
         return self._get(
             "CleanCheckRequestCache",
             params={
                 "uid": uid,
             },
-            delimiter=",",
         )
 
-    def CleanCheckRequestCacheInner(self, uid: list[int] = None):
+    def CleanCheckRequestCacheInner(self, uid: int = None):
         return self._get(
             "CleanCheckRequestCacheInner",
             params={
                 "uid": uid,
             },
-            delimiter=",",
         )
 
     def CleanTemplateManifestCache(
@@ -6582,23 +6499,21 @@ class _System(Environment):
             },
         )
 
-    def Event(self, message: str, publish_local: list[bool] = None):
+    def Event(self, message: str, publish_local: bool = None):
         return self._get(
             "Event",
             params={
                 "message": message,
                 "publishLocal": publish_local,
             },
-            delimiter=",",
         )
 
-    def FixDuplicates(self, debug: list[bool] = None):
+    def FixDuplicates(self, debug: bool = None):
         return self._get(
             "FixDuplicates",
             params={
                 "debug": debug,
             },
-            delimiter=",",
         )
 
     def FixStuckEnvs(
@@ -6612,28 +6527,22 @@ class _System(Environment):
             },
         )
 
-    def GetAPIDescriptions(
-        self, is_public_only: list[bool] = None, is_token: list[bool] = None
-    ):
+    def GetAPIDescriptions(self, is_public_only: bool = None, is_token: bool = None):
         return self._get(
             "GetAPIDescriptions",
             params={
                 "isPublicOnly": is_public_only,
                 "isToken": is_token,
             },
-            delimiter=",",
         )
 
-    def GetAllAPIDescriptions(
-        self, is_public_only: list[bool] = None, is_token: list[bool] = None
-    ):
+    def GetAllAPIDescriptions(self, is_public_only: bool = None, is_token: bool = None):
         return self._get(
             "GetAllAPIDescriptions",
             params={
                 "isPublicOnly": is_public_only,
                 "isToken": is_token,
             },
-            delimiter=",",
         )
 
     def GetBillableItems(
@@ -6675,11 +6584,10 @@ class _System(Environment):
             params={},
         )
 
-    def GetIpsByType(self, checksum: str, node_type: str, hnip: list[str] = None):
+    def GetIpsByType(self, checksum: str, node_type: str, hnip: str = None):
         return self._get(
             "GetIpsByType",
             params={"checksum": checksum, "nodeType": node_type, "hnip": hnip},
-            delimiter=",",
         )
 
     def GetKeyword(
@@ -6693,7 +6601,7 @@ class _System(Environment):
             },
         )
 
-    def GetPlatformStatus(self, checksum: str, check_smtp: list[bool] = None):
+    def GetPlatformStatus(self, checksum: str, check_smtp: bool = None):
         return self._get(
             "GetPlatformStatus",
             params={"checksum": checksum, "checkSMTP": check_smtp},
@@ -6723,12 +6631,8 @@ class _System(Environment):
             params={},
         )
 
-    def RefreshUser(self, language: list[str] = None):
-        return self._get(
-            "RefreshUser",
-            params={"language": language},
-            delimiter=",",
-        )
+    def RefreshUser(self, language: str = None):
+        return self._get("RefreshUser", params={"language": language})
 
     def RegisterEnvContainer(
         self,
@@ -6755,8 +6659,8 @@ class _System(Environment):
 
     def ReloadConfiguration(
         self,
-        reseller_id: list[int] = None,
-        changed_placeholders: list[str] = None,
+        reseller_id: int = None,
+        changed_placeholders: str = None,
     ):
         return self._get(
             "ReloadConfiguration",
@@ -6764,15 +6668,14 @@ class _System(Environment):
                 "resellerId": reseller_id,
                 "changedPlaceholders": changed_placeholders,
             },
-            delimiter=",",
         )
 
     def SendEmail(
         self,
         templates: str,
-        email: list[str] = None,
-        language: list[str] = None,
-        timeout: list[int] = None,
+        email: str = None,
+        language: str = None,
+        timeout: int = None,
     ):
         return self._get(
             "SendEmail",
@@ -6782,7 +6685,6 @@ class _System(Environment):
                 "language": language,
                 "timeout": timeout,
             },
-            delimiter=",",
         )
 
     def SurchargeBillableItems(self, starttime: datetime, endtime: datetime):
@@ -6815,7 +6717,7 @@ class _Tracking(Environment):
 
     def GetAction(
         self,
-        id: list[int] = None,
+        id: int = None,
     ):
         """
         param id: unique identifier of the target action. An error occurs if the specified action does not exist or does not belong to the current user.
@@ -6825,10 +6727,9 @@ class _Tracking(Environment):
             params={
                 "id": id,
             },
-            delimiter=",",
         )
 
-    def GetActions(self, start_time: datetime, end_time: datetime = None):
+    def GetActions(self, start_time: datetime, end_time: list[datetime] = None):
         return self._get(
             "GetActions",
             params={
@@ -6840,13 +6741,12 @@ class _Tracking(Environment):
 
     def GetAllServiceName(
         self,
-        add_services_wildcard: list[bool] = None,
-        type: list[str] = None,
+        add_services_wildcard: bool = None,
+        type: str = None,
     ):
         return self._get(
             "GetAllServiceName",
             params={"addServicesWildcard": add_services_wildcard, "type": type},
-            delimiter=",",
         )
 
     def GetCurrentActions(
@@ -6858,8 +6758,8 @@ class _Tracking(Environment):
         self,
         start_time: datetime,
         end_time: list[datetime] = None,
-        offset: list[int] = None,
-        count: list[int] = None,
+        offset: int = None,
+        count: int = None,
     ):
         return self._get(
             "GetEnvActions",
@@ -6879,10 +6779,10 @@ class _Tracking(Environment):
 
     def GetUidActions(
         self,
-        count: list[int] = None,
-        start_time: list[datetime] = None,
-        end_time: list[datetime] = None,
-        action_types: list[str] = None,
+        count: int = None,
+        start_time: datetime = None,
+        end_time: datetime = None,
+        action_types: str = None,
     ):
         """
         param count: returns the specified number of actions from the response (10 by default).
@@ -6907,11 +6807,11 @@ class _Tracking(Environment):
         start_row: int,
         start_time: datetime,
         end_time: datetime,
-        result_count: list[int] = None,
-        servicename: list[str] = None,
-        order_field: list[str] = None,
-        order_direction: list[str] = None,
-        search_text: list[str] = None,
+        result_count: int = None,
+        servicename: str = None,
+        order_field: str = None,
+        order_direction: str = None,
+        search_text: str = None,
     ):
         """
         param start_row: returns information starting from the specified row in the response (starts with 0, by default).
@@ -6943,11 +6843,7 @@ class _Tracking(Environment):
         param session: user session or personal access token.
         param search: JSON object with the search parameters:
         """
-        return self._get(
-            "SearchActions",
-            params={"session": session, "search": search},
-            delimiter=",",
-        )
+        return self._get("SearchActions", params={"session": session, "search": search})
 
     def StoreAuditAdminActions(self, session: str, trackedevent: dict):
         """
@@ -6957,7 +6853,6 @@ class _Tracking(Environment):
         return self._get(
             "StoreAuditAdminActions",
             params={"session": session, "trackedevent": trackedevent},
-            delimiter=",",
         )
 
     def StoreUserActions(self, session: str, tracked_action_event: dict):
@@ -6968,7 +6863,6 @@ class _Tracking(Environment):
         return self._get(
             "StoreUserActions",
             params={"session": session, "trackedActionEvent": tracked_action_event},
-            delimiter=",",
         )
 
 
@@ -6999,7 +6893,6 @@ class _Trigger(Environment):
                 "envName": env_name,
                 "data": data,
             },
-            delimiter=",",
         )
 
     def AddLoadAlertTrigger(
@@ -7017,7 +6910,6 @@ class _Trigger(Environment):
                 "envName": env_name,
                 "data": data,
             },
-            delimiter=",",
         )
 
     def AddTrigger(
@@ -7035,7 +6927,6 @@ class _Trigger(Environment):
                 "envName": env_name,
                 "data": data,
             },
-            delimiter=",",
         )
 
     def AutoScalingHistory(
@@ -7043,16 +6934,16 @@ class _Trigger(Environment):
         env_name: str,
         start_row: int,
         result_count: int,
-        trigger_id: list[int] = None,
+        trigger_id: int = None,
         action_types: list[str] = None,
-        start_time: list[datetime] = None,
-        end_time: list[datetime] = None,
-        order_field: list[str] = None,
-        order_direction: list[str] = None,
-        skip_results: list[str] = None,
-        node_group: list[str] = None,
+        start_time: datetime = None,
+        end_time: datetime = None,
+        order_field: str = None,
+        order_direction: str = None,
+        skip_results: str = None,
+        node_group: str = None,
         resource_types: list[str] = None,
-        trigger_log_id: list[int] = None,
+        trigger_log_id: int = None,
     ):
         """
         param env_name: target environment name.
@@ -7199,14 +7090,14 @@ class _Trigger(Environment):
         result_count: int,
         trigger_id: list[int] = None,
         action_types: list[str] = None,
-        start_time: list[datetime] = None,
-        end_time: list[datetime] = None,
-        order_field: list[str] = None,
-        order_direction: list[str] = None,
-        skip_results: list[str] = None,
-        node_group: list[str] = None,
+        start_time: datetime = None,
+        end_time: datetime = None,
+        order_field: str = None,
+        order_direction: str = None,
+        skip_results: str = None,
+        node_group: str = None,
         resource_types: list[str] = None,
-        trigger_log_id: list[int] = None,
+        trigger_log_id: int = None,
     ):
         """
         param env_name: target environment name.
@@ -7262,16 +7153,16 @@ class _Trigger(Environment):
         env_name: str,
         start_row: int,
         result_count: int,
-        trigger_id: list[int] = None,
+        trigger_id: int = None,
         action_types: list[str] = None,
-        start_time: list[datetime] = None,
-        end_time: list[datetime] = None,
-        order_field: list[str] = None,
-        order_direction: list[str] = None,
-        skip_results: list[str] = None,
-        node_group: list[str] = None,
+        start_time: datetime = None,
+        end_time: datetime = None,
+        order_field: str = None,
+        order_direction: str = None,
+        skip_results: str = None,
+        node_group: str = None,
         resource_types: list[str] = None,
-        trigger_log_id: list[int] = None,
+        trigger_log_id: int = None,
     ):
         """
         param env_name: target environment name.
@@ -7342,19 +7233,19 @@ class _Vcs(Environment):
         type: str,
         context: str,
         url: str,
-        branch: list[str] = None,
-        key_id: list[int] = None,
-        login: list[str] = None,
-        password: list[str] = None,
-        auto_update: list[bool] = None,
-        interval: list[str] = None,
-        auto_resolve_conflict: list[bool] = None,
-        zdt: list[bool] = None,
-        update_now: list[bool] = None,
-        node_group: list[str] = None,
-        hooks: list[str] = None,
-        delay: list[int] = None,
-        repo_hash: list[str] = None,
+        branch: str = None,
+        key_id: int = None,
+        login: str = None,
+        password: str = None,
+        auto_update: bool = None,
+        interval: str = None,
+        auto_resolve_conflict: bool = None,
+        zdt: bool = None,
+        update_now: bool = None,
+        node_group: str = None,
+        hooks: str = None,
+        delay: int = None,
+        repo_hash: str = None,
     ):
         """
         param env_name: target environment name.
@@ -7396,14 +7287,13 @@ class _Vcs(Environment):
                 "delay": delay,
                 "repoHash": repo_hash,
             },
-            delimiter=",",
         )
 
     def DeleteProject(
         self,
         env_name: str,
         context: str,
-        node_group: list[str] = None,
+        node_group: str = None,
     ):
         """
         param env_name: target environment name.
@@ -7417,7 +7307,6 @@ class _Vcs(Environment):
                 "context": context,
                 "nodeGroup": node_group,
             },
-            delimiter=",",
         )
 
     def EditProject(
@@ -7431,14 +7320,14 @@ class _Vcs(Environment):
         auto_update: bool,
         auto_resolve_conflict: bool,
         zdt: bool,
-        key_id: list[int] = None,
-        login: list[str] = None,
-        password: list[str] = None,
-        interval: list[str] = None,
-        node_group: list[str] = None,
+        key_id: int = None,
+        login: str = None,
+        password: str = None,
+        interval: str = None,
+        node_group: str = None,
         hooks: list[str] = None,
-        delay: list[int] = None,
-        repo_hash: list[str] = None,
+        delay: int = None,
+        repo_hash: str = None,
     ):
         """
         param env_name: target environment name.
@@ -7480,14 +7369,13 @@ class _Vcs(Environment):
                 "delay": delay,
                 "repoHash": repo_hash,
             },
-            delimiter=",",
         )
 
     def GetProject(
         self,
         env_name: str,
-        context: list[str] = None,
-        node_group: list[str] = None,
+        context: str = None,
+        node_group: str = None,
     ):
         """
         param env_name: target environment name.
@@ -7501,15 +7389,14 @@ class _Vcs(Environment):
                 "context": context,
                 "nodeGroup": node_group,
             },
-            delimiter=",",
         )
 
     def Update(
         self,
         env_name: str,
         context: str,
-        node_group: list[str] = None,
-        delay: list[int] = None,
+        node_group: str = None,
+        delay: int = None,
     ):
         """
         param env_name: target environment name.
@@ -7525,7 +7412,6 @@ class _Vcs(Environment):
                 "nodeGroup": node_group,
                 "delay": delay,
             },
-            delimiter=",",
         )
 
 
@@ -7543,7 +7429,7 @@ class _Windows(Environment):
         name: str,
         username: str,
         password: str,
-        dns_server: list[str] = None,
+        dns_server: str = None,
     ):
         """
         param password: password of the domain user
@@ -7556,17 +7442,16 @@ class _Windows(Environment):
                 "password": password,
                 "dnsServer": dns_server,
             },
-            delimiter=",",
         )
 
     def EditDomain(
         self,
         id: int,
-        name: list[str] = None,
-        username: list[str] = None,
-        old_password: list[str] = None,
-        password: list[str] = None,
-        dns_server: list[str] = None,
+        name: str = None,
+        username: str = None,
+        old_password: str = None,
+        password: str = None,
+        dns_server: str = None,
     ):
         return self._get(
             "EditDomain",
@@ -7578,7 +7463,6 @@ class _Windows(Environment):
                 "password": password,
                 "dnsServer": dns_server,
             },
-            delimiter=",",
         )
 
     def GetList(self):
@@ -7587,13 +7471,9 @@ class _Windows(Environment):
     def IsDomainExists(
         self,
         id: int,
-        checksum: list[str] = None,
+        checksum: str = None,
     ):
-        return self._get(
-            "IsDomainExists",
-            params={"id": id, "checksum": checksum},
-            delimiter=",",
-        )
+        return self._get("IsDomainExists", params={"id": id, "checksum": checksum})
 
     def RemoveDomain(
         self,

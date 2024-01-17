@@ -35,26 +35,14 @@ class _File(IO):
             params={"src": src, "dest": dest},
         )
 
-    def Create(self, path: str, is_dir: list[bool] = None):
-        return self._get(
-            "Create",
-            params={"path": path, "isdir": is_dir},
-            delimiter=",",
-        )
+    def Create(self, path: str, is_dir: bool = None):
+        return self._get("Create", params={"path": path, "isdir": is_dir})
 
-    def Delete(self, path: str, ext: list[str] = None):
-        return self._get(
-            "Delete",
-            params={"path": path, "ext": ext},
-            delimiter=",",
-        )
+    def Delete(self, path: str, ext: str = None):
+        return self._get("Delete", params={"path": path, "ext": ext})
 
-    def GetList(self, path: list[str] = None, ext: list[str] = None):
-        return self._get(
-            "GetList",
-            params={"path": path, "ext": ext},
-            delimiter=",",
-        )
+    def GetList(self, path: str = None, ext: str = None):
+        return self._get("GetList", params={"path": path, "ext": ext})
 
     def Read(self, path: str):
         return self._get(
@@ -73,7 +61,7 @@ class _File(IO):
             },
         )
 
-    def Upload(self, source_path: str, dest_path: str, over_write: list[bool] = None):
+    def Upload(self, source_path: str, dest_path: str, over_write: bool = None):
         return self._get(
             "Upload",
             params={
@@ -81,12 +69,7 @@ class _File(IO):
                 "destPath": dest_path,
                 "overWrite": over_write,
             },
-            delimiter=",",
         )
 
-    def Write(self, path: str, body: str, append: list[bool] = None):
-        return self._get(
-            "Write",
-            params={"path": path, "body": body, "append": append},
-            delimiter=",",
-        )
+    def Write(self, path: str, body: str, append: bool = None):
+        return self._get("Write", params={"path": path, "body": body, "append": append})

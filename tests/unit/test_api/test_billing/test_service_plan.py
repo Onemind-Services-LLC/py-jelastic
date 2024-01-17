@@ -5,7 +5,7 @@ def test_create_level_auto_pay(client):
     client._get.return_value = success_response
     response = client.ServicePlan.CreateLevelAutoPay(
         1000,
-        "2024-11-11",
+        CURRENT_DATETIME,
         10,
         "online",
         5,
@@ -14,11 +14,12 @@ def test_create_level_auto_pay(client):
         "CreateLevelAutoPay",
         params={
             "minBalance": 1000,
-            "expires": "2024-11-11",
+            "expires": CURRENT_DATETIME,
             "servicePlanId": 10,
             "paymentMethodId": "online",
             "minPeriod": 5,
         },
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
@@ -27,7 +28,7 @@ def test_create_regular_auto_pay(client):
     client._get.return_value = success_response
     response = client.ServicePlan.CreateRegularAutoPay(
         "exp",
-        "2024-11-11",
+        CURRENT_DATETIME,
         "GMT+4",
         1,
         "online",
@@ -36,11 +37,12 @@ def test_create_regular_auto_pay(client):
         "CreateRegularAutoPay",
         params={
             "cronExpression": "exp",
-            "expires": "2024-11-11",
+            "expires": CURRENT_DATETIME,
             "timeZone": "GMT+4",
             "servicePlanId": 1,
             "paymentMethodId": "online",
         },
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
@@ -207,29 +209,26 @@ def test_get_service_plan(client):
 
 def test_get_service_plan_by_type(client):
     client._get.return_value = success_response
-    response = client.ServicePlan.GetServicePlanByType([1, 2, 3])
+    response = client.ServicePlan.GetServicePlanByType("planType")
     client._get.assert_called_with(
-        "GetServicePlanByType", params={"planType": [1, 2, 3]}
+        "GetServicePlanByType", params={"planType": "planType"}
     )
     assert response == success_response
 
 
 def test_payment_news_read(client):
     client._get.return_value = success_response
-    response = client.ServicePlan.PaymentNewsRead(1)
-    client._get.assert_called_with("PaymentNewsRead", params={"id": 1})
+    response = client.ServicePlan.PaymentNewsRead("id")
+    client._get.assert_called_with("PaymentNewsRead", params={"id": "id"})
     assert response == success_response
 
 
 def test_set_extern_plan_id(client):
     client._get.return_value = success_response
-    response = client.ServicePlan.SetExternPlanId(1, 1)
+    response = client.ServicePlan.SetExternPlanId(1, "externalPlanId")
     client._get.assert_called_with(
         "SetExternPlanId",
-        params={
-            "servicePlanId": 1,
-            "externalPlanId": 1,
-        },
+        params={"servicePlanId": 1, "externalPlanId": "externalPlanId"},
     )
     assert response == success_response
 

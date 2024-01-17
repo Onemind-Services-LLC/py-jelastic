@@ -3,10 +3,14 @@ from . import *
 
 def test_apply_data(client):
     client._get.return_value = success_response
-    response = client.NodeGroup.ApplyData("env_name", "node_group", "data")
+    response = client.NodeGroup.ApplyData("env_name", "node_group", {"key": "value"})
     client._get.assert_called_with(
         "ApplyData",
-        params={"envName": "env_name", "nodeGroup": "node_group", "data": "data"},
+        params={
+            "envName": "env_name",
+            "nodeGroup": "node_group",
+            "data": {"key": "value"},
+        },
     )
     assert response == success_response
 

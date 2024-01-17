@@ -117,9 +117,9 @@ class _Account(Users):
         self,
         email: str,
         password: str,
-        name: list[str] = None,
-        notify: list[bool] = None,
-        reseller_id: list[int] = None,
+        name: str = None,
+        notify: bool = None,
+        reseller_id: int = None,
     ):
         """
         :param email: unique email address of the new account.
@@ -137,7 +137,6 @@ class _Account(Users):
                 "notify": notify,
                 "resellerId": reseller_id,
             },
-            delimiter=",",
         )
 
     def AddSSHKey(
@@ -164,7 +163,7 @@ class _Account(Users):
     def ChangeEmail(
         self,
         email: str,
-        redirect_url: list[str] = None,
+        redirect_url: str = None,
     ):
         """
         param email: new account email address (provided by the user).
@@ -176,7 +175,6 @@ class _Account(Users):
                 "email": email,
                 "redirectUrl": redirect_url,
             },
-            delimiter=",",
         )
 
     def ChangeName(
@@ -197,7 +195,7 @@ class _Account(Users):
         self,
         old_password: str,
         new_password: str,
-        invalidate_sessions: list[str] = None,
+        invalidate_sessions: bool = None,
     ):
         """
         param old_password: user's current password (as specified by the user).
@@ -211,7 +209,6 @@ class _Account(Users):
                 "newPassword": new_password,
                 "invalidateSessions": invalidate_sessions,
             },
-            delimiter=",",
         )
 
     def CheckUser(
@@ -241,20 +238,19 @@ class _Account(Users):
 
     def Disable2FA(
         self,
-        password: list[str] = None,
+        password: str = None,
     ):
         return self._get(
             "Disable2FA",
             params={
                 "password": password,
             },
-            delimiter=",",
         )
 
     def Enable2FA(
         self,
         code: str,
-        password: list[str] = None,
+        password: str = None,
     ):
         return self._get(
             "Enable2FA",
@@ -262,43 +258,39 @@ class _Account(Users):
                 "code": code,
                 "password": password,
             },
-            delimiter=",",
         )
 
     def Get2FABackupCodes(
         self,
-        password: list[str] = None,
+        password: str = None,
     ):
         return self._get(
             "Get2FABackupCodes",
             params={
                 "password": password,
             },
-            delimiter=",",
         )
 
     def Get2FAConfig(
         self,
-        password: list[str] = None,
+        password: str = None,
     ):
         return self._get(
             "Get2FAConfig",
             params={
                 "password": password,
             },
-            delimiter=",",
         )
 
     def GetSSHKeys(
         self,
-        is_private: list[str] = None,
+        is_private: bool = None,
     ):
         return self._get(
             "GetSSHKeys",
             params={
                 "isPrivate": is_private,
             },
-            delimiter=",",
         )
 
     def GetUserInfo(
@@ -317,26 +309,24 @@ class _Account(Users):
             },
         )
 
-    def RecoverPassword(self, email: str, lang: list[str] = None):
+    def RecoverPassword(self, email: str, lang: str = None):
         return self._get(
             "RecoverPassword",
             params={
                 "email": email,
                 "lang": lang,
             },
-            delimiter=",",
         )
 
     def Regenerate2FABackupCodes(
         self,
-        password: list[str] = None,
+        password: str = None,
     ):
         return self._get(
             "Regenerate2FABackupCodes",
             params={
                 "password": password,
             },
-            delimiter=",",
         )
 
     def SetAsTenantHost(
@@ -359,7 +349,7 @@ class _Account(Users):
     def SetPassword(
         self,
         auth_key: str,
-        invalidate_sessions: list[bool] = None,
+        invalidate_sessions: bool = None,
     ):
         """
         param auth_key: authentication key to confirm the operation.
@@ -371,7 +361,6 @@ class _Account(Users):
                 "authKey": auth_key,
                 "invalidateSessions": invalidate_sessions,
             },
-            delimiter=",",
         )
 
     def SetUserData(
@@ -449,10 +438,10 @@ class _Authentication(Users):
     def CreateToken(
         self,
         description: str,
-        password: list[str] = None,
-        token_template: list[str] = None,
+        password: str = None,
+        token_template: str = None,
         api_list: list[str] = None,
-        expires_at: list[datetime] = None,
+        expires_at: datetime = None,
     ):
         """
         param description: custom description for the created token.
@@ -470,18 +459,18 @@ class _Authentication(Users):
                 "apiList": api_list,
                 "expiresAt": expires_at,
             },
-            delimiter=",",
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def CreateTokenInner(
         self,
         login: str,
         description: str,
-        token_template: list[str] = None,
+        token_template: str = None,
         api_list: list[str] = None,
-        expires_at: list[datetime] = None,
-        is_protected: list[bool] = None,
-        skip_notification: list[bool] = None,
+        expires_at: datetime = None,
+        is_protected: bool = None,
+        skip_notification: bool = None,
     ):
         return self._get(
             "CreateTokenInner",
@@ -494,32 +483,28 @@ class _Authentication(Users):
                 "isProtected": is_protected,
                 "skipNotification": skip_notification,
             },
-            delimiter=",",
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def DeleteTokens(
         self,
         ids: str,
-        password: list[str] = None,
+        password: str = None,
     ):
         """
         param ids: a comma- or semicolon-separated list of target token IDs. For example: 1;4;6. Also, you can use * for selecting all your tokens.
         param password: password for authenticating the current user.
         """
-        return self._get(
-            "DeleteTokens",
-            params={"ids": ids, "password": password},
-            delimiter=",",
-        )
+        return self._get("DeleteTokens", params={"ids": ids, "password": password})
 
     def EditToken(
         self,
         id: int,
-        password: list[str] = None,
-        description: list[str] = None,
-        token_template: list[str] = None,
+        password: str = None,
+        description: str = None,
+        token_template: str = None,
         api_list: list[str] = None,
-        expires_at: list[datetime] = None,
+        expires_at: datetime = None,
     ):
         """
         param id: unique identifier of the target token.
@@ -539,7 +524,7 @@ class _Authentication(Users):
                 "apiList": api_list,
                 "expiresAt": expires_at,
             },
-            delimiter=",",
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def GetAuthKey(self, auth_key: str):
@@ -564,13 +549,9 @@ class _Authentication(Users):
 
     def GetPolicyMethods(
         self,
-        unique_name: list[str] = None,
+        unique_name: str = None,
     ):
-        return self._get(
-            "GetPolicyMethods",
-            params={"uniqueName": unique_name},
-            delimiter=",",
-        )
+        return self._get("GetPolicyMethods", params={"uniqueName": unique_name})
 
     def GetSessions(
         self,
@@ -580,16 +561,10 @@ class _Authentication(Users):
             params={},
         )
 
-    def GetSigninAttempts(self, search: list[str] = None):
-        return self._get(
-            "GetSigninAttempts",
-            params={"search": search},
-            delimiter=",",
-        )
+    def GetSigninAttempts(self, search: str = None):
+        return self._get("GetSigninAttempts", params={"search": search})
 
-    def GetTokenApiList(
-        self, show_private: list[str] = None, sort_param: list[str] = None
-    ):
+    def GetTokenApiList(self, show_private: str = None, sort_param: str = None):
         """
         param show_private: showPrivate : "boolean" (optional)
         param sort_param: filter by method name.
@@ -600,7 +575,6 @@ class _Authentication(Users):
                 "showPrivate": show_private,
                 "sortParam": sort_param,
             },
-            delimiter=",",
         )
 
     def GetTokenTemplates(
@@ -630,27 +604,21 @@ class _Authentication(Users):
     def RegenerateToken(
         self,
         ids: str,
-        password: list[str] = None,
+        password: str = None,
     ):
         """
         param ids: unique identifier of the target token.
         param password: password for authenticating the current user.
         """
-        return self._get(
-            "RegenerateToken",
-            params={"ids": ids, "password": password},
-            delimiter=",",
-        )
+        return self._get("RegenerateToken", params={"ids": ids, "password": password})
 
     def ResetSigninAttempts(
         self,
-        login: list[str] = None,
-        ip_address: list[str] = None,
+        login: str = None,
+        ip_address: str = None,
     ):
         return self._get(
-            "ResetSigninAttempts",
-            params={"login": login, "ipAddress": ip_address},
-            delimiter=",",
+            "ResetSigninAttempts", params={"login": login, "ipAddress": ip_address}
         )
 
     def Signin(self, login: str, password: str):
@@ -720,7 +688,7 @@ class _Collaboration(Users):
     def ActivateMember(
         self,
         id: int,
-        owner_uid: list[int] = None,
+        owner_uid: int = None,
     ):
         """
         param id: unique identifier of the collaboration invite.
@@ -731,7 +699,7 @@ class _Collaboration(Users):
             params={"id": id, "ownerUid": owner_uid},
         )
 
-    def AddPolicy(self, name: str, methods: str, description: list[str] = None):
+    def AddPolicy(self, name: str, methods: list[str], description: str = None):
         """
         param name: custom name for the target policy.
         param methods: a comma-separated list of API methods allowed by this new policy.
@@ -740,13 +708,14 @@ class _Collaboration(Users):
         return self._get(
             "AddPolicy",
             params={"name": name, "methods": methods, "description": description},
+            delimiter=",",
         )
 
     def AddResources(
         self,
         collaboration_id: int,
         resources: str,
-        create_role_if_needed: list[bool] = None,
+        create_role_if_needed: bool = None,
     ):
         """
         param collaboration_id: create_role_if_needed
@@ -760,15 +729,14 @@ class _Collaboration(Users):
                 "resources": resources,
                 "createRoleIfNeeded": create_role_if_needed,
             },
-            delimiter=",",
         )
 
     def AddRole(
         self,
         name: str,
-        policies: str,
+        policies: list[str],
         receive_notification: bool,
-        description: list[str] = None,
+        description: str = None,
     ):
         """
         param name: custom name for the target new role.
@@ -789,8 +757,8 @@ class _Collaboration(Users):
 
     def CheckEnvironmentRights(
         self,
-        service_method: str,
-        is_any: list[bool] = None,
+        service_method: list[str],
+        is_any: bool = None,
     ):
         """
         param service_method: a semicolon-separated list of API methods.
@@ -805,17 +773,13 @@ class _Collaboration(Users):
     def DeleteMember(
         self,
         id: int,
-        owner_uid: list[int] = None,
+        owner_uid: int = None,
     ):
         """
         param id: unique identifier of the collaboration invite.
         param owner_uid: unique identifier of the collaboration owner.
         """
-        return self._get(
-            "DeleteMember",
-            params={"id": id, "ownerUid": owner_uid},
-            delimiter=",",
-        )
+        return self._get("DeleteMember", params={"id": id, "ownerUid": owner_uid})
 
     def DeletePolicy(
         self,
@@ -870,7 +834,6 @@ class _Collaboration(Users):
                 "resourceType": resource_type,
                 "resourceId": resource_id,
             },
-            delimiter=",",
         )
 
     def DeleteRole(
@@ -887,7 +850,7 @@ class _Collaboration(Users):
             },
         )
 
-    def EditCollaboration(self, id: int, display_name: list[str] = None):
+    def EditCollaboration(self, id: int, display_name: str = None):
         """
         param id: unique identifier of the target collaboration to edit.
         param display_name: name of the collaboration displayed in the dashboard.
@@ -898,12 +861,9 @@ class _Collaboration(Users):
                 "id": id,
                 "displayName": display_name,
             },
-            delimiter=",",
         )
 
-    def EditMember(
-        self, id: int, display_name: list[str] = None, owner_uid: list[int] = None
-    ):
+    def EditMember(self, id: int, display_name: str = None, owner_uid: int = None):
         """
         param id: unique identifier of the target collaboration to edit.
         param display_name: name of the collaboration displayed in the dashboard.
@@ -916,15 +876,14 @@ class _Collaboration(Users):
                 "displayName": display_name,
                 "ownerUid": owner_uid,
             },
-            delimiter=",",
         )
 
     def EditPolicy(
         self,
         id: int,
         methods: str,
-        name: list[str] = None,
-        description: list[str] = None,
+        name: str = None,
+        description: str = None,
     ):
         """
         param id: unique identifier of the target collaboration to edit.
@@ -940,16 +899,15 @@ class _Collaboration(Users):
                 "name": name,
                 "description": description,
             },
-            delimiter=",",
         )
 
     def EditRole(
         self,
         id: int,
-        policies: str,
-        name: list[str] = None,
-        description: list[str] = None,
-        receive_notification: list[bool] = None,
+        policies: list[str],
+        name: str = None,
+        description: str = None,
+        receive_notification: bool = None,
     ):
         """
         param id: unique identifier of the target collaboration to edit.
@@ -981,14 +939,13 @@ class _Collaboration(Users):
                 "resourceType": resource_type,
                 "resourceId": resource_id,
             },
-            delimiter=",",
         )
 
     def GetCollaborationResources(
         self,
-        collaboration_id: list[int] = None,
-        type: list[str] = None,
-        resource_group: list[str] = None,
+        collaboration_id: int = None,
+        type: str = None,
+        resource_group: str = None,
     ):
         """
         param collaboration_id: unique identifier of the target collaboration.
@@ -1002,15 +959,14 @@ class _Collaboration(Users):
                 "type": type,
                 "resourceGroup": resource_group,
             },
-            delimiter=",",
         )
 
     def GetCollaborationResourcesInner(
         self,
-        uid: list[int] = None,
-        collaboration_id: list[int] = None,
-        type: list[str] = None,
-        resource_group: list[str] = None,
+        uid: int = None,
+        collaboration_id: int = None,
+        type: str = None,
+        resource_group: str = None,
     ):
         """
         param uid: unique identifier of the target user.
@@ -1026,13 +982,12 @@ class _Collaboration(Users):
                 "type": type,
                 "resourceGroup": resource_group,
             },
-            delimiter=",",
         )
 
     def GetCollaborationRoleMethods(
         self,
-        collaboration_id: list[int] = None,
-        role_id: list[int] = None,
+        collaboration_id: int = None,
+        role_id: int = None,
     ):
         """
         param collaboration_id: unique identifier of the target collaboration.
@@ -1044,14 +999,13 @@ class _Collaboration(Users):
                 "collaborationId": collaboration_id,
                 "roleId": role_id,
             },
-            delimiter=",",
         )
 
     def GetCollaborations(
         self,
-        id: list[int] = None,
-        owner_uid: list[int] = None,
-        collaboration_type: list[str] = None,
+        id: int = None,
+        owner_uid: int = None,
+        collaboration_type: str = None,
     ):
         """
         param id: unique identifier of the target collaboration
@@ -1065,7 +1019,6 @@ class _Collaboration(Users):
                 "ownerUid": owner_uid,
                 "collaborationType": collaboration_type,
             },
-            delimiter=",",
         )
 
     def GetCollaborationsInner(
@@ -1081,8 +1034,8 @@ class _Collaboration(Users):
 
     def GetMemberResources(
         self,
-        member_id: list[int] = None,
-        resource_group: list[str] = None,
+        member_id: int = None,
+        resource_group: str = None,
     ):
         """
         param member_id: unique identifier of the target collaboration member.
@@ -1094,23 +1047,18 @@ class _Collaboration(Users):
                 "memberId": member_id,
                 "resourceGroup": resource_group,
             },
-            delimiter=",",
         )
 
     def GetMembers(
         self,
         id: int,
-        owner_uid: list[int] = None,
+        owner_uid: int = None,
     ):
         """
         param id: unique identifier of the collaboration invite.
         param owner_uid: unique identifier of the collaboration owner.
         """
-        return self._get(
-            "GetMembers",
-            params={"id": id, "ownerUid": owner_uid},
-            delimiter=",",
-        )
+        return self._get("GetMembers", params={"id": id, "ownerUid": owner_uid})
 
     def GetMembersInner(
         self,
@@ -1125,7 +1073,7 @@ class _Collaboration(Users):
 
     def GetPolicies(
         self,
-        id: list[int] = None,
+        id: int = None,
     ):
         """
         param id: unique identifier of the target policy.
@@ -1139,7 +1087,7 @@ class _Collaboration(Users):
 
     def GetPolicyMethods(
         self,
-        policy_id: list[int] = None,
+        policy_id: int = None,
     ):
         """
         param id: unique identifier of the target policy.
@@ -1155,7 +1103,7 @@ class _Collaboration(Users):
         self,
         owner_uid: int,
         resource_id: str,
-        resource_type: list[str] = None,
+        resource_type: str = None,
     ):
         """
         param owner_uid: unique identifier of the target collaboration resource.
@@ -1169,7 +1117,6 @@ class _Collaboration(Users):
                 "resourceId": resource_id,
                 "resourceType": resource_type,
             },
-            delimiter=",",
         )
 
     def GetResourceRolesInner(
@@ -1186,21 +1133,15 @@ class _Collaboration(Users):
     def GetRoles(
         self,
         id: int,
-        owner_uid: list[int] = None,
+        owner_uid: int = None,
     ):
         """
         param id: unique identifier of the collaboration invite.
         param owner_uid: unique identifier of the collaboration owner.
         """
-        return self._get(
-            "GetRoles",
-            params={"id": id, "ownerUid": owner_uid},
-            delimiter=",",
-        )
+        return self._get("GetRoles", params={"id": id, "ownerUid": owner_uid})
 
-    def InviteMember(
-        self, email: str, display_name: list[str] = None, owner_uid: list[int] = None
-    ):
+    def InviteMember(self, email: str, display_name: str = None, owner_uid: int = None):
         """
         param email: email address of the user to invite to the collaboration.
         param display_name: name of the collaboration displayed in the dashboard.
@@ -1213,7 +1154,6 @@ class _Collaboration(Users):
                 "displayName": display_name,
                 "ownerUid": owner_uid,
             },
-            delimiter=",",
         )
 
     def LeaveCollaboration(
@@ -1247,26 +1187,24 @@ class _Collaboration(Users):
     def ResendMemberInvitation(
         self,
         id: int,
-        owner_uid: list[int] = None,
+        owner_uid: int = None,
     ):
         """
         param id: unique identifier of the collaboration invite.
         param owner_uid: unique identifier of the collaboration owner.
         """
         return self._get(
-            "ResendMemberInvitation",
-            params={"id": id, "ownerUid": owner_uid},
-            delimiter=",",
+            "ResendMemberInvitation", params={"id": id, "ownerUid": owner_uid}
         )
 
     def SetResource(
         self,
         collaboration_id: int,
         resource_id: str,
-        role_id: str,
-        resource_type: list[str] = None,
-        owner_uid: list[int] = None,
-        create_role_if_needed: list[bool] = None,
+        role_id: list[str],
+        resource_type: str = None,
+        owner_uid: int = None,
+        create_role_if_needed: bool = None,
     ):
         """
         param collaboration_id:unique identifier of the target collaboration
@@ -1293,7 +1231,7 @@ class _Collaboration(Users):
         self,
         collaboration_id: int,
         resource: str,
-        create_role_if_needed: list[bool] = None,
+        create_role_if_needed: bool = None,
     ):
         """
         param collaboration_id:unique identifier of the target collaboration
@@ -1307,23 +1245,18 @@ class _Collaboration(Users):
                 "resource": resource,
                 "createRoleIfNeeded": create_role_if_needed,
             },
-            delimiter=",",
         )
 
     def SuspendMember(
         self,
         id: int,
-        owner_uid: list[int] = None,
+        owner_uid: int = None,
     ):
         """
         param id: unique identifier of the collaboration invite.
         param owner_uid: unique identifier of the collaboration owner.
         """
-        return self._get(
-            "SuspendMember",
-            params={"id": id, "ownerUid": owner_uid},
-            delimiter=",",
-        )
+        return self._get("SuspendMember", params={"id": id, "ownerUid": owner_uid})
 
 
 class _SSO(Users):
@@ -1399,10 +1332,10 @@ class _Registration(Users):
     def Activate(
         self,
         key: str,
-        password: list[str] = None,
-        skip_send_email: list[bool] = None,
-        code: list[str] = None,
-        reseller_id: list[int] = None,
+        password: str = None,
+        skip_send_email: bool = None,
+        code:str = None,
+        reseller_id: int = None,
     ):
         """
         param key: activation key received after registration. The activation key is sent to the email address provided during registration.
@@ -1419,8 +1352,7 @@ class _Registration(Users):
                 "skipSendEmail": skip_send_email,
                 "code": code,
                 "resellerId": reseller_id,
-            },
-            delimiter=",",
+            }
         )
 
     def CheckEmailExist(
@@ -1460,11 +1392,11 @@ class _Registration(Users):
         self,
         email: str,
         password: str,
-        name: list[str] = None,
-        check_email: list[bool] = None,
-        welcome: list[str] = None,
-        skip_send_email: list[bool] = None,
-        reseller_id: list[int] = None,
+        name: str = None,
+        check_email: bool = None,
+        welcome:str = None,
+        skip_send_email: bool = None,
+        reseller_id: int = None,
     ):
         """
         param email: mailing address to which will be sent an activation key (as specified by user). The key activation is valid 24 hours after registration, if the key was not activated during this time, the user is automatically deleted, the key is not valid
@@ -1485,17 +1417,16 @@ class _Registration(Users):
                 "welcome": welcome,
                 "skipSendEmail": skip_send_email,
                 "resellerId": reseller_id,
-            },
-            delimiter=",",
+            }
         )
 
     def CreateAuthKey(
         self,
         login: str,
         solution: str,
-        auth_type: list[str] = None,
-        expires_at: list[datetime] = None,
-        type: list[str] = None,
+        auth_type:str = None,
+        expires_at: datetime = None,
+        type: str = None,
     ):
         return self._get(
             "CreateAuthKey",
@@ -1506,15 +1437,15 @@ class _Registration(Users):
                 "expiresAt": expires_at,
                 "type": type,
             },
-            delimiter=",",
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def CreateConfirmLinkUserKey(
         self,
         email: str,
         role: str,
-        target_app_id: list[str] = None,
-        application_right: list[str] = None,
+        target_app_id:str = None,
+        application_right: str = None,
     ):
         """
         param email: email to generate confirmation key
@@ -1527,13 +1458,12 @@ class _Registration(Users):
                 "role": role,
                 "targetAppid": target_app_id,
                 "applicationRight": application_right,
-            },
-            delimiter=",",
+            }
         )
 
     def GeneratePassword(
         self,
-        length: list[int] = None,
+        length: int= None,
     ):
         """
         param length: define password length (default value is set by password policy: minLength, can not be less than minLength)
@@ -1553,7 +1483,7 @@ class _Registration(Users):
         activation_key: str,
         email: str,
         phone: str,
-        lang: list[str] = None,
+        lang: str = None,
     ):
         """
         param email: email to generate confirmation key
@@ -1564,9 +1494,9 @@ class _Registration(Users):
             "SendSms",
             params={
                 "activationKey ": activation_key,
-                "email ": email,
-                "phone ": phone,
-                "lang ": lang,
+                "email": email,
+                "phone": phone,
+                "lang": lang,
             },
         )
 
@@ -1581,7 +1511,7 @@ class _Team(Users):
 
     _endpoint2 = "team"
 
-    def Create(self, display_name: str, owner_uid: list[int] = None):
+    def Create(self, display_name: str, owner_uid: int = None):
         """
         param owner_uid: unique identifier of the collaboration Team owner.
         """
@@ -1590,11 +1520,10 @@ class _Team(Users):
             params={
                 "displayName": display_name,
                 "ownerUid": owner_uid,
-            },
-            delimiter=",",
+            }
         )
 
-    def Delete(self, team_id: int, owner_uid: list[int] = None):
+    def Delete(self, team_id: int, owner_uid: int = None):
         """
         param team_id: unique identifier of the target collaboration Team.
         param owner_uid: unique identifier of the collaboration Team owner.
@@ -1604,11 +1533,10 @@ class _Team(Users):
             params={
                 "teamId": team_id,
                 "ownerUid": owner_uid,
-            },
-            delimiter=",",
+            }
         )
 
-    def DeleteMember(self, member_id: int, owner_uid: list[int] = None):
+    def DeleteMember(self, member_id: int, owner_uid: int = None):
         """
         param member_id: unique identifier of the collaboration Team member.
         param owner_uid: unique identifier of the collaboration Team owner.
@@ -1618,16 +1546,15 @@ class _Team(Users):
             params={
                 "memberId": member_id,
                 "ownerUid": owner_uid,
-            },
-            delimiter=",",
+            }
         )
 
     def Edit(
         self,
         team_id: int,
-        display_name: list[str] = None,
-        external_id: list[str] = None,
-        owner_uid: list[int] = None,
+        display_name: str = None,
+        external_id: str = None,
+        owner_uid:int = None,
     ):
         """
         param team_id:  unique identifier of the collaboration Team
@@ -1641,11 +1568,10 @@ class _Team(Users):
                 "displayName": display_name,
                 "externalId": external_id,
                 "ownerUid": owner_uid,
-            },
-            delimiter=",",
+            }
         )
 
-    def Get(self, owner_uid: list[int] = None):
+    def Get(self, owner_uid:int = None):
         """
         param owner_uid: unique identifier of the collaboration Team owner.
         """
@@ -1653,16 +1579,15 @@ class _Team(Users):
             "Get",
             params={
                 "ownerUid": owner_uid,
-            },
-            delimiter=",",
+            }
         )
 
     def Invite(
         self,
         email: str,
         team_id: int,
-        display_name: list[str] = None,
-        owner_uid: list[int] = None,
+        display_name: str = None,
+        owner_uid: int = None,
     ):
         """
         param email: email address to send an invitation to.
@@ -1677,11 +1602,10 @@ class _Team(Users):
                 "teamId": team_id,
                 "displayName": display_name,
                 "ownerUid": owner_uid,
-            },
-            delimiter=",",
+            }
         )
 
-    def ResendInvite(self, member_id: int, owner_uid: list[int] = None):
+    def ResendInvite(self, member_id: int, owner_uid: int = None):
         """
         param member_id: unique identifier of the collaboration Team member.
         param owner_uid: unique identifier of the collaboration Team owner.
@@ -1691,6 +1615,5 @@ class _Team(Users):
             params={
                 "memberId": member_id,
                 "ownerUid": owner_uid,
-            },
-            delimiter=",",
+            }
         )

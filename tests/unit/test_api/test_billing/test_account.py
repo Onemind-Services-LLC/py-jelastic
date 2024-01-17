@@ -108,6 +108,7 @@ def test_convert_to_trial(client):
             "count": 10,
             "bonus": 100.25,
         },
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
 
     assert response == success_response
@@ -135,6 +136,7 @@ def test_export_account_billing_history_by_period(client):
             "groupNodes": True,
             "targetAppid": "app_id",
         },
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
@@ -153,6 +155,7 @@ def test_export_env_billing_history_by_period(client):
             "timeOffset": 10,
             "groupNodes": True,
         },
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
@@ -366,6 +369,7 @@ def test_get_cluster_billing_history(client):
             "endTime": CURRENT_DATETIME,
             "interval": 10,
         },
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
@@ -444,6 +448,7 @@ def test_get_extended_account_billing_history_by_period(client):
             "endtime": CURRENT_DATETIME,
             "targetAppid": "app_id",
         },
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 

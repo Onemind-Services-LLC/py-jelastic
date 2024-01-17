@@ -44,15 +44,14 @@ def test_apply_reseller_config(client):
 
 def test_change_config_key(client):
     client._get.return_value = success_response
-    response = client.Config.ChangeConfigKey("type", "key", ["value1", "value2"])
+    response = client.Config.ChangeConfigKey("type", "key", "value")
     client._get.assert_called_with(
         "ChangeConfigKey",
         params={
             "type": "type",
             "key": "key",
-            "value": ["value1", "value2"],
+            "value": "value",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -163,19 +162,10 @@ def test_get_congif_key(client):
 
 def test_get_config_key_by_seller_id(client):
     client._get.return_value = success_response
-    response = client.Config.GetConfigKeyByResellerId(
-        "type",
-        "key",
-        [1, 2, 3],
-    )
+    response = client.Config.GetConfigKeyByResellerId("type", "key", 1)
     client._get.assert_called_with(
         "GetConfigKeyByResellerId",
-        params={
-            "type": "type",
-            "key": "key",
-            "resellerId": [1, 2, 3],
-        },
-        delimiter=",",
+        params={"type": "type", "key": "key", "resellerId": 1},
     )
     assert response == success_response
 

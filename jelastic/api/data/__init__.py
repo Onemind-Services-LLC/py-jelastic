@@ -56,7 +56,7 @@ class _Base(Data):
         self,
         type: str,
         field: str,
-        field_type: list[str] = None,
+        field_type: str = None,
     ):
         """
         :param type: name type
@@ -75,7 +75,7 @@ class _Base(Data):
     def CreateObject(
         self,
         type: str,
-        data: list[str] = None,
+        data: str = None,
     ):
         """
         :param type: name of the data type for which the object is created
@@ -87,7 +87,6 @@ class _Base(Data):
                 "type": type,
                 "data": data,
             },
-            delimiter=",",
         )
 
     def CreateObjects(self, type: str, data: str):
@@ -97,14 +96,13 @@ class _Base(Data):
                 "type": type,
                 "data": data,
             },
-            delimiter=",",
         )
 
     def DefineType(
         self,
         type: str,
-        fields: list[str] = None,
-        unique: list[str] = None,
+        fields: str = None,
+        unique: str = None,
     ):
         """
         :param type: name for the created data type, which meets the following requirements:
@@ -119,15 +117,14 @@ class _Base(Data):
                 "fields": fields,
                 "unique": unique,
             },
-            delimiter=",",
         )
 
     def DefineTypeByUid(
         self,
         uid: int,
         type: str,
-        fields: list[str] = None,
-        unique: list[str] = None,
+        fields: str = None,
+        unique: str = None,
     ):
         """
         param uid: user unique identifier
@@ -143,7 +140,6 @@ class _Base(Data):
                 "fields": fields,
                 "unique": unique,
             },
-            delimiter=",",
         )
 
     def DeleteObject(self, type: str, id: int):
@@ -162,7 +158,7 @@ class _Base(Data):
     def DeleteObjectsByCriteria(
         self,
         type: str,
-        criteria: list[str] = None,
+        criteria: str = None,
     ):
         """
         param type: name of the data type for which the object is created
@@ -174,13 +170,12 @@ class _Base(Data):
                 "type": type,
                 "criteria": criteria,
             },
-            delimiter=",",
         )
 
     def GetNotEmptyType(
         self,
         type_like: str,
-        asc: list[bool] = None,
+        asc: bool = None,
     ):
         return self._get(
             "GetNotEmptyType",
@@ -188,14 +183,13 @@ class _Base(Data):
                 "typeLike": type_like,
                 "asc": asc,
             },
-            delimiter=",",
         )
 
     def GetObject(
         self,
         type: str,
         id: int,
-        join: list[str] = None,
+        join: str = None,
     ):
         """
         param type: name of the type of data
@@ -208,15 +202,14 @@ class _Base(Data):
                 "id": id,
                 "join": join,
             },
-            delimiter=",",
         )
 
     def GetObjects(
         self,
         type: str,
-        froms: list[int] = None,
-        count: list[int] = None,
-        join: list[str] = None,
+        froms: int = None,
+        count: int = None,
+        join: str = None,
     ):
         """
         param type: name of the type of data
@@ -231,17 +224,16 @@ class _Base(Data):
                 "count": count,
                 "join": join,
             },
-            delimiter=",",
         )
 
     def GetObjectsByCriteria(
         self,
         type: str,
-        criteria: list[str] = None,
-        froms: list[int] = None,
-        count: list[int] = None,
-        join: list[str] = None,
-        projection: list[str] = None,
+        criteria: str = None,
+        froms: int = None,
+        count: int = None,
+        join: str = None,
+        projection: str = None,
     ):
         """
         param type: name of the type of data
@@ -259,18 +251,17 @@ class _Base(Data):
                 "join": join,
                 "projection": projection,
             },
-            delimiter=",",
         )
 
     def GetObjectsByRole(
         self,
         type: str,
         role: str,
-        criteria: list[str] = None,
-        froms: list[int] = None,
-        count: list[int] = None,
-        join: list[str] = None,
-        projection: list[str] = None,
+        criteria: str = None,
+        froms: int = None,
+        count: int = None,
+        join: str = None,
+        projection: str = None,
     ):
         """
         param type: name of the type of data
@@ -289,13 +280,12 @@ class _Base(Data):
                 "join": join,
                 "projection": projection,
             },
-            delimiter=",",
         )
 
     def GetObjectsCount(
         self,
         type: str,
-        criteria: list[str] = None,
+        criteria: str = None,
     ):
         """
         param type: name of the data type for which the object is created
@@ -307,7 +297,6 @@ class _Base(Data):
                 "type": type,
                 "criteria": criteria,
             },
-            delimiter=",",
         )
 
     def GetProperty(
@@ -315,7 +304,7 @@ class _Base(Data):
         type: str,
         id: int,
         property: str,
-        join: list[str] = None,
+        join: str = None,
     ):
         """
         param type: name of the type of data
@@ -330,7 +319,6 @@ class _Base(Data):
                 "property": property,
                 "join": join,
             },
-            delimiter=",",
         )
 
     def GetType(
@@ -349,8 +337,8 @@ class _Base(Data):
 
     def GetTypes(
         self,
-        froms: list[int] = None,
-        count: list[int] = None,
+        froms: int = None,
+        count: int = None,
     ):
         """
         param froms: index which returned objects (default is 0)
@@ -362,7 +350,6 @@ class _Base(Data):
                 "froms": froms,
                 "count": count,
             },
-            delimiter=",",
         )
 
     def GetTypesCount(
@@ -452,7 +439,7 @@ class _Base(Data):
         """
         return self._get("SetObjects", params={"type": type, "data": data})
 
-    def SetProperty(self, type: str, id: int, property: str, value: list[str] = None):
+    def SetProperty(self, type: str, id: int, property: str, value: None):
         """
         param type: name of the type of data
         param id: object id
@@ -468,30 +455,29 @@ class _Base(Data):
         self,
         type: str,
         property: str,
-        criteria: list[str] = None,
-        froms: list[int] = None,
-        count: list[int] = None,
-        join: list[str] = None,
-        projection: list[str] = None,
+        value: None = None,
+        criteria: str = None,
+        froms: int = None,
+        count: int = None,
+        join: str = None,
     ):
         return self._get(
             "SetObjectsByCriteria",
             params={
                 "type": type,
                 "property": property,
+                "value": value,
                 "criteria": criteria,
                 "froms": froms,
                 "count": count,
                 "join": join,
-                "projection": projection,
             },
-            delimiter=",",
         )
 
     def SetUniqueFields(
         self,
         type: str,
-        unique: list[str] = None,
+        unique: str = None,
     ):
         """
         param type:name name of the type of data
@@ -503,7 +489,6 @@ class _Base(Data):
                 "type": type,
                 "unique": unique,
             },
-            delimiter=",",
         )
 
     def UndefineType(

@@ -122,7 +122,7 @@ class _Admin(System):
     def ChangePhoneNumber(
         self,
         login: str,
-        number: list[str] = None,
+        number: str = None,
     ):
         return self._get(
             "ChangePhoneNumber",
@@ -130,7 +130,6 @@ class _Admin(System):
                 "login": login,
                 "number": number,
             },
-            delimiter=",",
         )
 
     def CheckActivationKey(self, key: str):
@@ -140,13 +139,13 @@ class _Admin(System):
         self,
         email: str,
         password: str,
-        name: list[str] = None,
-        check_email: list[bool] = None,
-        welcome: list[str] = None,
-        skip_send_email: list[bool] = None,
-        auto_active: list[bool] = None,
-        send_credentials: list[bool] = None,
-        reseller_id: list[int] = None,
+        name: str = None,
+        check_email: bool = None,
+        welcome: str = None,
+        skip_send_email: bool = None,
+        auto_active: bool = None,
+        send_credentials: bool = None,
+        reseller_id: int = None,
     ):
         """
         :param email: unique email address of the new account. An activation key is sent to this user, it remains valid for 24 hours after registration. If the key was not activated during this period, it is invalidated and the user is automatically deleted.
@@ -172,7 +171,6 @@ class _Admin(System):
                 "sendCredentials": send_credentials,
                 "resellerId": reseller_id,
             },
-            delimiter=",",
         )
 
     def DeleteApp(self, target_app_id: str):
@@ -184,7 +182,7 @@ class _Admin(System):
     def Disable2FA(
         self,
         login: str,
-        password: list[str] = None,
+        password: str = None,
     ):
         """
         :param login: user's email
@@ -195,21 +193,16 @@ class _Admin(System):
                 "login": login,
                 "password": password,
             },
-            delimiter=",",
         )
 
     def DisableMandatory2FA(self):
-        return self._get(
-            "DisableMandatory2FA",
-            params={},
-            delimiter=",",
-        )
+        return self._get("DisableMandatory2FA", params={})
 
     def EnableMandatory2FA(
         self,
-        period: list[int] = None,
-        notify: list[bool] = None,
-        trusted_users: list[str] = None,
+        period: int = None,
+        notify: bool = None,
+        trusted_users: str = None,
     ):
         return self._get(
             "EnableMandatory2FA",
@@ -218,7 +211,6 @@ class _Admin(System):
                 "notify": notify,
                 "trustedUsers": trusted_users,
             },
-            delimiter=",",
         )
 
     def GetActivationKey(self, email: str):
@@ -268,7 +260,7 @@ class _Admin(System):
     def GetUserSSHKeys(
         self,
         login: str,
-        is_private: list[bool] = None,
+        is_private: bool = None,
     ):
         """
         :param login: email or unique identifier of the user (key owner).
@@ -279,7 +271,6 @@ class _Admin(System):
                 "login": login,
                 "isPrivate": is_private,
             },
-            delimiter=",",
         )
 
     def GetUsersByStatus(self, status: str):
@@ -300,9 +291,9 @@ class _Admin(System):
 
     def InvalidateAuthKey(
         self,
-        reference_id: list[str] = None,
-        reference_type: list[str] = None,
-        auth_key: list[str] = None,
+        reference_id: str = None,
+        reference_type: str = None,
+        auth_key: str = None,
     ):
         return self._get(
             "InvalidateAuthKey",
@@ -311,15 +302,14 @@ class _Admin(System):
                 "referenceType": reference_type,
                 "authKey": auth_key,
             },
-            delimiter=",",
         )
 
     def RecoverPassword(
         self,
         email: str,
-        password: list[str] = None,
-        skip_send_email: list[bool] = None,
-        lang: list[str] = None,
+        password: str = None,
+        skip_send_email: bool = None,
+        lang: str = None,
     ):
         return self._get(
             "RecoverPassword",
@@ -329,13 +319,12 @@ class _Admin(System):
                 "skipSendEmail": skip_send_email,
                 "lang": lang,
             },
-            delimiter=",",
         )
 
     def RemovePersonalData(
         self,
         login: str,
-        is_anonymize: list[bool] = None,
+        is_anonymize: bool = None,
     ):
         """
         :param login: email or unique identifier of the user
@@ -346,7 +335,6 @@ class _Admin(System):
                 "login": login,
                 "isAnonymize": is_anonymize,
             },
-            delimiter=",",
         )
 
     def RemoveTrustedUser(self, login: str):
@@ -359,7 +347,7 @@ class _Admin(System):
         self,
         login: str,
         password: str,
-        invalidate_sessions: list[bool] = None,
+        invalidate_sessions: bool = None,
     ):
         """
         :param login: target user email address.
@@ -373,7 +361,6 @@ class _Admin(System):
                 "password": password,
                 "invalidateSessions": invalidate_sessions,
             },
-            delimiter=",",
         )
 
     def SetTrustedUsers(self, login: str):
@@ -448,12 +435,8 @@ class _Cluster(System):
     def GetActiveApps(self):
         return self._get("GetActiveApps", params={})
 
-    def GetApps(self, path: list[str] = None):
-        return self._get(
-            "GetApps",
-            params={"path": path},
-            delimiter=",",
-        )
+    def GetApps(self, path: str = None):
+        return self._get("GetApps", params={"path": path})
 
     def GetCpuUsage(self):
         return self._get("GetCpuUsage", params={})
@@ -464,13 +447,12 @@ class _Cluster(System):
     def GetMaintenanceMode(self):
         return self._get("GetMaintenanceMode", params={})
 
-    def GetNodes(self, target_app_id: list[str] = None):
+    def GetNodes(self, target_app_id: str = None):
         return self._get(
             "GetNodes",
             params={
                 "targetAppId": target_app_id,
             },
-            delimiter=",",
         )
 
     def GetSystemUsage(self):
@@ -655,7 +637,7 @@ class _Service(System):
         self,
         topic: str,
         message: str,
-        publishLocal: list[bool] = None,
+        publishLocal: bool = None,
     ):
         return self._get(
             "Event",
@@ -664,13 +646,12 @@ class _Service(System):
                 "message": message,
                 "publishLocal": publishLocal,
             },
-            delimiter=",",
         )
 
     def GetAPIDescriptions(
         self,
-        is_public_only: list[bool] = None,
-        is_token: list[bool] = None,
+        is_public_only: bool = None,
+        is_token: bool = None,
     ):
         return self._get(
             "GetAPIDescriptions",
@@ -678,7 +659,6 @@ class _Service(System):
                 "isPublicOnly": is_public_only,
                 "isToken": is_token,
             },
-            delimiter=",",
         )
 
     def GetApps(self, checksum: str):
@@ -720,7 +700,7 @@ class _Service(System):
     def NotifyEvent(
         self,
         checksum: str,
-        params: list[str] = None,
+        params: str = None,
     ):
         return self._get(
             "NotifyEvent",
@@ -728,25 +708,23 @@ class _Service(System):
                 "checksum": checksum,
                 "params": params,
             },
-            delimiter=",",
         )
 
     def RefreshEmailTemplates(self):
         return self._get("RefreshEmailTemplates", params={})
 
-    def RefreshUser(self, language: list[str] = None):
+    def RefreshUser(self, language: str = None):
         return self._get(
             "RefreshUser",
             params={
                 "language": language,
             },
-            delimiter=",",
         )
 
     def ReloadConfiguration(
         self,
-        reseller_id: list[str] = None,
-        changed_placeholders: list[str] = None,
+        reseller_id: str = None,
+        changed_placeholders: str = None,
     ):
         return self._get(
             "ReloadConfiguration",
@@ -754,7 +732,6 @@ class _Service(System):
                 "resellerId": reseller_id,
                 "changedPlaceholders": changed_placeholders,
             },
-            delimiter=",",
         )
 
     def SetStandbyMode(self, enabled: bool):
@@ -775,9 +752,9 @@ class _Usage(System):
 
     def GetCPUHours(
         self,
-        start: list[str] = None,
-        period: list[str] = None,
-        series: list[bool] = None,
+        start: str = None,
+        period: str = None,
+        series: bool = None,
     ):
         return self._get(
             "GetCPUHours",
@@ -786,7 +763,6 @@ class _Usage(System):
                 "period": period,
                 "series": series,
             },
-            delimiter=",",
         )
 
     def GetPlatformStats(self):

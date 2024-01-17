@@ -11,7 +11,7 @@ def test_add_category(client):
             "category4": "val4",
             "category5": "val5",
         },
-        [1, 2, 3, 4],
+        1,
     )
     client._get.assert_called_with(
         "AddCategory",
@@ -23,9 +23,8 @@ def test_add_category(client):
                 "category4": "val4",
                 "category5": "val5",
             },
-            "resellerId": [1, 2, 3, 4],
+            "resellerId": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -40,7 +39,7 @@ def test_add_product(client):
             "product4": "val4",
             "product5": "val5",
         },
-        [1, 2, 3, 4],
+        1,
     )
     client._get.assert_called_with(
         "AddProduct",
@@ -52,9 +51,8 @@ def test_add_product(client):
                 "product4": "val4",
                 "product5": "val5",
             },
-            "resellerId": [1, 2, 3, 4],
+            "resellerId": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -68,8 +66,8 @@ def test_add_service_plan(client):
             "servicePlan3": "val3",
             "servicePlan4": "val4",
         },
-        [1, 2, 3, 4],
-        ["exp1", "exp2", "exp3", "exp4"],
+        1,
+        "exp",
     )
     client._get.assert_called_with(
         "AddServicePlan",
@@ -80,10 +78,9 @@ def test_add_service_plan(client):
                 "servicePlan3": "val3",
                 "servicePlan4": "val4",
             },
-            "resellerId": [1, 2, 3, 4],
-            "expandFields": ["exp1", "exp2", "exp3", "exp4"],
+            "resellerId": 1,
+            "expandFields": "exp",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -116,7 +113,6 @@ def test_add_subscription_item_resource(client):
                 "resource5": "val5",
             },
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -137,56 +133,40 @@ def test_adjust_product(client):
 
 def test_delete_category(client):
     client._get.return_value = success_response
-    response = client.Subscription.DeleteCategory(1, [1, 2, 3, 4])
-    client._get.assert_called_with(
-        "DeleteCategory",
-        params={
-            "id": 1,
-            "resellerId": [1, 2, 3, 4],
-        },
-        delimiter=",",
-    )
+    response = client.Subscription.DeleteCategory(1, 1)
+    client._get.assert_called_with("DeleteCategory", params={"id": 1, "resellerId": 1})
     assert response == success_response
 
 
 def test_delete_product(client):
     client._get.return_value = success_response
-    response = client.Subscription.DeleteProduct(1, [1, 2, 3, 4])
-    client._get.assert_called_with(
-        "DeleteProduct",
-        params={
-            "id": 1,
-            "resellerId": [1, 2, 3, 4],
-        },
-        delimiter=",",
-    )
+    response = client.Subscription.DeleteProduct(1, 1)
+    client._get.assert_called_with("DeleteProduct", params={"id": 1, "resellerId": 1})
     assert response == success_response
 
 
 def test_delete_service_plan(client):
     client._get.return_value = success_response
-    response = client.Subscription.DeleteServicePlan(1, [1, 2, 3, 4])
+    response = client.Subscription.DeleteServicePlan(1, 1)
     client._get.assert_called_with(
         "DeleteServicePlan",
         params={
             "id": 1,
-            "resellerId": [1, 2, 3, 4],
+            "resellerId": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_edit_category(client):
     client._get.return_value = success_response
-    response = client.Subscription.EditCategory(1, [1, 2, 3, 4])
+    response = client.Subscription.EditCategory(1, 1)
     client._get.assert_called_with(
         "EditCategory",
         params={
             "category": 1,
-            "resellerId": [1, 2, 3, 4],
+            "resellerId": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -201,7 +181,7 @@ def test_edit_product(client):
             "category4": "val4",
             "category5": "val5",
         },
-        [1, 2, 3, 4],
+        1,
     )
     client._get.assert_called_with(
         "EditProduct",
@@ -213,9 +193,8 @@ def test_edit_product(client):
                 "category4": "val4",
                 "category5": "val5",
             },
-            "resellerId": [1, 2, 3, 4],
+            "resellerId": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -230,8 +209,8 @@ def test_edit_service_plan(client):
             "service_plan4": "val4",
             "service_plan5": "val5",
         },
-        [1, 2, 3, 4, 5],
-        ["exp1", "exp2", "exp3", "exp4", "exp5"],
+        1,
+        "exp",
     )
     client._get.assert_called_with(
         "EditServicePlan",
@@ -243,26 +222,18 @@ def test_edit_service_plan(client):
                 "service_plan4": "val4",
                 "service_plan5": "val5",
             },
-            "resellerId": [1, 2, 3, 4, 5],
-            "expendFields": ["exp1", "exp2", "exp3", "exp4", "exp5"],
+            "resellerId": 1,
+            "expendFields": "exp",
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_get_categories(client):
     client._get.return_value = success_response
-    response = client.Subscription.GetCategories(
-        [1, 2, 3, 4], ["exp1", "exp2", "exp3", "exp4"]
-    )
+    response = client.Subscription.GetCategories(1, "exp")
     client._get.assert_called_with(
-        "GetCategories",
-        params={
-            "resellerId": [1, 2, 3, 4],
-            "expendFields": ["exp1", "exp2", "exp3", "exp4"],
-        },
-        delimiter=",",
+        "GetCategories", params={"resellerId": 1, "expendFields": "exp"}
     )
     assert response == success_response
 
@@ -270,34 +241,28 @@ def test_get_categories(client):
 def test_get_products(client):
     client._get.return_value = success_response
     response = client.Subscription.GetProducts(
-        [1, 2, 3, 4, 5],
+        1,
         ["status1", "status2", "status3", "status4", "status5"],
-        [1, 2, 3, 4, 5],
+        1,
         ["sub1", "sub2", "sub3", "sub4", "sub5"],
-        ["exp1", "exp2", "exp3", "exp4"],
-        [1, 2, 3, 4, 5],
-        [1, 2, 3, 4, 5],
-        ["order1", "order2", "order3", "order4", "order5"],
-        ["direction1", "direction2", "direction3", "direction4", "direction5"],
+        "exp",
+        1,
+        1,
+        "order",
+        "direction",
     )
     client._get.assert_called_with(
         "GetProduct",
         params={
-            "id": [1, 2, 3, 4, 5],
+            "id": 1,
             "status": ["status1", "status2", "status3", "status4", "status5"],
-            "resellerId": [1, 2, 3, 4, 5],
+            "resellerId": 1,
             "subscriptionStatus": ["sub1", "sub2", "sub3", "sub4", "sub5"],
-            "expandFields": ["exp1", "exp2", "exp3", "exp4"],
-            "startRow": [1, 2, 3, 4, 5],
-            "resultCount": [1, 2, 3, 4, 5],
-            "orderField": ["order1", "order2", "order3", "order4", "order5"],
-            "orderDirection": [
-                "direction1",
-                "direction2",
-                "direction3",
-                "direction4",
-                "direction5",
-            ],
+            "expandFields": "exp",
+            "startRow": 1,
+            "resultCount": 1,
+            "orderField": "order",
+            "orderDirection": "direction",
         },
         delimiter=",",
     )
@@ -307,22 +272,22 @@ def test_get_products(client):
 def test_get_service_plan(client):
     client._get.return_value = success_response
     response = client.Subscription.GetServicePlans(
-        [1, 2, 3, 4],
-        [True, False, True, False],
+        1,
+        True,
         ["sub1", "sub2", "sub3", "sub4"],
-        [1, 2, 3, 4],
-        ["exp1", "exp2", "exp3", "exp4"],
-        [1, 2, 3, 4],
+        1,
+        "exp",
+        1,
     )
     client._get.assert_called_with(
         "GetServicePlans",
         params={
-            "id": [1, 2, 3, 4],
-            "hasProducts": [True, False, True, False],
+            "id": 1,
+            "hasProducts": True,
             "subscriptionStatus": ["sub1", "sub2", "sub3", "sub4"],
-            "productId": [1, 2, 3, 4],
-            "expandFields": ["exp1", "exp2", "exp3", "exp4"],
-            "resellerId": [1, 2, 3, 4],
+            "productId": 1,
+            "expandFields": "exp",
+            "resellerId": 1,
         },
         delimiter=",",
     )
@@ -332,32 +297,32 @@ def test_get_service_plan(client):
 def test_get_subscriptions(client):
     client._get.return_value = success_response
     response = client.Subscription.GetSubscriptions(
-        [1, 2, 3],
-        [1, 2, 3],
+        1,
+        1,
         ["status1", "status2", "status3"],
-        [1, 2, 3],
-        [1, 2, 3],
-        [1, 2, 3],
-        ["exp1", "exp2", "exp3"],
-        [1, 2, 3],
-        [1, 2, 3],
-        ["field1", "field2", "field3"],
-        ["direction1", "direction2", "direction3"],
+        1,
+        1,
+        1,
+        "exp",
+        1,
+        1,
+        "field",
+        "direction",
     )
     client._get.assert_called_with(
         "GetSubscriptions",
         params={
-            "id": [1, 2, 3],
-            "uid": [1, 2, 3],
+            "id": 1,
+            "uid": 1,
             "status": ["status1", "status2", "status3"],
-            "resellerId": [1, 2, 3],
-            "productId": [1, 2, 3],
-            "servicePlanId": [1, 2, 3],
-            "expandFields": ["exp1", "exp2", "exp3"],
-            "startRow": [1, 2, 3],
-            "resultCount": [1, 2, 3],
-            "orderField": ["field1", "field2", "field3"],
-            "orderDirection": ["direction1", "direction2", "direction3"],
+            "resellerId": 1,
+            "productId": 1,
+            "servicePlanId": 1,
+            "expandFields": "exp",
+            "startRow": 1,
+            "resultCount": 1,
+            "orderField": "field",
+            "orderDirection": "direction",
         },
         delimiter=",",
     )
@@ -366,45 +331,32 @@ def test_get_subscriptions(client):
 
 def test_set_category_published(client):
     client._get.return_value = success_response
-    response = client.Subscription.SetCategoryPublished(1, True, [1, 2, 3])
+    response = client.Subscription.SetCategoryPublished(1, True, 1)
     client._get.assert_called_with(
         "SetCategoryPublished",
         params={
             "id": 1,
             "published": True,
-            "resellerId": [1, 2, 3],
+            "resellerId": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_set_product_status(client):
     client._get.return_value = success_response
-    response = client.Subscription.SetProductStatus(1, "status", [1, 2, 3])
+    response = client.Subscription.SetProductStatus(1, "status", 1)
     client._get.assert_called_with(
-        "SetProductStatus",
-        params={
-            "id": 1,
-            "status": "status",
-            "resellerId": [1, 2, 3],
-        },
-        delimiter=",",
+        "SetProductStatus", params={"id": 1, "status": "status", "resellerId": 1}
     )
     assert response == success_response
 
 
 def test_set_service_plan_status(client):
     client._get.return_value = success_response
-    response = client.Subscription.SetServicePlanStatus(1, "status", [1, 2, 3])
+    response = client.Subscription.SetServicePlanStatus(1, "status", 1)
     client._get.assert_called_with(
-        "SetServicePlanStatus",
-        params={
-            "id": 1,
-            "status": "status",
-            "resellerId": [1, 2, 3],
-        },
-        delimiter=",",
+        "SetServicePlanStatus", params={"id": 1, "status": "status", "resellerId": 1}
     )
     assert response == success_response
 

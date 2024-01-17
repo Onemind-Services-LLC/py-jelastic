@@ -53,20 +53,19 @@ def test_get_ext(client):
     response = client.IpPool.GetExt(
         "regions",
         "checksum",
-        ["type1", "type2"],
-        ["node_id1", "node_id2"],
-        ["target_app_id1", "target_app_id2"],
+        "type",
+        11,
+        "targetAppid",
     )
     client._get.assert_called_with(
         "GetExt",
         params={
             "regions": "regions",
             "checksum": "checksum",
-            "type": ["type1", "type2"],
-            "nodeId": ["node_id1", "node_id2"],
-            "targetAppid": ["target_app_id1", "target_app_id2"],
+            "type": "type",
+            "nodeId": 11,
+            "targetAppid": "targetAppid",
         },
-        delimiter=",",
     )
     assert response == success_response
 

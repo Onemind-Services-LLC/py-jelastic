@@ -13,41 +13,27 @@ def test_copy(client):
 
 def test_create(client):
     client._get.return_value = success_response
-    response = client.File.Create(
-        "path",
-        [True, False, True],
-    )
-    client._get.assert_called_with(
-        "Create",
-        params={
-            "path": "path",
-            "isdir": [True, False, True],
-        },
-        delimiter=",",
-    )
+    response = client.File.Create("path", True)
+    client._get.assert_called_with("Create", params={"path": "path", "isdir": True})
     assert response == success_response
 
 
 def test_delete(client):
     client._get.return_value = success_response
-    response = client.File.Delete("path", ["ext1", "ext2", "ext3"])
+    response = client.File.Delete("path", "ext")
     client._get.assert_called_with(
         "Delete",
-        params={"path": "path", "ext": ["ext1", "ext2", "ext3"]},
-        delimiter=",",
+        params={"path": "path", "ext": "ext"},
     )
     assert response == success_response
 
 
 def test_get_list(client):
     client._get.return_value = success_response
-    response = client.File.GetList(
-        ["path1", "path2", "path3"], ["ext1", "ext2", "ext3"]
-    )
+    response = client.File.GetList("path", "ext")
     client._get.assert_called_with(
         "GetList",
-        params={"path": ["path1", "path2", "path3"], "ext": ["ext1", "ext2", "ext3"]},
-        delimiter=",",
+        params={"path": "path", "ext": "ext"},
     )
     assert response == success_response
 
@@ -82,37 +68,22 @@ def test_rename(client):
 
 def test_upload(client):
     client._get.return_value = success_response
-    response = client.File.Upload(
-        "source_path",
-        "dest_path",
-        [True, False, True],
-    )
+    response = client.File.Upload("source_path", "dest_path", True)
     client._get.assert_called_with(
         "Upload",
         params={
             "sourcePath": "source_path",
             "destPath": "dest_path",
-            "overWrite": [True, False, True],
+            "overWrite": True,
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_write(client):
     client._get.return_value = success_response
-    response = client.File.Write(
-        "path",
-        "body",
-        [True, False, True],
-    )
+    response = client.File.Write("path", "body", True)
     client._get.assert_called_with(
-        "Write",
-        params={
-            "path": "path",
-            "body": "body",
-            "append": [True, False, True],
-        },
-        delimiter=",",
+        "Write", params={"path": "path", "body": "body", "append": True}
     )
     assert response == success_response

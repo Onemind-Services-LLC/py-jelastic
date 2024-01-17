@@ -163,8 +163,8 @@ class _Installation(Marketplace):
     def GetSettings(
         self,
         app_unique_name: str,
-        settings_id: list[str] = None,
-        lang: list[str] = None,
+        settings_id: str = "main",
+        lang: str = None,
     ):
         """
         param app_unique_name: unique identifier of the particular installation.
@@ -178,7 +178,6 @@ class _Installation(Marketplace):
                 "settingsId": settings_id,
                 "lang": lang,
             },
-            delimiter=",",
         )
 
     def Uninstall(
@@ -344,7 +343,7 @@ class _App(Marketplace):
     def GetAddonList(
         self,
         env_name: str,
-        node_group: list[str] = None,
+        node_group: str = None,
         search: dict = None,
     ):
         """
@@ -364,8 +363,8 @@ class _App(Marketplace):
     def GetAppInfo(
         self,
         id: str,
-        lang: list[str] = None,
-        owner_uid: list[int] = None,
+        lang: str = None,
+        owner_uid: int = None,
     ):
         """
         :param id: unique identifier of the target JPS manifest in the Marketplace.
@@ -399,7 +398,7 @@ class _App(Marketplace):
 
     def GetList(
         self,
-        search: list[str] = None,
+        search: str = None,
     ):
         """
         :param search: JSON object with the search parameters. For example (all fields are optional):
@@ -413,15 +412,15 @@ class _App(Marketplace):
         self,
         id: str,
         env_name: str = None,
-        settings: dict = None,
+        settings: str = None,
         display_name: str = None,
         region: str = None,
-        env_groups: list[str] = None,
+        env_groups: str = None,
         owner_uid: int = None,
-        nodes: dict = None,
+        nodes: str = None,
         override_nodes: bool = None,
-        skip_email: bool = False,
-        skip_node_emails: bool = False,
+        skip_email: bool = None,
+        skip_node_emails: bool = None,
     ):
         """
         :param id: unique identifier of the target JPS manifest in the Marketplace.
@@ -456,9 +455,9 @@ class _App(Marketplace):
     def InstallAddon(
         self,
         env_name: str,
-        app_id: str,
+        id: str,
         settings: dict = None,
-        node_group: list[str] = None,
+        node_group: str = None,
         skip_email: bool = False,
     ):
         """
@@ -471,13 +470,12 @@ class _App(Marketplace):
         return self._get(
             "InstallAddon",
             params={
-                "id": app_id,
+                "id": id,
                 "envName": env_name,
                 "settings": settings,
                 "nodeGroup": node_group,
                 "skipEmail": skip_email,
             },
-            delimiter=",",
         )
 
 
@@ -486,7 +484,7 @@ class _Admin(Marketplace):
     Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.Admin
     """
 
-    _endpoint2 = "admin"
+    _endpoint2 = "account"
 
     def AddApp(self, env_name: str, manifest: str):
         return self._get(
@@ -522,19 +520,11 @@ class _Admin(Marketplace):
             params={"envName": env_name, "id": id},
         )
 
-    def GetApps(self, env_name: str, search: list[str] = None):
-        return self._get(
-            "GetApps",
-            params={"envName": env_name, "search": search},
-            delimiter=",",
-        )
+    def GetApps(self, env_name: str, search: str = None):
+        return self._get("GetApps", params={"envName": env_name, "search": search})
 
-    def GetJpsSamples(self, env_name: str, type: list[str] = None):
-        return self._get(
-            "GetJpsSamples",
-            params={"envName": env_name, "type": type},
-            delimiter=",",
-        )
+    def GetJpsSamples(self, env_name: str, type: str = None):
+        return self._get("GetJpsSamples", params={"envName": env_name, "type": type})
 
     def PublishApp(self, env_name: str, id: int):
         return self._get(
@@ -558,7 +548,7 @@ class _Admin(Marketplace):
         env_name: str,
         name: str,
         values: str,
-        override: list[bool] = None,
+        override: bool = None,
     ):
         return self._get(
             "SetSetting",
@@ -568,7 +558,6 @@ class _Admin(Marketplace):
                 "values": values,
                 "override": override,
             },
-            delimiter=",",
         )
 
     def SyncExternalApps(
@@ -643,10 +632,10 @@ class _Jps(Marketplace):
     def ExecuteAppAction(
         self,
         app_unique_name: str,
-        action: list[str] = None,
-        settings_id: list[str] = None,
-        params: list[str] = None,
-        lang: list[str] = None,
+        action: str = None,
+        settings_id: str = "main",
+        params: str = None,
+        lang: str = None,
     ):
         return self._get(
             "ExecuteAppAction",
@@ -657,14 +646,13 @@ class _Jps(Marketplace):
                 "params": params,
                 "lang": lang,
             },
-            delimiter=",",
         )
 
     def GetAppInfo(
         self,
-        jps: list[str] = None,
-        lang: list[str] = None,
-        owner_uid: list[str] = None,
+        jps: str = None,
+        lang: str = None,
+        owner_uid: int = None,
     ):
         """
         param jps: custom JPS (manifest body, link, or application ID from the Marketplace).
@@ -678,14 +666,13 @@ class _Jps(Marketplace):
                 "lang": lang,
                 "ownerUid": owner_uid,
             },
-            delimiter=",",
         )
 
     def GetAppSettings(
         self,
         app_unique_name: str,
-        settings_id: list[str] = None,
-        lang: list[str] = None,
+        settings_id: str = "main",
+        lang: str = None,
     ):
         return self._get(
             "GetAppSettings",
@@ -694,7 +681,6 @@ class _Jps(Marketplace):
                 "settingsId": settings_id,
                 "lang": lang,
             },
-            delimiter=",",
         )
 
     def GetEngineVersion(self):
@@ -707,15 +693,15 @@ class _Jps(Marketplace):
         self,
         jps: str,
         env_name: str = None,
-        settings: dict = None,
+        settings: str = None,
         node_group: str = None,
         display_name: str = None,
         region: str = None,
-        env_groups: list[str] = None,
+        env_groups: str = None,
         owner_uid: int = None,
         logs_path: str = None,
-        write_output_tasks: bool = False,
-        skip_node_emails: bool = False,
+        write_output_tasks: bool = None,
+        skip_node_emails: bool = None,
     ):
         """
         param jps: custom JPS (manifest body, link, or application ID from the Marketplace).
@@ -744,5 +730,18 @@ class _Jps(Marketplace):
                 "logsPath": logs_path,
                 "writeOutputTasks": write_output_tasks,
                 "skipNodeEmails": skip_node_emails,
+            },
+        )
+
+    def Uninstall(
+        self,
+        app_unique_name: str,
+        force: bool = None,
+    ):
+        return self._get(
+            "Uninstall",
+            params={
+                "appUniqueName": app_unique_name,
+                "force": force,
             },
         )

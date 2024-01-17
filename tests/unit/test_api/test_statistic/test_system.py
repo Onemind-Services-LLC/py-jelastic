@@ -3,20 +3,20 @@ from . import *
 
 def test_event(client):
     client._get.return_value = success_response
-    response = client.System.Event("topic", [True, False])
+    response = client.System.Event("topic", True)
     client._get.assert_called_with(
         "Event",
-        params={"topic": "topic", "publishLocal": [True, False]},
+        params={"topic": "topic", "publishLocal": True},
     )
     assert response == success_response
 
 
 def test_get_api_descriptions(client):
     client._get.return_value = success_response
-    response = client.System.GetAPIDescriptions([True, True], [True, True])
+    response = client.System.GetAPIDescriptions(True, True)
     client._get.assert_called_with(
         "GetAPIDescriptions",
-        params={"isPublicOnly": [True, True], "isToken": [True, True]},
+        params={"isPublicOnly": True, "isToken": True},
     )
     assert response == success_response
 
@@ -73,14 +73,9 @@ def test_refresh_user(client):
 
 def test_reload_configuration(client):
     client._get.return_value = success_response
-    response = client.System.ReloadConfiguration(
-        [1, 1], ["changed_place_holders1", "changed_place_holders2"]
-    )
+    response = client.System.ReloadConfiguration(1, "changedPlaceholders")
     client._get.assert_called_with(
         "ReloadConfiguration",
-        params={
-            "resellerId": [1, 1],
-            "changedPlaceholders": ["changed_place_holders1", "changed_place_holders2"],
-        },
+        params={"resellerId": 1, "changedPlaceholders": "changedPlaceholders"},
     )
     assert response == success_response

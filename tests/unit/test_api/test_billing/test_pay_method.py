@@ -59,23 +59,16 @@ def test_register_bank_card(client):
 
 def test_register_pay_method_and_pay(client):
     client._get.return_value = success_response
-    response = client.PayMethod.RegisterPayMethodAndPay(
-        "pay type",
-        1,
-        [1, 1, 0],
-        [500, 500, 500],
-        ["WEEK", "MONTH", "WEEK"],
-    )
+    response = client.PayMethod.RegisterPayMethodAndPay("pay type", 1, 1, 500, "WEEK")
     client._get.assert_called_with(
         "RegisterPayMethodAndPay",
         params={
             "payMethodType": "pay type",
             "servicePlanId": 1,
-            "autoServicePlanId": [1, 1, 0],
-            "autoRefillMinBalance": [500, 500, 500],
-            "autoRefillPeriod": ["WEEK", "MONTH", "WEEK"],
+            "autoServicePlanId": 1,
+            "autoRefillMinBalance": 500,
+            "autoRefillPeriod": "WEEK",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -91,10 +84,6 @@ def test_set_default_pay_method(client):
 
 def test_setup_intent(client):
     client._get.return_value = success_response
-    response = client.PayMethod.SetupIntent(["type1", "type2", "type3"])
-    client._get.assert_called_with(
-        "SetupIntent",
-        params={"paymentMethodType": ["type1", "type2", "type3"]},
-        delimiter=",",
-    )
+    response = client.PayMethod.SetupIntent("type")
+    client._get.assert_called_with("SetupIntent", params={"paymentMethodType": "type"})
     assert response == success_response

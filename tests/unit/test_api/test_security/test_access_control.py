@@ -79,17 +79,9 @@ def test_get_object_by_role(client):
 
 def test_get_policy(client):
     client._get.return_value = success_response
-    response = client.AccessControl.GetPolicy(
-        "role",
-        ["object1", "object2", "object3"],
-    )
+    response = client.AccessControl.GetPolicy("role", "object")
     client._get.assert_called_once_with(
-        "GetPolicy",
-        params={
-            "role": "role",
-            "object": ["object1", "object2", "object3"],
-        },
-        delimiter=",",
+        "GetPolicy", params={"role": "role", "object": "object"}
     )
     assert response == success_response
 
