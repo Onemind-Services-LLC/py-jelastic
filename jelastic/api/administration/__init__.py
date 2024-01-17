@@ -212,7 +212,7 @@ class _Analytics(Administration):
         :param target_app_ids: list of the exact environments that should be analyzed
         :param node_groups: list of the node group IDs that should be analyzed
         :param uids: list of the user IDs that should be analyzed
-        :param thread_count: a number of threads for container distribution analysis
+            :param thread_count: a number of threads for container distribution analysis
         """
         return self._get(
             "GetNodesAffinitySuggestion",
@@ -258,16 +258,13 @@ class _Analytics(Administration):
 class _Cluster(Administration):
     _endpoint2 = "cluster"
 
-    def AddActionToIsolationQueue(
-        self, count: list[int] = None, delay: list[int] = None
-    ):
+    def AddActionToIsolationQueue(self, count: int = None, delay: int = None):
         return self._get(
             "AddActionToIsolationQueue",
             params={
                 "count": count,
                 "delay": delay,
             },
-            delimiter=",",
         )
 
     def AddCartridge(
@@ -279,11 +276,10 @@ class _Cluster(Administration):
             params={"manifestUrl": manifest_url},
         )
 
-    def AddCertifiedTemplates(self, repositories: str, publish: list[bool] = None):
+    def AddCertifiedTemplates(self, repositories: str, publish: bool = None):
         return self._get(
             "AddCertifiedTemplates",
             params={"repositories": repositories, "publish": publish},
-            delimiter=",",
         )
 
     def AddExtIps(
@@ -321,17 +317,16 @@ class _Cluster(Administration):
     def AddHdNode(
         self,
         hdnode: dict,
-        set_as_docker_host: list[bool] = None,
-        skip_configuration: list[bool] = None,
+        set_as_docker_host: bool = None,
+        skip_configuration: bool = None,
     ):
         return self._get(
             "AddHdNode",
             params={
                 "hdnode": hdnode,
                 "setAsDockerHost": set_as_docker_host,
-                "setAsDockerHost": skip_configuration,
+                "skipConfiguration": skip_configuration,
             },
-            delimiter=",",
         )
 
     def AddHdNodeGroup(
@@ -343,7 +338,6 @@ class _Cluster(Administration):
             params={
                 "data": data,
             },
-            delimiter=",",
         )
 
     def AddIps(
@@ -360,12 +354,11 @@ class _Cluster(Administration):
     def AddIpv6Network(
         self,
         region: str,
-        network: list[str] = None,
+        network: str = None,
     ):
         return self._get(
             "AddIpv6Network",
             params={"network": network, "region": region},
-            delimiter=",",
         )
 
     def AddNameserver(
@@ -384,7 +377,7 @@ class _Cluster(Administration):
     def AddRegion(
         self,
         data: dict,
-        test_authentication: list[bool] = None,
+        test_authentication: bool = None,
     ):
         """
         :param data: JSON object with the new hardware region data.
@@ -396,14 +389,13 @@ class _Cluster(Administration):
                 "data": data,
                 "testAuthentication": test_authentication,
             },
-            delimiter=",",
         )
 
     def AddRegionDomain(
         self,
         region_id: int,
         domain: str,
-        primary: list[bool] = None,
+        primary: bool = None,
     ):
         """
         :param region_id: unique identifier of the target region.
@@ -417,7 +409,6 @@ class _Cluster(Administration):
                 "domain": domain,
                 "primary": primary,
             },
-            delimiter=",",
         )
 
     def AddRegionReseller(
@@ -426,12 +417,12 @@ class _Cluster(Administration):
         domain: str,
         type: str,
         generate_dns: bool,
-        ssl_type: list[str] = None,
-        region_id: list[int] = None,
-        key: list[str] = None,
-        intermediate: list[str] = None,
-        cert: list[str] = None,
-        source502: list[str] = None,
+        ssl_type: str = None,
+        region_id: int = None,
+        key: str = None,
+        intermediate: str = None,
+        cert: str = None,
+        source502: str = None,
     ):
         """
         :param reseller_id: unique identifier of the target reseller platform.
@@ -459,17 +450,16 @@ class _Cluster(Administration):
                 "cert": cert,
                 "source502": source502,
             },
-            delimiter=",",
         )
 
     def AddRegionSsl(
         self,
         region_id: int,
         ssl_type: str,
-        domain_id: list[int] = None,
-        cert_key: list[str] = None,
-        intermediate: list[str] = None,
-        cert: list[str] = None,
+        domain_id: int = None,
+        cert_key: str = None,
+        intermediate: str = None,
+        cert: str = None,
     ):
         """
         :param region_id: unique identifier of the target region.
@@ -489,7 +479,6 @@ class _Cluster(Administration):
                 "intermediate": intermediate,
                 "cert": cert,
             },
-            delimiter=",",
         )
 
     def AddTemplate(
@@ -500,12 +489,12 @@ class _Cluster(Administration):
         node_type: str,
         node_mission: str,
         display_name: str,
-        engine_type: list[str] = None,
-        images_data: list[str] = None,
-        auto_update: list[bool] = None,
-        keep_selected_tags: list[bool] = None,
-        update_default_tag: list[bool] = None,
-        skip_tags_from_auto_update: list[str] = None,
+        engine_type: str = None,
+        images_data: str = None,
+        auto_update: bool = None,
+        keep_selected_tags: bool = None,
+        update_default_tag: bool = None,
+        skip_tags_from_auto_update: str = None,
     ):
         return self._get(
             "AddTemplate",
@@ -523,7 +512,6 @@ class _Cluster(Administration):
                 "updateDefaultTag": update_default_tag,
                 "skipTagsFromAutoUpdate": skip_tags_from_auto_update,
             },
-            delimiter=",",
         )
 
     def AddTemplateRegistry(
@@ -535,14 +523,13 @@ class _Cluster(Administration):
             params={
                 "data": data,
             },
-            delimiter=",",
         )
 
     def AddUserToContainer(
         self,
-        node_id: list[int] = None,
-        container_id: list[int] = None,
-        regenerate_keys: list[bool] = None,
+        node_id: int = None,
+        container_id: int = None,
+        regenerate_keys: bool = None,
     ):
         return self._get(
             "AddUserToContainer",
@@ -551,7 +538,6 @@ class _Cluster(Administration):
                 "containerId": container_id,
                 "regenerateKeys": regenerate_keys,
             },
-            delimiter=",",
         )
 
     def AddUsersToGate(
@@ -572,8 +558,8 @@ class _Cluster(Administration):
 
     def CheckMigrationEnvPossibility(
         self,
-        target_appid: list[str] = None,
-        hardware_node_group: list[str] = None,
+        target_appid: str = None,
+        hardware_node_group: str = None,
     ):
         return self._get(
             "CheckMigrationEnvPossibility",
@@ -581,7 +567,6 @@ class _Cluster(Administration):
                 "targetAppid": target_appid,
                 "hardwareNodeGroup": hardware_node_group,
             },
-            delimiter=",",
         )
 
     def CleanTemplateManifestCache(
@@ -594,12 +579,11 @@ class _Cluster(Administration):
 
     def ClearPool(
         self,
-        hnid: list[int] = None,
+        hnid: int = None,
     ):
         return self._get(
             "ClearPool",
             params={"hnid": hnid},
-            delimiter=",",
         )
 
     def ConvertPasswords(
@@ -638,16 +622,19 @@ class _Cluster(Administration):
 
     def DeleteEnvsByChecksum(
         self,
+        checksum: str,
         uid: int,
         target_appid: str,
     ):
         """
+        :param checksum: checksum of the request.
         :param uid: unique identifier of the target user.
         :param target_appid: A semicolon-separated list of target environment IDs.
         """
         return self._get(
             "DeleteEnvsByChecksum",
             params={
+                "checksum": checksum,
                 "uid": uid,
                 "targetAppid": target_appid,
             },
@@ -667,24 +654,22 @@ class _Cluster(Administration):
             },
         )
 
-    def DeleteHDNode(self, hdnodeid: int, force: list[bool] = None):
+    def DeleteHDNode(self, hdnodeid: int, force: bool = None):
         return self._get(
             "DeleteHDNode",
             params={
                 "hdnodeid": hdnodeid,
                 "force": force,
             },
-            delimiter=",",
         )
 
-    def EditHdNode(self, hdnode: dict, set_as_docker_host: list[bool] = None):
+    def EditHdNode(self, hdnode: dict, set_as_docker_host: bool = None):
         return self._get(
             "EditHdNode",
             params={
                 "hdnode": hdnode,
                 "set_as_docker_host": set_as_docker_host,
             },
-            delimiter=",",
         )
 
     def EditHdNodeGroup(
@@ -696,27 +681,25 @@ class _Cluster(Administration):
             params={
                 "data": data,
             },
-            delimiter=",",
         )
 
-    def EditRegion(self, data: dict, test_authentication: list[bool] = None):
+    def EditRegion(self, data: dict, test_authentication: bool = None):
         return self._get(
             "EditRegion",
             params={"data": data, "testAuthentication": test_authentication},
-            delimiter=",",
         )
 
     def EditTemplate(
         self,
         node_type: str,
-        tags: list[str] = None,
-        display_name: list[str] = None,
-        engine_type: list[str] = None,
-        images_data: list[str] = None,
-        auto_update: list[bool] = None,
-        keep_selected_tags: list[bool] = None,
-        update_default_tag: list[bool] = None,
-        skip_tags_from_auto_update: list[str] = None,
+        tags: str = None,
+        display_name: str = None,
+        engine_type: str = None,
+        images_data: str = None,
+        auto_update: bool = None,
+        keep_selected_tags: bool = None,
+        update_default_tag: bool = None,
+        skip_tags_from_auto_update: str = None,
     ):
         return self._get(
             "EditTemplate",
@@ -731,7 +714,6 @@ class _Cluster(Administration):
                 "updateDefaultTag": update_default_tag,
                 "skipTagsFromAutoUpdate": skip_tags_from_auto_update,
             },
-            delimiter=",",
         )
 
     def EditTemplateRegistry(
@@ -748,8 +730,8 @@ class _Cluster(Administration):
     def EvacuateContainers(
         self,
         source_hn_id: str,
-        possible_target_node_ids: list[str] = None,
-        is_online: list[bool] = None,
+        possible_target_node_ids: str = None,
+        is_online: bool = None,
     ):
         return self._get(
             "EvacuateContainers",
@@ -758,17 +740,16 @@ class _Cluster(Administration):
                 "possibleTargetNodeIds": possible_target_node_ids,
                 "isOnline": is_online,
             },
-            delimiter=",",
         )
 
     def ExecHnCMD(
         self,
         cmd: str,
-        hn_id: list[int] = None,
-        infra_only: list[bool] = None,
-        run_on_broken: list[bool] = None,
-        vz_version: list[str] = None,
-        docker_host_only: list[bool] = None,
+        hn_id: int = None,
+        infra_only: bool = None,
+        run_on_broken: bool = None,
+        vz_version: str = None,
+        docker_host_only: bool = None,
     ):
         return self._get(
             "ExecHnCMD",
@@ -780,17 +761,16 @@ class _Cluster(Administration):
                 "vzVersion": vz_version,
                 "dockerHostOnly": docker_host_only,
             },
-            delimiter=",",
         )
 
     def ExecHostCmd(
         self,
         cmd: str,
-        host_id: list[int] = None,
-        infra_only: list[bool] = None,
-        run_on_broken: list[bool] = None,
-        vz_version: list[str] = None,
-        docker_host_only: list[bool] = None,
+        host_id: int = None,
+        infra_only: bool = None,
+        run_on_broken: bool = None,
+        vz_version: str = None,
+        docker_host_only: bool = None,
     ):
         return self._get(
             "ExecHostCmd",
@@ -802,13 +782,12 @@ class _Cluster(Administration):
                 "vzVersion": vz_version,
                 "dockerHostOnly": docker_host_only,
             },
-            delimiter=",",
         )
 
     def GeneratePool(
         self,
-        node_type: list[str] = None,
-        hnid: list[int] = None,
+        node_type: str = None,
+        hnid: int = None,
     ):
         return self._get(
             "GeneratePool",
@@ -816,31 +795,28 @@ class _Cluster(Administration):
                 "nodeType": node_type,
                 "hnId": hnid,
             },
-            delimiter=",",
         )
 
     def GetAddHdNodeCmd(
         self,
-        hard_node_group: list[str] = None,
+        hard_node_group: str = None,
     ):
         return self._get(
             "GetAddHdNodeCmd",
             params={
                 "hardNodeGroup": hard_node_group,
             },
-            delimiter=",",
         )
 
     def GetAddHostCmd(
         self,
-        host_group: list[str] = None,
+        host_group: str = None,
     ):
         return self._get(
             "GetAddHostCmd",
             params={
                 "hostGroup": host_group,
             },
-            delimiter=",",
         )
 
     def GetAllContainers(
@@ -861,9 +837,9 @@ class _Cluster(Administration):
 
     def GetAllSumStatByUid(
         self,
-        duration: list[int] = None,
-        endtime: list[datetime] = None,
-        uid: list[int] = None,
+        duration: int = None,
+        endtime: datetime = None,
+        uid: int = None,
     ):
         return self._get(
             "GetAllSumStatByUid",
@@ -872,19 +848,17 @@ class _Cluster(Administration):
                 "endtime": endtime,
                 "uid": uid,
             },
-            delimiter=",",
         )
 
     def GetAppidByDomain(
         self,
-        domain: list[str] = None,
+        domain: str = None,
     ):
         return self._get(
             "GetAppidByDomain",
             params={
                 "domain": domain,
             },
-            delimiter=",",
         )
 
     def GetBillableItems(
@@ -902,6 +876,7 @@ class _Cluster(Administration):
                 "starttime": starttime,
                 "endtime": endtime,
             },
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def GetClusterLoadInfo(
@@ -920,8 +895,8 @@ class _Cluster(Administration):
 
     def GetClusterStatus(
         self,
-        check_smtp: list[bool] = None,
-        cached: list[bool] = None,
+        check_smtp: bool = None,
+        cached: bool = None,
     ):
         return self._get(
             "GetClusterStatus",
@@ -929,7 +904,6 @@ class _Cluster(Administration):
                 "checkSMTP": check_smtp,
                 "cached": cached,
             },
-            delimiter=",",
         )
 
     def GetClusterUsage(
@@ -954,11 +928,10 @@ class _Cluster(Administration):
             params={},
         )
 
-    def GetDefaultTagInfo(self, node_type: str, engine: list[str] = None):
+    def GetDefaultTagInfo(self, node_type: str, engine: str = None):
         return self._get(
             "GetDefaultTagInfo",
             params={"nodeType": node_type, "engine": engine},
-            delimiter=",",
         )
 
     def GetDomainByIp(
@@ -1009,6 +982,7 @@ class _Cluster(Administration):
                 "starttime": starttime,
                 "endtime": endtime,
             },
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def GetEnvironmentGroupPopulations(self, start: datetime, end: datetime):
@@ -1021,15 +995,16 @@ class _Cluster(Administration):
         return self._get(
             "GetEnvironmentGroupPopulations",
             params={"start": start, "end": end},
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def GetEnvs(
         self,
         uid: int,
         rights: list[str] = None,
-        lazy: list[bool] = None,
-        owner_uid: list[int] = None,
-        ssh_access_only: list[bool] = None,
+        lazy: bool = None,
+        owner_uid: int = None,
+        ssh_access_only: bool = None,
     ):
         """
         A list of suitable environments.
@@ -1075,7 +1050,6 @@ class _Cluster(Administration):
             params={
                 "search": search,
             },
-            delimiter=",",
         )
 
     def GetHdNodeGroups(
@@ -1094,33 +1068,22 @@ class _Cluster(Administration):
             params={},
         )
 
-    def GetHdNodes(self, ids: list[str] = None):
+    def GetHdNodes(self, ids: str = None):
         return self._get(
             "GetHdNodes",
             params={"ids": ids},
-            delimiter=",",
         )
 
-    def GetHdNodesLoad(self, duration: int, hdnodes: list[str] = None):
+    def GetHdNodesLoad(self, duration: int, hdnodes: str = None):
         return self._get(
-            "GetHdNodesLoad",
-            params={"duration": duration, "hdnodes": hdnodes},
-            delimiter=",",
+            "GetHdNodesLoad", params={"duration": duration, "hdnodes": hdnodes}
         )
 
-    def GetHdNodesLoadInfo(self, ids: list[str] = None):
-        return self._get(
-            "GetHdNodesLoadInfo",
-            params={"ids": ids},
-            delimiter=",",
-        )
+    def GetHdNodesLoadInfo(self, ids: str = None):
+        return self._get("GetHdNodesLoadInfo", params={"ids": ids})
 
-    def GetHosts(self, ids: list[str] = None):
-        return self._get(
-            "GetHosts",
-            params={"ids": ids},
-            delimiter=",",
-        )
+    def GetHosts(self, ids: str = None):
+        return self._get("GetHosts", params={"ids": ids})
 
     def GetIpPoolInfo(
         self,
@@ -1131,7 +1094,6 @@ class _Cluster(Administration):
             params={
                 "search": search,
             },
-            delimiter=",",
         )
 
     def GetIpv6Networks(
@@ -1142,13 +1104,12 @@ class _Cluster(Administration):
             params={},
         )
 
-    def GetIpv6SubnetsInfo(self, search: list[str] = None):
+    def GetIpv6SubnetsInfo(self, search: str = None):
         return self._get(
             "GetIpv6SubnetsInfo",
             params={
                 "search": search,
             },
-            delimiter=",",
         )
 
     def GetJelasticAppid(
@@ -1205,21 +1166,20 @@ class _Cluster(Administration):
             params={},
         )
 
-    def GetNodePassword(self, nodeid: list[int] = None):
+    def GetNodePassword(self, nodeid: int = None):
         return self._get(
             "GetNodePassword",
             params={
                 "nodeid": nodeid,
             },
-            delimiter=",",
         )
 
     def GetNodes(
         self,
         hdnodeid: int,
-        name: list[str] = None,
-        start_row: list[int] = None,
-        result_count: list[int] = None,
+        name: str = None,
+        start_row: int = None,
+        result_count: int = None,
     ):
         return self._get(
             "GetNodes",
@@ -1229,7 +1189,6 @@ class _Cluster(Administration):
                 "startRow": start_row,
                 "resultCount": result_count,
             },
-            delimiter=",",
         )
 
     def GetOOMKilledProcesses(
@@ -1241,7 +1200,6 @@ class _Cluster(Administration):
             params={
                 "search": search,
             },
-            delimiter=",",
         )
 
     def GetPcsClusterList(
@@ -1282,7 +1240,7 @@ class _Cluster(Administration):
             },
         )
 
-    def GetRegionDomains(self, region_id: list[int] = None):
+    def GetRegionDomains(self, region_id: int = None):
         """
         param region_id: unique identifier of the target region.
         """
@@ -1315,16 +1273,15 @@ class _Cluster(Administration):
 
     def GetRepositoryTags(
         self,
-        registry_id: list[int] = None,
-        repository: list[str] = None,
+        repository: str,
+        registry_id: int = None,
     ):
         return self._get(
             "GetRepositoryTags",
             params={
-                "registryId": registry_id,
                 "repository": repository,
+                "registryId": registry_id,
             },
-            delimiter=",",
         )
 
     def GetSoftNodeInfo(
@@ -1351,10 +1308,10 @@ class _Cluster(Administration):
         duration: int,
         interval: int,
         target_appid: str,
-        endtime: list[datetime] = None,
-        nodeid: list[int] = None,
-        nodetype: list[str] = None,
-        node_group: list[str] = None,
+        endtime: datetime = None,
+        nodeid: int = None,
+        nodetype: str = None,
+        node_group: str = None,
     ):
         return self._get(
             "GetStats",
@@ -1367,14 +1324,14 @@ class _Cluster(Administration):
                 "nodetype": nodetype,
                 "nodeGroup": node_group,
             },
-            delimiter=",",
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def GetSumStat(
         self,
-        duration: list[int] = None,
-        endtime: list[datetime] = None,
-        target_appid: list[str] = None,
+        duration: int = None,
+        endtime: datetime = None,
+        target_appid: str = None,
     ):
         return self._get(
             "GetSumStat",
@@ -1383,7 +1340,7 @@ class _Cluster(Administration):
                 "endtime": endtime,
                 "targetAppid": target_appid,
             },
-            delimiter=",",
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def GetSystemLog(
@@ -1411,8 +1368,8 @@ class _Cluster(Administration):
     def GetTemplateLabels(
         self,
         repository: str,
-        registry_id: list[int] = None,
-        tag: list[str] = None,
+        registry_id: int = None,
+        tag: str = None,
     ):
         return self._get(
             "GetTemplateLabels",
@@ -1421,7 +1378,6 @@ class _Cluster(Administration):
                 "registryId": registry_id,
                 "tag": tag,
             },
-            delimiter=",",
         )
 
     def GetTemplateRegistries(
@@ -1434,9 +1390,9 @@ class _Cluster(Administration):
 
     def GetTemplates(
         self,
-        type: list[str] = None,
-        published: list[bool] = None,
-        lazy: list[bool] = None,
+        type: str = None,
+        published: bool = None,
+        lazy: bool = None,
     ):
         return self._get(
             "GetTemplates",
@@ -1445,7 +1401,6 @@ class _Cluster(Administration):
                 "published": published,
                 "lazy": lazy,
             },
-            delimiter=",",
         )
 
     def GetUserActivity(
@@ -1453,14 +1408,14 @@ class _Cluster(Administration):
         uid: int,
         starttime: datetime,
         endtime: datetime,
-        target_appid: list[str] = None,
-        start_row: list[int] = None,
-        result_count: list[int] = None,
-        service_name: list[str] = None,
-        search_text: list[str] = None,
-        action_types: list[str] = None,
-        order_field: list[str] = None,
-        order_direction: list[str] = None,
+        target_appid: str = None,
+        start_row: int = None,
+        result_count: int = None,
+        service_name: str = None,
+        search_text: str = None,
+        action_types: str = None,
+        order_field: str = None,
+        order_direction: str = None,
     ):
         """
         param: uid: unique identifier of the target user.
@@ -1490,15 +1445,15 @@ class _Cluster(Administration):
                 "orderField": order_field,
                 "orderDirection": order_direction,
             },
-            delimiter=",",
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def GetUsersActivities(
         self,
         starttime: datetime,
         endtime: datetime,
-        start_row: list[int] = None,
-        result_count: list[int] = None,
+        start_row: int = None,
+        result_count: int = None,
     ):
         return self._get(
             "GetUsersActivities",
@@ -1508,7 +1463,7 @@ class _Cluster(Administration):
                 "startRow": start_row,
                 "resultCount": result_count,
             },
-            delimiter=",",
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def L2Update(
@@ -1524,9 +1479,9 @@ class _Cluster(Administration):
 
     def MigrateEnv(
         self,
-        target_appid: list[str] = None,
-        hardware_node_group: list[str] = None,
-        is_online: list[bool] = None,
+        target_appid: str = None,
+        hardware_node_group: str = None,
+        is_online: bool = None,
     ):
         return self._get(
             "MigrateEnv",
@@ -1535,15 +1490,14 @@ class _Cluster(Administration):
                 "hardwareNodeGroup": hardware_node_group,
                 "isOnline": is_online,
             },
-            delimiter=",",
         )
 
     def MigrateNode(
         self,
         nodeid: int,
         hdnodeid: int,
-        is_online: list[bool] = None,
-        manage_dns_state: list[bool] = None,
+        is_online: bool = None,
+        manage_dns_state: bool = None,
     ):
         """
         param nodeid: unique identifier of the target node (container).
@@ -1559,19 +1513,18 @@ class _Cluster(Administration):
                 "isOnline": is_online,
                 "manageDNSState": manage_dns_state,
             },
-            delimiter=",",
         )
 
     def RedeployContainers(
         self,
         target_env_name: str,
         tag: str,
-        node_group: list[str] = None,
-        node_id: list[int] = None,
-        use_existing_volumes: list[bool] = None,
-        login: list[str] = None,
-        password: list[str] = None,
-        skip_reinstall: list[bool] = None,
+        node_group: str = None,
+        node_id: int = None,
+        use_existing_volumes: bool = None,
+        login: str = None,
+        password: str = None,
+        skip_reinstall: bool = None,
     ):
         return self._get(
             "RedeployContainers",
@@ -1585,7 +1538,6 @@ class _Cluster(Administration):
                 "password": password,
                 "skipReinstall": skip_reinstall,
             },
-            delimiter=",",
         )
 
     def RefreshEmailTemplates(
@@ -1599,30 +1551,28 @@ class _Cluster(Administration):
             },
         )
 
-    def RefreshUser(self, language: list[str] = None):
+    def RefreshUser(self, language: str = None):
         return self._get(
             "RefreshUser",
             params={
                 "language": language,
             },
-            delimiter=",",
         )
 
-    def RegeneratePool(self, node_type: str, exclude: list[str] = None):
+    def RegeneratePool(self, node_type: str, exclude: str = None):
         return self._get(
             "RegeneratePool",
             params={
                 "nodeType": node_type,
                 "exclude": exclude,
             },
-            delimiter=",",
         )
 
     def RegisterInfaModule(
         self,
-        module: list[str] = None,
-        dst_env_name: list[str] = None,
-        dry_run: list[bool] = None,
+        module: str = None,
+        dst_env_name: str = None,
+        dry_run: bool = None,
     ):
         return self._get(
             "RegisterInfaModule",
@@ -1631,19 +1581,17 @@ class _Cluster(Administration):
                 "dstEnvName": dst_env_name,
                 "dryRun": dry_run,
             },
-            delimiter=",",
         )
 
     def RemoveExtIps(
         self,
-        ips: list[str] = None,
+        ips: str = None,
     ):
         return self._get(
             "RemoveExtIps",
             params={
                 "ips": ips,
             },
-            delimiter=",",
         )
 
     def RemoveHdNodeGroup(
@@ -1680,7 +1628,7 @@ class _Cluster(Administration):
         )
 
     def RemoveRegionReseller(
-        self, reseller_id: int, remove_dns: bool, region_id: list[int] = None
+        self, reseller_id: int, remove_dns: bool, region_id: int = None
     ):
         return self._get(
             "RemoveRegionReseller",
@@ -1689,14 +1637,13 @@ class _Cluster(Administration):
                 "dstEnvName": remove_dns,
                 "regionId": region_id,
             },
-            delimiter=",",
         )
 
     def RemoveRegionSsl(
         self,
         region_id: int,
-        domain_id: list[int] = None,
-        reseller_id: list[int] = None,
+        domain_id: int = None,
+        reseller_id: int = None,
     ):
         """
         param region_id: unique identifier of the target region.
@@ -1710,7 +1657,6 @@ class _Cluster(Administration):
                 "domainId": domain_id,
                 "resellerId": reseller_id,
             },
-            delimiter=",",
         )
 
     def RemoveTemplate(
@@ -1737,10 +1683,10 @@ class _Cluster(Administration):
 
     def ReplaceNodeInEnv(
         self,
-        dst_env_name: list[str] = None,
-        dst_node_id: list[int] = None,
-        src_env_id: list[str] = None,
-        src_hn_id: list[int] = None,
+        dst_env_name: str = None,
+        dst_node_id: int = None,
+        src_env_id: str = None,
+        src_hn_id: int = None,
     ):
         return self._get(
             "ReplaceNodeInEnv",
@@ -1750,7 +1696,6 @@ class _Cluster(Administration):
                 "srcEnvId": src_env_id,
                 "srcHnId": src_hn_id,
             },
-            delimiter=",",
         )
 
     def ReviveInstallHdNode(
@@ -1773,7 +1718,6 @@ class _Cluster(Administration):
             params={
                 "search": search,
             },
-            delimiter=",",
         )
 
     def SearchNodes(
@@ -1785,7 +1729,6 @@ class _Cluster(Administration):
             params={
                 "search": search,
             },
-            delimiter=",",
         )
 
     def SetDefaultTemplateTag(self, node_type: str, tag: str):
@@ -1797,7 +1740,7 @@ class _Cluster(Administration):
             },
         )
 
-    def SetEnvNote(self, target_appid: list[str] = None, note: list[str] = None):
+    def SetEnvNote(self, target_appid: str = None, note: str = None):
         """
         param target_appid: target environment name
         param note: custom note for the target environment
@@ -1808,7 +1751,6 @@ class _Cluster(Administration):
                 "targetAppid": target_appid,
                 "note": note,
             },
-            delimiter=",",
         )
 
     def SetEnvStatus(self, target_appid: str, status: int):
@@ -1893,9 +1835,9 @@ class _Cluster(Administration):
 
     def Sleep(
         self,
-        starttime: list[datetime] = None,
-        endtime: list[datetime] = None,
-        deactivate_after: list[int] = None,
+        starttime: datetime = None,
+        endtime: datetime = None,
+        deactivate_after: int = None,
     ):
         """
         param starttime: start of the period (date and time in format yyyy-MM-dd HH:mm:ss, timezone GMT+0)
@@ -1909,7 +1851,7 @@ class _Cluster(Administration):
                 "endtime": endtime,
                 "deactivateAfter": deactivate_after,
             },
-            delimiter=",",
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def StartEnv(
@@ -1944,7 +1886,7 @@ class _Cluster(Administration):
 
     def StopEvacuation(
         self,
-        hard_node_id: str,
+        hard_node_id: int,
     ):
         return self._get(
             "StopEvacuation",
@@ -1953,13 +1895,14 @@ class _Cluster(Administration):
             },
         )
 
-    def SyncCloudlets(self, starttime: datetime, debug: list[bool] = None):
+    def SyncCloudlets(self, starttime: datetime, debug: bool = None):
         return self._get(
             "SyncCloudlets(",
             params={
                 "starttime": starttime,
                 "debug": debug,
             },
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def SyncInfaModule(
@@ -1967,7 +1910,7 @@ class _Cluster(Administration):
         node_group: str,
         dst_env_name: str,
         components: str,
-        target_tag: list[str] = None,
+        target_tag: str = None,
     ):
         return self._get(
             "SyncInfaModule",
@@ -1977,10 +1920,9 @@ class _Cluster(Administration):
                 "components": components,
                 "targetTag": target_tag,
             },
-            delimiter=",",
         )
 
-    def UpdateRegionSsl(self, region_id: int, domain_id: list[int] = None):
+    def UpdateRegionSsl(self, region_id: int, domain_id: int = None):
         """
         param region_id: unique identifier of the target region.
         param domain_id: unique identifier of the target domain name.
@@ -2002,14 +1944,13 @@ class _Cluster(Administration):
             },
         )
 
-    def UpdateTemplate(self, node_type: int, icons_only: list[int] = None):
+    def UpdateTemplate(self, node_type: int, icons_only: bool = None):
         return self._get(
             "UpdateTemplate",
             params={
                 "nodeType": node_type,
                 "iconsOnly": icons_only,
             },
-            delimiter=",",
         )
 
     def Validate(
@@ -2031,9 +1972,9 @@ class _Cluster(Administration):
     def ValidateSsl(
         self,
         domain: str,
-        key: list[str] = None,
-        intermediate: list[str] = None,
-        cert: list[str] = None,
+        key: str = None,
+        intermediate: str = None,
+        cert: str = None,
     ):
         return self._get(
             "ValidateSsl",
@@ -2043,7 +1984,6 @@ class _Cluster(Administration):
                 "intermediate": intermediate,
                 "cert": cert,
             },
-            delimiter=",",
         )
 
 
@@ -2097,7 +2037,7 @@ class _Config(Administration):
         self,
         type: str,
         key: str,
-        value: list[str] = None,
+        value: str = None,
     ):
         return self._get(
             "ChangeConfigKey",
@@ -2106,7 +2046,6 @@ class _Config(Administration):
                 "key": key,
                 "value": value,
             },
-            delimiter=",",
         )
 
     def ChangePropertiesForReseller(
@@ -2212,7 +2151,7 @@ class _Config(Administration):
         self,
         type: str,
         key: str,
-        reseller_id: list[int] = None,
+        reseller_id: int = None,
     ):
         """
         :param type: configuration type
@@ -2226,7 +2165,6 @@ class _Config(Administration):
                 "key": key,
                 "resellerId": reseller_id,
             },
-            delimiter=",",
         )
 
     def GetConfigKeys(
@@ -2325,12 +2263,12 @@ class _Resource(Administration):
         resource_name: str,
         uid: int,
         value: int,
-        start_date: list[date] = None,
-        end_date: list[date] = None,
-        env_name: list[str] = None,
-        node_id: list[int] = None,
-        note: list[str] = None,
-        value_group: list[str] = None,
+        start_date: date = None,
+        end_date: date = None,
+        env_name: str = None,
+        node_id: int = None,
+        note: str = None,
+        value_group: str = None,
     ):
         return self._get(
             "AddStatistics",
@@ -2345,7 +2283,7 @@ class _Resource(Administration):
                 "note": note,
                 "valueGroup": value_group,
             },
-            delimiter=",",
+            datetime_format="%Y-%m-%d",
         )
 
 
@@ -2358,8 +2296,8 @@ class _Update(Administration):
 
     def FixExtDns(
         self,
-        uid: list[int] = None,
-        target_app_id: list[str] = None,
+        uid: int = None,
+        target_app_id: str = None,
     ):
         return self._get(
             "FixExtDns",
@@ -2367,14 +2305,13 @@ class _Update(Administration):
                 "uid": uid,
                 "targetAppIds": target_app_id,
             },
-            delimiter=",",
         )
 
     def RestoreEnv(
         self,
-        env_name: list[str] = None,
-        uid: list[int] = None,
-        region: list[str] = None,
+        env_name: str = None,
+        uid: int = None,
+        region: str = None,
     ):
         return self._get(
             "RestoreEnv",
@@ -2383,13 +2320,12 @@ class _Update(Administration):
                 "uid": uid,
                 "region": region,
             },
-            delimiter=",",
         )
 
     def SyncInfraEnv(
         self,
-        domain: list[str] = None,
-        registry: list[str] = None,
+        domain: str = None,
+        registry: str = None,
     ):
         return self._get(
             "SyncInfraEnv",
@@ -2397,7 +2333,6 @@ class _Update(Administration):
                 "domain": domain,
                 "registry": registry,
             },
-            delimiter=",",
         )
 
 
@@ -2427,7 +2362,7 @@ class _Template(Administration):
 
     def SetDefaultRegistry(
         self,
-        id: list[int] = None,
+        id: int = None,
     ):
         """
         :param id: identifier of the registry.
@@ -2437,13 +2372,12 @@ class _Template(Administration):
             params={
                 "id": id,
             },
-            delimiter=",",
         )
 
     def SetDistribution(
         self,
         node_types: str,
-        distribution: list[str] = None,
+        distribution: str = None,
     ):
         """
         :param node_type: templates where distribution should be set.
@@ -2452,7 +2386,6 @@ class _Template(Administration):
         return self._get(
             "SetDistribution",
             params={"nodeTypes": node_types, "distribution": distribution},
-            delimiter=",",
         )
 
 
@@ -2475,7 +2408,6 @@ class _HostGroup(Administration):
             params={
                 "data": data,
             },
-            delimiter=",",
         )
 
     def AddEndpoints(
@@ -2493,7 +2425,6 @@ class _HostGroup(Administration):
                 "hostGroup": host_group,
                 "endpoints": end_points,
             },
-            delimiter=",",
         )
 
     def Edit(
@@ -2508,7 +2439,6 @@ class _HostGroup(Administration):
             params={
                 "data": data,
             },
-            delimiter=",",
         )
 
     def EditEndpoints(
@@ -2525,7 +2455,6 @@ class _HostGroup(Administration):
                 "hostGroup": host_group,
                 "endpoints": end_points,
             },
-            delimiter=",",
         )
 
     def Get(
@@ -2601,7 +2530,6 @@ class _HostGroup(Administration):
             params={
                 "endPoints": end_points,
             },
-            delimiter=",",
         )
 
 
@@ -2628,8 +2556,8 @@ class _Host(Administration):
     def CheckHostConnection(
         self,
         host_id: str,
-        port: list[int] = None,
-        check_external_ip: list[bool] = None,
+        port: int = None,
+        check_external_ip: bool = None,
     ):
         """
         :param host_id: unique identifier of the target host.
@@ -2642,7 +2570,6 @@ class _Host(Administration):
                 "port": port,
                 "checkExternalIp": check_external_ip,
             },
-            delimiter=",",
         )
 
     def GetHostFirewallSets(self):
@@ -2656,9 +2583,9 @@ class _Host(Administration):
 
     def UpdateHostFirewall(
         self,
-        host_id: list[int] = None,
-        force: list[bool] = None,
-        check_external_ip: list[bool] = None,
+        host_id: int = None,
+        force: bool = None,
+        check_external_ip: bool = None,
     ):
         """
         :param host_id: unique identifier of the target host (all hosts if not defined).
@@ -2671,7 +2598,6 @@ class _Host(Administration):
                 "force": force,
                 "checkExternalIp": check_external_ip,
             },
-            delimiter=",",
         )
 
 
@@ -2686,8 +2612,8 @@ class _Utils(Administration):
         name: str,
         ttl: int,
         record_data_type: str,
-        ssl_enabled: list[bool] = None,
-        enabled: list[bool] = None,
+        ssl_enabled: bool = None,
+        enabled: bool = None,
     ):
         """
         :param record_data: custom data for the DNS record.
@@ -2707,7 +2633,6 @@ class _Utils(Administration):
                 "sslEnabled": ssl_enabled,
                 "enabled": enabled,
             },
-            delimiter=",",
         )
 
     def AnalizeEnv(
@@ -2729,25 +2654,24 @@ class _Utils(Administration):
 
     def DeleteBrokenEnvs(
         self,
-        target_app_ids: list[str] = None,
+        target_app_ids: str = None,
     ):
         return self._get(
             "DeleteBrokenEnvs",
             params={
                 "targetAppIds": target_app_ids,
             },
-            delimiter=",",
         )
 
     def EditSystemExternalDNSRecord(
         self,
         id: int,
-        record_data: list[str] = None,
-        name: list[str] = None,
-        ttl: list[int] = None,
-        record_data_type: list[str] = None,
-        ssl_enabled: list[bool] = None,
-        enabled: list[bool] = None,
+        record_data: str = None,
+        name: str = None,
+        ttl: int = None,
+        record_data_type: str = None,
+        ssl_enabled: bool = None,
+        enabled: bool = None,
     ):
         """
         :param id: unique identifier of the target custom external DNS record.
@@ -2769,7 +2693,6 @@ class _Utils(Administration):
                 "sslEnabled": ssl_enabled,
                 "enabled": enabled,
             },
-            delimiter=",",
         )
 
     def ExportEnv(self, target_app_id: str):
@@ -2780,14 +2703,13 @@ class _Utils(Administration):
             },
         )
 
-    def FixExtDns(self, uid: list[int] = None, target_app_id: list[str] = None):
+    def FixExtDns(self, uid: int = None, target_app_id: str = None):
         return self._get(
             "FixExtDns",
             params={
                 "uid": uid,
                 "targetAppId": target_app_id,
             },
-            delimiter=",",
         )
 
     def FixLaunching(self):
@@ -2812,8 +2734,8 @@ class _Utils(Administration):
 
     def GetBalancerStat(
         self,
-        start_time: str,
-        end_time: str,
+        start_time: datetime,
+        end_time: datetime,
     ):
         return self._get(
             "GetBalancerStat",
@@ -2821,6 +2743,7 @@ class _Utils(Administration):
                 "starttime": start_time,
                 "endtime": end_time,
             },
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def GetCloudletsUsage(self):
@@ -2828,8 +2751,8 @@ class _Utils(Administration):
 
     def GetDBCreationStat(
         self,
-        start_time: str,
-        end_time: str,
+        start_time: datetime,
+        end_time: datetime,
     ):
         return self._get(
             "GetDBCreationStat",
@@ -2837,15 +2760,16 @@ class _Utils(Administration):
                 "startTime": start_time,
                 "endTime": end_time,
             },
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def GetErrors(
         self,
-        start_time: str,
-        end_time: str,
+        start_time: datetime,
+        end_time: datetime,
         start_row: int,
         result_count: int,
-        filter: list[int] = None,
+        filter: int = None,
     ):
         return self._get(
             "GerErrors",
@@ -2856,15 +2780,15 @@ class _Utils(Administration):
                 "resultCount": result_count,
                 "filter": filter,
             },
-            delimiter=",",
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def GetErrorsByDate(
         self,
-        start_time: str,
-        end_time: str,
+        start_time: datetime,
+        end_time: datetime,
         interval: int,
-        filter: list[int] = None,
+        filter: int = None,
     ):
         return self._get(
             "GetErrorsByDate",
@@ -2874,7 +2798,7 @@ class _Utils(Administration):
                 "interval": interval,
                 "filter": filter,
             },
-            delimiter=",",
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def GetSystemExternalDNSRecords(self):
@@ -2886,8 +2810,8 @@ class _Utils(Administration):
     def ImportEnv(
         self,
         env_info: str,
-        env_name: list[str] = None,
-        enable_firewall: list[bool] = None,
+        env_name: str = None,
+        enable_firewall: bool = None,
     ):
         return self._get(
             "ImportEnv",
@@ -2896,19 +2820,17 @@ class _Utils(Administration):
                 "envName": env_name,
                 "enableFirewall": enable_firewall,
             },
-            delimiter=",",
         )
 
     def InspectEnvs(
         self,
-        remove: list[bool] = None,
+        remove: bool = None,
     ):
         return self._get(
             "InspectEnvs",
             params={
                 "remove": remove,
             },
-            delimiter=",",
         )
 
     def ManageService(self, node_id: int, command: str, service_name: str):
@@ -2959,7 +2881,7 @@ class _Subscription(Administration):
     def AddCategory(
         self,
         category: dict,
-        reseller_id: list[int] = None,
+        reseller_id: int = None,
     ):
         """
         :param category: JSON representation of an object (subscription Category) that should be created
@@ -2971,13 +2893,12 @@ class _Subscription(Administration):
                 "category": category,
                 "resellerId": reseller_id,
             },
-            delimiter=",",
         )
 
     def AddProduct(
         self,
         product: dict = None,
-        reseller_id: list[int] = None,
+        reseller_id: int = None,
     ):
         """
         :param category: JSON representation of an object (subscription Product) that should be created.
@@ -2989,14 +2910,13 @@ class _Subscription(Administration):
                 "product": product,
                 "resellerId": reseller_id,
             },
-            delimiter=",",
         )
 
     def AddServicePlan(
         self,
         service_plan: dict,
-        reseller_id: list[int] = None,
-        expand_fields: list[str] = None,
+        reseller_id: int = None,
+        expand_fields: str = None,
     ):
         """
         :param service_plan: JSON representation of an object (subscription Service Plan) that should be created.
@@ -3010,7 +2930,6 @@ class _Subscription(Administration):
                 "resellerId": reseller_id,
                 "expandFields": expand_fields,
             },
-            delimiter=",",
         )
 
     def AddSubscriptionItemResource(
@@ -3035,7 +2954,6 @@ class _Subscription(Administration):
                 "itemResourceId": item_resource_id,
                 "resources": resources,
             },
-            delimiter=",",
         )
 
     def AdjustProduct(
@@ -3061,49 +2979,39 @@ class _Subscription(Administration):
     def DeleteCategory(
         self,
         id: int,
-        reseller_id: list[int] = None,
+        reseller_id: int = None,
     ):
         """
         :param id: unique identifier of the target category.
         :param reseller_id: unique identifier of the target reseller platform.
         """
-        return self._get(
-            "DeleteCategory",
-            params={"id": id, "resellerId": reseller_id},
-            delimiter=",",
-        )
+        return self._get("DeleteCategory", params={"id": id, "resellerId": reseller_id})
 
     def DeleteProduct(
         self,
         id: int,
-        reseller_id: list[int] = None,
+        reseller_id: int = None,
     ):
         """
         :param id: unique identifier of the target product.
         :param reseller_id: unique identifier of the target reseller platform.
         """
-        return self._get(
-            "DeleteProduct",
-            params={"id": id, "resellerId": reseller_id},
-            delimiter=",",
-        )
+        return self._get("DeleteProduct", params={"id": id, "resellerId": reseller_id})
 
     def DeleteServicePlan(
         self,
         id: int,
-        reseller_id: list[int] = None,
+        reseller_id: int = None,
     ):
         """
         :param id: unique identifier of the target service plan.
         :param reseller_id: unique identifier of the target reseller platform.
         """
         return self._get(
-            "DeleteServicePlan",
-            params={"id": id, "resellerId": reseller_id},
-            delimiter=",",
+            "DeleteServicePlan", params={"id": id, "resellerId": reseller_id}
         )
 
-    def EditCategory(self, category: dict, reseller_id: list[int] = None):
+    def EditCategory(self, category: dict, reseller_id: int = None):
         """
         :param category: JSON representation of an object (subscription Category) that should be created.
         :param reseller_id: unique identifier of the target reseller platform.
@@ -3114,10 +3022,9 @@ class _Subscription(Administration):
                 "category": category,
                 "resellerId": reseller_id,
             },
-            delimiter=",",
         )
 
-    def EditProduct(self, category: dict, reseller_id: list[int] = None):
+    def EditProduct(self, category: dict, reseller_id: int = None):
         """
         :param category: JSON representation of an object (subscription Product) that should be created.
         :param reseller_id: unique identifier of the target reseller platform.
@@ -3128,14 +3035,13 @@ class _Subscription(Administration):
                 "category": category,
                 "resellerId": reseller_id,
             },
-            delimiter=",",
         )
 
     def EditServicePlan(
         self,
         service_plan: dict,
-        reseller_id: list[int] = None,
-        expend_fields: list[str] = None,
+        reseller_id: int = None,
+        expend_fields: str = None,
     ):
         """
         :param service_plan: JSON representation of an object (subscription Service Plan) that should be created.
@@ -3149,13 +3055,12 @@ class _Subscription(Administration):
                 "resellerId": reseller_id,
                 "expendFields": expend_fields,
             },
-            delimiter=",",
         )
 
     def GetCategories(
         self,
-        reseller_id: list[int] = None,
-        expend_fields: list[str] = None,
+        reseller_id: int = None,
+        expend_fields: str = None,
     ):
         """
         :param reseller_id: unique identifier of the target reseller platform.
@@ -3167,20 +3072,19 @@ class _Subscription(Administration):
                 "resellerId": reseller_id,
                 "expendFields": expend_fields,
             },
-            delimiter=",",
         )
 
     def GetProducts(
         self,
-        id: list[int] = None,
+        id: int = None,
         status: list[str] = None,
-        reseller_id: list[int] = None,
+        reseller_id: int = None,
         subscription_status: list[str] = None,
-        expend_fields: list[str] = None,
-        start_row: list[int] = None,
-        result_count: list[int] = None,
-        order_field: list[str] = None,
-        order_direction: list[str] = None,
+        expend_fields: str = None,
+        start_row: int = None,
+        result_count: int = None,
+        order_field: str = None,
+        order_direction: str = None,
     ):
         """
         :param id: unique identifier of the product (for filtering).
@@ -3211,12 +3115,12 @@ class _Subscription(Administration):
 
     def GetServicePlans(
         self,
-        id: list[int] = None,
-        has_products: list[bool] = None,
+        id: int = None,
+        has_products: bool = None,
         subscription_status: list[str] = None,
-        product_id: list[int] = None,
-        expend_fields: list[str] = None,
-        reseller_id: list[int] = None,
+        product_id: int = None,
+        expend_fields: str = None,
+        reseller_id: int = None,
     ):
         """
         :param id: unique identifier of the service plan (for filtering).
@@ -3241,17 +3145,17 @@ class _Subscription(Administration):
 
     def GetSubscriptions(
         self,
-        id: list[int] = None,
-        uid: list[int] = None,
+        id: int = None,
+        uid: int = None,
         status: list[str] = None,
-        reseller_id: list[int] = None,
-        product_id: list[int] = None,
-        service_plan_id: list[int] = None,
-        expend_fields: list[str] = None,
-        start_row: list[int] = None,
-        result_count: list[int] = None,
-        order_field: list[str] = None,
-        order_direction: list[str] = None,
+        reseller_id: int = None,
+        product_id: int = None,
+        service_plan_id: int = None,
+        expend_fields: str = None,
+        start_row: int = None,
+        result_count: int = None,
+        order_field: str = None,
+        order_direction: str = None,
     ):
         """
         :param id: unique identifier of the subscription (for filtering).
@@ -3288,7 +3192,7 @@ class _Subscription(Administration):
         self,
         id: int,
         published: bool,
-        reseller_id: list[int] = None,
+        reseller_id: int = None,
     ):
         """
         :param id: unique identifier of the target category.
@@ -3302,14 +3206,13 @@ class _Subscription(Administration):
                 "published": published,
                 "resellerId": reseller_id,
             },
-            delimiter=",",
         )
 
     def SetProductStatus(
         self,
         id: int,
         status: str,
-        reseller_id: list[int] = None,
+        reseller_id: int = None,
     ):
         """
         :param id: unique identifier of the target product.
@@ -3323,14 +3226,13 @@ class _Subscription(Administration):
                 "status": status,
                 "resellerId": reseller_id,
             },
-            delimiter=",",
         )
 
     def SetServicePlanStatus(
         self,
         id: int,
         status: str,
-        reseller_id: list[int] = None,
+        reseller_id: int = None,
     ):
         """
         :param id: unique identifier of the target service plan.
@@ -3344,7 +3246,6 @@ class _Subscription(Administration):
                 "status": status,
                 "resellerId": reseller_id,
             },
-            delimiter=",",
         )
 
     def TerminateSubscription(
@@ -3382,12 +3283,11 @@ class _VirtualNetwork(Administration):
         return self._get(
             "AddVirtualNetwork",
             params={"virtualNetwork": virtual_network},
-            delimiter=",",
         )
 
     def ApplyVirtualNetworks(
         self,
-        host_id: list[int] = None,
+        host_id: int = None,
     ):
         """
         :param host_id: unique identifier of the target host (all hosts if not defined).
@@ -3397,7 +3297,6 @@ class _VirtualNetwork(Administration):
             params={
                 "hostId": host_id,
             },
-            delimiter=",",
         )
 
     def DeleteVirtualNetworks(
@@ -3416,15 +3315,14 @@ class _VirtualNetwork(Administration):
 
     def GetVirtualNetworks(
         self,
-        ids: list[int] = None,
+        ids: int = None,
     ):
         """
-        :param ids:
+        :param ids: a list of the target virtual networks' unique identifiers.
         """
         return self._get(
             "GetVirtualNetworks",
             params={
                 "ids": ids,
             },
-            delimiter=",",
         )

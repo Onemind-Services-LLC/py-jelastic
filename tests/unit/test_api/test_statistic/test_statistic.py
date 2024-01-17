@@ -32,7 +32,7 @@ def test_get_agg_stats(client):
         CURRENT_DATETIME,
         "env_id",
         "checksum",
-        [CURRENT_DATETIME, CURRENT_DATETIME],
+        CURRENT_DATETIME,
     )
     client._get.assert_called_with(
         "GetAggStats",
@@ -40,9 +40,9 @@ def test_get_agg_stats(client):
             "starttime": CURRENT_DATETIME,
             "envid": "env_id",
             "checksum": "checksum",
-            "endtime": [CURRENT_DATETIME, CURRENT_DATETIME],
+            "endtime": CURRENT_DATETIME,
         },
-        delimiter=",",
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
@@ -60,6 +60,7 @@ def test_get_all_agg_sum_stat_by_uid(client):
             "checksum": "checksum",
             "endTime": CURRENT_DATETIME,
         },
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
@@ -70,7 +71,7 @@ def test_get_all_sum_stat_by_uid(client):
         1,
         1,
         "checksum",
-        [CURRENT_DATETIME, CURRENT_DATETIME],
+        CURRENT_DATETIME,
     )
     client._get.assert_called_with(
         "GetAllSumStatByUid",
@@ -78,9 +79,9 @@ def test_get_all_sum_stat_by_uid(client):
             "uid": 1,
             "duration": 1,
             "checksum": "checksum",
-            "endtime": [CURRENT_DATETIME, CURRENT_DATETIME],
+            "endtime": CURRENT_DATETIME,
         },
-        delimiter=",",
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
@@ -99,11 +100,9 @@ def test_get_current_statistics_for_all_containers(client):
 
 def test_get_last_stats(client):
     client._get.return_value = success_response
-    response = client.Statistic.GetLastStats(["node_group1", "node_group2"], [1, 1])
+    response = client.Statistic.GetLastStats("nodeGroup", 1)
     client._get.assert_called_with(
-        "GetLastStats",
-        params={"nodeGroup": ["node_group1", "node_group2"], "nodeId": [1, 1]},
-        delimiter=",",
+        "GetLastStats", params={"nodeGroup": "nodeGroup", "nodeId": 1}
     )
     assert response == success_response
 
@@ -111,13 +110,7 @@ def test_get_last_stats(client):
 def test_get_stats(client):
     client._get.return_value = success_response
     response = client.Statistic.GetStats(
-        1,
-        1,
-        "checksum",
-        [CURRENT_DATETIME, CURRENT_DATETIME],
-        [1, 1],
-        ["node_type1", "node_type2"],
-        ["node_group1", "node_group2"],
+        1, 1, "checksum", CURRENT_DATETIME, 1, "nodetype", "nodeGroup"
     )
     client._get.assert_called_with(
         "GetStats",
@@ -125,12 +118,12 @@ def test_get_stats(client):
             "duration": 1,
             "interval": 1,
             "checksum": "checksum",
-            "end_time": [CURRENT_DATETIME, CURRENT_DATETIME],
-            "nodeid": [1, 1],
-            "nodetype": ["node_type1", "node_type2"],
-            "nodeGroup": ["node_group1", "node_group2"],
+            "end_time": CURRENT_DATETIME,
+            "nodeid": 1,
+            "nodetype": "nodetype",
+            "nodeGroup": "nodeGroup",
         },
-        delimiter=",",
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
@@ -149,19 +142,11 @@ def test_get_status(client):
 
 def test_get_all_sum_stat(client):
     client._get.return_value = success_response
-    response = client.Statistic.GetSumStat(
-        1,
-        "checksum",
-        [CURRENT_DATETIME, CURRENT_DATETIME],
-    )
+    response = client.Statistic.GetSumStat(1, "checksum", CURRENT_DATETIME)
     client._get.assert_called_with(
         "GetSumStat",
-        params={
-            "duration": 1,
-            "checksum": "checksum",
-            "endtime": [CURRENT_DATETIME, CURRENT_DATETIME],
-        },
-        delimiter=",",
+        params={"duration": 1, "checksum": "checksum", "endtime": CURRENT_DATETIME},
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
@@ -169,10 +154,7 @@ def test_get_all_sum_stat(client):
 def test_get_sum_stats_by_period(client):
     client._get.return_value = success_response
     response = client.Statistic.GetSumStatsByPeriod(
-        CURRENT_DATETIME,
-        "env_id",
-        "checksum",
-        [CURRENT_DATETIME, CURRENT_DATETIME],
+        CURRENT_DATETIME, "env_id", "checksum", CURRENT_DATETIME
     )
     client._get.assert_called_with(
         "GetSumStatsByPeriod",
@@ -180,18 +162,18 @@ def test_get_sum_stats_by_period(client):
             "starttime": CURRENT_DATETIME,
             "envid": "env_id",
             "checksum": "checksum",
-            "endtime": [CURRENT_DATETIME, CURRENT_DATETIME],
+            "endtime": CURRENT_DATETIME,
         },
-        delimiter=",",
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
 
 def test_search_nodes(client):
     client._get.return_value = success_response
-    response = client.Statistic.SearchNodes("checksum", ["search1", "search2"])
+    response = client.Statistic.SearchNodes("checksum", "search")
     client._get.assert_called_with(
         "SearchNodes",
-        params={"checksum": "checksum", "search": ["search1", "search2"]},
+        params={"checksum": "checksum", "search": "search"},
     )
     assert response == success_response

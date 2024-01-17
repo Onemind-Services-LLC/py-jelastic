@@ -3,17 +3,9 @@ from . import *
 
 def test_activate(client):
     client._get.return_value = success_response
-    response = client.License.Activate(
-        ["serial1", "serial2", "serial3"],
-        [True, False, True],
-    )
+    response = client.License.Activate("serial", True)
     client._get.assert_called_once_with(
-        "Activate",
-        params={
-            "serial": ["serial1", "serial2", "serial3"],
-            "generateSMTPCreds": [True, False, True],
-        },
-        delimiter=",",
+        "Activate", params={"serial": "serial", "generateSMTPCreds": True}
     )
     assert response == success_response
 
@@ -30,12 +22,10 @@ def test_generate_smtp_settings(client):
 
 def test_get_vz_license(client):
     client._get.return_value = success_response
-    response = client.License.GetVZLicense(["type1", "type2", "type3"])
+    response = client.License.GetVZLicense("vzType")
     client._get.assert_called_once_with(
         "GetVZLicense",
-        params={
-            "vzType": ["type1", "type2", "type3"],
-        },
+        params={"vzType": "vzType"},
     )
     assert response == success_response
 

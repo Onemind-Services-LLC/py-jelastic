@@ -13,7 +13,7 @@ def test_add_pricing(client):
             "amount6": 20.10,
         },
         "tariff_id_1",
-        ["name1", "name2", "name3"],
+        "name",
     )
     client._get.assert_called_with(
         "AddPricing",
@@ -27,9 +27,8 @@ def test_add_pricing(client):
                 "amount6": 20.10,
             },
             "tariffIds": "tariff_id_1",
-            "tariffGridNames": ["name1", "name2", "name3"],
+            "tariffGridNames": "name",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -63,7 +62,6 @@ def test_add_tariff(client):
                 "tariff5": "val5",
             }
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -93,16 +91,15 @@ def test_attach_tariff_grid(client):
 def test_check_host_groups_allowed(client):
     client._get.return_value = success_response
     response = client.Pricing.CheckHostGroupsAllowed(
-        [1, 2, 3],
-        ["group1", "group2", "group3"],
+        1,
+        "group",
     )
     client._get.assert_called_with(
         "CheckHostGroupsAllowed",
         params={
-            "ownerUid": [1, 2, 3],
-            "hardwareNodeGroups": ["group1", "group2", "group3"],
+            "ownerUid": 1,
+            "hardwareNodeGroups": "group",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -161,7 +158,6 @@ def test_edit_pricing(client):
                 "price5": 10.1,
             }
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -195,84 +191,50 @@ def test_edit_tariff(client):
                 "tariff5": "val5",
             }
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_get_currencies(client):
     client._get.return_value = success_response
-    response = client.Pricing.GetCurrencies(["USD", "INR"])
-    client._get.assert_called_with(
-        "GetCurrencies",
-        params={"currency": ["USD", "INR"]},
-        delimiter=",",
-    )
+    response = client.Pricing.GetCurrencies("USD")
+    client._get.assert_called_with("GetCurrencies", params={"currency": "USD"})
     assert response == success_response
 
 
 def test_get_platform_currency(client):
     client._get.return_value = success_response
-    response = client.Pricing.GetPlatformCurrency([1, 2, 3])
-    client._get.assert_called_with(
-        "GetPlatformCurrency",
-        params={"resellerId": [1, 2, 3]},
-        delimiter=",",
-    )
+    response = client.Pricing.GetPlatformCurrency(1)
+    client._get.assert_called_with("GetPlatformCurrency", params={"resellerId": 1})
     assert response == success_response
 
 
 def test_get_pricing(client):
     client._get.return_value = success_response
-    response = client.Pricing.GetPricing([1, 2, 3])
-    client._get.assert_called_with(
-        "GetPricing",
-        params={"ownerUid": [1, 2, 3]},
-        delimiter=",",
-    )
+    response = client.Pricing.GetPricing(1)
+    client._get.assert_called_with("GetPricing", params={"ownerUid": 1})
     assert response == success_response
 
 
 def test_get_pricing_inner(client):
     client._get.return_value = success_response
-    response = client.Pricing.GetPricingInner([1, 2, 3])
-    client._get.assert_called_with(
-        "GetPricingInner",
-        params={"resellerId": [1, 2, 3]},
-        delimiter=",",
-    )
+    response = client.Pricing.GetPricingInner(1)
+    client._get.assert_called_with("GetPricingInner", params={"resellerId": 1})
     assert response == success_response
 
 
 def test_get_resources(client):
     client._get.return_value = success_response
-    response = client.Pricing.GetResources(
-        [1, 2, 3],
-        ["name1", "name2", "name3"],
-    )
-    client._get.assert_called_with(
-        "GetResources",
-        params={"id": [1, 2, 3], "name": ["name1", "name2", "name3"]},
-        delimiter=",",
-    )
+    response = client.Pricing.GetResources(1, "name")
+    client._get.assert_called_with("GetResources", params={"id": 1, "name": "name"})
     assert response == success_response
 
 
 def test_get_tariffs_inner(client):
     client._get.return_value = success_response
-    response = client.Pricing.GetTariffsInner(
-        ["pid1", "pid2", "pid3", "pid4"],
-        ["type1", "type2", "type3", "type4"],
-        [1, 2, 3, 4],
-    )
+    response = client.Pricing.GetTariffsInner("pid", "type", 1)
     client._get.assert_called_with(
-        "GetTariffsInner",
-        params={
-            "priceId": ["pid1", "pid2", "pid3", "pid4"],
-            "type": ["type1", "type2", "type3", "type4"],
-            "resellerId": [1, 2, 3, 4],
-        },
-        delimiter=",",
+        "GetTariffsInner", params={"priceId": "pid", "type": "type", "resellerId": 1}
     )
     assert response == success_response
 
@@ -286,33 +248,27 @@ def test_get_unique_resource_name(client):
 
 def test_set_tariff(client):
     client._get.return_value = success_response
-    response = client.Pricing.SetTariffs(
-        "pid",
-        "tariff_id",
-        ["name1", "name2", "name3"],
-    )
+    response = client.Pricing.SetTariffs("pid", "tariff_id", "name")
     client._get.assert_called_with(
         "SetTariffs",
         params={
             "pricingId": "pid",
             "tariffIds": "tariff_id",
-            "tariffGridNames": ["name1", "name2", "name3"],
+            "tariffGridNames": "name",
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_validate_environment(client):
     client._get.return_value = success_response
-    response = client.Pricing.ValidateEnvironment("node", [1, 2, 3])
+    response = client.Pricing.ValidateEnvironment("node", 1)
     client._get.assert_called_with(
         "ValidateEnvironment",
         params={
             "hardwareNodeGroup": "node",
-            "ownerUid": [1, 2, 3],
+            "ownerUid": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
 

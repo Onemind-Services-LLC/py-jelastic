@@ -4,60 +4,45 @@ from . import *
 def test_execute_app_action(client):
     client._get.return_value = success_response
     response = client.Jps.ExecuteAppAction(
-        "app_unique_name",
-        ["action1", "action2"],
-        ["settings_id1", "settings_id2"],
-        ["params1", "params2"],
-        ["lang1", "lang2"],
+        "app_unique_name", "action", "other", "params", "lang"
     )
     client._get.assert_called_with(
         "ExecuteAppAction",
         params={
             "appUniqueName": "app_unique_name",
-            "action": ["action1", "action2"],
-            "settingsId": ["settings_id1", "settings_id2"],
-            "params": ["params1", "params2"],
-            "lang": ["lang1", "lang2"],
+            "action": "action",
+            "settingsId": "other",
+            "params": "params",
+            "lang": "lang",
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_get_app_info(client):
     client._get.return_value = success_response
-    response = client.Jps.GetAppInfo(
-        ["jps1", "jps2"],
-        ["lang1", "lang2"],
-        ["owner_uid1", "owner_uid2"],
-    )
+    response = client.Jps.GetAppInfo("jps", "lang", 11)
     client._get.assert_called_with(
         "GetAppInfo",
         params={
-            "jps": ["jps1", "jps2"],
-            "lang": ["lang1", "lang2"],
-            "ownerUid": ["owner_uid1", "owner_uid2"],
+            "jps": "jps",
+            "lang": "lang",
+            "ownerUid": 11,
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_get_app_settings(client):
     client._get.return_value = success_response
-    response = client.Jps.GetAppSettings(
-        "app_unique_name",
-        ["settings_id1", "settings_id2"],
-        ["lang1", "lang2"],
-    )
+    response = client.Jps.GetAppSettings("app_unique_name", "other", "lang")
     client._get.assert_called_with(
         "GetAppSettings",
         params={
             "appUniqueName": "app_unique_name",
-            "settingsId": ["settings_id1", "settings_id2"],
-            "lang": ["lang1", "lang2"],
+            "settingsId": "other",
+            "lang": "lang",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -80,32 +65,44 @@ def test_install(client):
     client._get.return_value = success_response
     response = client.Jps.Install(
         "jps",
-        ["env_name1", "env_name2"],
-        ["settings1", "settings2"],
-        ["node_group1", "node_group2"],
-        ["display_name1", "display_name2"],
-        ["region1", "region2"],
-        ["env_groups1", "env_groups2"],
-        [1, 1],
-        ["logs_path1", "logs_path2"],
-        [True, True],
-        [True, True],
+        "envName",
+        "settings",
+        "nodeGroup",
+        "displayName",
+        "region",
+        "envGroups",
+        1,
+        "logsPath",
+        True,
+        True,
     )
     client._get.assert_called_with(
         "Install",
         params={
             "jps": "jps",
-            "envName": ["env_name1", "env_name2"],
-            "settingsId": ["settings1", "settings2"],
-            "nodeGroup": ["node_group1", "node_group2"],
-            "displayName": ["display_name1", "display_name2"],
-            "region": ["region1", "region2"],
-            "envGroups": ["env_groups1", "env_groups2"],
-            "ownerUid": [1, 1],
-            "logsPath": ["logs_path1", "logs_path2"],
-            "writeOutputTasks": [True, True],
-            "skipNodeEmails": [True, True],
+            "envName": "envName",
+            "settings": "settings",
+            "nodeGroup": "nodeGroup",
+            "displayName": "displayName",
+            "region": "region",
+            "envGroups": "envGroups",
+            "ownerUid": 1,
+            "logsPath": "logsPath",
+            "writeOutputTasks": True,
+            "skipNodeEmails": True,
         },
-        delimiter=",",
+    )
+    assert response == success_response
+
+
+def test_uninstall(client):
+    client._get.return_value = success_response
+    response = client.Jps.Uninstall("app_unique_name", False)
+    client._get.assert_called_with(
+        "Uninstall",
+        params={
+            "appUniqueName": "app_unique_name",
+            "force": False,
+        },
     )
     assert response == success_response

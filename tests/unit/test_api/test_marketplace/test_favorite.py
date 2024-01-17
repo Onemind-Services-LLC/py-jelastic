@@ -30,3 +30,22 @@ def test_delete(client):
     )
 
     assert response == success_response
+
+
+def test_get_list(client):
+    client._get.return_value = success_response
+    response = client.Favorite.GetList(
+        {"search1": "value1", "search2": "value2", "search3": "value3"},
+        "lang",
+        "checksum",
+    )
+    client._get.assert_called_with(
+        "GetList",
+        params={
+            "search": {"search1": "value1", "search2": "value2", "search3": "value3"},
+            "lang": "lang",
+            "checksum": "checksum",
+        },
+    )
+
+    assert response == success_response

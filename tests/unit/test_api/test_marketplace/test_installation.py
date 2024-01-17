@@ -56,20 +56,16 @@ def test_get_scripting_appid(client):
 
 def test_get_settings(client):
     client._get.return_value = success_response
-    response = client.Installation.GetSettings(
-        "app_unique_name",
-        ["settings_id1", "settings_id2"],
-        ["lang1", "lang2"],
-    )
+    response = client.Installation.GetSettings("app_unique_name", "other", "lang")
     client._get.assert_called_with(
         "GetSettings",
         params={
             "appUniqueName": "app_unique_name",
-            "settingsId": ["settings_id1", "settings_id2"],
-            "lang": ["lang1", "lang2"],
+            "settingsId": "other",
+            "lang": "lang",
         },
-        delimiter=",",
     )
+    assert response == success_response
 
 
 def test_install_addon(client):
@@ -78,7 +74,7 @@ def test_install_addon(client):
         "env_name",
         "2",
         {"key": "value"},
-        ["nodeGroup1", "nodeGroup2", "nodeGroup3"],
+        "nodeGroup",
         True,
     )
     client._get.assert_called_with(
@@ -87,10 +83,9 @@ def test_install_addon(client):
             "id": "2",
             "envName": "env_name",
             "settings": {"key": "value"},
-            "nodeGroup": ["nodeGroup1", "nodeGroup2", "nodeGroup3"],
+            "nodeGroup": "nodeGroup",
             "skipEmail": True,
         },
-        delimiter=",",
     )
     assert response == success_response
 

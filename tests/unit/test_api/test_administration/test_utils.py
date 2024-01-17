@@ -8,8 +8,8 @@ def test_add_system_external_dns_records(client):
         "name1",
         1,
         "data type 1",
-        [True, False, True],
-        [True, False, True],
+        True,
+        True,
     )
     client._get.assert_called_with(
         "AddSystemExternalDNSRecord",
@@ -18,10 +18,9 @@ def test_add_system_external_dns_records(client):
             "name": "name1",
             "ttl": 1,
             "recordDataType": "data type 1",
-            "sslEnabled": [True, False, True],
-            "enabled": [True, False, True],
+            "sslEnabled": True,
+            "enabled": True,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -58,15 +57,9 @@ def test_clear_envs(client):
 
 def test_delete_broken_envs(client):
     client._get.return_value = success_response
-    response = client.Utils.DeleteBrokenEnvs(
-        ["app1", "app2", "app3"],
-    )
+    response = client.Utils.DeleteBrokenEnvs("target_app_ids")
     client._get.assert_called_with(
-        "DeleteBrokenEnvs",
-        params={
-            "targetAppIds": ["app1", "app2", "app3"],
-        },
-        delimiter=",",
+        "DeleteBrokenEnvs", params={"targetAppIds": "target_app_ids"}
     )
     assert response == success_response
 
@@ -74,26 +67,19 @@ def test_delete_broken_envs(client):
 def test_edit_system_external_dns_record(client):
     client._get.return_value = success_response
     response = client.Utils.EditSystemExternalDNSRecord(
-        1,
-        ["record1", "record2", "record2"],
-        ["name1", "name2", "name3"],
-        [1, 2, 3],
-        ["datatype1", "datatype2", "datatype3"],
-        [True, False, True],
-        [True, False, True],
+        1, "record", "name", 1, "datatype", True, True
     )
     client._get.assert_called_with(
         "EditSystemExternalDNSRecord",
         params={
             "id": 1,
-            "recordData": ["record1", "record2", "record2"],
-            "name": ["name1", "name2", "name3"],
-            "ttl": [1, 2, 3],
-            "recordDataType": ["datatype1", "datatype2", "datatype3"],
-            "sslEnabled": [True, False, True],
-            "enabled": [True, False, True],
+            "recordData": "record",
+            "name": "name",
+            "ttl": 1,
+            "recordDataType": "datatype",
+            "sslEnabled": True,
+            "enabled": True,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -114,17 +100,9 @@ def test_export_env(client):
 
 def test_utils_fix_ext_dns(client):
     client._get.return_value = success_response
-    response = client.Utils.FixExtDns(
-        [1, 2, 3],
-        ["app id 1", "app id 2", "app id"],
-    )
+    response = client.Utils.FixExtDns(1, "target_app_id")
     client._get.assert_called_with(
-        "FixExtDns",
-        params={
-            "uid": [1, 2, 3],
-            "targetAppId": ["app id 1", "app id 2", "app id"],
-        },
-        delimiter=",",
+        "FixExtDns", params={"uid": 1, "targetAppId": "target_app_id"}
     )
     assert response == success_response
 
@@ -167,15 +145,16 @@ def test_get_avgs2(client):
 def test_get_balance_stat(client):
     client._get.return_value = success_response
     response = client.Utils.GetBalancerStat(
-        "2022-11-11",
-        "2024-11-11",
+        CURRENT_DATETIME,
+        CURRENT_DATETIME,
     )
     client._get.assert_called_with(
         "GetBalancerStat",
         params={
-            "starttime": "2022-11-11",
-            "endtime": "2024-11-11",
+            "starttime": CURRENT_DATETIME,
+            "endtime": CURRENT_DATETIME,
         },
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
@@ -189,60 +168,44 @@ def test_get_cloud_lets_usage(client):
 
 def test_get_db_creation_stat(client):
     client._get.return_value = success_response
-    response = client.Utils.GetDBCreationStat(
-        "2022-11-11",
-        "2024-11-11",
-    )
+    response = client.Utils.GetDBCreationStat(CURRENT_DATETIME, CURRENT_DATETIME)
     client._get.assert_called_with(
         "GetDBCreationStat",
-        params={
-            "startTime": "2022-11-11",
-            "endTime": "2024-11-11",
-        },
+        params={"startTime": CURRENT_DATETIME, "endTime": CURRENT_DATETIME},
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
 
 def test_get_errors(client):
     client._get.return_value = success_response
-    response = client.Utils.GetErrors(
-        "2022-11-11",
-        "2024-11-11",
-        1,
-        1,
-        [1, 2, 3, 4],
-    )
+    response = client.Utils.GetErrors(CURRENT_DATETIME, CURRENT_DATETIME, 1, 1, 1)
     client._get.assert_called_with(
         "GerErrors",
         params={
-            "starttime": "2022-11-11",
-            "endtime": "2024-11-11",
+            "starttime": CURRENT_DATETIME,
+            "endtime": CURRENT_DATETIME,
             "startrow": 1,
             "resultCount": 1,
-            "filter": [1, 2, 3, 4],
+            "filter": 1,
         },
-        delimiter=",",
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
 
 def test_get_errors_by_date(client):
     client._get.return_value = success_response
-    response = client.Utils.GetErrorsByDate(
-        "2022-11-11",
-        "2024-11-11",
-        1,
-        [1, 2, 3, 4],
-    )
+    response = client.Utils.GetErrorsByDate(CURRENT_DATETIME, CURRENT_DATETIME, 1, 1)
     client._get.assert_called_with(
         "GetErrorsByDate",
         params={
-            "starttime": "2022-11-11",
-            "endtime": "2024-11-11",
+            "starttime": CURRENT_DATETIME,
+            "endtime": CURRENT_DATETIME,
             "interval": 1,
-            "filter": [1, 2, 3, 4],
+            "filter": 1,
         },
-        delimiter=",",
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
@@ -263,35 +226,18 @@ def test_get_zone(client):
 
 def test_import_env(client):
     client._get.return_value = success_response
-    response = client.Utils.ImportEnv(
-        "env1",
-        ["name1", "name2", "name3"],
-        [True, False, True],
-    )
+    response = client.Utils.ImportEnv("env1", "env_name", True)
     client._get.assert_called_with(
         "ImportEnv",
-        params={
-            "envInfo": "env1",
-            "envName": ["name1", "name2", "name3"],
-            "enableFirewall": [True, False, True],
-        },
-        delimiter=",",
+        params={"envInfo": "env1", "envName": "env_name", "enableFirewall": True},
     )
     assert response == success_response
 
 
 def test_inspect_envs(client):
     client._get.return_value = success_response
-    response = client.Utils.InspectEnvs(
-        [True, False, True],
-    )
-    client._get.assert_called_with(
-        "InspectEnvs",
-        params={
-            "remove": [True, False, True],
-        },
-        delimiter=",",
-    )
+    response = client.Utils.InspectEnvs(True)
+    client._get.assert_called_with("InspectEnvs", params={"remove": True})
     assert response == success_response
 
 

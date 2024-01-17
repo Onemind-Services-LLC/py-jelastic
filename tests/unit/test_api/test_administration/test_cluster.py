@@ -3,17 +3,10 @@ from . import *
 
 def test_add_action_to_isolation_queue(client):
     client._get.return_value = success_response
-    response = client.Cluster.AddActionToIsolationQueue(
-        [1, 2],
-        [1, 2],
-    )
+    response = client.Cluster.AddActionToIsolationQueue(1, 2)
     client._get.assert_called_with(
         "AddActionToIsolationQueue",
-        params={
-            "count": [1, 2],
-            "delay": [1, 2],
-        },
-        delimiter=",",
+        params={"count": 1, "delay": 2},
     )
     assert response == success_response
 
@@ -30,14 +23,13 @@ def test_add_cartridge(client):
 
 def test_add_certified_templates(client):
     client._get.return_value = success_response
-    response = client.Cluster.AddCertifiedTemplates("manifest_url", [True, False])
+    response = client.Cluster.AddCertifiedTemplates("manifest_url", True)
     client._get.assert_called_with(
         "AddCertifiedTemplates",
         params={
             "repositories": "manifest_url",
-            "publish": [True, False],
+            "publish": True,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -83,16 +75,15 @@ def test_add_hard_ware_node_message(client):
 def test_add_hd_node(client):
     client._get.return_value = success_response
     response = client.Cluster.AddHdNode(
-        {"hd_node1": "hd_node1", "hd_node2": "hd_node2"}, [True, False], [True, False]
+        {"hd_node1": "hd_node1", "hd_node2": "hd_node2"}, True, False
     )
     client._get.assert_called_with(
         "AddHdNode",
         params={
             "hdnode": {"hd_node1": "hd_node1", "hd_node2": "hd_node2"},
-            "setAsDockerHost": [True, False],
-            "setAsDockerHost": [True, False],
+            "setAsDockerHost": True,
+            "skipConfiguration": False,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -103,7 +94,6 @@ def test_add_hd_node_group(client):
     client._get.assert_called_with(
         "AddHdNodeGroup",
         params={"data": {"data1": "data1", "data2": "data2"}},
-        delimiter=",",
     )
     assert response == success_response
 
@@ -124,11 +114,10 @@ def test_add_ips(client):
 
 def test_add_ipv6_network(client):
     client._get.return_value = success_response
-    response = client.Cluster.AddIpv6Network("region", ["network1", "network2"])
+    response = client.Cluster.AddIpv6Network("region", "network")
     client._get.assert_called_with(
         "AddIpv6Network",
-        params={"region": "region", "network": ["network1", "network2"]},
-        delimiter=",",
+        params={"region": "region", "network": "network"},
     )
     assert response == success_response
 
@@ -148,27 +137,23 @@ def test_add_nameserver(client):
 
 def test_add_region(client):
     client._get.return_value = success_response
-    response = client.Cluster.AddRegion(
-        {"data1": "data1", "data2": "data2"}, [True, False]
-    )
+    response = client.Cluster.AddRegion({"data1": "data1", "data2": "data2"}, True)
     client._get.assert_called_with(
         "AddRegion",
         params={
             "data": {"data1": "data1", "data2": "data2"},
-            "testAuthentication": [True, False],
+            "testAuthentication": True,
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_add_region_domain(client):
     client._get.return_value = success_response
-    response = client.Cluster.AddRegionDomain(1, "domain", [True, False])
+    response = client.Cluster.AddRegionDomain(1, "domain", True)
     client._get.assert_called_with(
         "AddRegionDomain",
-        params={"regionId": 1, "domain": "domain", "primary": [True, False]},
-        delimiter=",",
+        params={"regionId": 1, "domain": "domain", "primary": True},
     )
     assert response == success_response
 
@@ -180,12 +165,12 @@ def test_add_region_reseller(client):
         "domain",
         "type",
         True,
-        ["ssl_type1", "ssl_type2"],
-        [1, 2],
-        ["key1", "key2"],
-        ["intermediate1", "intermediate2"],
-        ["cert1", "cert2"],
-        ["source5021", "source5022"],
+        "sslType",
+        1,
+        "key",
+        "intermediate",
+        "cert",
+        "source502",
     )
     client._get.assert_called_with(
         "AddRegionReseller",
@@ -194,14 +179,13 @@ def test_add_region_reseller(client):
             "domain": "domain",
             "type": "type",
             "generateDns": True,
-            "sslType": ["ssl_type1", "ssl_type2"],
-            "regionId": [1, 2],
-            "key": ["key1", "key2"],
-            "intermediate": ["intermediate1", "intermediate2"],
-            "cert": ["cert1", "cert2"],
-            "source502": ["source5021", "source5022"],
+            "sslType": "sslType",
+            "regionId": 1,
+            "key": "key",
+            "intermediate": "intermediate",
+            "cert": "cert",
+            "source502": "source502",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -209,24 +193,18 @@ def test_add_region_reseller(client):
 def test_add_region_ssl(client):
     client._get.return_value = success_response
     response = client.Cluster.AddRegionSsl(
-        1,
-        "ssl_type",
-        [1, 2],
-        ["cert_key1", "cert_keyt2"],
-        ["intermediate1", "intermediate2"],
-        ["cert1", "cert2"],
+        1, "ssl_type", 1, "cert_key", "intermediate", "cert"
     )
     client._get.assert_called_with(
         "AddRegionSsl",
         params={
             "regionId": 1,
             "sslType": "ssl_type",
-            "domainId": [1, 2],
-            "cert_key": ["cert_key1", "cert_keyt2"],
-            "intermediate": ["intermediate1", "intermediate2"],
-            "cert": ["cert1", "cert2"],
+            "domainId": 1,
+            "cert_key": "cert_key",
+            "intermediate": "intermediate",
+            "cert": "cert",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -240,12 +218,12 @@ def test_add_template(client):
         "nodeType",
         "nodeMission",
         "displayName",
-        ["engine_type1", "engine_type2"],
-        ["images_data1", "images_data2"],
-        ["auto_update1", "auto_update2"],
-        [True, False],
-        [True, False],
-        ["skip_tags_from_auto_update1", "skip_tags_from_auto_update2"],
+        "engineType",
+        "imagesData",
+        "autoUpdate",
+        True,
+        False,
+        "skipTagsFromAutoUpdate",
     )
     client._get.assert_called_with(
         "AddTemplate",
@@ -256,17 +234,13 @@ def test_add_template(client):
             "nodeType": "nodeType",
             "nodeMission": "nodeMission",
             "displayName": "displayName",
-            "engineType": ["engine_type1", "engine_type2"],
-            "imagesData": ["images_data1", "images_data2"],
-            "autoUpdate": ["auto_update1", "auto_update2"],
-            "keepSelectedTags": [True, False],
-            "updateDefaultTag": [True, False],
-            "skipTagsFromAutoUpdate": [
-                "skip_tags_from_auto_update1",
-                "skip_tags_from_auto_update2",
-            ],
+            "engineType": "engineType",
+            "imagesData": "imagesData",
+            "autoUpdate": "autoUpdate",
+            "keepSelectedTags": True,
+            "updateDefaultTag": False,
+            "skipTagsFromAutoUpdate": "skipTagsFromAutoUpdate",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -277,24 +251,16 @@ def test_add_template_registry(client):
     client._get.assert_called_with(
         "AddTemplateRegistry",
         params={"data": "data"},
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_add_user_to_container(client):
     client._get.return_value = success_response
-    response = client.Cluster.AddUserToContainer(
-        ["node_id1", "node_id2"], ["container_id1", "container_id2"], [True, True]
-    )
+    response = client.Cluster.AddUserToContainer(1, 1, True)
     client._get.assert_called_with(
         "AddUserToContainer",
-        params={
-            "nodeId": ["node_id1", "node_id2"],
-            "containerId": ["container_id1", "container_id2"],
-            "regenerateKeys": [True, True],
-        },
-        delimiter=",",
+        params={"nodeId": 1, "containerId": 1, "regenerateKeys": True},
     )
     assert response == success_response
 
@@ -322,16 +288,11 @@ def test_apply_firewall_rules(client):
 def test_check_migration_env_possibility(client):
     client._get.return_value = success_response
     response = client.Cluster.CheckMigrationEnvPossibility(
-        ["target_appid1", "target_appid2"],
-        ["hardware_node_group1", "hardware_node_group2"],
+        "targetAppid", "hardwareNodeGroup"
     )
     client._get.assert_called_with(
         "CheckMigrationEnvPossibility",
-        params={
-            "targetAppid": ["target_appid1", "target_appid2"],
-            "hardwareNodeGroup": ["hardware_node_group1", "hardware_node_group2"],
-        },
-        delimiter=",",
+        params={"targetAppid": "targetAppid", "hardwareNodeGroup": "hardwareNodeGroup"},
     )
     assert response == success_response
 
@@ -348,11 +309,10 @@ def test_clean_template_manifest_cache(client):
 
 def test_clear_pool(client):
     client._get.return_value = success_response
-    response = client.Cluster.ClearPool([1, 2])
+    response = client.Cluster.ClearPool(1)
     client._get.assert_called_with(
         "ClearPool",
-        params={"hnid": [1, 2]},
-        delimiter=",",
+        params={"hnid": 1},
     )
     assert response == success_response
 
@@ -389,10 +349,11 @@ def test_delete_env(client):
 
 def test_delete_envs_by_checksum(client):
     client._get.return_value = success_response
-    response = client.Cluster.DeleteEnvsByChecksum(1, "target_appid")
+    response = client.Cluster.DeleteEnvsByChecksum("checksum", 1, "target_appid")
     client._get.assert_called_with(
         "DeleteEnvsByChecksum",
         params={
+            "checksum": "checksum",
             "uid": 1,
             "targetAppid": "target_appid",
         },
@@ -414,11 +375,10 @@ def test_delete_envs_by_uid_by_checksum(client):
 
 def test_delete_hd_node(client):
     client._get.return_value = success_response
-    response = client.Cluster.DeleteHDNode(1, [True, True])
+    response = client.Cluster.DeleteHDNode(1, True)
     client._get.assert_called_with(
         "DeleteHDNode",
-        params={"hdnodeid": 1, "force": [True, True]},
-        delimiter=",",
+        params={"hdnodeid": 1, "force": True},
     )
     assert response == success_response
 
@@ -426,15 +386,14 @@ def test_delete_hd_node(client):
 def test_edit_hd_node(client):
     client._get.return_value = success_response
     response = client.Cluster.EditHdNode(
-        {"hdnode1": "hdnode1", "hdnode2": "hdnode2"}, [True, True]
+        {"hdnode1": "hdnode1", "hdnode2": "hdnode2"}, True
     )
     client._get.assert_called_with(
         "EditHdNode",
         params={
             "hdnode": {"hdnode1": "hdnode1", "hdnode2": "hdnode2"},
-            "set_as_docker_host": [True, True],
+            "set_as_docker_host": True,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -445,23 +404,19 @@ def test_edit_hd_node_group(client):
     client._get.assert_called_with(
         "EditHdNodeGroup",
         params={"data": {"data1": "data1", "data2": "data2"}},
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_edit_region(client):
     client._get.return_value = success_response
-    response = client.Cluster.EditRegion(
-        {"data1": "data1", "data2": "data2"}, [True, True]
-    )
+    response = client.Cluster.EditRegion({"data1": "data1", "data2": "data2"}, True)
     client._get.assert_called_with(
         "EditRegion",
         params={
             "data": {"data1": "data1", "data2": "data2"},
-            "testAuthentication": [True, True],
+            "testAuthentication": True,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -470,32 +425,28 @@ def test_edit_template(client):
     client._get.return_value = success_response
     response = client.Cluster.EditTemplate(
         "node_type",
-        ["tags1", "tags2"],
-        ["display_name1", "display_name2"],
-        ["engine_type1", "engine_type2"],
-        ["images_data1", "images_data2"],
-        [True, True],
-        [True, True],
-        [False, False],
-        ["skip_tags_from_auto_update1", "skip_tags_from_auto_update2"],
+        "tags",
+        "displayName",
+        "engineType",
+        "imagesData",
+        True,
+        False,
+        False,
+        "skipTagsFromAutoUpdate",
     )
     client._get.assert_called_with(
         "EditTemplate",
         params={
             "nodeType": "node_type",
-            "tags": ["tags1", "tags2"],
-            "displayName": ["display_name1", "display_name2"],
-            "engineType": ["engine_type1", "engine_type2"],
-            "imagesData": ["images_data1", "images_data2"],
-            "autoUpdate": [True, True],
-            "keepSelectedTags": [True, True],
-            "updateDefaultTag": [False, False],
-            "skipTagsFromAutoUpdate": [
-                "skip_tags_from_auto_update1",
-                "skip_tags_from_auto_update2",
-            ],
+            "tags": "tags",
+            "displayName": "displayName",
+            "engineType": "engineType",
+            "imagesData": "imagesData",
+            "autoUpdate": True,
+            "keepSelectedTags": False,
+            "updateDefaultTag": False,
+            "skipTagsFromAutoUpdate": "skipTagsFromAutoUpdate",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -513,110 +464,78 @@ def test_edit_template_registry(client):
 def test_evacuate_containers(client):
     client._get.return_value = success_response
     response = client.Cluster.EvacuateContainers(
-        "source_hn_id",
-        ["possible_target_node_id1", "possible_target_node_id2"],
-        [True, True],
+        "source_hn_id", "possibleTargetNodeIds", True
     )
     client._get.assert_called_with(
         "EvacuateContainers",
         params={
             "sourceHnId": "source_hn_id",
-            "possibleTargetNodeIds": [
-                "possible_target_node_id1",
-                "possible_target_node_id2",
-            ],
-            "isOnline": [True, True],
+            "possibleTargetNodeIds": "possibleTargetNodeIds",
+            "isOnline": True,
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_exec_hn_cmd(client):
     client._get.return_value = success_response
-    response = client.Cluster.ExecHnCMD(
-        "cmd",
-        ["hn_id1", "hn_id2"],
-        [True, True],
-        [True, True],
-        ["vz_version1", "vz_version2"],
-        [True, True],
-    )
+    response = client.Cluster.ExecHnCMD("cmd", 1, True, True, "vzVersion", True)
     client._get.assert_called_with(
         "ExecHnCMD",
         params={
             "cmd": "cmd",
-            "hnId": ["hn_id1", "hn_id2"],
-            "infraOnly": [True, True],
-            "runOnBroken": [True, True],
-            "vzVersion": ["vz_version1", "vz_version2"],
-            "dockerHostOnly": [True, True],
+            "hnId": 1,
+            "infraOnly": True,
+            "runOnBroken": True,
+            "vzVersion": "vzVersion",
+            "dockerHostOnly": True,
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_exec_host_cmd(client):
     client._get.return_value = success_response
-    response = client.Cluster.ExecHostCmd(
-        "cmd",
-        [1, 2],
-        [True, True],
-        [True, True],
-        ["vz_version1", "vz_version2"],
-        [True, True],
-    )
+    response = client.Cluster.ExecHostCmd("cmd", 1, True, True, "vzVersion", True)
     client._get.assert_called_with(
         "ExecHostCmd",
         params={
             "cmd": "cmd",
-            "hostId": [1, 2],
-            "infraOnly": [True, True],
-            "runOnBroken": [True, True],
-            "vzVersion": ["vz_version1", "vz_version2"],
-            "dockerHostOnly": [True, True],
+            "hostId": 1,
+            "infraOnly": True,
+            "runOnBroken": True,
+            "vzVersion": "vzVersion",
+            "dockerHostOnly": True,
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_generate_pool(client):
     client._get.return_value = success_response
-    response = client.Cluster.GeneratePool(
-        ["node_type1", "node_type2"],
-        [1, 1],
-    )
+    response = client.Cluster.GeneratePool("nodeType", 1)
     client._get.assert_called_with(
         "GeneratePool",
-        params={
-            "nodeType": ["node_type1", "node_type2"],
-            "hnId": [1, 1],
-        },
-        delimiter=",",
+        params={"nodeType": "nodeType", "hnId": 1},
     )
     assert response == success_response
 
 
 def test_get_add_hd_node_cmd(client):
     client._get.return_value = success_response
-    response = client.Cluster.GetAddHdNodeCmd(["hard_node_group1", "hard_node_group2"])
+    response = client.Cluster.GetAddHdNodeCmd("hardNodeGroup")
     client._get.assert_called_with(
-        "GetAddHdNodeCmd",
-        params={"hardNodeGroup": ["hard_node_group1", "hard_node_group2"]},
-        delimiter=",",
+        "GetAddHdNodeCmd", params={"hardNodeGroup": "hardNodeGroup"}
     )
     assert response == success_response
 
 
 def test_get_add_host_cmd(client):
     client._get.return_value = success_response
-    response = client.Cluster.GetAddHostCmd(["hostGroup1", "hostGroup2"])
+    response = client.Cluster.GetAddHostCmd("host_group")
     client._get.assert_called_with(
         "GetAddHostCmd",
-        params={"hostGroup": ["hostGroup1", "hostGroup2"]},
-        delimiter=",",
+        params={"hostGroup": "host_group"},
     )
     assert response == success_response
 
@@ -643,29 +562,18 @@ def test_get_all_resellers(client):
 
 def test_get_all_sum_stat_by_uid(client):
     client._get.return_value = success_response
-    response = client.Cluster.GetAllSumStatByUid(
-        [1, 2], [CURRENT_DATETIME.date(), CURRENT_DATETIME.date()], [1, 1]
-    )
+    response = client.Cluster.GetAllSumStatByUid(1, CURRENT_DATETIME, 1)
     client._get.assert_called_with(
         "GetAllSumStatByUid",
-        params={
-            "duration": [1, 2],
-            "endtime": [CURRENT_DATETIME.date(), CURRENT_DATETIME.date()],
-            "uid": [1, 1],
-        },
-        delimiter=",",
+        params={"duration": 1, "endtime": CURRENT_DATETIME, "uid": 1},
     )
     assert response == success_response
 
 
 def test_get_appid_by_domain(client):
     client._get.return_value = success_response
-    response = client.Cluster.GetAppidByDomain(["domain1", "domain2"])
-    client._get.assert_called_with(
-        "GetAppidByDomain",
-        params={"domain": ["domain1", "domain2"]},
-        delimiter=",",
-    )
+    response = client.Cluster.GetAppidByDomain("domain")
+    client._get.assert_called_with("GetAppidByDomain", params={"domain": "domain"})
     assert response == success_response
 
 
@@ -681,19 +589,14 @@ def test_get_billable_items(client):
 
 def test_get_cluster_load_history(client):
     client._get.return_value = success_response
-    response = client.Cluster.GetClusterLoadHistory(
-        [CURRENT_DATETIME.date(), CURRENT_DATETIME.date()],
-        [
-            CURRENT_DATETIME.date(),
-            CURRENT_DATETIME.date(),
-        ],
-    )
+    response = client.Cluster.GetClusterLoadHistory(CURRENT_DATETIME, CURRENT_DATETIME)
     client._get.assert_called_with(
         "GetClusterLoadHistory",
         params={
-            "starttime": [CURRENT_DATETIME.date(), CURRENT_DATETIME.date()],
-            "endtime": [CURRENT_DATETIME.date(), CURRENT_DATETIME.date()],
+            "starttime": CURRENT_DATETIME,
+            "endtime": CURRENT_DATETIME,
         },
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
@@ -720,11 +623,9 @@ def test_get_cluster_load_percent(client):
 
 def test_get_cluster_status(client):
     client._get.return_value = success_response
-    response = client.Cluster.GetClusterStatus([True, True], [False, False])
+    response = client.Cluster.GetClusterStatus(True, True)
     client._get.assert_called_with(
-        "GetClusterStatus",
-        params={"checkSMTP": [True, True], "cached": [False, False]},
-        delimiter=",",
+        "GetClusterStatus", params={"checkSMTP": True, "cached": True}
     )
     assert response == success_response
 
@@ -761,11 +662,10 @@ def test_get_default_region(client):
 
 def test_get_default_tag_info(client):
     client._get.return_value = success_response
-    response = client.Cluster.GetDefaultTagInfo("node_type", ["engine1", "engine2"])
+    response = client.Cluster.GetDefaultTagInfo("node_type", "engine")
     client._get.assert_called_with(
         "GetDefaultTagInfo",
-        params={"nodeType": "node_type", "engine": ["engine1", "engine2"]},
-        delimiter=",",
+        params={"nodeType": "node_type", "engine": "engine"},
     )
     assert response == success_response
 
@@ -815,15 +715,16 @@ def test_get_env_info(client):
 def test_get_env_stat(client):
     client._get.return_value = success_response
     response = client.Cluster.GetEnvStat(
-        CURRENT_DATETIME.date(),
-        CURRENT_DATETIME.date(),
+        CURRENT_DATETIME,
+        CURRENT_DATETIME,
     )
     client._get.assert_called_with(
         "GetEnvStat",
         params={
-            "starttime": CURRENT_DATETIME.date(),
-            "endtime": CURRENT_DATETIME.date(),
+            "starttime": CURRENT_DATETIME,
+            "endtime": CURRENT_DATETIME,
         },
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
@@ -831,28 +732,27 @@ def test_get_env_stat(client):
 def test_get_environment_group_populations(client):
     client._get.return_value = success_response
     response = client.Cluster.GetEnvironmentGroupPopulations(
-        CURRENT_DATETIME.date(), CURRENT_DATETIME.date()
+        CURRENT_DATETIME, CURRENT_DATETIME
     )
     client._get.assert_called_with(
         "GetEnvironmentGroupPopulations",
-        params={"start": CURRENT_DATETIME.date(), "end": CURRENT_DATETIME.date()},
+        params={"start": CURRENT_DATETIME, "end": CURRENT_DATETIME},
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
 
 def test_get_envs(client):
     client._get.return_value = success_response
-    response = client.Cluster.GetEnvs(
-        1, ["rights1", "rights2"], [True, True], [1, 2], [True, True]
-    )
+    response = client.Cluster.GetEnvs(1, ["rights1", "rights2"], True, 1, True)
     client._get.assert_called_with(
         "GetEnvs",
         params={
             "uid": 1,
             "rights": ["rights1", "rights2"],
-            "lazy": [True, True],
-            "ownerUid": [1, 2],
-            "sshAccessOnly": [True, True],
+            "lazy": True,
+            "ownerUid": 1,
+            "sshAccessOnly": True,
         },
         delimiter=",",
     )
@@ -877,7 +777,6 @@ def test_get_ext_ip_pool_info(client):
     client._get.assert_called_with(
         "GetExtIpPoolInfo",
         params={"search": {"search1": "search1", "search2": "search2"}},
-        delimiter=",",
     )
     assert response == success_response
 
@@ -904,45 +803,38 @@ def test_get_hd_node_status(client):
 
 def test_get_hd_nodes(client):
     client._get.return_value = success_response
-    response = client.Cluster.GetHdNodes(["id1", "id2"])
+    response = client.Cluster.GetHdNodes("id")
     client._get.assert_called_with(
         "GetHdNodes",
-        params={"ids": ["id1", "id2"]},
-        delimiter=",",
+        params={"ids": "id"},
     )
     assert response == success_response
 
 
 def test_get_hd_nodes_load(client):
     client._get.return_value = success_response
-    response = client.Cluster.GetHdNodesLoad(1, ["hdnodes1", "hdnodes2"])
+    response = client.Cluster.GetHdNodesLoad(1, "hdnodes")
     client._get.assert_called_with(
         "GetHdNodesLoad",
-        params={"duration": 1, "hdnodes": ["hdnodes1", "hdnodes2"]},
-        delimiter=",",
+        params={"duration": 1, "hdnodes": "hdnodes"},
     )
     assert response == success_response
 
 
 def test_get_hd_load_info(client):
     client._get.return_value = success_response
-    response = client.Cluster.GetHdNodesLoadInfo(["id1", "id2"])
+    response = client.Cluster.GetHdNodesLoadInfo("id")
     client._get.assert_called_with(
         "GetHdNodesLoadInfo",
-        params={"ids": ["id1", "id2"]},
-        delimiter=",",
+        params={"ids": "id"},
     )
     assert response == success_response
 
 
 def test_get_hosts(client):
     client._get.return_value = success_response
-    response = client.Cluster.GetHosts(["id1", "id2"])
-    client._get.assert_called_with(
-        "GetHosts",
-        params={"ids": ["id1", "id2"]},
-        delimiter=",",
-    )
+    response = client.Cluster.GetHosts("id")
+    client._get.assert_called_with("GetHosts", params={"ids": "id"})
     assert response == success_response
 
 
@@ -952,9 +844,7 @@ def test_get_ip_pool_info(client):
         {"search1": "search1", "search2": "search2"}
     )
     client._get.assert_called_with(
-        "GetIpPoolInfo",
-        params={"search": {"search1": "search1", "search2": "search2"}},
-        delimiter=",",
+        "GetIpPoolInfo", params={"search": {"search1": "search1", "search2": "search2"}}
     )
     assert response == success_response
 
@@ -971,12 +861,8 @@ def test_get_ipv6_networks(client):
 
 def test_get_ipv6_subnets_info(client):
     client._get.return_value = success_response
-    response = client.Cluster.GetIpv6SubnetsInfo(["search1", "search2"])
-    client._get.assert_called_with(
-        "GetIpv6SubnetsInfo",
-        params={"search": ["search1", "search2"]},
-        delimiter=",",
-    )
+    response = client.Cluster.GetIpv6SubnetsInfo("search")
+    client._get.assert_called_with("GetIpv6SubnetsInfo", params={"search": "search"})
     assert response == success_response
 
 
@@ -1037,27 +923,17 @@ def test_get_node_missions(client):
 
 def test_get_node_password(client):
     client._get.return_value = success_response
-    response = client.Cluster.GetNodePassword([1, 2])
-    client._get.assert_called_with(
-        "GetNodePassword",
-        params={"nodeid": [1, 2]},
-        delimiter=",",
-    )
+    response = client.Cluster.GetNodePassword(1)
+    client._get.assert_called_with("GetNodePassword", params={"nodeid": 1})
     assert response == success_response
 
 
 def test_get_nodes(client):
     client._get.return_value = success_response
-    response = client.Cluster.GetNodes(1, ["name1", "name2"], [1, 2], [1, 1])
+    response = client.Cluster.GetNodes(1, "name", 1, 1)
     client._get.assert_called_with(
         "GetNodes",
-        params={
-            "hdnodeid": 1,
-            "name": ["name1", "name2"],
-            "startRow": [1, 2],
-            "resultCount": [1, 1],
-        },
-        delimiter=",",
+        params={"hdnodeid": 1, "name": "name", "startRow": 1, "resultCount": 1},
     )
     assert response == success_response
 
@@ -1070,7 +946,6 @@ def test_get_oom_killed_processes(client):
     client._get.assert_called_with(
         "GetOOMKilledProcesses",
         params={"search": {"search1": "search1", "search2": "search2"}},
-        delimiter=",",
     )
     assert response == success_response
 
@@ -1121,10 +996,10 @@ def test_get_region_dns_records(client):
 
 def test_get_region_domains(client):
     client._get.return_value = success_response
-    response = client.Cluster.GetRegionDomains([1, 2])
+    response = client.Cluster.GetRegionDomains(1)
     client._get.assert_called_with(
         "GetRegionDomains",
-        params={"regionId": [1, 2]},
+        params={"regionId": 1},
         delimiter=",",
     )
     assert response == success_response
@@ -1154,14 +1029,9 @@ def test_get_regions(client):
 
 def test_get_repository_tags(client):
     client._get.return_value = success_response
-    response = client.Cluster.GetRepositoryTags([1, 2], ["repository1", "repository2"])
+    response = client.Cluster.GetRepositoryTags("repository", 1)
     client._get.assert_called_with(
-        "GetRepositoryTags",
-        params={
-            "registryId": [1, 2],
-            "repository": ["repository1", "repository2"],
-        },
-        delimiter=",",
+        "GetRepositoryTags", params={"repository": "repository", "registryId": 1}
     )
     assert response == success_response
 
@@ -1189,13 +1059,7 @@ def test_get_stand_by_status(client):
 def test_get_stats(client):
     client._get.return_value = success_response
     response = client.Cluster.GetStats(
-        1,
-        1,
-        "target_appid",
-        [CURRENT_DATETIME.date(), CURRENT_DATETIME.date()],
-        [1, 2],
-        ["nodetype1", "nodetype2"],
-        ["node_group1", "node_group2"],
+        1, 1, "target_appid", CURRENT_DATETIME, 1, "nodetype", "nodeGroup"
     )
     client._get.assert_called_with(
         "GetStats",
@@ -1203,31 +1067,27 @@ def test_get_stats(client):
             "duration": 1,
             "interval": 1,
             "targetAppid": "target_appid",
-            "endtime": [CURRENT_DATETIME.date(), CURRENT_DATETIME.date()],
-            "nodeid": [1, 2],
-            "nodetype": ["nodetype1", "nodetype2"],
-            "nodeGroup": ["node_group1", "node_group2"],
+            "endtime": CURRENT_DATETIME,
+            "nodeid": 1,
+            "nodetype": "nodetype",
+            "nodeGroup": "nodeGroup",
         },
-        delimiter=",",
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
 
 def test_get_sum_stats(client):
     client._get.return_value = success_response
-    response = client.Cluster.GetSumStat(
-        [1, 2],
-        [CURRENT_DATETIME.date(), CURRENT_DATETIME.date()],
-        ["target_appid1", "target_appid2"],
-    )
+    response = client.Cluster.GetSumStat(1, CURRENT_DATETIME, "target_appid")
     client._get.assert_called_with(
         "GetSumStat",
         params={
-            "duration": [1, 2],
-            "endtime": [CURRENT_DATETIME.date(), CURRENT_DATETIME.date()],
-            "targetAppid": ["target_appid1", "target_appid2"],
+            "duration": 1,
+            "endtime": CURRENT_DATETIME,
+            "targetAppid": "target_appid",
         },
-        delimiter=",",
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
@@ -1254,15 +1114,10 @@ def test_get_template_info(client):
 
 def test_get_template_labels(client):
     client._get.return_value = success_response
-    response = client.Cluster.GetTemplateLabels("repository", [1, 2], ["tag1", "tag2"])
+    response = client.Cluster.GetTemplateLabels("repository", 1, "tag")
     client._get.assert_called_with(
         "GetTemplateLabels",
-        params={
-            "repository": "repository",
-            "registryId": [1, 2],
-            "tag": ["tag1", "tag2"],
-        },
-        delimiter=",",
+        params={"repository": "repository", "registryId": 1, "tag": "tag"},
     )
     assert response == success_response
 
@@ -1279,17 +1134,9 @@ def test_get_template_registries(client):
 
 def test_get_templates(client):
     client._get.return_value = success_response
-    response = client.Cluster.GetTemplates(
-        ["type1", "type2"], [True, True], [False, False]
-    )
+    response = client.Cluster.GetTemplates("type", True, False)
     client._get.assert_called_with(
-        "GetTemplates",
-        params={
-            "type": ["type1", "type2"],
-            "published": [True, True],
-            "lazy": [False, False],
-        },
-        delimiter=",",
+        "GetTemplates", params={"type": "type", "published": True, "lazy": False}
     )
     assert response == success_response
 
@@ -1298,33 +1145,33 @@ def test_get_user_activity(client):
     client._get.return_value = success_response
     response = client.Cluster.GetUserActivity(
         1,
-        CURRENT_DATETIME.date(),
-        CURRENT_DATETIME.date(),
-        ["target_appid1", "target_appid2"],
-        ["start_row1", "start_row2"],
-        [1, 2],
-        ["service_name1", "service_name2"],
-        ["search_text1", "search_text2"],
-        ["action_types1", "action_types2"],
-        ["order_field1", "order_field2"],
-        ["order_direction1", "order_direction2"],
+        CURRENT_DATETIME,
+        CURRENT_DATETIME,
+        "targetAppid",
+        "startRow",
+        1,
+        "serviceName",
+        "searchText",
+        "actionTypes",
+        "orderField",
+        "orderDirection",
     )
     client._get.assert_called_with(
         "GetUserActivity",
         params={
             "uid": 1,
-            "starttime": CURRENT_DATETIME.date(),
-            "endtime": CURRENT_DATETIME.date(),
-            "targetAppid": ["target_appid1", "target_appid2"],
-            "startRow": ["start_row1", "start_row2"],
-            "resultCount": [1, 2],
-            "serviceName": ["service_name1", "service_name2"],
-            "searchText": ["search_text1", "search_text2"],
-            "actionTypes": ["action_types1", "action_types2"],
-            "orderField": ["order_field1", "order_field2"],
-            "orderDirection": ["order_direction1", "order_direction2"],
+            "starttime": CURRENT_DATETIME,
+            "endtime": CURRENT_DATETIME,
+            "targetAppid": "targetAppid",
+            "startRow": "startRow",
+            "resultCount": 1,
+            "serviceName": "serviceName",
+            "searchText": "searchText",
+            "actionTypes": "actionTypes",
+            "orderField": "orderField",
+            "orderDirection": "orderDirection",
         },
-        delimiter=",",
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
@@ -1332,17 +1179,17 @@ def test_get_user_activity(client):
 def test_get_user_activities(client):
     client._get.return_value = success_response
     response = client.Cluster.GetUsersActivities(
-        CURRENT_DATETIME.date(), CURRENT_DATETIME.date(), [1, 2], [1, 2]
+        CURRENT_DATETIME, CURRENT_DATETIME, 1, 1
     )
     client._get.assert_called_with(
         "GetUsersActivities",
         params={
-            "starttime": CURRENT_DATETIME.date(),
-            "endtime": CURRENT_DATETIME.date(),
-            "startRow": [1, 2],
-            "resultCount": [1, 2],
+            "starttime": CURRENT_DATETIME,
+            "endtime": CURRENT_DATETIME,
+            "startRow": 1,
+            "resultCount": 1,
         },
-        delimiter=",",
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
@@ -1361,35 +1208,29 @@ def test_l2_update(client):
 
 def test_migrate_env(client):
     client._get.return_value = success_response
-    response = client.Cluster.MigrateEnv(
-        ["target_appid1", "target_appid2"],
-        ["hardware_node_group1", "hardware_node_group2"],
-        [True, True],
-    )
+    response = client.Cluster.MigrateEnv("targetAppid", "hardwareNodeGroup", True)
     client._get.assert_called_with(
         "MigrateEnv",
         params={
-            "targetAppid": ["target_appid1", "target_appid2"],
-            "hardwareNodeGroup": ["hardware_node_group1", "hardware_node_group2"],
-            "isOnline": [True, True],
+            "targetAppid": "targetAppid",
+            "hardwareNodeGroup": "hardwareNodeGroup",
+            "isOnline": True,
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_migrate_node(client):
     client._get.return_value = success_response
-    response = client.Cluster.MigrateNode(1, 1, [True, True], [True, True])
+    response = client.Cluster.MigrateNode(1, 1, True, True)
     client._get.assert_called_with(
         "MigrateNode",
         params={
             "nodeid": 1,
             "hdnodeid": 1,
-            "isOnline": [True, True],
-            "manageDNSState": [True, True],
+            "isOnline": True,
+            "manageDNSState": True,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -1397,28 +1238,20 @@ def test_migrate_node(client):
 def test_redeploy_containers(client):
     client._get.return_value = success_response
     response = client.Cluster.RedeployContainers(
-        "target_env_name",
-        "tag",
-        ["node_group1", "node_group2"],
-        [1, 2],
-        [True, True],
-        ["login1", "login2"],
-        ["password1", "password2"],
-        [True, True],
+        "target_env_name", "tag", "nodeGroup", 1, True, "login", "password", True
     )
     client._get.assert_called_with(
         "RedeployContainers",
         params={
             "targetEnvName": "target_env_name",
             "tag": "tag",
-            "nodeGroup": ["node_group1", "node_group2"],
-            "nodeId": [1, 2],
-            "useExistingVolumes": [True, True],
-            "login": ["login1", "login2"],
-            "password": ["password1", "password2"],
-            "skipReinstall": [True, True],
+            "nodeGroup": "nodeGroup",
+            "nodeId": 1,
+            "useExistingVolumes": True,
+            "login": "login",
+            "password": "password",
+            "skipReinstall": True,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -1435,51 +1268,34 @@ def test_refresh_email_templates(client):
 
 def test_refresh_user(client):
     client._get.return_value = success_response
-    response = client.Cluster.RefreshUser(["language1", "language2"])
-    client._get.assert_called_with(
-        "RefreshUser",
-        params={"language": ["language1", "language2"]},
-        delimiter=",",
-    )
+    response = client.Cluster.RefreshUser("language")
+    client._get.assert_called_with("RefreshUser", params={"language": "language"})
     assert response == success_response
 
 
 def test_regenerate_pool(client):
     client._get.return_value = success_response
-    response = client.Cluster.RegeneratePool("node_type", ["exclude1", "exclude2"])
+    response = client.Cluster.RegeneratePool("node_type", "exclude")
     client._get.assert_called_with(
-        "RegeneratePool",
-        params={"nodeType": "node_type", "exclude": ["exclude1", "exclude2"]},
-        delimiter=",",
+        "RegeneratePool", params={"nodeType": "node_type", "exclude": "exclude"}
     )
     assert response == success_response
 
 
 def test_register_infa_module(client):
     client._get.return_value = success_response
-    response = client.Cluster.RegisterInfaModule(
-        ["module1", "module2"], ["dst_env_name1", "dst_env_name2"], [True, True]
-    )
+    response = client.Cluster.RegisterInfaModule("module", "dstEnvName", True)
     client._get.assert_called_with(
         "RegisterInfaModule",
-        params={
-            "module": ["module1", "module2"],
-            "dstEnvName": ["dst_env_name1", "dst_env_name2"],
-            "dryRun": [True, True],
-        },
-        delimiter=",",
+        params={"module": "module", "dstEnvName": "dstEnvName", "dryRun": True},
     )
     assert response == success_response
 
 
 def test_remove_ext_ips(client):
     client._get.return_value = success_response
-    response = client.Cluster.RemoveExtIps(["ips1", "ips2"])
-    client._get.assert_called_with(
-        "RemoveExtIps",
-        params={"ips": ["ips1", "ips2"]},
-        delimiter=",",
-    )
+    response = client.Cluster.RemoveExtIps("ips")
+    client._get.assert_called_with("RemoveExtIps", params={"ips": "ips"})
     assert response == success_response
 
 
@@ -1515,26 +1331,24 @@ def test_remove_region(client):
 
 def test_remove_region_reseller(client):
     client._get.return_value = success_response
-    response = client.Cluster.RemoveRegionReseller(1, True, [1, 2])
+    response = client.Cluster.RemoveRegionReseller(1, True, 1)
     client._get.assert_called_with(
         "RemoveRegionReseller",
-        params={"resellerId": 1, "dstEnvName": True, "regionId": [1, 2]},
-        delimiter=",",
+        params={"resellerId": 1, "dstEnvName": True, "regionId": 1},
     )
     assert response == success_response
 
 
 def test_remove_region_ssl(client):
     client._get.return_value = success_response
-    response = client.Cluster.RemoveRegionSsl([1, 2], [1, 2], 1)
+    response = client.Cluster.RemoveRegionSsl(1, 1, 1)
     client._get.assert_called_with(
         "RemoveRegionSsl",
         params={
-            "regionId": [1, 2],
-            "domainId": [1, 2],
+            "regionId": 1,
+            "domainId": 1,
             "resellerId": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -1561,21 +1375,15 @@ def test_remove_template_registry(client):
 
 def test_replace_node_in_env(client):
     client._get.return_value = success_response
-    response = client.Cluster.ReplaceNodeInEnv(
-        ["dst_env_name1", "dst_env_name2"],
-        [1, 2],
-        ["src_env_id1", "src_env_id2"],
-        [1, 2],
-    )
+    response = client.Cluster.ReplaceNodeInEnv("dstEnvName", 1, "srcEnvId", 1)
     client._get.assert_called_with(
         "ReplaceNodeInEnv",
         params={
-            "dstEnvName": ["dst_env_name1", "dst_env_name2"],
-            "dstNodeId": [1, 2],
-            "srcEnvId": ["src_env_id1", "src_env_id2"],
-            "srcHnId": [1, 2],
+            "dstEnvName": "dstEnvName",
+            "dstNodeId": 1,
+            "srcEnvId": "srcEnvId",
+            "srcHnId": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -1594,9 +1402,7 @@ def test_search_envs(client):
     client._get.return_value = success_response
     response = client.Cluster.SearchEnvs({"search1": "search1", "search2": "search2"})
     client._get.assert_called_with(
-        "SearchEnvs",
-        params={"search": {"search1": "search1", "search2": "search2"}},
-        delimiter=",",
+        "SearchEnvs", params={"search": {"search1": "search1", "search2": "search2"}}
     )
     assert response == success_response
 
@@ -1605,9 +1411,7 @@ def test_search_nodes(client):
     client._get.return_value = success_response
     response = client.Cluster.SearchNodes({"search1": "search1", "search2": "search2"})
     client._get.assert_called_with(
-        "SearchNodes",
-        params={"search": {"search1": "search1", "search2": "search2"}},
-        delimiter=",",
+        "SearchNodes", params={"search": {"search1": "search1", "search2": "search2"}}
     )
     assert response == success_response
 
@@ -1624,16 +1428,13 @@ def test_set_default_template_tag(client):
 
 def test_set_env_note(client):
     client._get.return_value = success_response
-    response = client.Cluster.SetEnvNote(
-        ["target_appid1", "target_appid2"], ["note1", "note2"]
-    )
+    response = client.Cluster.SetEnvNote("targetAppid", "note")
     client._get.assert_called_with(
         "SetEnvNote",
         params={
-            "targetAppid": ["target_appid1", "target_appid2"],
-            "note": ["note1", "note2"],
+            "targetAppid": "targetAppid",
+            "note": "note",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -1737,19 +1538,15 @@ def test_set_template_published(client):
 
 def test_sleep(client):
     client._get.return_value = success_response
-    response = client.Cluster.Sleep(
-        [CURRENT_DATETIME, CURRENT_DATETIME],
-        [CURRENT_DATETIME, CURRENT_DATETIME],
-        [1, 2, 3],
-    )
+    response = client.Cluster.Sleep(CURRENT_DATETIME, CURRENT_DATETIME, 1)
     client._get.assert_called_with(
         "Sleep",
         params={
-            "starttime": [CURRENT_DATETIME, CURRENT_DATETIME],
-            "endtime": [CURRENT_DATETIME, CURRENT_DATETIME],
-            "deactivateAfter": [1, 2, 3],
+            "starttime": CURRENT_DATETIME,
+            "endtime": CURRENT_DATETIME,
+            "deactivateAfter": 1,
         },
-        delimiter=",",
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
@@ -1790,11 +1587,11 @@ def test_stop_env(client):
 
 def test_stop_evacuation(client):
     client._get.return_value = success_response
-    response = client.Cluster.StopEvacuation("hard node")
+    response = client.Cluster.StopEvacuation(1)
     client._get.assert_called_with(
         "StopEvacuation",
         params={
-            "hardNodeId": "hard node",
+            "hardNodeId": 1,
         },
     )
     assert response == success_response
@@ -1802,16 +1599,14 @@ def test_stop_evacuation(client):
 
 def test_sync_cloud_lets(client):
     client._get.return_value = success_response
-    response = client.Cluster.SyncCloudlets(
-        CURRENT_DATETIME.date(),
-        [True, False, True],
-    )
+    response = client.Cluster.SyncCloudlets(CURRENT_DATETIME, True)
     client._get.assert_called_with(
         "SyncCloudlets(",
         params={
-            "starttime": CURRENT_DATETIME.date(),
-            "debug": [True, False, True],
+            "starttime": CURRENT_DATETIME,
+            "debug": True,
         },
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
@@ -1819,10 +1614,7 @@ def test_sync_cloud_lets(client):
 def test_sync_infa_module(client):
     client._get.return_value = success_response
     response = client.Cluster.SyncInfaModule(
-        "node group",
-        "dst env",
-        "components",
-        ["tag1", "tag2", "tag3"],
+        "node group", "dst env", "components", "targetTag"
     )
     client._get.assert_called_with(
         "SyncInfaModule",
@@ -1830,25 +1622,18 @@ def test_sync_infa_module(client):
             "nodeGroup": "node group",
             "dstEnvName": "dst env",
             "components": "components",
-            "targetTag": ["tag1", "tag2", "tag3"],
+            "targetTag": "targetTag",
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_update_region_ssl(client):
     client._get.return_value = success_response
-    response = client.Cluster.UpdateRegionSsl(
-        1,
-        [1, 2, 3, 4],
-    )
+    response = client.Cluster.UpdateRegionSsl(1, 1)
     client._get.assert_called_with(
         "UpdateRegionSsl",
-        params={
-            "regionId": 1,
-            "domainId": [1, 2, 3, 4],
-        },
+        params={"regionId": 1, "domainId": 1},
     )
     assert response == success_response
 
@@ -1868,17 +1653,9 @@ def test_update_reseller_ssl(client):
 
 def test_update_template(client):
     client._get.return_value = success_response
-    response = client.Cluster.UpdateTemplate(
-        1,
-        [1, 2, 3, 4],
-    )
+    response = client.Cluster.UpdateTemplate(1, True)
     client._get.assert_called_with(
-        "UpdateTemplate",
-        params={
-            "nodeType": 1,
-            "iconsOnly": [1, 2, 3, 4],
-        },
-        delimiter=",",
+        "UpdateTemplate", params={"nodeType": 1, "iconsOnly": True}
     )
     assert response == success_response
 
@@ -1905,20 +1682,14 @@ def test_validate_all(client):
 
 def test_validate_ssl(client):
     client._get.return_value = success_response
-    response = client.Cluster.ValidateSsl(
-        "domain",
-        ["key1", "key2", "key3"],
-        ["intermediate1", "intermediate2", "intermediate3"],
-        ["certificate1", "certificate2", "certificate3"],
-    )
+    response = client.Cluster.ValidateSsl("domain", "key", "intermediate", "cert")
     client._get.assert_called_with(
         "ValidateSsl",
         params={
             "domain": "domain",
-            "key": ["key1", "key2", "key3"],
-            "intermediate": ["intermediate1", "intermediate2", "intermediate3"],
-            "cert": ["certificate1", "certificate2", "certificate3"],
+            "key": "key",
+            "intermediate": "intermediate",
+            "cert": "cert",
         },
-        delimiter=",",
     )
     assert response == success_response

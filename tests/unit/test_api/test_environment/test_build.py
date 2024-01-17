@@ -11,19 +11,19 @@ def test_add_project(client):
         "name",
         "type",
         "path",
-        [1, 1],
-        ["login1", "login2"],
-        ["password1", "password2"],
-        ["target_env1", "target_env2"],
-        ["context1", "context2"],
-        ["branch1", "branch2"],
-        ["interval1", "interval2"],
-        [1, 1],
-        [True, True],
-        ["hooks1", "hooks2"],
-        ["work_dir1", "work_dir2"],
-        ["target_node_group1", "target_node_group2"],
-        [True, True],
+        1,
+        "login",
+        "password",
+        "targetEnv",
+        "context",
+        "branch",
+        "interval",
+        1,
+        True,
+        "hooks",
+        "workDir",
+        "target_node_group",
+        True,
     )
     client._get.assert_called_with(
         "AddProject",
@@ -35,21 +35,20 @@ def test_add_project(client):
             "name": "name",
             "type": "type",
             "path": "path",
-            "keyId": [1, 1],
-            "login": ["login1", "login2"],
-            "password": ["password1", "password2"],
-            "targetEnv": ["target_env1", "target_env2"],
-            "context": ["context1", "context2"],
-            "branch": ["branch1", "branch2"],
-            "interval": ["interval1", "interval2"],
-            "delay": [1, 1],
-            "deployNow": [True, True],
-            "hooks": ["hooks1", "hooks2"],
-            "workDir": ["work_dir1", "work_dir2"],
-            "targetNodeGroup": ["target_node_group1", "target_node_group2"],
-            "isSequential": [True, True],
+            "keyId": 1,
+            "login": "login",
+            "password": "password",
+            "targetEnv": "targetEnv",
+            "context": "context",
+            "branch": "branch",
+            "interval": "interval",
+            "delay": 1,
+            "deployNow": True,
+            "hooks": "hooks",
+            "workDir": "workDir",
+            "targetNodeGroup": "target_node_group",
+            "isSequential": True,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -64,16 +63,16 @@ def test_add_project_with_creds(client):
         "name",
         "type",
         "path",
-        ["target_env1", "target_env2"],
-        ["login1", "login2"],
-        ["password1", "password2"],
-        ["context1", "context2"],
-        ["branch1", "branch2"],
-        ["interval1", "interval2"],
-        [1, 1],
-        [True, True],
-        ["hooks1", "hooks2"],
-        ["work_dir1", "work_dir2"],
+        "targetEnv",
+        "login",
+        "password",
+        "context",
+        "branch",
+        "interval",
+        1,
+        True,
+        "hooks",
+        "workDir",
     )
     client._get.assert_called_with(
         "AddProjectWithCreds",
@@ -85,18 +84,17 @@ def test_add_project_with_creds(client):
             "name": "name",
             "type": "type",
             "path": "path",
-            "targetEnv": ["target_env1", "target_env2"],
-            "login": ["login1", "login2"],
-            "password": ["password1", "password2"],
-            "context": ["context1", "context2"],
-            "branch": ["branch1", "branch2"],
-            "interval": ["interval1", "interval2"],
-            "delay": [1, 1],
-            "deployNow": [True, True],
-            "hooks": ["hooks1", "hooks2"],
-            "workDir": ["work_dir1", "work_dir2"],
+            "targetEnv": "targetEnv",
+            "login": "login",
+            "password": "password",
+            "context": "context",
+            "branch": "branch",
+            "interval": "interval",
+            "delay": 1,
+            "deployNow": True,
+            "hooks": "hooks",
+            "workDir": "workDir",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -111,15 +109,15 @@ def test_add_project_with_key(client):
         "name",
         "type",
         "path",
-        ["target_env1", "target_env2"],
-        [1, 1],
-        ["context1", "context2"],
-        ["branch1", "branch2"],
-        ["interval1", "interval2"],
-        [1, 1],
-        [True, True],
-        ["hooks1", "hooks2"],
-        ["work_dir1", "work_dir2"],
+        "targetEnv",
+        1,
+        "context",
+        "branch",
+        "interval",
+        1,
+        True,
+        "hooks",
+        "workDir",
     )
     client._get.assert_called_with(
         "AddProjectWithKey",
@@ -131,17 +129,16 @@ def test_add_project_with_key(client):
             "name": "name",
             "type": "type",
             "path": "path",
-            "targetEnv": ["target_env1", "target_env2"],
-            "keyId": [1, 1],
-            "context": ["context1", "context2"],
-            "branch": ["branch1", "branch2"],
-            "interval": ["interval1", "interval2"],
-            "delay": [1, 1],
-            "deployNow": [True, True],
-            "hooks": ["hooks1", "hooks2"],
-            "workDir": ["work_dir1", "work_dir2"],
+            "targetEnv": "targetEnv",
+            "keyId": 1,
+            "context": "context",
+            "branch": "branch",
+            "interval": "interval",
+            "delay": 1,
+            "deployNow": True,
+            "hooks": "hooks",
+            "workDir": "workDir",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -162,7 +159,7 @@ def test_build_deploy(client):
 def test_build_build_deploy_project(client):
     client._get.return_value = success_response
     response = client.Build.BuildDeployProject(
-        "env_name", 1, "project_id", [1, 1], [True, False], [True, False]
+        "env_name", 1, "project_id", 1, True, True
     )
     assert response == success_response
     client._get.assert_called_with(
@@ -171,19 +168,16 @@ def test_build_build_deploy_project(client):
             "envName": "env_name",
             "nodeid": 1,
             "projectid": "project_id",
-            "delay": [1, 1],
-            "update": [True, False],
-            "isSequential": [True, False],
+            "delay": 1,
+            "update": True,
+            "isSequential": True,
         },
-        delimiter=",",
     )
 
 
 def test_build_build_project(client):
     client._get.return_value = success_response
-    response = client.Build.BuildProject(
-        "env_name", 1, "project_id", [True, False], [True, False], [True, False]
-    )
+    response = client.Build.BuildProject("env_name", 1, "project_id", True, True, True)
     assert response == success_response
     client._get.assert_called_with(
         "BuildProject",
@@ -191,19 +185,16 @@ def test_build_build_project(client):
             "envName": "env_name",
             "nodeid": 1,
             "projectid": "project_id",
-            "update": [True, False],
-            "skipPublish": [True, False],
-            "async": [True, False],
+            "update": True,
+            "skipPublish": True,
+            "async": True,
         },
-        delimiter=",",
     )
 
 
 def test_build_deploy_project(client):
     client._get.return_value = success_response
-    response = client.Build.DeployProject(
-        "env_name", 1, "project_id", [1, 1], [True, False]
-    )
+    response = client.Build.DeployProject("env_name", 1, "project_id", 1, True)
     assert response == success_response
     client._get.assert_called_with(
         "DeployProject",
@@ -211,10 +202,9 @@ def test_build_deploy_project(client):
             "envName": "env_name",
             "nodeid": 1,
             "projectid": "project_id",
-            "delay": [1, 1],
-            "isSequential": [True, False],
+            "delay": 1,
+            "isSequential": True,
         },
-        delimiter=",",
     )
 
 
@@ -227,19 +217,19 @@ def test_build_edit_project(client):
         "name",
         "type",
         "path",
-        [1, 1],
-        ["login1", "login2"],
-        ["password1", "password2"],
-        ["env1", "env2"],
-        ["context1", "context2"],
-        ["branch1", "branch2"],
+        1,
+        "login",
+        "password",
+        "env",
+        "context",
+        "branch",
         True,
-        ["interval1", "interval2"],
+        "interval",
         True,
-        [1, 1],
-        ["hooks1", "hooks2"],
-        ["work_dir1", "work_dir2"],
-        ["target_node_group1", "target_node_group2"],
+        1,
+        "hooks",
+        "workDir",
+        "targetNodeGroup",
     )
     client._get.assert_called_with(
         "EditProject",
@@ -250,57 +240,50 @@ def test_build_edit_project(client):
             "name": "name",
             "type": "type",
             "path": "path",
-            "keyId": [1, 1],
-            "login": ["login1", "login2"],
-            "password": ["password1", "password2"],
-            "env": ["env1", "env2"],
-            "context": ["context1", "context2"],
-            "branch": ["branch1", "branch2"],
+            "keyId": 1,
+            "login": "login",
+            "password": "password",
+            "env": "env",
+            "context": "context",
+            "branch": "branch",
             "autoUpdate": True,
-            "interval": ["interval1", "interval2"],
+            "interval": "interval",
             "autoResolveConflict": True,
-            "delay": [1, 1],
-            "hooks": ["hooks1", "hooks2"],
-            "workDir": ["work_dir1", "work_dir2"],
-            "targetNodeGroup": ["target_node_group1", "target_node_group2"],
+            "delay": 1,
+            "hooks": "hooks",
+            "workDir": "workDir",
+            "targetNodeGroup": "targetNodeGroup",
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_build_get_project_info(client):
     client._get.return_value = success_response
-    response = client.Build.GetProjectInfo(
-        "env_name", 1, [1, 1], ["project1", "project2"]
-    )
+    response = client.Build.GetProjectInfo("env_name", 1, 1, "project")
     assert response == success_response
     client._get.assert_called_with(
         "GetProjectInfo",
         params={
             "envName": "env_name",
             "nodeid": 1,
-            "projectid": [1, 1],
-            "projectName": ["project1", "project2"],
+            "projectid": 1,
+            "projectName": "project",
         },
-        delimiter=",",
     )
 
 
 def test_get_project(client):
     client._get.return_value = success_response
-    response = client.Build.GetProjects(
-        "env_name", ["node_group1", "node_group2"], [1, 1]
-    )
+    response = client.Build.GetProjects("env_name", "nodeGroup", 1)
     assert response == success_response
     client._get.assert_called_with(
         "GetProjects",
         params={
             "envName": "env_name",
-            "nodeGroup": ["node_group1", "node_group2"],
-            "nodeid": [1, 1],
+            "nodeGroup": "nodeGroup",
+            "nodeid": 1,
         },
-        delimiter=",",
     )
 
 
@@ -315,21 +298,19 @@ def test_remove_project(client):
             "nodeid": 1,
             "projectid": 1,
         },
-        delimiter=",",
     )
 
 
 def test_build_update(client):
     client._get.return_value = success_response
-    response = client.Build.Update("env_name", 1, [1, 1], ["context1", "context2"])
+    response = client.Build.Update("env_name", 1, 1, "context")
     assert response == success_response
     client._get.assert_called_with(
         "Update",
         params={
             "envName": "env_name",
             "nodeId": 1,
-            "projectId": [1, 1],
-            "context": ["context1", "context2"],
+            "projectId": 1,
+            "context": "context",
         },
-        delimiter=",",
     )

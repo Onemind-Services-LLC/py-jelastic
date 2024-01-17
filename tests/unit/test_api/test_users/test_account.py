@@ -3,19 +3,16 @@ from . import *
 
 def test_add_account(client):
     client._get.return_value = success_response
-    response = client.Account.AddAccount(
-        "email", "password", ["name1", "name2"], [True, True], [1, 1]
-    )
+    response = client.Account.AddAccount("email", "password", "name", True, 1)
     client._get.assert_called_with(
         "AddAccount",
         params={
             "email": "email",
             "password": "password",
-            "name": ["name1", "name2"],
-            "notify": [True, True],
-            "resellerId": [1, 1],
+            "name": "name",
+            "notify": True,
+            "resellerId": 1,
         },
-        delimiter=",",
     )
 
     assert response == success_response
@@ -41,14 +38,9 @@ def test_add_ssh_key(client):
 
 def test_change_email(client):
     client._get.return_value = success_response
-    response = client.Account.ChangeEmail("email", ["redirect_url1", "redirect_url2"])
+    response = client.Account.ChangeEmail("email", "redirectUrl")
     client._get.assert_called_with(
-        "ChangeEmail",
-        params={
-            "email": "email",
-            "redirectUrl": ["redirect_url1", "redirect_url2"],
-        },
-        delimiter=",",
+        "ChangeEmail", params={"email": "email", "redirectUrl": "redirectUrl"}
     )
     assert response == success_response
 
@@ -67,17 +59,14 @@ def test_change_name(client):
 
 def test_change_password(client):
     client._get.return_value = success_response
-    response = client.Account.ChangePassword(
-        "old_password", "new_password", ["invalidate_sessions1", "invalidate_sessions2"]
-    )
+    response = client.Account.ChangePassword("old_password", "new_password", False)
     client._get.assert_called_with(
         "ChangePassword",
         params={
             "oldPassword": "old_password",
             "newPassword": "new_password",
-            "invalidateSessions": ["invalidate_sessions1", "invalidate_sessions2"],
+            "invalidateSessions": False,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -108,56 +97,38 @@ def test_delete_ssh_key(client):
 
 def test_disable_2_fa(client):
     client._get.return_value = success_response
-    response = client.Account.Disable2FA(["password1", "password2"])
-    client._get.assert_called_with(
-        "Disable2FA",
-        params={"password": ["password1", "password2"]},
-        delimiter=",",
-    )
+    response = client.Account.Disable2FA("password")
+    client._get.assert_called_with("Disable2FA", params={"password": "password"})
     assert response == success_response
 
 
 def test_enable_2_fa(client):
     client._get.return_value = success_response
-    response = client.Account.Enable2FA("code", ["password1", "password2"])
+    response = client.Account.Enable2FA("code", "password")
     client._get.assert_called_with(
-        "Enable2FA",
-        params={"code": "code", "password": ["password1", "password2"]},
-        delimiter=",",
+        "Enable2FA", params={"code": "code", "password": "password"}
     )
     assert response == success_response
 
 
 def test_get_2_fa_backup_codes(client):
     client._get.return_value = success_response
-    response = client.Account.Get2FABackupCodes(["password1", "password2"])
-    client._get.assert_called_with(
-        "Get2FABackupCodes",
-        params={"password": ["password1", "password2"]},
-        delimiter=",",
-    )
+    response = client.Account.Get2FABackupCodes("password")
+    client._get.assert_called_with("Get2FABackupCodes", params={"password": "password"})
     assert response == success_response
 
 
 def test_get_2_fa_config(client):
     client._get.return_value = success_response
-    response = client.Account.Get2FAConfig(["password1", "password2"])
-    client._get.assert_called_with(
-        "Get2FAConfig",
-        params={"password": ["password1", "password2"]},
-        delimiter=",",
-    )
+    response = client.Account.Get2FAConfig("password")
+    client._get.assert_called_with("Get2FAConfig", params={"password": "password"})
     assert response == success_response
 
 
 def test_get_ssh_keys(client):
     client._get.return_value = success_response
-    response = client.Account.GetSSHKeys(["is_private1", "is_private2"])
-    client._get.assert_called_with(
-        "GetSSHKeys",
-        params={"isPrivate": ["is_private1", "is_private2"]},
-        delimiter=",",
-    )
+    response = client.Account.GetSSHKeys(False)
+    client._get.assert_called_with("GetSSHKeys", params={"isPrivate": False})
     assert response == success_response
 
 
@@ -185,22 +156,18 @@ def test_check_user_info_inner(client):
 
 def test_recover_password(client):
     client._get.return_value = success_response
-    response = client.Account.RecoverPassword("email", ["lang1", "lang2"])
+    response = client.Account.RecoverPassword("email", "lang")
     client._get.assert_called_with(
-        "RecoverPassword",
-        params={"email": "email", "lang": ["lang1", "lang2"]},
-        delimiter=",",
+        "RecoverPassword", params={"email": "email", "lang": "lang"}
     )
     assert response == success_response
 
 
 def test_regenerate_2_fa_backup_codes(client):
     client._get.return_value = success_response
-    response = client.Account.Regenerate2FABackupCodes(["password1", "password2"])
+    response = client.Account.Regenerate2FABackupCodes("password")
     client._get.assert_called_with(
-        "Regenerate2FABackupCodes",
-        params={"password": ["password1", "password2"]},
-        delimiter=",",
+        "Regenerate2FABackupCodes", params={"password": "password"}
     )
     assert response == success_response
 
@@ -220,14 +187,9 @@ def test_set_as_tenant_host(client):
 
 def test_set_password(client):
     client._get.return_value = success_response
-    response = client.Account.SetPassword("auth_key", [True, True])
+    response = client.Account.SetPassword("auth_key", True)
     client._get.assert_called_with(
-        "SetPassword",
-        params={
-            "authKey": "auth_key",
-            "invalidateSessions": [True, True],
-        },
-        delimiter=",",
+        "SetPassword", params={"authKey": "auth_key", "invalidateSessions": True}
     )
     assert response == success_response
 

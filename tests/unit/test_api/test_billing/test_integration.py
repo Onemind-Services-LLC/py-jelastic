@@ -10,13 +10,9 @@ def test_get_invoice_url(client):
 
 def test_get_sso_url(client):
     client._get.return_value = success_response
-    response = client.Integration.GetSSOUrl(
-        ["path 1", "path 2"],
-    )
+    response = client.Integration.GetSSOUrl("path")
     client._get.assert_called_with(
         "GetSSOUrl",
-        params={
-            "path": ["path 1", "path 2"],
-        },
+        params={"path": "path"},
     )
     assert response == success_response

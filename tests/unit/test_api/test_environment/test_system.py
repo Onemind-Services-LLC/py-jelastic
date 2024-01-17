@@ -15,34 +15,22 @@ def test_check_db_connection(client):
 
 def test_check_error(client):
     client._get.return_value = success_response
-    response = client.System.CheckError([1, 1])
-    client._get.assert_called_with(
-        "CheckError",
-        params={"code": [1, 1]},
-        delimiter=",",
-    )
+    response = client.System.CheckError(1)
+    client._get.assert_called_with("CheckError", params={"code": 1})
     assert response == success_response
 
 
 def test_clean_check_request_cache(client):
     client._get.return_value = success_response
-    response = client.System.CleanCheckRequestCache([1, 1])
-    client._get.assert_called_with(
-        "CleanCheckRequestCache",
-        params={"uid": [1, 1]},
-        delimiter=",",
-    )
+    response = client.System.CleanCheckRequestCache(1)
+    client._get.assert_called_with("CleanCheckRequestCache", params={"uid": 1})
     assert response == success_response
 
 
 def test_clean_check_request_cache_inner(client):
     client._get.return_value = success_response
-    response = client.System.CleanCheckRequestCacheInner([1, 1])
-    client._get.assert_called_with(
-        "CleanCheckRequestCacheInner",
-        params={"uid": [1, 1]},
-        delimiter=",",
-    )
+    response = client.System.CleanCheckRequestCacheInner(1)
+    client._get.assert_called_with("CleanCheckRequestCacheInner", params={"uid": 1})
     assert response == success_response
 
 
@@ -73,33 +61,17 @@ def test_delete_old_envs(client):
 
 def test_event(client):
     client._get.return_value = success_response
-    response = client.System.Event(
-        "message",
-        [True, False],
-    )
+    response = client.System.Event("message", True)
     client._get.assert_called_with(
-        "Event",
-        params={
-            "message": "message",
-            "publishLocal": [True, False],
-        },
-        delimiter=",",
+        "Event", params={"message": "message", "publishLocal": True}
     )
     assert response == success_response
 
 
 def test_fix_duplicates(client):
     client._get.return_value = success_response
-    response = client.System.FixDuplicates(
-        [True, False],
-    )
-    client._get.assert_called_with(
-        "FixDuplicates",
-        params={
-            "debug": [True, False],
-        },
-        delimiter=",",
-    )
+    response = client.System.FixDuplicates(True)
+    client._get.assert_called_with("FixDuplicates", params={"debug": True})
     assert response == success_response
 
 
@@ -115,22 +87,18 @@ def test_fix_stuck_envs(client):
 
 def test_get_api_descriptions(client):
     client._get.return_value = success_response
-    response = client.System.GetAPIDescriptions([True, True], [True, True])
+    response = client.System.GetAPIDescriptions(True, True)
     client._get.assert_called_with(
-        "GetAPIDescriptions",
-        params={"isPublicOnly": [True, True], "isToken": [True, True]},
-        delimiter=",",
+        "GetAPIDescriptions", params={"isPublicOnly": True, "isToken": True}
     )
     assert response == success_response
 
 
 def test_get_all_api_descriptions(client):
     client._get.return_value = success_response
-    response = client.System.GetAllAPIDescriptions([True, True], [True, True])
+    response = client.System.GetAllAPIDescriptions(True, True)
     client._get.assert_called_with(
-        "GetAllAPIDescriptions",
-        params={"isPublicOnly": [True, True], "isToken": [True, True]},
-        delimiter=",",
+        "GetAllAPIDescriptions", params={"isPublicOnly": True, "isToken": True}
     )
     assert response == success_response
 
@@ -191,15 +159,10 @@ def test_get_instance_cache_status(client):
 
 def test_get_ips_by_type(client):
     client._get.return_value = success_response
-    response = client.System.GetIpsByType("checksum", "node_type", ["hnip1", "hnip2"])
+    response = client.System.GetIpsByType("checksum", "node_type", "hnip")
     client._get.assert_called_with(
         "GetIpsByType",
-        params={
-            "checksum": "checksum",
-            "nodeType": "node_type",
-            "hnip": ["hnip1", "hnip2"],
-        },
-        delimiter=",",
+        params={"checksum": "checksum", "nodeType": "node_type", "hnip": "hnip"},
     )
     assert response == success_response
 
@@ -216,10 +179,10 @@ def test_get_keyword(client):
 
 def test_get_platform_status(client):
     client._get.return_value = success_response
-    response = client.System.GetPlatformStatus("checksum", [True, True])
+    response = client.System.GetPlatformStatus("checksum", True)
     client._get.assert_called_with(
         "GetPlatformStatus",
-        params={"checksum": "checksum", "checkSMTP": [True, True]},
+        params={"checksum": "checksum", "checkSMTP": True},
     )
     assert response == success_response
 
@@ -256,12 +219,8 @@ def test_refresh_email_templates(client):
 
 def test_refresh_user(client):
     client._get.return_value = success_response
-    response = client.System.RefreshUser(["language1", "language2"])
-    client._get.assert_called_with(
-        "RefreshUser",
-        params={"language": ["language1", "language2"]},
-        delimiter=",",
-    )
+    response = client.System.RefreshUser("language")
+    client._get.assert_called_with("RefreshUser", params={"language": "language"})
     assert response == success_response
 
 
@@ -293,34 +252,25 @@ def test_register_env_container(client):
 
 def test_reload_configuration(client):
     client._get.return_value = success_response
-    response = client.System.ReloadConfiguration(
-        [1, 1], ["changed_placeholders1", "changed_placeholders2"]
-    )
+    response = client.System.ReloadConfiguration(1, "changedPlaceholders")
     client._get.assert_called_with(
         "ReloadConfiguration",
-        params={
-            "resellerId": [1, 1],
-            "changedPlaceholders": ["changed_placeholders1", "changed_placeholders2"],
-        },
-        delimiter=",",
+        params={"resellerId": 1, "changedPlaceholders": "changedPlaceholders"},
     )
     assert response == success_response
 
 
 def test_send_email(client):
     client._get.return_value = success_response
-    response = client.System.SendEmail(
-        "templates", ["email1", "email2"], ["language1", "language2"], [1, 3]
-    )
+    response = client.System.SendEmail("templates", "abc@gmail.com", "language", 1)
     client._get.assert_called_with(
         "SendEmail",
         params={
             "templates": "templates",
-            "email": ["email1", "email2"],
-            "language": ["language1", "language2"],
-            "timeout": [1, 3],
+            "email": "abc@gmail.com",
+            "language": "language",
+            "timeout": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
 

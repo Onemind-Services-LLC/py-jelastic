@@ -137,7 +137,7 @@ class _AccessControl(Security):
     def GetPolicy(
         self,
         role: str,
-        object: list[str] = None,
+        object: str = None,
     ):
         """
         :param role: name of the role
@@ -149,7 +149,6 @@ class _AccessControl(Security):
                 "role": role,
                 "object": object,
             },
-            delimiter=",",
         )
 
     def GetRights(
@@ -351,8 +350,8 @@ class _License(Security):
 
     def Activate(
         self,
-        serial: list[str] = None,
-        generate_smtp_creds: list[bool] = None,
+        serial: str = None,
+        generate_smtp_creds: bool = None,
     ):
         return self._get(
             "Activate",
@@ -360,7 +359,6 @@ class _License(Security):
                 "serial": serial,
                 "generateSMTPCreds": generate_smtp_creds,
             },
-            delimiter=",",
         )
 
     def GenerateSMTPSettings(self):
@@ -371,7 +369,7 @@ class _License(Security):
 
     def GetVZLicense(
         self,
-        vz_type: list[str] = None,
+        vz_type: str = None,
     ):
         return self._get(
             "GetVZLicense",
