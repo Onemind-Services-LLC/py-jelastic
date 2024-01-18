@@ -255,9 +255,9 @@ class _Favorite(Marketplace):
 
     def GetList(
         self,
-        search:dict = None,
-        lang:str = None,
-        checksum:str = None,
+        search: dict = None,
+        lang: str = None,
+        checksum: str = None,
     ):
         """
         param search: JSON object with the search parameters

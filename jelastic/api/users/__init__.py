@@ -1334,7 +1334,7 @@ class _Registration(Users):
         key: str,
         password: str = None,
         skip_send_email: bool = None,
-        code:str = None,
+        code: str = None,
         reseller_id: int = None,
     ):
         """
@@ -1352,7 +1352,7 @@ class _Registration(Users):
                 "skipSendEmail": skip_send_email,
                 "code": code,
                 "resellerId": reseller_id,
-            }
+            },
         )
 
     def CheckEmailExist(
@@ -1394,7 +1394,7 @@ class _Registration(Users):
         password: str,
         name: str = None,
         check_email: bool = None,
-        welcome:str = None,
+        welcome: str = None,
         skip_send_email: bool = None,
         reseller_id: int = None,
     ):
@@ -1417,14 +1417,14 @@ class _Registration(Users):
                 "welcome": welcome,
                 "skipSendEmail": skip_send_email,
                 "resellerId": reseller_id,
-            }
+            },
         )
 
     def CreateAuthKey(
         self,
         login: str,
         solution: str,
-        auth_type:str = None,
+        auth_type: str = None,
         expires_at: datetime = None,
         type: str = None,
     ):
@@ -1444,7 +1444,7 @@ class _Registration(Users):
         self,
         email: str,
         role: str,
-        target_app_id:str = None,
+        target_app_id: str = None,
         application_right: str = None,
     ):
         """
@@ -1458,12 +1458,12 @@ class _Registration(Users):
                 "role": role,
                 "targetAppid": target_app_id,
                 "applicationRight": application_right,
-            }
+            },
         )
 
     def GeneratePassword(
         self,
-        length: int= None,
+        length: int = None,
     ):
         """
         param length: define password length (default value is set by password policy: minLength, can not be less than minLength)
@@ -1520,7 +1520,7 @@ class _Team(Users):
             params={
                 "displayName": display_name,
                 "ownerUid": owner_uid,
-            }
+            },
         )
 
     def Delete(self, team_id: int, owner_uid: int = None):
@@ -1533,7 +1533,7 @@ class _Team(Users):
             params={
                 "teamId": team_id,
                 "ownerUid": owner_uid,
-            }
+            },
         )
 
     def DeleteMember(self, member_id: int, owner_uid: int = None):
@@ -1546,7 +1546,7 @@ class _Team(Users):
             params={
                 "memberId": member_id,
                 "ownerUid": owner_uid,
-            }
+            },
         )
 
     def Edit(
@@ -1554,7 +1554,7 @@ class _Team(Users):
         team_id: int,
         display_name: str = None,
         external_id: str = None,
-        owner_uid:int = None,
+        owner_uid: int = None,
     ):
         """
         param team_id:  unique identifier of the collaboration Team
@@ -1568,10 +1568,10 @@ class _Team(Users):
                 "displayName": display_name,
                 "externalId": external_id,
                 "ownerUid": owner_uid,
-            }
+            },
         )
 
-    def Get(self, owner_uid:int = None):
+    def Get(self, owner_uid: int = None):
         """
         param owner_uid: unique identifier of the collaboration Team owner.
         """
@@ -1579,7 +1579,7 @@ class _Team(Users):
             "Get",
             params={
                 "ownerUid": owner_uid,
-            }
+            },
         )
 
     def Invite(
@@ -1602,7 +1602,7 @@ class _Team(Users):
                 "teamId": team_id,
                 "displayName": display_name,
                 "ownerUid": owner_uid,
-            }
+            },
         )
 
     def ResendInvite(self, member_id: int, owner_uid: int = None):
@@ -1615,5 +1615,5 @@ class _Team(Users):
             params={
                 "memberId": member_id,
                 "ownerUid": owner_uid,
-            }
+            },
         )
