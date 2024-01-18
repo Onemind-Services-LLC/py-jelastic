@@ -6202,7 +6202,7 @@ class _NodeGroup(Environment):
     Ref: https://docs.jelastic.com/api/private/#!/api/environment.NodeGroup
     """
 
-    _endpoint2 = "nodeGroup"
+    _endpoint2 = "nodegroup"
 
     def ApplyData(
         self,
