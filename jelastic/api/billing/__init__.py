@@ -681,7 +681,7 @@ class _Account(Billing):
                 "endtime": end_time,
                 "targetAppid": target_app_id,
             },
-            datetime_format="%Y-%m-%d %H:%M:%S",
+            datetime_format="%Y-%m-%dT%H:%M:%SZ",
         )
 
     def GetExternBillingSystemSession(self):

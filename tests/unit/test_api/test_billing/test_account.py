@@ -448,7 +448,7 @@ def test_get_extended_account_billing_history_by_period(client):
             "endtime": CURRENT_DATETIME,
             "targetAppid": "app_id",
         },
-            datetime_format="%Y-%m-%d %H:%M:%S",
+        datetime_format="%Y-%m-%dT%H:%M:%SZ",
     )
     assert response == success_response
 
