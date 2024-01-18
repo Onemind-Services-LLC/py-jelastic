@@ -10,7 +10,7 @@ class Marketplace(ClientAbstract):
     def Admin(self) -> "_Admin":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.marketplace.Admin
 
         Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.Admin
@@ -25,7 +25,7 @@ class Marketplace(ClientAbstract):
     def App(self) -> "_App":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.marketplace.App
         Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.App
         """
@@ -39,7 +39,7 @@ class Marketplace(ClientAbstract):
     def Console(self) -> "_Console":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.marketplace.Console
 
         Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.Console
@@ -54,7 +54,7 @@ class Marketplace(ClientAbstract):
     def Favorite(self) -> "_Favorite":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.marketplace.Favorite
         Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.Favorite
         """
@@ -69,7 +69,7 @@ class Marketplace(ClientAbstract):
         """
         The Installation service provides extensive functionality for users to manage applications installed from the Marketplace or via Import.
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.marketplace.Installation
         Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.Installation
         """
@@ -84,7 +84,7 @@ class Marketplace(ClientAbstract):
         """
         The JPS service provides methods for working with custom JPS manifests.
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.marketplace.Jps
         Ref: https://docs.jelastic.com/api/private/#!/api/marketplace.Jps
         """

@@ -11,7 +11,7 @@ TRIGGER_TYPE = Literal["cron", "rate", "date", "oninit", "once_delay"]
 class Utils(ClientAbstract):
     """
     >>> from jelastic import Jelastic
-    >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+    >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
     >>> jelastic.utils
 
     Ref: https://docs.jelastic.com/api/private/#!/api/utils
@@ -25,7 +25,7 @@ class Utils(ClientAbstract):
         Used to perform several actions in one request to the server.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.utils.Batch
 
         Ref: https://docs.jelastic.com/api/private/#!/api/utils.Batch
@@ -44,7 +44,7 @@ class Utils(ClientAbstract):
         and executed based on the specific conditions - cron, date, after the platform start, etc.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.utils.Scheduler
 
         Ref: https://docs.jelastic.com/api/private/#!/api/utils.Scheduler

@@ -14,7 +14,7 @@ class Billing(ClientAbstract):
     The Billing service provides methods for managing user accounts and their billing information.
 
     >>> from jelastic import Jelastic
-    >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+    >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
     >>> jelastic.billing
 
     Ref: https://docs.jelastic.com/api/#!/billing
@@ -29,7 +29,7 @@ class Billing(ClientAbstract):
         quotas, etc.) and allow managing it.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.billing.Account
 
         Ref: https://docs.jelastic.com/api/#!/api/billing.Account
@@ -43,7 +43,7 @@ class Billing(ClientAbstract):
         quotas, etc.) and allow managing it.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.billing.GroupQuota
 
         Ref: https://docs.jelastic.com/api/#!/api/billing.GroupQuota
@@ -57,7 +57,7 @@ class Billing(ClientAbstract):
         quotas, etc.) and allow managing it.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.billing.Integration
 
         Ref: https://docs.jelastic.com/api/#!/api/billing.Integration
@@ -71,7 +71,7 @@ class Billing(ClientAbstract):
         quotas, etc.) and allow managing it.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.billing.PayMethod
 
         Ref: https://docs.jelastic.com/api/private/#!/api/billing.PayMethod
@@ -85,7 +85,7 @@ class Billing(ClientAbstract):
         quotas, etc.) and allow managing it.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.billing.Pricing
 
         Ref: https://docs.jelastic.com/api/private/#!/api/billing.Pricing
@@ -99,7 +99,7 @@ class Billing(ClientAbstract):
         quotas, etc.) and allow managing it.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.billing.Reseller
 
         Ref: https://docs.jelastic.com/api/private/#!/api/billing.Reseller
@@ -113,7 +113,7 @@ class Billing(ClientAbstract):
         quotas, etc.) and allow managing it.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.billing.ServicePlan
 
         Ref: https://docs.jelastic.com/api/private/#!/api/billing.ServicePlan
@@ -127,7 +127,7 @@ class Billing(ClientAbstract):
         quotas, etc.) and allow managing it.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.billing.Order
 
         Ref: https://docs.jelastic.com/api/private/#!/api/billing.Order
@@ -141,7 +141,7 @@ class Billing(ClientAbstract):
         quotas, etc.) and allow managing it.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.billing.Invoice
 
         Ref: https://docs.jelastic.com/api/#!/api/billing.Invoice
@@ -155,7 +155,7 @@ class Billing(ClientAbstract):
         quotas, etc.) and allow managing it.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.billing.System
 
         Ref: https://docs.jelastic.com/api/#!/api/billing.System
@@ -169,7 +169,7 @@ class Billing(ClientAbstract):
         quotas, etc.) and allow managing it.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.billing.Utils
 
         Ref: https://docs.jelastic.com/api/private/#!/api/billing.Utils
@@ -183,7 +183,7 @@ class Billing(ClientAbstract):
         quotas, etc.) and allow managing it.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.billing.Subscription
 
         Ref: https://docs.jelastic.com/api/private/#!/api/billing.Subscription

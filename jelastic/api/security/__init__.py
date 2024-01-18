@@ -9,7 +9,7 @@ MODE = Literal["STRONG", "MODERATE", "WEAK"]
 class Security(ClientAbstract):
     """
     >>> from jelastic import Jelastic
-    >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+    >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
     >>> jelastic.security
 
     Ref: https://docs.jelastic.com/api/#!/security
@@ -21,7 +21,7 @@ class Security(ClientAbstract):
     def AccessControl(self) -> "_AccessControl":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.security.AccessControl
 
         Ref: https://docs.jelastic.com/api/private/#!/api/security.AccessControl
@@ -36,7 +36,7 @@ class Security(ClientAbstract):
     def License(self) -> "_License":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.security.License
 
         Ref: https://docs.jelastic.com/api/private/#!/api/security.License

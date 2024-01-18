@@ -14,7 +14,7 @@ class Data(ClientAbstract):
         Construction of API to import data from your project for other developers of applications;
         Duplication of data to reduce the risk of loss, encryption, if necessary.
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.data
 
         Ref: https://docs.jelastic.com/api/#!/data
@@ -26,7 +26,7 @@ class Data(ClientAbstract):
     def Base(self) -> "_Base":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.data.Base
 
         Ref: https://docs.jelastic.com/api/private/#!/api/data.Base

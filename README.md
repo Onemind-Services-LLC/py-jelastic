@@ -18,7 +18,7 @@ To begin, import the Jelastic client and instantiate the API.
 from jelastic import Jelastic
 
 jelastic = Jelastic(
-    'https://jca.xapp.cloudmydc.com',
+    'https://app.xapp.cloudmydc.com',
     token='d6f4e314a5b5fefd164995169f28ae32d987704f'
 )
 ```
@@ -29,7 +29,7 @@ The library follows the convention from the Jelastic API documentation. For exam
 from jelastic import Jelastic
 
 jelastic = Jelastic(
-    'https://jca.xapp.cloudmydc.com',
+    'https://app.xapp.cloudmydc.com',
     token='d6f4e314a5b5fefd164995169f28ae32d987704f'
 )
 

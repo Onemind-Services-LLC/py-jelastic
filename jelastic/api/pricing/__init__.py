@@ -6,7 +6,7 @@ __all__ = ["Pricing"]
 class Pricing(ClientAbstract):
     """
     >>> from jelastic import Jelastic
-    >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+    >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
     >>> jelastic.pricing
 
     Ref: https://docs.jelastic.com/api/private/#!/api/pricing
@@ -18,7 +18,7 @@ class Pricing(ClientAbstract):
     def Option(self) -> "_Option":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.pricing.Option
 
         Ref: https://docs.jelastic.com/api/private/#!/api/pricing.Option
@@ -29,7 +29,7 @@ class Pricing(ClientAbstract):
     def Tariff(self) -> "_Tariff":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.pricing.Tariff
 
         Ref: https://docs.jelastic.com/api/private/#!/api/pricing.Tariff

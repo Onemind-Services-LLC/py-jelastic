@@ -4,7 +4,7 @@ import pytest
 
 from jelastic import Jelastic
 
-JELASTIC_URL = os.environ.get("JELASTIC_URL", "https://jca.xapp.cloudmydc.com/")
+JELASTIC_URL = os.environ.get("JELASTIC_URL", "https://app.xapp.cloudmydc.com/")
 JELASTIC_TOKEN = os.environ.get("JELASTIC_TOKEN")
 
 if not JELASTIC_TOKEN:

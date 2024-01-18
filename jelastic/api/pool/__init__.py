@@ -6,7 +6,7 @@ __all__ = ["Pool"]
 class Pool(ClientAbstract):
     """
     >>> from jelastic import Jelastic
-    >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+    >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
     >>> jelastic.pool
 
     Ref: https://docs.jelastic.com/api/#!/pool
@@ -18,7 +18,7 @@ class Pool(ClientAbstract):
     def IpPool(self) -> "_IpPool":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.pool.IpPool
 
         Ref: https://docs.jelastic.com/api/private/#!/api/pool.IpPool
@@ -33,7 +33,7 @@ class Pool(ClientAbstract):
     def NodePool(self) -> "_NodePool":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.pool.NodePool
 
         Ref: https://docs.jelastic.com/api/private/#!/api/pool.NodePool

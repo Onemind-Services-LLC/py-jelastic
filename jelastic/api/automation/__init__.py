@@ -9,7 +9,7 @@ __all__ = ["Automation"]
 class Automation(ClientAbstract):
     """
     >>> from jelastic import Jelastic
-    >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+    >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
     >>> jelastic.automation
 
     Ref: https://docs.jelastic.com/api/private/#!/api/automation
@@ -21,7 +21,7 @@ class Automation(ClientAbstract):
     def Utils(self) -> "_Utils":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.automation.Utils
 
         Ref: https://docs.jelastic.com/api/private/#!/api/automation.Utils
@@ -32,7 +32,7 @@ class Automation(ClientAbstract):
 class _Utils(Automation):
     """
     >>> from jelastic import Jelastic
-    >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+    >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
     >>> jelastic.automation.Utils
 
     Ref: https://docs.jelastic.com/api/private/#!/api/automation.Utils

@@ -6,7 +6,7 @@ __all__ = ["S3"]
 class S3(ClientAbstract):
     """
     >>> from jelastic import Jelastic
-    >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+    >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
     >>> jelastic.s3
 
     Ref: https://docs.jelastic.com/api/private/#!/api/s3
@@ -20,7 +20,7 @@ class S3(ClientAbstract):
         Service provides an interface for managing S3 stuff
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.s3.Account
 
         Ref: https://docs.jelastic.com/api/private/#!/api/s3.Account
@@ -33,7 +33,7 @@ class S3(ClientAbstract):
         Service provides an interface for managing S3 stuff
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.s3.Bucket
 
         Ref: https://docs.jelastic.com/api/private/#!/api/s3.Bucket

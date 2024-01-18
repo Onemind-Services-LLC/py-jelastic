@@ -13,7 +13,7 @@ class Development(ClientAbstract):
         Service Management applications. Used to create new applications and settings.
 
          >>> from jelastic import Jelastic
-         >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+         >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
          >>> jelastic.development.Applications
 
          Ref: https://docs.jelastic.com/api/private/#!/api/development.Applications
@@ -30,7 +30,7 @@ class Development(ClientAbstract):
         Service Management applications. Used to create new applications and settings.
 
          >>> from jelastic import Jelastic
-         >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+         >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
          >>> jelastic.development.Scripting
 
          Ref: https://docs.jelastic.com/api/private/#!/api/development.Scripting

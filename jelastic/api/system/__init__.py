@@ -13,7 +13,7 @@ class System(ClientAbstract):
         quotas, etc.) and allow managing it.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.system.Admin
 
         Ref: https://docs.jelastic.com/api/private/#!/api/system.Admin
@@ -27,7 +27,7 @@ class System(ClientAbstract):
         quotas, etc.) and allow managing it.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.system.Cluster
 
         Ref: https://docs.jelastic.com/api/private/#!/api/system.Cluster
@@ -41,7 +41,7 @@ class System(ClientAbstract):
         quotas, etc.) and allow managing it.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.system.Groups
 
         Ref: https://docs.jelastic.com/api/private/#!/api/system.Groups
@@ -55,7 +55,7 @@ class System(ClientAbstract):
         quotas, etc.) and allow managing it.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.system.IdentityProvider
 
         Ref: https://docs.jelastic.com/api/private/#!/api/system.IdentityProvider
@@ -71,7 +71,7 @@ class System(ClientAbstract):
         quotas, etc.) and allow managing it.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.system.Service
 
         Ref: https://docs.jelastic.com/api/private/#!/api/system.Service
@@ -85,7 +85,7 @@ class System(ClientAbstract):
         quotas, etc.) and allow managing it.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.system.Usage
 
         Ref: https://docs.jelastic.com/api/private/#!/api/system.Usage

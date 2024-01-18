@@ -12,7 +12,7 @@ EVENT_TYPE = Literal["SEND_NOTIFICATION", "OOM_KILLER", "CUSTOM_NODE_EVENT"]
 class Environment(ClientAbstract):
     """
     >>> from jelastic import Jelastic
-    >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+    >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
     >>> jelastic.environment
 
     Ref: https://docs.jelastic.com/api/#!/environment
@@ -27,7 +27,7 @@ class Environment(ClientAbstract):
         resources that grouped by account.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.environment.Billing
 
         Ref: https://docs.jelastic.com/api/private/#!/api/environment.Billing
@@ -46,7 +46,7 @@ class Environment(ClientAbstract):
 
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.environment.Export
 
         Ref: https://docs.jelastic.com/api/private/#!/api/environment.Export
@@ -57,7 +57,7 @@ class Environment(ClientAbstract):
     def JError(self) -> "_JError":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.environment.JError
 
         Ref: https://docs.jelastic.com/api/private/#!/api/environment.JError
@@ -68,7 +68,7 @@ class Environment(ClientAbstract):
     def Node(self) -> "_Node":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.environment.Node
 
         Ref: https://docs.jelastic.com/api/private/#!/api/environment.Node
@@ -81,7 +81,7 @@ class Environment(ClientAbstract):
         This service provides methods to manage Java project deployment from the version control system (VCS) repositories. The process requires a dedicated Maven build automation node that will build and deploy Java projects. With Maven, you can add any public or private project directly from your VCS repository (Git or SVN) using the appropriate link type: http, https, git (or svn). After the addition, Java projects can be deployed to the appropriate application servers.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.environment.Build
 
         Ref: https://docs.jelastic.com/api/private/#!/api/environment.Build
@@ -108,7 +108,7 @@ class Environment(ClientAbstract):
         Also, you can bind Custom SSL to your custom domain.
 
          >>> from jelastic import Jelastic
-         >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+         >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
          >>> jelastic.environment.Binder
 
          Ref: https://docs.jelastic.com/api/private/#!/api/environment.Binder
@@ -123,7 +123,7 @@ class Environment(ClientAbstract):
     def Control(self) -> "_Control":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.environment.Control
 
         Ref: https://docs.jelastic.com/api/private/#!/api/environment.Control
@@ -134,7 +134,7 @@ class Environment(ClientAbstract):
     def Deployment(self) -> "_Deployment":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.environment.Deployment
 
         Ref: https://docs.jelastic.com/api/private/#!/api/environment.Deployment
@@ -147,7 +147,7 @@ class Environment(ClientAbstract):
         The File Manager API service gives you access to the container’s home directory and your environment's configuration files. You can read, write, create, delete, and adjust your application files and settings.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.environment.File
 
         Ref: https://docs.jelastic.com/api/private/#!/api/environment.File
@@ -164,7 +164,7 @@ class Environment(ClientAbstract):
         Categorize environments in the account with the help of the group management API. Such user-defined groups can filter the environment list, allowing a clear-cut view of the projects. Learn more in the documentation.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.environment.Group
 
         Ref: https://docs.jelastic.com/api/private/#!/api/environment.Group
@@ -181,7 +181,7 @@ class Environment(ClientAbstract):
         The nodeGroup API service is used to manage data (parameters) and custom options of the environment layers.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.environment.NodeGroup
 
         Ref: https://docs.jelastic.com/api/private/#!/api/environment.NodeGroup
@@ -198,7 +198,7 @@ class Environment(ClientAbstract):
         This service is responsible for managing the environment firewall feature. You can get a rules list, manage specific rules, and enable/disable firewalls for environments. Learn more in the documentation.
 
          >>> from jelastic import Jelastic
-         >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+         >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
          >>> jelastic.environment.Security
 
          Ref: https://docs.jelastic.com/api/private/#!/api/environment.Security
@@ -213,7 +213,7 @@ class Environment(ClientAbstract):
     def System(self) -> "_System":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.environment.System
 
         Ref: https://docs.jelastic.com/api/private/#!/api/environment.System
@@ -230,7 +230,7 @@ class Environment(ClientAbstract):
         This service is responsible for the monitoring of actions performed by the user. Learn more in the documentation.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.environment.Tracking
 
         Ref: https://docs.jelastic.com/api/private/#!/api/environment.Tracking
@@ -250,7 +250,7 @@ class Environment(ClientAbstract):
         load alert - custom conditions for email notifications based on the nodes' load, i.e. a particular resource type is above/below the stated value for the designated period.
 
                  >>> from jelastic import Jelastic
-                 >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+                 >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
                  >>> jelastic.environment.Trigger
 
                  Ref: https://docs.jelastic.com/api/private/#!/api/environment.Trigger
@@ -267,7 +267,7 @@ class Environment(ClientAbstract):
         This service is the tool for managing your VCS (version control system) projects. Configure periodic automatic deployment of the committed changes, and you can work with GIT/SVN repository only. Just commit the updated code to your VCS project. The platform will detect changes and automatically push them to the assigned environment. In contrast to the GIT hooks, the auto-deploy feature does not require configuration on the GIT side and works with SVN.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.environment.Vcs
 
         Ref: https://docs.jelastic.com/api/private/#!/api/environment.Vcs
@@ -284,7 +284,7 @@ class Environment(ClientAbstract):
         Service provides a flexible structure to manage Environment, obtain statistic information etc.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.environment.Windows
 
         Ref: https://docs.jelastic.com/api/private/#!/api/environment.Windows

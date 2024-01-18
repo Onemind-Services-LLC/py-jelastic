@@ -8,7 +8,7 @@ __all__ = ["Users"]
 class Users(ClientAbstract):
     """
     >>> from jelastic import Jelastic
-    >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+    >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
     >>> jelastic.users
     Ref: https://docs.jelastic.com/api/private/#!/api/users
     """
@@ -19,7 +19,7 @@ class Users(ClientAbstract):
     def Account(self) -> "_Account":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.users.Account
 
         Ref: https://docs.jelastic.com/api/private/#!/api/users.Account
@@ -32,7 +32,7 @@ class Users(ClientAbstract):
         This service is responsible for the identification and authentication of registered users. It includes sign-in/out actions, session and tokens management, etc.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.users.Authentication
         Ref: https://docs.jelastic.com/api/private/#!/api/users.Authentication
         """
@@ -57,7 +57,7 @@ class Users(ClientAbstract):
         Collaboration roles - a combination of policies that create the required range of actions to share with members.
 
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.users.Collaboration
 
         Ref: https://docs.jelastic.com/api/private/#!/api/users.Collaboration
@@ -70,7 +70,7 @@ class Users(ClientAbstract):
     def Team(self) -> "_Team":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.users.Team
 
         Ref: https://docs.jelastic.com/api/private/#!/api/users.Team
@@ -82,7 +82,7 @@ class Users(ClientAbstract):
         """
         Registration of new users.
          >>> from jelastic import Jelastic
-         >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+         >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
          >>> jelastic.users.Registration
          Ref: https://docs.jelastic.com/api/private/#!/api/users.Registration
         """
@@ -95,7 +95,7 @@ class Users(ClientAbstract):
         """
         SSO methods
          >>> from jelastic import Jelastic
-         >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+         >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
          >>> jelastic.users.SSO
          Ref: https://docs.jelastic.com/api/private/#!/api/users.SSO
         """
@@ -105,7 +105,7 @@ class Users(ClientAbstract):
 class _Account(Users):
     """
     >>> from jelastic import Jelastic
-    >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+    >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
     >>> jelastic.users.Account
 
      Ref: https://docs.jelastic.com/api/private/#!/api/users.Account
@@ -389,7 +389,7 @@ class _Account(Users):
 class _Authentication(Users):
     """
     >>> from jelastic import Jelastic
-    >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+    >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
     >>> jelastic.users.Authentication
      Ref: https://docs.jelastic.com/api/private/#!/api/users.Authentication
     """
@@ -701,7 +701,7 @@ class _Authentication(Users):
 class _Collaboration(Users):
     """
     >>> from jelastic import Jelastic
-    >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+    >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
     >>> jelastic.users.Collaboration
      Ref: https://docs.jelastic.com/api/private/#!/api/users.Collaboration
     """
@@ -1329,7 +1329,7 @@ class _Collaboration(Users):
 class _SSO(Users):
     """
     >>> from jelastic import Jelastic
-    >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+    >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
     >>> jelastic.users.SSO
      Ref: https://docs.jelastic.com/api/private/#!/api/users.SSO
     """
@@ -1389,7 +1389,7 @@ class _SSO(Users):
 class _Registration(Users):
     """
     >>> from jelastic import Jelastic
-    >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+    >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
     >>> jelastic.users.Registration
      Ref: https://docs.jelastic.com/api/private/#!/api/users.Registration
     """
@@ -1574,7 +1574,7 @@ class _Registration(Users):
 class _Team(Users):
     """
     >>> from jelastic import Jelastic
-    >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+    >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
     >>> jelastic.users.Team
      Ref: https://docs.jelastic.com/api/private/#!/api/users.Team
     """

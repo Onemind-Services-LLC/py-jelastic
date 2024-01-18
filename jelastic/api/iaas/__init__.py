@@ -6,7 +6,7 @@ __all__ = ["IaaS"]
 class IaaS(ClientAbstract):
     """
     >>> from jelastic import Jelastic
-    >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+    >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
     >>> jelastic.iaas
 
     Ref: https://docs.jelastic.com/api/private/#!/api/iaas
@@ -18,7 +18,7 @@ class IaaS(ClientAbstract):
     def Project(self) -> "_Project":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.iaas.Project
 
         Ref: https://docs.jelastic.com/api/private/#!/api/iaas.Project

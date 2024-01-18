@@ -8,7 +8,7 @@ __all__ = ["Statistic"]
 class Statistic(ClientAbstract):
     """
     >>> from jelastic import Jelastic
-    >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+    >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
     >>> jelastic.statistic
     Ref: https://docs.jelastic.com/api/private/#!/api/statistic
     """
@@ -19,7 +19,7 @@ class Statistic(ClientAbstract):
     def Statistic(self) -> "_Statistic":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.statistic.Statistic
 
         Ref: https://docs.jelastic.com/api/private/#!/api/statistic.Statistic
@@ -30,7 +30,7 @@ class Statistic(ClientAbstract):
     def Utils(self) -> "_Utils":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.statistic.Utils
         Ref: https://docs.jelastic.com/api/private/#!/api/statistic.Utils
         """
@@ -40,7 +40,7 @@ class Statistic(ClientAbstract):
     def System(self) -> "_System":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.statistic.System
         Ref: https://docs.jelastic.com/api/private/#!/api/statistic.System
         """

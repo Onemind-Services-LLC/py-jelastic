@@ -10,7 +10,7 @@ class Management(ClientAbstract):
     def Account(self) -> "_Account":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.management.Account
 
         Ref: https://docs.jelastic.com/api/private/#!/api/management.Account

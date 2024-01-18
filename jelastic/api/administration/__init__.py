@@ -15,7 +15,7 @@ class Administration(ClientAbstract):
     def Analytics(self) -> "_Analytics":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.administration.Analytics
 
         Ref: https://docs.jelastic.com/api/private/#!/api/administration.Analytics
@@ -30,7 +30,7 @@ class Administration(ClientAbstract):
     def Cluster(self) -> "_Cluster":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.administration.Cluster
 
         Ref: https://docs.jelastic.com/api/private/#!/api/administration.Cluster
@@ -45,7 +45,7 @@ class Administration(ClientAbstract):
     def Resource(self) -> "_Resource":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.administration.Resource
 
         Ref: https://docs.jelastic.com/api/private/#!/api/administration.Resource
@@ -60,7 +60,7 @@ class Administration(ClientAbstract):
     def Subscription(self) -> "_Subscription":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.administration.Subscription
 
         Ref: https://docs.jelastic.com/api/private/#!/api/administration.Subscription
@@ -75,7 +75,7 @@ class Administration(ClientAbstract):
     def Update(self) -> "_Update":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.administration.Update
 
         Ref: https://docs.jelastic.com/api/private/#!/api/administration.Update
@@ -90,7 +90,7 @@ class Administration(ClientAbstract):
     def Monitoring(self) -> "_Monitoring":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.administration.Monitoring
 
         Ref: https://docs.jelastic.com/api/private/#!/api/administration.Monitoring
@@ -105,7 +105,7 @@ class Administration(ClientAbstract):
     def Template(self) -> "_Template":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.administration.Template
 
         Ref: https://docs.jelastic.com/api/private/#!/api/administration.Template
@@ -120,7 +120,7 @@ class Administration(ClientAbstract):
     def Host(self) -> "_Host":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.administration.Host
 
         Ref: https://docs.jelastic.com/api/private/#!/api/administration.Host
@@ -135,7 +135,7 @@ class Administration(ClientAbstract):
     def HostGroup(self) -> "_HostGroup":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.administration.HostGroup
 
         Ref: https://docs.jelastic.com/api/private/#!/api/administration.HostGroup
@@ -150,7 +150,7 @@ class Administration(ClientAbstract):
     def Utils(self) -> "_Utils":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.administration.Utils
 
         Ref: https://docs.jelastic.com/api/private/#!/api/administration.Utils
@@ -165,7 +165,7 @@ class Administration(ClientAbstract):
     def Config(self) -> "_Config":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.administration.Config
 
         Ref: https://docs.jelastic.com/api/private/#!/api/administration.Config
@@ -180,7 +180,7 @@ class Administration(ClientAbstract):
     def VirtualNetwork(self) -> "_VirtualNetwork":
         """
         >>> from jelastic import Jelastic
-        >>> jelastic = Jelastic('https://jca.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
+        >>> jelastic = Jelastic('https://app.xapp.cloudmydc.com', token='d6f4e314a5b5fefd164995169f28ae32d987704f')
         >>> jelastic.administration.VirtualNetwork
 
         Ref: https://docs.jelastic.com/api/private/#!/api/administration.VirtualNetwork
