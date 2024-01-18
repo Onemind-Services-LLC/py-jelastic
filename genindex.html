@@ -524,12 +524,12 @@
 <li class="toctree-l2"><a class="reference internal" href="billing.html#jelastic.api.billing._ServicePlan"><code class="docutils literal notranslate"><span class="pre">_ServicePlan</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="billing.html#jelastic.api.billing._Subscription"><code class="docutils literal notranslate"><span class="pre">_Subscription</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="billing.html#jelastic.api.billing._Order"><code class="docutils literal notranslate"><span class="pre">_Order</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="billing.html#jelastic.api.billing._Order.AddStats"><code class="docutils literal notranslate"><span class="pre">_Order.AddStats()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="billing.html#jelastic.api.billing._Order.EnvResources"><code class="docutils literal notranslate"><span class="pre">_Order.EnvResources()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="billing.html#jelastic.api.billing._Order.EnvsResources"><code class="docutils literal notranslate"><span class="pre">_Order.EnvsResources()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="billing.html#jelastic.api.billing._Order.EnvsResourcesByAccount"><code class="docutils literal notranslate"><span class="pre">_Order.EnvsResourcesByAccount()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="billing.html#jelastic.api.billing._Order.GetOptions"><code class="docutils literal notranslate"><span class="pre">_Order.GetOptions()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="billing.html#jelastic.api.billing._Order.SetOptions"><code class="docutils literal notranslate"><span class="pre">_Order.SetOptions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="billing.html#jelastic.api.billing._Order.GetFraudCheckUrl"><code class="docutils literal notranslate"><span class="pre">_Order.GetFraudCheckUrl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="billing.html#jelastic.api.billing._Order.GetHistoryUrl"><code class="docutils literal notranslate"><span class="pre">_Order.GetHistoryUrl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="billing.html#jelastic.api.billing._Order.GetOrders"><code class="docutils literal notranslate"><span class="pre">_Order.GetOrders()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="billing.html#jelastic.api.billing._Order.GetUrlSupplyingCookiesForHistoryUrl"><code class="docutils literal notranslate"><span class="pre">_Order.GetUrlSupplyingCookiesForHistoryUrl()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="billing.html#jelastic.api.billing._Order.OrderEvent"><code class="docutils literal notranslate"><span class="pre">_Order.OrderEvent()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="billing.html#jelastic.api.billing._Order.PayServicePlan"><code class="docutils literal notranslate"><span class="pre">_Order.PayServicePlan()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="billing.html#jelastic.api.billing._Utils"><code class="docutils literal notranslate"><span class="pre">_Utils</span></code></a><ul>
@@ -1592,12 +1592,8 @@
 </li>
       <li><a href="administration.html#jelastic.api.administration._Resource.AddStatistics">AddStatistics() (jelastic.api.administration._Resource method)</a>
 </li>
-      <li><a href="billing.html#jelastic.api.billing._Order.AddStats">AddStats() (jelastic.api.billing._Order method)</a>
-
-      <ul>
-        <li><a href="environment.html#jelastic.api.environment._Billing.AddStats">(jelastic.api.environment._Billing method)</a>
+      <li><a href="environment.html#jelastic.api.environment._Billing.AddStats">AddStats() (jelastic.api.environment._Billing method)</a>
 </li>
-      </ul></li>
       <li><a href="environment.html#jelastic.api.environment._Control.AddStorageNode">AddStorageNode() (jelastic.api.environment._Control method)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Subscription.AddSubscriptionItemResource">AddSubscriptionItemResource() (jelastic.api.administration._Subscription method)</a>
@@ -2082,10 +2078,10 @@
 </li>
       <li><a href="administration.html#jelastic.api.administration._Utils.EditSystemExternalDNSRecord">EditSystemExternalDNSRecord() (jelastic.api.administration._Utils method)</a>
 </li>
-      <li><a href="billing.html#jelastic.api.billing._Pricing.EditTariff">EditTariff() (jelastic.api.billing._Pricing method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="billing.html#jelastic.api.billing._Pricing.EditTariff">EditTariff() (jelastic.api.billing._Pricing method)</a>
+</li>
       <li><a href="utils.html#jelastic.api.utils._Scheduler.EditTask">EditTask() (jelastic.api.utils._Scheduler method)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Cluster.EditTemplate">EditTemplate() (jelastic.api.administration._Cluster method)</a>, <a href="system.html#jelastic.api.administration._Cluster.EditTemplate">[1]</a>
@@ -2106,24 +2102,12 @@
 </li>
       <li><a href="environment.html#jelastic.api.environment.Environment">Environment (class in jelastic.api.environment)</a>
 </li>
-      <li><a href="billing.html#jelastic.api.billing._Order.EnvResources">EnvResources() (jelastic.api.billing._Order method)</a>
-
-      <ul>
-        <li><a href="environment.html#jelastic.api.environment._Billing.EnvResources">(jelastic.api.environment._Billing method)</a>
+      <li><a href="environment.html#jelastic.api.environment._Billing.EnvResources">EnvResources() (jelastic.api.environment._Billing method)</a>
 </li>
-      </ul></li>
-      <li><a href="billing.html#jelastic.api.billing._Order.EnvsResources">EnvsResources() (jelastic.api.billing._Order method)</a>
-
-      <ul>
-        <li><a href="environment.html#jelastic.api.environment._Billing.EnvsResources">(jelastic.api.environment._Billing method)</a>
+      <li><a href="environment.html#jelastic.api.environment._Billing.EnvsResources">EnvsResources() (jelastic.api.environment._Billing method)</a>
 </li>
-      </ul></li>
-      <li><a href="billing.html#jelastic.api.billing._Order.EnvsResourcesByAccount">EnvsResourcesByAccount() (jelastic.api.billing._Order method)</a>
-
-      <ul>
-        <li><a href="environment.html#jelastic.api.environment._Billing.EnvsResourcesByAccount">(jelastic.api.environment._Billing method)</a>
+      <li><a href="environment.html#jelastic.api.environment._Billing.EnvsResourcesByAccount">EnvsResourcesByAccount() (jelastic.api.environment._Billing method)</a>
 </li>
-      </ul></li>
       <li><a href="environment.html#jelastic.api.environment._JError.Error">Error() (jelastic.api.environment._JError method)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Cluster.EvacuateContainers">EvacuateContainers() (jelastic.api.administration._Cluster method)</a>, <a href="system.html#jelastic.api.administration._Cluster.EvacuateContainers">[1]</a>
@@ -2476,6 +2460,8 @@
 </li>
       <li><a href="environment.html#jelastic.api.environment._File.GetFavorites">GetFavorites() (jelastic.api.environment._File method)</a>
 </li>
+      <li><a href="billing.html#jelastic.api.billing._Order.GetFraudCheckUrl">GetFraudCheckUrl() (jelastic.api.billing._Order method)</a>
+</li>
       <li><a href="billing.html#jelastic.api.billing._Account.GetFundAccountHistory">GetFundAccountHistory() (jelastic.api.billing._Account method)</a>
 </li>
       <li><a href="pricing.html#jelastic.api.pricing._Tariff.GetGridItems">GetGridItems() (jelastic.api.pricing._Tariff method)</a>
@@ -2501,6 +2487,8 @@
       <li><a href="administration.html#jelastic.api.administration._Cluster.GetHdNodesLoadInfo">GetHdNodesLoadInfo() (jelastic.api.administration._Cluster method)</a>, <a href="system.html#jelastic.api.administration._Cluster.GetHdNodesLoadInfo">[1]</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Cluster.GetHdNodeStatus">GetHdNodeStatus() (jelastic.api.administration._Cluster method)</a>, <a href="system.html#jelastic.api.administration._Cluster.GetHdNodeStatus">[1]</a>
+</li>
+      <li><a href="billing.html#jelastic.api.billing._Order.GetHistoryUrl">GetHistoryUrl() (jelastic.api.billing._Order method)</a>
 </li>
       <li><a href="environment.html#jelastic.api.environment._Deployment.GetHooks">GetHooks() (jelastic.api.environment._Deployment method)</a>
 </li>
@@ -2598,12 +2586,10 @@
 </li>
       <li><a href="administration.html#jelastic.api.administration._Cluster.GetOOMKilledProcesses">GetOOMKilledProcesses() (jelastic.api.administration._Cluster method)</a>, <a href="system.html#jelastic.api.administration._Cluster.GetOOMKilledProcesses">[1]</a>
 </li>
-      <li><a href="billing.html#jelastic.api.billing._Order.GetOptions">GetOptions() (jelastic.api.billing._Order method)</a>
-
-      <ul>
-        <li><a href="environment.html#jelastic.api.environment._Billing.GetOptions">(jelastic.api.environment._Billing method)</a>
+      <li><a href="environment.html#jelastic.api.environment._Billing.GetOptions">GetOptions() (jelastic.api.environment._Billing method)</a>
 </li>
-      </ul></li>
+      <li><a href="billing.html#jelastic.api.billing._Order.GetOrders">GetOrders() (jelastic.api.billing._Order method)</a>
+</li>
       <li><a href="administration.html#jelastic.api.administration._Cluster.GetPcsClusterList">GetPcsClusterList() (jelastic.api.administration._Cluster method)</a>, <a href="system.html#jelastic.api.administration._Cluster.GetPcsClusterList">[1]</a>
 </li>
       <li><a href="billing.html#jelastic.api.billing._Pricing.GetPlatformCurrency">GetPlatformCurrency() (jelastic.api.billing._Pricing method)</a>
@@ -2761,6 +2747,8 @@
       <li><a href="data.html#jelastic.api.data._Base.GetUniqueFields">GetUniqueFields() (jelastic.api.data._Base method)</a>
 </li>
       <li><a href="billing.html#jelastic.api.billing._Pricing.GetUniqueResourceNames">GetUniqueResourceNames() (jelastic.api.billing._Pricing method)</a>
+</li>
+      <li><a href="billing.html#jelastic.api.billing._Order.GetUrlSupplyingCookiesForHistoryUrl">GetUrlSupplyingCookiesForHistoryUrl() (jelastic.api.billing._Order method)</a>
 </li>
       <li><a href="administration.html#jelastic.api.administration._Cluster.GetUserActivity">GetUserActivity() (jelastic.api.administration._Cluster method)</a>, <a href="system.html#jelastic.api.administration._Cluster.GetUserActivity">[1]</a>
 </li>
@@ -3351,6 +3339,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="billing.html#jelastic.api.billing.Billing.Order">Order (jelastic.api.billing.Billing property)</a>
 </li>
+      <li><a href="billing.html#jelastic.api.billing._Order.OrderEvent">OrderEvent() (jelastic.api.billing._Order method)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -3361,12 +3351,14 @@
 </li>
       <li><a href="billing.html#jelastic.api.billing.Billing.PayMethod">PayMethod (jelastic.api.billing.Billing property)</a>
 </li>
-      <li><a href="platform.html#jelastic.api.platform.Platform">Platform (class in jelastic.api.platform)</a>
+      <li><a href="billing.html#jelastic.api.billing._Order.PayServicePlan">PayServicePlan() (jelastic.api.billing._Order method)</a>
 </li>
-      <li><a href="pool.html#jelastic.api.pool.Pool">Pool (class in jelastic.api.pool)</a>
+      <li><a href="platform.html#jelastic.api.platform.Platform">Platform (class in jelastic.api.platform)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="pool.html#jelastic.api.pool.Pool">Pool (class in jelastic.api.pool)</a>
+</li>
       <li><a href="environment.html#jelastic.api.environment._File.PrepareMountPoints">PrepareMountPoints() (jelastic.api.environment._File method)</a>
 </li>
       <li><a href="pricing.html#jelastic.api.pricing.Pricing">Pricing (class in jelastic.api.pricing)</a>
@@ -3735,10 +3727,10 @@
 </li>
       <li><a href="billing.html#jelastic.api.billing._GroupQuota.SetGroupQuota">SetGroupQuota() (jelastic.api.billing._GroupQuota method)</a>
 </li>
-      <li><a href="environment.html#jelastic.api.environment._Group.SetIsolationEnabled">SetIsolationEnabled() (jelastic.api.environment._Group method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="environment.html#jelastic.api.environment._Group.SetIsolationEnabled">SetIsolationEnabled() (jelastic.api.environment._Group method)</a>
+</li>
       <li><a href="administration.html#jelastic.api.administration._Host.SetLabels">SetLabels() (jelastic.api.administration._Host method)</a>
 </li>
       <li><a href="environment.html#jelastic.api.environment._Trigger.SetLoadAlertTriggerEnabled">SetLoadAlertTriggerEnabled() (jelastic.api.environment._Trigger method)</a>
@@ -3759,12 +3751,8 @@
 </li>
       <li><a href="data.html#jelastic.api.data._Base.SetObjectsByCriteria">SetObjectsByCriteria() (jelastic.api.data._Base method)</a>
 </li>
-      <li><a href="billing.html#jelastic.api.billing._Order.SetOptions">SetOptions() (jelastic.api.billing._Order method)</a>
-
-      <ul>
-        <li><a href="environment.html#jelastic.api.environment._Billing.SetOptions">(jelastic.api.environment._Billing method)</a>
+      <li><a href="environment.html#jelastic.api.environment._Billing.SetOptions">SetOptions() (jelastic.api.environment._Billing method)</a>
 </li>
-      </ul></li>
       <li><a href="s3.html#jelastic.api.s3._Bucket.SetPolicy">SetPolicy() (jelastic.api.s3._Bucket method)</a>
 </li>
       <li><a href="billing.html#jelastic.api.billing._GroupQuota.SetPricingModels">SetPricingModels() (jelastic.api.billing._GroupQuota method)</a>
