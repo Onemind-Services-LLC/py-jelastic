@@ -1924,130 +1924,55 @@ class _Order(Billing):
 
     _endpoint2 = "order"
 
-    def AddStats(
-        self,
-        resource_name: str,
-        uid: int,
-        value: int,
-        start_date: list[str] = None,
-        end_date: list[str] = None,
-        env_name: list[str] = None,
-        node_id: list[int] = None,
-        note: list[str] = None,
-        value_group: list[str] = None,
-    ):
-        return self._get(
-            "AddStats",
-            params={
-                "resourceName": resource_name,
-                "uid": uid,
-                "value": value,
-                "startDate": start_date,
-                "endDate": end_date,
-                "envName": env_name,
-                "nodeId": node_id,
-                "note": note,
-                "valueGroup": value_group,
-            },
-            delimiter=",",
-        )
+    def GetFraudCheckUrl(self):
+        return self._get("GetFraudCheckUrl", params={})
 
-    def EnvResources(
-        self,
-        start_date: date,
-        end_date: date,
-    ):
-        start_date = start_date.strftime("%Y-%m-%d")
-        end_date = end_date.strftime("%Y-%m-%d")
+    def GetHistoryUrl(self):
+        return self._get("GetHistoryUrl", params={})
+
+    def GetOrders(self, status: str):
         return self._get(
-            "EnvResources",
+            "GetOrders",
             params={
-                "startDate": start_date,
-                "endDate": end_date,
+                "status": status,
             },
         )
 
-    def EnvsResources(
+    def GetUrlSupplyingCookiesForHistoryUrl(self):
+        return self._get("GetUrlSupplyingCookiesForHistoryUrl", params={})
+
+    def OrderEvent(
         self,
-        start_date: date,
-        end_date: date,
-        target_app_id: str,
-        checksum: str,
+        extern_order_id: str,
+        event_type: str,
     ):
-        start_date = start_date.strftime("%Y-%m-%d")
-        end_date = end_date.strftime("%Y-%m-%d")
+        """
+        :param extern_order_id: id of document in ebs which was returned
+        :param event_type: APPROVED or DECLINED
+        """
         return self._get(
-            "EnvsResources",
+            "OrderEvent",
             params={
-                "startDate": start_date,
-                "endDate": end_date,
-                "targetAppId": target_app_id,
-                "checksum": checksum,
+                "externOrderId": extern_order_id,
+                "eventType": event_type,
             },
         )
 
-    def EnvsResourcesByAccount(
+    def PayServicePlan(
         self,
-        start_date: date,
-        end_date: date,
-        uid: int,
-        checksum: str,
+        service_plan_id: int,
+        pay_method_id: str,
     ):
         """
-        :param checksum: required but not used
-        """
-
-        start_date = start_date.strftime("%Y-%m-%d")
-        end_date = end_date.strftime("%Y-%m-%d")
-        return self._get(
-            "EnvsResourcesByAccount",
-            params={
-                "startDate": start_date,
-                "endDate": end_date,
-                "uid": uid,
-                "checksum": checksum,
-            },
-        )
-
-    def GetOptions(
-        self,
-        target_env_name: str,
-        node_group: str,
-    ):
-        """
-        :param target_env_name: env which holds nodeGroup
-        :param node_group: Node Group
+        :param service_plan_id: service plan ID to be paid (for example, $200 one-time fee)
+        :param pay_method_id: payment method ID to be used (see the GetPayMethodList method)
         """
         return self._get(
-            "GetOptions",
+            "PayServicePlan",
             params={
-                "targetEnvName": target_env_name,
-                "nodeGroup": node_group,
+                "servicePlanId": service_plan_id,
+                "payMethodId": pay_method_id,
             },
-        )
-
-    def SetOptions(
-        self,
-        target_env_name: str,
-        node_group: str,
-        options: str,
-        node_id: list[int] = None,
-    ):
-        """
-        :param target_env_name: target environment name with the required node group (layer).
-        :param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
-        :param options: JSON object with the required billing options.
-        :param node_id: unique identifier of the node that will be used to identify the target node group (overrides the nodeGroup parameter if both are specified).
-        """
-        return self._get(
-            "SetOptions",
-            params={
-                "targetEnvName": target_env_name,
-                "nodeGroup": node_group,
-                "options": options,
-                "nodeId": node_id,
-            },
-            delimiter=",",
         )
 
 
