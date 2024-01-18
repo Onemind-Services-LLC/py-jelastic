@@ -107,13 +107,12 @@ def test_get_env_billing_history_by_period(client):
     assert isinstance(response, dict)
 
 
-# def test_get_extended_account_billing_history_by_period(client):
-#     response = (
-#         client.Account.GetExtendedAccountBillingHistoryByPeriod(
-#             CURRENT_DATETIME, CURRENT_DATETIME
-#         ),
-#     )
-#     assert isinstance(response, dict)
+def test_get_extended_account_billing_history_by_period(client):
+    response = client.Account.GetExtendedAccountBillingHistoryByPeriod(
+        CURRENT_DATETIME, CURRENT_DATETIME
+
+    )
+    assert isinstance(response, dict)
 
 
 def test_get_extern_billing_systems(client):
