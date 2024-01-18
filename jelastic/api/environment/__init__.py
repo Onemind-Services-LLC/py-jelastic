@@ -1545,7 +1545,7 @@ class _Binder(Environment):
      Ref: https://docs.jelastic.com/api/private/#!/api/environment.Binder
     """
 
-    _endpoint2 = "Binder"
+    _endpoint2 = "binder"
 
     def AddDomains(
         self,
