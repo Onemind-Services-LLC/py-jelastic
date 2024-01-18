@@ -34,7 +34,9 @@ class _Project(IaaS):
     """
     Ref: https://docs.jelastic.com/api/private/#!/api/iaas.Project
     """
-    _endpoint2="project"
+
+    _endpoint2 = "project"
+
     def Create(
         self,
         host_group: str,
