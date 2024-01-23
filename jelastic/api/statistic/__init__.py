@@ -83,7 +83,7 @@ class _Statistic(Statistic):
         start_time: datetime,
         env_id: str,
         checksum: str,
-        end_time: list[datetime] = None,
+        end_time: datetime = None,
     ):
         """
         param start_time: start period inclusive date and time in format yyyy-MM-dd HH:mm:ss
@@ -100,7 +100,7 @@ class _Statistic(Statistic):
                 "checksum": checksum,
                 "endtime": end_time,
             },
-            delimiter=",",
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def GetAllAggSumStatByUid(
@@ -114,6 +114,7 @@ class _Statistic(Statistic):
                 "checksum": checksum,
                 "endTime": end_time,
             },
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def GetAllSumStatByUid(
@@ -121,7 +122,7 @@ class _Statistic(Statistic):
         uid: int,
         duration: int,
         checksum: str,
-        end_time: list[datetime] = None,
+        end_time: datetime = None,
     ):
         return self._get(
             "GetAllSumStatByUid",
@@ -131,7 +132,7 @@ class _Statistic(Statistic):
                 "checksum": checksum,
                 "endtime": end_time,
             },
-            delimiter=",",
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def GetCurrentStatisticsForAllContainers(
@@ -145,14 +146,13 @@ class _Statistic(Statistic):
             },
         )
 
-    def GetLastStats(self, node_group: list[str] = None, node_id: list[int] = None):
+    def GetLastStats(self, node_group: str = None, node_id: int = None):
         return self._get(
             "GetLastStats",
             params={
                 "nodeGroup": node_group,
                 "nodeId": node_id,
             },
-            delimiter=",",
         )
 
     def GetStats(
@@ -160,10 +160,10 @@ class _Statistic(Statistic):
         duration: int,
         interval: int,
         checksum: str,
-        end_time: list[datetime] = None,
-        node_id: list[int] = None,
-        node_type: list[str] = None,
-        node_group: list[str] = None,
+        end_time: datetime = None,
+        node_id: int = None,
+        node_type: str = None,
+        node_group: str = None,
     ):
         return self._get(
             "GetStats",
@@ -176,7 +176,7 @@ class _Statistic(Statistic):
                 "nodetype": node_type,
                 "nodeGroup": node_group,
             },
-            delimiter=",",
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def GetStatus(
@@ -194,7 +194,7 @@ class _Statistic(Statistic):
         self,
         duration: int,
         checksum: str,
-        end_time: list[datetime] = None,
+        end_time: datetime = None,
     ):
         return self._get(
             "GetSumStat",
@@ -203,7 +203,7 @@ class _Statistic(Statistic):
                 "checksum": checksum,
                 "endtime": end_time,
             },
-            delimiter=",",
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def GetSumStatsByPeriod(
@@ -211,7 +211,7 @@ class _Statistic(Statistic):
         start_time: datetime,
         env_id: str,
         checksum: str,
-        end_time: list[datetime] = None,
+        end_time: datetime = None,
     ):
         """
         param start_time: start period inclusive date and time in format yyyy-MM-dd HH:mm:ss
@@ -228,10 +228,10 @@ class _Statistic(Statistic):
                 "checksum": checksum,
                 "endtime": end_time,
             },
-            delimiter=",",
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
-    def SearchNodes(self, checksum: str, search: list[str] = None):
+    def SearchNodes(self, checksum: str, search: str = None):
         return self._get(
             "SearchNodes",
             params={"checksum": checksum, "search": search},
@@ -273,7 +273,7 @@ class _System(Statistic):
     def Event(
         self,
         topic: str,
-        publish_local: list[bool] = None,
+        publish_local: bool = None,
     ):
         return self._get(
             "Event",
@@ -285,8 +285,8 @@ class _System(Statistic):
 
     def GetAPIDescriptions(
         self,
-        is_public_only: list[bool] = None,
-        is_token: list[bool] = None,
+        is_public_only: bool = None,
+        is_token: bool = None,
     ):
         return self._get(
             "GetAPIDescriptions",
@@ -328,14 +328,14 @@ class _System(Statistic):
             params={},
         )
 
-    def RefreshUser(self, language: list[str] = None):
+    def RefreshUser(self, language: str = None):
         return self._get(
             "RefreshUser",
             params={"language": language},
         )
 
     def ReloadConfiguration(
-        self, reseller_id: list[int] = None, changed_place_holders: list[str] = None
+        self, reseller_id: int = None, changed_place_holders: str = None
     ):
         return self._get(
             "ReloadConfiguration",

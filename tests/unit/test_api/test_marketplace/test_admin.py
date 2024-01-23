@@ -66,22 +66,18 @@ def test_get_app_manifest(client):
 
 def test_get_apps(client):
     client._get.return_value = success_response
-    response = client.Admin.GetApps("env", ["search1", "search2", "search3"])
+    response = client.Admin.GetApps("env", "search")
     client._get.assert_called_with(
-        "GetApps",
-        params={"envName": "env", "search": ["search1", "search2", "search3"]},
-        delimiter=",",
+        "GetApps", params={"envName": "env", "search": "search"}
     )
     assert response == success_response
 
 
 def test_get_jps_samples(client):
     client._get.return_value = success_response
-    response = client.Admin.GetJpsSamples("env", ["type1", "type2", "type3"])
+    response = client.Admin.GetJpsSamples("env", "type")
     client._get.assert_called_with(
-        "GetJpsSamples",
-        params={"envName": "env", "type": ["type1", "type2", "type3"]},
-        delimiter=",",
+        "GetJpsSamples", params={"envName": "env", "type": "type"}
     )
     assert response == success_response
 
@@ -112,21 +108,10 @@ def test_schedule_apps_sync(client):
 
 def test_set_setting(client):
     client._get.return_value = success_response
-    response = client.Admin.SetSetting(
-        "env",
-        "name",
-        "values",
-        [True, False, True],
-    )
+    response = client.Admin.SetSetting("env", "name", "values", True)
     client._get.assert_called_with(
         "SetSetting",
-        params={
-            "envName": "env",
-            "name": "name",
-            "values": "values",
-            "override": [True, False, True],
-        },
-        delimiter=",",
+        params={"envName": "env", "name": "name", "values": "values", "override": True},
     )
     assert response == success_response
 

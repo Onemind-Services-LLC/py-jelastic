@@ -55,37 +55,29 @@ class _NodePool(Pool):
     def ClearOsPool(
         self,
         checksum: str,
-        type: list[str] = None,
+        type: str = None,
     ):
         """
         :param checksum: authorization checksum = md5(appid + private key)
         """
-        return self._get(
-            "ClearOsPool",
-            params={"checksum": checksum, "type": type},
-            delimiter=",",
-        )
+        return self._get("ClearOsPool", params={"checksum": checksum, "type": type})
 
     def ClearPool(
         self,
         hn_id: int,
-        type: list[str] = None,
+        type: str = None,
     ):
         """
         :param hnid: hardnode id (primary key) where OsNode to be allocated
         :param checksum: authorization checksum = md5(appid + private key)
         """
-        return self._get(
-            "ClearPool",
-            params={"hnid": hn_id, "type": type},
-            delimiter=",",
-        )
+        return self._get("ClearPool", params={"hnid": hn_id, "type": type})
 
     def GeneratePool(
         self,
         checksum: int,
-        type: list[str] = None,
-        hn_id: list[int] = None,
+        type: str = None,
+        hn_id: int = None,
     ):
         return self._get(
             "GeneratePool",
@@ -94,16 +86,15 @@ class _NodePool(Pool):
                 "type": type,
                 "hnid": hn_id,
             },
-            delimiter=",",
         )
 
     def Get(
         self,
         type: str,
-        hn_id: str,
+        hn_id: int,
         checksum: str,
-        os_template: list[str] = None,
-        ct_id: list[str] = None,
+        os_template: str = None,
+        ct_id: int = None,
     ):
         """
         info about allocated new OsNode
@@ -121,7 +112,6 @@ class _NodePool(Pool):
                 "osTemplate": os_template,
                 "ctid": ct_id,
             },
-            delimiter=",",
         )
 
     def GetStatus(
@@ -152,7 +142,6 @@ class _NodePool(Pool):
                 "type": type,
                 "checksum": checksum,
             },
-            delimiter=",",
         )
 
 
@@ -224,9 +213,9 @@ class _IpPool(Pool):
         self,
         regions: str,
         checksum: str,
-        type: list[str] = None,
-        node_id: list[str] = None,
-        target_app_id: list[str] = None,
+        type: str = None,
+        node_id: int = None,
+        target_app_id: str = None,
     ):
         return self._get(
             "GetExt",
@@ -237,7 +226,6 @@ class _IpPool(Pool):
                 "nodeId": node_id,
                 "targetAppid": target_app_id,
             },
-            delimiter=",",
         )
 
     def GetFreePublicPort(self, checksum: str):

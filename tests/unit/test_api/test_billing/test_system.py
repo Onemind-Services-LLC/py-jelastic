@@ -4,16 +4,15 @@ from . import *
 def test_clean_check_request_cache(client):
     client._get.return_value = success_response
     response = client.System.CleanCheckRequestCache(
-        [1, 2, 3],
-        [True, False, True],
+        1,
+        True,
     )
     client._get.assert_called_with(
         "CleanCheckRequestCache",
         params={
-            "uid": [1, 2, 3],
-            "localOnly": [True, False, True],
+            "uid": 1,
+            "localOnly": True,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -23,16 +22,15 @@ def test_event_Sys(client):
     response = client.System.Event(
         "topic",
         "message",
-        [True, False, True],
+        True,
     )
     client._get.assert_called_with(
         "Event",
         params={
             "topic": "topic",
             "message": "message",
-            "publishLocal": [True, False, True],
+            "publishLocal": True,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -40,16 +38,15 @@ def test_event_Sys(client):
 def test_get_api_description(client):
     client._get.return_value = success_response
     response = client.System.GetAPIDescriptions(
-        [True, False, True],
-        [True, False, True],
+        False,
+        True,
     )
     client._get.assert_called_with(
         "GetAPIDescriptions",
         params={
-            "isPublicOnly": [True, False, True],
-            "isToken": [True, False, True],
+            "isPublicOnly": False,
+            "isToken": True,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -84,8 +81,8 @@ def test_get_instance_cache_status(client):
 
 def test_get_status(client):
     client._get.return_value = success_response
-    response = client.System.GetStatus(1)
-    client._get.assert_called_with("GetStatus", params={"checksum": 1})
+    response = client.System.GetStatus("checksum")
+    client._get.assert_called_with("GetStatus", params={"checksum": "checksum"})
     assert response == success_response
 
 
@@ -105,33 +102,17 @@ def test_refresh_email_templates(client):
 
 def test_refresh_user(client):
     client._get.return_value = success_response
-    response = client.System.RefreshUser(["lang1", "lang2"])
-    client._get.assert_called_with(
-        "RefreshUser",
-        params={"language": ["lang1", "lang2"]},
-        delimiter=",",
-    )
+    response = client.System.RefreshUser("language")
+    client._get.assert_called_with("RefreshUser", params={"language": "language"})
     assert response == success_response
 
 
 def test_reload_configuration(client):
     client._get.return_value = success_response
-    response = client.System.ReloadConfiguration(
-        [1, 2, 3, 4],
-        ["place holder 1", "place holder 2", "place holder 3", "place holder 4"],
-    )
+    response = client.System.ReloadConfiguration(1, "place holder")
     client._get.assert_called_with(
         "ReloadConfiguration",
-        params={
-            "resellerId": [1, 2, 3, 4],
-            "changedPlaceholders": [
-                "place holder 1",
-                "place holder 2",
-                "place holder 3",
-                "place holder 4",
-            ],
-        },
-        delimiter=",",
+        params={"resellerId": 1, "changedPlaceholders": "place holder"},
     )
     assert response == success_response
 
@@ -140,19 +121,18 @@ def test_send_email(client):
     client._get.return_value = success_response
     response = client.System.SendEmail(
         "template",
-        ["test1@email.com", "test2@email.com", "test3@email.com"],
-        ["language1", "language2", "language3"],
-        [1, 2, 3],
+        "test1@email.com",
+        "language",
+        1,
     )
     client._get.assert_called_with(
         "SendEmail",
         params={
             "template": "template",
-            "email": ["test1@email.com", "test2@email.com", "test3@email.com"],
-            "language": ["language1", "language2", "language3"],
-            "timeout": [1, 2, 3],
+            "email": "test1@email.com",
+            "language": "language",
+            "timeout": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
 

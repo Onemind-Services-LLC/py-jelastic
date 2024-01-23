@@ -10,7 +10,7 @@ def test_add_build_project(client):
         "repo",
         {"deployment1": "deployment1", "deployment2": "deployment2"},
         {"settings1": "settings1", "settings2": "settings2"},
-        ["hooks1", "hooks2"],
+        "hooks",
     )
     client._get.assert_called_with(
         "AddBuildProject",
@@ -21,9 +21,8 @@ def test_add_build_project(client):
             "repo": "repo",
             "deployment": {"deployment1": "deployment1", "deployment2": "deployment2"},
             "settings": {"settings1": "settings1", "settings2": "settings2"},
-            "hooks": ["hooks1", "hooks2"],
+            "hooks": "hooks",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -31,14 +30,7 @@ def test_add_build_project(client):
 def test_add_repo(client):
     client._get.return_value = success_response
     response = client.Deployment.AddRepo(
-        "name",
-        "url",
-        "type",
-        ["branch1", "branch2"],
-        [1, 1],
-        ["login1", "login2"],
-        ["password1", "password2"],
-        ["description", "description2"],
+        "name", "url", "type", "branch", 1, "login", "password", "description"
     )
     client._get.assert_called_with(
         "AddRepo",
@@ -46,51 +38,44 @@ def test_add_repo(client):
             "name": "name",
             "url": "url",
             "type": "type",
-            "branch": ["branch1", "branch2"],
-            "keyId": [1, 1],
-            "login": ["login1", "login2"],
-            "password": ["password1", "password2"],
-            "description": ["description", "description2"],
+            "branch": "branch",
+            "keyId": 1,
+            "login": "login",
+            "password": "password",
+            "description": "description",
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_deployment_build_deploy_project(client):
     client._get.return_value = success_response
-    response = client.Deployment.BuildDeployProject(
-        "env_name", 1, "project", [True, True], [1, 1]
-    )
+    response = client.Deployment.BuildDeployProject("env_name", 1, "project", True, 1)
     client._get.assert_called_with(
         "BuildDeployProject",
         params={
             "envName": "env_name",
             "nodeId": 1,
             "project": "project",
-            "skipUpdate": [True, True],
-            "delay": [1, 1],
+            "skipUpdate": True,
+            "delay": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_build_project(client):
     client._get.return_value = success_response
-    response = client.Deployment.BuildProject(
-        "env_name", 1, "project", [True, True], [True, True]
-    )
+    response = client.Deployment.BuildProject("env_name", 1, "project", True, True)
     client._get.assert_called_with(
         "BuildProject",
         params={
             "envName": "env_name",
             "nodeId": 1,
             "project": "project",
-            "skipUpload": [True, True],
-            "skipUpdate": [True, True],
+            "skipUpload": True,
+            "skipUpdate": True,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -101,11 +86,11 @@ def test_deploy(client):
         "env_name",
         "repo",
         "context",
-        ["node_group1", "node_group2"],
-        [1, 1],
+        "nodeGroup",
+        1,
         {"settings1": "settings1", "settings2": "settings2"},
-        ["hooks1", "hooks2"],
-        [1, 1],
+        "hooks",
+        1,
     )
     client._get.assert_called_with(
         "Deploy",
@@ -113,13 +98,12 @@ def test_deploy(client):
             "envName": "env_name",
             "repo": "repo",
             "context": "context",
-            "nodeGroup": ["node_group1", "node_group2"],
-            "buildNodeId": [1, 1],
+            "nodeGroup": "nodeGroup",
+            "buildNodeId": 1,
             "settings": {"settings1": "settings1", "settings2": "settings2"},
-            "hooks": ["hooks1", "hooks2"],
-            "delay": [1, 1],
+            "hooks": "hooks",
+            "delay": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -127,14 +111,7 @@ def test_deploy(client):
 def test_deploy_archive(client):
     client._get.return_value = success_response
     response = client.Deployment.DeployArchive(
-        "env_name",
-        "file_url",
-        "file_name",
-        ["node_group1", "node_group2"],
-        ["context1", "context2"],
-        ["zdt1", "zdt2"],
-        ["hooks1", "hooks2"],
-        [1, 1],
+        "env_name", "file_url", "file_name", "nodeGroup", "context", "zdt", "hooks", 1
     )
     client._get.assert_called_with(
         "DeployArchive",
@@ -142,13 +119,12 @@ def test_deploy_archive(client):
             "envName": "env_name",
             "fileUrl": "file_url",
             "fileName": "file_name",
-            "nodeGroup": ["node_group1", "node_group2"],
-            "context": ["context1", "context2"],
-            "zdt": ["zdt1", "zdt2"],
-            "hooks": ["hooks1", "hooks2"],
-            "delay": [1, 1],
+            "nodeGroup": "nodeGroup",
+            "context": "context",
+            "zdt": "zdt",
+            "hooks": "hooks",
+            "delay": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -167,7 +143,6 @@ def test_deploy_project(client):
             "nodeId": 1,
             "project": "project",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -178,11 +153,11 @@ def test_edit_build_project(client):
         "env_name",
         1,
         "project",
-        ["name1", "name2"],
-        ["repo1", "repo2"],
+        "name",
+        "repo",
         {"deployment1": "deployment1", "deployment2": "deployment2"},
         {"settings1": "settings1", "settings2": "settings2"},
-        ["hooks1", "hooks2"],
+        "hooks",
     )
     client._get.assert_called_with(
         "EditBuildProject",
@@ -190,13 +165,12 @@ def test_edit_build_project(client):
             "envName": "env_name",
             "nodeId": 1,
             "project": "project",
-            "name": ["name1", "name2"],
-            "repo": ["repo1", "repo2"],
+            "name": "name",
+            "repo": "repo",
             "deployment": {"deployment1": "deployment1", "deployment2": "deployment2"},
             "settings": {"settings1": "settings1", "settings2": "settings2"},
-            "hooks": ["hooks1", "hooks2"],
+            "hooks": "hooks",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -207,11 +181,11 @@ def test_edit_project(client):
         "env_name",
         "node_group",
         "context",
-        ["new_context1", "new_context2"],
-        ["repo1", "repo2"],
+        "newContext",
+        "repo",
         {"settings1": "settings1", "settings2": "settings2"},
-        ["hooks1", "hooks2"],
-        [1, 2],
+        "hooks",
+        1,
     )
     client._get.assert_called_with(
         "EditProject",
@@ -219,13 +193,12 @@ def test_edit_project(client):
             "envName": "env_name",
             "nodeGroup": "node_group",
             "context": "context",
-            "newContext": ["new_context1", "new_context2"],
-            "repo": ["repo1", "repo2"],
+            "newContext": "newContext",
+            "repo": "repo",
             "settings": {"settings1": "settings1", "settings2": "settings2"},
-            "hooks": ["hooks1", "hooks2"],
-            "delay": [1, 2],
+            "hooks": "hooks",
+            "delay": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -233,30 +206,21 @@ def test_edit_project(client):
 def test_edit_repo(client):
     client._get.return_value = success_response
     response = client.Deployment.EditRepo(
-        1,
-        ["name1", "name2"],
-        ["type1", "type2"],
-        ["url1", "url2"],
-        ["branch1", "branch2"],
-        [1, 1],
-        ["login1", "login2"],
-        ["password1", "password2"],
-        ["description", "description2"],
+        1, "name", "type", "url", "branch", 1, "login", "password", "description"
     )
     client._get.assert_called_with(
         "EditRepo",
         params={
             "id": 1,
-            "name": ["name1", "name2"],
-            "type": ["type1", "type2"],
-            "url": ["url1", "url2"],
-            "branch": ["branch1", "branch2"],
-            "keyId": [1, 1],
-            "login": ["login1", "login2"],
-            "password": ["password1", "password2"],
-            "description": ["description", "description2"],
+            "name": "name",
+            "type": "type",
+            "url": "url",
+            "branch": "branch",
+            "keyId": 1,
+            "login": "login",
+            "password": "password",
+            "description": "description",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -267,24 +231,16 @@ def test_get_build_project_info(client):
     client._get.assert_called_with(
         "GetBuildProjectInfo",
         params={"envName": "env_name", "nodeId": 1, "project": "project"},
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_get_build_project(client):
     client._get.return_value = success_response
-    response = client.Deployment.GetBuildProjects(
-        "env_name", ["node_group1", "node_group2"], [1, 2]
-    )
+    response = client.Deployment.GetBuildProjects("env_name", "nodeGroup", 1)
     client._get.assert_called_with(
         "GetBuildProjects",
-        params={
-            "envName": "env_name",
-            "nodeGroup": ["node_group1", "node_group2"],
-            "nodeId": [1, 2],
-        },
-        delimiter=",",
+        params={"envName": "env_name", "nodeGroup": "nodeGroup", "nodeId": 1},
     )
     assert response == success_response
 
@@ -293,9 +249,7 @@ def test_get_deployments(client):
     client._get.return_value = success_response
     response = client.Deployment.GetDeployments("env_name", "node_group")
     client._get.assert_called_with(
-        "GetDeployments",
-        params={"envName": "env_name", "nodeGroup": "node_group"},
-        delimiter=",",
+        "GetDeployments", params={"envName": "env_name", "nodeGroup": "node_group"}
     )
     assert response == success_response
 
@@ -303,51 +257,35 @@ def test_get_deployments(client):
 def test_get_hooks(client):
     client._get.return_value = success_response
     response = client.Deployment.GetHooks(
-        "env_name",
-        ["node_group1", "node_group2"],
-        [1, 2],
-        ["context1", "context2"],
-        ["project1", "project2"],
+        "env_name", "nodeGroup", 1, "context", "project"
     )
     client._get.assert_called_with(
         "GetHooks",
         params={
             "envName": "env_name",
-            "nodeGroup": ["node_group1", "node_group2"],
-            "nodeId": [1, 2],
-            "context": ["context1", "context2"],
-            "project": ["project1", "project2"],
+            "nodeGroup": "nodeGroup",
+            "nodeId": 1,
+            "context": "context",
+            "project": "project",
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_get_project_info(client):
     client._get.return_value = success_response
-    response = client.Deployment.GetProjectInfo(
-        "env_name", "context", ["node_group1", "node_group2"]
-    )
+    response = client.Deployment.GetProjectInfo("env_name", "context", "nodeGroup")
     client._get.assert_called_with(
         "GetProjectInfo",
-        params={
-            "envName": "env_name",
-            "context": "context",
-            "nodeGroup": ["node_group1", "node_group2"],
-        },
-        delimiter=",",
+        params={"envName": "env_name", "context": "context", "nodeGroup": "nodeGroup"},
     )
     assert response == success_response
 
 
 def test_get_repos(client):
     client._get.return_value = success_response
-    response = client.Deployment.GetRepos([1, 2])
-    client._get.assert_called_with(
-        "GetRepos",
-        params={"id": [1, 2]},
-        delimiter=",",
-    )
+    response = client.Deployment.GetRepos(1)
+    client._get.assert_called_with("GetRepos", params={"id": 1})
     assert response == success_response
 
 
@@ -357,7 +295,6 @@ def test_remove_build_project(client):
     client._get.assert_called_with(
         "RemoveBuildProject",
         params={"envName": "env_name", "nodeId": 1, "project": "project"},
-        delimiter=",",
     )
     assert response == success_response
 
@@ -406,23 +343,17 @@ def test_undeploy(client):
 def test_update(client):
     client._get.return_value = success_response
     response = client.Deployment.Update(
-        "env_name",
-        ["node_group1", "node_group2"],
-        [1, 2],
-        ["context1", "context2"],
-        ["project1", "project2"],
-        ["delay1", "delay2"],
+        "env_name", "nodeGroup", 1, "context", "project", "delay"
     )
     client._get.assert_called_with(
         "Update",
         params={
             "envName": "env_name",
-            "nodeGroup": ["node_group1", "node_group2"],
-            "nodeId": [1, 2],
-            "context": ["context1", "context2"],
-            "project": ["project1", "project2"],
-            "delay": ["delay1", "delay2"],
+            "nodeGroup": "nodeGroup",
+            "nodeId": 1,
+            "context": "context",
+            "project": "project",
+            "delay": "delay",
         },
-        delimiter=",",
     )
     assert response == success_response

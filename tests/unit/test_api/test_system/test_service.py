@@ -29,19 +29,9 @@ def test_check_request(client):
 
 def test_event(client):
     client._get.return_value = success_response
-    response = client.Service.Event(
-        "topic",
-        "message",
-        [True, False, True],
-    )
+    response = client.Service.Event("topic", "message", True)
     client._get.assert_called_once_with(
-        "Event",
-        params={
-            "topic": "topic",
-            "message": "message",
-            "publishLocal": [True, False, True],
-        },
-        delimiter=",",
+        "Event", params={"topic": "topic", "message": "message", "publishLocal": True}
     )
     assert response == success_response
 
@@ -49,16 +39,15 @@ def test_event(client):
 def test_get_api_description(client):
     client._get.return_value = success_response
     response = client.Service.GetAPIDescriptions(
-        [True, False, True],
-        [True, False, True],
+        True,
+        True,
     )
     client._get.assert_called_once_with(
         "GetAPIDescriptions",
         params={
-            "isPublicOnly": [True, False, True],
-            "isToken": [True, False, True],
+            "isPublicOnly": True,
+            "isToken": True,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -122,17 +111,9 @@ def test_get_version(client):
 
 def test_notify_event(client):
     client._get.return_value = success_response
-    response = client.Service.NotifyEvent(
-        "checksum",
-        ["parameter1", "parameter2", "parameter3"],
-    )
+    response = client.Service.NotifyEvent("checksum", "params")
     client._get.assert_called_once_with(
-        "NotifyEvent",
-        params={
-            "checksum": "checksum",
-            "params": ["parameter1", "parameter2", "parameter3"],
-        },
-        delimiter=",",
+        "NotifyEvent", params={"checksum": "checksum", "params": "params"}
     )
     assert response == success_response
 
@@ -146,30 +127,17 @@ def test_refresh_email_templates(client):
 
 def test_refresh_user(client):
     client._get.return_value = success_response
-    response = client.Service.RefreshUser(["language1", "language2", "language3"])
-    client._get.assert_called_once_with(
-        "RefreshUser",
-        params={
-            "language": ["language1", "language2", "language3"],
-        },
-        delimiter=",",
-    )
+    response = client.Service.RefreshUser("language")
+    client._get.assert_called_once_with("RefreshUser", params={"language": "language"})
     assert response == success_response
 
 
 def test_reload_configuration(client):
     client._get.return_value = success_response
-    response = client.Service.ReloadConfiguration(
-        ["rid1", "rid2", "rid3"],
-        ["placeholder1", "placeholder2", "placeholder3"],
-    )
+    response = client.Service.ReloadConfiguration("rid", "placeholder")
     client._get.assert_called_once_with(
         "ReloadConfiguration",
-        params={
-            "resellerId": ["rid1", "rid2", "rid3"],
-            "changedPlaceholders": ["placeholder1", "placeholder2", "placeholder3"],
-        },
-        delimiter=",",
+        params={"resellerId": "rid", "changedPlaceholders": "placeholder"},
     )
     assert response == success_response
 

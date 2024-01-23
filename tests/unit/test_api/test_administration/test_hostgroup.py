@@ -21,7 +21,6 @@ def test_add(client):
                 "add4": "val4",
             },
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -48,7 +47,6 @@ def test_add_end_points(client):
                 "endpoint4": "val4",
             },
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -73,7 +71,6 @@ def test_edit(client):
                 "edit4": "data4",
             },
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -100,7 +97,6 @@ def test_edit_end_points(client):
                 "endpoint4": "val4",
             },
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -181,6 +177,5 @@ def test_test_end_points(client):
                 "endpoint4": "val4",
             },
         },
-        delimiter=",",
     )
     assert response == success_response

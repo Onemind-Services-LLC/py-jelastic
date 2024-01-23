@@ -45,14 +45,14 @@ def test_get_addon_list(client):
     client._get.return_value = success_response
     response = client.App.GetAddonList(
         "env",
-        ["nodegroup1", "nodegroup2", "nodegroup3"],
+        "nodeGroup",
         {"search1": "value1", "search2": "value2", "search3": "value3"},
     )
     client._get.assert_called_with(
         "GetAddonList",
         params={
             "envName": "env",
-            "nodeGroup": ["nodegroup1", "nodegroup2", "nodegroup3"],
+            "nodeGroup": "nodeGroup",
             "search": {"search1": "value1", "search2": "value2", "search3": "value3"},
         },
     )
@@ -61,18 +61,10 @@ def test_get_addon_list(client):
 
 def test_get_app_info(client):
     client._get.return_value = success_response
-    response = client.App.GetAppInfo(
-        "1",
-        ["lang1", "lang2", "lang3"],
-        [3, 2, 5],
-    )
+    response = client.App.GetAppInfo("1", "lang", 1)
     client._get.assert_called_with(
         "GetAppInfo",
-        params={
-            "id": "1",
-            "lang": ["lang1", "lang2", "lang3"],
-            "ownerUid": [3, 2, 5],
-        },
+        params={"id": "1", "lang": "lang", "ownerUid": 1},
     )
     assert response == success_response
 
@@ -99,15 +91,10 @@ def test_get_checksum(client):
 
 def test_get_list(client):
     client._get.return_value = success_response
-    response = client.App.GetList(["search1", "search2", "search3"])
+    response = client.App.GetList("search")
     client._get.assert_called_with(
         "GetList",
-        params={"search": ["search1", "search2", "search3"]},
-    )
-    response = client.Favorite.GetList(
-        "search",
-        "lang",
-        "checksum",
+        params={"search": "search"},
     )
     assert response == success_response
 
@@ -115,32 +102,58 @@ def test_get_list(client):
 def test_install(client):
     client._get.return_value = success_response
     response = client.App.Install(
-        "netbox",
+        "2",
         "envName",
-        {"key": "value"},
+        "settings",
         "displayName",
         "region",
-        ["envGroup1", "envGroup2", "envGroup3"],
-        123,
-        {"node1": "node1", "node2": "node2", "node3": "node3"},
-        True,
-        True,
-        True,
+        "envGroups",
+        1,
+        "nodes",
+        False,
+        False,
+        False,
     )
     client._get.assert_called_with(
         "Install",
         params={
-            "id": "netbox",
+            "id": "2",
             "envName": "envName",
-            "settings": {"key": "value"},
+            "settings": "settings",
             "displayName": "displayName",
             "region": "region",
-            "envGroups": ["envGroup1", "envGroup2", "envGroup3"],
-            "ownerUid": 123,
-            "nodes": {"node1": "node1", "node2": "node2", "node3": "node3"},
-            "overrideNodes": True,
-            "skipEmail": True,
-            "skipNodeEmails": True,
+            "envGroups": "envGroups",
+            "ownerUid": 1,
+            "nodes": "nodes",
+            "overrideNodes": False,
+            "skipEmail": False,
+            "skipNodeEmails": False,
+        },
+    )
+    assert response == success_response
+
+
+def test_install_addon(client):
+    client._get.return_value = success_response
+    response = client.App.InstallAddon(
+        "env",
+        "id",
+        {"settings1": "value1", "settings2": "value2", "settings3": "value3"},
+        "nodeGroup",
+        "skip_email",
+    )
+    client._get.assert_called_with(
+        "InstallAddon",
+        params={
+            "envName": "env",
+            "id": "id",
+            "settings": {
+                "settings1": "value1",
+                "settings2": "value2",
+                "settings3": "value3",
+            },
+            "nodeGroup": "nodeGroup",
+            "skipEmail": "skip_email",
         },
     )
     assert response == success_response

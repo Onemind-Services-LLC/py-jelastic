@@ -4,20 +4,16 @@ from . import *
 def test_add_domains(client):
     client._get.return_value = success_response
     response = client.Binder.AddDomains(
-        "env_name",
-        "domains",
-        ["node_group1", "node_group2"],
-        [1, 2],
-        ["subdomain1", "subdomain2"],
+        "env_name", ["domains1", "domains2"], "node_group", 1, "subdomain"
     )
     client._get.assert_called_with(
         "AddDomains",
         params={
             "envName": "env_name",
-            "domains": "domains",
-            "nodeGroup": ["node_group1", "node_group2"],
-            "nodeId": [1, 2],
-            "subdomain": ["subdomain1", "subdomain2"],
+            "domains": ["domains1", "domains2"],
+            "nodeGroup": "node_group",
+            "nodeId": 1,
+            "subdomain": "subdomain",
         },
         delimiter=",",
     )
@@ -26,50 +22,51 @@ def test_add_domains(client):
 
 def test_add_ssl_cert(client):
     client._get.return_value = success_response
-    response = client.Binder.AddSSLCert(
-        "env_name", "key", "cert", ["interm1", "interm2"]
-    )
+    response = client.Binder.AddSSLCert("env_name", "key", "cert", "interm")
     client._get.assert_called_with(
         "AddSSLCert",
         params={
             "envName": "env_name",
             "key": "key",
             "cert": "cert",
-            "interm": ["interm1", "interm2"],
+            "interm": "interm",
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_attach_ext_ip(client):
     client._get.return_value = success_response
-    response = client.Binder.AttachExtIp("env_name", "nodeid", ["type1", "type2"])
+    response = client.Binder.AttachExtIp("env_name", "nodeid", "type")
     client._get.assert_called_with(
         "AttachExtIp",
-        params={"envName": "env_name", "nodeid": "nodeid", "type": ["type1", "type2"]},
-        delimiter=",",
+        params={"envName": "env_name", "nodeid": "nodeid", "type": "type"},
     )
     assert response == success_response
 
 
 def test_bind_ext_domain(client):
     client._get.return_value = success_response
-    response = client.Binder.BindExtDomain("env_name", "extdomain", [1, 2])
+    response = client.Binder.BindExtDomain("env_name", "extdomain", 1)
     client._get.assert_called_with(
         "BindExtDomain",
-        params={"envName": "env_name", "extdomain": "extdomain", "certId": [1, 2]},
-        delimiter=",",
+        params={"envName": "env_name", "extdomain": "extdomain", "certId": 1},
     )
     assert response == success_response
 
 
 def test_bind_ext_domains(client):
     client._get.return_value = success_response
-    response = client.Binder.BindExtDomains("env_name", "extdomains", [1, 2])
+    response = client.Binder.BindExtDomains(
+        "env_name", ["extdomains1", "extdomains2"], 1
+    )
     client._get.assert_called_with(
         "BindExtDomains",
-        params={"envName": "env_name", "extdomains": "extdomains", "certId": [1, 2]},
+        params={
+            "envName": "env_name",
+            "extdomains": ["extdomains1", "extdomains2"],
+            "certId": 1,
+        },
         delimiter=",",
     )
     assert response == success_response
@@ -95,7 +92,7 @@ def test_bind_ssl_cert(client):
     response = client.Binder.BindSSLCert(
         "env_name",
         1,
-        ["entry_point1", "entry_point2"],
+        "entry_point",
         ["ext_domains1", "ext_domains2"],
     )
     client._get.assert_called_with(
@@ -103,7 +100,7 @@ def test_bind_ssl_cert(client):
         params={
             "envName": "env_name",
             "certId": 1,
-            "entryPoint": ["entry_point1", "entry_point2"],
+            "entryPoint": "entry_point",
             "extDomains": ["ext_domains1", "ext_domains2"],
         },
         delimiter=",",
@@ -113,15 +110,10 @@ def test_bind_ssl_cert(client):
 
 def test_check_domain(client):
     client._get.return_value = success_response
-    response = client.Binder.CheckDomain("env_name", "domain", ["region1", "region2"])
+    response = client.Binder.CheckDomain("env_name", "domain", "region")
     client._get.assert_called_with(
         "CheckDomain",
-        params={
-            "envName": "env_name",
-            "domain": "domain",
-            "region": ["region1", "region2"],
-        },
-        delimiter=",",
+        params={"envName": "env_name", "domain": "domain", "region": "region"},
     )
     assert response == success_response
 
@@ -183,19 +175,16 @@ def test_disable_ssl(client):
 
 def test_edit_ssl_cert(client):
     client._get.return_value = success_response
-    response = client.Binder.EditSSLCert(
-        "env_name", 1, ["key1", "key2"], ["cert1", "cert2"], ["interm1", "interm2"]
-    )
+    response = client.Binder.EditSSLCert("env_name", 1, "key", "cert", "interm")
     client._get.assert_called_with(
         "EditSSLCert",
         params={
             "envName": "env_name",
             "id": 1,
-            "key": ["key1", "key2"],
-            "cert": ["cert1", "cert2"],
-            "interm": ["interm1", "interm2"],
+            "key": "key",
+            "cert": "cert",
+            "interm": "interm",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -215,18 +204,15 @@ def test_get_domain_info(client):
 
 def test_get_domains(client):
     client._get.return_value = success_response
-    response = client.Binder.GetDomains(
-        "env_name", ["node_group1", "node_group2"], [1, 2], [True, True]
-    )
+    response = client.Binder.GetDomains("env_name", "node_group", 1, True)
     client._get.assert_called_with(
         "GetDomains",
         params={
             "envName": "env_name",
-            "nodeGroup": ["node_group1", "node_group2"],
-            "nodeId": [1, 2],
-            "inShort": [True, True],
+            "nodeGroup": "node_group",
+            "nodeId": 1,
+            "inShort": True,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -272,26 +258,26 @@ def test_get_ssl_certs(client):
 
 def test_manage_node_dns_state(client):
     client._get.return_value = success_response
-    response = client.Binder.ManageNodeDnsState("env_name", [1, 2], [True, True])
+    response = client.Binder.ManageNodeDnsState("env_name", 1, True)
     client._get.assert_called_with(
         "ManageNodeDnsState",
-        params={"envName": "env_name", "nodeId": [1, 2], "enabled": [True, True]},
-        delimiter=",",
+        params={"envName": "env_name", "nodeId": 1, "enabled": True},
     )
     assert response == success_response
 
 
 def test_move_ext_ips(client):
     client._get.return_value = success_response
-    response = client.Binder.MoveExtIps("env_name", 1, 2, "ips")
+    response = client.Binder.MoveExtIps("env_name", 1, 2, ["ips1", "ips2"])
     client._get.assert_called_with(
         "MoveExtIps",
         params={
             "envName": "env_name",
             "sourceNodeId": 1,
             "targetNodeId": 2,
-            "ips": "ips",
+            "ips": ["ips1", "ips2"],
         },
+        delimiter=",",
     )
     assert response == success_response
 
@@ -299,15 +285,15 @@ def test_move_ext_ips(client):
 def test_remove_domains(client):
     client._get.return_value = success_response
     response = client.Binder.RemoveDomains(
-        "env_name", "domains", ["node_group1", "node_group2"], [1, 2]
+        "env_name", ["domains1", "domains2"], "node_group", 1
     )
     client._get.assert_called_with(
         "RemoveDomains",
         params={
             "envName": "env_name",
-            "domains": "domains",
-            "nodeGroup": ["node_group1", "node_group2"],
-            "node_id": [1, 2],
+            "domains": ["domains1", "domains2"],
+            "nodeGroup": "node_group",
+            "node_id": 1,
         },
         delimiter=",",
     )
@@ -341,32 +327,27 @@ def test_remove_ssl(client):
 
 def test_remove_ssl_certs(client):
     client._get.return_value = success_response
-    response = client.Binder.RemoveSSLCerts("env_name", "ids")
+    response = client.Binder.RemoveSSLCerts("env_name", ["ids1", "ids2"])
     client._get.assert_called_with(
         "RemoveSSLCerts",
-        params={
-            "envName": "env_name",
-            "ids": "ids",
-        },
+        params={"envName": "env_name", "ids": ["ids1", "ids2"]},
+        delimiter=",",
     )
     assert response == success_response
 
 
 def test_set_ext_ip_count(client):
     client._get.return_value = success_response
-    response = client.Binder.SetExtIpCount(
-        "env_name", "type", 1, ["node_group1", "node_group2"], [1, 2]
-    )
+    response = client.Binder.SetExtIpCount("env_name", "type", 1, "node_group", 1)
     client._get.assert_called_with(
         "SetExtIpCount",
         params={
             "envName": "env_name",
             "type": "type",
             "count": 1,
-            "nodeGroup": ["node_group1", "node_group2"],
-            "node_id": [1, 2],
+            "nodeGroup": "node_group",
+            "node_id": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -386,19 +367,16 @@ def test_swap_ext_domains(client):
 
 def test_swap_ext_ips(client):
     client._get.return_value = success_response
-    response = client.Binder.SwapExtIps(
-        "env_name", 1, 2, ["source_ip1", "source_ip2"], ["target_ip1", "target_ip2"]
-    )
+    response = client.Binder.SwapExtIps("env_name", 1, 2, "source_ip", "target_ip")
     client._get.assert_called_with(
         "SwapExtIps",
         params={
             "envName": "env_name",
             "sourceNodeId": 1,
             "targetNodeId": 2,
-            "sourceIp": ["source_ip1", "source_ip2"],
-            "targetIp": ["target_ip1", "target_ip2"],
+            "sourceIp": "source_ip",
+            "targetIp": "target_ip",
         },
-        delimiter=",",
     )
     assert response == success_response
 

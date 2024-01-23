@@ -320,6 +320,7 @@ class _Account(Billing):
                 "count": count,
                 "bonus": bonus,
             },
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def EnableUser(self, uid: int):
@@ -350,6 +351,7 @@ class _Account(Billing):
                 "timeOffset": time_offset,
                 "groupNodes": group_nodes,
             },
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def ExportEnvBillingHistoryByPeriod(
@@ -372,6 +374,7 @@ class _Account(Billing):
                 "timeOffset": time_offset,
                 "groupNodes": group_nodes,
             },
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def FundAccount(
@@ -593,6 +596,7 @@ class _Account(Billing):
         return self._get(
             "GetClusterBillingHistory",
             params={"startTime": start_time, "endTime": end_time, "interval": interval},
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def GetCollaborationQuotas(
@@ -677,6 +681,7 @@ class _Account(Billing):
                 "endtime": end_time,
                 "targetAppid": target_app_id,
             },
+            datetime_format="%Y-%m-%dT%H:%M:%SZ",
         )
 
     def GetExternBillingSystemSession(self):
@@ -883,8 +888,8 @@ class _Invoice(Billing):
 
     def GetExternalInvoices(
         self,
-        limit: list[int] = None,
-        owner_uid: list[int] = None,
+        limit: int = None,
+        owner_uid: int = None,
     ):
         """
         :param limit: the maximum number of invoices returned in the response.
@@ -896,22 +901,21 @@ class _Invoice(Billing):
                 "limit": limit,
                 "ownerUid": owner_uid,
             },
-            delimiter=",",
         )
 
     def GetInvoices(
         self,
-        id: list[int] = None,
-        unique_name: list[str] = None,
-        type: list[str] = None,
-        status: list[str] = None,
-        subscription_id: list[int] = None,
-        subscription_status: list[str] = None,
-        order_fields: list[str] = None,
-        order_direction: list[str] = None,
-        start_row: list[int] = None,
-        result_count: list[int] = None,
-        expand_fields: list[str] = None,
+        id: int = None,
+        unique_name: str = None,
+        type: str = None,
+        status: str = None,
+        subscription_id: int = None,
+        subscription_status: str = None,
+        order_fields: str = None,
+        order_direction: str = None,
+        start_row: int = None,
+        result_count: int = None,
+        expand_fields: str = None,
     ):
         """
         :param id: unique identifier of the target invoice.
@@ -941,13 +945,12 @@ class _Invoice(Billing):
                 "resultCount": result_count,
                 "expandFields": expand_fields,
             },
-            delimiter=",",
         )
 
     def MakeInvoice(
         self,
         uid: str,
-        skip_pay: list[bool] = None,
+        skip_pay: bool = None,
     ):
         """
         :param uid: a comma-separated list of target POST-paid users' unique identifiers (all, if not set).
@@ -959,13 +962,12 @@ class _Invoice(Billing):
                 "uid": uid,
                 "skipPay": skip_pay,
             },
-            delimiter=",",
         )
 
     def MarkAsPaid(
         self,
-        id: list[int] = None,
-        ebs_invoice_id: list[str] = None,
+        id: int = None,
+        ebs_invoice_id: str = None,
     ):
         """
         :param id: unique identifier of the target invoice.
@@ -977,13 +979,12 @@ class _Invoice(Billing):
                 "id": id,
                 "ebsInvoiceId": ebs_invoice_id,
             },
-            delimiter=",",
         )
 
     def MarkAsVoid(
         self,
-        id: list[int] = None,
-        ebs_invoice_id: list[str] = None,
+        id: int = None,
+        ebs_invoice_id: str = None,
     ):
         """
         :param id: unique identifier of the target invoice.
@@ -995,14 +996,13 @@ class _Invoice(Billing):
                 "id": id,
                 "ebsInvoiceId": ebs_invoice_id,
             },
-            delimiter=",",
         )
 
     def Pay(
         self,
         id: int,
-        payment_method_id: list[str] = None,
-        payment_method_type: list[str] = None,
+        payment_method_id: str = None,
+        payment_method_type: str = None,
     ):
         """
         :param id: unique identifier of the target invoice.
@@ -1016,14 +1016,13 @@ class _Invoice(Billing):
                 "paymentMethodId": payment_method_id,
                 "paymentMethodType": payment_method_type,
             },
-            delimiter=",",
         )
 
     def SearchInvoices(
         self,
         search: str,
-        expand_fields: list[str] = None,
-        reseller_id: list[int] = None,
+        expand_fields: str = None,
+        reseller_id: int = None,
     ):
         """
         :param search: a search string in the JSON format. For example: {"startDate":"2023-01-23 00:00:00","endDate":"2023-01-30 23:59:59","orderField":"id","orderDirection":"DESC","startRow":0,"resultCount":10}
@@ -1037,7 +1036,6 @@ class _Invoice(Billing):
                 "expandFields": expand_fields,
                 "resellerId": reseller_id,
             },
-            delimiter=",",
         )
 
 
@@ -1046,16 +1044,16 @@ class _GroupQuota(Billing):
     Ref: https://docs.jelastic.com/api/#!/api/billing.GroupQuota
     """
 
-    _endpoint2 = "getquota"
+    _endpoint2 = "groupquota"
 
     def AddGroup(
         self,
         type: str,
         name: str,
-        description: list[str] = None,
-        source_group_name: list[str] = None,
-        domain: list[str] = None,
-        conversion_group: list[str] = None,
+        description: str = None,
+        source_group_name: str = None,
+        domain: str = None,
+        conversion_group: str = None,
     ):
         """
         :param type: quota group type.
@@ -1075,16 +1073,15 @@ class _GroupQuota(Billing):
                 "domain": domain,
                 "conversionGroup": conversion_group,
             },
-            delimiter=",",
         )
 
     def AddQuota(
         self,
         name: str,
-        description: list[str] = None,
-        reference_id: list[str] = None,
-        default_value: list[int] = None,
-        assign_to_group: list[bool] = None,
+        description: str = None,
+        reference_id: str = None,
+        default_value: int = None,
+        assign_to_group: bool = None,
     ):
         """
         :param name: a name of the quota to be created.
@@ -1102,7 +1099,6 @@ class _GroupQuota(Billing):
                 "defaultValue": default_value,
                 "assignToGroup": assign_to_group,
             },
-            delimiter=",",
         )
 
     def DeleteGroup(self, name: str):
@@ -1111,9 +1107,9 @@ class _GroupQuota(Billing):
     def EditGroup(
         self,
         name: str,
-        new_name: list[str] = None,
-        description: list[str] = None,
-        conversion_group: list[str] = None,
+        new_name: str = None,
+        description: str = None,
+        conversion_group: str = None,
     ):
         """
         :param name: unique name of the target quota group.
@@ -1129,16 +1125,20 @@ class _GroupQuota(Billing):
                 "description": description,
                 "conversionGroup": conversion_group,
             },
-            delimiter=",",
         )
 
     def EditQuota(
         self,
         name: str,
-        reference_id: list[str] = None,
-        new_reference_id: list[str] = None,
-        description: list[str] = None,
+        reference_id: str = None,
+        new_reference_id: str = None,
+        description: str = None,
     ):
+        """
+        param name: unique a name of the quota to be adjusted.
+        param reference_id: reference ID of the quota.
+        param description: custom quota description.
+        """
         return self._get(
             "EditQuota",
             params={
@@ -1147,17 +1147,15 @@ class _GroupQuota(Billing):
                 "newReferenceId": new_reference_id,
                 "description": description,
             },
-            delimiter=",",
         )
 
-    def GetGroupQuotas(self, name: str, quotas_names: list[str] = None):
+    def GetGroupQuotas(self, name: str, quotas_names: str = None):
         return self._get(
             "GetGroupQuotas",
             params={
                 "name": name,
                 "quotasnames": quotas_names,
             },
-            delimiter=",",
         )
 
     def GetGroups(self):
@@ -1169,12 +1167,8 @@ class _GroupQuota(Billing):
     def GetQuotas(self):
         return self._get("GetQuotas", params={})
 
-    def IsDomainBound(self, checksum: list[str] = None):
-        return self._get(
-            "IsDomainBound",
-            params={"checksum": checksum},
-            delimiter=",",
-        )
+    def IsDomainBound(self, checksum: str = None):
+        return self._get("IsDomainBound", params={"checksum": checksum})
 
     def RemoveGroupQuota(self, group_name: str, quota_name: str):
         return self._get(
@@ -1188,8 +1182,8 @@ class _GroupQuota(Billing):
     def RemoveQuota(
         self,
         name: str,
-        force: list[bool] = None,
-        reference_id: list[str] = None,
+        force: bool = None,
+        reference_id: str = None,
     ):
         """
         :param name: a name of the quota to be removed.
@@ -1203,7 +1197,6 @@ class _GroupQuota(Billing):
                 "force": force,
                 "referenceId": reference_id,
             },
-            delimiter=",",
         )
 
     def SetCollaborationGroup(
@@ -1220,7 +1213,7 @@ class _GroupQuota(Billing):
         group_name: str,
         quota_name: str,
         value: int,
-        reference_id: list[str] = None,
+        reference_id: str = None,
     ):
         """
         :param group_name: unique name of the target group.
@@ -1236,7 +1229,6 @@ class _GroupQuota(Billing):
                 "value": value,
                 "referenceId": reference_id,
             },
-            delimiter=",",
         )
 
     def SetPricingModels(
@@ -1288,7 +1280,7 @@ class _Integration(Billing):
         """
         return self._get("GetInvoiceUrl", params={"invoiceId": invoice_id})
 
-    def GetSSOUrl(self, path: list[str] = None):
+    def GetSSOUrl(self, path: str = None):
         """
         :param path: destination path within the integrated system.
         """
@@ -1360,9 +1352,9 @@ class _PayMethod(Billing):
         self,
         pay_method_type: str,
         service_plan_id: int,
-        auto_service_plan_id: list[int] = None,
-        auto_refill_min_balance: list[int] = None,
-        auto_refill_period: list[str] = None,
+        auto_service_plan_id: int = None,
+        auto_refill_min_balance: int = None,
+        auto_refill_period: str = None,
     ):
         """
         :param pay_method_type: take value from item of GetValidPayTypes response
@@ -1379,7 +1371,6 @@ class _PayMethod(Billing):
                 "autoRefillMinBalance": auto_refill_min_balance,
                 "autoRefillPeriod": auto_refill_period,
             },
-            delimiter=",",
         )
 
     def SetDefaultPayMethod(self, pay_method_id: str):
@@ -1390,15 +1381,13 @@ class _PayMethod(Billing):
 
     def SetupIntent(
         self,
-        payment_method_type: list[str] = None,
+        payment_method_type: str = None,
     ):
         """
         :param payment_method_type: list of payment method keys (optional), for example: card, bancontact, ...
         """
         return self._get(
-            "SetupIntent",
-            params={"paymentMethodType": payment_method_type},
-            delimiter=",",
+            "SetupIntent", params={"paymentMethodType": payment_method_type}
         )
 
 
@@ -1413,7 +1402,7 @@ class _Pricing(Billing):
         self,
         pricing: dict,
         tariff_ids: str,
-        tariff_grid_names: list[str] = None,
+        tariff_grid_names: str = None,
     ):
         return self._get(
             "AddPricing",
@@ -1422,18 +1411,13 @@ class _Pricing(Billing):
                 "tariffIds": tariff_ids,
                 "tariffGridNames": tariff_grid_names,
             },
-            delimiter=",",
         )
 
     def AddResource(self, resource: str):
         return self._get("AddResource", params={"resource": resource})
 
     def AddTariff(self, tariff: dict):
-        return self._get(
-            "AddTariff",
-            params={"tariff": tariff},
-            delimiter=",",
-        )
+        return self._get("AddTariff", params={"tariff": tariff})
 
     def AttachTariff(self, uniq_name: str, target_app_id: str):
         return self._get(
@@ -1455,8 +1439,8 @@ class _Pricing(Billing):
 
     def CheckHostGroupsAllowed(
         self,
-        owner_uid: list[int] = None,
-        hardware_node_groups: list[str] = None,
+        owner_uid: int = None,
+        hardware_node_groups: str = None,
     ):
         """
         :param owner_uid: unique identifier of the target user.
@@ -1465,7 +1449,6 @@ class _Pricing(Billing):
         return self._get(
             "CheckHostGroupsAllowed",
             params={"ownerUid": owner_uid, "hardwareNodeGroups": hardware_node_groups},
-            delimiter=",",
         )
 
     def DeletePricing(self, id: str):
@@ -1496,69 +1479,41 @@ class _Pricing(Billing):
         self,
         pricing: dict,
     ):
-        return self._get(
-            "EditPricing",
-            params={"pricing": pricing},
-            delimiter=",",
-        )
+        return self._get("EditPricing", params={"pricing": pricing})
 
     def EditResource(self, resource: str):
         return self._get("EditResource", params={"resource": resource})
 
     def EditTariff(self, tariff: dict):
-        return self._get(
-            "EditTariff",
-            params={"tariff": tariff},
-            delimiter=",",
-        )
+        return self._get("EditTariff", params={"tariff": tariff})
 
-    def GetCurrencies(self, currency: list[str] = None):
-        return self._get(
-            "GetCurrencies",
-            params={"currency": currency},
-            delimiter=",",
-        )
+    def GetCurrencies(self, currency: str = None):
+        return self._get("GetCurrencies", params={"currency": currency})
 
-    def GetPlatformCurrency(self, reseller_id: list[int] = None):
-        return self._get(
-            "GetPlatformCurrency",
-            params={"resellerId": reseller_id},
-            delimiter=",",
-        )
+    def GetPlatformCurrency(self, reseller_id: int = None):
+        return self._get("GetPlatformCurrency", params={"resellerId": reseller_id})
 
-    def GetPricing(self, owner_uid: list[int] = None):
-        return self._get(
-            "GetPricing",
-            params={"ownerUid": owner_uid},
-            delimiter=",",
-        )
+    def GetPricing(self, owner_uid: int = None):
+        return self._get("GetPricing", params={"ownerUid": owner_uid})
 
-    def GetPricingInner(self, reseller_id: list[int] = None):
+    def GetPricingInner(self, reseller_id: int = None):
         """
         :param reseller_id: unique ID of the target reseller platform
         """
-        return self._get(
-            "GetPricingInner",
-            params={"resellerId": reseller_id},
-            delimiter=",",
-        )
+        return self._get("GetPricingInner", params={"resellerId": reseller_id})
 
     def GetResources(
         self,
-        id: list[int] = None,
-        name: list[str] = None,
+        id: int = None,
+        name: str = None,
     ):
-        return self._get(
-            "GetResources",
-            params={"id": id, "name": name},
-            delimiter=",",
-        )
+        return self._get("GetResources", params={"id": id, "name": name})
 
     def GetTariffsInner(
         self,
-        pricing_id: list[str] = None,
-        type: list[str] = None,
-        reseller_id: list[int] = None,
+        pricing_id: str = None,
+        type: str = None,
+        reseller_id: int = None,
     ):
         """
         :param pricing_id: pricing model unique ID.
@@ -1568,7 +1523,6 @@ class _Pricing(Billing):
         return self._get(
             "GetTariffsInner",
             params={"priceId": pricing_id, "type": type, "resellerId": reseller_id},
-            delimiter=",",
         )
 
     def GetUniqueResourceNames(self):
@@ -1578,7 +1532,7 @@ class _Pricing(Billing):
         self,
         pricing_id: str,
         tariff_ids: str,
-        tariff_grid_names: list[str] = None,
+        tariff_grid_names: str = None,
     ):
         return self._get(
             "SetTariffs",
@@ -1587,13 +1541,12 @@ class _Pricing(Billing):
                 "tariffIds": tariff_ids,
                 "tariffGridNames": tariff_grid_names,
             },
-            delimiter=",",
         )
 
     def ValidateEnvironment(
         self,
         hardware_node_group: str,
-        owner_uid: list[int] = None,
+        owner_uid: int = None,
     ):
         return self._get(
             "ValidateEnvironment",
@@ -1601,7 +1554,6 @@ class _Pricing(Billing):
                 "hardwareNodeGroup": hardware_node_group,
                 "ownerUid": owner_uid,
             },
-            delimiter=",",
         )
 
     def ValidateNode(
@@ -1653,7 +1605,7 @@ class _Reseller(Billing):
         reseller: str,
         platform: str,
         regions: str,
-        settings: list[str] = None,
+        settings: str = None,
     ):
         """
         :param reseller: JSON representation of the reseller object.
@@ -1669,14 +1621,13 @@ class _Reseller(Billing):
                 "regions": regions,
                 "settings": settings,
             },
-            delimiter=",",
         )
 
     def EditReseller(
         self,
         reseller: str,
-        platform: str,
-        regions: list[str] = None,
+        platform: str = None,
+        regions: str = None,
     ):
         return self._get(
             "EditReseller",
@@ -1685,7 +1636,6 @@ class _Reseller(Billing):
                 "platform": platform,
                 "regions": regions,
             },
-            delimiter=",",
         )
 
     def GetAllResellers(self):
@@ -1720,7 +1670,7 @@ class _ServicePlan(Billing):
     def CreateLevelAutoPay(
         self,
         min_balance: int,
-        expires: str,
+        expires: datetime,
         service_plan_id: int,
         payment_method_id: str,
         min_period: int,
@@ -1741,12 +1691,13 @@ class _ServicePlan(Billing):
                 "paymentMethodId": payment_method_id,
                 "minPeriod": min_period,
             },
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def CreateRegularAutoPay(
         self,
         cron_expression: str,
-        expires: str,
+        expires: datetime,
         time_zone: str,
         service_plan_id: int,
         payment_method_id: str,
@@ -1768,6 +1719,7 @@ class _ServicePlan(Billing):
                 "servicePlanId": service_plan_id,
                 "paymentMethodId": payment_method_id,
             },
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def CreateServicePlan(
@@ -1917,10 +1869,10 @@ class _ServicePlan(Billing):
         """
         return self._get("GetServicePlan", params={"servicePlanId": service_plan_id})
 
-    def GetServicePlanByType(self, plan_type: list[int] = None):
+    def GetServicePlanByType(self, plan_type: str = None):
         return self._get("GetServicePlanByType", params={"planType": plan_type})
 
-    def PaymentNewsRead(self, id: int):
+    def PaymentNewsRead(self, id: str):
         """
         :param id: comma separated ids of payments
         """
@@ -1929,7 +1881,7 @@ class _ServicePlan(Billing):
     def SetExternPlanId(
         self,
         service_plan_id: int,
-        external_plan_id: int,
+        external_plan_id: str,
     ):
         """
         :param service_plan_id: JBilling service plan id
@@ -2035,8 +1987,8 @@ class _Utils(Billing):
         self,
         env_name: str,
         uid: int,
-        start_date: str,
-        end_date: str,
+        start_date: datetime,
+        end_date: datetime,
         checksum: str,
     ):
         return self._get(
@@ -2048,6 +2000,7 @@ class _Utils(Billing):
                 "endDate": end_date,
                 "checksum": checksum,
             },
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def ClearMonthTraffic(
@@ -2068,8 +2021,8 @@ class _Utils(Billing):
     def GetUidUsageByPeriod(
         self,
         uid: int,
-        start_date: str,
-        end_date: str,
+        start_date: datetime,
+        end_date: datetime,
         checksum: str,
     ):
         return self._get(
@@ -2080,6 +2033,7 @@ class _Utils(Billing):
                 "endDate": end_date,
                 "checksum": checksum,
             },
+            datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def SetAccountDate(
@@ -2103,8 +2057,8 @@ class _Utils(Billing):
         self,
         uid: int,
         env_name: str,
-        start_date_from: str,
-        start_date_to: str,
+        start_date_from: date,
+        start_date_to: date,
         date_type: str,
         date_value: str,
         checksum: str,
@@ -2120,6 +2074,7 @@ class _Utils(Billing):
                 "dateValue": date_value,
                 "checksum": checksum,
             },
+            datetime_format="%Y-%m-%d",
         )
 
     def SetMonthTraffic(
@@ -2149,8 +2104,8 @@ class _System(Billing):
 
     def CleanCheckRequestCache(
         self,
-        uid: list[int] = None,
-        local_only: list[bool] = None,
+        uid: int = None,
+        local_only: bool = None,
     ):
         return self._get(
             "CleanCheckRequestCache",
@@ -2158,14 +2113,13 @@ class _System(Billing):
                 "uid": uid,
                 "localOnly": local_only,
             },
-            delimiter=",",
         )
 
     def Event(
         self,
         topic: str,
         message: str,
-        publish_local: list[bool] = None,
+        publish_local: bool = None,
     ):
         return self._get(
             "Event",
@@ -2174,13 +2128,12 @@ class _System(Billing):
                 "message": message,
                 "publishLocal": publish_local,
             },
-            delimiter=",",
         )
 
     def GetAPIDescriptions(
         self,
-        is_public_only: list[bool] = None,
-        is_token: list[bool] = None,
+        is_public_only: bool = None,
+        is_token: bool = None,
     ):
         return self._get(
             "GetAPIDescriptions",
@@ -2188,7 +2141,6 @@ class _System(Billing):
                 "isPublicOnly": is_public_only,
                 "isToken": is_token,
             },
-            delimiter=",",
         )
 
     def GetAutoPercent(self):
@@ -2203,7 +2155,7 @@ class _System(Billing):
     def GetInstanceCacheStatus(self):
         return self._get("GetInstanceCacheStatus", params={})
 
-    def GetStatus(self, checksum: int):
+    def GetStatus(self, checksum: str):
         return self._get("GetStatus", params={"checksum": checksum})
 
     def GetVersion(self):
@@ -2212,17 +2164,13 @@ class _System(Billing):
     def RefreshEmailTemplates(self):
         return self._get("RefreshEmailTemplates", params={})
 
-    def RefreshUser(self, language: list[str] = None):
-        return self._get(
-            "RefreshUser",
-            params={"language": language},
-            delimiter=",",
-        )
+    def RefreshUser(self, language: str = None):
+        return self._get("RefreshUser", params={"language": language})
 
     def ReloadConfiguration(
         self,
-        reseller_id: list[int] = None,
-        changed_placeholders: list[str] = None,
+        reseller_id: int = None,
+        changed_placeholders: str = None,
     ):
         return self._get(
             "ReloadConfiguration",
@@ -2230,15 +2178,14 @@ class _System(Billing):
                 "resellerId": reseller_id,
                 "changedPlaceholders": changed_placeholders,
             },
-            delimiter=",",
         )
 
     def SendEmail(
         self,
         template: str,
-        email: list[str] = None,
-        language: list[str] = None,
-        timeout: list[int] = None,
+        email: str = None,
+        language: str = None,
+        timeout: int = None,
     ):
         return self._get(
             "SendEmail",
@@ -2248,7 +2195,6 @@ class _System(Billing):
                 "language": language,
                 "timeout": timeout,
             },
-            delimiter=",",
         )
 
     def Validate(self):
@@ -2268,10 +2214,10 @@ class _Subscription(Billing):
     def Cancel(
         self,
         id: int,
-        immediately: list[bool] = None,
-        cancel_date: list[str] = None,
-        passphrase: list[str] = None,
-        expand_fields: list[str] = None,
+        immediately: bool = None,
+        cancel_date: date = None,
+        passphrase: str = None,
+        expand_fields: str = None,
     ):
         """
         :param id: unique identifier of the target subscription.
@@ -2289,7 +2235,7 @@ class _Subscription(Billing):
                 "passphrase": passphrase,
                 "expandFields": expand_fields,
             },
-            delimiter=",",
+            datetime_format="%Y-%m-%d",
         )
 
     def CloneProduct(
@@ -2297,7 +2243,7 @@ class _Subscription(Billing):
         subscription_id: int,
         item_resource: int,
         target_env_name: str,
-        item_id: list[int] = None,
+        item_id: int = None,
     ):
         """
         :param subscription_id: unique identifier of the target subscription.
@@ -2313,7 +2259,6 @@ class _Subscription(Billing):
                 "targetEnvName": target_env_name,
                 "itemId": item_id,
             },
-            delimiter=",",
         )
 
     def DiscardUpdateSubscription(self, subscription_id: int):
@@ -2324,25 +2269,21 @@ class _Subscription(Billing):
             "DiscardUpdateSubscription", params={"subscriptionId": subscription_id}
         )
 
-    def GetCategories(self, expand_fields: list[str] = None):
+    def GetCategories(self, expand_fields: str = None):
         """
         :param expand_fields: there are fields that are not included in responses by default. You can request these fields as an expanded response by listing required object paths in this parameter (e.g. account.group).
         """
-        return self._get(
-            "GetCategories",
-            params={"expandFields": expand_fields},
-            delimiter=",",
-        )
+        return self._get("GetCategories", params={"expandFields": expand_fields})
 
     def GetProducts(
         self,
-        id: list[int] = None,
-        category_id: list[int] = None,
-        expand_fields: list[str] = None,
-        start_row: list[int] = None,
-        result_count: list[int] = None,
-        order_field: list[str] = None,
-        order_direction: list[str] = None,
+        id: int = None,
+        category_id: int = None,
+        expand_fields: str = None,
+        start_row: int = None,
+        result_count: int = None,
+        order_field: str = None,
+        order_direction: str = None,
     ):
         """
         :param id: unique identifier of the target subscription Product (for filtering).
@@ -2364,12 +2305,11 @@ class _Subscription(Billing):
                 "orderField": order_field,
                 "orderDirection": order_direction,
             },
-            delimiter=",",
         )
 
     def GetRestrictedHardNodeGroups(self, subscription_item_id: int):
         """
-        :param subscription_id: unique identifier of the target subscription item.
+        :param subscription_item_id: unique identifier of the target subscription item.
         """
         return self._get(
             "GetHardNodeGroups",
@@ -2380,9 +2320,9 @@ class _Subscription(Billing):
 
     def GetServicePlans(
         self,
-        id: list[int] = None,
-        product_id: list[int] = None,
-        expand_fields: list[str] = None,
+        id: int = None,
+        product_id: int = None,
+        expand_fields: str = None,
     ):
         """
         :param id: unique identifier of the target service plan (for filtering).
@@ -2396,19 +2336,18 @@ class _Subscription(Billing):
                 "productId": product_id,
                 "expandFields": expand_fields,
             },
-            delimiter=",",
         )
 
     def GetSubscriptions(
         self,
-        id: list[int] = None,
-        product_id: list[int] = None,
+        id: int = None,
+        product_id: int = None,
         status: list[str] = None,
-        expand_fields: list[str] = None,
-        start_row: list[int] = None,
-        result_count: list[int] = None,
-        order_field: list[str] = None,
-        order_direction: list[str] = None,
+        expand_fields: str = None,
+        start_row: int = None,
+        result_count: int = None,
+        order_field: str = None,
+        order_direction: str = None,
     ):
         """
         :param id: unique identifier of the target subscription (for filtering).
@@ -2438,13 +2377,13 @@ class _Subscription(Billing):
     def InstallProduct(
         self,
         subscription_id: int,
-        item_id: list[int] = None,
-        settings: list[str] = None,
-        env_name: list[str] = None,
-        display_name: list[str] = None,
-        env_groups: list[str] = None,
-        region: list[str] = None,
-        lang: list[str] = None,
+        item_id: int = None,
+        settings: str = None,
+        env_name: str = None,
+        display_name: str = None,
+        env_groups: str = None,
+        region: str = None,
+        lang: str = None,
     ):
         """
         :param subscription_id: unique identifier of the target subscription.
@@ -2468,7 +2407,6 @@ class _Subscription(Billing):
                 "region": region,
                 "lang": lang,
             },
-            delimiter=",",
         )
 
     def MoveProduct(
@@ -2478,7 +2416,7 @@ class _Subscription(Billing):
         target_subscription_id: int,
         target_item_id: int,
         passphrase: str,
-        item_id: list[int] = None,
+        item_id: int = None,
     ):
         """
         :param subscription_id: unique identifier of the source subscription.
@@ -2498,14 +2436,13 @@ class _Subscription(Billing):
                 "passphrase": passphrase,
                 "itemId": item_id,
             },
-            delimiter=",",
         )
 
     def SetAutopay(
         self,
         id: int,
         enabled: bool,
-        expand_fields: list[str] = None,
+        expand_fields: str = None,
     ):
         """
         :param id: unique identifier of the target subscription.
@@ -2519,15 +2456,14 @@ class _Subscription(Billing):
                 "enabled": enabled,
                 "expandFields": expand_fields,
             },
-            delimiter=",",
         )
 
     def Subscribe(
         self,
         product_id: int,
         items: str,
-        change_automatically: list[bool] = None,
-        expand_fields: list[str] = None,
+        change_automatically: bool = None,
+        expand_fields: str = None,
     ):
         """
         :param product_id: unique identifier of the subscription product.
@@ -2543,13 +2479,12 @@ class _Subscription(Billing):
                 "chargeAutomatically": change_automatically,
                 "expandFields": expand_fields,
             },
-            delimiter=",",
         )
 
     def UndoCancel(
         self,
         id: int,
-        expand_fields: list[str] = None,
+        expand_fields: str = None,
     ):
         """
         :param id: unique identifier of the target subscription.
@@ -2561,7 +2496,6 @@ class _Subscription(Billing):
                 "id": id,
                 "expandFields": expand_fields,
             },
-            delimiter=",",
         )
 
     def UninstallProduct(
@@ -2612,7 +2546,7 @@ class _Subscription(Billing):
         subscription_id: int,
         item_id: int,
         quantity: int,
-        expand_fields: list[str] = None,
+        expand_fields: str = None,
     ):
         """
         :param subscription_id: unique identifier of the target subscription.
@@ -2628,5 +2562,4 @@ class _Subscription(Billing):
                 "quantity": quantity,
                 "expandFields": expand_fields,
             },
-            delimiter=",",
         )

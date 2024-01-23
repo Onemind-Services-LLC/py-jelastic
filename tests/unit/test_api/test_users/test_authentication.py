@@ -55,21 +55,21 @@ def test_create_token(client):
     client._get.return_value = success_response
     response = client.Authentication.CreateToken(
         "description",
-        ["password1", "password2"],
-        ["token_template1", "token_template2"],
+        "password",
+        "tokenTemplate",
         ["api_list1", "api_list2"],
-        [CURRENT_DATETIME, CURRENT_DATETIME],
+        CURRENT_DATETIME,
     )
     client._get.assert_called_with(
         "CreateToken",
         params={
             "description": "description",
-            "password": ["password1", "password2"],
-            "tokenTemplate": ["token_template1", "token_template2"],
+            "password": "password",
+            "tokenTemplate": "tokenTemplate",
             "apiList": ["api_list1", "api_list2"],
-            "expiresAt": [CURRENT_DATETIME, CURRENT_DATETIME],
+            "expiresAt": CURRENT_DATETIME,
         },
-        delimiter=",",
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
@@ -79,38 +79,33 @@ def test_create_token_inner(client):
     response = client.Authentication.CreateTokenInner(
         "login",
         "description",
-        ["token_template1", "token_template2"],
+        "tokenTemplate",
         ["api_list1", "api_list2"],
-        [CURRENT_DATETIME, CURRENT_DATETIME],
-        [True, True],
-        [True, True],
+        CURRENT_DATETIME,
+        True,
+        True,
     )
     client._get.assert_called_with(
         "CreateTokenInner",
         params={
             "login": "login",
             "description": "description",
-            "tokenTemplate": ["token_template1", "token_template2"],
+            "tokenTemplate": "tokenTemplate",
             "apiList": ["api_list1", "api_list2"],
-            "expiresAt": [CURRENT_DATETIME, CURRENT_DATETIME],
-            "isProtected": [True, True],
-            "skipNotification": [True, True],
+            "expiresAt": CURRENT_DATETIME,
+            "isProtected": True,
+            "skipNotification": True,
         },
-        delimiter=",",
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
 
 def test_delete_token(client):
     client._get.return_value = success_response
-    response = client.Authentication.DeleteTokens("ids", ["password1", "password2"])
+    response = client.Authentication.DeleteTokens("ids", "password")
     client._get.assert_called_with(
-        "DeleteTokens",
-        params={
-            "ids": "ids",
-            "password": ["password1", "password2"],
-        },
-        delimiter=",",
+        "DeleteTokens", params={"ids": "ids", "password": "password"}
     )
     assert response == success_response
 
@@ -119,23 +114,23 @@ def test_edit_token(client):
     client._get.return_value = success_response
     response = client.Authentication.EditToken(
         1,
-        ["password1", "password2"],
-        ["description1", "description2"],
-        ["token_template1", "token_template2"],
+        "password",
+        "description",
+        "tokenTemplate",
         ["api_list1", "api_list2"],
-        [CURRENT_DATETIME, CURRENT_DATETIME],
+        CURRENT_DATETIME,
     )
     client._get.assert_called_with(
         "EditToken",
         params={
             "id": 1,
-            "password": ["password1", "password2"],
-            "description": ["description1", "description2"],
-            "tokenTemplate": ["token_template1", "token_template2"],
+            "password": "password",
+            "description": "description",
+            "tokenTemplate": "tokenTemplate",
             "apiList": ["api_list1", "api_list2"],
-            "expiresAt": [CURRENT_DATETIME, CURRENT_DATETIME],
+            "expiresAt": CURRENT_DATETIME,
         },
-        delimiter=",",
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
@@ -165,11 +160,9 @@ def test_get_device_signature(client):
 
 def test_get_policy_methods(client):
     client._get.return_value = success_response
-    response = client.Authentication.GetPolicyMethods(["unique_name1", "unique_name2"])
+    response = client.Authentication.GetPolicyMethods("uniqueName")
     client._get.assert_called_with(
-        "GetPolicyMethods",
-        params={"uniqueName": ["unique_name1", "unique_name2"]},
-        delimiter=",",
+        "GetPolicyMethods", params={"uniqueName": "uniqueName"}
     )
     assert response == success_response
 
@@ -183,27 +176,17 @@ def test_get_session(client):
 
 def test_get_sign_in_attempts(client):
     client._get.return_value = success_response
-    response = client.Authentication.GetSigninAttempts(["search1", "search2"])
-    client._get.assert_called_with(
-        "GetSigninAttempts",
-        params={"search": ["search1", "search2"]},
-        delimiter=",",
-    )
+    response = client.Authentication.GetSigninAttempts("search")
+    client._get.assert_called_with("GetSigninAttempts", params={"search": "search"})
     assert response == success_response
 
 
 def test_get_token_api_list(client):
     client._get.return_value = success_response
-    response = client.Authentication.GetTokenApiList(
-        ["show_private1", "show_private2"], ["sort_param1", "sort_param2"]
-    )
+    response = client.Authentication.GetTokenApiList("showPrivate", "sortParam")
     client._get.assert_called_with(
         "GetTokenApiList",
-        params={
-            "showPrivate": ["show_private1", "show_private2"],
-            "sortParam": ["sort_param1", "sort_param2"],
-        },
-        delimiter=",",
+        params={"showPrivate": "showPrivate", "sortParam": "sortParam"},
     )
     assert response == success_response
 
@@ -235,30 +218,18 @@ def test_get_uid_by_token(client):
 
 def test_regenerate_token(client):
     client._get.return_value = success_response
-    response = client.Authentication.RegenerateToken("ids", ["password1", "password2"])
+    response = client.Authentication.RegenerateToken("ids", "password")
     client._get.assert_called_with(
-        "RegenerateToken",
-        params={
-            "ids": "ids",
-            "password": ["password1", "password2"],
-        },
-        delimiter=",",
+        "RegenerateToken", params={"ids": "ids", "password": "password"}
     )
     assert response == success_response
 
 
 def test_reset_sign_in_attempts(client):
     client._get.return_value = success_response
-    response = client.Authentication.ResetSigninAttempts(
-        ["login1", "login2"], ["ip_address1", "ip_address2"]
-    )
+    response = client.Authentication.ResetSigninAttempts("login", "ipAddress")
     client._get.assert_called_with(
-        "ResetSigninAttempts",
-        params={
-            "login": ["login1", "login2"],
-            "ipAddress": ["ip_address1", "ip_address2"],
-        },
-        delimiter=",",
+        "ResetSigninAttempts", params={"login": "login", "ipAddress": "ipAddress"}
     )
     assert response == success_response
 

@@ -4,26 +4,19 @@ from . import *
 def test_add_favorite(client):
     client._get.return_value = success_response
     response = client.File.AddFavorite(
-        "env_name",
-        "path",
-        ["node_group1", "node_group2"],
-        [1, 2],
-        ["keyword1", "keyword2"],
-        ["filter1", "filter2"],
-        [True, True],
+        "env_name", "path", "nodeGroup", 1, "keyword", "filter", True
     )
     client._get.assert_called_with(
         "AddFavorite",
         params={
             "envName": "env_name",
             "path": "path",
-            "nodeGroup": ["node_group1", "node_group2"],
-            "nodeId": [1, 2],
-            "keyword": ["keyword1", "keyword2"],
-            "filter": ["filter1", "filter2"],
-            "isDir": [True, True],
+            "nodeGroup": "nodeGroup",
+            "nodeId": 1,
+            "keyword": "keyword",
+            "filter": "filter",
+            "isDir": True,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -35,12 +28,12 @@ def test_add_mount_point_by_group(client):
         "node_group",
         "path",
         "source_path",
-        ["protocol1", "protocol2"],
-        ["source_host1", "source_host2"],
-        [1, 1],
-        ["name1", "name2"],
-        [True, True],
-        ["source_address_type1", "source_address_type2"],
+        "protocol",
+        "sourceHost",
+        1,
+        "name",
+        True,
+        "sourceAddressType",
     )
     client._get.assert_called_with(
         "AddMountPointByGroup",
@@ -49,14 +42,13 @@ def test_add_mount_point_by_group(client):
             "nodeGroup": "node_group",
             "path": "path",
             "sourcePath": "source_path",
-            "protocol": ["protocol1", "protocol2"],
-            "sourceHost": ["source_host1", "source_host2"],
-            "sourceNodeId": [1, 1],
-            "name": ["name1", "name2"],
-            "readOnly": [True, True],
-            "sourceAddressType": ["source_address_type1", "source_address_type2"],
+            "protocol": "protocol",
+            "sourceHost": "sourceHost",
+            "sourceNodeId": 1,
+            "name": "name",
+            "readOnly": True,
+            "sourceAddressType": "sourceAddressType",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -68,12 +60,12 @@ def test_add_mount_point_by_id(client):
         1,
         "path",
         "source_path",
-        ["protocol1", "protocol2"],
-        ["source_host1", "source_host2"],
-        [1, 1],
-        ["name1", "name2"],
-        [True, True],
-        ["source_address_type1", "source_address_type2"],
+        "protocol",
+        "sourceHost",
+        1,
+        "name",
+        True,
+        "sourceAddressType",
     )
     client._get.assert_called_with(
         "AddMountPointById",
@@ -82,14 +74,13 @@ def test_add_mount_point_by_id(client):
             "nodeId": 1,
             "path": "path",
             "sourcePath": "source_path",
-            "protocol": ["protocol1", "protocol2"],
-            "sourceHost": ["source_host1", "source_host2"],
-            "sourceNodeId": [1, 1],
-            "name": ["name1", "name2"],
-            "readOnly": [True, True],
-            "sourceAddressType": ["source_address_type1", "source_address_type2"],
+            "protocol": "protocol",
+            "sourceHost": "sourceHost",
+            "sourceNodeId": 1,
+            "name": "name",
+            "readOnly": True,
+            "sourceAddressType": "sourceAddressType",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -97,26 +88,19 @@ def test_add_mount_point_by_id(client):
 def test_append(client):
     client._get.return_value = success_response
     response = client.File.Append(
-        "env_name",
-        "path",
-        ["body1", "body2"],
-        ["node_type1", "node_type2"],
-        ["node_group1", "node_group2"],
-        [True, True],
-        [1, 1],
+        "env_name", "path", "body", "nodeType", "nodeGroup", True, 1
     )
     client._get.assert_called_with(
         "Append",
         params={
             "envName": "env_name",
             "path": "path",
-            "body": ["body1", "body2"],
-            "nodeType": ["node_type1", "node_type2"],
-            "nodeGroup": ["node_group1", "node_group2"],
-            "masterOnly": [True, True],
-            "nodeId": [1, 1],
+            "body": "body",
+            "nodeType": "nodeType",
+            "nodeGroup": "nodeGroup",
+            "masterOnly": True,
+            "nodeId": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -137,21 +121,15 @@ def test_check_cross_mount(client):
 
 def test_clone_cross_mount_points(client):
     client._get.return_value = success_response
-    response = client.File.CloneMountPoints(
-        "env_name",
-        1,
-        1,
-        ["mount_points1", "mount_points2"],
-    )
+    response = client.File.CloneMountPoints("env_name", 1, 1, "mountPoints")
     client._get.assert_called_with(
         "CloneMountPoints",
         params={
             "envName": "env_name",
             "nodeId": 1,
             "sourceNodeId": 1,
-            "mountPoints": ["mount_points1", "mount_points2"],
+            "mountPoints": "mountPoints",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -159,13 +137,7 @@ def test_clone_cross_mount_points(client):
 def test_copy(client):
     client._get.return_value = success_response
     response = client.File.Copy(
-        "env_name",
-        "src",
-        "dest",
-        ["node_type1", "node_type2"],
-        ["node_group1", "node_group2"],
-        [True, True],
-        [1, 1],
+        "env_name", "src", "dest", "nodeType", "nodeGroup", True, 1
     )
     client._get.assert_called_with(
         "Copy",
@@ -173,12 +145,11 @@ def test_copy(client):
             "envName": "env_name",
             "src": "src",
             "dest": "dest",
-            "nodeType": ["node_type1", "node_type2"],
-            "nodeGroup": ["node_group1", "node_group2"],
-            "masterOnly": [True, True],
-            "nodeId": [1, 1],
+            "nodeType": "nodeType",
+            "nodeGroup": "nodeGroup",
+            "masterOnly": True,
+            "nodeId": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -186,81 +157,55 @@ def test_copy(client):
 def test_create(client):
     client._get.return_value = success_response
     response = client.File.Create(
-        "env_name",
-        "path",
-        ["node_type1", "node_type2"],
-        ["node_group1", "node_group2"],
-        [True, True],
-        [True, True],
-        [1, 1],
+        "env_name", "path", "nodeType", "nodeGroup", True, True, 1
     )
     client._get.assert_called_with(
         "Create",
         params={
             "envName": "env_name",
             "path": "path",
-            "nodeType": ["node_type1", "node_type2"],
-            "nodeGroup": ["node_group1", "node_group2"],
-            "masterOnly": [True, True],
-            "isdir": [True, True],
-            "nodeId": [1, 1],
+            "nodeType": "nodeType",
+            "nodeGroup": "nodeGroup",
+            "masterOnly": True,
+            "isdir": True,
+            "nodeId": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_delete(client):
     client._get.return_value = success_response
-    response = client.File.Delete(
-        "env_name",
-        "path",
-        ["node_type1", "node_type2"],
-        ["node_group1", "node_group2"],
-        [True, True],
-        [1, 1],
-    )
+    response = client.File.Delete("env_name", "path", "nodeType", "nodeGroup", True, 1)
     client._get.assert_called_with(
         "Delete",
         params={
             "envName": "env_name",
             "path": "path",
-            "nodeType": ["node_type1", "node_type2"],
-            "nodeGroup": ["node_group1", "node_group2"],
-            "masterOnly": [True, True],
-            "nodeId": [1, 1],
+            "nodeType": "nodeType",
+            "nodeGroup": "nodeGroup",
+            "masterOnly": True,
+            "nodeId": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_get_exported_list(client):
     client._get.return_value = success_response
-    response = client.File.GetExportedList("env_name", 1, ["path1", "path2"])
+    response = client.File.GetExportedList("env_name", 1, "path")
     client._get.assert_called_with(
-        "GetExportedList",
-        params={"envName": "env_name", "nodeId": 1, "path": ["path1", "path2"]},
-        delimiter=",",
+        "GetExportedList", params={"envName": "env_name", "nodeId": 1, "path": "path"}
     )
     assert response == success_response
 
 
 def test_get_favorites(client):
     client._get.return_value = success_response
-    response = client.File.GetFavorites(
-        "env_name",
-        ["node_group1", "node_group2"],
-        [1, 1],
-    )
+    response = client.File.GetFavorites("env_name", "nodeGroup", 1)
     client._get.assert_called_with(
         "GetFavorites",
-        params={
-            "envName": "env_name",
-            "nodeGroup": ["node_group1", "node_group2"],
-            "nodeId": [1, 1],
-        },
-        delimiter=",",
+        params={"envName": "env_name", "nodeGroup": "nodeGroup", "nodeId": 1},
     )
     assert response == success_response
 
@@ -268,41 +213,28 @@ def test_get_favorites(client):
 def test_add_list(client):
     client._get.return_value = success_response
     response = client.File.GetList(
-        "env_name",
-        "path",
-        ["node_type1", "node_type2"],
-        ["node_group1", "node_group2"],
-        [1, 2],
-        ["filter1", "filter2"],
+        "env_name", "path", "nodeType", "nodeGroup", 1, "filter"
     )
     client._get.assert_called_with(
         "GetList",
         params={
             "envName": "env_name",
             "path": "path",
-            "nodeType": ["node_type1", "node_type2"],
-            "nodeGroup": ["node_group1", "node_group2"],
-            "nodeId": [1, 2],
-            "filter": ["filter1", "filter2"],
+            "nodeType": "nodeType",
+            "nodeGroup": "nodeGroup",
+            "nodeId": 1,
+            "filter": "filter",
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_get_mount_points(client):
     client._get.return_value = success_response
-    response = client.File.GetMountPoints(
-        "env_name", ["node_group1", "node_group2"], [1, 2]
-    )
+    response = client.File.GetMountPoints("env_name", "nodeGroup", 1)
     client._get.assert_called_with(
         "GetMountPoints",
-        params={
-            "envName": "env_name",
-            "nodeGroup": ["node_group1", "node_group2"],
-            "nodeId": [1, 2],
-        },
-        delimiter=",",
+        params={"envName": "env_name", "nodeGroup": "nodeGroup", "nodeId": 1},
     )
     assert response == success_response
 
@@ -319,23 +251,16 @@ def test_prepare_mount_points(client):
 
 def test_read(client):
     client._get.return_value = success_response
-    response = client.File.Read(
-        "env_name",
-        "path",
-        ["node_type1", "node_type2"],
-        ["node_group1", "node_group2"],
-        [1, 2],
-    )
+    response = client.File.Read("env_name", "path", "nodeType", "nodeGroup", 1)
     client._get.assert_called_with(
         "Read",
         params={
             "envName": "env_name",
             "path": "path",
-            "nodeType": ["node_type1", "node_type2"],
-            "nodeGroup": ["node_group1", "node_group2"],
-            "nodeId": [1, 2],
+            "nodeType": "nodeType",
+            "nodeGroup": "nodeGroup",
+            "nodeId": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -359,22 +284,17 @@ def test_remove_export(client):
 def test_remove_favorite(client):
     client._get.return_value = success_response
     response = client.File.RemoveFavorite(
-        "env_name",
-        "path",
-        ["node_type1", "node_type2"],
-        ["node_group1", "node_group2"],
-        [1, 2],
+        "env_name", "path", "nodeType", "nodeGroup", 1
     )
     client._get.assert_called_with(
         "RemoveFavorite",
         params={
             "envName": "env_name",
             "path": "path",
-            "nodeType": ["node_type1", "node_type2"],
-            "nodeGroup": ["node_group1", "node_group2"],
-            "nodeId": [1, 2],
+            "nodeType": "nodeType",
+            "nodeGroup": "nodeGroup",
+            "nodeId": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -418,13 +338,7 @@ def test_remove_mount_point_by_id(client):
 def test_rename(client):
     client._get.return_value = success_response
     response = client.File.Rename(
-        "env_name",
-        "old_path",
-        "new_path",
-        ["node_type1", "node_type2"],
-        ["node_group1", "node_group2"],
-        [True, True],
-        [1, 1],
+        "env_name", "old_path", "new_path", "nodeType", "nodeGroup", True, 1
     )
     client._get.assert_called_with(
         "Rename",
@@ -432,12 +346,11 @@ def test_rename(client):
             "envName": "env_name",
             "oldPath": "old_path",
             "newPath": "new_path",
-            "nodeType": ["node_type1", "node_type2"],
-            "nodeGroup": ["node_group1", "node_group2"],
-            "masterOnly": [True, True],
-            "nodeId": [1, 1],
+            "nodeType": "nodeType",
+            "nodeGroup": "nodeGroup",
+            "masterOnly": True,
+            "nodeId": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -449,11 +362,11 @@ def test_replace_in_body(client):
         "path",
         "pattern",
         "replacement",
-        [1, 1],
-        ["node_type1", "node_type2"],
-        ["node_group1", "node_group2"],
-        [True, True],
-        [1, 1],
+        1,
+        "nodeType",
+        "nodeGroup",
+        True,
+        1,
     )
     client._get.assert_called_with(
         "ReplaceInBody",
@@ -462,13 +375,12 @@ def test_replace_in_body(client):
             "path": "path",
             "pattern": "pattern",
             "replacement": "replacement",
-            "nth": [1, 1],
-            "nodeType": ["node_type1", "node_type2"],
-            "nodeGroup": ["node_group1", "node_group2"],
-            "masterOnly": [True, True],
-            "nodeId": [1, 1],
+            "nth": 1,
+            "nodeType": "nodeType",
+            "nodeGroup": "nodeGroup",
+            "masterOnly": True,
+            "nodeId": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -515,10 +427,10 @@ def test_upload(client):
         "env_name",
         "source_path",
         "dest_path",
-        ["node_type1", "node_type2"],
-        ["node_group1", "node_group2"],
-        [True, True],
-        [1, 1],
+        "nodeType",
+        "nodeGroup",
+        True,
+        1,
         "overwrite",
     )
     client._get.assert_called_with(
@@ -527,13 +439,12 @@ def test_upload(client):
             "envName": "env_name",
             "sourcePath": "source_path",
             "destPath": "dest_path",
-            "nodeType": ["node_type1", "node_type2"],
-            "nodeGroup": ["node_group1", "node_group2"],
-            "masterOnly": [True, True],
-            "nodeId": [1, 1],
+            "nodeType": "nodeType",
+            "nodeGroup": "nodeGroup",
+            "masterOnly": True,
+            "nodeId": 1,
             "overwrite": "overwrite",
         },
-        delimiter=",",
     )
     assert response == success_response
 

@@ -3,18 +3,10 @@ from . import *
 
 def test_add_field(client):
     client._get.return_value = success_response
-    response = client.Base.AddField(
-        "type",
-        "field",
-        ["field_type1", "field_type2"],
-    )
+    response = client.Base.AddField("type", "field", "fieldType")
     client._get.assert_called_with(
         "AddField",
-        params={
-            "type": "type",
-            "field": "field",
-            "fieldType": ["field_type1", "field_type2"],
-        },
+        params={"type": "type", "field": "field", "fieldType": "fieldType"},
     )
 
     assert response == success_response
@@ -22,14 +14,9 @@ def test_add_field(client):
 
 def test_create_object(client):
     client._get.return_value = success_response
-    response = client.Base.CreateObject("type", ["data1", "data2"])
+    response = client.Base.CreateObject("type", "data")
     client._get.assert_called_with(
-        "CreateObject",
-        params={
-            "type": "type",
-            "data": ["data1", "data2"],
-        },
-        delimiter=",",
+        "CreateObject", params={"type": "type", "data": "data"}
     )
 
     assert response == success_response
@@ -39,9 +26,7 @@ def test_create_objects(client):
     client._get.return_value = success_response
     response = client.Base.CreateObjects("type", "data")
     client._get.assert_called_with(
-        "CreateObjects",
-        params={"type": "type", "data": "data"},
-        delimiter=",",
+        "CreateObjects", params={"type": "type", "data": "data"}
     )
 
     assert response == success_response
@@ -49,17 +34,9 @@ def test_create_objects(client):
 
 def test_define_type(client):
     client._get.return_value = success_response
-    response = client.Base.DefineType(
-        "type", ["fields1", "fields2"], ["unique1", "unique2"]
-    )
+    response = client.Base.DefineType("type", "fields", "unique")
     client._get.assert_called_with(
-        "DefineType",
-        params={
-            "type": "type",
-            "fields": ["fields1", "fields2"],
-            "unique": ["unique1", "unique2"],
-        },
-        delimiter=",",
+        "DefineType", params={"type": "type", "fields": "fields", "unique": "unique"}
     )
 
     assert response == success_response
@@ -67,18 +44,10 @@ def test_define_type(client):
 
 def test_define_type_by_uid(client):
     client._get.return_value = success_response
-    response = client.Base.DefineTypeByUid(
-        1, "type", ["fields1", "fields2"], ["unique1", "unique2"]
-    )
+    response = client.Base.DefineTypeByUid(1, "type", "fields", "unique")
     client._get.assert_called_with(
         "DefineTypeByUid",
-        params={
-            "uid": 1,
-            "type": "type",
-            "fields": ["fields1", "fields2"],
-            "unique": ["unique1", "unique2"],
-        },
-        delimiter=",",
+        params={"uid": 1, "type": "type", "fields": "fields", "unique": "unique"},
     )
 
     assert response == success_response
@@ -97,14 +66,9 @@ def test_delete_object(client):
 
 def test_delete_objects_by_criteria(client):
     client._get.return_value = success_response
-    response = client.Base.DeleteObjectsByCriteria("type", ["criteria1", "criteria2"])
+    response = client.Base.DeleteObjectsByCriteria("type", "criteria")
     client._get.assert_called_with(
-        "DeleteObjectsByCriteria",
-        params={
-            "type": "type",
-            "criteria": ["criteria1", "criteria2"],
-        },
-        delimiter=",",
+        "DeleteObjectsByCriteria", params={"type": "type", "criteria": "criteria"}
     )
 
     assert response == success_response
@@ -112,14 +76,13 @@ def test_delete_objects_by_criteria(client):
 
 def test_get_not_empty_type(client):
     client._get.return_value = success_response
-    response = client.Base.GetNotEmptyType("type_like", ["asc1", "asc2"])
+    response = client.Base.GetNotEmptyType("type_like", True)
     client._get.assert_called_with(
         "GetNotEmptyType",
         params={
             "typeLike": "type_like",
-            "asc": ["asc1", "asc2"],
+            "asc": True,
         },
-        delimiter=",",
     )
 
     assert response == success_response
@@ -127,11 +90,9 @@ def test_get_not_empty_type(client):
 
 def test_get_object(client):
     client._get.return_value = success_response
-    response = client.Base.GetObject("type", 1, ["join1", "join2"])
+    response = client.Base.GetObject("type", 1, "join")
     client._get.assert_called_with(
-        "GetObject",
-        params={"type": "type", "id": 1, "join": ["join1", "join2"]},
-        delimiter=",",
+        "GetObject", params={"type": "type", "id": 1, "join": "join"}
     )
 
     assert response == success_response
@@ -139,16 +100,9 @@ def test_get_object(client):
 
 def test_get_objects(client):
     client._get.return_value = success_response
-    response = client.Base.GetObjects("type", [1, 1], [1, 1], ["join1", "join2"])
+    response = client.Base.GetObjects("type", 1, 1, "join")
     client._get.assert_called_with(
-        "GetObjects",
-        params={
-            "type": "type",
-            "froms": [1, 1],
-            "count": [1, 1],
-            "join": ["join1", "join2"],
-        },
-        delimiter=",",
+        "GetObjects", params={"type": "type", "froms": 1, "count": 1, "join": "join"}
     )
 
     assert response == success_response
@@ -157,24 +111,18 @@ def test_get_objects(client):
 def test_get_objects_by_criteria(client):
     client._get.return_value = success_response
     response = client.Base.GetObjectsByCriteria(
-        "type",
-        ["criteria1", "criteria2"],
-        [1, 1],
-        [1, 1],
-        ["join1", "join2"],
-        ["projection1", "projection2"],
+        "type", "criteria", 1, 1, "join", "projection"
     )
     client._get.assert_called_with(
         "GetObjectsByCriteria",
         params={
             "type": "type",
-            "criteria": ["criteria1", "criteria2"],
-            "froms": [1, 1],
-            "count": [1, 1],
-            "join": ["join1", "join2"],
-            "projection": ["projection1", "projection2"],
+            "criteria": "criteria",
+            "froms": 1,
+            "count": 1,
+            "join": "join",
+            "projection": "projection",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -182,40 +130,28 @@ def test_get_objects_by_criteria(client):
 def test_get_objects_by_role(client):
     client._get.return_value = success_response
     response = client.Base.GetObjectsByRole(
-        "type",
-        "role",
-        ["criteria1", "criteria2"],
-        [1, 1],
-        [1, 1],
-        ["join1", "join2"],
-        ["projection1", "projection2"],
+        "type", "role", "criteria", 1, 1, "join", "projection"
     )
     client._get.assert_called_with(
         "GetObjectsByRole",
         params={
             "type": "type",
             "role": "role",
-            "criteria": ["criteria1", "criteria2"],
-            "froms": [1, 1],
-            "count": [1, 1],
-            "join": ["join1", "join2"],
-            "projection": ["projection1", "projection2"],
+            "criteria": "criteria",
+            "froms": 1,
+            "count": 1,
+            "join": "join",
+            "projection": "projection",
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_get_objects_count(client):
     client._get.return_value = success_response
-    response = client.Base.GetObjectsCount("type", ["criteria1", "criteria2"])
+    response = client.Base.GetObjectsCount("type", "criteria")
     client._get.assert_called_with(
-        "GetObjectsCount",
-        params={
-            "type": "type",
-            "criteria": ["criteria1", "criteria2"],
-        },
-        delimiter=",",
+        "GetObjectsCount", params={"type": "type", "criteria": "criteria"}
     )
 
     assert response == success_response
@@ -223,16 +159,10 @@ def test_get_objects_count(client):
 
 def test_get_property(client):
     client._get.return_value = success_response
-    response = client.Base.GetProperty("type", 1, "property", ["join1", "join2"])
+    response = client.Base.GetProperty("type", 1, "property", "join")
     client._get.assert_called_with(
         "GetProperty",
-        params={
-            "type": "type",
-            "id": 1,
-            "property": "property",
-            "join": ["join1", "join2"],
-        },
-        delimiter=",",
+        params={"type": "type", "id": 1, "property": "property", "join": "join"},
     )
 
     assert response == success_response
@@ -253,14 +183,13 @@ def test_get_type(client):
 
 def test_get_types(client):
     client._get.return_value = success_response
-    response = client.Base.GetTypes([1, 1], [1, 1])
+    response = client.Base.GetTypes(1, 1)
     client._get.assert_called_with(
         "GetTypes",
         params={
-            "froms": [1, 1],
-            "count": [1, 1],
+            "froms": 1,
+            "count": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -340,15 +269,10 @@ def test_set_objects(client):
 
 def test_set_property(client):
     client._get.return_value = success_response
-    response = client.Base.SetProperty("type", 1, "property", ["value1", "value2"])
+    response = client.Base.SetProperty("type", 1, "property", None)
     client._get.assert_called_with(
         "SetProperty",
-        params={
-            "type": "type",
-            "id": 1,
-            "property": "property",
-            "value": ["value1", "value2"],
-        },
+        params={"type": "type", "id": 1, "property": "property", "value": None},
     )
 
     assert response == success_response
@@ -357,37 +281,28 @@ def test_set_property(client):
 def test_set_objects_by_criteria(client):
     client._get.return_value = success_response
     response = client.Base.SetObjectsByCriteria(
-        "type",
-        "property",
-        ["criteria1", "criteria2"],
-        [1, 1],
-        [1, 1],
-        ["join1", "join2"],
-        ["projection1", "projection2"],
+        "type", "property", None, "criteria", 1, 1, "join"
     )
     client._get.assert_called_with(
         "SetObjectsByCriteria",
         params={
             "type": "type",
             "property": "property",
-            "criteria": ["criteria1", "criteria2"],
-            "froms": [1, 1],
-            "count": [1, 1],
-            "join": ["join1", "join2"],
-            "projection": ["projection1", "projection2"],
+            "value": None,
+            "criteria": "criteria",
+            "froms": 1,
+            "count": 1,
+            "join": "join",
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_set_unique_fields(client):
     client._get.return_value = success_response
-    response = client.Base.SetUniqueFields("type", ["unique1", "unique2"])
+    response = client.Base.SetUniqueFields("type", "unique")
     client._get.assert_called_with(
-        "SetUniqueFields",
-        params={"type": "type", "unique": ["unique1", "unique2"]},
-        delimiter=",",
+        "SetUniqueFields", params={"type": "type", "unique": "unique"}
     )
 
     assert response == success_response
@@ -403,5 +318,4 @@ def test_undefine_type(client):
         },
     )
 
-    assert response == success_response
     assert response == success_response

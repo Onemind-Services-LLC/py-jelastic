@@ -16,17 +16,10 @@ def test_add_labels(client):
 
 def test_check_host_connection(client):
     client._get.return_value = success_response
-    response = client.Host.CheckHostConnection(
-        "host_id1", [8000, 8001, 8002], [True, False, True]
-    )
+    response = client.Host.CheckHostConnection("host_id1", 1111, True)
     client._get.assert_called_with(
         "CheckHostConnection",
-        params={
-            "hostId": "host_id1",
-            "port": [8000, 8001, 8002],
-            "checkExternalIp": [True, False, True],
-        },
-        delimiter=",",
+        params={"hostId": "host_id1", "port": 1111, "checkExternalIp": True},
     )
     assert response == success_response
 
@@ -61,16 +54,9 @@ def test_set_label(client):
 
 def test_update_host_firewall(client):
     client._get.return_value = success_response
-    response = client.Host.UpdateHostFirewall(
-        [1, 2, 3], [True, False, True], [True, False, True]
-    )
+    response = client.Host.UpdateHostFirewall(1, True, True)
     client._get.assert_called_with(
         "UpdateHostFirewall",
-        params={
-            "hostId": [1, 2, 3],
-            "force": [True, False, True],
-            "checkExternalIp": [True, False, True],
-        },
-        delimiter=",",
+        params={"hostId": 1, "force": True, "checkExternalIp": True},
     )
     assert response == success_response

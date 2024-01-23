@@ -6,8 +6,8 @@ def test_clear_billing_history(client):
     response = client.Utils.ClearBillingHistory(
         "env",
         1,
-        "2022-11-11",
-        "2026-11-11",
+        CURRENT_DATETIME.date(),
+        CURRENT_DATETIME.date(),
         "checksum",
     )
     client._get.assert_called_with(
@@ -15,10 +15,11 @@ def test_clear_billing_history(client):
         params={
             "envName": "env",
             "uid": 1,
-            "startDate": "2022-11-11",
-            "endDate": "2026-11-11",
+            "startDate": CURRENT_DATETIME.date(),
+            "endDate": CURRENT_DATETIME.date(),
             "checksum": "checksum",
         },
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
@@ -45,18 +46,19 @@ def test_get_uid_usage_by_period(client):
     client._get.return_value = success_response
     response = client.Utils.GetUidUsageByPeriod(
         1,
-        "2022-11-11",
-        "2026-11-11",
+        CURRENT_DATETIME.date(),
+        CURRENT_DATETIME.date(),
         "checksum",
     )
     client._get.assert_called_with(
         "GetUidUsageByPeriod",
         params={
             "uid": 1,
-            "startDate": "2022-11-11",
-            "endDate": "2026-11-11",
+            "startDate": CURRENT_DATETIME.date(),
+            "endDate": CURRENT_DATETIME.date(),
             "checksum": "checksum",
         },
+        datetime_format="%Y-%m-%d %H:%M:%S",
     )
     assert response == success_response
 
@@ -86,8 +88,8 @@ def test_set_billing_history_date(client):
     response = client.Utils.SetBillingHistoryDate(
         1,
         "env",
-        "2022-11-11",
-        "2026-11-11",
+        CURRENT_DATETIME.date(),
+        CURRENT_DATETIME.date(),
         "date type",
         "value",
         "checksum",
@@ -97,12 +99,13 @@ def test_set_billing_history_date(client):
         params={
             "uid": 1,
             "envName": "env",
-            "startDateFrom": "2022-11-11",
-            "startDateTo": "2026-11-11",
+            "startDateFrom": CURRENT_DATETIME.date(),
+            "startDateTo": CURRENT_DATETIME.date(),
             "dateType": "date type",
             "dateValue": "value",
             "checksum": "checksum",
         },
+        datetime_format="%Y-%m-%d",
     )
     assert response == success_response
 

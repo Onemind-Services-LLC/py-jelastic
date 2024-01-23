@@ -26,24 +26,16 @@ def test_allow_app_access(client):
             "targetAppid": "target_appid",
             "allowAppid": "allow_appid",
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_change_app_info(client):
     client._get.return_value = success_response
-    response = client.Applications.ChangeAppInfo(
-        "target_appid", "field", ["value1", "value2"]
-    )
+    response = client.Applications.ChangeAppInfo("target_appid", "field", "value")
     client._get.assert_called_with(
         "ChangeAppInfo",
-        params={
-            "targetAppid": "target_appid",
-            "field": "field",
-            "value": ["value1", "value2"],
-        },
-        delimiter=",",
+        params={"targetAppid": "target_appid", "field": "field", "value": "value"},
     )
     assert response == success_response
 
@@ -73,10 +65,10 @@ def test_clean_owner_cache(client):
 
 def test_clone_app(client):
     client._get.return_value = success_response
-    response = client.Applications.CloneApp("target_appid", ["name2", "name2"])
+    response = client.Applications.CloneApp("target_appid", "name")
     client._get.assert_called_with(
         "CloneApp",
-        params={"targetAppid": "target_appid", "name": ["name2", "name2"]},
+        params={"targetAppid": "target_appid", "name": "name"},
     )
     assert response == success_response
 
@@ -113,13 +105,9 @@ def test_create_confirm_app_transfer_key(client):
 
 def test_create_persistence(client):
     client._get.return_value = success_response
-    response = client.Applications.CreatePersistence(
-        "target_appid", ["config1", "config2"]
-    )
+    response = client.Applications.CreatePersistence("target_appid", "config")
     client._get.assert_called_with(
-        "CreatePersistence",
-        params={"targetAppid": "target_appid", "config": ["config1", "config2"]},
-        delimiter=",",
+        "CreatePersistence", params={"targetAppid": "target_appid", "config": "config"}
     )
     assert response == success_response
 
@@ -198,20 +186,19 @@ def test_export_app_resource(client):
 def test_find_solutions(client):
     client._get.return_value = success_response
     response = client.Applications.FindSolutions(
-        ["keywords1", "keywords2"],
-        ["description1", "description2"],
-        [1, 1],
-        [1, 1],
+        "keywords",
+        "description",
+        1,
+        1,
     )
     client._get.assert_called_with(
         "FindSolutions",
         params={
-            "keywords": ["keywords1", "keywords2"],
-            "description": ["description1", "description2"],
-            "froms": [1, 1],
-            "count": [1, 1],
+            "keywords": "keywords",
+            "description": "description",
+            "froms": 1,
+            "count": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -219,22 +206,17 @@ def test_find_solutions(client):
 def test_generate_app(client):
     client._get.return_value = success_response
     response = client.Applications.GenerateApp(
-        "name",
-        ["description1", "description2"],
-        ["domain1", "domain2"],
-        ["keywords1", "keywords2"],
-        ["config1", "config2"],
+        "name", "description", "domain", "keywords", "config"
     )
     client._get.assert_called_with(
         "GenerateApp",
         params={
             "name": "name",
-            "description": ["description1", "description2"],
-            "domain": ["domain1", "domain2"],
-            "keywords": ["keywords1", "keywords2"],
-            "config": ["config1", "config2"],
+            "description": "description",
+            "domain": "domain",
+            "keywords": "keywords",
+            "config": "config",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -242,24 +224,18 @@ def test_generate_app(client):
 def test_generate_app_with_app_id(client):
     client._get.return_value = success_response
     response = client.Applications.GenerateAppWithAppID(
-        "name",
-        "idapp",
-        ["description1", "description2"],
-        ["domain1", "domain2"],
-        ["keywords1", "keywords2"],
-        ["config1", "config2"],
+        "name", "idapp", "description", "domain", "keywords", "config"
     )
     client._get.assert_called_with(
         "GenerateAppWithAppID",
         params={
             "name": "name",
             "idapp": "idapp",
-            "description": ["description1", "description2"],
-            "domain": ["domain1", "domain2"],
-            "keywords": ["keywords1", "keywords2"],
-            "config": ["config1", "config2"],
+            "description": "description",
+            "domain": "domain",
+            "keywords": "keywords",
+            "config": "config",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -267,24 +243,18 @@ def test_generate_app_with_app_id(client):
 def test_generate_shared_app(client):
     client._get.return_value = success_response
     response = client.Applications.GenerateSharedApp(
-        "owner_login",
-        "name",
-        ["description1", "description2"],
-        ["domain1", "domain2"],
-        ["keywords1", "keywords2"],
-        ["config1", "config2"],
+        "owner_login", "name", "description", "domain", "keywords", "config"
     )
     client._get.assert_called_with(
         "GenerateSharedApp",
         params={
             "ownerLogin": "owner_login",
             "name": "name",
-            "description": ["description1", "description2"],
-            "domain": ["domain1", "domain2"],
-            "keywords": ["keywords1", "keywords2"],
-            "config": ["config1", "config2"],
+            "description": "description",
+            "domain": "domain",
+            "keywords": "keywords",
+            "config": "config",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -358,15 +328,12 @@ def test_get_apps_by_login(client):
 
 def test_get_apps_pools(client):
     client._get.return_value = success_response
-    response = client.Applications.GetAppsPools(
-        ["name1", "name2"],
-    )
+    response = client.Applications.GetAppsPools("name")
     client._get.assert_called_with(
         "GetAppsPools",
         params={
-            "name": ["name1", "name2"],
+            "name": "name",
         },
-        delimiter=",",
     )
     assert response == success_response
 
@@ -443,53 +410,42 @@ def test_get_solution(client):
 
 def test_get_solutions(client):
     client._get.return_value = success_response
-    response = client.Applications.GetSolutions(["target_appid1", "target_appid2"])
+    response = client.Applications.GetSolutions(
+        "target_appid",
+    )
     client._get.assert_called_with(
         "GetSolutions",
-        params={"targetAppid": ["target_appid1", "target_appid2"]},
-        delimiter=",",
+        params={
+            "targetAppid": "target_appid",
+        },
     )
     assert response == success_response
 
 
 def test_get_user_app_permission(client):
     client._get.return_value = success_response
-    response = client.Applications.GetUserAppPermission(
-        "target_appid",
-        ["rights1", "rights2"],
-    )
+    response = client.Applications.GetUserAppPermission("target_appid", "rights")
     client._get.assert_called_with(
         "GetUserAppPermission",
-        params={
-            "targetAppid": "target_appid",
-            "rights": ["rights1", "rights2"],
-        },
+        params={"targetAppid": "target_appid", "rights": "rights"},
     )
     assert response == success_response
 
 
 def test_import_app_persistance(client):
     client._get.return_value = success_response
-    response = client.Applications.ImportAppPersistance(
-        "path", ["target_appid1", "target_appid2"]
-    )
+    response = client.Applications.ImportAppPersistance("path", "targetAppid")
     client._get.assert_called_with(
-        "ImportAppPersistance",
-        params={"path": "path", "targetAppid": ["target_appid1", "target_appid2"]},
-        delimiter=",",
+        "ImportAppPersistance", params={"path": "path", "targetAppid": "targetAppid"}
     )
     assert response == success_response
 
 
 def test_import_app_resources(client):
     client._get.return_value = success_response
-    response = client.Applications.ImportAppResources(
-        "path", ["target_appid1", "target_appid2"]
-    )
+    response = client.Applications.ImportAppResources("path", "targetAppid")
     client._get.assert_called_with(
-        "ImportAppResources",
-        params={"path": "path", "targetAppid": ["target_appid1", "target_appid2"]},
-        delimiter=",",
+        "ImportAppResources", params={"path": "path", "targetAppid": "targetAppid"}
     )
     assert response == success_response
 
@@ -538,18 +494,9 @@ def test_rebuild_app_from_pool(client):
 
 def test_set_app_permission(client):
     client._get.return_value = success_response
-    response = client.Applications.SetAppPermission(
-        "target_appid",
-        "login",
-        ["rights1", "rights2"],
-    )
+    response = client.Applications.SetAppPermission("target_appid", "login", "rights")
     client._get.assert_called_with(
         "SetAppPermission",
-        params={
-            "targetAppid": "target_appid",
-            "login": "login",
-            "rights": ["rights1", "rights2"],
-        },
-        delimiter=",",
+        params={"targetAppid": "target_appid", "login": "login", "rights": "rights"},
     )
     assert response == success_response

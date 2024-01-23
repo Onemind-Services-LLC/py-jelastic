@@ -4,10 +4,7 @@ from . import *
 def test_add_reseller(client):
     client._get.return_value = success_response
     response = client.Reseller.AddReseller(
-        "reseller",
-        "platform",
-        "regions",
-        ["setting1", "setting2", "setting3"],
+        "reseller", "platform", "regions", "settings"
     )
     client._get.assert_called_with(
         "AddReseller",
@@ -15,28 +12,18 @@ def test_add_reseller(client):
             "reseller": "reseller",
             "platform": "platform",
             "regions": "regions",
-            "settings": ["setting1", "setting2", "setting3"],
+            "settings": "settings",
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_edit_reseller(client):
     client._get.return_value = success_response
-    response = client.Reseller.EditReseller(
-        "reseller",
-        "platform",
-        ["region1", "region2", "region3"],
-    )
+    response = client.Reseller.EditReseller("reseller", "platform", "regions")
     client._get.assert_called_with(
         "EditReseller",
-        params={
-            "reseller": "reseller",
-            "platform": "platform",
-            "regions": ["region1", "region2", "region3"],
-        },
-        delimiter=",",
+        params={"reseller": "reseller", "platform": "platform", "regions": "regions"},
     )
     assert response == success_response
 

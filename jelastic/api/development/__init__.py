@@ -79,10 +79,9 @@ class _Applications(Development):
                 "targetAppid": target_appid,
                 "allowAppid": allow_appid,
             },
-            delimiter=",",
         )
 
-    def ChangeAppInfo(self, target_appid: str, field: str, value: list[str] = None):
+    def ChangeAppInfo(self, target_appid: str, field: str, value: str = None):
         """
         :param target_appid: id editable applications
         :param field: the name of the edited field. Valid values are:
@@ -95,7 +94,6 @@ class _Applications(Development):
                 "field": field,
                 "value": value,
             },
-            delimiter=",",
         )
 
     def ChangeSolutionInfo(
@@ -115,8 +113,8 @@ class _Applications(Development):
 
     def CleanOwnerCache(
         self,
-        user_id: int,
-        clean_all_apps: bool,
+        user_id: int = None,
+        clean_all_apps: bool = None,
     ):
         return self._get(
             "CleanOwnerCache",
@@ -129,7 +127,7 @@ class _Applications(Development):
     def CloneApp(
         self,
         target_appid: str,
-        name: list[str] = None,
+        name: str = None,
     ):
         return self._get(
             "CloneApp",
@@ -181,7 +179,7 @@ class _Applications(Development):
     def CreatePersistence(
         self,
         target_appid: str,
-        config: list[str] = None,
+        config: str = None,
     ):
         """
         param target_appid: unique identifier of the target application.
@@ -193,7 +191,6 @@ class _Applications(Development):
                 "targetAppid": target_appid,
                 "config": config,
             },
-            delimiter=",",
         )
 
     def CreateSolution(
@@ -270,10 +267,10 @@ class _Applications(Development):
 
     def FindSolutions(
         self,
-        keywords: list[str] = None,
-        description: list[str] = None,
-        froms: list[int] = None,
-        count: list[int] = None,
+        keywords: str = None,
+        description: str = None,
+        froms: int = None,
+        count: int = None,
     ):
         return self._get(
             "FindSolutions",
@@ -283,16 +280,15 @@ class _Applications(Development):
                 "froms": froms,
                 "count": count,
             },
-            delimiter=",",
         )
 
     def GenerateApp(
         self,
         name: str,
-        description: list[str] = None,
-        domain: list[str] = None,
-        keywords: list[str] = None,
-        config: list[str] = None,
+        description: str = None,
+        domain: str = None,
+        keywords: str = None,
+        config: str = None,
     ):
         """
         param name: the name of the application (max. 128 characters)
@@ -308,17 +304,16 @@ class _Applications(Development):
                 "keywords": keywords,
                 "config": config,
             },
-            delimiter=",",
         )
 
     def GenerateAppWithAppID(
         self,
         name: str,
         idapp: str,
-        description: list[str] = None,
-        domain: list[str] = None,
-        keywords: list[str] = None,
-        config: list[str] = None,
+        description: str = None,
+        domain: str = None,
+        keywords: str = None,
+        config: str = None,
     ):
         """
         param name: the name of the application (max. 128 characters)
@@ -335,17 +330,16 @@ class _Applications(Development):
                 "keywords": keywords,
                 "config": config,
             },
-            delimiter=",",
         )
 
     def GenerateSharedApp(
         self,
         owner_login: str,
         name: str,
-        description: list[str] = None,
-        domain: list[str] = None,
-        keywords: list[str] = None,
-        config: list[str] = None,
+        description: str = None,
+        domain: str = None,
+        keywords: str = None,
+        config: str = None,
     ):
         """
         param owner_login: login of the environment's owner
@@ -363,7 +357,6 @@ class _Applications(Development):
                 "keywords": keywords,
                 "config": config,
             },
-            delimiter=",",
         )
 
     def GetApp(
@@ -409,7 +402,7 @@ class _Applications(Development):
 
     def GetApps(
         self,
-        target_appid: str,
+        target_appid: str = None,
     ):
         """
         param target_appid: the application identifier for which information is requested
@@ -434,14 +427,13 @@ class _Applications(Development):
 
     def GetAppsPools(
         self,
-        name: list[str] = None,
+        name: str = None,
     ):
         return self._get(
             "GetAppsPools",
             params={
                 "name": name,
             },
-            delimiter=",",
         )
 
     def GetConfirmAppTransferKey(self):
@@ -515,20 +507,19 @@ class _Applications(Development):
 
     def GetSolutions(
         self,
-        target_appid: list[str] = None,
+        target_appid: str = None,
     ):
         return self._get(
             "GetSolutions",
             params={
                 "targetAppid": target_appid,
             },
-            delimiter=",",
         )
 
     def GetUserAppPermission(
         self,
         target_appid: str,
-        rights: list[str] = None,
+        rights: str = None,
     ):
         return self._get(
             "GetUserAppPermission",
@@ -541,7 +532,7 @@ class _Applications(Development):
     def ImportAppPersistance(
         self,
         path: str,
-        target_appid: list[str] = None,
+        target_appid: str = None,
     ):
         return self._get(
             "ImportAppPersistance",
@@ -549,13 +540,12 @@ class _Applications(Development):
                 "path": path,
                 "targetAppid": target_appid,
             },
-            delimiter=",",
         )
 
     def ImportAppResources(
         self,
         path: str,
-        target_appid: list[str] = None,
+        target_appid: str = None,
     ):
         return self._get(
             "ImportAppResources",
@@ -563,7 +553,6 @@ class _Applications(Development):
                 "path": path,
                 "targetAppid": target_appid,
             },
-            delimiter=",",
         )
 
     def IsAppsInstalled(
@@ -605,7 +594,7 @@ class _Applications(Development):
         self,
         target_appid: str,
         login: str,
-        rights: list[str] = None,
+        rights: str = None,
     ):
         return self._get(
             "SetAppPermission",
@@ -614,7 +603,6 @@ class _Applications(Development):
                 "login": login,
                 "rights": rights,
             },
-            delimiter=",",
         )
 
 
@@ -627,28 +615,23 @@ class _Scripting(Development):
 
     def Build(
         self,
-        app_id: str,
         script: str,
     ):
         return self._get(
             "Build",
             params={
-                "appid": app_id,
                 "script": script,
             },
         )
 
-    def BuildStubs(self, app_id: str):
+    def BuildStubs(self):
         return self._get(
             "BuildStubs",
-            params={
-                "appid": app_id,
-            },
+            params={},
         )
 
     def ChangeScript(
         self,
-        app_id: str,
         name: str,
         field: str,
         value: str = None,
@@ -656,7 +639,6 @@ class _Scripting(Development):
         return self._get(
             "ChangeScript",
             params={
-                "appid": app_id,
                 "name": name,
                 "field": field,
                 "value": value,
@@ -665,7 +647,6 @@ class _Scripting(Development):
 
     def CreateScript(
         self,
-        app_id: str,
         name: str,
         type: str,
         code: str = None,
@@ -674,7 +655,6 @@ class _Scripting(Development):
         return self._get(
             "CreateScript",
             params={
-                "appid": app_id,
                 "name": name,
                 "type": type,
                 "code": code,
@@ -682,25 +662,22 @@ class _Scripting(Development):
             },
         )
 
-    def DeleteScript(self, app_id: str, name: str):
+    def DeleteScript(self, name: str):
         return self._get(
             "DeleteScript",
             params={
-                "appid": app_id,
                 "name": name,
             },
         )
 
     def Eval(
         self,
-        app_id: str,
         script: str,
         params: Any = None,
     ):
         return self._get(
             "Eval",
             params={
-                "appid": app_id,
                 "script": script,
                 "params": params,
             },
@@ -708,7 +685,6 @@ class _Scripting(Development):
 
     def EvalCode(
         self,
-        app_id: str,
         code: str,
         type: str,
         annotations: str = None,
@@ -717,7 +693,6 @@ class _Scripting(Development):
         return self._get(
             "EvalCode",
             params={
-                "appid": app_id,
                 "code": code,
                 "type": type,
                 "annotations": annotations,
@@ -725,35 +700,30 @@ class _Scripting(Development):
             },
         )
 
-    def ExportScripts(self, app_id: str, overwrite: bool = None):
+    def ExportScripts(self, overwrite: bool = None):
         return self._get(
             "ExportScripts",
             params={
-                "appid": app_id,
                 "overwrite": overwrite,
             },
         )
 
-    def GetEngineInfo(self, app_id: str):
+    def GetEngineInfo(self):
         return self._get(
             "GetEngineInfo",
-            params={
-                "appid": app_id,
-            },
+            params={},
         )
 
-    def GetScript(self, app_id: str, name: str):
+    def GetScript(self, name: str):
         return self._get(
             "GetScript",
             params={
-                "appid": app_id,
                 "name": name,
             },
         )
 
     def GetScripts(
         self,
-        app_id: str,
         type: str = None,
         From: int = None,
         count: int = None,
@@ -761,7 +731,6 @@ class _Scripting(Development):
         return self._get(
             "GetScripts",
             params={
-                "appid": app_id,
                 "type": type,
                 "from": From,
                 "count": count,

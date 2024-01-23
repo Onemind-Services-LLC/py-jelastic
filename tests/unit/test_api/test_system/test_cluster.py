@@ -47,12 +47,8 @@ def test_get_active_apps(client):
 
 def test_get__apps(client):
     client._get.return_value = success_response
-    response = client.Cluster.GetApps(["path1", "path2", "path3"])
-    client._get.assert_called_once_with(
-        "GetApps",
-        params={"path": ["path1", "path2", "path3"]},
-        delimiter=",",
-    )
+    response = client.Cluster.GetApps("path")
+    client._get.assert_called_once_with("GetApps", params={"path": "path"})
     assert response == success_response
 
 
@@ -79,14 +75,8 @@ def test_get_maintenance_mode(client):
 
 def test_get_nodes(client):
     client._get.return_value = success_response
-    response = client.Cluster.GetNodes(["id 1", "id 2", "id 3"])
-    client._get.assert_called_once_with(
-        "GetNodes",
-        params={
-            "targetAppId": ["id 1", "id 2", "id 3"],
-        },
-        delimiter=",",
-    )
+    response = client.Cluster.GetNodes("id")
+    client._get.assert_called_once_with("GetNodes", params={"targetAppId": "id"})
     assert response == success_response
 
 

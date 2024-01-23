@@ -8,19 +8,19 @@ def test_create_project(client):
         "type",
         "context",
         "url",
-        ["branch1", "branch2"],
-        [1, 2],
-        ["login1", "login2"],
-        ["password1", "password2"],
-        [True, True],
-        ["interval1", "interval2"],
-        [True, True],
-        [True, True],
-        [True, True],
-        ["node_group1", "node_group2"],
-        ["hooks1", "hooks2"],
-        [1, 1],
-        ["repo_hash1", "repo_hash2"],
+        "branch",
+        1,
+        "login",
+        "password",
+        True,
+        "interval",
+        True,
+        True,
+        True,
+        "nodeGroup",
+        "hooks",
+        1,
+        "repoHash",
     )
     client._get.assert_called_with(
         "CreateProject",
@@ -29,38 +29,30 @@ def test_create_project(client):
             "type": "type",
             "context": "context",
             "url": "url",
-            "branch": ["branch1", "branch2"],
-            "keyId": [1, 2],
-            "login": ["login1", "login2"],
-            "password": ["password1", "password2"],
-            "autoupdate": [True, True],
-            "interval": ["interval1", "interval2"],
-            "autoResolveConflict": [True, True],
-            "zdt": [True, True],
-            "updateNow": [True, True],
-            "nodeGroup": ["node_group1", "node_group2"],
-            "hooks": ["hooks1", "hooks2"],
-            "delay": [1, 1],
-            "repoHash": ["repo_hash1", "repo_hash2"],
+            "branch": "branch",
+            "keyId": 1,
+            "login": "login",
+            "password": "password",
+            "autoupdate": True,
+            "interval": "interval",
+            "autoResolveConflict": True,
+            "zdt": True,
+            "updateNow": True,
+            "nodeGroup": "nodeGroup",
+            "hooks": "hooks",
+            "delay": 1,
+            "repoHash": "repoHash",
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_delete_project(client):
     client._get.return_value = success_response
-    response = client.Vcs.DeleteProject(
-        "env_name", "context", ["node_group1", "node_group2"]
-    )
+    response = client.Vcs.DeleteProject("env_name", "context", "nodeGroup")
     client._get.assert_called_with(
         "DeleteProject",
-        params={
-            "envName": "env_name",
-            "context": "context",
-            "nodeGroup": ["node_group1", "node_group2"],
-        },
-        delimiter=",",
+        params={"envName": "env_name", "context": "context", "nodeGroup": "nodeGroup"},
     )
     assert response == success_response
 
@@ -77,14 +69,14 @@ def test_edit_project(client):
         True,
         True,
         True,
-        [1, 2],
-        ["login1", "login2"],
-        ["password1", "password2"],
-        ["interval1", "interval2"],
-        ["node_group1", "node_group2"],
-        ["hooks1", "hooks2"],
-        [1, 1],
-        ["repo_hash1", "repo_hash2"],
+        1,
+        "login",
+        "password",
+        "interval",
+        "nodeGroup",
+        "hooks",
+        1,
+        "repoHash",
     )
     client._get.assert_called_with(
         "EditProject",
@@ -98,50 +90,39 @@ def test_edit_project(client):
             "autoupdate": True,
             "autoResolveConflict": True,
             "zdt": True,
-            "keyId": [1, 2],
-            "login": ["login1", "login2"],
-            "password": ["password1", "password2"],
-            "interval": ["interval1", "interval2"],
-            "nodeGroup": ["node_group1", "node_group2"],
-            "hooks": ["hooks1", "hooks2"],
-            "delay": [1, 1],
-            "repoHash": ["repo_hash1", "repo_hash2"],
+            "keyId": 1,
+            "login": "login",
+            "password": "password",
+            "interval": "interval",
+            "nodeGroup": "nodeGroup",
+            "hooks": "hooks",
+            "delay": 1,
+            "repoHash": "repoHash",
         },
-        delimiter=",",
     )
     assert response == success_response
 
 
 def test_get_project(client):
     client._get.return_value = success_response
-    response = client.Vcs.GetProject(
-        "env_name", ["context1", "context2"], ["node_group1", "node_group2"]
-    )
+    response = client.Vcs.GetProject("env_name", "context", "nodeGroup")
     client._get.assert_called_with(
         "GetProject",
-        params={
-            "envName": "env_name",
-            "context": ["context1", "context2"],
-            "nodeGroup": ["node_group1", "node_group2"],
-        },
-        delimiter=",",
+        params={"envName": "env_name", "context": "context", "nodeGroup": "nodeGroup"},
     )
     assert response == success_response
 
 
 def test_update(client):
     client._get.return_value = success_response
-    response = client.Vcs.Update(
-        "env_name", "context", ["node_group1", "node_group2"], [1, 2]
-    )
+    response = client.Vcs.Update("env_name", "context", "nodeGroup", 1)
     client._get.assert_called_with(
         "Update",
         params={
             "envName": "env_name",
             "context": "context",
-            "nodeGroup": ["node_group1", "node_group2"],
-            "delay": [1, 2],
+            "nodeGroup": "nodeGroup",
+            "delay": 1,
         },
-        delimiter=",",
     )
     assert response == success_response
