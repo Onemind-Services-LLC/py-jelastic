@@ -412,7 +412,7 @@ class _App(Marketplace):
         self,
         id: str,
         env_name: str = None,
-        settings: str = None,
+        settings: dict = None,
         display_name: str = None,
         region: str = None,
         env_groups: str = None,
