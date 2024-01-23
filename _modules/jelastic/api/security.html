@@ -780,6 +780,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.ExecCmdByGroup"><code class="docutils literal notranslate"><span class="pre">_Control.ExecCmdByGroup()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.ExecCmdById"><code class="docutils literal notranslate"><span class="pre">_Control.ExecCmdById()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.ExecCmdByType"><code class="docutils literal notranslate"><span class="pre">_Control.ExecCmdByType()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.ExecCmdInner"><code class="docutils literal notranslate"><span class="pre">_Control.ExecCmdInner()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.ExecDockerRunCmd"><code class="docutils literal notranslate"><span class="pre">_Control.ExecDockerRunCmd()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.ExportEnv"><code class="docutils literal notranslate"><span class="pre">_Control.ExportEnv()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.Finish"><code class="docutils literal notranslate"><span class="pre">_Control.Finish()</span></code></a></li>
@@ -862,8 +863,10 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.ResetNodePasswordByType"><code class="docutils literal notranslate"><span class="pre">_Control.ResetNodePasswordByType()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.ResetServicePassword"><code class="docutils literal notranslate"><span class="pre">_Control.ResetServicePassword()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.RestartContainer"><code class="docutils literal notranslate"><span class="pre">_Control.RestartContainer()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.RestartContainerById"><code class="docutils literal notranslate"><span class="pre">_Control.RestartContainerById()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.RestartContainerByType"><code class="docutils literal notranslate"><span class="pre">_Control.RestartContainerByType()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.RestartContainersByGroup"><code class="docutils literal notranslate"><span class="pre">_Control.RestartContainersByGroup()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.RestartNodeById"><code class="docutils literal notranslate"><span class="pre">_Control.RestartNodeById()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.RestartNodes"><code class="docutils literal notranslate"><span class="pre">_Control.RestartNodes()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.RestartNodesByGroup"><code class="docutils literal notranslate"><span class="pre">_Control.RestartNodesByGroup()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../environment.html#jelastic.api.environment._Control.RestartNodesByType"><code class="docutils literal notranslate"><span class="pre">_Control.RestartNodesByType()</span></code></a></li>
@@ -1431,7 +1434,7 @@
     <span class="k">def</span> <span class="nf">GetPolicy</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">role</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="nb">object</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="nb">object</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param role: name of the role</span>
@@ -1443,7 +1446,6 @@
                 <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="n">role</span><span class="p">,</span>
                 <span class="s2">&quot;object&quot;</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">GetRights</span><span class="p">(</span>
@@ -1645,8 +1647,8 @@
 
     <span class="k">def</span> <span class="nf">Activate</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">serial</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">generate_smtp_creds</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">serial</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">generate_smtp_creds</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
             <span class="s2">&quot;Activate&quot;</span><span class="p">,</span>
@@ -1654,7 +1656,6 @@
                 <span class="s2">&quot;serial&quot;</span><span class="p">:</span> <span class="n">serial</span><span class="p">,</span>
                 <span class="s2">&quot;generateSMTPCreds&quot;</span><span class="p">:</span> <span class="n">generate_smtp_creds</span><span class="p">,</span>
             <span class="p">},</span>
-            <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">GenerateSMTPSettings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1665,7 +1666,7 @@
 
     <span class="k">def</span> <span class="nf">GetVZLicense</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">vz_type</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">vz_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
             <span class="s2">&quot;GetVZLicense&quot;</span><span class="p">,</span>
