@@ -4313,7 +4313,7 @@ class _Control(Environment):
     def RemoveContainerEnvVars(
         self,
         env_name: str,
-        vars: str,
+        vars: list[str],
         node_group: str = None,
         node_id: int = None,
     ):

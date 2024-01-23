@@ -2118,12 +2118,12 @@ def test_remove_app(client):
 
 def test_remove_container_env_vars(client):
     client._get.return_value = success_response
-    response = client.Control.RemoveContainerEnvVars("env", "vars", "nodeGroup", 1)
+    response = client.Control.RemoveContainerEnvVars("env", ["var1", "var2"], "nodeGroup", 1)
     client._get.assert_called_once_with(
         "RemoveContainerEnvVars",
         params={
             "envName": "env",
-            "vars": "vars",
+            "vars": ["var1", "var2"],
             "nodeGroup": "nodeGroup",
             "nodeId": 1,
         },
