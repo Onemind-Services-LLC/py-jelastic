@@ -20,7 +20,7 @@ class Jelastic:
     """Jelastic API client, main entry point for all API operations."""
 
     def __init__(
-        self, base_url: str, token: str, version: str = "1.0", debug: bool = False
+        self, base_url: str, token: str, version: str = "1.0", debug: bool = False, timeout: int = 30
     ):
         """
         To initialize with API endpoints for the Jelastic API.
@@ -32,6 +32,7 @@ class Jelastic:
         :param token: Jelastic API token
         :param version: Jelastic API version
         :param debug: Enable debug mode
+        :param timeout: Timeout for the request
         """
         if not base_url.startswith("http"):
             base_url = f"https://{base_url}"
@@ -45,14 +46,15 @@ class Jelastic:
         self._state = ClientState.UNOPENED
         self._token = token
         self._debug = debug
+        self._timeout = timeout
 
     def __enter__(self) -> "Jelastic":
         if self._state != ClientState.UNOPENED:
-            message = {
+            msg = {
                 ClientState.OPENED: "Cannot open a client instance more than once",
                 ClientState.CLOSED: "Cannot reopen a client instance, once it has been closed",
             }[self._state]
-            raise RuntimeError(message)
+            raise RuntimeError(msg)
 
         self._state = ClientState.OPENED
         self._session = self._session.__enter__()
@@ -65,89 +67,89 @@ class Jelastic:
     @property
     def administration(self) -> Administration:
         return Administration(
-            session=self._session, token=self._token, debug=self._debug
+            session=self._session, token=self._token, debug=self._debug, timeout=self._timeout
         )
 
     @property
     def automation(self) -> Automation:
-        return Automation(session=self._session, token=self._token, debug=self._debug)
+        return Automation(session=self._session, token=self._token, debug=self._debug, timeout=self._timeout)
 
     @property
     def billing(self) -> Billing:
-        return Billing(session=self._session, token=self._token, debug=self._debug)
+        return Billing(session=self._session, token=self._token, debug=self._debug, timeout=self._timeout)
 
     @property
     def data(self) -> Data:
-        return Data(session=self._session, token=self._token, debug=self._debug)
+        return Data(session=self._session, token=self._token, debug=self._debug, timeout=self._timeout)
 
     @property
     def development(self) -> Development:
-        return Development(session=self._session, token=self._token, debug=self._debug)
+        return Development(session=self._session, token=self._token, debug=self._debug, timeout=self._timeout)
 
     @property
     def environment(self) -> Environment:
-        return Environment(session=self._session, token=self._token, debug=self._debug)
+        return Environment(session=self._session, token=self._token, debug=self._debug, timeout=self._timeout)
 
     @property
     def iaas(self) -> IaaS:
-        return IaaS(session=self._session, token=self._token, debug=self._debug)
+        return IaaS(session=self._session, token=self._token, debug=self._debug, timeout=self._timeout)
 
     @property
     def io(self) -> IO:
-        return IO(session=self._session, token=self._token, debug=self._debug)
+        return IO(session=self._session, token=self._token, debug=self._debug, timeout=self._timeout)
 
     @property
     def management(self) -> Management:
-        return Management(session=self._session, token=self._token, debug=self._debug)
+        return Management(session=self._session, token=self._token, debug=self._debug, timeout=self._timeout)
 
     @property
     def marketplace(self) -> Marketplace:
-        return Marketplace(session=self._session, token=self._token, debug=self._debug)
+        return Marketplace(session=self._session, token=self._token, debug=self._debug, timeout=self._timeout)
 
     @property
     def message(self) -> Message:
-        return Message(session=self._session, token=self._token, debug=self._debug)
+        return Message(session=self._session, token=self._token, debug=self._debug, timeout=self._timeout)
 
     @property
     def migration(self) -> Migration:
-        return Migration(session=self._session, token=self._token, debug=self._debug)
+        return Migration(session=self._session, token=self._token, debug=self._debug, timeout=self._timeout)
 
     @property
     def platform(self) -> Platform:
-        return Platform(session=self._session, token=self._token, debug=self._debug)
+        return Platform(session=self._session, token=self._token, debug=self._debug, timeout=self._timeout)
 
     @property
     def pool(self) -> Pool:
-        return Pool(session=self._session, token=self._token, debug=self._debug)
+        return Pool(session=self._session, token=self._token, debug=self._debug, timeout=self._timeout)
 
     @property
     def pricing(self) -> Pricing:
-        return Pricing(session=self._session, token=self._token, debug=self._debug)
+        return Pricing(session=self._session, token=self._token, debug=self._debug, timeout=self._timeout)
 
     @property
     def s3(self) -> S3:
-        return S3(session=self._session, token=self._token, debug=self._debug)
+        return S3(session=self._session, token=self._token, debug=self._debug, timeout=self._timeout)
 
     @property
     def security(self) -> Security:
-        return Security(session=self._session, token=self._token, debug=self._debug)
+        return Security(session=self._session, token=self._token, debug=self._debug, timeout=self._timeout)
 
     @property
     def statistic(self) -> Statistic:
-        return Statistic(session=self._session, token=self._token, debug=self._debug)
+        return Statistic(session=self._session, token=self._token, debug=self._debug, timeout=self._timeout)
 
     @property
     def system(self) -> System:
-        return System(session=self._session, token=self._token, debug=self._debug)
+        return System(session=self._session, token=self._token, debug=self._debug, timeout=self._timeout)
 
     @property
     def thirdparty(self) -> ThirdParty:
-        return ThirdParty(session=self._session, token=self._token, debug=self._debug)
+        return ThirdParty(session=self._session, token=self._token, debug=self._debug, timeout=self._timeout)
 
     @property
     def users(self) -> Users:
-        return Users(session=self._session, token=self._token, debug=self._debug)
+        return Users(session=self._session, token=self._token, debug=self._debug, timeout=self._timeout)
 
     @property
     def utils(self) -> Utils:
-        return Utils(session=self._session, token=self._token, debug=self._debug)
+        return Utils(session=self._session, token=self._token, debug=self._debug, timeout=self._timeout)

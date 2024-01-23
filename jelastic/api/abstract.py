@@ -33,7 +33,7 @@ class ClientAbstract(ABC):
     _required_permission: str
 
     def __init__(
-        self, session: requests.Session, token: str, debug: bool = False
+        self, session: requests.Session, token: str, debug: bool = False, timeout: int = 30
     ) -> None:
         """
         Initialize the client with the given session and token.
@@ -41,10 +41,12 @@ class ClientAbstract(ABC):
         :param session: HTTPX session
         :param token: Jelastic API token
         :param debug: enable debug mode
+        :param timeout: timeout for the request
         """
         self._session = session
         self._token = token
         self._debug = debug
+        self._timeout = timeout
 
     def _log_debug(
         self, method: VALID_METHODS, path: str, params: Optional[dict[str, Any]] = None
@@ -182,7 +184,7 @@ class ClientAbstract(ABC):
         assert base_url is not None
         url = f"{base_url}{url}"
 
-        response = self._session.get(url)
+        response = self._session.get(url, timeout=self._timeout)
         if not response.ok:
             if response.status_code == 404:
                 raise JelasticResourceNotFound(f"API endpoint not found: {url}")
