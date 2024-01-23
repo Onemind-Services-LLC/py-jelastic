@@ -104,7 +104,12 @@ def test_install(client):
     response = client.App.Install(
         "2",
         "envName",
-        "settings",
+        {
+            "settings1": "value1",
+            "settings2": "value2",
+            "settings3": "value3",
+            "settings4": "value4",
+        },
         "displayName",
         "region",
         "envGroups",
@@ -119,7 +124,12 @@ def test_install(client):
         params={
             "id": "2",
             "envName": "envName",
-            "settings": "settings",
+            "settings": {
+                "settings1": "value1",
+                "settings2": "value2",
+                "settings3": "value3",
+                "settings4": "value4",
+            },
             "displayName": "displayName",
             "region": "region",
             "envGroups": "envGroups",
