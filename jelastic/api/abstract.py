@@ -58,13 +58,6 @@ class ClientAbstract(ABC):
         """
         endpoint = self._endpoint(path=path, params=params)
         prefix = f"[Jelastic] [{method.upper()}]"
-
-        # Remove session from params and endpoint
-        if params is not None:
-            params.pop("session", None)
-        endpoint = endpoint.replace(f"session={self._token}", "")
-        endpoint = endpoint.strip("?" + "&")
-
         message = f"{prefix}, Path: {endpoint}, Params: {params}"
         print(message)
 
