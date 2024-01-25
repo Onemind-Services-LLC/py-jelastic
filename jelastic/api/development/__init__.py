@@ -616,18 +616,25 @@ class _Scripting(Development):
     def Build(
         self,
         script: str,
+        app_id: str = None,
     ):
         return self._get(
             "Build",
             params={
                 "script": script,
+                "appid": app_id,
             },
         )
 
-    def BuildStubs(self):
+    def BuildStubs(
+        self,
+        app_id: str = None,
+    ):
         return self._get(
             "BuildStubs",
-            params={},
+            params={
+                "appid": app_id,
+            },
         )
 
     def ChangeScript(
@@ -635,6 +642,7 @@ class _Scripting(Development):
         name: str,
         field: str,
         value: str = None,
+        app_id: str = None,
     ):
         return self._get(
             "ChangeScript",
@@ -642,6 +650,7 @@ class _Scripting(Development):
                 "name": name,
                 "field": field,
                 "value": value,
+                "appid": app_id,
             },
         )
 
@@ -651,6 +660,7 @@ class _Scripting(Development):
         type: str,
         code: str = None,
         annotations: str = None,
+        app_id: str = None,
     ):
         return self._get(
             "CreateScript",
@@ -659,14 +669,20 @@ class _Scripting(Development):
                 "type": type,
                 "code": code,
                 "annotations": annotations,
+                "appid": app_id,
             },
         )
 
-    def DeleteScript(self, name: str):
+    def DeleteScript(
+        self,
+        name: str,
+        app_id: str = None,
+    ):
         return self._get(
             "DeleteScript",
             params={
                 "name": name,
+                "appid": app_id,
             },
         )
 
@@ -674,12 +690,14 @@ class _Scripting(Development):
         self,
         script: str,
         params: Any = None,
+        app_id: str = None,
     ):
         return self._get(
             "Eval",
             params={
                 "script": script,
                 "params": params,
+                "appid": app_id,
             },
         )
 
@@ -689,6 +707,7 @@ class _Scripting(Development):
         type: str,
         annotations: str = None,
         params: Any = None,
+        app_id: str = None,
     ):
         return self._get(
             "EvalCode",
@@ -697,28 +716,44 @@ class _Scripting(Development):
                 "type": type,
                 "annotations": annotations,
                 "params": params,
+                "appid": app_id,
             },
         )
 
-    def ExportScripts(self, overwrite: bool = None):
+    def ExportScripts(
+        self,
+        overwrite: bool = None,
+        app_id: str = None,
+    ):
         return self._get(
             "ExportScripts",
             params={
                 "overwrite": overwrite,
+                "appid": app_id,
             },
         )
 
-    def GetEngineInfo(self):
+    def GetEngineInfo(
+        self,
+        app_id: str = None,
+    ):
         return self._get(
             "GetEngineInfo",
-            params={},
+            params={
+                "appid": app_id,
+            },
         )
 
-    def GetScript(self, name: str):
+    def GetScript(
+        self,
+        name: str,
+        app_id: str = None,
+    ):
         return self._get(
             "GetScript",
             params={
                 "name": name,
+                "appid": app_id,
             },
         )
 
@@ -727,6 +762,7 @@ class _Scripting(Development):
         type: str = None,
         From: int = None,
         count: int = None,
+        app_id: str = None,
     ):
         return self._get(
             "GetScripts",
@@ -734,5 +770,6 @@ class _Scripting(Development):
                 "type": type,
                 "from": From,
                 "count": count,
+                "appid": app_id,
             },
         )
