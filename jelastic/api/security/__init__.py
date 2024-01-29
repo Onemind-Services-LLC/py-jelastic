@@ -30,6 +30,7 @@ class Security(ClientAbstract):
             session=self._session,
             token=self._token,
             debug=self._debug,
+            ruk=self._ruk,
         )
 
     @property
@@ -45,6 +46,7 @@ class Security(ClientAbstract):
             session=self._session,
             token=self._token,
             debug=self._debug,
+            ruk=self._ruk,
         )
 
 

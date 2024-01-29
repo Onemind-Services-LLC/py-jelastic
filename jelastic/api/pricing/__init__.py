@@ -23,7 +23,12 @@ class Pricing(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/private/#!/api/pricing.Option
         """
-        return _Option(session=self._session, token=self._token, debug=self._debug)
+        return _Option(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
     @property
     def Tariff(self) -> "_Tariff":
@@ -35,7 +40,12 @@ class Pricing(ClientAbstract):
         Ref: https://docs.jelastic.com/api/private/#!/api/pricing.Tariff
         """
 
-        return _Tariff(session=self._session, token=self._token, debug=self._debug)
+        return _Tariff(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
 
 class _Option(Pricing):

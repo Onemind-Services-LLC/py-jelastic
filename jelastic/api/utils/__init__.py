@@ -34,6 +34,7 @@ class Utils(ClientAbstract):
             session=self._session,
             token=self._token,
             debug=self._debug,
+            ruk=self._ruk,
         )
 
     @property
@@ -49,7 +50,12 @@ class Utils(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/private/#!/api/utils.Scheduler
         """
-        return _Scheduler(session=self._session, token=self._token, debug=self._debug)
+        return _Scheduler(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
 
 class _Batch(Utils):

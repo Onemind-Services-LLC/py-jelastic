@@ -26,7 +26,12 @@ class Automation(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/private/#!/api/automation.Utils
         """
-        return _Utils(session=self._session, token=self._token, debug=self._debug)
+        return _Utils(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
 
 class _Utils(Automation):

@@ -33,7 +33,11 @@ class ClientAbstract(ABC):
     _required_permission: str
 
     def __init__(
-        self, session: requests.Session, token: str, debug: bool = False
+        self,
+        session: requests.Session,
+        token: str,
+        debug: bool = False,
+        ruk: str = None,
     ) -> None:
         """
         Initialize the client with the given session and token.
@@ -41,10 +45,12 @@ class ClientAbstract(ABC):
         :param session: HTTPX session
         :param token: Jelastic API token
         :param debug: enable debug mode
+        :param ruk: Jelastic RUK (random unique key)
         """
         self._session = session
         self._token = token
         self._debug = debug
+        self._ruk = ruk
 
     def _log_debug(
         self, method: VALID_METHODS, path: str, params: Optional[dict[str, Any]] = None
@@ -57,7 +63,7 @@ class ClientAbstract(ABC):
         :param params: endpoint params
         """
         endpoint = self._endpoint(path=path, params=params)
-        prefix = f"[Jelastic] [{method.upper()}]"
+        prefix = f"[Jelastic] [{method.upper()}] [{self._ruk}]"
         message = f"{prefix}, Path: {endpoint}, Params: {params}"
         print(message)
 
@@ -76,6 +82,7 @@ class ClientAbstract(ABC):
 
         params.setdefault("appid", "cluster")
         params.setdefault("session", self._token)
+        params.setdefault("ruk", self._ruk)
 
         # Remove None values and serialize params
         serialized_params = {}

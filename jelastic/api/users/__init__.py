@@ -24,7 +24,12 @@ class Users(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/private/#!/api/users.Account
         """
-        return _Account(session=self._session, token=self._token, debug=self._debug)
+        return _Account(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
     @property
     def Authentication(self) -> "_Authentication":
@@ -37,7 +42,10 @@ class Users(ClientAbstract):
         Ref: https://docs.jelastic.com/api/private/#!/api/users.Authentication
         """
         return _Authentication(
-            session=self._session, token=self._token, debug=self._debug
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
         )
 
     @property
@@ -63,7 +71,10 @@ class Users(ClientAbstract):
         Ref: https://docs.jelastic.com/api/private/#!/api/users.Collaboration
         """
         return _Collaboration(
-            session=self._session, token=self._token, debug=self._debug
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
         )
 
     @property
@@ -75,7 +86,12 @@ class Users(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/private/#!/api/users.Team
         """
-        return _Team(session=self._session, token=self._token, debug=self._debug)
+        return _Team(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
     @property
     def Registration(self) -> "_Registration":
@@ -87,7 +103,10 @@ class Users(ClientAbstract):
          Ref: https://docs.jelastic.com/api/private/#!/api/users.Registration
         """
         return _Registration(
-            session=self._session, token=self._token, debug=self._debug
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
         )
 
     @property
@@ -99,7 +118,12 @@ class Users(ClientAbstract):
          >>> jelastic.users.SSO
          Ref: https://docs.jelastic.com/api/private/#!/api/users.SSO
         """
-        return _SSO(session=self._session, token=self._token, debug=self._debug)
+        return _SSO(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
 
 class _Account(Users):
