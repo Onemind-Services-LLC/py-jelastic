@@ -59,7 +59,7 @@ class ClientAbstract(ABC):
         :param params: endpoint params
         """
         endpoint = self._endpoint(path=path, params=params)
-        prefix = f"[Jelastic] [{method.upper()}]"
+        prefix = f"[Jelastic] [{method.upper()}] [{self._ruk}]"
         message = f"{prefix}, Path: {endpoint}, Params: {params}"
         print(message)
 
