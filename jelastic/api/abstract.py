@@ -33,7 +33,11 @@ class ClientAbstract(ABC):
     _required_permission: str
 
     def __init__(
-        self, session: requests.Session, token: str, debug: bool = False, ruk: str = None
+        self,
+        session: requests.Session,
+        token: str,
+        debug: bool = False,
+        ruk: str = None,
     ) -> None:
         """
         Initialize the client with the given session and token.

@@ -34,7 +34,9 @@ class Billing(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/#!/api/billing.Account
         """
-        return _Account(session=self._session, token=self._token, debug=self._debug)
+        return _Account(
+            session=self._session, token=self._token, debug=self._debug, ruk=self._ruk
+        )
 
     @property
     def GroupQuota(self) -> "_GroupQuota":
@@ -48,7 +50,12 @@ class Billing(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/#!/api/billing.GroupQuota
         """
-        return _GroupQuota(session=self._session, token=self._token, debug=self._debug)
+        return _GroupQuota(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
     @property
     def Integration(self) -> "_Integration":
@@ -62,7 +69,12 @@ class Billing(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/#!/api/billing.Integration
         """
-        return _Integration(session=self._session, token=self._token, debug=self._debug)
+        return _Integration(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
     @property
     def PayMethod(self) -> "_PayMethod":
@@ -76,7 +88,12 @@ class Billing(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/private/#!/api/billing.PayMethod
         """
-        return _PayMethod(session=self._session, token=self._token, debug=self._debug)
+        return _PayMethod(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
     @property
     def Pricing(self) -> "_Pricing":
@@ -90,7 +107,12 @@ class Billing(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/private/#!/api/billing.Pricing
         """
-        return _Pricing(session=self._session, token=self._token, debug=self._debug)
+        return _Pricing(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
     @property
     def Reseller(self) -> "_Reseller":
@@ -104,7 +126,12 @@ class Billing(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/private/#!/api/billing.Reseller
         """
-        return _Reseller(session=self._session, token=self._token, debug=self._debug)
+        return _Reseller(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
     @property
     def ServicePlan(self) -> "_ServicePlan":
@@ -118,7 +145,12 @@ class Billing(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/private/#!/api/billing.ServicePlan
         """
-        return _ServicePlan(session=self._session, token=self._token, debug=self._debug)
+        return _ServicePlan(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
     @property
     def Order(self) -> "_Order":
@@ -132,7 +164,12 @@ class Billing(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/private/#!/api/billing.Order
         """
-        return _Order(session=self._session, token=self._token, debug=self._debug)
+        return _Order(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
     @property
     def Invoice(self) -> "_Invoice":
@@ -146,7 +183,12 @@ class Billing(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/#!/api/billing.Invoice
         """
-        return _Invoice(session=self._session, token=self._token, debug=self._debug)
+        return _Invoice(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
     @property
     def System(self) -> "_System":
@@ -160,7 +202,12 @@ class Billing(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/#!/api/billing.System
         """
-        return _System(session=self._session, token=self._token, debug=self._debug)
+        return _System(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
     @property
     def Utils(self) -> "_Utils":
@@ -174,7 +221,12 @@ class Billing(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/private/#!/api/billing.Utils
         """
-        return _Utils(session=self._session, token=self._token, debug=self._debug)
+        return _Utils(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
     @property
     def Subscription(self) -> "_Subscription":
@@ -189,7 +241,10 @@ class Billing(ClientAbstract):
         Ref: https://docs.jelastic.com/api/private/#!/api/billing.Subscription
         """
         return _Subscription(
-            session=self._session, token=self._token, debug=self._debug
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
         )
 
 

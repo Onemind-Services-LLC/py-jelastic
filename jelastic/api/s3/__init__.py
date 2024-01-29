@@ -25,7 +25,12 @@ class S3(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/private/#!/api/s3.Account
         """
-        return _Account(session=self._session, token=self._token, debug=self._debug)
+        return _Account(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
     @property
     def Bucket(self) -> "_Bucket":
@@ -38,7 +43,12 @@ class S3(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/private/#!/api/s3.Bucket
         """
-        return _Bucket(session=self._session, token=self._token, debug=self._debug)
+        return _Bucket(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
 
 class _Account(S3):

@@ -23,7 +23,12 @@ class Platform(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/private/#!/api/platform.Engine
         """
-        return _Engine(session=self._session, token=self._token, debug=self._debug)
+        return _Engine(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
 
 class _Engine(Platform):

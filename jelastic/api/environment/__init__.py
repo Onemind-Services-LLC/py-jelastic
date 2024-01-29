@@ -36,6 +36,7 @@ class Environment(ClientAbstract):
             session=self._session,
             token=self._token,
             debug=self._debug,
+            ruk=self._ruk,
         )
 
     @property
@@ -51,7 +52,12 @@ class Environment(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/private/#!/api/environment.Export
         """
-        return _Export(session=self._session, token=self._token, debug=self._debug)
+        return _Export(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
     @property
     def JError(self) -> "_JError":
@@ -62,7 +68,12 @@ class Environment(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/private/#!/api/environment.JError
         """
-        return _JError(session=self._session, token=self._token, debug=self._debug)
+        return _JError(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
     @property
     def Node(self) -> "_Node":
@@ -73,7 +84,12 @@ class Environment(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/private/#!/api/environment.Node
         """
-        return _Node(session=self._session, token=self._token, debug=self._debug)
+        return _Node(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
     @property
     def Build(self) -> "_Build":
@@ -90,6 +106,7 @@ class Environment(ClientAbstract):
             session=self._session,
             token=self._token,
             debug=self._debug,
+            ruk=self._ruk,
         )
 
     @property
@@ -117,6 +134,7 @@ class Environment(ClientAbstract):
             session=self._session,
             token=self._token,
             debug=self._debug,
+            ruk=self._ruk,
         )
 
     @property
@@ -128,7 +146,12 @@ class Environment(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/private/#!/api/environment.Control
         """
-        return _Control(session=self._session, token=self._token, debug=self._debug)
+        return _Control(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
     @property
     def Deployment(self) -> "_Deployment":
@@ -139,7 +162,12 @@ class Environment(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/private/#!/api/environment.Deployment
         """
-        return _Deployment(session=self._session, token=self._token, debug=self._debug)
+        return _Deployment(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
     @property
     def File(self) -> "_File":
@@ -156,6 +184,7 @@ class Environment(ClientAbstract):
             session=self._session,
             token=self._token,
             debug=self._debug,
+            ruk=self._ruk,
         )
 
     @property
@@ -173,6 +202,7 @@ class Environment(ClientAbstract):
             session=self._session,
             token=self._token,
             debug=self._debug,
+            ruk=self._ruk,
         )
 
     @property
@@ -190,6 +220,7 @@ class Environment(ClientAbstract):
             session=self._session,
             token=self._token,
             debug=self._debug,
+            ruk=self._ruk,
         )
 
     @property
@@ -207,6 +238,7 @@ class Environment(ClientAbstract):
             session=self._session,
             token=self._token,
             debug=self._debug,
+            ruk=self._ruk,
         )
 
     @property
@@ -222,6 +254,7 @@ class Environment(ClientAbstract):
             session=self._session,
             token=self._token,
             debug=self._debug,
+            ruk=self._ruk,
         )
 
     @property
@@ -239,6 +272,7 @@ class Environment(ClientAbstract):
             session=self._session,
             token=self._token,
             debug=self._debug,
+            ruk=self._ruk,
         )
 
     @property
@@ -259,6 +293,7 @@ class Environment(ClientAbstract):
             session=self._session,
             token=self._token,
             debug=self._debug,
+            ruk=self._ruk,
         )
 
     @property
@@ -276,6 +311,7 @@ class Environment(ClientAbstract):
             session=self._session,
             token=self._token,
             debug=self._debug,
+            ruk=self._ruk,
         )
 
     @property
@@ -293,6 +329,7 @@ class Environment(ClientAbstract):
             session=self._session,
             token=self._token,
             debug=self._debug,
+            ruk=self._ruk,
         )
 
 

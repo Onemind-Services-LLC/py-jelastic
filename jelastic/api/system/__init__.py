@@ -18,7 +18,12 @@ class System(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/private/#!/api/system.Admin
         """
-        return _Admin(session=self._session, token=self._token, debug=self._debug)
+        return _Admin(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
     @property
     def Cluster(self) -> "_Cluster":
@@ -32,7 +37,12 @@ class System(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/private/#!/api/system.Cluster
         """
-        return _Cluster(session=self._session, token=self._token, debug=self._debug)
+        return _Cluster(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
     @property
     def Groups(self) -> "_Groups":
@@ -46,7 +56,12 @@ class System(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/private/#!/api/system.Groups
         """
-        return _Groups(session=self._session, token=self._token, debug=self._debug)
+        return _Groups(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
     @property
     def IdentityProvider(self) -> "_IdentityProvider":
@@ -61,7 +76,10 @@ class System(ClientAbstract):
         Ref: https://docs.jelastic.com/api/private/#!/api/system.IdentityProvider
         """
         return _IdentityProvider(
-            session=self._session, token=self._token, debug=self._debug
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
         )
 
     @property
@@ -76,7 +94,12 @@ class System(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/private/#!/api/system.Service
         """
-        return _Service(session=self._session, token=self._token, debug=self._debug)
+        return _Service(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
     @property
     def Usage(self) -> "_Usage":
@@ -90,7 +113,12 @@ class System(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/private/#!/api/system.Usage
         """
-        return _Usage(session=self._session, token=self._token, debug=self._debug)
+        return _Usage(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
 
 class _Admin(System):

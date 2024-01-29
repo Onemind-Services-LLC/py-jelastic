@@ -22,6 +22,7 @@ class Development(ClientAbstract):
             session=self._session,
             token=self._token,
             debug=self._debug,
+            ruk=self._ruk,
         )
 
     @property
@@ -39,6 +40,7 @@ class Development(ClientAbstract):
             session=self._session,
             token=self._token,
             debug=self._debug,
+            ruk=self._ruk,
         )
 
 

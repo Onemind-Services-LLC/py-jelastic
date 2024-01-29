@@ -24,7 +24,12 @@ class Statistic(ClientAbstract):
 
         Ref: https://docs.jelastic.com/api/private/#!/api/statistic.Statistic
         """
-        return _Statistic(session=self._session, token=self._token, debug=self._debug)
+        return _Statistic(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
     @property
     def Utils(self) -> "_Utils":
@@ -34,7 +39,12 @@ class Statistic(ClientAbstract):
         >>> jelastic.statistic.Utils
         Ref: https://docs.jelastic.com/api/private/#!/api/statistic.Utils
         """
-        return _Utils(session=self._session, token=self._token, debug=self._debug)
+        return _Utils(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
     @property
     def System(self) -> "_System":
@@ -44,7 +54,12 @@ class Statistic(ClientAbstract):
         >>> jelastic.statistic.System
         Ref: https://docs.jelastic.com/api/private/#!/api/statistic.System
         """
-        return _System(session=self._session, token=self._token, debug=self._debug)
+        return _System(
+            session=self._session,
+            token=self._token,
+            debug=self._debug,
+            ruk=self._ruk,
+        )
 
 
 class _Statistic(Statistic):
