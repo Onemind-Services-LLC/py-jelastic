@@ -1,4 +1,5 @@
 from enum import Enum
+from uuid import uuid4
 
 import requests
 
@@ -20,7 +21,7 @@ class Jelastic:
     """Jelastic API client, main entry point for all API operations."""
 
     def __init__(
-        self, base_url: str, token: str, version: str = "1.0", debug: bool = False
+        self, base_url: str, token: str, version: str = "1.0", debug: bool = False, ruk: str = None
     ):
         """
         To initialize with API endpoints for the Jelastic API.
@@ -45,6 +46,7 @@ class Jelastic:
         self._state = ClientState.UNOPENED
         self._token = token
         self._debug = debug
+        self._ruk = ruk or str(uuid4())
 
     def __enter__(self) -> "Jelastic":
         if self._state != ClientState.UNOPENED:
@@ -65,89 +67,89 @@ class Jelastic:
     @property
     def administration(self) -> Administration:
         return Administration(
-            session=self._session, token=self._token, debug=self._debug
+            session=self._session, token=self._token, debug=self._debug, ruk=self._ruk
         )
 
     @property
     def automation(self) -> Automation:
-        return Automation(session=self._session, token=self._token, debug=self._debug)
+        return Automation(session=self._session, token=self._token, debug=self._debug, ruk=self._ruk)
 
     @property
     def billing(self) -> Billing:
-        return Billing(session=self._session, token=self._token, debug=self._debug)
+        return Billing(session=self._session, token=self._token, debug=self._debug, ruk=self._ruk)
 
     @property
     def data(self) -> Data:
-        return Data(session=self._session, token=self._token, debug=self._debug)
+        return Data(session=self._session, token=self._token, debug=self._debug, ruk=self._ruk)
 
     @property
     def development(self) -> Development:
-        return Development(session=self._session, token=self._token, debug=self._debug)
+        return Development(session=self._session, token=self._token, debug=self._debug, ruk=self._ruk)
 
     @property
     def environment(self) -> Environment:
-        return Environment(session=self._session, token=self._token, debug=self._debug)
+        return Environment(session=self._session, token=self._token, debug=self._debug, ruk=self._ruk)
 
     @property
     def iaas(self) -> IaaS:
-        return IaaS(session=self._session, token=self._token, debug=self._debug)
+        return IaaS(session=self._session, token=self._token, debug=self._debug, ruk=self._ruk)
 
     @property
     def io(self) -> IO:
-        return IO(session=self._session, token=self._token, debug=self._debug)
+        return IO(session=self._session, token=self._token, debug=self._debug, ruk=self._ruk)
 
     @property
     def management(self) -> Management:
-        return Management(session=self._session, token=self._token, debug=self._debug)
+        return Management(session=self._session, token=self._token, debug=self._debug, ruk=self._ruk)
 
     @property
     def marketplace(self) -> Marketplace:
-        return Marketplace(session=self._session, token=self._token, debug=self._debug)
+        return Marketplace(session=self._session, token=self._token, debug=self._debug, ruk=self._ruk)
 
     @property
     def message(self) -> Message:
-        return Message(session=self._session, token=self._token, debug=self._debug)
+        return Message(session=self._session, token=self._token, debug=self._debug, ruk=self._ruk)
 
     @property
     def migration(self) -> Migration:
-        return Migration(session=self._session, token=self._token, debug=self._debug)
+        return Migration(session=self._session, token=self._token, debug=self._debug, ruk=self._ruk)
 
     @property
     def platform(self) -> Platform:
-        return Platform(session=self._session, token=self._token, debug=self._debug)
+        return Platform(session=self._session, token=self._token, debug=self._debug, ruk=self._ruk)
 
     @property
     def pool(self) -> Pool:
-        return Pool(session=self._session, token=self._token, debug=self._debug)
+        return Pool(session=self._session, token=self._token, debug=self._debug, ruk=self._ruk)
 
     @property
     def pricing(self) -> Pricing:
-        return Pricing(session=self._session, token=self._token, debug=self._debug)
+        return Pricing(session=self._session, token=self._token, debug=self._debug, ruk=self._ruk)
 
     @property
     def s3(self) -> S3:
-        return S3(session=self._session, token=self._token, debug=self._debug)
+        return S3(session=self._session, token=self._token, debug=self._debug, ruk=self._ruk)
 
     @property
     def security(self) -> Security:
-        return Security(session=self._session, token=self._token, debug=self._debug)
+        return Security(session=self._session, token=self._token, debug=self._debug, ruk=self._ruk)
 
     @property
     def statistic(self) -> Statistic:
-        return Statistic(session=self._session, token=self._token, debug=self._debug)
+        return Statistic(session=self._session, token=self._token, debug=self._debug, ruk=self._ruk)
 
     @property
     def system(self) -> System:
-        return System(session=self._session, token=self._token, debug=self._debug)
+        return System(session=self._session, token=self._token, debug=self._debug, ruk=self._ruk)
 
     @property
     def thirdparty(self) -> ThirdParty:
-        return ThirdParty(session=self._session, token=self._token, debug=self._debug)
+        return ThirdParty(session=self._session, token=self._token, debug=self._debug, ruk=self._ruk)
 
     @property
     def users(self) -> Users:
-        return Users(session=self._session, token=self._token, debug=self._debug)
+        return Users(session=self._session, token=self._token, debug=self._debug, ruk=self._ruk)
 
     @property
     def utils(self) -> Utils:
-        return Utils(session=self._session, token=self._token, debug=self._debug)
+        return Utils(session=self._session, token=self._token, debug=self._debug, ruk=self._ruk)
