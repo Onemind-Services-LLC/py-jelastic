@@ -45,6 +45,7 @@ class _Email(Message):
         reply_to: str = None,
         type: str = None,
         reseller_id: int = None,
+        ruk: str = None,
     ):
         return self._get(
             "Send",
@@ -56,6 +57,7 @@ class _Email(Message):
                 "replyTo": reply_to,
                 "type": type,
                 "resellerId": reseller_id,
+                "ruk": ruk,
             },
         )
 
@@ -66,6 +68,7 @@ class _Email(Message):
         body: str,
         from_email: str = None,
         reseller_id: int = None,
+        ruk: str = None,
     ):
         return self._get(
             "SendToUser",
@@ -75,5 +78,6 @@ class _Email(Message):
                 "body": body,
                 "from": from_email,
                 "resellerId": reseller_id,
+                "ruk": ruk,
             },
         )
