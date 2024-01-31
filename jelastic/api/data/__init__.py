@@ -56,7 +56,8 @@ class _Base(Data):
         self,
         type: str,
         field: str,
-        field_type: str = None,ruk: str = None,
+        field_type: str = None,
+        ruk: str = None,
     ):
         """
         :param type: name type
@@ -68,14 +69,16 @@ class _Base(Data):
             params={
                 "type": type,
                 "field": field,
-                "fieldType": field_type,"ruk": ruk,
+                "fieldType": field_type,
+                "ruk": ruk,
             },
         )
 
     def CreateObject(
         self,
         type: str,
-        data: str = None,ruk: str = None,
+        data: str = None,
+        ruk: str = None,
     ):
         """
         :param type: name of the data type for which the object is created
@@ -85,16 +88,23 @@ class _Base(Data):
             "CreateObject",
             params={
                 "type": type,
-                "data": data,"ruk": ruk,
+                "data": data,
+                "ruk": ruk,
             },
         )
 
-    def CreateObjects(self, type: str, data: str,ruk: str = None,):
+    def CreateObjects(
+        self,
+        type: str,
+        data: str,
+        ruk: str = None,
+    ):
         return self._get(
             "CreateObjects",
             params={
                 "type": type,
-                "data": data,"ruk": ruk,
+                "data": data,
+                "ruk": ruk,
             },
         )
 
@@ -102,7 +112,8 @@ class _Base(Data):
         self,
         type: str,
         fields: str = None,
-        unique: str = None,ruk: str = None,
+        unique: str = None,
+        ruk: str = None,
     ):
         """
         :param type: name for the created data type, which meets the following requirements:
@@ -115,7 +126,8 @@ class _Base(Data):
             params={
                 "type": type,
                 "fields": fields,
-                "unique": unique,"ruk": ruk,
+                "unique": unique,
+                "ruk": ruk,
             },
         )
 
@@ -124,7 +136,8 @@ class _Base(Data):
         uid: int,
         type: str,
         fields: str = None,
-        unique: str = None,ruk: str = None,
+        unique: str = None,
+        ruk: str = None,
     ):
         """
         param uid: user unique identifier
@@ -138,11 +151,17 @@ class _Base(Data):
                 "uid": uid,
                 "type": type,
                 "fields": fields,
-                "unique": unique,"ruk": ruk,
+                "unique": unique,
+                "ruk": ruk,
             },
         )
 
-    def DeleteObject(self, type: str, id: int,ruk: str = None,):
+    def DeleteObject(
+        self,
+        type: str,
+        id: int,
+        ruk: str = None,
+    ):
         """
         param type: name of the type of data
         param id: object id
@@ -151,14 +170,16 @@ class _Base(Data):
             "DeleteObject",
             params={
                 "type": type,
-                "id": id,"ruk": ruk,
+                "id": id,
+                "ruk": ruk,
             },
         )
 
     def DeleteObjectsByCriteria(
         self,
         type: str,
-        criteria: str = None,ruk: str = None,
+        criteria: str = None,
+        ruk: str = None,
     ):
         """
         param type: name of the data type for which the object is created
@@ -168,20 +189,23 @@ class _Base(Data):
             "DeleteObjectsByCriteria",
             params={
                 "type": type,
-                "criteria": criteria,"ruk": ruk,
+                "criteria": criteria,
+                "ruk": ruk,
             },
         )
 
     def GetNotEmptyType(
         self,
         type_like: str,
-        asc: bool = None,ruk: str = None,
+        asc: bool = None,
+        ruk: str = None,
     ):
         return self._get(
             "GetNotEmptyType",
             params={
                 "typeLike": type_like,
-                "asc": asc,"ruk": ruk,
+                "asc": asc,
+                "ruk": ruk,
             },
         )
 
@@ -189,7 +213,8 @@ class _Base(Data):
         self,
         type: str,
         id: int,
-        join: str = None,ruk: str = None,
+        join: str = None,
+        ruk: str = None,
     ):
         """
         param type: name of the type of data
@@ -200,7 +225,8 @@ class _Base(Data):
             params={
                 "type": type,
                 "id": id,
-                "join": join,"ruk": ruk,
+                "join": join,
+                "ruk": ruk,
             },
         )
 
@@ -209,7 +235,8 @@ class _Base(Data):
         type: str,
         froms: int = None,
         count: int = None,
-        join: str = None,ruk: str = None,
+        join: str = None,
+        ruk: str = None,
     ):
         """
         param type: name of the type of data
@@ -222,7 +249,8 @@ class _Base(Data):
                 "type": type,
                 "froms": froms,
                 "count": count,
-                "join": join,"ruk": ruk,
+                "join": join,
+                "ruk": ruk,
             },
         )
 
@@ -233,7 +261,8 @@ class _Base(Data):
         froms: int = None,
         count: int = None,
         join: str = None,
-        projection: str = None,ruk: str = None,
+        projection: str = None,
+        ruk: str = None,
     ):
         """
         param type: name of the type of data
@@ -249,7 +278,8 @@ class _Base(Data):
                 "froms": froms,
                 "count": count,
                 "join": join,
-                "projection": projection,"ruk": ruk,
+                "projection": projection,
+                "ruk": ruk,
             },
         )
 
@@ -261,7 +291,8 @@ class _Base(Data):
         froms: int = None,
         count: int = None,
         join: str = None,
-        projection: str = None,ruk: str = None,
+        projection: str = None,
+        ruk: str = None,
     ):
         """
         param type: name of the type of data
@@ -278,14 +309,16 @@ class _Base(Data):
                 "froms": froms,
                 "count": count,
                 "join": join,
-                "projection": projection,"ruk": ruk,
+                "projection": projection,
+                "ruk": ruk,
             },
         )
 
     def GetObjectsCount(
         self,
         type: str,
-        criteria: str = None,ruk: str = None,
+        criteria: str = None,
+        ruk: str = None,
     ):
         """
         param type: name of the data type for which the object is created
@@ -295,7 +328,8 @@ class _Base(Data):
             "GetObjectsCount",
             params={
                 "type": type,
-                "criteria": criteria,"ruk": ruk,
+                "criteria": criteria,
+                "ruk": ruk,
             },
         )
 
@@ -304,7 +338,8 @@ class _Base(Data):
         type: str,
         id: int,
         property: str,
-        join: str = None,ruk: str = None,
+        join: str = None,
+        ruk: str = None,
     ):
         """
         param type: name of the type of data
@@ -317,13 +352,15 @@ class _Base(Data):
                 "type": type,
                 "id": id,
                 "property": property,
-                "join": join,"ruk": ruk,
+                "join": join,
+                "ruk": ruk,
             },
         )
 
     def GetType(
         self,
-        type: str,ruk: str = None,
+        type: str,
+        ruk: str = None,
     ):
         """
         param type: name of the type of data
@@ -331,14 +368,16 @@ class _Base(Data):
         return self._get(
             "GetType",
             params={
-                "type": type,"ruk": ruk,
+                "type": type,
+                "ruk": ruk,
             },
         )
 
     def GetTypes(
         self,
         froms: int = None,
-        count: int = None,ruk: str = None,
+        count: int = None,
+        ruk: str = None,
     ):
         """
         param froms: index which returned objects (default is 0)
@@ -348,18 +387,26 @@ class _Base(Data):
             "GetTypes",
             params={
                 "froms": froms,
-                "count": count,"ruk": ruk,
+                "count": count,
+                "ruk": ruk,
             },
         )
 
     def GetTypesCount(
-        self,ruk: str = None,
+        self,
+        ruk: str = None,
     ):
-        return self._get("GetTypesCount", params={"ruk": ruk,})
+        return self._get(
+            "GetTypesCount",
+            params={
+                "ruk": ruk,
+            },
+        )
 
     def GetUniqueFields(
         self,
-        type: str,ruk: str = None,
+        type: str,
+        ruk: str = None,
     ):
         """
         param type: name of the type of data
@@ -367,26 +414,36 @@ class _Base(Data):
         return self._get(
             "GetUniqueFields",
             params={
-                "type": type,"ruk": ruk,
+                "type": type,
+                "ruk": ruk,
             },
         )
 
     def RemoveField(
         self,
         type: str,
-        field: str,ruk: str = None,
+        field: str,
+        ruk: str = None,
     ):
         """
         param type: name of the type of data
         param field: name deleted fields (id - reserved)
         """
-        return self._get("RemoveField", params={"type": type, "field": field,"ruk": ruk,})
+        return self._get(
+            "RemoveField",
+            params={
+                "type": type,
+                "field": field,
+                "ruk": ruk,
+            },
+        )
 
     def RenameField(
         self,
         type: str,
         old_field: str,
-        new_field: str,ruk: str = None,
+        new_field: str,
+        ruk: str = None,
     ):
         """
         param type: name of the type of data
@@ -395,14 +452,20 @@ class _Base(Data):
         """
         return self._get(
             "RenameField",
-            params={"type": type, "oldField": old_field, "newField": new_field,"ruk": ruk,},
+            params={
+                "type": type,
+                "oldField": old_field,
+                "newField": new_field,
+                "ruk": ruk,
+            },
         )
 
     def RenameType(
         self,
         type: str,
         old_type: str,
-        new_type: str,ruk: str = None,
+        new_type: str,
+        ruk: str = None,
     ):
         """
         param type: name of the type of data
@@ -411,35 +474,64 @@ class _Base(Data):
         """
         return self._get(
             "RenameType",
-            params={"type": type, "oldType": old_type, "newTyoe": new_type,"ruk": ruk,},
+            params={
+                "type": type,
+                "oldType": old_type,
+                "newTyoe": new_type,
+                "ruk": ruk,
+            },
         )
 
     def SetObject(
         self,
         type: str,
         id: int,
-        data: str,ruk: str = None,
+        data: str,
+        ruk: str = None,
     ):
         """
         param type: name of the type of data
         param id: object id
         param data: the data object in the JSON
         """
-        return self._get("SetObject", params={"type": type, "id": id, "data": data,"ruk": ruk,})
+        return self._get(
+            "SetObject",
+            params={
+                "type": type,
+                "id": id,
+                "data": data,
+                "ruk": ruk,
+            },
+        )
 
     def SetObjects(
         self,
         type: str,
-        data: str,ruk: str = None,
+        data: str,
+        ruk: str = None,
     ):
         """
         param type: name of the type of data
         param id: object id
         param data: the data object in the JSON
         """
-        return self._get("SetObjects", params={"type": type, "data": data,"ruk": ruk,})
+        return self._get(
+            "SetObjects",
+            params={
+                "type": type,
+                "data": data,
+                "ruk": ruk,
+            },
+        )
 
-    def SetProperty(self, type: str, id: int, property: str, value: None,ruk: str = None,):
+    def SetProperty(
+        self,
+        type: str,
+        id: int,
+        property: str,
+        value: None,
+        ruk: str = None,
+    ):
         """
         param type: name of the type of data
         param id: object id
@@ -448,7 +540,13 @@ class _Base(Data):
         """
         return self._get(
             "SetProperty",
-            params={"type": type, "id": id, "property": property, "value": value,"ruk": ruk,},
+            params={
+                "type": type,
+                "id": id,
+                "property": property,
+                "value": value,
+                "ruk": ruk,
+            },
         )
 
     def SetObjectsByCriteria(
@@ -459,7 +557,8 @@ class _Base(Data):
         criteria: str = None,
         froms: int = None,
         count: int = None,
-        join: str = None,ruk: str = None,
+        join: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "SetObjectsByCriteria",
@@ -470,14 +569,16 @@ class _Base(Data):
                 "criteria": criteria,
                 "froms": froms,
                 "count": count,
-                "join": join,"ruk": ruk,
+                "join": join,
+                "ruk": ruk,
             },
         )
 
     def SetUniqueFields(
         self,
         type: str,
-        unique: str = None,ruk: str = None,
+        unique: str = None,
+        ruk: str = None,
     ):
         """
         param type:name name of the type of data
@@ -487,13 +588,15 @@ class _Base(Data):
             "SetUniqueFields",
             params={
                 "type": type,
-                "unique": unique,"ruk": ruk,
+                "unique": unique,
+                "ruk": ruk,
             },
         )
 
     def UndefineType(
         self,
-        type: str,ruk: str = None,
+        type: str,
+        ruk: str = None,
     ):
         """
         param type:name name of the type of data
@@ -501,6 +604,7 @@ class _Base(Data):
         return self._get(
             "UndefineType",
             params={
-                "type": type,"ruk": ruk,
+                "type": type,
+                "ruk": ruk,
             },
         )

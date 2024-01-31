@@ -163,8 +163,16 @@ class _Installation(Marketplace):
             },
         )
 
-    def GetScriptingAppid(self, ruk: str = None,):
-        return self._get("GetScriptingAppid", params={"ruk": ruk,})
+    def GetScriptingAppid(
+        self,
+        ruk: str = None,
+    ):
+        return self._get(
+            "GetScriptingAppid",
+            params={
+                "ruk": ruk,
+            },
+        )
 
     def GetSettings(
         self,
@@ -303,19 +311,39 @@ class _Console(Marketplace):
         self,
         ruk: str = None,
     ):
-        return self._get("ClearLog", params={"ruk": ruk,})
+        return self._get(
+            "ClearLog",
+            params={
+                "ruk": ruk,
+            },
+        )
 
     def ReadLog(
         self,
         ruk: str = None,
     ):
-        return self._get("ReadLog", params={"ruk": ruk,})
+        return self._get(
+            "ReadLog",
+            params={
+                "ruk": ruk,
+            },
+        )
 
-    def WriteLog(self, message: str, ruk: str = None,):
+    def WriteLog(
+        self,
+        message: str,
+        ruk: str = None,
+    ):
         """
         param message: a custom message to be added to the console log.
         """
-        return self._get("WriteLog", params={"message": message, "ruk": ruk,})
+        return self._get(
+            "WriteLog",
+            params={
+                "message": message,
+                "ruk": ruk,
+            },
+        )
 
 
 class _App(Marketplace):
@@ -325,7 +353,11 @@ class _App(Marketplace):
 
     _endpoint2 = "app"
 
-    def AddApp(self, manifest: str, ruk: str = None,):
+    def AddApp(
+        self,
+        manifest: str,
+        ruk: str = None,
+    ):
         """
         :param manifest: custom personal JPS (manifest body or link) to be added.
         """
@@ -337,7 +369,11 @@ class _App(Marketplace):
             },
         )
 
-    def DeleteApp(self, id: str, ruk: str = None,):
+    def DeleteApp(
+        self,
+        id: str,
+        ruk: str = None,
+    ):
         """
         :param id: unique identifier of the target personal JPS manifest in the Marketplace..
         """
@@ -349,7 +385,12 @@ class _App(Marketplace):
             },
         )
 
-    def EditApp(self, id: str, manifest: str, ruk: str = None,):
+    def EditApp(
+        self,
+        id: str,
+        manifest: str,
+        ruk: str = None,
+    ):
         """
         :param id: unique identifier of the target personal JPS manifest in the Marketplace..
         :param manifest: updated personal JPS (manifest body or link).
@@ -413,7 +454,9 @@ class _App(Marketplace):
     ):
         return self._get(
             "GetCategories",
-            params={"ruk": ruk,},
+            params={
+                "ruk": ruk,
+            },
         )
 
     def GetChecksum(
@@ -422,7 +465,9 @@ class _App(Marketplace):
     ):
         return self._get(
             "GetChecksum",
-            params={"ruk": ruk,},
+            params={
+                "ruk": ruk,
+            },
         )
 
     def GetList(
@@ -435,7 +480,10 @@ class _App(Marketplace):
         """
         return self._get(
             "GetList",
-            params={"search": search, "ruk": ruk,},
+            params={
+                "search": search,
+                "ruk": ruk,
+            },
         )
 
     def Install(
@@ -520,7 +568,12 @@ class _Admin(Marketplace):
 
     _endpoint2 = "account"
 
-    def AddApp(self, env_name: str, manifest: str, ruk: str = None,):
+    def AddApp(
+        self,
+        env_name: str,
+        manifest: str,
+        ruk: str = None,
+    ):
         return self._get(
             "AddApp",
             params={
@@ -530,7 +583,12 @@ class _Admin(Marketplace):
             },
         )
 
-    def DeleteApp(self, env_name: str, id: int, ruk: str = None,):
+    def DeleteApp(
+        self,
+        env_name: str,
+        id: int,
+        ruk: str = None,
+    ):
         return self._get(
             "DeleteApp",
             params={
@@ -540,7 +598,13 @@ class _Admin(Marketplace):
             },
         )
 
-    def EditApp(self, env_name: str, id: int, manifest: str, ruk: str = None,):
+    def EditApp(
+        self,
+        env_name: str,
+        id: int,
+        manifest: str,
+        ruk: str = None,
+    ):
         return self._get(
             "EditApp",
             params={
@@ -551,22 +615,64 @@ class _Admin(Marketplace):
             },
         )
 
-    def GetAppManifest(self, env_name: str, id: int, ruk: str = None,):
+    def GetAppManifest(
+        self,
+        env_name: str,
+        id: int,
+        ruk: str = None,
+    ):
         return self._get(
             "GetAppManifest",
-            params={"envName": env_name, "id": id, "ruk": ruk,},
+            params={
+                "envName": env_name,
+                "id": id,
+                "ruk": ruk,
+            },
         )
 
-    def GetApps(self, env_name: str, search: str = None, ruk: str = None,):
-        return self._get("GetApps", params={"envName": env_name, "search": search, "ruk": ruk,})
+    def GetApps(
+        self,
+        env_name: str,
+        search: str = None,
+        ruk: str = None,
+    ):
+        return self._get(
+            "GetApps",
+            params={
+                "envName": env_name,
+                "search": search,
+                "ruk": ruk,
+            },
+        )
 
-    def GetJpsSamples(self, env_name: str, type: str = None, ruk: str = None,):
-        return self._get("GetJpsSamples", params={"envName": env_name, "type": type, "ruk": ruk,})
+    def GetJpsSamples(
+        self,
+        env_name: str,
+        type: str = None,
+        ruk: str = None,
+    ):
+        return self._get(
+            "GetJpsSamples",
+            params={
+                "envName": env_name,
+                "type": type,
+                "ruk": ruk,
+            },
+        )
 
-    def PublishApp(self, env_name: str, id: int, ruk: str = None,):
+    def PublishApp(
+        self,
+        env_name: str,
+        id: int,
+        ruk: str = None,
+    ):
         return self._get(
             "PublishApp",
-            params={"envName": env_name, "id": id, "ruk": ruk,},
+            params={
+                "envName": env_name,
+                "id": id,
+                "ruk": ruk,
+            },
         )
 
     def ScheduleAppsSync(
@@ -627,7 +733,12 @@ class _Admin(Marketplace):
             },
         )
 
-    def UnpublishApp(self, env_name: str, id: int, ruk: str = None,):
+    def UnpublishApp(
+        self,
+        env_name: str,
+        id: int,
+        ruk: str = None,
+    ):
         return self._get(
             "UnpublishApp",
             params={
@@ -739,11 +850,27 @@ class _Jps(Marketplace):
             },
         )
 
-    def GetEngineVersion(self, ruk: str = None,):
-        return self._get("GetEngineVersion", params={"ruk": ruk,})
+    def GetEngineVersion(
+        self,
+        ruk: str = None,
+    ):
+        return self._get(
+            "GetEngineVersion",
+            params={
+                "ruk": ruk,
+            },
+        )
 
-    def GetScriptingAppid(self, ruk: str = None,):
-        return self._get("GetScriptingAppid", params={"ruk": ruk,})
+    def GetScriptingAppid(
+        self,
+        ruk: str = None,
+    ):
+        return self._get(
+            "GetScriptingAppid",
+            params={
+                "ruk": ruk,
+            },
+        )
 
     def Install(
         self,

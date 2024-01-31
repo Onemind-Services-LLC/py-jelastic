@@ -8,7 +8,8 @@ def test_clear_billing_history(client):
         1,
         CURRENT_DATETIME.date(),
         CURRENT_DATETIME.date(),
-        "checksum","ruk",
+        "checksum",
+        "ruk",
     )
     client._get.assert_called_with(
         "ClearBillingHistory",
@@ -17,7 +18,8 @@ def test_clear_billing_history(client):
             "uid": 1,
             "startDate": CURRENT_DATETIME.date(),
             "endDate": CURRENT_DATETIME.date(),
-            "checksum": "checksum","ruk": "ruk",
+            "checksum": "checksum",
+            "ruk": "ruk",
         },
         datetime_format="%Y-%m-%d %H:%M:%S",
     )
@@ -29,14 +31,16 @@ def test_clear_month_traffic(client):
     response = client.Utils.ClearMonthTraffic(
         1,
         "2022-11-11",
-        "checksum","ruk",
+        "checksum",
+        "ruk",
     )
     client._get.assert_called_with(
         "ClearMonthTraffic",
         params={
             "uid": 1,
             "monthStart": "2022-11-11",
-            "checksum": "checksum","ruk": "ruk",
+            "checksum": "checksum",
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -48,7 +52,8 @@ def test_get_uid_usage_by_period(client):
         1,
         CURRENT_DATETIME.date(),
         CURRENT_DATETIME.date(),
-        "checksum","ruk",
+        "checksum",
+        "ruk",
     )
     client._get.assert_called_with(
         "GetUidUsageByPeriod",
@@ -56,7 +61,8 @@ def test_get_uid_usage_by_period(client):
             "uid": 1,
             "startDate": CURRENT_DATETIME.date(),
             "endDate": CURRENT_DATETIME.date(),
-            "checksum": "checksum","ruk": "ruk",
+            "checksum": "checksum",
+            "ruk": "ruk",
         },
         datetime_format="%Y-%m-%d %H:%M:%S",
     )
@@ -69,7 +75,8 @@ def test_set_account_date(client):
         1,
         "type",
         "value",
-        "checksum","ruk",
+        "checksum",
+        "ruk",
     )
     client._get.assert_called_with(
         "SetAccountDate",
@@ -77,7 +84,8 @@ def test_set_account_date(client):
             "uid": 1,
             "dateType": "type",
             "dateValue": "value",
-            "checksum": "checksum","ruk": "ruk",
+            "checksum": "checksum",
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -92,7 +100,8 @@ def test_set_billing_history_date(client):
         CURRENT_DATETIME.date(),
         "date type",
         "value",
-        "checksum","ruk",
+        "checksum",
+        "ruk",
     )
     client._get.assert_called_with(
         "SetBillingHistoryDate",
@@ -103,7 +112,8 @@ def test_set_billing_history_date(client):
             "startDateTo": CURRENT_DATETIME.date(),
             "dateType": "date type",
             "dateValue": "value",
-            "checksum": "checksum","ruk": "ruk",
+            "checksum": "checksum",
+            "ruk": "ruk",
         },
         datetime_format="%Y-%m-%d",
     )
@@ -116,7 +126,8 @@ def test_set_month_traffic(client):
         1,
         "2022-11-11",
         3,
-        "checksum","ruk",
+        "checksum",
+        "ruk",
     )
     client._get.assert_called_with(
         "SetMonthTraffic",
@@ -124,7 +135,8 @@ def test_set_month_traffic(client):
             "uid": 1,
             "monthStart": "2022-11-11",
             "externalTraffic": 3,
-            "checksum": "checksum","ruk": "ruk",
+            "checksum": "checksum",
+            "ruk": "ruk",
         },
     )
     assert response == success_response

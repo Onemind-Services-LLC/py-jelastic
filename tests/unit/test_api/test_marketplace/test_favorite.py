@@ -6,7 +6,7 @@ def test_add(client):
     response = client.Favorite.Add("id", "ruk")
     client._get.assert_called_with(
         "Add",
-        params={"id": "id", "ruk":"ruk"},
+        params={"id": "id", "ruk": "ruk"},
     )
     assert response == success_response
 
@@ -16,7 +16,7 @@ def test_add_manifest(client):
     response = client.Favorite.AddManifest("manifest", "ruk")
     client._get.assert_called_with(
         "AddManifest",
-        params={"manifest": "manifest", "ruk":"ruk"},
+        params={"manifest": "manifest", "ruk": "ruk"},
     )
     assert response == success_response
 
@@ -26,7 +26,7 @@ def test_delete(client):
     response = client.Favorite.Delete("id", "ruk")
     client._get.assert_called_with(
         "Delete",
-        params={"id": "id", "ruk":"ruk"},
+        params={"id": "id", "ruk": "ruk"},
     )
 
     assert response == success_response
@@ -38,7 +38,7 @@ def test_get_list(client):
         {"search1": "value1", "search2": "value2", "search3": "value3"},
         "lang",
         "checksum",
-        "ruk"
+        "ruk",
     )
     client._get.assert_called_with(
         "GetList",
@@ -46,7 +46,7 @@ def test_get_list(client):
             "search": {"search1": "value1", "search2": "value2", "search3": "value3"},
             "lang": "lang",
             "checksum": "checksum",
-            "ruk":"ruk"
+            "ruk": "ruk",
         },
     )
 

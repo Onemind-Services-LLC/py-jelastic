@@ -61,7 +61,14 @@ class _NodePool(Pool):
         """
         :param checksum: authorization checksum = md5(appid + private key)
         """
-        return self._get("ClearOsPool", params={"checksum": checksum, "type": type, "ruk": ruk,})
+        return self._get(
+            "ClearOsPool",
+            params={
+                "checksum": checksum,
+                "type": type,
+                "ruk": ruk,
+            },
+        )
 
     def ClearPool(
         self,
@@ -73,7 +80,14 @@ class _NodePool(Pool):
         :param hnid: hardnode id (primary key) where OsNode to be allocated
         :param checksum: authorization checksum = md5(appid + private key)
         """
-        return self._get("ClearPool", params={"hnid": hn_id, "type": type, "ruk": ruk,})
+        return self._get(
+            "ClearPool",
+            params={
+                "hnid": hn_id,
+                "type": type,
+                "ruk": ruk,
+            },
+        )
 
     def GeneratePool(
         self,
@@ -217,7 +231,11 @@ class _IpPool(Pool):
             },
         )
 
-    def Get(self, checksum: str, ruk: str = None,):
+    def Get(
+        self,
+        checksum: str,
+        ruk: str = None,
+    ):
         return self._get(
             "Get",
             params={
@@ -247,7 +265,11 @@ class _IpPool(Pool):
             },
         )
 
-    def GetFreePublicPort(self, checksum: str, ruk: str = None,):
+    def GetFreePublicPort(
+        self,
+        checksum: str,
+        ruk: str = None,
+    ):
         return self._get(
             "GetFreePublicPort",
             params={
@@ -256,7 +278,12 @@ class _IpPool(Pool):
             },
         )
 
-    def Release(self, id: int, checksum: str, ruk: str = None,):
+    def Release(
+        self,
+        id: int,
+        checksum: str,
+        ruk: str = None,
+    ):
         return self._get(
             "Release",
             params={
@@ -266,7 +293,12 @@ class _IpPool(Pool):
             },
         )
 
-    def ReleaseExt(self, id: int, checksum: str, ruk: str = None,):
+    def ReleaseExt(
+        self,
+        id: int,
+        checksum: str,
+        ruk: str = None,
+    ):
         return self._get(
             "ReleaseExt",
             params={
@@ -276,7 +308,12 @@ class _IpPool(Pool):
             },
         )
 
-    def ReleaseSubnet(self, id: int, checksum: str, ruk: str = None,):
+    def ReleaseSubnet(
+        self,
+        id: int,
+        checksum: str,
+        ruk: str = None,
+    ):
         return self._get(
             "ReleaseSubnet",
             params={
@@ -286,7 +323,12 @@ class _IpPool(Pool):
             },
         )
 
-    def RemoveExt(self, ips: str, checksum: str, ruk: str = None,):
+    def RemoveExt(
+        self,
+        ips: str,
+        checksum: str,
+        ruk: str = None,
+    ):
         return self._get(
             "RemoveExt",
             params={
@@ -296,7 +338,12 @@ class _IpPool(Pool):
             },
         )
 
-    def RemoveFromReserve(self, checksum: str, target_app_id: str,  ruk: str = None,):
+    def RemoveFromReserve(
+        self,
+        checksum: str,
+        target_app_id: str,
+        ruk: str = None,
+    ):
         return self._get(
             "RemoveFromReserve",
             params={
@@ -306,7 +353,12 @@ class _IpPool(Pool):
             },
         )
 
-    def ReserveExtIPv6(self, checksum: str, target_app_id: str, ruk: str = None,):
+    def ReserveExtIPv6(
+        self,
+        checksum: str,
+        target_app_id: str,
+        ruk: str = None,
+    ):
         return self._get(
             "ReserveExtIPv6",
             params={
@@ -316,7 +368,12 @@ class _IpPool(Pool):
             },
         )
 
-    def UnreserveExtIPv6(self, id: int, checksum: str, ruk: str = None,):
+    def UnreserveExtIPv6(
+        self,
+        id: int,
+        checksum: str,
+        ruk: str = None,
+    ):
         return self._get(
             "UnreserveExtIPv6",
             params={

@@ -6,7 +6,7 @@ def test_clear_log(client):
     response = client.Console.ClearLog("ruk")
     client._get.assert_called_with(
         "ClearLog",
-        params={"ruk":"ruk"},
+        params={"ruk": "ruk"},
     )
     assert response == success_response
 
@@ -16,7 +16,7 @@ def test_read_log(client):
     response = client.Console.ReadLog("ruk")
     client._get.assert_called_with(
         "ReadLog",
-        params={"ruk":"ruk"},
+        params={"ruk": "ruk"},
     )
     assert response == success_response
 
@@ -26,6 +26,6 @@ def test_write_log(client):
     response = client.Console.WriteLog("message", "ruk")
     client._get.assert_called_with(
         "WriteLog",
-        params={"message": "message", "ruk":"ruk"},
+        params={"message": "message", "ruk": "ruk"},
     )
     assert response == success_response

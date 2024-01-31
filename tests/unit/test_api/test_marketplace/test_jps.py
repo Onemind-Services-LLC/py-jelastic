@@ -14,7 +14,7 @@ def test_execute_app_action(client):
             "settingsId": "other",
             "params": "params",
             "lang": "lang",
-            "ruk":"ruk"
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -25,12 +25,7 @@ def test_get_app_info(client):
     response = client.Jps.GetAppInfo("jps", "lang", 11, "ruk")
     client._get.assert_called_with(
         "GetAppInfo",
-        params={
-            "jps": "jps",
-            "lang": "lang",
-            "ownerUid": 11,
-            "ruk":"ruk"
-        },
+        params={"jps": "jps", "lang": "lang", "ownerUid": 11, "ruk": "ruk"},
     )
     assert response == success_response
 
@@ -44,7 +39,7 @@ def test_get_app_settings(client):
             "appUniqueName": "app_unique_name",
             "settingsId": "other",
             "lang": "lang",
-            "ruk":"ruk"
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -53,14 +48,14 @@ def test_get_app_settings(client):
 def test_get_engine_version(client):
     client._get.return_value = success_response
     response = client.Jps.GetEngineVersion("ruk")
-    client._get.assert_called_with("GetEngineVersion", params={"ruk":"ruk"})
+    client._get.assert_called_with("GetEngineVersion", params={"ruk": "ruk"})
     assert response == success_response
 
 
 def test_get_scripting_appid(client):
     client._get.return_value = success_response
     response = client.Jps.GetScriptingAppid("ruk")
-    client._get.assert_called_with("GetScriptingAppid", params={"ruk":"ruk"})
+    client._get.assert_called_with("GetScriptingAppid", params={"ruk": "ruk"})
     assert response == success_response
 
 
@@ -78,7 +73,7 @@ def test_install(client):
         "logsPath",
         True,
         True,
-        "ruk"
+        "ruk",
     )
     client._get.assert_called_with(
         "Install",
@@ -94,7 +89,7 @@ def test_install(client):
             "logsPath": "logsPath",
             "writeOutputTasks": True,
             "skipNodeEmails": True,
-            "ruk":"ruk"
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -105,10 +100,6 @@ def test_uninstall(client):
     response = client.Jps.Uninstall("app_unique_name", False, "ruk")
     client._get.assert_called_with(
         "Uninstall",
-        params={
-            "appUniqueName": "app_unique_name",
-            "force": False,
-            "ruk":"ruk"
-        },
+        params={"appUniqueName": "app_unique_name", "force": False, "ruk": "ruk"},
     )
     assert response == success_response

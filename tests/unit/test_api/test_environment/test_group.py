@@ -4,7 +4,11 @@ from . import *
 def test_attach_env(client):
     client._get.return_value = success_response
     response = client.Group.AttachEnv(
-        "env_name", ["env_group1", "env_group2"], "targetAppid", 1,"ruk",
+        "env_name",
+        ["env_group1", "env_group2"],
+        "targetAppid",
+        1,
+        "ruk",
     )
     client._get.assert_called_with(
         "AttachEnv",
@@ -12,7 +16,8 @@ def test_attach_env(client):
             "envName": "env_name",
             "envGroup": ["env_group1", "env_group2"],
             "targetAppid": "targetAppid",
-            "ownerUid": 1,"ruk": "ruk",
+            "ownerUid": 1,
+            "ruk": "ruk",
         },
         delimiter=",",
     )
@@ -25,7 +30,8 @@ def test_create_group(client):
         "env_name",
         ["env_group1", "env_group2"],
         {"data1": "data1", "data2": "data2"},
-        1,"ruk",
+        1,
+        "ruk",
     )
     client._get.assert_called_with(
         "CreateGroup",
@@ -33,7 +39,8 @@ def test_create_group(client):
             "envName": "env_name",
             "envGroup": ["env_group1", "env_group2"],
             "data": {"data1": "data1", "data2": "data2"},
-            "ownerUid": 1,"ruk": "ruk",
+            "ownerUid": 1,
+            "ruk": "ruk",
         },
         delimiter=",",
     )
@@ -43,7 +50,11 @@ def test_create_group(client):
 def test_detach_env(client):
     client._get.return_value = success_response
     response = client.Group.DetachEnv(
-        "env_name", ["env_group1", "env_group2"], "targetAppid", 1,"ruk",
+        "env_name",
+        ["env_group1", "env_group2"],
+        "targetAppid",
+        1,
+        "ruk",
     )
     client._get.assert_called_with(
         "DetachEnv",
@@ -51,7 +62,8 @@ def test_detach_env(client):
             "envName": "env_name",
             "envGroup": ["env_group1", "env_group2"],
             "targetAppid": "targetAppid",
-            "ownerUid": 1,"ruk": "ruk",
+            "ownerUid": 1,
+            "ruk": "ruk",
         },
         delimiter=",",
     )
@@ -65,7 +77,8 @@ def test_edit_group(client):
         "src_group_name",
         "dstGroupName",
         {"data1": "data1", "data2": "data2"},
-        1,"ruk",
+        1,
+        "ruk",
     )
     client._get.assert_called_with(
         "EditGroup",
@@ -74,7 +87,8 @@ def test_edit_group(client):
             "srcGroupName": "src_group_name",
             "dstGroupName": "dstGroupName",
             "data": {"data1": "data1", "data2": "data2"},
-            "ownerUid": 1,"ruk": "ruk",
+            "ownerUid": 1,
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -82,23 +96,39 @@ def test_edit_group(client):
 
 def test_get_groups(client):
     client._get.return_value = success_response
-    response = client.Group.GetGroups("env_name", "targetAppid", 1,"ruk",)
+    response = client.Group.GetGroups(
+        "env_name",
+        "targetAppid",
+        1,
+        "ruk",
+    )
     client._get.assert_called_with(
         "GetGroups",
-        params={"envName": "env_name", "targetAppid": "targetAppid", "ownerUid": 1,"ruk": "ruk",},
+        params={
+            "envName": "env_name",
+            "targetAppid": "targetAppid",
+            "ownerUid": 1,
+            "ruk": "ruk",
+        },
     )
     assert response == success_response
 
 
 def test_remove_group(client):
     client._get.return_value = success_response
-    response = client.Group.RemoveGroup("env_name", ["env_group1", "env_group2"], 1,"ruk",)
+    response = client.Group.RemoveGroup(
+        "env_name",
+        ["env_group1", "env_group2"],
+        1,
+        "ruk",
+    )
     client._get.assert_called_with(
         "RemoveGroup",
         params={
             "envName": "env_name",
             "envGroup": ["env_group1", "env_group2"],
-            "ownerUid": 1,"ruk": "ruk",
+            "ownerUid": 1,
+            "ruk": "ruk",
         },
         delimiter=",",
     )
@@ -108,14 +138,18 @@ def test_remove_group(client):
 def test_set_env(client):
     client._get.return_value = success_response
     response = client.Group.SetEnv(
-        "env_name", ["env_group1", "env_group2"], "targetAppid","ruk",
+        "env_name",
+        ["env_group1", "env_group2"],
+        "targetAppid",
+        "ruk",
     )
     client._get.assert_called_with(
         "SetEnv",
         params={
             "envName": "env_name",
             "envGroup": ["env_group1", "env_group2"],
-            "targetAppid": "targetAppid","ruk": "ruk",
+            "targetAppid": "targetAppid",
+            "ruk": "ruk",
         },
         delimiter=",",
     )
@@ -124,14 +158,21 @@ def test_set_env(client):
 
 def test_set_isolation_enabled(client):
     client._get.return_value = success_response
-    response = client.Group.SetIsolationEnabled("env_name", "group_name", True, 1,"ruk",)
+    response = client.Group.SetIsolationEnabled(
+        "env_name",
+        "group_name",
+        True,
+        1,
+        "ruk",
+    )
     client._get.assert_called_with(
         "SetIsolationEnabled",
         params={
             "envName": "env_name",
             "groupName": "group_name",
             "enabled": True,
-            "ownerUid": 1,"ruk": "ruk",
+            "ownerUid": 1,
+            "ruk": "ruk",
         },
         delimiter=",",
     )

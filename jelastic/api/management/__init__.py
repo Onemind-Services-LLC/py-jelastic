@@ -29,42 +29,74 @@ class _Account(Management):
 
     _endpoint2 = "account"
 
-    def AddPrivateSSHKey(self, title: str, ssh_key: str, ruk: str = None,):
+    def AddPrivateSSHKey(
+        self,
+        title: str,
+        ssh_key: str,
+        ruk: str = None,
+    ):
         """
         :param title: title of the ssh key.
         :param sshKey: value of the ssh key.
         """
         return self._get(
             "AddPrivateSSHKey",
-            params={"title": title, "sshKey": ssh_key, "ruk": ruk,},
+            params={
+                "title": title,
+                "sshKey": ssh_key,
+                "ruk": ruk,
+            },
         )
 
-    def AddPublicSSHKey(self, title: str, ssh_key: str, ruk: str = None,):
+    def AddPublicSSHKey(
+        self,
+        title: str,
+        ssh_key: str,
+        ruk: str = None,
+    ):
         """
         :param title: title of the ssh key.
         :param sshKey: value of the ssh key.
         """
         return self._get(
             "AddPublicSSHKey",
-            params={"title": title, "sshKey": ssh_key, "ruk": ruk,},
+            params={
+                "title": title,
+                "sshKey": ssh_key,
+                "ruk": ruk,
+            },
         )
 
-    def AddSSHKey(self, title: str, ssh_key: str, is_private: bool, ruk: str = None,):
+    def AddSSHKey(
+        self,
+        title: str,
+        ssh_key: str,
+        is_private: bool,
+        ruk: str = None,
+    ):
         """
         :param title: title of the ssh key.
         :param sshKey: value of the ssh key.
         """
         return self._get(
             "AddSSHKey",
-            params={"title": title, "sshKey": ssh_key, "isPrivate": is_private, "ruk": ruk,},
+            params={
+                "title": title,
+                "sshKey": ssh_key,
+                "isPrivate": is_private,
+                "ruk": ruk,
+            },
         )
 
     def AdjustContainersLimitsForAllUsers(
-        self, ruk: str = None,
+        self,
+        ruk: str = None,
     ):
         return self._get(
             "AdjustContainersLimitsForAllUsers",
-            params={"ruk": ruk,},
+            params={
+                "ruk": ruk,
+            },
         )
 
     def CleanQuotasCache(
@@ -80,7 +112,11 @@ class _Account(Management):
             },
         )
 
-    def DeleteSSHKey(self, id: int, ruk: str = None,):
+    def DeleteSSHKey(
+        self,
+        id: int,
+        ruk: str = None,
+    ):
         """
         :param id: unique identifier of the ssh key.
         """
@@ -107,13 +143,20 @@ class _Account(Management):
             },
         )
 
-    def GetSSHKeys(self, is_private: bool, ruk: str = None,):
+    def GetSSHKeys(
+        self,
+        is_private: bool,
+        ruk: str = None,
+    ):
         """
         :param isPrivate: defines whether to return the account's private (true) or public (false) SSH keys.
         """
         return self._get(
             "GetSSHKeys",
-            params={"isPrivate": is_private, "ruk": ruk,},
+            params={
+                "isPrivate": is_private,
+                "ruk": ruk,
+            },
         )
 
     def GetSSHKeysInner(
