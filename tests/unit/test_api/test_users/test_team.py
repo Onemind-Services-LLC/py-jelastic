@@ -3,9 +3,13 @@ from . import *
 
 def test_create(client):
     client._get.return_value = success_response
-    response = client.Team.Create("displayName", 1)
+    response = client.Team.Create(
+        "displayName",
+        1,
+        "ruk",
+    )
     client._get.assert_called_with(
-        "Create", params={"displayName": "displayName", "ownerUid": 1}
+        "Create", params={"displayName": "displayName", "ownerUid": 1, "ruk": "ruk"}
     )
 
     assert response == success_response
@@ -13,17 +17,27 @@ def test_create(client):
 
 def test_delete(client):
     client._get.return_value = success_response
-    response = client.Team.Delete(1, 1)
-    client._get.assert_called_with("Delete", params={"teamId": 1, "ownerUid": 1})
+    response = client.Team.Delete(
+        1,
+        1,
+        "ruk",
+    )
+    client._get.assert_called_with(
+        "Delete", params={"teamId": 1, "ownerUid": 1, "ruk": "ruk"}
+    )
 
     assert response == success_response
 
 
 def test_delete_member_team(client):
     client._get.return_value = success_response
-    response = client.Team.DeleteMember(1, 1)
+    response = client.Team.DeleteMember(
+        1,
+        1,
+        "ruk",
+    )
     client._get.assert_called_with(
-        "DeleteMember", params={"memberId": 1, "ownerUid": 1}
+        "DeleteMember", params={"memberId": 1, "ownerUid": 1, "ruk": "ruk"}
     )
 
     assert response == success_response
@@ -31,7 +45,13 @@ def test_delete_member_team(client):
 
 def test_edit(client):
     client._get.return_value = success_response
-    response = client.Team.Edit(1, "displayName", "externalId", 1)
+    response = client.Team.Edit(
+        1,
+        "displayName",
+        "externalId",
+        1,
+        "ruk",
+    )
     client._get.assert_called_with(
         "Edit",
         params={
@@ -39,6 +59,7 @@ def test_edit(client):
             "displayName": "displayName",
             "externalId": "externalId",
             "ownerUid": 1,
+            "ruk": "ruk",
         },
     )
 
@@ -47,15 +68,24 @@ def test_edit(client):
 
 def test_get(client):
     client._get.return_value = success_response
-    response = client.Team.Get(1)
-    client._get.assert_called_with("Get", params={"ownerUid": 1})
+    response = client.Team.Get(
+        1,
+        "ruk",
+    )
+    client._get.assert_called_with("Get", params={"ownerUid": 1, "ruk": "ruk"})
 
     assert response == success_response
 
 
 def test_invite(client):
     client._get.return_value = success_response
-    response = client.Team.Invite("email", 1, "displayName", 1)
+    response = client.Team.Invite(
+        "email",
+        1,
+        "displayName",
+        1,
+        "ruk",
+    )
     client._get.assert_called_with(
         "Invite",
         params={
@@ -63,6 +93,7 @@ def test_invite(client):
             "teamId": 1,
             "displayName": "displayName",
             "ownerUid": 1,
+            "ruk": "ruk",
         },
     )
 
@@ -71,9 +102,13 @@ def test_invite(client):
 
 def test_resend_invite(client):
     client._get.return_value = success_response
-    response = client.Team.ResendInvite(1, 1)
+    response = client.Team.ResendInvite(
+        1,
+        1,
+        "ruk",
+    )
     client._get.assert_called_with(
-        "ResendInvite", params={"memberId": 1, "ownerUid": 1}
+        "ResendInvite", params={"memberId": 1, "ownerUid": 1, "ruk": "ruk"}
     )
 
     assert response == success_response

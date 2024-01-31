@@ -55,33 +55,44 @@ class _AccessControl(Security):
 
     _endpoint2 = "accesscontrol"
 
-    def AddPolicy(self, role: str, object: str, rights: str):
+    def AddPolicy(
+        self,
+        role: str,
+        object: str,
+        rights: str,
+        ruk: str = None,
+    ):
         """
         :param role: name of the role
         :param object: object access
         :param rights: the rights of access
         """
         return self._get(
-            "AddPolicy", params={"role": role, "object": object, "rights": rights}
+            "AddPolicy",
+            params={"role": role, "object": object, "rights": rights, "ruk": ruk},
         )
 
     def ApplyRole(
         self,
         role: str,
         subject: str,
+        ruk: str = None,
     ):
         """
         :param subject: subject access
         """
         return self._get(
             "ApplyRole",
-            params={
-                "role": role,
-                "subject": subject,
-            },
+            params={"role": role, "subject": subject, "ruk": ruk},
         )
 
-    def CheckRights(self, subject: str, object: str, rights: str):
+    def CheckRights(
+        self,
+        subject: str,
+        object: str,
+        rights: str,
+        ruk: str = None,
+    ):
         """
         :param subject: the subject of access
         :param object: object access
@@ -89,55 +100,53 @@ class _AccessControl(Security):
         """
         return self._get(
             "CheckRights",
-            params={"subject": subject, "object": object, "rights": rights},
+            params={"subject": subject, "object": object, "rights": rights, "ruk": ruk},
         )
 
     def CreateRole(
         self,
         role: str,
+        ruk: str = None,
     ):
         """
         :param role: the name of (owner reserved the name, means the owner of the facility)
         """
         return self._get(
             "CreateRole",
-            params={
-                "role": role,
-            },
+            params={"role": role, "ruk": ruk},
         )
 
     def DeleteRole(
         self,
         role: str,
+        ruk: str = None,
     ):
         """
         :param role: role name
         """
         return self._get(
             "DeleteRole",
-            params={
-                "role": role,
-            },
+            params={"role": role, "ruk": ruk},
         )
 
     def GetObjectsByRole(
         self,
         role: str,
+        ruk: str = None,
     ):
         """
         :param role: the name of the role
         """
         return self._get(
             "GetObjectsByRole",
-            params={
-                "role": role,
-            },
+            params={"role": role, "ruk": ruk},
         )
 
     def GetPolicy(
         self,
         role: str,
         object: str = None,
+        ruk: str = None,
     ):
         """
         :param role: name of the role
@@ -145,16 +154,14 @@ class _AccessControl(Security):
         """
         return self._get(
             "GetPolicy",
-            params={
-                "role": role,
-                "object": object,
-            },
+            params={"role": role, "object": object, "ruk": ruk},
         )
 
     def GetRights(
         self,
         subject: str,
         object: str,
+        ruk: str = None,
     ):
         """
         :param subject: the subject of access
@@ -162,89 +169,85 @@ class _AccessControl(Security):
         """
         return self._get(
             "GetRights",
-            params={
-                "subject": subject,
-                "object": object,
-            },
+            params={"subject": subject, "object": object, "ruk": ruk},
         )
 
     def GetRightsByObject(
         self,
         object: str,
+        ruk: str = None,
     ):
         """
         :param object: object access
         """
         return self._get(
             "GetRightsByObject",
-            params={
-                "object": object,
-            },
+            params={"object": object, "ruk": ruk},
         )
 
     def GetRightsBySubject(
         self,
         subject: str,
+        ruk: str = None,
     ):
         """
         :param subject: the subject of access
         """
         return self._get(
             "GetRightsBySubject",
-            params={
-                "subject": subject,
-            },
+            params={"subject": subject, "ruk": ruk},
         )
 
-    def GetRoles(self):
-        return self._get("GetRoles", params={})
+    def GetRoles(
+        self,
+        ruk: str = None,
+    ):
+        return self._get("GetRoles", params={"ruk": ruk})
 
     def GetRolesByObject(
         self,
         object: str,
+        ruk: str = None,
     ):
         """
         :param object: object access
         """
         return self._get(
             "GetRolesByObject",
-            params={
-                "object": object,
-            },
+            params={"object": object, "ruk": ruk},
         )
 
     def GetRolesBySubject(
         self,
         subject: str,
+        ruk: str = None,
     ):
         """
         :param subject: the subject of access
         """
         return self._get(
             "GetRolesBySubject",
-            params={
-                "subject": subject,
-            },
+            params={"subject": subject, "ruk": ruk},
         )
 
     def GetSubjectsByRole(
         self,
         role: str,
+        ruk: str = None,
     ):
         """
         :param role: the name of the role
         """
         return self._get(
             "GetSubjectsByRole",
-            params={
-                "role": role,
-            },
+            params={"role": role, "ruk": ruk},
         )
 
     def RemovePolicy(
         self,
         role: str,
         object: str,
+        ruk: str = None,
     ):
         """
         :param role: name of the role
@@ -252,16 +255,14 @@ class _AccessControl(Security):
         """
         return self._get(
             "RemovePolicy",
-            params={
-                "role": role,
-                "object": object,
-            },
+            params={"role": role, "object": object, "ruk": ruk},
         )
 
     def RemoveRights(
         self,
         subject: str,
         object: str,
+        ruk: str = None,
     ):
         """
         :param subject: subject access
@@ -269,44 +270,40 @@ class _AccessControl(Security):
         """
         return self._get(
             "RemoveRights",
-            params={
-                "subject": subject,
-                "object": object,
-            },
+            params={"subject": subject, "object": object, "ruk": ruk},
         )
 
     def RemoveRightsByObject(
         self,
         object: str,
+        ruk: str = None,
     ):
         """
         :param object: object access
         """
         return self._get(
             "RemoveRightsByObject",
-            params={
-                "object": object,
-            },
+            params={"object": object, "ruk": ruk},
         )
 
     def RemoveRightsBySubject(
         self,
         subject: str,
+        ruk: str = None,
     ):
         """
         :param subject: subject access
         """
         return self._get(
             "RemoveRightsBySubject",
-            params={
-                "subject": subject,
-            },
+            params={"subject": subject, "ruk": ruk},
         )
 
     def RemoveRole(
         self,
         role: str,
         subject: str,
+        ruk: str = None,
     ):
         """
         :param role: name of the role
@@ -314,10 +311,7 @@ class _AccessControl(Security):
         """
         return self._get(
             "RemoveRole",
-            params={
-                "role": role,
-                "subject": subject,
-            },
+            params={"role": role, "subject": subject, "ruk": ruk},
         )
 
     def SetRights(
@@ -325,6 +319,7 @@ class _AccessControl(Security):
         object: str,
         subject: str,
         rights: str,
+        ruk: str = None,
     ):
         """
         :param object: object access
@@ -333,11 +328,7 @@ class _AccessControl(Security):
         """
         return self._get(
             "SetRights",
-            params={
-                "object": object,
-                "subject": subject,
-                "rights": rights,
-            },
+            params={"object": object, "subject": subject, "rights": rights, "ruk": ruk},
         )
 
 
@@ -352,39 +343,54 @@ class _License(Security):
         self,
         serial: str = None,
         generate_smtp_creds: bool = None,
+        ruk: str = None,
     ):
         return self._get(
             "Activate",
             params={
                 "serial": serial,
                 "generateSMTPCreds": generate_smtp_creds,
+                "ruk": ruk,
             },
         )
 
-    def GenerateSMTPSettings(self):
+    def GenerateSMTPSettings(
+        self,
+        ruk: str = None,
+    ):
         return self._get(
             "GenerateSMTPSettings",
-            params={},
+            params={"ruk": ruk},
         )
 
     def GetVZLicense(
         self,
         vz_type: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "GetVZLicense",
-            params={
-                "vzType": vz_type,
-            },
+            params={"vzType": vz_type, "ruk": ruk},
         )
 
-    def Validate(self):
-        return self._get("Validate", params={})
+    def Validate(
+        self,
+        ruk: str = None,
+    ):
+        return self._get("Validate", params={"ruk": ruk})
 
-    def ValidateServices(self):
-        return self._get("ValidateServices", params={})
+    def ValidateServices(
+        self,
+        ruk: str = None,
+    ):
+        return self._get("ValidateServices", params={"ruk": ruk})
 
-    def Welcome(self, allow_info_sharing: bool):
+    def Welcome(
+        self,
+        allow_info_sharing: bool,
+        ruk: str = None,
+    ):
         return self._get(
-            "ValidateServices", params={"allowInfoSharing": allow_info_sharing}
+            "ValidateServices",
+            params={"allowInfoSharing": allow_info_sharing, "ruk": ruk},
         )

@@ -3,24 +3,26 @@ from . import *
 
 def test_add_app(client):
     client._get.return_value = success_response
-    response = client.App.AddApp("manifest")
+    response = client.App.AddApp(
+        "manifest",
+        "ruk",
+    )
     client._get.assert_called_with(
         "AddApp",
-        params={
-            "manifest": "manifest",
-        },
+        params={"manifest": "manifest", "ruk": "ruk"},
     )
     assert response == success_response
 
 
 def test_delete_app(client):
     client._get.return_value = success_response
-    response = client.App.DeleteApp("1")
+    response = client.App.DeleteApp(
+        "1",
+        "ruk",
+    )
     client._get.assert_called_with(
         "DeleteApp",
-        params={
-            "id": "1",
-        },
+        params={"id": "1", "ruk": "ruk"},
     )
     assert response == success_response
 
@@ -30,13 +32,11 @@ def test_edit_app(client):
     response = client.App.EditApp(
         "1",
         "manifest",
+        "ruk",
     )
     client._get.assert_called_with(
         "EditApp",
-        params={
-            "id": "1",
-            "manifest": "manifest",
-        },
+        params={"id": "1", "manifest": "manifest", "ruk": "ruk"},
     )
     assert response == success_response
 
@@ -47,6 +47,7 @@ def test_get_addon_list(client):
         "env",
         "nodeGroup",
         {"search1": "value1", "search2": "value2", "search3": "value3"},
+        "ruk",
     )
     client._get.assert_called_with(
         "GetAddonList",
@@ -54,6 +55,7 @@ def test_get_addon_list(client):
             "envName": "env",
             "nodeGroup": "nodeGroup",
             "search": {"search1": "value1", "search2": "value2", "search3": "value3"},
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -61,40 +63,45 @@ def test_get_addon_list(client):
 
 def test_get_app_info(client):
     client._get.return_value = success_response
-    response = client.App.GetAppInfo("1", "lang", 1)
+    response = client.App.GetAppInfo(
+        "1",
+        "lang",
+        1,
+        "ruk",
+    )
     client._get.assert_called_with(
         "GetAppInfo",
-        params={"id": "1", "lang": "lang", "ownerUid": 1},
+        params={"id": "1", "lang": "lang", "ownerUid": 1, "ruk": "ruk"},
     )
     assert response == success_response
 
 
 def test_get_categories(client):
     client._get.return_value = success_response
-    response = client.App.GetCategories()
+    response = client.App.GetCategories("ruk")
     client._get.assert_called_with(
         "GetCategories",
-        params={},
+        params={"ruk": "ruk"},
     )
     assert response == success_response
 
 
 def test_get_checksum(client):
     client._get.return_value = success_response
-    response = client.App.GetChecksum()
+    response = client.App.GetChecksum("ruk")
     client._get.assert_called_with(
         "GetChecksum",
-        params={},
+        params={"ruk": "ruk"},
     )
     assert response == success_response
 
 
 def test_get_list(client):
     client._get.return_value = success_response
-    response = client.App.GetList("search")
+    response = client.App.GetList("search", "ruk")
     client._get.assert_called_with(
         "GetList",
-        params={"search": "search"},
+        params={"search": "search", "ruk": "ruk"},
     )
     assert response == success_response
 
@@ -118,6 +125,7 @@ def test_install(client):
         False,
         False,
         False,
+        "ruk",
     )
     client._get.assert_called_with(
         "Install",
@@ -138,6 +146,7 @@ def test_install(client):
             "overrideNodes": False,
             "skipEmail": False,
             "skipNodeEmails": False,
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -151,6 +160,7 @@ def test_install_addon(client):
         {"settings1": "value1", "settings2": "value2", "settings3": "value3"},
         "nodeGroup",
         "skip_email",
+        "ruk",
     )
     client._get.assert_called_with(
         "InstallAddon",
@@ -164,6 +174,7 @@ def test_install_addon(client):
             },
             "nodeGroup": "nodeGroup",
             "skipEmail": "skip_email",
+            "ruk": "ruk",
         },
     )
     assert response == success_response

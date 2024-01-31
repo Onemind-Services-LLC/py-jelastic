@@ -6987,7 +6987,7 @@ class _Tracking(Environment):
         )
 
     def GetServerUTCTime(self, ruk: str = None):
-        return self._get("GetServerUTCTime", params={})
+        return self._get("GetServerUTCTime", params={"ruk": ruk})
 
     def GetUidActions(
         self,

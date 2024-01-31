@@ -120,6 +120,7 @@ class _Account(Users):
         name: str = None,
         notify: bool = None,
         reseller_id: int = None,
+        ruk: str = None,
     ):
         """
         :param email: unique email address of the new account.
@@ -136,6 +137,7 @@ class _Account(Users):
                 "name": name,
                 "notify": notify,
                 "resellerId": reseller_id,
+                "ruk": ruk,
             },
         )
 
@@ -144,6 +146,7 @@ class _Account(Users):
         title: str,
         ssh_key: str,
         is_private: bool,
+        ruk: str = None,
     ):
         """
         Response which contains new key data and operation result.
@@ -157,6 +160,7 @@ class _Account(Users):
                 "title": title,
                 "sshKey": ssh_key,
                 "isPrivate": is_private,
+                "ruk": ruk,
             },
         )
 
@@ -164,6 +168,7 @@ class _Account(Users):
         self,
         email: str,
         redirect_url: str = None,
+        ruk: str = None,
     ):
         """
         param email: new account email address (provided by the user).
@@ -171,24 +176,20 @@ class _Account(Users):
         """
         return self._get(
             "ChangeEmail",
-            params={
-                "email": email,
-                "redirectUrl": redirect_url,
-            },
+            params={"email": email, "redirectUrl": redirect_url, "ruk": ruk},
         )
 
     def ChangeName(
         self,
         name: str,
+        ruk: str = None,
     ):
         """
         param name: new account name (provided by the user).
         """
         return self._get(
             "ChangeName",
-            params={
-                "name": name,
-            },
+            params={"name": name, "ruk": ruk},
         )
 
     def ChangePassword(
@@ -196,6 +197,7 @@ class _Account(Users):
         old_password: str,
         new_password: str,
         invalidate_sessions: bool = None,
+        ruk: str = None,
     ):
         """
         param old_password: user's current password (as specified by the user).
@@ -208,131 +210,126 @@ class _Account(Users):
                 "oldPassword": old_password,
                 "newPassword": new_password,
                 "invalidateSessions": invalidate_sessions,
+                "ruk": ruk,
             },
         )
 
     def CheckUser(
         self,
         login: str,
+        ruk: str = None,
     ):
         return self._get(
             "CheckUser",
-            params={
-                "login": login,
-            },
+            params={"login": login, "ruk": ruk},
         )
 
     def DeleteSSHKey(
         self,
         id: int,
+        ruk: str = None,
     ):
         """
         param id: unique identifier of the ssh key.
         """
         return self._get(
             "DeleteSSHKey",
-            params={
-                "id": id,
-            },
+            params={"id": id, "ruk": ruk},
         )
 
     def Disable2FA(
         self,
         password: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "Disable2FA",
-            params={
-                "password": password,
-            },
+            params={"password": password, "ruk": ruk},
         )
 
     def Enable2FA(
         self,
         code: str,
         password: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "Enable2FA",
-            params={
-                "code": code,
-                "password": password,
-            },
+            params={"code": code, "password": password, "ruk": ruk},
         )
 
     def Get2FABackupCodes(
         self,
         password: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "Get2FABackupCodes",
-            params={
-                "password": password,
-            },
+            params={"password": password, "ruk": ruk},
         )
 
     def Get2FAConfig(
         self,
         password: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "Get2FAConfig",
-            params={
-                "password": password,
-            },
+            params={"password": password, "ruk": ruk},
         )
 
     def GetSSHKeys(
         self,
         is_private: bool = None,
+        ruk: str = None,
     ):
         return self._get(
             "GetSSHKeys",
-            params={
-                "isPrivate": is_private,
-            },
+            params={"isPrivate": is_private, "ruk": ruk},
         )
 
     def GetUserInfo(
         self,
+        ruk: str = None,
     ):
-        return self._get("GetUserInfo", params={})
+        return self._get("GetUserInfo", params={"ruk": ruk})
 
     def GetUserInfoInner(
         self,
         login: str,
+        ruk: str = None,
     ):
         return self._get(
             "GetUserInfoInner",
-            params={
-                "login": login,
-            },
+            params={"login": login, "ruk": ruk},
         )
 
-    def RecoverPassword(self, email: str, lang: str = None):
+    def RecoverPassword(
+        self,
+        email: str,
+        lang: str = None,
+        ruk: str = None,
+    ):
         return self._get(
             "RecoverPassword",
-            params={
-                "email": email,
-                "lang": lang,
-            },
+            params={"email": email, "lang": lang, "ruk": ruk},
         )
 
     def Regenerate2FABackupCodes(
         self,
         password: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "Regenerate2FABackupCodes",
-            params={
-                "password": password,
-            },
+            params={"password": password, "ruk": ruk},
         )
 
     def SetAsTenantHost(
         self,
         uid: int,
         force_change: bool,
+        ruk: str = None,
     ):
         """
         param uid: unique identifier of the target user.
@@ -340,16 +337,14 @@ class _Account(Users):
         """
         return self._get(
             "SetAsTenantHost",
-            params={
-                "uid": uid,
-                "forceChange": force_change,
-            },
+            params={"uid": uid, "forceChange": force_change, "ruk": ruk},
         )
 
     def SetPassword(
         self,
         auth_key: str,
         invalidate_sessions: bool = None,
+        ruk: str = None,
     ):
         """
         param auth_key: authentication key to confirm the operation.
@@ -360,18 +355,18 @@ class _Account(Users):
             params={
                 "authKey": auth_key,
                 "invalidateSessions": invalidate_sessions,
+                "ruk": ruk,
             },
         )
 
     def SetUserData(
         self,
         data: str,
+        ruk: str = None,
     ):
         return self._get(
             "SetUserData",
-            params={
-                "data": data,
-            },
+            params={"data": data, "ruk": ruk},
         )
 
 
@@ -387,52 +382,68 @@ class _Authentication(Users):
 
     def ChangeSession(
         self,
+        ruk: str = None,
     ):
         return self._get(
             "ChangeSession",
-            params={},
+            params={"ruk": ruk},
         )
 
-    def CheckAuthKey(self, auth_key: str):
+    def CheckAuthKey(
+        self,
+        auth_key: str,
+        ruk: str = None,
+    ):
         return self._get(
             "CheckAuthKey",
-            params={"authKey": auth_key},
+            params={"authKey": auth_key, "ruk": ruk},
         )
 
-    def CheckPassword(self, password: str):
+    def CheckPassword(
+        self,
+        password: str,
+        ruk: str = None,
+    ):
         return self._get(
             "CheckPassword",
-            params={"password": password},
+            params={"password": password, "ruk": ruk},
         )
 
     def CheckSign(
         self,
+        ruk: str = None,
     ):
         return self._get(
             "CheckSign",
-            params={},
+            params={"ruk": ruk},
         )
 
-    def CheckUser(self, login: str):
+    def CheckUser(
+        self,
+        login: str,
+        ruk: str = None,
+    ):
         return self._get(
             "CheckUser",
-            params={"login": login},
+            params={"login": login, "ruk": ruk},
         )
 
     def ClearApiListData(
         self,
+        ruk: str = None,
     ):
         return self._get(
             "ClearApiListData",
-            params={},
+            params={"ruk": ruk},
         )
 
     def ClearApiListDataInner(
         self,
+        ruk: str = None,
     ):
         return self._get(
             "ClearApiListDataInner",
-            params={},
+            params={"ruk": ruk},
         )
 
     def CreateToken(
@@ -442,6 +453,7 @@ class _Authentication(Users):
         token_template: str = None,
         api_list: list[str] = None,
         expires_at: datetime = None,
+        ruk: str = None,
     ):
         """
         param description: custom description for the created token.
@@ -458,6 +470,7 @@ class _Authentication(Users):
                 "tokenTemplate": token_template,
                 "apiList": api_list,
                 "expiresAt": expires_at,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
@@ -471,6 +484,7 @@ class _Authentication(Users):
         expires_at: datetime = None,
         is_protected: bool = None,
         skip_notification: bool = None,
+        ruk: str = None,
     ):
         return self._get(
             "CreateTokenInner",
@@ -482,6 +496,7 @@ class _Authentication(Users):
                 "expiresAt": expires_at,
                 "isProtected": is_protected,
                 "skipNotification": skip_notification,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
@@ -490,12 +505,15 @@ class _Authentication(Users):
         self,
         ids: str,
         password: str = None,
+        ruk: str = None,
     ):
         """
         param ids: a comma- or semicolon-separated list of target token IDs. For example: 1;4;6. Also, you can use * for selecting all your tokens.
         param password: password for authenticating the current user.
         """
-        return self._get("DeleteTokens", params={"ids": ids, "password": password})
+        return self._get(
+            "DeleteTokens", params={"ids": ids, "password": password, "ruk": ruk}
+        )
 
     def EditToken(
         self,
@@ -505,6 +523,7 @@ class _Authentication(Users):
         token_template: str = None,
         api_list: list[str] = None,
         expires_at: datetime = None,
+        ruk: str = None,
     ):
         """
         param id: unique identifier of the target token.
@@ -523,146 +542,209 @@ class _Authentication(Users):
                 "tokenTemplate": token_template,
                 "apiList": api_list,
                 "expiresAt": expires_at,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
-    def GetAuthKey(self, auth_key: str):
+    def GetAuthKey(
+        self,
+        auth_key: str,
+        ruk: str = None,
+    ):
         return self._get(
             "GetAuthKey",
-            params={"authKey": auth_key},
+            params={"authKey": auth_key, "ruk": ruk},
         )
 
-    def GetDescriptionByToken(self, checksum: str):
+    def GetDescriptionByToken(
+        self,
+        checksum: str,
+        ruk: str = None,
+    ):
         return self._get(
             "GetDescriptionByToken",
-            params={"checksum": checksum},
+            params={"checksum": checksum, "ruk": ruk},
         )
 
     def GetDeviceSignature(
         self,
+        ruk: str = None,
     ):
         return self._get(
             "GetDeviceSignature",
-            params={},
+            params={"ruk": ruk},
         )
 
     def GetPolicyMethods(
         self,
         unique_name: str = None,
+        ruk: str = None,
     ):
-        return self._get("GetPolicyMethods", params={"uniqueName": unique_name})
+        return self._get(
+            "GetPolicyMethods", params={"uniqueName": unique_name, "ruk": ruk}
+        )
 
     def GetSessions(
         self,
+        ruk: str = None,
     ):
         return self._get(
             "GetSessions",
-            params={},
+            params={"ruk": ruk},
         )
 
-    def GetSigninAttempts(self, search: str = None):
-        return self._get("GetSigninAttempts", params={"search": search})
+    def GetSigninAttempts(
+        self,
+        search: str = None,
+        ruk: str = None,
+    ):
+        return self._get("GetSigninAttempts", params={"search": search, "ruk": ruk})
 
-    def GetTokenApiList(self, show_private: str = None, sort_param: str = None):
+    def GetTokenApiList(
+        self,
+        show_private: str = None,
+        sort_param: str = None,
+        ruk: str = None,
+    ):
         """
         param show_private: showPrivate : "boolean" (optional)
         param sort_param: filter by method name.
         """
         return self._get(
             "GetTokenApiList",
-            params={
-                "showPrivate": show_private,
-                "sortParam": sort_param,
-            },
+            params={"showPrivate": show_private, "sortParam": sort_param, "ruk": ruk},
         )
 
     def GetTokenTemplates(
         self,
+        ruk: str = None,
     ):
         return self._get(
             "GetTokenTemplates",
-            params={},
+            params={"ruk": ruk},
         )
 
-    def GetTokens(self, ids: list[str] = None):
+    def GetTokens(
+        self,
+        ids: list[str] = None,
+        ruk: str = None,
+    ):
         """
         param ids: a comma- or semicolon-separated list of target token IDs. For example: 1;4;6. Also, you can use * for selecting all your tokens.
         """
         return self._get(
             "GetTokens",
-            params={"ids": ids},
+            params={"ids": ids, "ruk": ruk},
             delimiter=",",
         )
 
-    def GetUidByToken(self, checksum: str):
+    def GetUidByToken(
+        self,
+        checksum: str,
+        ruk: str = None,
+    ):
         return self._get(
             "GetUidByToken",
-            params={"checksum": checksum},
+            params={"checksum": checksum, "ruk": ruk},
         )
 
     def RegenerateToken(
         self,
         ids: str,
         password: str = None,
+        ruk: str = None,
     ):
         """
         param ids: unique identifier of the target token.
         param password: password for authenticating the current user.
         """
-        return self._get("RegenerateToken", params={"ids": ids, "password": password})
+        return self._get(
+            "RegenerateToken", params={"ids": ids, "password": password, "ruk": ruk}
+        )
 
     def ResetSigninAttempts(
         self,
         login: str = None,
         ip_address: str = None,
+        ruk: str = None,
     ):
         return self._get(
-            "ResetSigninAttempts", params={"login": login, "ipAddress": ip_address}
+            "ResetSigninAttempts",
+            params={"login": login, "ipAddress": ip_address, "ruk": ruk},
         )
 
-    def Signin(self, login: str, password: str):
-        return self._get("Signin", params={"login": login, "password": password})
+    def Signin(
+        self,
+        login: str,
+        password: str,
+        ruk: str = None,
+    ):
+        return self._get(
+            "Signin", params={"login": login, "password": password, "ruk": ruk}
+        )
 
-    def SigninByAuthKey(self, auth_key: str):
+    def SigninByAuthKey(
+        self,
+        auth_key: str,
+        ruk: str = None,
+    ):
         return self._get(
             "SigninByAuthKey",
-            params={"authKey": auth_key},
+            params={"authKey": auth_key, "ruk": ruk},
         )
 
-    def SigninByToken(self, token: str, user_headers: str):
+    def SigninByToken(
+        self,
+        token: str,
+        user_headers: str,
+        ruk: str = None,
+    ):
         return self._get(
             "SigninByToken",
-            params={"token": token, "userHeaders": user_headers},
+            params={"token": token, "userHeaders": user_headers, "ruk": ruk},
         )
 
     def Signout(
         self,
+        ruk: str = None,
     ):
         return self._get(
             "Signout",
-            params={},
+            params={"ruk": ruk},
         )
 
-    def SignoutSessions(self, ids: str):
+    def SignoutSessions(
+        self,
+        ids: str,
+        ruk: str = None,
+    ):
         """
         param ids: a comma- or semicolon-separated list of target token IDs. For example: 1;4;6. Also, you can use * for selecting all your tokens.
         """
         return self._get(
             "SignoutSessions",
-            params={"ids": ids},
+            params={"ids": ids, "ruk": ruk},
         )
 
-    def ValidateCaptcha(self, code: str):
+    def ValidateCaptcha(
+        self,
+        code: str,
+        ruk: str = None,
+    ):
         return self._get(
             "ValidateCaptcha",
-            params={"code": code},
+            params={"code": code, "ruk": ruk},
         )
 
-    def Verify2FACode(self, code: str):
+    def Verify2FACode(
+        self,
+        code: str,
+        ruk: str = None,
+    ):
         return self._get(
             "Verify2FACode",
-            params={"code": code},
+            params={"code": code, "ruk": ruk},
         )
 
 
@@ -676,19 +758,24 @@ class _Collaboration(Users):
 
     _endpoint2 = "collaboration"
 
-    def AcceptCollaboration(self, id: int):
+    def AcceptCollaboration(
+        self,
+        id: int,
+        ruk: str = None,
+    ):
         """
         param id: unique identifier of the collaboration invite.
         """
         return self._get(
             "AcceptCollaboration",
-            params={"id": id},
+            params={"id": id, "ruk": ruk},
         )
 
     def ActivateMember(
         self,
         id: int,
         owner_uid: int = None,
+        ruk: str = None,
     ):
         """
         param id: unique identifier of the collaboration invite.
@@ -696,10 +783,16 @@ class _Collaboration(Users):
         """
         return self._get(
             "ActivateMember",
-            params={"id": id, "ownerUid": owner_uid},
+            params={"id": id, "ownerUid": owner_uid, "ruk": ruk},
         )
 
-    def AddPolicy(self, name: str, methods: list[str], description: str = None):
+    def AddPolicy(
+        self,
+        name: str,
+        methods: list[str],
+        description: str = None,
+        ruk: str = None,
+    ):
         """
         param name: custom name for the target policy.
         param methods: a comma-separated list of API methods allowed by this new policy.
@@ -707,7 +800,12 @@ class _Collaboration(Users):
         """
         return self._get(
             "AddPolicy",
-            params={"name": name, "methods": methods, "description": description},
+            params={
+                "name": name,
+                "methods": methods,
+                "description": description,
+                "ruk": ruk,
+            },
             delimiter=",",
         )
 
@@ -716,6 +814,7 @@ class _Collaboration(Users):
         collaboration_id: int,
         resources: str,
         create_role_if_needed: bool = None,
+        ruk: str = None,
     ):
         """
         param collaboration_id: create_role_if_needed
@@ -728,6 +827,7 @@ class _Collaboration(Users):
                 "collaborationId": collaboration_id,
                 "resources": resources,
                 "createRoleIfNeeded": create_role_if_needed,
+                "ruk": ruk,
             },
         )
 
@@ -737,6 +837,7 @@ class _Collaboration(Users):
         policies: list[str],
         receive_notification: bool,
         description: str = None,
+        ruk: str = None,
     ):
         """
         param name: custom name for the target new role.
@@ -751,6 +852,7 @@ class _Collaboration(Users):
                 "policies": policies,
                 "receiveNotification": receive_notification,
                 "description": description,
+                "ruk": ruk,
             },
             delimiter=",",
         )
@@ -759,6 +861,7 @@ class _Collaboration(Users):
         self,
         service_method: list[str],
         is_any: bool = None,
+        ruk: str = None,
     ):
         """
         param service_method: a semicolon-separated list of API methods.
@@ -766,7 +869,7 @@ class _Collaboration(Users):
         """
         return self._get(
             "CheckEnvironmentRights",
-            params={"serviceMethod": service_method, "isAny": is_any},
+            params={"serviceMethod": service_method, "isAny": is_any, "ruk": ruk},
             delimiter=",",
         )
 
@@ -774,45 +877,47 @@ class _Collaboration(Users):
         self,
         id: int,
         owner_uid: int = None,
+        ruk: str = None,
     ):
         """
         param id: unique identifier of the collaboration invite.
         param owner_uid: unique identifier of the collaboration owner.
         """
-        return self._get("DeleteMember", params={"id": id, "ownerUid": owner_uid})
+        return self._get(
+            "DeleteMember", params={"id": id, "ownerUid": owner_uid, "ruk": ruk}
+        )
 
     def DeletePolicy(
         self,
         id: int,
+        ruk: str = None,
     ):
         """
         param id: unique identifier of the collaboration invite.
         """
         return self._get(
             "DeletePolicy",
-            params={
-                "id": id,
-            },
+            params={"id": id, "ruk": ruk},
         )
 
     def DeleteProjectFromResources(
         self,
         project_id: str,
+        ruk: str = None,
     ):
         """
         param project_id: unique identifier of the target project.
         """
         return self._get(
             "DeleteProjectFromResources",
-            params={
-                "projectId": project_id,
-            },
+            params={"projectId": project_id, "ruk": ruk},
         )
 
     def DeleteResources(
         self,
         collaboration_id: str,
         ids: list[str] = None,
+        ruk: str = None,
     ):
         """
         param collaboration_id: unique identifier of the target collaboration.
@@ -820,50 +925,60 @@ class _Collaboration(Users):
         """
         return self._get(
             "DeleteResources",
-            params={
-                "collaborationId": collaboration_id,
-                "ids": ids,
-            },
+            params={"collaborationId": collaboration_id, "ids": ids, "ruk": ruk},
             delimiter=",",
         )
 
-    def DeleteResourcesInner(self, resource_type: str, resource_id: str):
+    def DeleteResourcesInner(
+        self,
+        resource_type: str,
+        resource_id: str,
+        ruk: str = None,
+    ):
         return self._get(
             "DeleteResourcesInner",
             params={
                 "resourceType": resource_type,
                 "resourceId": resource_id,
+                "ruk": ruk,
             },
         )
 
     def DeleteRole(
         self,
         id: int,
+        ruk: str = None,
     ):
         """
         param id: unique identifier of the target collaboration role to delete.
         """
         return self._get(
             "DeleteRole",
-            params={
-                "id": id,
-            },
+            params={"id": id, "ruk": ruk},
         )
 
-    def EditCollaboration(self, id: int, display_name: str = None):
+    def EditCollaboration(
+        self,
+        id: int,
+        display_name: str = None,
+        ruk: str = None,
+    ):
         """
         param id: unique identifier of the target collaboration to edit.
         param display_name: name of the collaboration displayed in the dashboard.
         """
         return self._get(
             "EditCollaboration",
-            params={
-                "id": id,
-                "displayName": display_name,
-            },
+            params={"id": id, "displayName": display_name, "ruk": ruk},
         )
 
-    def EditMember(self, id: int, display_name: str = None, owner_uid: int = None):
+    def EditMember(
+        self,
+        id: int,
+        display_name: str = None,
+        owner_uid: int = None,
+        ruk: str = None,
+    ):
         """
         param id: unique identifier of the target collaboration to edit.
         param display_name: name of the collaboration displayed in the dashboard.
@@ -875,6 +990,7 @@ class _Collaboration(Users):
                 "id": id,
                 "displayName": display_name,
                 "ownerUid": owner_uid,
+                "ruk": ruk,
             },
         )
 
@@ -884,6 +1000,7 @@ class _Collaboration(Users):
         methods: str,
         name: str = None,
         description: str = None,
+        ruk: str = None,
     ):
         """
         param id: unique identifier of the target collaboration to edit.
@@ -898,6 +1015,7 @@ class _Collaboration(Users):
                 "methods": methods,
                 "name": name,
                 "description": description,
+                "ruk": ruk,
             },
         )
 
@@ -908,6 +1026,7 @@ class _Collaboration(Users):
         name: str = None,
         description: str = None,
         receive_notification: bool = None,
+        ruk: str = None,
     ):
         """
         param id: unique identifier of the target collaboration to edit.
@@ -924,11 +1043,17 @@ class _Collaboration(Users):
                 "name": name,
                 "description": description,
                 "receiveNotification": receive_notification,
+                "ruk": ruk,
             },
             delimiter=",",
         )
 
-    def GetCollaborationResourceMethods(self, resource_type: str, resource_id: str):
+    def GetCollaborationResourceMethods(
+        self,
+        resource_type: str,
+        resource_id: str,
+        ruk: str = None,
+    ):
         """
         param resource_type: unique identifier of the target collaboration resource
         param resource_id: type (ENV, ENV_GROUP, ACCOUNT, VHI_REGION, S3_REGION) of the target collaboration resource.
@@ -938,6 +1063,7 @@ class _Collaboration(Users):
             params={
                 "resourceType": resource_type,
                 "resourceId": resource_id,
+                "ruk": ruk,
             },
         )
 
@@ -946,6 +1072,7 @@ class _Collaboration(Users):
         collaboration_id: int = None,
         type: str = None,
         resource_group: str = None,
+        ruk: str = None,
     ):
         """
         param collaboration_id: unique identifier of the target collaboration.
@@ -958,6 +1085,7 @@ class _Collaboration(Users):
                 "collaborationId": collaboration_id,
                 "type": type,
                 "resourceGroup": resource_group,
+                "ruk": ruk,
             },
         )
 
@@ -967,6 +1095,7 @@ class _Collaboration(Users):
         collaboration_id: int = None,
         type: str = None,
         resource_group: str = None,
+        ruk: str = None,
     ):
         """
         param uid: unique identifier of the target user.
@@ -981,6 +1110,7 @@ class _Collaboration(Users):
                 "collaborationId": collaboration_id,
                 "type": type,
                 "resourceGroup": resource_group,
+                "ruk": ruk,
             },
         )
 
@@ -988,6 +1118,7 @@ class _Collaboration(Users):
         self,
         collaboration_id: int = None,
         role_id: int = None,
+        ruk: str = None,
     ):
         """
         param collaboration_id: unique identifier of the target collaboration.
@@ -995,10 +1126,7 @@ class _Collaboration(Users):
         """
         return self._get(
             "GetCollaborationRoleMethods",
-            params={
-                "collaborationId": collaboration_id,
-                "roleId": role_id,
-            },
+            params={"collaborationId": collaboration_id, "roleId": role_id, "ruk": ruk},
         )
 
     def GetCollaborations(
@@ -1006,6 +1134,7 @@ class _Collaboration(Users):
         id: int = None,
         owner_uid: int = None,
         collaboration_type: str = None,
+        ruk: str = None,
     ):
         """
         param id: unique identifier of the target collaboration
@@ -1018,24 +1147,25 @@ class _Collaboration(Users):
                 "id": id,
                 "ownerUid": owner_uid,
                 "collaborationType": collaboration_type,
+                "ruk": ruk,
             },
         )
 
     def GetCollaborationsInner(
         self,
         login: str,
+        ruk: str = None,
     ):
         return self._get(
             "GetCollaborationsInner",
-            params={
-                "login": login,
-            },
+            params={"login": login, "ruk": ruk},
         )
 
     def GetMemberResources(
         self,
         member_id: int = None,
         resource_group: str = None,
+        ruk: str = None,
     ):
         """
         param member_id: unique identifier of the target collaboration member.
@@ -1043,60 +1173,57 @@ class _Collaboration(Users):
         """
         return self._get(
             "GetMemberResources",
-            params={
-                "memberId": member_id,
-                "resourceGroup": resource_group,
-            },
+            params={"memberId": member_id, "resourceGroup": resource_group, "ruk": ruk},
         )
 
     def GetMembers(
         self,
         id: int,
         owner_uid: int = None,
+        ruk: str = None,
     ):
         """
         param id: unique identifier of the collaboration invite.
         param owner_uid: unique identifier of the collaboration owner.
         """
-        return self._get("GetMembers", params={"id": id, "ownerUid": owner_uid})
+        return self._get(
+            "GetMembers", params={"id": id, "ownerUid": owner_uid, "ruk": ruk}
+        )
 
     def GetMembersInner(
         self,
         login: str,
+        ruk: str = None,
     ):
         return self._get(
             "GetMembersInner",
-            params={
-                "login": login,
-            },
+            params={"login": login, "ruk": ruk},
         )
 
     def GetPolicies(
         self,
         id: int = None,
+        ruk: str = None,
     ):
         """
         param id: unique identifier of the target policy.
         """
         return self._get(
             "GetPolicies",
-            params={
-                "id": id,
-            },
+            params={"id": id, "ruk": ruk},
         )
 
     def GetPolicyMethods(
         self,
         policy_id: int = None,
+        ruk: str = None,
     ):
         """
         param id: unique identifier of the target policy.
         """
         return self._get(
             "GetPolicyMethods",
-            params={
-                "policyId": policy_id,
-            },
+            params={"policyId": policy_id, "ruk": ruk},
         )
 
     def GetResourceRoles(
@@ -1104,6 +1231,7 @@ class _Collaboration(Users):
         owner_uid: int,
         resource_id: str,
         resource_type: str = None,
+        ruk: str = None,
     ):
         """
         param owner_uid: unique identifier of the target collaboration resource.
@@ -1116,32 +1244,41 @@ class _Collaboration(Users):
                 "ownerUid": owner_uid,
                 "resourceId": resource_id,
                 "resourceType": resource_type,
+                "ruk": ruk,
             },
         )
 
     def GetResourceRolesInner(
         self,
         target_app_id: str,
+        ruk: str = None,
     ):
         return self._get(
             "GetResourceRolesInner",
-            params={
-                "targetAppid": target_app_id,
-            },
+            params={"targetAppid": target_app_id, "ruk": ruk},
         )
 
     def GetRoles(
         self,
         id: int,
         owner_uid: int = None,
+        ruk: str = None,
     ):
         """
         param id: unique identifier of the collaboration invite.
         param owner_uid: unique identifier of the collaboration owner.
         """
-        return self._get("GetRoles", params={"id": id, "ownerUid": owner_uid})
+        return self._get(
+            "GetRoles", params={"id": id, "ownerUid": owner_uid, "ruk": ruk}
+        )
 
-    def InviteMember(self, email: str, display_name: str = None, owner_uid: int = None):
+    def InviteMember(
+        self,
+        email: str,
+        display_name: str = None,
+        owner_uid: int = None,
+        ruk: str = None,
+    ):
         """
         param email: email address of the user to invite to the collaboration.
         param display_name: name of the collaboration displayed in the dashboard.
@@ -1153,48 +1290,49 @@ class _Collaboration(Users):
                 "email": email,
                 "displayName": display_name,
                 "ownerUid": owner_uid,
+                "ruk": ruk,
             },
         )
 
     def LeaveCollaboration(
         self,
         id: int,
+        ruk: str = None,
     ):
         """
         param id: unique identifier of the collaboration invite.
         """
         return self._get(
             "LeaveCollaboration",
-            params={
-                "id": id,
-            },
+            params={"id": id, "ruk": ruk},
         )
 
     def RejectCollaboration(
         self,
         id: int,
+        ruk: str = None,
     ):
         """
         param id: unique identifier of the collaboration invite.
         """
         return self._get(
             "RejectCollaboration",
-            params={
-                "id": id,
-            },
+            params={"id": id, "ruk": ruk},
         )
 
     def ResendMemberInvitation(
         self,
         id: int,
         owner_uid: int = None,
+        ruk: str = None,
     ):
         """
         param id: unique identifier of the collaboration invite.
         param owner_uid: unique identifier of the collaboration owner.
         """
         return self._get(
-            "ResendMemberInvitation", params={"id": id, "ownerUid": owner_uid}
+            "ResendMemberInvitation",
+            params={"id": id, "ownerUid": owner_uid, "ruk": ruk},
         )
 
     def SetResource(
@@ -1205,6 +1343,7 @@ class _Collaboration(Users):
         resource_type: str = None,
         owner_uid: int = None,
         create_role_if_needed: bool = None,
+        ruk: str = None,
     ):
         """
         param collaboration_id:unique identifier of the target collaboration
@@ -1223,6 +1362,7 @@ class _Collaboration(Users):
                 "resourceType": resource_type,
                 "ownerUid": owner_uid,
                 "createRoleIfNeeded": create_role_if_needed,
+                "ruk": ruk,
             },
             delimiter=",",
         )
@@ -1232,6 +1372,7 @@ class _Collaboration(Users):
         collaboration_id: int,
         resource: str,
         create_role_if_needed: bool = None,
+        ruk: str = None,
     ):
         """
         param collaboration_id:unique identifier of the target collaboration
@@ -1244,6 +1385,7 @@ class _Collaboration(Users):
                 "collaborationId": collaboration_id,
                 "resource": resource,
                 "createRoleIfNeeded": create_role_if_needed,
+                "ruk": ruk,
             },
         )
 
@@ -1251,12 +1393,15 @@ class _Collaboration(Users):
         self,
         id: int,
         owner_uid: int = None,
+        ruk: str = None,
     ):
         """
         param id: unique identifier of the collaboration invite.
         param owner_uid: unique identifier of the collaboration owner.
         """
-        return self._get("SuspendMember", params={"id": id, "ownerUid": owner_uid})
+        return self._get(
+            "SuspendMember", params={"id": id, "ownerUid": owner_uid, "ruk": ruk}
+        )
 
 
 class _SSO(Users):
@@ -1269,53 +1414,76 @@ class _SSO(Users):
 
     _endpoint2 = "sso"
 
-    def GetAuthEndpoint(self, redirect_uri: str):
+    def GetAuthEndpoint(
+        self,
+        redirect_uri: str,
+        ruk: str = None,
+    ):
         """
         param redirectUri: a link to display after the authentication.
         """
         return self._get(
             "GetAuthEndpoint",
-            params={"redirectUri": redirect_uri},
+            params={"redirectUri": redirect_uri, "ruk": ruk},
         )
 
-    def GetImpersonationData(self, uid: int):
+    def GetImpersonationData(
+        self,
+        uid: int,
+        ruk: str = None,
+    ):
         """
         param uid: application identifier of the platform.
         """
         return self._get(
             "GetImpersonationData",
-            params={"uid": uid},
+            params={"uid": uid, "ruk": ruk},
         )
 
-    def GetSettings(self):
+    def GetSettings(
+        self,
+        ruk: str = None,
+    ):
         return self._get(
             "GetSettings",
-            params={},
+            params={"ruk": ruk},
         )
 
-    def ResetPassword(self):
+    def ResetPassword(
+        self,
+        ruk: str = None,
+    ):
         return self._get(
             "ResetPassword",
-            params={},
+            params={"ruk": ruk},
         )
 
-    def SigninByCode(self, code: str, redirect_uri: str):
+    def SigninByCode(
+        self,
+        code: str,
+        redirect_uri: str,
+        ruk: str = None,
+    ):
         """
         param code: a security code for SSO authentication.
         param redirectUri: a link to display after the authentication.
         """
         return self._get(
             "SigninByCode",
-            params={"code": code, "redirectUri": redirect_uri},
+            params={"code": code, "redirectUri": redirect_uri, "ruk": ruk},
         )
 
-    def SigninByToken(self, token: str):
+    def SigninByToken(
+        self,
+        token: str,
+        ruk: str = None,
+    ):
         """
         param token: an access token for SSO authentication.
         """
         return self._get(
             "SigninByToken",
-            params={"token": token},
+            params={"token": token, "ruk": ruk},
         )
 
 
@@ -1336,6 +1504,7 @@ class _Registration(Users):
         skip_send_email: bool = None,
         code: str = None,
         reseller_id: int = None,
+        ruk: str = None,
     ):
         """
         param key: activation key received after registration. The activation key is sent to the email address provided during registration.
@@ -1352,41 +1521,46 @@ class _Registration(Users):
                 "skipSendEmail": skip_send_email,
                 "code": code,
                 "resellerId": reseller_id,
+                "ruk": ruk,
             },
         )
 
     def CheckEmailExist(
         self,
         email: str,
+        ruk: str = None,
     ):
         """
         param email: verifiable e-mail address
         """
-        return self._get("CheckEmailExist", params={"email": email})
+        return self._get("CheckEmailExist", params={"email": email, "ruk": ruk})
 
     def CheckEmailRegistration(
         self,
         email: str,
+        ruk: str = None,
     ):
         """
         param email: verifiable e-mail address
         """
-        return self._get("CheckEmailRegistration", params={"email": email})
+        return self._get("CheckEmailRegistration", params={"email": email, "ruk": ruk})
 
     def CheckPassword(
         self,
         password: str,
+        ruk: str = None,
     ):
-        return self._get("CheckPassword", params={"password": password})
+        return self._get("CheckPassword", params={"password": password, "ruk": ruk})
 
     def ClearSmsListData(
         self,
         email: str,
+        ruk: str = None,
     ):
         """
         param email: email to generate confirmation key
         """
-        return self._get("ClearSmsListData", params={"email": email})
+        return self._get("ClearSmsListData", params={"email": email, "ruk": ruk})
 
     def CreateAccount(
         self,
@@ -1397,6 +1571,7 @@ class _Registration(Users):
         welcome: str = None,
         skip_send_email: bool = None,
         reseller_id: int = None,
+        ruk: str = None,
     ):
         """
         param email: mailing address to which will be sent an activation key (as specified by user). The key activation is valid 24 hours after registration, if the key was not activated during this time, the user is automatically deleted, the key is not valid
@@ -1417,6 +1592,7 @@ class _Registration(Users):
                 "welcome": welcome,
                 "skipSendEmail": skip_send_email,
                 "resellerId": reseller_id,
+                "ruk": ruk,
             },
         )
 
@@ -1427,6 +1603,7 @@ class _Registration(Users):
         auth_type: str = None,
         expires_at: datetime = None,
         type: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "CreateAuthKey",
@@ -1436,6 +1613,7 @@ class _Registration(Users):
                 "authType": auth_type,
                 "expiresAt": expires_at,
                 "type": type,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
@@ -1446,6 +1624,7 @@ class _Registration(Users):
         role: str,
         target_app_id: str = None,
         application_right: str = None,
+        ruk: str = None,
     ):
         """
         param email: email to generate confirmation key
@@ -1458,25 +1637,32 @@ class _Registration(Users):
                 "role": role,
                 "targetAppid": target_app_id,
                 "applicationRight": application_right,
+                "ruk": ruk,
             },
         )
 
     def GeneratePassword(
         self,
         length: int = None,
+        ruk: str = None,
     ):
         """
         param length: define password length (default value is set by password policy: minLength, can not be less than minLength)
         """
-        return self._get("GeneratePassword", params={"length": length})
+        return self._get("GeneratePassword", params={"length": length, "ruk": ruk})
 
     def GetSmsListData(
         self,
+        ruk: str = None,
     ):
-        return self._get("GetSmsListData", params={})
+        return self._get("GetSmsListData", params={"ruk": ruk})
 
-    def ResendInvitation(self, welcome: str):
-        return self._get("ResendInvitation", params={"welcome": welcome})
+    def ResendInvitation(
+        self,
+        welcome: str,
+        ruk: str = None,
+    ):
+        return self._get("ResendInvitation", params={"welcome": welcome, "ruk": ruk})
 
     def SendSms(
         self,
@@ -1484,6 +1670,7 @@ class _Registration(Users):
         email: str,
         phone: str,
         lang: str = None,
+        ruk: str = None,
     ):
         """
         param email: email to generate confirmation key
@@ -1497,6 +1684,7 @@ class _Registration(Users):
                 "email": email,
                 "phone": phone,
                 "lang": lang,
+                "ruk": ruk,
             },
         )
 
@@ -1511,42 +1699,48 @@ class _Team(Users):
 
     _endpoint2 = "team"
 
-    def Create(self, display_name: str, owner_uid: int = None):
+    def Create(
+        self,
+        display_name: str,
+        owner_uid: int = None,
+        ruk: str = None,
+    ):
         """
         param owner_uid: unique identifier of the collaboration Team owner.
         """
         return self._get(
             "Create",
-            params={
-                "displayName": display_name,
-                "ownerUid": owner_uid,
-            },
+            params={"displayName": display_name, "ownerUid": owner_uid, "ruk": ruk},
         )
 
-    def Delete(self, team_id: int, owner_uid: int = None):
+    def Delete(
+        self,
+        team_id: int,
+        owner_uid: int = None,
+        ruk: str = None,
+    ):
         """
         param team_id: unique identifier of the target collaboration Team.
         param owner_uid: unique identifier of the collaboration Team owner.
         """
         return self._get(
             "Delete",
-            params={
-                "teamId": team_id,
-                "ownerUid": owner_uid,
-            },
+            params={"teamId": team_id, "ownerUid": owner_uid, "ruk": ruk},
         )
 
-    def DeleteMember(self, member_id: int, owner_uid: int = None):
+    def DeleteMember(
+        self,
+        member_id: int,
+        owner_uid: int = None,
+        ruk: str = None,
+    ):
         """
         param member_id: unique identifier of the collaboration Team member.
         param owner_uid: unique identifier of the collaboration Team owner.
         """
         return self._get(
             "DeleteMember",
-            params={
-                "memberId": member_id,
-                "ownerUid": owner_uid,
-            },
+            params={"memberId": member_id, "ownerUid": owner_uid, "ruk": ruk},
         )
 
     def Edit(
@@ -1555,6 +1749,7 @@ class _Team(Users):
         display_name: str = None,
         external_id: str = None,
         owner_uid: int = None,
+        ruk: str = None,
     ):
         """
         param team_id:  unique identifier of the collaboration Team
@@ -1568,18 +1763,21 @@ class _Team(Users):
                 "displayName": display_name,
                 "externalId": external_id,
                 "ownerUid": owner_uid,
+                "ruk": ruk,
             },
         )
 
-    def Get(self, owner_uid: int = None):
+    def Get(
+        self,
+        owner_uid: int = None,
+        ruk: str = None,
+    ):
         """
         param owner_uid: unique identifier of the collaboration Team owner.
         """
         return self._get(
             "Get",
-            params={
-                "ownerUid": owner_uid,
-            },
+            params={"ownerUid": owner_uid, "ruk": ruk},
         )
 
     def Invite(
@@ -1588,6 +1786,7 @@ class _Team(Users):
         team_id: int,
         display_name: str = None,
         owner_uid: int = None,
+        ruk: str = None,
     ):
         """
         param email: email address to send an invitation to.
@@ -1602,18 +1801,21 @@ class _Team(Users):
                 "teamId": team_id,
                 "displayName": display_name,
                 "ownerUid": owner_uid,
+                "ruk": ruk,
             },
         )
 
-    def ResendInvite(self, member_id: int, owner_uid: int = None):
+    def ResendInvite(
+        self,
+        member_id: int,
+        owner_uid: int = None,
+        ruk: str = None,
+    ):
         """
         param member_id: unique identifier of the collaboration Team member.
         param owner_uid: unique identifier of the collaboration Team owner.
         """
         return self._get(
             "ResendInvite",
-            params={
-                "memberId": member_id,
-                "ownerUid": owner_uid,
-            },
+            params={"memberId": member_id, "ownerUid": owner_uid, "ruk": ruk},
         )

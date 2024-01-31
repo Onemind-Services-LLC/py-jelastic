@@ -56,28 +56,45 @@ class _NodePool(Pool):
         self,
         checksum: str,
         type: str = None,
+        ruk: str = None,
     ):
         """
         :param checksum: authorization checksum = md5(appid + private key)
         """
-        return self._get("ClearOsPool", params={"checksum": checksum, "type": type})
+        return self._get(
+            "ClearOsPool",
+            params={
+                "checksum": checksum,
+                "type": type,
+                "ruk": ruk,
+            },
+        )
 
     def ClearPool(
         self,
         hn_id: int,
         type: str = None,
+        ruk: str = None,
     ):
         """
         :param hnid: hardnode id (primary key) where OsNode to be allocated
         :param checksum: authorization checksum = md5(appid + private key)
         """
-        return self._get("ClearPool", params={"hnid": hn_id, "type": type})
+        return self._get(
+            "ClearPool",
+            params={
+                "hnid": hn_id,
+                "type": type,
+                "ruk": ruk,
+            },
+        )
 
     def GeneratePool(
         self,
         checksum: int,
         type: str = None,
         hn_id: int = None,
+        ruk: str = None,
     ):
         return self._get(
             "GeneratePool",
@@ -85,6 +102,7 @@ class _NodePool(Pool):
                 "checksum": checksum,
                 "type": type,
                 "hnid": hn_id,
+                "ruk": ruk,
             },
         )
 
@@ -95,6 +113,7 @@ class _NodePool(Pool):
         checksum: str,
         os_template: str = None,
         ct_id: int = None,
+        ruk: str = None,
     ):
         """
         info about allocated new OsNode
@@ -111,12 +130,14 @@ class _NodePool(Pool):
                 "checksum": checksum,
                 "osTemplate": os_template,
                 "ctid": ct_id,
+                "ruk": ruk,
             },
         )
 
     def GetStatus(
         self,
         checksum: str,
+        ruk: str = None,
     ):
         """
         :param checksum: authorization checksum = md5(appid + private key)
@@ -125,6 +146,7 @@ class _NodePool(Pool):
             "GetStatus",
             params={
                 "checksum": checksum,
+                "ruk": ruk,
             },
         )
 
@@ -132,6 +154,7 @@ class _NodePool(Pool):
         self,
         type: str,
         checksum: str,
+        ruk: str = None,
     ):
         """
         :param checksum: authorization checksum = md5(appid + private key)
@@ -141,6 +164,7 @@ class _NodePool(Pool):
             params={
                 "type": type,
                 "checksum": checksum,
+                "ruk": ruk,
             },
         )
 
@@ -158,6 +182,7 @@ class _IpPool(Pool):
         ip_to: str,
         region: str,
         checksum: str,
+        ruk: str = None,
     ):
         return self._get(
             "Add",
@@ -166,6 +191,7 @@ class _IpPool(Pool):
                 "ipto": ip_to,
                 "region": region,
                 "checksum": checksum,
+                "ruk": ruk,
             },
         )
 
@@ -175,6 +201,7 @@ class _IpPool(Pool):
         ip_to: str,
         regions: str,
         checksum: str,
+        ruk: str = None,
     ):
         return self._get(
             "AddExt",
@@ -183,6 +210,7 @@ class _IpPool(Pool):
                 "ipto": ip_to,
                 "regions": regions,
                 "checksum": checksum,
+                "ruk": ruk,
             },
         )
 
@@ -191,6 +219,7 @@ class _IpPool(Pool):
         network: str,
         regions: str,
         checksum: str,
+        ruk: str = None,
     ):
         return self._get(
             "AddIpv6Network",
@@ -198,14 +227,20 @@ class _IpPool(Pool):
                 "network": network,
                 "regions": regions,
                 "checksum": checksum,
+                "ruk": ruk,
             },
         )
 
-    def Get(self, checksum: str):
+    def Get(
+        self,
+        checksum: str,
+        ruk: str = None,
+    ):
         return self._get(
             "Get",
             params={
                 "checksum": checksum,
+                "ruk": ruk,
             },
         )
 
@@ -216,6 +251,7 @@ class _IpPool(Pool):
         type: str = None,
         node_id: int = None,
         target_app_id: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "GetExt",
@@ -225,76 +261,124 @@ class _IpPool(Pool):
                 "type": type,
                 "nodeId": node_id,
                 "targetAppid": target_app_id,
+                "ruk": ruk,
             },
         )
 
-    def GetFreePublicPort(self, checksum: str):
+    def GetFreePublicPort(
+        self,
+        checksum: str,
+        ruk: str = None,
+    ):
         return self._get(
             "GetFreePublicPort",
             params={
                 "checksum": checksum,
+                "ruk": ruk,
             },
         )
 
-    def Release(self, id: int, checksum: str):
+    def Release(
+        self,
+        id: int,
+        checksum: str,
+        ruk: str = None,
+    ):
         return self._get(
             "Release",
             params={
                 "id": id,
                 "checksum": checksum,
+                "ruk": ruk,
             },
         )
 
-    def ReleaseExt(self, id: int, checksum: str):
+    def ReleaseExt(
+        self,
+        id: int,
+        checksum: str,
+        ruk: str = None,
+    ):
         return self._get(
             "ReleaseExt",
             params={
                 "id": id,
                 "checksum": checksum,
+                "ruk": ruk,
             },
         )
 
-    def ReleaseSubnet(self, id: int, checksum: str):
+    def ReleaseSubnet(
+        self,
+        id: int,
+        checksum: str,
+        ruk: str = None,
+    ):
         return self._get(
             "ReleaseSubnet",
             params={
                 "id": id,
                 "checksum": checksum,
+                "ruk": ruk,
             },
         )
 
-    def RemoveExt(self, ips: str, checksum: str):
+    def RemoveExt(
+        self,
+        ips: str,
+        checksum: str,
+        ruk: str = None,
+    ):
         return self._get(
             "RemoveExt",
             params={
                 "ips": ips,
                 "checksum": checksum,
+                "ruk": ruk,
             },
         )
 
-    def RemoveFromReserve(self, checksum: str, target_app_id: str):
+    def RemoveFromReserve(
+        self,
+        checksum: str,
+        target_app_id: str,
+        ruk: str = None,
+    ):
         return self._get(
             "RemoveFromReserve",
             params={
                 "checksum": checksum,
                 "targetAppid": target_app_id,
+                "ruk": ruk,
             },
         )
 
-    def ReserveExtIPv6(self, checksum: str, target_app_id: str):
+    def ReserveExtIPv6(
+        self,
+        checksum: str,
+        target_app_id: str,
+        ruk: str = None,
+    ):
         return self._get(
             "ReserveExtIPv6",
             params={
                 "checksum": checksum,
                 "targetAppid": target_app_id,
+                "ruk": ruk,
             },
         )
 
-    def UnreserveExtIPv6(self, id: int, checksum: str):
+    def UnreserveExtIPv6(
+        self,
+        id: int,
+        checksum: str,
+        ruk: str = None,
+    ):
         return self._get(
             "UnreserveExtIPv6",
             params={
                 "id": id,
                 "checksum": checksum,
+                "ruk": ruk,
             },
         )

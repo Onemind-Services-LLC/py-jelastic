@@ -21,6 +21,7 @@ def test_create_project(client):
         "hooks",
         1,
         "repoHash",
+        "ruk",
     )
     client._get.assert_called_with(
         "CreateProject",
@@ -42,6 +43,7 @@ def test_create_project(client):
             "hooks": "hooks",
             "delay": 1,
             "repoHash": "repoHash",
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -49,10 +51,20 @@ def test_create_project(client):
 
 def test_delete_project(client):
     client._get.return_value = success_response
-    response = client.Vcs.DeleteProject("env_name", "context", "nodeGroup")
+    response = client.Vcs.DeleteProject(
+        "env_name",
+        "context",
+        "nodeGroup",
+        "ruk",
+    )
     client._get.assert_called_with(
         "DeleteProject",
-        params={"envName": "env_name", "context": "context", "nodeGroup": "nodeGroup"},
+        params={
+            "envName": "env_name",
+            "context": "context",
+            "nodeGroup": "nodeGroup",
+            "ruk": "ruk",
+        },
     )
     assert response == success_response
 
@@ -77,6 +89,7 @@ def test_edit_project(client):
         "hooks",
         1,
         "repoHash",
+        "ruk",
     )
     client._get.assert_called_with(
         "EditProject",
@@ -98,6 +111,7 @@ def test_edit_project(client):
             "hooks": "hooks",
             "delay": 1,
             "repoHash": "repoHash",
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -105,17 +119,33 @@ def test_edit_project(client):
 
 def test_get_project(client):
     client._get.return_value = success_response
-    response = client.Vcs.GetProject("env_name", "context", "nodeGroup")
+    response = client.Vcs.GetProject(
+        "env_name",
+        "context",
+        "nodeGroup",
+        "ruk",
+    )
     client._get.assert_called_with(
         "GetProject",
-        params={"envName": "env_name", "context": "context", "nodeGroup": "nodeGroup"},
+        params={
+            "envName": "env_name",
+            "context": "context",
+            "nodeGroup": "nodeGroup",
+            "ruk": "ruk",
+        },
     )
     assert response == success_response
 
 
 def test_update(client):
     client._get.return_value = success_response
-    response = client.Vcs.Update("env_name", "context", "nodeGroup", 1)
+    response = client.Vcs.Update(
+        "env_name",
+        "context",
+        "nodeGroup",
+        1,
+        "ruk",
+    )
     client._get.assert_called_with(
         "Update",
         params={
@@ -123,6 +153,7 @@ def test_update(client):
             "context": "context",
             "nodeGroup": "nodeGroup",
             "delay": 1,
+            "ruk": "ruk",
         },
     )
     assert response == success_response

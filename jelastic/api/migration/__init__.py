@@ -35,8 +35,26 @@ class _Migration(Migration):
 
     _endpoint2 = "migration"
 
-    def GetMigrationOperations(self, search: str = None):
-        return self._get("GetMigrationOperations", params={"search": search})
+    def GetMigrationOperations(
+        self,
+        search: str = None,
+        ruk: str = None,
+    ):
+        return self._get(
+            "GetMigrationOperations",
+            params={
+                "search": search,
+                "ruk": ruk,
+            },
+        )
 
-    def Migrate(self):
-        return self._get("Migrate")
+    def Migrate(
+        self,
+        ruk: str = None,
+    ):
+        return self._get(
+            "Migrate",
+            params={
+                "ruk": ruk,
+            },
+        )

@@ -58,24 +58,21 @@ class _Statistic(Statistic):
         self,
         env_id: str,
         checksum: str,
+        ruk: str = None,
     ):
         return self._get(
             "CreateStatTable",
-            params={
-                "envid": env_id,
-                "checksum": checksum,
-            },
+            params={"envid": env_id, "checksum": checksum, "ruk": ruk},
         )
 
     def GetActiveCloudlets(
         self,
         checksum: str,
+        ruk: str = None,
     ):
         return self._get(
             "GetActiveCloudlets",
-            params={
-                "checksum": checksum,
-            },
+            params={"checksum": checksum, "ruk": ruk},
         )
 
     def GetAggStats(
@@ -84,6 +81,7 @@ class _Statistic(Statistic):
         env_id: str,
         checksum: str,
         end_time: datetime = None,
+        ruk: str = None,
     ):
         """
         param start_time: start period inclusive date and time in format yyyy-MM-dd HH:mm:ss
@@ -99,12 +97,18 @@ class _Statistic(Statistic):
                 "envid": env_id,
                 "checksum": checksum,
                 "endtime": end_time,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def GetAllAggSumStatByUid(
-        self, start_time: datetime, env_id: str, checksum: str, end_time: datetime
+        self,
+        start_time: datetime,
+        env_id: str,
+        checksum: str,
+        end_time: datetime,
+        ruk: str = None,
     ):
         return self._get(
             "GetAllAggSumStatByUid",
@@ -113,6 +117,7 @@ class _Statistic(Statistic):
                 "envid": env_id,
                 "checksum": checksum,
                 "endTime": end_time,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
@@ -123,6 +128,7 @@ class _Statistic(Statistic):
         duration: int,
         checksum: str,
         end_time: datetime = None,
+        ruk: str = None,
     ):
         return self._get(
             "GetAllSumStatByUid",
@@ -131,6 +137,7 @@ class _Statistic(Statistic):
                 "duration": duration,
                 "checksum": checksum,
                 "endtime": end_time,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
@@ -138,21 +145,22 @@ class _Statistic(Statistic):
     def GetCurrentStatisticsForAllContainers(
         self,
         checksum: str,
+        ruk: str = None,
     ):
         return self._get(
             "GetCurrentStatisticsForAllContainers",
-            params={
-                "checksum": checksum,
-            },
+            params={"checksum": checksum, "ruk": ruk},
         )
 
-    def GetLastStats(self, node_group: str = None, node_id: int = None):
+    def GetLastStats(
+        self,
+        node_group: str = None,
+        node_id: int = None,
+        ruk: str = None,
+    ):
         return self._get(
             "GetLastStats",
-            params={
-                "nodeGroup": node_group,
-                "nodeId": node_id,
-            },
+            params={"nodeGroup": node_group, "nodeId": node_id, "ruk": ruk},
         )
 
     def GetStats(
@@ -164,6 +172,7 @@ class _Statistic(Statistic):
         node_id: int = None,
         node_type: str = None,
         node_group: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "GetStats",
@@ -175,6 +184,7 @@ class _Statistic(Statistic):
                 "nodeid": node_id,
                 "nodetype": node_type,
                 "nodeGroup": node_group,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
@@ -182,12 +192,11 @@ class _Statistic(Statistic):
     def GetStatus(
         self,
         checksum: str,
+        ruk: str = None,
     ):
         return self._get(
             "GetStatus",
-            params={
-                "checksum": checksum,
-            },
+            params={"checksum": checksum, "ruk": ruk},
         )
 
     def GetSumStat(
@@ -195,6 +204,7 @@ class _Statistic(Statistic):
         duration: int,
         checksum: str,
         end_time: datetime = None,
+        ruk: str = None,
     ):
         return self._get(
             "GetSumStat",
@@ -202,6 +212,7 @@ class _Statistic(Statistic):
                 "duration": duration,
                 "checksum": checksum,
                 "endtime": end_time,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
@@ -212,6 +223,7 @@ class _Statistic(Statistic):
         env_id: str,
         checksum: str,
         end_time: datetime = None,
+        ruk: str = None,
     ):
         """
         param start_time: start period inclusive date and time in format yyyy-MM-dd HH:mm:ss
@@ -227,14 +239,20 @@ class _Statistic(Statistic):
                 "envid": env_id,
                 "checksum": checksum,
                 "endtime": end_time,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
-    def SearchNodes(self, checksum: str, search: str = None):
+    def SearchNodes(
+        self,
+        checksum: str,
+        search: str = None,
+        ruk: str = None,
+    ):
         return self._get(
             "SearchNodes",
-            params={"checksum": checksum, "search": search},
+            params={"checksum": checksum, "search": search, "ruk": ruk},
         )
 
 
@@ -251,6 +269,7 @@ class _Utils(Statistic):
         node_id: int,
         stat_json: str,
         checksum: str,
+        ruk: str = None,
     ):
         return self._get(
             "GenerateStatistics",
@@ -259,6 +278,7 @@ class _Utils(Statistic):
                 "nodeId": node_id,
                 "statJSON": stat_json,
                 "checksum": checksum,
+                "ruk": ruk,
             },
         )
 
@@ -274,73 +294,81 @@ class _System(Statistic):
         self,
         topic: str,
         publish_local: bool = None,
+        ruk: str = None,
     ):
         return self._get(
             "Event",
-            params={
-                "topic": topic,
-                "publishLocal": publish_local,
-            },
+            params={"topic": topic, "publishLocal": publish_local, "ruk": ruk},
         )
 
     def GetAPIDescriptions(
         self,
         is_public_only: bool = None,
         is_token: bool = None,
+        ruk: str = None,
     ):
         return self._get(
             "GetAPIDescriptions",
-            params={
-                "isPublicOnly": is_public_only,
-                "isToken": is_token,
-            },
+            params={"isPublicOnly": is_public_only, "isToken": is_token, "ruk": ruk},
         )
 
     def GetCacheStatus(
         self,
+        ruk: str = None,
     ):
         return self._get(
             "GetCacheStatus",
-            params={},
+            params={"ruk": ruk},
         )
 
     def GetInstanceCacheStatus(
         self,
+        ruk: str = None,
     ):
         return self._get(
             "GetInstanceCacheStatus",
-            params={},
+            params={"ruk": ruk},
         )
 
     def GetVersion(
         self,
+        ruk: str = None,
     ):
         return self._get(
             "GetVersion",
-            params={},
+            params={"ruk": ruk},
         )
 
     def RefreshEmailTemplates(
         self,
+        ruk: str = None,
     ):
         return self._get(
             "RefreshEmailTemplates",
-            params={},
+            params={"ruk": ruk},
         )
 
-    def RefreshUser(self, language: str = None):
+    def RefreshUser(
+        self,
+        language: str = None,
+        ruk: str = None,
+    ):
         return self._get(
             "RefreshUser",
-            params={"language": language},
+            params={"language": language, "ruk": ruk},
         )
 
     def ReloadConfiguration(
-        self, reseller_id: int = None, changed_place_holders: str = None
+        self,
+        reseller_id: int = None,
+        changed_place_holders: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "ReloadConfiguration",
             params={
                 "resellerId": reseller_id,
                 "changedPlaceholders": changed_place_holders,
+                "ruk": ruk,
             },
         )

@@ -35,7 +35,12 @@ class _Engine(Platform):
 
     _endpoint2 = "engine"
 
-    def Get(self, engine_type: str = None, owner_uid: int = None):
+    def Get(
+        self,
+        engine_type: str = None,
+        owner_uid: int = None,
+        ruk: str = None,
+    ):
         """
         Returns a list of available engines for the user.
 
@@ -43,10 +48,20 @@ class _Engine(Platform):
         :param owner_uid: unique identifier of the platform owner.
         """
         return self._get(
-            "Get", params={"engineType": engine_type, "ownerUid": owner_uid}
+            "Get",
+            params={
+                "engineType": engine_type,
+                "ownerUid": owner_uid,
+                "ruk": ruk,
+            },
         )
 
-    def GetEntryPoint(self, host_group: str, owner_uid: int = None):
+    def GetEntryPoint(
+        self,
+        host_group: str,
+        owner_uid: int = None,
+        ruk: str = None,
+    ):
         """
         Connects a user to the host group.
 
@@ -54,5 +69,10 @@ class _Engine(Platform):
         :param owner_uid: unique identifier of the platform owner.
         """
         return self._get(
-            "GetEntryPoint", params={"hostGroup": host_group, "ownerUid": owner_uid}
+            "GetEntryPoint",
+            params={
+                "hostGroup": host_group,
+                "ownerUid": owner_uid,
+                "ruk": ruk,
+            },
         )
