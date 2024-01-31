@@ -11,6 +11,7 @@ def test_send(client):
         "reply-to@example.com",
         "plain",
         1,
+        "ruk"
     )
     client._get.assert_called_with(
         "Send",
@@ -22,6 +23,7 @@ def test_send(client):
             "replyTo": "reply-to@example.com",
             "type": "plain",
             "resellerId": 1,
+            "ruk":"ruk"
         },
     )
     assert response == success_response
@@ -30,7 +32,7 @@ def test_send(client):
 def test_send_to_user(client):
     client._get.return_value = success_response
     response = client.Email.SendToUser(
-        "user@example.com", "Subject", "This is a body", "from@example.com", 1
+        "user@example.com", "Subject", "This is a body", "from@example.com", 1, "ruk"
     )
     client._get.assert_called_with(
         "SendToUser",
@@ -40,6 +42,7 @@ def test_send_to_user(client):
             "body": "This is a body",
             "from": "from@example.com",
             "resellerId": 1,
+            "ruk":"ruk"
         },
     )
     assert response == success_response
