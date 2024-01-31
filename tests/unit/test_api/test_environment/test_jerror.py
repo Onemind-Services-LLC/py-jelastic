@@ -4,7 +4,7 @@ from . import *
 def test_jerror_error(client):
     client._get.return_value = success_response
     response = client.JError.Error(
-        "name", "param", 82, 1, "dummy@example.com", "not found"
+        "name", "param", 82, 1, "dummy@example.com", "not found","ruk",
     )
     client._get.assert_called_with(
         "Error",
@@ -14,7 +14,7 @@ def test_jerror_error(client):
             "errorCode": 82,
             "priority": 1,
             "email": "dummy@example.com",
-            "errorMessage": "not found",
+            "errorMessage": "not found","ruk": "ruk",
         },
     )
     assert response == success_response
