@@ -41,7 +41,12 @@ class _Utils(Automation):
     _endpoint2 = "utils"
 
     def ClearBillingHistory(
-        self, uid: int, start_date: date, end_date: date, env_name: str = None
+        self,
+        uid: int,
+        start_date: date,
+        end_date: date,
+        env_name: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "ClearBillingHistory",
@@ -50,21 +55,32 @@ class _Utils(Automation):
                 "startDate": start_date,
                 "endDate": end_date,
                 "envName": env_name,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d",
         )
 
-    def ClearMonthTraffic(self, uid: int, month_start: str):
+    def ClearMonthTraffic(
+        self,
+        uid: int,
+        month_start: str,
+        ruk: str = None,
+    ):
         return self._get(
             "ClearMonthTraffic",
             params={
                 "uid": uid,
                 "monthStart": month_start,
+                "ruk": ruk,
             },
         )
 
     def ClearResourceStatistics(
-        self, uid: int, start_date_from: date, start_date_to: date
+        self,
+        uid: int,
+        start_date_from: date,
+        start_date_to: date,
+        ruk: str = None,
     ):
         return self._get(
             "ClearResourceStatistics",
@@ -72,6 +88,7 @@ class _Utils(Automation):
                 "uid": uid,
                 "startDateFrom": start_date_from,
                 "startDateTo": start_date_to,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d",
         )
@@ -83,6 +100,7 @@ class _Utils(Automation):
         node_id: int,
         item_id: int,
         env_name: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "GenerateBillableItemStatistics",
@@ -92,12 +110,18 @@ class _Utils(Automation):
                 "nodeId": node_id,
                 "itemId": item_id,
                 "envName": env_name,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d",
         )
 
     def GenerateStatistics(
-        self, start_date: date, duration_hour: int, node_id: int, stat_json: dict
+        self,
+        start_date: date,
+        duration_hour: int,
+        node_id: int,
+        stat_json: dict,
+        ruk: str = None,
     ):
         stat_json = json.dumps(stat_json)
         return self._get(
@@ -107,34 +131,60 @@ class _Utils(Automation):
                 "durationHour": duration_hour,
                 "nodeId": node_id,
                 "statJson": stat_json,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d",
         )
 
-    def GetUidUsageByPeriod(self, uid: int, start_date: date, end_date: date):
+    def GetUidUsageByPeriod(
+        self,
+        uid: int,
+        start_date: date,
+        end_date: date,
+        ruk: str = None,
+    ):
         return self._get(
             "GetUidUsageByPeriod",
             params={
                 "uid": uid,
                 "startDate": start_date,
                 "endDate": end_date,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d",
         )
 
-    def SetAccountDate(self, uid: int, date_type: str, date_value: str):
+    def SetAccountDate(
+        self,
+        uid: int,
+        date_type: str,
+        date_value: str,
+        ruk: str = None,
+    ):
         return self._get(
             "SetAccountDate",
-            params={"uid": uid, "dateType": date_type, "dateValue": date_value},
+            params={
+                "uid": uid,
+                "dateType": date_type,
+                "dateValue": date_value,
+                "ruk": ruk,
+            },
         )
 
-    def SetAppNodeDate(self, env_name: str, date_type: str, date_value: str):
+    def SetAppNodeDate(
+        self,
+        env_name: str,
+        date_type: str,
+        date_value: str,
+        ruk: str = None,
+    ):
         return self._get(
             "SetAppNodeDate",
             params={
                 "envName": env_name,
                 "dateType": date_type,
                 "dateValue": date_value,
+                "ruk": ruk,
             },
         )
 
@@ -146,6 +196,7 @@ class _Utils(Automation):
         start_date_to: date,
         date_type: str,
         date_value: str,
+        ruk: str = None,
     ):
         return self._get(
             "SetBillingHistoryDate",
@@ -156,22 +207,31 @@ class _Utils(Automation):
                 "startDateTo": start_date_to,
                 "dateType": date_type,
                 "dateValue": date_value,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d",
         )
 
-    def SetMonthTraffic(self, uid: int, month_start: str, external_traffic: float):
+    def SetMonthTraffic(
+        self, uid: int, month_start: str, external_traffic: float, ruk: str = None
+    ):
         return self._get(
             "SetMonthTraffic",
             params={
                 "uid": uid,
                 "monthStart": month_start,
                 "externalTraffic": external_traffic,
+                "ruk": ruk,
             },
         )
 
     def ShiftResourceCreatedOnDateToStartDate(
-        self, uid: int, env_name: str, start_date_from: date, start_date_to: date
+        self,
+        uid: int,
+        env_name: str,
+        start_date_from: date,
+        start_date_to: date,
+        ruk: str = None,
     ):
         return self._get(
             "ShiftResourceCreatedOnDateToStartDate",
@@ -180,6 +240,7 @@ class _Utils(Automation):
                 "envName": env_name,
                 "startDateFrom": start_date_from,
                 "startDateTo": start_date_to,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d",
         )
