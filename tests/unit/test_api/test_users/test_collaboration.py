@@ -3,16 +3,27 @@ from . import *
 
 def test_accept_collaboration(client):
     client._get.return_value = success_response
-    response = client.Collaboration.AcceptCollaboration(1)
-    client._get.assert_called_with("AcceptCollaboration", params={"id": 1})
+    response = client.Collaboration.AcceptCollaboration(
+        1,
+        "ruk",
+    )
+    client._get.assert_called_with(
+        "AcceptCollaboration", params={"id": 1, "ruk": "ruk"}
+    )
 
     assert response == success_response
 
 
 def test_activate_member(client):
     client._get.return_value = success_response
-    response = client.Collaboration.ActivateMember(1, 1)
-    client._get.assert_called_with("ActivateMember", params={"id": 1, "ownerUid": 1})
+    response = client.Collaboration.ActivateMember(
+        1,
+        1,
+        "ruk",
+    )
+    client._get.assert_called_with(
+        "ActivateMember", params={"id": 1, "ownerUid": 1, "ruk": "ruk"}
+    )
 
     assert response == success_response
 
@@ -20,7 +31,10 @@ def test_activate_member(client):
 def test_add_policy(client):
     client._get.return_value = success_response
     response = client.Collaboration.AddPolicy(
-        "name", ["methods1", "methods2"], "description"
+        "name",
+        ["methods1", "methods2"],
+        "description",
+        "ruk",
     )
     client._get.assert_called_with(
         "AddPolicy",
@@ -28,6 +42,7 @@ def test_add_policy(client):
             "name": "name",
             "methods": ["methods1", "methods2"],
             "description": "description",
+            "ruk": "ruk",
         },
         delimiter=",",
     )
@@ -37,13 +52,19 @@ def test_add_policy(client):
 
 def test_add_resources(client):
     client._get.return_value = success_response
-    response = client.Collaboration.AddResources(1, "resources", True)
+    response = client.Collaboration.AddResources(
+        1,
+        "resources",
+        True,
+        "ruk",
+    )
     client._get.assert_called_with(
         "AddResources",
         params={
             "collaborationId": 1,
             "resources": "resources",
             "createRoleIfNeeded": True,
+            "ruk": "ruk",
         },
     )
 
@@ -53,7 +74,11 @@ def test_add_resources(client):
 def test_add_role(client):
     client._get.return_value = success_response
     response = client.Collaboration.AddRole(
-        "name", ["policies1", "policies2"], True, "description"
+        "name",
+        ["policies1", "policies2"],
+        True,
+        "description",
+        "ruk",
     )
     client._get.assert_called_with(
         "AddRole",
@@ -62,6 +87,7 @@ def test_add_role(client):
             "policies": ["policies1", "policies2"],
             "receiveNotification": True,
             "description": "description",
+            "ruk": "ruk",
         },
         delimiter=",",
     )
@@ -72,11 +98,17 @@ def test_add_role(client):
 def test_check_environment_rights(client):
     client._get.return_value = success_response
     response = client.Collaboration.CheckEnvironmentRights(
-        ["service_method1", "service_method2"], True
+        ["service_method1", "service_method2"],
+        True,
+        "ruk",
     )
     client._get.assert_called_with(
         "CheckEnvironmentRights",
-        params={"serviceMethod": ["service_method1", "service_method2"], "isAny": True},
+        params={
+            "serviceMethod": ["service_method1", "service_method2"],
+            "isAny": True,
+            "ruk": "ruk",
+        },
         delimiter=",",
     )
 
@@ -85,20 +117,27 @@ def test_check_environment_rights(client):
 
 def test_delete_member(client):
     client._get.return_value = success_response
-    response = client.Collaboration.DeleteMember(1, 1)
-    client._get.assert_called_with("DeleteMember", params={"id": 1, "ownerUid": 1})
+    response = client.Collaboration.DeleteMember(
+        1,
+        1,
+        "ruk",
+    )
+    client._get.assert_called_with(
+        "DeleteMember", params={"id": 1, "ownerUid": 1, "ruk": "ruk"}
+    )
 
     assert response == success_response
 
 
 def test_delete_policy(client):
     client._get.return_value = success_response
-    response = client.Collaboration.DeletePolicy(1)
+    response = client.Collaboration.DeletePolicy(
+        1,
+        "ruk",
+    )
     client._get.assert_called_with(
         "DeletePolicy",
-        params={
-            "id": 1,
-        },
+        params={"id": 1, "ruk": "ruk"},
     )
 
     assert response == success_response
@@ -106,9 +145,12 @@ def test_delete_policy(client):
 
 def test_delete_project_from_resources(client):
     client._get.return_value = success_response
-    response = client.Collaboration.DeleteProjectFromResources("project_id")
+    response = client.Collaboration.DeleteProjectFromResources(
+        "project_id",
+        "ruk",
+    )
     client._get.assert_called_with(
-        "DeleteProjectFromResources", params={"projectId": "project_id"}
+        "DeleteProjectFromResources", params={"projectId": "project_id", "ruk": "ruk"}
     )
 
     assert response == success_response
@@ -119,12 +161,14 @@ def test_delete_resources(client):
     response = client.Collaboration.DeleteResources(
         "collaboration_id",
         ["ids1", "ids2"],
+        "ruk",
     )
     client._get.assert_called_with(
         "DeleteResources",
         params={
             "collaborationId": "collaboration_id",
             "ids": ["ids1", "ids2"],
+            "ruk": "ruk",
         },
         delimiter=",",
     )
@@ -134,12 +178,17 @@ def test_delete_resources(client):
 
 def test_delete_resources_inner(client):
     client._get.return_value = success_response
-    response = client.Collaboration.DeleteResourcesInner("resource_type", "resource_id")
+    response = client.Collaboration.DeleteResourcesInner(
+        "resource_type",
+        "resource_id",
+        "ruk",
+    )
     client._get.assert_called_with(
         "DeleteResourcesInner",
         params={
             "resourceType": "resource_type",
             "resourceId": "resource_id",
+            "ruk": "ruk",
         },
     )
 
@@ -148,12 +197,13 @@ def test_delete_resources_inner(client):
 
 def test_delete_role(client):
     client._get.return_value = success_response
-    response = client.Collaboration.DeleteRole(1)
+    response = client.Collaboration.DeleteRole(
+        1,
+        "ruk",
+    )
     client._get.assert_called_with(
         "DeleteRole",
-        params={
-            "id": 1,
-        },
+        params={"id": 1, "ruk": "ruk"},
     )
 
     assert response == success_response
@@ -161,9 +211,14 @@ def test_delete_role(client):
 
 def test_edit_collaboration(client):
     client._get.return_value = success_response
-    response = client.Collaboration.EditCollaboration(1, "displayName")
+    response = client.Collaboration.EditCollaboration(
+        1,
+        "displayName",
+        "ruk",
+    )
     client._get.assert_called_with(
-        "EditCollaboration", params={"id": 1, "displayName": "displayName"}
+        "EditCollaboration",
+        params={"id": 1, "displayName": "displayName", "ruk": "ruk"},
     )
 
     assert response == success_response
@@ -171,9 +226,15 @@ def test_edit_collaboration(client):
 
 def test_edit_member(client):
     client._get.return_value = success_response
-    response = client.Collaboration.EditMember(1, "displayName", 1)
+    response = client.Collaboration.EditMember(
+        1,
+        "displayName",
+        1,
+        "ruk",
+    )
     client._get.assert_called_with(
-        "EditMember", params={"id": 1, "displayName": "displayName", "ownerUid": 1}
+        "EditMember",
+        params={"id": 1, "displayName": "displayName", "ownerUid": 1, "ruk": "ruk"},
     )
 
     assert response == success_response
@@ -181,7 +242,13 @@ def test_edit_member(client):
 
 def test_edit_policy(client):
     client._get.return_value = success_response
-    response = client.Collaboration.EditPolicy(1, "methods", "name", "description")
+    response = client.Collaboration.EditPolicy(
+        1,
+        "methods",
+        "name",
+        "description",
+        "ruk",
+    )
     client._get.assert_called_with(
         "EditPolicy",
         params={
@@ -189,6 +256,7 @@ def test_edit_policy(client):
             "methods": "methods",
             "name": "name",
             "description": "description",
+            "ruk": "ruk",
         },
     )
 
@@ -198,7 +266,12 @@ def test_edit_policy(client):
 def test_edit_role(client):
     client._get.return_value = success_response
     response = client.Collaboration.EditRole(
-        1, ["policies1", "policies2", "policies3"], "name", "description", True
+        1,
+        ["policies1", "policies2", "policies3"],
+        "name",
+        "description",
+        True,
+        "ruk",
     )
     client._get.assert_called_with(
         "EditRole",
@@ -208,6 +281,7 @@ def test_edit_role(client):
             "name": "name",
             "description": "description",
             "receiveNotification": True,
+            "ruk": "ruk",
         },
         delimiter=",",
     )
@@ -218,13 +292,16 @@ def test_edit_role(client):
 def test_get_collaboration_resource_methods(client):
     client._get.return_value = success_response
     response = client.Collaboration.GetCollaborationResourceMethods(
-        "resource_type", "resource_id"
+        "resource_type",
+        "resource_id",
+        "ruk",
     )
     client._get.assert_called_with(
         "GetCollaborationResourceMethods",
         params={
             "resourceType": "resource_type",
             "resourceId": "resource_id",
+            "ruk": "ruk",
         },
     )
 
@@ -234,11 +311,19 @@ def test_get_collaboration_resource_methods(client):
 def test_get_collaboration_resource(client):
     client._get.return_value = success_response
     response = client.Collaboration.GetCollaborationResources(
-        1, "type", "resourceGroup"
+        1,
+        "type",
+        "resourceGroup",
+        "ruk",
     )
     client._get.assert_called_with(
         "GetCollaborationResources",
-        params={"collaborationId": 1, "type": "type", "resourceGroup": "resourceGroup"},
+        params={
+            "collaborationId": 1,
+            "type": "type",
+            "resourceGroup": "resourceGroup",
+            "ruk": "ruk",
+        },
     )
 
     assert response == success_response
@@ -247,7 +332,11 @@ def test_get_collaboration_resource(client):
 def test_get_collaboration_resource_inner(client):
     client._get.return_value = success_response
     response = client.Collaboration.GetCollaborationResourcesInner(
-        1, 1, "type", "resourceGroup"
+        1,
+        1,
+        "type",
+        "resourceGroup",
+        "ruk",
     )
     client._get.assert_called_with(
         "GetCollaborationResourcesInner",
@@ -256,6 +345,7 @@ def test_get_collaboration_resource_inner(client):
             "collaborationId": 1,
             "type": "type",
             "resourceGroup": "resourceGroup",
+            "ruk": "ruk",
         },
     )
 
@@ -264,9 +354,14 @@ def test_get_collaboration_resource_inner(client):
 
 def test_get_collaboration_role_methods(client):
     client._get.return_value = success_response
-    response = client.Collaboration.GetCollaborationRoleMethods(1, 1)
+    response = client.Collaboration.GetCollaborationRoleMethods(
+        1,
+        1,
+        "ruk",
+    )
     client._get.assert_called_with(
-        "GetCollaborationRoleMethods", params={"collaborationId": 1, "roleId": 1}
+        "GetCollaborationRoleMethods",
+        params={"collaborationId": 1, "roleId": 1, "ruk": "ruk"},
     )
 
     assert response == success_response
@@ -274,13 +369,19 @@ def test_get_collaboration_role_methods(client):
 
 def test_get_collaboration(client):
     client._get.return_value = success_response
-    response = client.Collaboration.GetCollaborations(1, 1, "collaborationType")
+    response = client.Collaboration.GetCollaborations(
+        1,
+        1,
+        "collaborationType",
+        "ruk",
+    )
     client._get.assert_called_with(
         "GetCollaborations",
         params={
             "id": 1,
             "ownerUid": 1,
             "collaborationType": "collaborationType",
+            "ruk": "ruk",
         },
     )
 
@@ -289,21 +390,27 @@ def test_get_collaboration(client):
 
 def test_get_collaborations_inner(client):
     client._get.return_value = success_response
-    response = client.Collaboration.GetCollaborationsInner("login")
+    response = client.Collaboration.GetCollaborationsInner(
+        "login",
+        "ruk",
+    )
     client._get.assert_called_with(
         "GetCollaborationsInner",
-        params={
-            "login": "login",
-        },
+        params={"login": "login", "ruk": "ruk"},
     )
     assert response == success_response
 
 
 def test_get_member_resources(client):
     client._get.return_value = success_response
-    response = client.Collaboration.GetMemberResources(1, "resourceGroup")
+    response = client.Collaboration.GetMemberResources(
+        1,
+        "resourceGroup",
+        "ruk",
+    )
     client._get.assert_called_with(
-        "GetMemberResources", params={"memberId": 1, "resourceGroup": "resourceGroup"}
+        "GetMemberResources",
+        params={"memberId": 1, "resourceGroup": "resourceGroup", "ruk": "ruk"},
     )
 
     assert response == success_response
@@ -311,50 +418,71 @@ def test_get_member_resources(client):
 
 def test_get_member(client):
     client._get.return_value = success_response
-    response = client.Collaboration.GetMembers(1, 1)
-    client._get.assert_called_with("GetMembers", params={"id": 1, "ownerUid": 1})
+    response = client.Collaboration.GetMembers(
+        1,
+        1,
+        "ruk",
+    )
+    client._get.assert_called_with(
+        "GetMembers", params={"id": 1, "ownerUid": 1, "ruk": "ruk"}
+    )
 
     assert response == success_response
 
 
 def test_get_members_inner(client):
     client._get.return_value = success_response
-    response = client.Collaboration.GetMembersInner("login")
+    response = client.Collaboration.GetMembersInner(
+        "login",
+        "ruk",
+    )
     client._get.assert_called_with(
         "GetMembersInner",
-        params={
-            "login": "login",
-        },
+        params={"login": "login", "ruk": "ruk"},
     )
     assert response == success_response
 
 
 def test_get_policies(client):
     client._get.return_value = success_response
-    response = client.Collaboration.GetPolicies(1)
+    response = client.Collaboration.GetPolicies(
+        1,
+        "ruk",
+    )
     client._get.assert_called_with(
         "GetPolicies",
-        params={"id": 1},
+        params={"id": 1, "ruk": "ruk"},
     )
     assert response == success_response
 
 
 def test_get_policy_methods(client):
     client._get.return_value = success_response
-    response = client.Collaboration.GetPolicyMethods(1)
-    client._get.assert_called_with("GetPolicyMethods", params={"policyId": 1})
+    response = client.Collaboration.GetPolicyMethods(
+        1,
+        "ruk",
+    )
+    client._get.assert_called_with(
+        "GetPolicyMethods", params={"policyId": 1, "ruk": "ruk"}
+    )
     assert response == success_response
 
 
 def test_get_resource_roles(client):
     client._get.return_value = success_response
-    response = client.Collaboration.GetResourceRoles(1, "resource_id", "resourceType")
+    response = client.Collaboration.GetResourceRoles(
+        1,
+        "resource_id",
+        "resourceType",
+        "ruk",
+    )
     client._get.assert_called_with(
         "GetResourceRoles",
         params={
             "ownerUid": 1,
             "resourceId": "resource_id",
             "resourceType": "resourceType",
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -362,27 +490,46 @@ def test_get_resource_roles(client):
 
 def test_get_resource_roles_inner(client):
     client._get.return_value = success_response
-    response = client.Collaboration.GetResourceRolesInner("target_app_id")
+    response = client.Collaboration.GetResourceRolesInner(
+        "target_app_id",
+        "ruk",
+    )
     client._get.assert_called_with(
-        "GetResourceRolesInner", params={"targetAppid": "target_app_id"}
+        "GetResourceRolesInner", params={"targetAppid": "target_app_id", "ruk": "ruk"}
     )
     assert response == success_response
 
 
 def test_get_roles(client):
     client._get.return_value = success_response
-    response = client.Collaboration.GetRoles(1, 1)
-    client._get.assert_called_with("GetRoles", params={"id": 1, "ownerUid": 1})
+    response = client.Collaboration.GetRoles(
+        1,
+        1,
+        "ruk",
+    )
+    client._get.assert_called_with(
+        "GetRoles", params={"id": 1, "ownerUid": 1, "ruk": "ruk"}
+    )
 
     assert response == success_response
 
 
 def test_invite_member(client):
     client._get.return_value = success_response
-    response = client.Collaboration.InviteMember("email", "displayName", 1)
+    response = client.Collaboration.InviteMember(
+        "email",
+        "displayName",
+        1,
+        "ruk",
+    )
     client._get.assert_called_with(
         "InviteMember",
-        params={"email": "email", "displayName": "displayName", "ownerUid": 1},
+        params={
+            "email": "email",
+            "displayName": "displayName",
+            "ownerUid": 1,
+            "ruk": "ruk",
+        },
     )
 
     assert response == success_response
@@ -390,12 +537,13 @@ def test_invite_member(client):
 
 def test_leave_collaboration(client):
     client._get.return_value = success_response
-    response = client.Collaboration.LeaveCollaboration(1)
+    response = client.Collaboration.LeaveCollaboration(
+        1,
+        "ruk",
+    )
     client._get.assert_called_with(
         "LeaveCollaboration",
-        params={
-            "id": 1,
-        },
+        params={"id": 1, "ruk": "ruk"},
     )
 
     assert response == success_response
@@ -403,12 +551,13 @@ def test_leave_collaboration(client):
 
 def test_reject_collaboration(client):
     client._get.return_value = success_response
-    response = client.Collaboration.RejectCollaboration(1)
+    response = client.Collaboration.RejectCollaboration(
+        1,
+        "ruk",
+    )
     client._get.assert_called_with(
         "RejectCollaboration",
-        params={
-            "id": 1,
-        },
+        params={"id": 1, "ruk": "ruk"},
     )
 
     assert response == success_response
@@ -416,9 +565,13 @@ def test_reject_collaboration(client):
 
 def test_resend_member_invitation(client):
     client._get.return_value = success_response
-    response = client.Collaboration.ResendMemberInvitation(1, 1)
+    response = client.Collaboration.ResendMemberInvitation(
+        1,
+        1,
+        "ruk",
+    )
     client._get.assert_called_with(
-        "ResendMemberInvitation", params={"id": 1, "ownerUid": 1}
+        "ResendMemberInvitation", params={"id": 1, "ownerUid": 1, "ruk": "ruk"}
     )
 
     assert response == success_response
@@ -427,7 +580,13 @@ def test_resend_member_invitation(client):
 def test_set_resource(client):
     client._get.return_value = success_response
     response = client.Collaboration.SetResource(
-        1, "resource_id", ["role_id1", "role_id2"], "resourceType", 1, True
+        1,
+        "resource_id",
+        ["role_id1", "role_id2"],
+        "resourceType",
+        1,
+        True,
+        "ruk",
     )
     client._get.assert_called_with(
         "SetResource",
@@ -438,6 +597,7 @@ def test_set_resource(client):
             "resourceType": "resourceType",
             "ownerUid": 1,
             "createRoleIfNeeded": True,
+            "ruk": "ruk",
         },
         delimiter=",",
     )
@@ -447,13 +607,19 @@ def test_set_resource(client):
 
 def test_set_resources(client):
     client._get.return_value = success_response
-    response = client.Collaboration.SetResources(1, "resource", True)
+    response = client.Collaboration.SetResources(
+        1,
+        "resource",
+        True,
+        "ruk",
+    )
     client._get.assert_called_with(
         "SetResources",
         params={
             "collaborationId": 1,
             "resource": "resource",
             "createRoleIfNeeded": True,
+            "ruk": "ruk",
         },
     )
 
@@ -462,7 +628,13 @@ def test_set_resources(client):
 
 def test_suspend_member(client):
     client._get.return_value = success_response
-    response = client.Collaboration.SuspendMember(1, 1)
-    client._get.assert_called_with("SuspendMember", params={"id": 1, "ownerUid": 1})
+    response = client.Collaboration.SuspendMember(
+        1,
+        1,
+        "ruk",
+    )
+    client._get.assert_called_with(
+        "SuspendMember", params={"id": 1, "ownerUid": 1, "ruk": "ruk"}
+    )
 
     assert response == success_response

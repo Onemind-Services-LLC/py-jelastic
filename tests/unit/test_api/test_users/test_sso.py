@@ -3,12 +3,13 @@ from . import *
 
 def test_get_auth_endpoint(client):
     client._get.return_value = success_response
-    response = client.SSO.GetAuthEndpoint("redirect_uri")
+    response = client.SSO.GetAuthEndpoint(
+        "redirect_uri",
+        "ruk",
+    )
     client._get.assert_called_with(
         "GetAuthEndpoint",
-        params={
-            "redirectUri": "redirect_uri",
-        },
+        params={"redirectUri": "redirect_uri", "ruk": "ruk"},
     )
 
     assert response == success_response
@@ -16,12 +17,13 @@ def test_get_auth_endpoint(client):
 
 def test_get_impersonation_data(client):
     client._get.return_value = success_response
-    response = client.SSO.GetImpersonationData(1)
+    response = client.SSO.GetImpersonationData(
+        1,
+        "ruk",
+    )
     client._get.assert_called_with(
         "GetImpersonationData",
-        params={
-            "uid": 1,
-        },
+        params={"uid": 1, "ruk": "ruk"},
     )
 
     assert response == success_response
@@ -29,10 +31,12 @@ def test_get_impersonation_data(client):
 
 def test_get_settings(client):
     client._get.return_value = success_response
-    response = client.SSO.GetSettings()
+    response = client.SSO.GetSettings(
+        "ruk",
+    )
     client._get.assert_called_with(
         "GetSettings",
-        params={},
+        params={"ruk": "ruk"},
     )
 
     assert response == success_response
@@ -40,10 +44,12 @@ def test_get_settings(client):
 
 def test_reset_password(client):
     client._get.return_value = success_response
-    response = client.SSO.ResetPassword()
+    response = client.SSO.ResetPassword(
+        "ruk",
+    )
     client._get.assert_called_with(
         "ResetPassword",
-        params={},
+        params={"ruk": "ruk"},
     )
 
     assert response == success_response
@@ -51,13 +57,14 @@ def test_reset_password(client):
 
 def test_sign_in_by_code(client):
     client._get.return_value = success_response
-    response = client.SSO.SigninByCode("code", "redirect_uri")
+    response = client.SSO.SigninByCode(
+        "code",
+        "redirect_uri",
+        "ruk",
+    )
     client._get.assert_called_with(
         "SigninByCode",
-        params={
-            "code": "code",
-            "redirectUri": "redirect_uri",
-        },
+        params={"code": "code", "redirectUri": "redirect_uri", "ruk": "ruk"},
     )
 
     assert response == success_response
@@ -65,12 +72,13 @@ def test_sign_in_by_code(client):
 
 def test_sign_in_by_token(client):
     client._get.return_value = success_response
-    response = client.SSO.SigninByToken("token")
+    response = client.SSO.SigninByToken(
+        "token",
+        "ruk",
+    )
     client._get.assert_called_with(
         "SigninByToken",
-        params={
-            "token": "token",
-        },
+        params={"token": "token", "ruk": "ruk"},
     )
 
     assert response == success_response
