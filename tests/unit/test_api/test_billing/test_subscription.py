@@ -3,7 +3,9 @@ from . import *
 
 def test_cancel(client):
     client._get.return_value = success_response
-    response = client.Subscription.Cancel(1, True, CURRENT_DATETIME.date(), "pf", "exp")
+    response = client.Subscription.Cancel(
+        1, True, CURRENT_DATETIME.date(), "pf", "exp", "ruk"
+    )
     client._get.assert_called_with(
         "Cancel",
         params={
@@ -12,6 +14,7 @@ def test_cancel(client):
             "cancelDate": CURRENT_DATETIME.date(),
             "passphrase": "pf",
             "expandFields": "exp",
+            "ruk": "ruk",
         },
         datetime_format="%Y-%m-%d",
     )
@@ -20,12 +23,7 @@ def test_cancel(client):
 
 def test_clone_product(client):
     client._get.return_value = success_response
-    response = client.Subscription.CloneProduct(
-        1,
-        1,
-        "env",
-        1,
-    )
+    response = client.Subscription.CloneProduct(1, 1, "env", 1, "ruk")
     client._get.assert_called_with(
         "CloneProduct",
         params={
@@ -33,6 +31,7 @@ def test_clone_product(client):
             "itemResource": 1,
             "targetEnvName": "env",
             "itemId": 1,
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -40,23 +39,25 @@ def test_clone_product(client):
 
 def test_discard_update_subscription(client):
     client._get.return_value = success_response
-    response = client.Subscription.DiscardUpdateSubscription(1)
+    response = client.Subscription.DiscardUpdateSubscription(1, "ruk")
     client._get.assert_called_with(
-        "DiscardUpdateSubscription", params={"subscriptionId": 1}
+        "DiscardUpdateSubscription", params={"subscriptionId": 1, "ruk": "ruk"}
     )
     assert response == success_response
 
 
 def test_get_categories(client):
     client._get.return_value = success_response
-    response = client.Subscription.GetCategories("category")
-    client._get.assert_called_with("GetCategories", params={"expandFields": "category"})
+    response = client.Subscription.GetCategories("category", "ruk")
+    client._get.assert_called_with(
+        "GetCategories", params={"expandFields": "category", "ruk": "ruk"}
+    )
     assert response == success_response
 
 
 def test_get_products(client):
     client._get.return_value = success_response
-    response = client.Subscription.GetProducts(1, 1, "exp", 1, 1, "field", "dir")
+    response = client.Subscription.GetProducts(1, 1, "exp", 1, 1, "field", "dir", "ruk")
     client._get.assert_called_with(
         "GetProducts",
         params={
@@ -67,6 +68,7 @@ def test_get_products(client):
             "resultCount": 1,
             "orderField": "field",
             "orderDirection": "dir",
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -74,25 +76,20 @@ def test_get_products(client):
 
 def test_get_get_restricted_hard_node_groups(client):
     client._get.return_value = success_response
-    response = client.Subscription.GetRestrictedHardNodeGroups(1)
+    response = client.Subscription.GetRestrictedHardNodeGroups(1, "ruk")
     client._get.assert_called_with(
         "GetHardNodeGroups",
-        params={
-            "subscriptionItemId": 1,
-        },
+        params={"subscriptionItemId": 1, "ruk": "ruk"},
     )
     assert response == success_response
 
 
 def test_get_service_plans(client):
     client._get.return_value = success_response
-    response = client.Subscription.GetServicePlans(
-        1,
-        1,
-        "exp",
-    )
+    response = client.Subscription.GetServicePlans(1, 1, "exp", "ruk")
     client._get.assert_called_with(
-        "GetServicePlans", params={"id": 1, "productId": 1, "expandFields": "exp"}
+        "GetServicePlans",
+        params={"id": 1, "productId": 1, "expandFields": "exp", "ruk": "ruk"},
     )
     assert response == success_response
 
@@ -100,7 +97,15 @@ def test_get_service_plans(client):
 def test_get_subscriptions(client):
     client._get.return_value = success_response
     response = client.Subscription.GetSubscriptions(
-        1, 1, ["status1", "status2", "status3"], "exp", 1, 1, "order", "direction"
+        1,
+        1,
+        ["status1", "status2", "status3"],
+        "exp",
+        1,
+        1,
+        "order",
+        "direction",
+        "ruk",
     )
     client._get.assert_called_with(
         "GetSubscriptions",
@@ -113,6 +118,7 @@ def test_get_subscriptions(client):
             "resultCount": 1,
             "orderField": "order",
             "orderDirection": "direction",
+            "ruk": "ruk",
         },
         delimiter=",",
     )
@@ -122,7 +128,7 @@ def test_get_subscriptions(client):
 def test_install_product(client):
     client._get.return_value = success_response
     response = client.Subscription.InstallProduct(
-        1, 1, "settings", "env", "name", "group", "region", "lang"
+        1, 1, "settings", "env", "name", "group", "region", "lang", "ruk"
     )
     client._get.assert_called_with(
         "InstallProduct",
@@ -135,6 +141,7 @@ def test_install_product(client):
             "envGroups": "group",
             "region": "region",
             "lang": "lang",
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -142,14 +149,7 @@ def test_install_product(client):
 
 def test_move_product(client):
     client._get.return_value = success_response
-    response = client.Subscription.MoveProduct(
-        1,
-        1,
-        1,
-        1,
-        "passphrase",
-        1,
-    )
+    response = client.Subscription.MoveProduct(1, 1, 1, 1, "passphrase", 1, "ruk")
     client._get.assert_called_with(
         "MoveProduct",
         params={
@@ -159,6 +159,7 @@ def test_move_product(client):
             "targetItemId": 1,
             "passphrase": "passphrase",
             "itemId": 1,
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -166,21 +167,17 @@ def test_move_product(client):
 
 def test_set_autopay(client):
     client._get.return_value = success_response
-    response = client.Subscription.SetAutopay(1, True, "exp")
+    response = client.Subscription.SetAutopay(1, True, "exp", "ruk")
     client._get.assert_called_with(
-        "SetAutopay", params={"id": 1, "enabled": True, "expandFields": "exp"}
+        "SetAutopay",
+        params={"id": 1, "enabled": True, "expandFields": "exp", "ruk": "ruk"},
     )
     assert response == success_response
 
 
 def test_subscribe(client):
     client._get.return_value = success_response
-    response = client.Subscription.Subscribe(
-        1,
-        "item",
-        True,
-        "exp",
-    )
+    response = client.Subscription.Subscribe(1, "item", True, "exp", "ruk")
     client._get.assert_called_with(
         "Subscribe",
         params={
@@ -188,6 +185,7 @@ def test_subscribe(client):
             "items": "item",
             "chargeAutomatically": True,
             "expandFields": "exp",
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -195,17 +193,17 @@ def test_subscribe(client):
 
 def test_undo_cancel(client):
     client._get.return_value = success_response
-    response = client.Subscription.UndoCancel(1, "exp")
+    response = client.Subscription.UndoCancel(1, "exp", "ruk")
     client._get.assert_called_with(
         "UndoCancel",
-        params={"id": 1, "expandFields": "exp"},
+        params={"id": 1, "expandFields": "exp", "ruk": "ruk"},
     )
     assert response == success_response
 
 
 def test_uninstall_product(client):
     client._get.return_value = success_response
-    response = client.Subscription.UninstallProduct(1, 1, 1, "passphrase")
+    response = client.Subscription.UninstallProduct(1, 1, 1, "passphrase", "ruk")
     client._get.assert_called_with(
         "UninstallProduct",
         params={
@@ -213,6 +211,7 @@ def test_uninstall_product(client):
             "itemId": 1,
             "itemResourceId": 1,
             "passphrase": "passphrase",
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -220,23 +219,25 @@ def test_uninstall_product(client):
 
 def test_upcoming_invoice(client):
     client._get.return_value = success_response
-    response = client.Subscription.UpcomingInvoice(1, 1, 1)
+    response = client.Subscription.UpcomingInvoice(1, 1, 1, "ruk")
     client._get.assert_called_with(
         "UpcomingInvoice",
-        params={
-            "subscriptionId": 1,
-            "itemId": 1,
-            "quantity": 1,
-        },
+        params={"subscriptionId": 1, "itemId": 1, "quantity": 1, "ruk": "ruk"},
     )
     assert response == success_response
 
 
 def test_update_subscription(client):
     client._get.return_value = success_response
-    response = client.Subscription.UpdateSubscription(1, 1, 1, "exp")
+    response = client.Subscription.UpdateSubscription(1, 1, 1, "exp", "ruk")
     client._get.assert_called_with(
         "UpdateSubscription",
-        params={"subscriptionId": 1, "itemId": 1, "quantity": 1, "expandFields": "exp"},
+        params={
+            "subscriptionId": 1,
+            "itemId": 1,
+            "quantity": 1,
+            "expandFields": "exp",
+            "ruk": "ruk",
+        },
     )
     assert response == success_response
