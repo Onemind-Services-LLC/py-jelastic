@@ -317,6 +317,7 @@ class _Billing(Environment):
         value: float,
         note: str = None,
         value_group: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "AddStats",
@@ -330,11 +331,12 @@ class _Billing(Environment):
                 "value": value,
                 "note": note,
                 "valueGroup": value_group,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d",
         )
 
-    def EnvResources(self, start_time: datetime, end_time: datetime):
+    def EnvResources(self, start_time: datetime, end_time: datetime, ruk: str = None):
         """
         Calculate resources usage of one environment for the given period.
         """
@@ -343,6 +345,7 @@ class _Billing(Environment):
             params={
                 "starttime": start_time,
                 "endtime": end_time,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
@@ -353,6 +356,7 @@ class _Billing(Environment):
         end_time: datetime,
         target_app_id: str,
         checksum: str,
+        ruk: str = None,
     ):
         """
         Calculate environments resources for the given period.
@@ -368,12 +372,18 @@ class _Billing(Environment):
                 "endtime": end_time,
                 "targetAppid": target_app_id,
                 "checksum": checksum,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def EnvsResourcesByAccount(
-        self, start_time: datetime, end_time: datetime, uid: int, checksum: str
+        self,
+        start_time: datetime,
+        end_time: datetime,
+        uid: int,
+        checksum: str,
+        ruk: str = None,
     ):
         """
         Calculate environments resources for the given period.
@@ -385,11 +395,12 @@ class _Billing(Environment):
                 "endtime": end_time,
                 "uid": uid,
                 "checksum": checksum,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
-    def GetOptions(self, target_env_name: str, node_group: str):
+    def GetOptions(self, target_env_name: str, node_group: str, ruk: str = None):
         """
         Gets billing options for nodeGroup.
         """
@@ -398,11 +409,17 @@ class _Billing(Environment):
             params={
                 "targetEnvName": target_env_name,
                 "nodeGroup": node_group,
+                "ruk": ruk,
             },
         )
 
     def SetOptions(
-        self, target_env_name: str, node_group: str, options: dict, node_id: int = None
+        self,
+        target_env_name: str,
+        node_group: str,
+        options: dict,
+        node_id: int = None,
+        ruk: str = None,
     ):
         """
         Sets billing options for the node group (layer) to help the platform identify installed license types.
@@ -422,6 +439,7 @@ class _Billing(Environment):
                 "nodeGroup": node_group,
                 "options": options,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
@@ -436,7 +454,7 @@ class _Export(Environment):
 
     _endpoint2 = "export"
 
-    def Create(self, settings: dict):
+    def Create(self, settings: dict, ruk: str = None):
         """
         Creates a manifest file based on the existing environment (a JSON file with the topology and other settings)
         and stores it within the corresponding environment.
@@ -447,10 +465,11 @@ class _Export(Environment):
             "Create",
             params={
                 "settings": json.dumps(settings),
+                "ruk": ruk,
             },
         )
 
-    def Delete(self, id: str):
+    def Delete(self, id: str, ruk: str = None):
         """
         Deletes a manifest file from the corresponding environment.
 
@@ -460,10 +479,11 @@ class _Export(Environment):
             "Delete",
             params={
                 "id": id,
+                "ruk": ruk,
             },
         )
 
-    def DeleteExportedData(self, env_name: str, file_name: str):
+    def DeleteExportedData(self, env_name: str, file_name: str, ruk: str = None):
         """
         Deletes the exported data.
 
@@ -471,25 +491,43 @@ class _Export(Environment):
         :param file_name: filename to be removed.
         """
         return self._get(
-            "DeleteExportedData", params={"envName": env_name, "fileName": file_name}
+            "DeleteExportedData",
+            params={
+                "envName": env_name,
+                "fileName": file_name,
+                "ruk": ruk,
+            },
         )
 
-    def GetList(self, env_name: str):
+    def GetList(self, env_name: str, ruk: str = None):
         """
         Returns a list of all the exported copies of the environment.
 
         :param env_name: target environment name.
         """
-        return self._get("GetList", params={"envName": env_name})
+        return self._get(
+            "GetList",
+            params={
+                "envName": env_name,
+                "ruk": ruk,
+            },
+        )
 
-    def GetManifest(self, env_name: str, id: str):
+    def GetManifest(self, env_name: str, id: str, ruk: str = None):
         """
         Returns a manifest file of the exported environment.
 
         :param env_name: target environment name.
         :param id: Unique identifier of the exported environment manifest.
         """
-        return self._get("GetManifest", params={"envName": env_name, "id": id})
+        return self._get(
+            "GetManifest",
+            params={
+                "envName": env_name,
+                "id": id,
+                "ruk": ruk,
+            },
+        )
 
 
 class _JError(Environment):
@@ -507,6 +545,7 @@ class _JError(Environment):
         priority: int,
         email: str = None,
         error_message: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "Error",
@@ -517,6 +556,7 @@ class _JError(Environment):
                 "priority": priority,
                 "email": email,
                 "errorMessage": error_message,
+                "ruk": ruk,
             },
         )
 
@@ -526,7 +566,7 @@ class _Node(Environment):
     Ref: https://docs.jelastic.com/api/private/#!/api/environment.Node
     """
 
-    def SendEvent(self, params: dict, event_name: EVENT_TYPE):
+    def SendEvent(self, params: dict, event_name: EVENT_TYPE, ruk: str = None):
         """
         Sends a predefined event using IP authorization.
 
@@ -535,17 +575,29 @@ class _Node(Environment):
         """
         params = json.dumps(params)
         return self._get(
-            "SendEvent", params={"params": params, "eventName": event_name}
+            "SendEvent",
+            params={
+                "params": params,
+                "eventName": event_name,
+                "ruk": ruk,
+            },
         )
 
-    def SendNotification(self, message: str, name: str = None):
+    def SendNotification(self, message: str, name: str = None, ruk: str = None):
         """
         Sends an email notification to the node owner using IP authorization.
 
         :param message: body of the message
         :param name: title of the message
         """
-        return self._get("SendNotification", params={"name": name, "message": message})
+        return self._get(
+            "SendNotification",
+            params={
+                "name": name,
+                "message": message,
+                "ruk": ruk,
+            },
+        )
 
 
 class _Build(Environment):
@@ -580,6 +632,7 @@ class _Build(Environment):
         work_dir: str = None,
         target_node_group: str = None,
         is_sequential: bool = None,
+        ruk: str = None,
     ):
         return self._get(
             "AddProject",
@@ -604,6 +657,7 @@ class _Build(Environment):
                 "workDir": work_dir,
                 "targetNodeGroup": target_node_group,
                 "isSequential": is_sequential,
+                "ruk": ruk,
             },
         )
 
@@ -626,6 +680,7 @@ class _Build(Environment):
         deploy_now: bool = None,
         hooks: str = None,
         work_dir: str = None,
+        ruk: str = None,
     ):
         """
         param autoupdate: defines whether to enable (true) or disable (false) automatic project updates (only upon code changes in the remote repository); auto-update frequency is set with the interval parameter.
@@ -666,6 +721,7 @@ class _Build(Environment):
                 "deployNow": deploy_now,
                 "hooks": hooks,
                 "workDir": work_dir,
+                "ruk": ruk,
             },
         )
 
@@ -687,6 +743,7 @@ class _Build(Environment):
         deploy_now: bool = None,
         hooks: str = None,
         work_dir: str = None,
+        ruk: str = None,
     ):
         """
         param autoupdate: Defines whether to enable (true) or disable (false) automatic project updates (only upon code changes in the remote repository); auto-update frequency is set with the interval parameter.
@@ -725,10 +782,11 @@ class _Build(Environment):
                 "deployNow": deploy_now,
                 "hooks": hooks,
                 "workDir": work_dir,
+                "ruk": ruk,
             },
         )
 
-    def BuildDeploy(self, env_name: str, project_name: str):
+    def BuildDeploy(self, env_name: str, project_name: str, ruk: str = None):
         """
         param env_name: source environment name (with a build node).
         param project_name: project name.
@@ -738,6 +796,7 @@ class _Build(Environment):
             params={
                 "envName": env_name,
                 "projectName": project_name,
+                "ruk": ruk,
             },
         )
 
@@ -749,6 +808,7 @@ class _Build(Environment):
         delay: int = None,
         update: bool = None,
         is_sequential: bool = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -767,6 +827,7 @@ class _Build(Environment):
                 "delay": delay,
                 "update": update,
                 "isSequential": is_sequential,
+                "ruk": ruk,
             },
         )
 
@@ -778,6 +839,7 @@ class _Build(Environment):
         update: bool = None,
         skip_publish: bool = None,
         asyncs: bool = None,
+        ruk: str = None,
     ):
         """
         param env_name: source environment name (with a build node).
@@ -796,6 +858,7 @@ class _Build(Environment):
                 "update": update,
                 "skipPublish": skip_publish,
                 "async": asyncs,
+                "ruk": ruk,
             },
         )
 
@@ -806,6 +869,7 @@ class _Build(Environment):
         project_id: str,
         delay: int = None,
         is_sequential: bool = None,
+        ruk: str = None,
     ):
         """
         param env_name: source environment name (with a build node).
@@ -822,6 +886,7 @@ class _Build(Environment):
                 "projectid": project_id,
                 "delay": delay,
                 "isSequential": is_sequential,
+                "ruk": ruk,
             },
         )
 
@@ -846,6 +911,7 @@ class _Build(Environment):
         hooks: str = None,
         work_dir: str = None,
         target_node_group: str = None,
+        ruk: str = None,
     ):
         """
         param env_name: source environment name (with a build node).
@@ -890,6 +956,7 @@ class _Build(Environment):
                 "hooks": hooks,
                 "workDir": work_dir,
                 "targetNodeGroup": target_node_group,
+                "ruk": ruk,
             },
         )
 
@@ -899,6 +966,7 @@ class _Build(Environment):
         node_id: int,
         project_id: int = None,
         project_name: str = None,
+        ruk: str = None,
     ):
         """
         param env_name: source environment name (with a build node).
@@ -913,6 +981,7 @@ class _Build(Environment):
                 "nodeid": node_id,
                 "projectid": project_id,
                 "projectName": project_name,
+                "ruk": ruk,
             },
         )
 
@@ -921,6 +990,7 @@ class _Build(Environment):
         env_name: str,
         node_group: str = None,
         node_id: int = None,
+        ruk: str = None,
     ):
         """
         param env_name: source environment name (with a build node).
@@ -933,14 +1003,12 @@ class _Build(Environment):
                 "envName": env_name,
                 "nodeGroup": node_group,
                 "nodeid": node_id,
+                "ruk": ruk,
             },
         )
 
     def RemoveProject(
-        self,
-        env_name: str,
-        nodeid: int,
-        projectid: int,
+        self, env_name: str, nodeid: int, projectid: int, ruk: str = None
     ):
         """
         param env_name: source environment name (with a build node).
@@ -953,6 +1021,7 @@ class _Build(Environment):
                 "envName": env_name,
                 "nodeid": nodeid,
                 "projectid": projectid,
+                "ruk": ruk,
             },
         )
 
@@ -962,6 +1031,7 @@ class _Build(Environment):
         node_id: int,
         project_id: int = None,
         context: str = None,
+        ruk: str = None,
     ):
         """
         param env_name: source environment name (with a build node).
@@ -976,6 +1046,7 @@ class _Build(Environment):
                 "nodeId": node_id,
                 "projectId": project_id,
                 "context": context,
+                "ruk": ruk,
             },
         )
 
@@ -1004,6 +1075,7 @@ class _Deployment(Environment):
         deployment: dict = None,
         settings: dict = None,
         hooks: str = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1024,6 +1096,7 @@ class _Deployment(Environment):
                 "deployment": deployment,
                 "settings": settings,
                 "hooks": hooks,
+                "ruk": ruk,
             },
         )
 
@@ -1037,6 +1110,7 @@ class _Deployment(Environment):
         login: str = None,
         password: str = None,
         description: str = None,
+        ruk: str = None,
     ):
         """
         param name: project name.
@@ -1059,6 +1133,7 @@ class _Deployment(Environment):
                 "login": login,
                 "password": password,
                 "description": description,
+                "ruk": ruk,
             },
         )
 
@@ -1069,6 +1144,7 @@ class _Deployment(Environment):
         project: str,
         skip_update: bool = None,
         delay: bool = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1085,6 +1161,7 @@ class _Deployment(Environment):
                 "project": project,
                 "skipUpdate": skip_update,
                 "delay": delay,
+                "ruk": ruk,
             },
         )
 
@@ -1095,6 +1172,7 @@ class _Deployment(Environment):
         project: str,
         skip_upload: bool = None,
         skip_update: bool = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1111,6 +1189,7 @@ class _Deployment(Environment):
                 "project": project,
                 "skipUpload": skip_upload,
                 "skipUpdate": skip_update,
+                "ruk": ruk,
             },
         )
 
@@ -1124,6 +1203,7 @@ class _Deployment(Environment):
         settings: dict = None,
         hooks: str = None,
         delay: int = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1147,6 +1227,7 @@ class _Deployment(Environment):
                 "settings": settings,
                 "hooks": hooks,
                 "delay": delay,
+                "ruk": ruk,
             },
         )
 
@@ -1160,6 +1241,7 @@ class _Deployment(Environment):
         zdt: bool = None,
         hooks: str = None,
         delay: int = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1183,15 +1265,11 @@ class _Deployment(Environment):
                 "zdt": zdt,
                 "hooks": hooks,
                 "delay": delay,
+                "ruk": ruk,
             },
         )
 
-    def DeployProject(
-        self,
-        env_name: str,
-        node_id: int,
-        project: str,
-    ):
+    def DeployProject(self, env_name: str, node_id: int, project: str, ruk: str = None):
         """
         param env_name: target environment name (with a build node).
         param node_id: unique identifier of the build node.
@@ -1203,6 +1281,7 @@ class _Deployment(Environment):
                 "envName": env_name,
                 "nodeId": node_id,
                 "project": project,
+                "ruk": ruk,
             },
         )
 
@@ -1216,6 +1295,7 @@ class _Deployment(Environment):
         deployment: dict = None,
         settings: dict = None,
         hooks: str = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1238,6 +1318,7 @@ class _Deployment(Environment):
                 "deployment": deployment,
                 "settings": settings,
                 "hooks": hooks,
+                "ruk": ruk,
             },
         )
 
@@ -1251,6 +1332,7 @@ class _Deployment(Environment):
         settings: dict = None,
         hooks: str = None,
         delay: int = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1274,6 +1356,7 @@ class _Deployment(Environment):
                 "settings": settings,
                 "hooks": hooks,
                 "delay": delay,
+                "ruk": ruk,
             },
         )
 
@@ -1288,6 +1371,7 @@ class _Deployment(Environment):
         login: str = None,
         password: str = None,
         description: str = None,
+        ruk: str = None,
     ):
         """
         param id : unique identifier of the repository to be edited.
@@ -1312,14 +1396,12 @@ class _Deployment(Environment):
                 "login": login,
                 "password": password,
                 "description": description,
+                "ruk": ruk,
             },
         )
 
     def GetBuildProjectInfo(
-        self,
-        env_name: str,
-        node_id: int,
-        project: str,
+        self, env_name: str, node_id: int, project: str, ruk: str = None
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1332,6 +1414,7 @@ class _Deployment(Environment):
                 "envName": env_name,
                 "nodeId": node_id,
                 "project": project,
+                "ruk": ruk,
             },
         )
 
@@ -1340,6 +1423,7 @@ class _Deployment(Environment):
         env_name: str,
         node_group: str = None,
         node_id: int = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1352,10 +1436,11 @@ class _Deployment(Environment):
                 "envName": env_name,
                 "nodeGroup": node_group,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
-    def GetDeployments(self, env_name: str, node_group: str):
+    def GetDeployments(self, env_name: str, node_group: str, ruk: str = None):
         """
         param env_name: target environment name (with a build node).
         param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
@@ -1365,6 +1450,7 @@ class _Deployment(Environment):
             params={
                 "envName": env_name,
                 "nodeGroup": node_group,
+                "ruk": ruk,
             },
         )
 
@@ -1375,6 +1461,7 @@ class _Deployment(Environment):
         node_id: int = None,
         context: str = None,
         project: str = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1391,14 +1478,12 @@ class _Deployment(Environment):
                 "nodeId": node_id,
                 "context": context,
                 "project": project,
+                "ruk": ruk,
             },
         )
 
     def GetProjectInfo(
-        self,
-        env_name: str,
-        context: str,
-        node_group: str = None,
+        self, env_name: str, context: str, node_group: str = None, ruk: str = None
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1411,13 +1496,11 @@ class _Deployment(Environment):
                 "envName": env_name,
                 "context": context,
                 "nodeGroup": node_group,
+                "ruk": ruk,
             },
         )
 
-    def GetRepos(
-        self,
-        id: int = None,
-    ):
+    def GetRepos(self, id: int = None, ruk: str = None):
         """
         param id: unique identifier of the repository.
         """
@@ -1425,14 +1508,12 @@ class _Deployment(Environment):
             "GetRepos",
             params={
                 "id": id,
+                "ruk": ruk,
             },
         )
 
     def RemoveBuildProject(
-        self,
-        env_name: str,
-        node_id: str,
-        project: str,
+        self, env_name: str, node_id: str, project: str, ruk: str = None
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1445,10 +1526,11 @@ class _Deployment(Environment):
                 "envName": env_name,
                 "nodeId": node_id,
                 "project": project,
+                "ruk": ruk,
             },
         )
 
-    def RemoveRepo(self, id: int):
+    def RemoveRepo(self, id: int, ruk: str = None):
         """
         param id: unique identifier of the repository.
         """
@@ -1456,6 +1538,7 @@ class _Deployment(Environment):
             "RemoveRepo",
             params={
                 "id": id,
+                "ruk": ruk,
             },
         )
 
@@ -1465,6 +1548,7 @@ class _Deployment(Environment):
         node_group: str,
         old_context: str,
         new_context: str,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1479,15 +1563,11 @@ class _Deployment(Environment):
                 "nodeGroup": node_group,
                 "oldContext": old_context,
                 "newContext": new_context,
+                "ruk": ruk,
             },
         )
 
-    def Undeploy(
-        self,
-        env_name: str,
-        node_group: str,
-        context: str,
-    ):
+    def Undeploy(self, env_name: str, node_group: str, context: str, ruk: str = None):
         """
         param env_name: target environment name (with a build node).
         param node_group: unique identifier of the target node group (layer), e.g. “cp” for the default application server layer.
@@ -1499,6 +1579,7 @@ class _Deployment(Environment):
                 "envName": env_name,
                 "nodeGroup": node_group,
                 "context": context,
+                "ruk": ruk,
             },
         )
 
@@ -1510,6 +1591,7 @@ class _Deployment(Environment):
         context: str = None,
         project: str = None,
         delay: str = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name (with a build node).
@@ -1528,6 +1610,7 @@ class _Deployment(Environment):
                 "context": context,
                 "project": project,
                 "delay": delay,
+                "ruk": ruk,
             },
         )
 
@@ -1554,6 +1637,7 @@ class _Binder(Environment):
         node_group: str = None,
         node_id: int = None,
         subdomain: str = None,
+        ruk: str = None,
     ):
         """
         param domains: a comma- or semicolon-separated list of domains (e.g. domain1,domain2 or domain1;domain2).
@@ -1569,16 +1653,13 @@ class _Binder(Environment):
                 "nodeGroup": node_group,
                 "nodeId": node_id,
                 "subdomain": subdomain,
+                "ruk": ruk,
             },
             delimiter=",",
         )
 
     def AddSSLCert(
-        self,
-        env_name: str,
-        key: str,
-        cert: str,
-        interm: str = None,
+        self, env_name: str, key: str, cert: str, interm: str = None, ruk: str = None
     ):
         """
         param key: private key (can be either key body or link to download it).
@@ -1592,14 +1673,12 @@ class _Binder(Environment):
                 "key": key,
                 "cert": cert,
                 "interm": interm,
+                "ruk": ruk,
             },
         )
 
     def AttachExtIp(
-        self,
-        env_name: str,
-        nodeid: int,
-        type: str = None,
+        self, env_name: str, nodeid: int, type: str = None, ruk: str = None
     ):
         return self._get(
             "AttachExtIp",
@@ -1607,14 +1686,12 @@ class _Binder(Environment):
                 "envName": env_name,
                 "nodeid": nodeid,
                 "type": type,
+                "ruk": ruk,
             },
         )
 
     def BindExtDomain(
-        self,
-        env_name: str,
-        extdomain: str,
-        cert_id: int = None,
+        self, env_name: str, extdomain: str, cert_id: int = None, ruk: str = None
     ):
         return self._get(
             "BindExtDomain",
@@ -1622,6 +1699,7 @@ class _Binder(Environment):
                 "envName": env_name,
                 "extdomain": extdomain,
                 "certId": cert_id,
+                "ruk": ruk,
             },
         )
 
@@ -1630,6 +1708,7 @@ class _Binder(Environment):
         env_name: str,
         extdomains: list[str] = None,
         cert_id: int = None,
+        ruk: str = None,
     ):
         """
         param extdomain: a comma-separated list of external domains to be bound to the environment.
@@ -1641,6 +1720,7 @@ class _Binder(Environment):
                 "envName": env_name,
                 "extdomains": extdomains,
                 "certId": cert_id,
+                "ruk": ruk,
             },
             delimiter=",",
         )
@@ -1651,6 +1731,7 @@ class _Binder(Environment):
         cert_key: str,
         cert: str,
         intermediate: str,
+        ruk: str = None,
     ):
         return self._get(
             "BindSSL",
@@ -1659,6 +1740,7 @@ class _Binder(Environment):
                 "cert_key": cert_key,
                 "cert": cert,
                 "intermediate": intermediate,
+                "ruk": ruk,
             },
         )
 
@@ -1668,6 +1750,7 @@ class _Binder(Environment):
         cert_id: int,
         entry_point: str = None,
         ext_domains: list[str] = None,
+        ruk: str = None,
     ):
         """
         param cert_id: unique identifier of the SSL certificate.
@@ -1681,15 +1764,13 @@ class _Binder(Environment):
                 "certId": cert_id,
                 "entryPoint": entry_point,
                 "extDomains": ext_domains,
+                "ruk": ruk,
             },
             delimiter=",",
         )
 
     def CheckDomain(
-        self,
-        env_name: str,
-        domain: str,
-        region: str = None,
+        self, env_name: str, domain: str, region: str = None, ruk: str = None
     ):
         """
         param domain: domain name to be checked.
@@ -1701,14 +1782,11 @@ class _Binder(Environment):
                 "envName": env_name,
                 "domain": domain,
                 "region": region,
+                "ruk": ruk,
             },
         )
 
-    def CheckExtDomain(
-        self,
-        env_name: str,
-        extdomains: str,
-    ):
+    def CheckExtDomain(self, env_name: str, extdomains: str, ruk: str = None):
         """
         param extdomains: external domain name to be checked.
         """
@@ -1717,24 +1795,20 @@ class _Binder(Environment):
             params={
                 "envName": env_name,
                 "extdomains": extdomains,
+                "ruk": ruk,
             },
         )
 
-    def DeleteSSL(
-        self,
-        env_name: str,
-    ):
+    def DeleteSSL(self, env_name: str, ruk: str = None):
         return self._get(
             "DeleteSSL",
-            params={"envName": env_name},
+            params={
+                "envName": env_name,
+                "ruk": ruk,
+            },
         )
 
-    def DetachExtIp(
-        self,
-        env_name: str,
-        nodeid: int,
-        ip: str,
-    ):
+    def DetachExtIp(self, env_name: str, nodeid: int, ip: str, ruk: str = None):
         """
         param nodeid: unique identifier of the target node (container).
         param ip: IP address that should be removed from the node.
@@ -1745,17 +1819,16 @@ class _Binder(Environment):
                 "envName": env_name,
                 "nodeid": nodeid,
                 "ip": ip,
+                "ruk": ruk,
             },
         )
 
-    def DisableSSL(
-        self,
-        env_name: str,
-    ):
+    def DisableSSL(self, env_name: str, ruk: str = None):
         return self._get(
             "DisableSSL",
             params={
                 "envName": env_name,
+                "ruk": ruk,
             },
         )
 
@@ -1766,6 +1839,7 @@ class _Binder(Environment):
         key: str = None,
         cert: str = None,
         interm: str = None,
+        ruk: str = None,
     ):
         """
         param id: unique identifier of the target SSL certificate.
@@ -1781,14 +1855,11 @@ class _Binder(Environment):
                 "key": key,
                 "cert": cert,
                 "interm": interm,
+                "ruk": ruk,
             },
         )
 
-    def GetDomainInfo(
-        self,
-        env_name: str,
-        domain: str,
-    ):
+    def GetDomainInfo(self, env_name: str, domain: str, ruk: str = None):
         """
         Returns environment appid if environment found by domain.
 
@@ -1799,6 +1870,7 @@ class _Binder(Environment):
             params={
                 "envName": env_name,
                 "domain": domain,
+                "ruk": ruk,
             },
         )
 
@@ -1808,6 +1880,7 @@ class _Binder(Environment):
         node_group: str = None,
         node_id: int = None,
         in_short: bool = None,
+        ruk: str = None,
     ):
         """
         param node_group: unique identifier of the target node group (layer) for filtering, e.g. "cp" for the default application server layer.
@@ -1821,24 +1894,41 @@ class _Binder(Environment):
                 "nodeGroup": node_group,
                 "nodeId": node_id,
                 "inShort": in_short,
+                "ruk": ruk,
             },
         )
 
-    def GetExtDomains(self, env_name: str):
-        return self._get("GetExtDomains", params={"envName": env_name})
+    def GetExtDomains(self, env_name: str, ruk: str = None):
+        return self._get(
+            "GetExtDomains",
+            params={
+                "envName": env_name,
+                "ruk": ruk,
+            },
+        )
 
-    def GetSSL(self, env_name: str):
-        return self._get("GetSSL", params={"envName": env_name})
+    def GetSSL(self, env_name: str, ruk: str = None):
+        return self._get(
+            "GetSSL",
+            params={
+                "envName": env_name,
+                "ruk": ruk,
+            },
+        )
 
-    def GetSSLCerts(self, env_name: str, ids: list[str] = None):
+    def GetSSLCerts(self, env_name: str, ids: list[str] = None, ruk: str = None):
         return self._get(
             "GetSSLCerts",
-            params={"envName": env_name, "ids": ids},
+            params={
+                "envName": env_name,
+                "ids": ids,
+                "ruk": ruk,
+            },
             delimiter=",",
         )
 
     def ManageNodeDnsState(
-        self, env_name: str, node_id: int = None, enabled: bool = None
+        self, env_name: str, node_id: int = None, enabled: bool = None, ruk: str = None
     ):
         """
         param env_name: target environment name.
@@ -1851,6 +1941,7 @@ class _Binder(Environment):
                 "envName": env_name,
                 "nodeId": node_id,
                 "enabled": enabled,
+                "ruk": ruk,
             },
         )
 
@@ -1860,6 +1951,7 @@ class _Binder(Environment):
         source_node_id: int,
         target_node_id: int,
         ips: list[str] = None,
+        ruk: str = None,
     ):
         """
         param env_name: source environment name.
@@ -1874,6 +1966,7 @@ class _Binder(Environment):
                 "sourceNodeId": source_node_id,
                 "targetNodeId": target_node_id,
                 "ips": ips,
+                "ruk": ruk,
             },
             delimiter=",",
         )
@@ -1884,6 +1977,7 @@ class _Binder(Environment):
         domains: list[str] = None,
         node_group: str = None,
         node_id: int = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -1898,15 +1992,12 @@ class _Binder(Environment):
                 "domains": domains,
                 "nodeGroup": node_group,
                 "node_id": node_id,
+                "ruk": ruk,
             },
             delimiter=",",
         )
 
-    def RemoveExtDomains(
-        self,
-        env_name: str,
-        extdomain: str,
-    ):
+    def RemoveExtDomains(self, env_name: str, extdomain: str, ruk: str = None):
         """
         param env_name: target environment name.
         param extdomain: external domain name to be detached.
@@ -1916,13 +2007,11 @@ class _Binder(Environment):
             params={
                 "envName": env_name,
                 "extdomain": extdomain,
+                "ruk": ruk,
             },
         )
 
-    def RemoveSSL(
-        self,
-        env_name: str,
-    ):
+    def RemoveSSL(self, env_name: str, ruk: str = None):
         """
         param env_name: target environment name.
         """
@@ -1930,14 +2019,11 @@ class _Binder(Environment):
             "RemoveSSL",
             params={
                 "envName": env_name,
+                "ruk": ruk,
             },
         )
 
-    def RemoveSSLCerts(
-        self,
-        env_name: str,
-        ids: list[str] = None,
-    ):
+    def RemoveSSLCerts(self, env_name: str, ids: list[str] = None, ruk: str = None):
         """
         param env_name: target environment name.
         param ids: a comma-separated list of certificate IDs (e.g. id1,id2,id3); provide "*" to remove all certificates.
@@ -1947,6 +2033,7 @@ class _Binder(Environment):
             params={
                 "envName": env_name,
                 "ids": ids,
+                "ruk": ruk,
             },
             delimiter=",",
         )
@@ -1958,6 +2045,7 @@ class _Binder(Environment):
         count: int,
         node_group: str = None,
         node_id: int = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -1974,14 +2062,11 @@ class _Binder(Environment):
                 "count": count,
                 "nodeGroup": node_group,
                 "node_id": node_id,
+                "ruk": ruk,
             },
         )
 
-    def SwapExtDomains(
-        self,
-        env_name: str,
-        targetappid: str,
-    ):
+    def SwapExtDomains(self, env_name: str, targetappid: str, ruk: str = None):
         """
         param env_name: target environment name.
         param targetappid: Target (second) environment name.
@@ -1991,6 +2076,7 @@ class _Binder(Environment):
             params={
                 "envName": env_name,
                 "targetappid": targetappid,
+                "ruk": ruk,
             },
         )
 
@@ -2001,6 +2087,7 @@ class _Binder(Environment):
         target_node_id: int,
         source_ip: str = None,
         target_ip: str = None,
+        ruk: str = None,
     ):
         """
         param env_name: source environment name.
@@ -2017,13 +2104,12 @@ class _Binder(Environment):
                 "targetNodeId": target_node_id,
                 "sourceIp": source_ip,
                 "targetIp": target_ip,
+                "ruk": ruk,
             },
         )
 
     def UnbindSSLCert(
-        self,
-        env_name: str,
-        extdomains: list[str] = None,
+        self, env_name: str, extdomains: list[str] = None, ruk: str = None
     ):
         """
         param env_name: target environment name.
@@ -2034,6 +2120,7 @@ class _Binder(Environment):
             params={
                 "envName": env_name,
                 "extDomains": extdomains,
+                "ruk": ruk,
             },
             delimiter=",",
         )
@@ -2051,6 +2138,7 @@ class _Control(Environment):
         env_name: str,
         backend_node_id: int,
         balancer_node_id: int,
+        ruk: str = None,
     ):
         return self._get(
             "AddBackend",
@@ -2058,6 +2146,7 @@ class _Control(Environment):
                 "envName": env_name,
                 "backendNodeId": backend_node_id,
                 "balancerNodeId": balancer_node_id,
+                "ruk": ruk,
             },
         )
 
@@ -2066,6 +2155,7 @@ class _Control(Environment):
         env_name: str,
         backend_node_id: str,
         balancer_node_id: str,
+        ruk: str = None,
     ):
         return self._get(
             "AddBackends",
@@ -2073,6 +2163,7 @@ class _Control(Environment):
                 "envName": env_name,
                 "backendNodeId": backend_node_id,
                 "balancerNodeId": balancer_node_id,
+                "ruk": ruk,
             },
         )
 
@@ -2093,6 +2184,7 @@ class _Control(Environment):
         exp_ipv6_count: int = None,
         exp_ip_count: int = None,
         node_group_data: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "AddBalancerNode",
@@ -2112,6 +2204,7 @@ class _Control(Environment):
                 "extIpv6Count": exp_ipv6_count,
                 "extIpCount": exp_ip_count,
                 "nodeGroupData": node_group_data,
+                "ruk": ruk,
             },
         )
 
@@ -2134,6 +2227,7 @@ class _Control(Environment):
         exp_ip_count: int = None,
         node_group_data: str = None,
         disk_limit: int = None,
+        ruk: str = None,
     ):
         return self._get(
             "AddBuildNode",
@@ -2155,6 +2249,7 @@ class _Control(Environment):
                 "extIpCount": exp_ip_count,
                 "nodeGroupData": node_group_data,
                 "diskLimit": disk_limit,
+                "ruk": ruk,
             },
         )
 
@@ -2174,6 +2269,7 @@ class _Control(Environment):
         exp_ipv6_count: int = None,
         exp_ip_count: int = None,
         node_group_data: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "AddCacheNode",
@@ -2192,6 +2288,7 @@ class _Control(Environment):
                 "expIpv6Count": exp_ipv6_count,
                 "expIpCount": exp_ip_count,
                 "nodeGroupData": node_group_data,
+                "ruk": ruk,
             },
         )
 
@@ -2214,6 +2311,7 @@ class _Control(Environment):
         exp_ipv6_count: int = None,
         exp_ip_count: int = None,
         node_group_data: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "AddComputeNode",
@@ -2235,6 +2333,7 @@ class _Control(Environment):
                 "expIpv6Count": exp_ipv6_count,
                 "expIpCount": exp_ip_count,
                 "nodeGroupData": node_group_data,
+                "ruk": ruk,
             },
         )
 
@@ -2244,6 +2343,7 @@ class _Control(Environment):
         vars: dict,
         node_group: str = None,
         node_id: int = None,
+        ruk: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -2258,14 +2358,12 @@ class _Control(Environment):
                 "vars": vars,
                 "nodeGroup": node_group,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
     def AddContainerVolume(
-        self,
-        env_name: str,
-        node_id: int,
-        path: str,
+        self, env_name: str, node_id: int, path: str, ruk: str = None
     ):
         return self._get(
             "AddContainerVolume",
@@ -2273,14 +2371,12 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeId": node_id,
                 "path": path,
+                "ruk": ruk,
             },
         )
 
     def AddContainerVolumeByGroup(
-        self,
-        env_name: str,
-        node_group: str,
-        path: str,
+        self, env_name: str, node_group: str, path: str, ruk: str = None
     ):
         return self._get(
             "AddContainerVolumeByGroup",
@@ -2288,6 +2384,7 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeGroup": node_group,
                 "path": path,
+                "ruk": ruk,
             },
         )
 
@@ -2297,6 +2394,7 @@ class _Control(Environment):
         volumes: str,
         node_group: str = None,
         node_id: int = None,
+        ruk: str = None,
     ):
         """
         :param env_name: target environment name
@@ -2311,6 +2409,7 @@ class _Control(Environment):
                 "volumes": volumes,
                 "nodeGroup": node_group,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
@@ -2321,6 +2420,7 @@ class _Control(Environment):
         file_name: str,
         type: str,
         node_group: str = None,
+        ruk: str = None,
     ):
         """
         :param env_name: target environment name
@@ -2334,6 +2434,7 @@ class _Control(Environment):
                 "fileName": file_name,
                 "type": type,
                 "nodeGroup": node_group,
+                "ruk": ruk,
             },
         )
 
@@ -2355,6 +2456,7 @@ class _Control(Environment):
         exp_ipv6_count: int = None,
         exp_ip_count: int = None,
         node_group_data: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "AddDBNode",
@@ -2375,6 +2477,7 @@ class _Control(Environment):
                 "expIpv6Count": exp_ipv6_count,
                 "expIpCount": exp_ip_count,
                 "nodeGroupData": node_group_data,
+                "ruk": ruk,
             },
         )
 
@@ -2395,6 +2498,7 @@ class _Control(Environment):
         exp_ipv6_count: int = None,
         exp_ip_count: int = None,
         node_group_data: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "AddDockerNode",
@@ -2414,29 +2518,32 @@ class _Control(Environment):
                 "expIpv6Count": exp_ipv6_count,
                 "expIpCount": exp_ip_count,
                 "nodeGroupData": node_group_data,
+                "ruk": ruk,
             },
         )
 
-    def AddDockerVolume(
-        self,
-        env_name: str,
-        node_id: int,
-        path: str,
-    ):
+    def AddDockerVolume(self, env_name: str, node_id: int, path: str, ruk: str = None):
         return self._get(
             "AddDockerVolume",
-            params={"envName": env_name, "nodeId": node_id, "path": path},
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "path": path,
+                "ruk": ruk,
+            },
         )
 
     def AddDockerVolumeByGroup(
-        self,
-        env_name: str,
-        node_group: int,
-        path: str,
+        self, env_name: str, node_group: int, path: str, ruk: str = None
     ):
         return self._get(
             "AddDockerVolumeByGroup",
-            params={"envName": env_name, "nodeGroup": node_group, "path": path},
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "path": path,
+                "ruk": ruk,
+            },
         )
 
     def AddEndpoint(
@@ -2446,6 +2553,7 @@ class _Control(Environment):
         private_port: int,
         protocol: str,
         name: str,
+        ruk: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -2462,14 +2570,11 @@ class _Control(Environment):
                 "privatePort": private_port,
                 "protocol": protocol,
                 "name": name,
+                "ruk": ruk,
             },
         )
 
-    def AddEnvPolicy(
-        self,
-        target_app_id: str,
-        policy: str,
-    ):
+    def AddEnvPolicy(self, target_app_id: str, policy: str, ruk: str = None):
         """
         :param target_app_id: target application identifier of the environment for adding policy.
         :param policy: a comma-separated list of policy. For example: "policy1,policy2".
@@ -2479,10 +2584,11 @@ class _Control(Environment):
             params={
                 "targetAppId": target_app_id,
                 "policy": policy,
+                "ruk": ruk,
             },
         )
 
-    def AddEnvProperty(self, properties: str):
+    def AddEnvProperty(self, properties: str, ruk: str = None):
         """
         :param properties: JSON object with environment properties. For example: {"customProperty1":"value1","customProperty2":"value2"}
         """
@@ -2490,6 +2596,7 @@ class _Control(Environment):
             "AddEnvProperty",
             params={
                 "properties": properties,
+                "ruk": ruk,
             },
         )
 
@@ -2510,6 +2617,7 @@ class _Control(Environment):
         exp_ipv6_count: int = None,
         exp_ip_count: int = None,
         node_group_data: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "AddExtraNode",
@@ -2529,6 +2637,7 @@ class _Control(Environment):
                 "expIpv6Count": exp_ipv6_count,
                 "expIpCount": exp_ip_count,
                 "nodeGroupData": node_group_data,
+                "ruk": ruk,
             },
         )
 
@@ -2552,6 +2661,7 @@ class _Control(Environment):
         exit_ipv6: int = None,
         node_group_data: str = None,
         options: str = None,
+        ruk: str = None,
     ):
         """
         :param env_name: name of the selected environment
@@ -2590,6 +2700,7 @@ class _Control(Environment):
                 "extipv6": exit_ipv6,
                 "nodeGroupData": node_group_data,
                 "options": options,
+                "ruk": ruk,
             },
         )
 
@@ -2601,6 +2712,7 @@ class _Control(Environment):
         dst_port: int,
         protocol: str,
         comments: str = None,
+        ruk: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -2619,6 +2731,7 @@ class _Control(Environment):
                 "dstPort": dst_port,
                 "protocol": protocol,
                 "comments": comments,
+                "ruk": ruk,
             },
         )
 
@@ -2639,6 +2752,7 @@ class _Control(Environment):
         ext_ipv6_count: int = None,
         ext_ip_count: int = None,
         node_group_data: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "AddStorageNode",
@@ -2658,6 +2772,7 @@ class _Control(Environment):
                 "extIpv6Count": ext_ipv6_count,
                 "extIpCount": ext_ip_count,
                 "nodeGroupData": node_group_data,
+                "ruk": ruk,
             },
         )
 
@@ -2679,6 +2794,7 @@ class _Control(Environment):
         ext_ipv6_count: int = None,
         ext_ip_count: int = None,
         node_group_data: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "AddVdsNode",
@@ -2699,6 +2815,7 @@ class _Control(Environment):
                 "extIpv6Count": ext_ipv6_count,
                 "extIpCount": ext_ip_count,
                 "nodeGroupData": node_group_data,
+                "ruk": ruk,
             },
         )
 
@@ -2715,6 +2832,7 @@ class _Control(Environment):
         ext_ip_count: int = None,
         node_group_data: str = None,
         password: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "AddVmNode",
@@ -2730,29 +2848,22 @@ class _Control(Environment):
                 "extIpCount": ext_ip_count,
                 "nodeGroupData": node_group_data,
                 "password": password,
+                "ruk": ruk,
             },
         )
 
-    def AppendNodes(
-        self,
-        env_name: str,
-        count: int,
-        node_type: str,
-    ):
+    def AppendNodes(self, env_name: str, count: int, node_type: str, ruk: str = None):
         return self._get(
             "AppendNodes",
             params={
                 "envName": env_name,
                 "count": count,
                 "nodeType": node_type,
+                "ruk": ruk,
             },
         )
 
-    def ApplyEnvProperty(
-        self,
-        env_name: str,
-        properties: str,
-    ):
+    def ApplyEnvProperty(self, env_name: str, properties: str, ruk: str = None):
         """
         :param env_name: target environment name.
         :param properties: JSON object with environment properties. For example: {"customProperty1":"value1","customProperty2":"value2"}
@@ -2762,14 +2873,12 @@ class _Control(Environment):
             params={
                 "envName": env_name,
                 "properties": properties,
+                "ruk": ruk,
             },
         )
 
     def ApplyNodeGroupData(
-        self,
-        env_name: str,
-        node_group_data: str,
-        data: str,
+        self, env_name: str, node_group_data: str, data: str, ruk: str = None
     ):
         return self._get(
             "ApplyNodeGroupData",
@@ -2777,6 +2886,7 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeGroupData": node_group_data,
                 "data": data,
+                "ruk": ruk,
             },
         )
 
@@ -2788,6 +2898,7 @@ class _Control(Environment):
         action: str = None,
         password: str = None,
         node_group: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "ApplySoftwarePackageAction",
@@ -2798,42 +2909,49 @@ class _Control(Environment):
                 "action": action,
                 "password": password,
                 "nodeGroup": node_group,
+                "ruk": ruk,
             },
         )
 
-    def AttachEnvGroup(
-        self,
-        env_name: str,
-        env_group_name: str,
-    ):
+    def AttachEnvGroup(self, env_name: str, env_group_name: str, ruk: str = None):
         return self._get(
             "AttachEnvGroup",
             params={
                 "envName": env_name,
                 "envGroup": env_group_name,
+                "ruk": ruk,
             },
         )
 
-    def BuildCluster(
-        self,
-        env_name: str,
-        node_group: str,
-    ):
+    def BuildCluster(self, env_name: str, node_group: str, ruk: str = None):
         return self._get(
-            "BuildCluster", params={"envName": env_name, "nodeGroup": node_group}
+            "BuildCluster",
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "ruk": ruk,
+            },
         )
 
-    def CancelTransferRequest(self):
-        return self._get("CancelTransferRequest", params={})
+    def CancelTransferRequest(self, ruk: str = None):
+        return self._get(
+            "CancelTransferRequest",
+            params={
+                "ruk": ruk,
+            },
+        )
 
-    def ChangeLimits(self, env_name: str):
-        return self._get("ChangeLimits", params={"envName": env_name})
+    def ChangeLimits(self, env_name: str, ruk: str = None):
+        return self._get(
+            "ChangeLimits",
+            params={
+                "envName": env_name,
+                "ruk": ruk,
+            },
+        )
 
     def ChangeLimitsInner(
-        self,
-        env_name: str,
-        uid: int,
-        limit_type: str = None,
+        self, env_name: str, uid: int, limit_type: str = None, ruk: str = None
     ):
         return self._get(
             "ChangeLimitsInner",
@@ -2841,11 +2959,17 @@ class _Control(Environment):
                 "envName": env_name,
                 "uid": uid,
                 "limitType": limit_type,
+                "ruk": ruk,
             },
         )
 
     def ChangeTopology(
-        self, env_name: str, env: dict, nodes: dict, action_key: str = None
+        self,
+        env_name: str,
+        env: dict,
+        nodes: dict,
+        action_key: str = None,
+        ruk: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -2860,14 +2984,12 @@ class _Control(Environment):
                 "env": env,
                 "nodes": nodes,
                 "actionkey": action_key,
+                "ruk": ruk,
             },
         )
 
     def CheckDependencies(
-        self,
-        env_name: str,
-        node_id: int = None,
-        filter: str = None,
+        self, env_name: str, node_id: int = None, filter: str = None, ruk: str = None
     ):
         return self._get(
             "CheckDependencies",
@@ -2875,6 +2997,7 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeId": node_id,
                 "filter": filter,
+                "ruk": ruk,
             },
         )
 
@@ -2883,6 +3006,7 @@ class _Control(Environment):
         exp_ipv6: int,
         exp_ipv4: int = None,
         hardware_node_group: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "CheckExtIpCount",
@@ -2890,13 +3014,12 @@ class _Control(Environment):
                 "expIpv6": exp_ipv6,
                 "expIpv4": exp_ipv4,
                 "hardwareNodeGroup": hardware_node_group,
+                "ruk": ruk,
             },
         )
 
     def CheckMigrationPossibility(
-        self,
-        env_name: str,
-        hardware_node_group: str = None,
+        self, env_name: str, hardware_node_group: str = None, ruk: str = None
     ):
         """
         :param env_name: target environment name.
@@ -2907,10 +3030,11 @@ class _Control(Environment):
             params={
                 "envName": env_name,
                 "hardwareNodeGroup": hardware_node_group,
+                "ruk": ruk,
             },
         )
 
-    def ClearLog(self, env_name: str, node_id: int, path: str):
+    def ClearLog(self, env_name: str, node_id: int, path: str, ruk: str = None):
         """
         :param env_name: target environment name.
         :param node_id: unique identifier of the target node (container).
@@ -2922,6 +3046,7 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeId": node_id,
                 "path": path,
+                "ruk": ruk,
             },
         )
 
@@ -2930,6 +3055,7 @@ class _Control(Environment):
         src_env_name: str,
         dit_env_name: str,
         use_external_mounts: bool = None,
+        ruk: str = None,
     ):
         """
         :param src_env_name: source environment name (one that is going to be cloned).
@@ -2942,6 +3068,7 @@ class _Control(Environment):
                 "srcEnvName": src_env_name,
                 "ditEnvName": dit_env_name,
                 "useExternalMounts": use_external_mounts,
+                "ruk": ruk,
             },
         )
 
@@ -2951,6 +3078,7 @@ class _Control(Environment):
         count: int,
         node_group: str,
         node_id: int = None,
+        ruk: str = None,
     ):
         return self._get(
             "CloneNode",
@@ -2959,10 +3087,11 @@ class _Control(Environment):
                 "count": count,
                 "nodeGroup": node_group,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
-    def ConfirmTransferRequest(self, key: str):
+    def ConfirmTransferRequest(self, key: str, ruk: str = None):
         """
         :param key: disposable confirmation key
         """
@@ -2970,6 +3099,7 @@ class _Control(Environment):
             "ConfirmTransferRequest",
             params={
                 "key": key,
+                "ruk": ruk,
             },
         )
 
@@ -2980,6 +3110,7 @@ class _Control(Environment):
         owner_uid: int = None,
         hardware_node_group: str = None,
         env_groups: str = None,
+        ruk: str = None,
     ):
         """
         :param env_name: domain of the environment
@@ -2994,6 +3125,7 @@ class _Control(Environment):
                 "ownerUid": owner_uid,
                 "hardwareNodeGroups": hardware_node_group,
                 "envGroups": env_groups,
+                "ruk": ruk,
             },
         )
 
@@ -3004,6 +3136,7 @@ class _Control(Environment):
         action_key: str = None,
         owner_uid: int = None,
         env_groups: str = None,
+        ruk: str = None,
     ):
         """
         :param env: JSON object with environment settings:
@@ -3020,14 +3153,11 @@ class _Control(Environment):
                 "actionKey": action_key,
                 "ownerUid": owner_uid,
                 "envGroups": env_groups,
+                "ruk": ruk,
             },
         )
 
-    def DeleteEnv(
-        self,
-        env_name: str,
-        password: str = None,
-    ):
+    def DeleteEnv(self, env_name: str, password: str = None, ruk: str = None):
         """
         :param env_name: target environment name.
         :param password: current user password or environment name to confirm environment deletion (depending on the 'environment.delete.confirm.type' quota).
@@ -3037,14 +3167,11 @@ class _Control(Environment):
             params={
                 "envName": env_name,
                 "password": password,
+                "ruk": ruk,
             },
         )
 
-    def DeleteExportedFiles(
-        self,
-        env_name: str,
-        file_name: str,
-    ):
+    def DeleteExportedFiles(self, env_name: str, file_name: str, ruk: str = None):
         """
         :param env_name: application identifier of the environment
         :param file_name: settings for export
@@ -3054,6 +3181,7 @@ class _Control(Environment):
             params={
                 "envName": env_name,
                 "fileName": file_name,
+                "ruk": ruk,
             },
         )
 
@@ -3068,6 +3196,7 @@ class _Control(Environment):
         node_group: str = None,
         hooks: str = None,
         is_sequential: bool = None,
+        ruk: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -3092,14 +3221,11 @@ class _Control(Environment):
                 "nodeGroup": node_group,
                 "hooks": hooks,
                 "isSequential": is_sequential,
+                "ruk": ruk,
             },
         )
 
-    def DetachEnvGroup(
-        self,
-        env_name: str,
-        env_group: str,
-    ):
+    def DetachEnvGroup(self, env_name: str, env_group: str, ruk: str = None):
         """
         :param env_name: target environment name.
         :param env_group: target group name or JSON array of group names.
@@ -3109,19 +3235,17 @@ class _Control(Environment):
             params={
                 "envName": env_name,
                 "envGroup": env_group,
+                "ruk": ruk,
             },
         )
 
-    def DisableReplication(
-        self,
-        env_name: str,
-        node_group: str,
-    ):
+    def DisableReplication(self, env_name: str, node_group: str, ruk: str = None):
         return self._get(
             "DisableReplication",
             params={
                 "envName": env_name,
                 "nodeGroup": node_group,
+                "ruk": ruk,
             },
         )
 
@@ -3132,6 +3256,7 @@ class _Control(Environment):
         name: str,
         private_port: int,
         protocol: str,
+        ruk: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -3148,14 +3273,11 @@ class _Control(Environment):
                 "name": name,
                 "privatePort": private_port,
                 "protocol": protocol,
+                "ruk": ruk,
             },
         )
 
-    def EditEnvSettings(
-        self,
-        env_name: str,
-        settings: dict,
-    ):
+    def EditEnvSettings(self, env_name: str, settings: dict, ruk: str = None):
         """
         :param settings: {"engine":string,"sslstate":boolean}
         """
@@ -3164,14 +3286,11 @@ class _Control(Environment):
             params={
                 "envName": env_name,
                 "settings": settings,
+                "ruk": ruk,
             },
         )
 
-    def EditNodeGroup(
-        self,
-        env_name: str,
-        node_group: dict,
-    ):
+    def EditNodeGroup(self, env_name: str, node_group: dict, ruk: str = None):
         """
         :param env_name: target environment name.
         :param node_group: JSON object with node group (layer) settings:
@@ -3181,14 +3300,12 @@ class _Control(Environment):
             params={
                 "envName": env_name,
                 "nodeGroup": node_group,
+                "ruk": ruk,
             },
         )
 
     def EditRegistryCredentials(
-        self,
-        filter: dict,
-        user: str = None,
-        password: str = None,
+        self, filter: dict, user: str = None, password: str = None, ruk: str = None
     ):
         """
         :param filter: JSON object to list parameters that need to be updated:
@@ -3201,6 +3318,7 @@ class _Control(Environment):
                 "filter": filter,
                 "user": user,
                 "password": password,
+                "ruk": ruk,
             },
         )
 
@@ -3210,6 +3328,7 @@ class _Control(Environment):
         node_type: str,
         command_list: list[dict],
         say_yes: bool = True,
+        ruk: str = None,
     ):
         return self._get(
             "ExecCmd",
@@ -3218,6 +3337,7 @@ class _Control(Environment):
                 "nodeType": node_type,
                 "commandList": command_list,
                 "sayYes": say_yes,
+                "ruk": ruk,
             },
         )
 
@@ -3228,6 +3348,7 @@ class _Control(Environment):
         command_list: list[dict],
         say_yes: bool = True,
         asynchronous: bool = False,
+        ruk: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -3244,6 +3365,7 @@ class _Control(Environment):
                 "commandList": command_list,
                 "sayYes": say_yes,
                 "async": asynchronous,
+                "ruk": ruk,
             },
         )
 
@@ -3253,6 +3375,7 @@ class _Control(Environment):
         node_id: int,
         command_list: list[dict],
         say_yes: bool = True,
+        ruk: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -3267,6 +3390,7 @@ class _Control(Environment):
                 "nodeId": node_id,
                 "commandList": command_list,
                 "sayYes": say_yes,
+                "ruk": ruk,
             },
         )
 
@@ -3276,6 +3400,7 @@ class _Control(Environment):
         node_type: str,
         command_list: list[dict],
         say_yes: bool = True,
+        ruk: str = None,
     ):
         return self._get(
             "ExecCmdByType",
@@ -3284,6 +3409,7 @@ class _Control(Environment):
                 "nodeType": node_type,
                 "commandList": command_list,
                 "sayYes": say_yes,
+                "ruk": ruk,
             },
         )
 
@@ -3298,6 +3424,7 @@ class _Control(Environment):
         node_group: str = None,
         asynchronous: bool = None,
         say_yes: bool = True,
+        ruk: str = None,
     ):
         return self._get(
             "ExecCmdInner",
@@ -3311,23 +3438,21 @@ class _Control(Environment):
                 "nodeGroup": node_group,
                 "async": asynchronous,
                 "sayYes": say_yes,
+                "ruk": ruk,
             },
         )
 
-    def ExecDockerRunCmd(self, env_name: str, node_id: int):
+    def ExecDockerRunCmd(self, env_name: str, node_id: int, ruk: str = None):
         return self._get(
             "ExecDockerRunCmd",
             params={
                 "envName": env_name,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
-    def ExportEnv(
-        self,
-        env_name: str,
-        settings: str,
-    ):
+    def ExportEnv(self, env_name: str, settings: str, ruk: str = None):
         """
         :param env_name: application identifier of the environment
         :param settings: settings for export
@@ -3337,25 +3462,26 @@ class _Control(Environment):
             params={
                 "envName": env_name,
                 "settings": settings,
+                "ruk": ruk,
             },
         )
 
-    def Finish(
-        self,
-        env_name: str,
-    ):
-        return self._get("Finish", params={"envName": env_name})
+    def Finish(self, env_name: str, ruk: str = None):
+        return self._get(
+            "Finish",
+            params={
+                "envName": env_name,
+                "ruk": ruk,
+            },
+        )
 
-    def FireWallStatus(
-        self,
-        env_name: str,
-        node_id: int,
-    ):
+    def FireWallStatus(self, env_name: str, node_id: int, ruk: str = None):
         return self._get(
             "FireWallStatus",
             params={
                 "envName": env_name,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
@@ -3366,6 +3492,7 @@ class _Control(Environment):
         start_time: datetime,
         end_time: datetime,
         checksum: str,
+        ruk: str = None,
     ):
         return self._get(
             "GetActiveEnvs",
@@ -3375,14 +3502,13 @@ class _Control(Environment):
                 "starttime": start_time,
                 "endtime": end_time,
                 "checksum": checksum,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def GetAllSumStatByUid(
-        self,
-        duration: int = None,
-        end_time: datetime = None,
+        self, duration: int = None, end_time: datetime = None, ruk: str = None
     ):
         """
         :param duration: period (in seconds) to show statistics for.
@@ -3393,11 +3519,12 @@ class _Control(Environment):
             params={
                 "duration": duration,
                 "endtime": end_time,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
-    def GetBasicEnvsInfo(self, owner_uid: int = None):
+    def GetBasicEnvsInfo(self, owner_uid: int = None, ruk: str = None):
         """
         :param owner_uid: unique identifier of the target user account.
         """
@@ -3405,10 +3532,11 @@ class _Control(Environment):
             "GetBasicEnvsInfo",
             params={
                 "ownerUid": owner_uid,
+                "ruk": ruk,
             },
         )
 
-    def GetContainerEntryPoint(self, env_name: str, node_id: int):
+    def GetContainerEntryPoint(self, env_name: str, node_id: int, ruk: str = None):
         """
         :param env_name: target environment name.
         :param node_id: unique identifier of the target node (container).
@@ -3418,14 +3546,11 @@ class _Control(Environment):
             params={
                 "envName": env_name,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
-    def GetContainerEnvVars(
-        self,
-        env_name: str,
-        node_id: int,
-    ):
+    def GetContainerEnvVars(self, env_name: str, node_id: int, ruk: str = None):
         """
         :param env_name: target environment name.
         :param node_id: unique identifier of the target node (container).
@@ -3435,13 +3560,12 @@ class _Control(Environment):
             params={
                 "envName": env_name,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
     def GetContainerEnvVarsByGroup(
-        self,
-        env_name: str,
-        node_group: str,
+        self, env_name: str, node_group: str, ruk: str = None
     ):
         """
         :param env_name: target environment name.
@@ -3452,6 +3576,7 @@ class _Control(Environment):
             params={
                 "envName": env_name,
                 "nodeGroup": node_group,
+                "ruk": ruk,
             },
         )
 
@@ -3462,6 +3587,7 @@ class _Control(Environment):
         user_name: str = None,
         password: str = None,
         ignore_format: bool = None,
+        ruk: str = None,
     ):
         """
         :param image: container's Docker image and tag, e.g. "alpine:latest".
@@ -3478,10 +3604,11 @@ class _Control(Environment):
                 "userName": user_name,
                 "password": password,
                 "ignoreFormat": ignore_format,
+                "ruk": ruk,
             },
         )
 
-    def GetContainerNodeTags(self, env_name: str, node_id: int):
+    def GetContainerNodeTags(self, env_name: str, node_id: int, ruk: str = None):
         """
         :params env_name: target environment name.
         :param node_id: unique identifier of the target node (container).
@@ -3491,10 +3618,11 @@ class _Control(Environment):
             params={
                 "envName": env_name,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
-    def GetContainerRunCmd(self, env_name: str, node_id: int):
+    def GetContainerRunCmd(self, env_name: str, node_id: int, ruk: str = None):
         """
         :params env_name: target environment name.
         :param node_id: unique identifier of the target node (container).
@@ -3504,10 +3632,11 @@ class _Control(Environment):
             params={
                 "envName": env_name,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
-    def GetContainerRunConfig(self, env_name: str, node_id: int):
+    def GetContainerRunConfig(self, env_name: str, node_id: int, ruk: str = None):
         """
         :params env_name: target environment name.
         :param node_id: unique identifier of the target node (container).
@@ -3517,6 +3646,7 @@ class _Control(Environment):
             params={
                 "envName": env_name,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
@@ -3526,6 +3656,7 @@ class _Control(Environment):
         registry: str = None,
         user_name: str = None,
         password: str = None,
+        ruk: str = None,
     ):
         """
         :params image: container's Docker image and tag, e.g. "alpine:latest".
@@ -3540,13 +3671,12 @@ class _Control(Environment):
                 "registry": registry,
                 "userName": user_name,
                 "password": password,
+                "ruk": ruk,
             },
         )
 
     def GetContainerVolumesByGroup(
-        self,
-        env_name: str,
-        node_group: str,
+        self, env_name: str, node_group: str, ruk: str = None
     ):
         """
         :params env_name: target environment name.
@@ -3557,14 +3687,11 @@ class _Control(Environment):
             params={
                 "envName": env_name,
                 "nodeGroup": node_group,
+                "ruk": ruk,
             },
         )
 
-    def GetContainerVolumesById(
-        self,
-        env_name: str,
-        node_id: int,
-    ):
+    def GetContainerVolumesById(self, env_name: str, node_id: int, ruk: str = None):
         """
         :params env_name: target environment name.
         :param node_id: unique identifier of the target node (container).
@@ -3574,66 +3701,51 @@ class _Control(Environment):
             params={
                 "envName": env_name,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
-    def GetDockerConfig(
-        self,
-        env_name: str,
-        node_id: int,
-    ):
+    def GetDockerConfig(self, env_name: str, node_id: int, ruk: str = None):
         return self._get(
             "GetDockerConfig",
             params={
                 "envName": env_name,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
-    def GetDockerEntryPoint(
-        self,
-        env_name: str,
-        node_id: int,
-    ):
+    def GetDockerEntryPoint(self, env_name: str, node_id: int, ruk: str = None):
         return self._get(
             "GetDockerEntryPoint",
             params={
                 "envName": env_name,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
-    def GetDockerRunCmd(
-        self,
-        env_name: str,
-        node_id: int,
-    ):
+    def GetDockerRunCmd(self, env_name: str, node_id: int, ruk: str = None):
         return self._get(
             "GetDockerRunCmd",
             params={
                 "envName": env_name,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
-    def GetDomainsList(
-        self,
-        env_name: str,
-        checksum: str,
-    ):
+    def GetDomainsList(self, env_name: str, checksum: str, ruk: str = None):
         return self._get(
             "GetDomainsList",
             params={
                 "envName": env_name,
                 "checksum": checksum,
+                "ruk": ruk,
             },
         )
 
-    def GetEndpoints(
-        self,
-        env_name: str,
-        node_id: int = None,
-    ):
+    def GetEndpoints(self, env_name: str, node_id: int = None, ruk: str = None):
         """
         :param env_name: target environment name.
         :param node_id: unique identifier of the target node (container).
@@ -3643,14 +3755,12 @@ class _Control(Environment):
             params={
                 "envName": env_name,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
             delimiter=",",
         )
 
-    def GetEngineList(
-        self,
-        type: str = None,
-    ):
+    def GetEngineList(self, type: str = None, ruk: str = None):
         """
         :param type: type of the engine (java/php/ruby/js)
         """
@@ -3658,17 +3768,19 @@ class _Control(Environment):
             "GetEngineList",
             params={
                 "type": type,
+                "ruk": ruk,
             },
         )
 
-    def GetEngineTypes(self):
-        return self._get("GetEngineTypes", params={})
+    def GetEngineTypes(self, ruk: str = None):
+        return self._get(
+            "GetEngineTypes",
+            params={
+                "ruk": ruk,
+            },
+        )
 
-    def GetEnvInfo(
-        self,
-        env_name: str,
-        lazy: bool = None,
-    ):
+    def GetEnvInfo(self, env_name: str, lazy: bool = None, ruk: str = None):
         """
         :param env_name: target environment name.
         :param lazy: defines whether to load only the main environment metadata, e.g. name, alias, domain, etc., (true) or all the environment information (false).
@@ -3678,13 +3790,12 @@ class _Control(Environment):
             params={
                 "envName": env_name,
                 "lazy": lazy,
+                "ruk": ruk,
             },
         )
 
     def GetEnvProperty(
-        self,
-        env_name: str,
-        property_keys: list[str] = None,
+        self, env_name: str, property_keys: list[str] = None, ruk: str = None
     ):
         """
         :param env_name: target environment name.
@@ -3695,15 +3806,12 @@ class _Control(Environment):
             params={
                 "envName": env_name,
                 "propertyKeys": property_keys,
+                "ruk": ruk,
             },
             delimiter=",",
         )
 
-    def GetEnvs(
-        self,
-        lazy: bool = None,
-        owner_uid: int = None,
-    ):
+    def GetEnvs(self, lazy: bool = None, owner_uid: int = None, ruk: str = None):
         """
         :param lazy: defines whether to load only the main environment metadata, e.g. name, alias, domain, etc., (true) or all the environment information (false).
         :param owner_uid: unique identifier of the target user account.
@@ -3713,55 +3821,43 @@ class _Control(Environment):
             params={
                 "lazy": lazy,
                 "ownerUid": owner_uid,
+                "ruk": ruk,
             },
         )
 
-    def GetEnvsByCriteria(
-        self,
-        criteria: dict,
-        lazy: bool = None,
-    ):
+    def GetEnvsByCriteria(self, criteria: dict, lazy: bool = None, ruk: str = None):
         return self._get(
             "GetEnvsByCriteria",
             params={
                 "criteria": criteria,
                 "lazy": lazy,
+                "ruk": ruk,
             },
         )
 
-    def GetEnvsInfo(
-        self,
-        env_name: str,
-        target_app_id: str = None,
-    ):
+    def GetEnvsInfo(self, env_name: str, target_app_id: str = None, ruk: str = None):
         return self._get(
             "GetEnvsInfo",
             params={
                 "envName": env_name,
                 "targetAppid": target_app_id,
+                "ruk": ruk,
             },
         )
 
-    def GetLogs(
-        self,
-        env_name: str,
-        node_id: int,
-        path: str = None,
-    ):
+    def GetLogs(self, env_name: str, node_id: int, path: str = None, ruk: str = None):
         return self._get(
             "GetLogs",
             params={
                 "envName": env_name,
                 "nodeId": node_id,
                 "path": path,
+                "ruk": ruk,
             },
         )
 
     def GetLogsList(
-        self,
-        env_name: str,
-        node_id: int,
-        path: str = None,
+        self, env_name: str, node_id: int, path: str = None, ruk: str = None
     ):
         """
         :param env_name: target environment name.
@@ -3774,13 +3870,11 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeId": node_id,
                 "path": path,
+                "ruk": ruk,
             },
         )
 
-    def GetNodeGroups(
-        self,
-        env_name: str,
-    ):
+    def GetNodeGroups(self, env_name: str, ruk: str = None):
         """
         :param env_name: target environment name
         """
@@ -3788,13 +3882,11 @@ class _Control(Environment):
             "GetNodeGroups",
             params={
                 "envName": env_name,
+                "ruk": ruk,
             },
         )
 
-    def GetNodeInfo(
-        self,
-        node_id: str,
-    ):
+    def GetNodeInfo(self, node_id: str, ruk: str = None):
         """
         :param node_id: node identifier
         """
@@ -3802,11 +3894,17 @@ class _Control(Environment):
             "GetNodeInfo",
             params={
                 "GetNodeInfo": node_id,
+                "ruk": ruk,
             },
         )
 
-    def GetNodeMissions(self):
-        return self._get("GetNodeMissions", params={})
+    def GetNodeMissions(self, ruk: str = None):
+        return self._get(
+            "GetNodeMissions",
+            params={
+                "ruk": ruk,
+            },
+        )
 
     def GetNodeSSHKey(
         self,
@@ -3814,6 +3912,7 @@ class _Control(Environment):
         node_id: int,
         uid: int,
         skip_node_type_check: bool = None,
+        ruk: str = None,
     ):
         """
         :param node_id: unique identifier of the software node.
@@ -3826,14 +3925,11 @@ class _Control(Environment):
                 "nodeId": node_id,
                 "uid": uid,
                 "skipNodeTypeCheck": skip_node_type_check,
+                "ruk": ruk,
             },
         )
 
-    def GetNodeTags(
-        self,
-        env_name: str,
-        node_id: int,
-    ):
+    def GetNodeTags(self, env_name: str, node_id: int, ruk: str = None):
         """
         :param env_name: target environment name.
         :param node_id: unique identifier of the target node (container).
@@ -3843,16 +3939,20 @@ class _Control(Environment):
             params={
                 "envName": env_name,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
-    def GetRegions(self):
-        return self._get("GetRegions", params={})
+    def GetRegions(self, ruk: str = None):
+        return self._get(
+            "GetRegions",
+            params={
+                "ruk": ruk,
+            },
+        )
 
     def GetRegionsInner(
-        self,
-        group_name: str,
-        is_enabled: bool = None,
+        self, group_name: str, is_enabled: bool = None, ruk: str = None
     ):
         """
         :param group_name: unique identifier of the target user group.
@@ -3863,14 +3963,11 @@ class _Control(Environment):
             params={
                 "groupName": group_name,
                 "isEnabled": is_enabled,
+                "ruk": ruk,
             },
         )
 
-    def GetRegistryInfo(
-        self,
-        env_name: str,
-        node_group: str,
-    ):
+    def GetRegistryInfo(self, env_name: str, node_group: str, ruk: str = None):
         """
         :param env_name: target environment name.
         :param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
@@ -3880,10 +3977,11 @@ class _Control(Environment):
             params={
                 "envName": env_name,
                 "nodeGroup": node_group,
+                "ruk": ruk,
             },
         )
 
-    def GetSSHAccessInfo(self, node_id: int):
+    def GetSSHAccessInfo(self, node_id: int, ruk: str = None):
         """
         :param node_id: unique identifier of the target node (container).
         """
@@ -3891,10 +3989,11 @@ class _Control(Environment):
             "GetSSHAccessInfo",
             params={
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
-    def GetSharedEnvsByUid(self, uid: int):
+    def GetSharedEnvsByUid(self, uid: int, ruk: str = None):
         """
         :param uid: identifier of the target user
         """
@@ -3902,6 +4001,7 @@ class _Control(Environment):
             "GetSharedEnvsByUid",
             params={
                 "uid": uid,
+                "ruk": ruk,
             },
         )
 
@@ -3910,6 +4010,7 @@ class _Control(Environment):
         env_name: str,
         node_type: str = None,
         node_group: str = None,
+        ruk: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -3922,6 +4023,7 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeType": node_type,
                 "nodeGroup": node_group,
+                "ruk": ruk,
             },
         )
 
@@ -3934,6 +4036,7 @@ class _Control(Environment):
         node_id: int = None,
         node_type: str = None,
         node_group: str = None,
+        ruk: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -3954,15 +4057,13 @@ class _Control(Environment):
                 "nodeid": node_id,
                 "nodetype": node_type,
                 "nodeGroup": node_group,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def GetSumStat(
-        self,
-        env_name: str,
-        duration: int,
-        end_time: datetime = None,
+        self, env_name: str, duration: int, end_time: datetime = None, ruk: str = None
     ):
         """
         :param env_name: target environment name
@@ -3975,15 +4076,12 @@ class _Control(Environment):
                 "envName": env_name,
                 "duration": duration,
                 "endtime": end_time,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
-    def GetTemplateManifest(
-        self,
-        node_type: str,
-        tag: str,
-    ):
+    def GetTemplateManifest(self, node_type: str, tag: str, ruk: str = None):
         """
         :param node_type: unique identifier of the target node type (software stack), e.g. “tomcat11” for the Tomcat 11 stack.
         :param tag: target tag for the template.
@@ -3993,14 +4091,11 @@ class _Control(Environment):
             params={
                 "nodeType": node_type,
                 "tag": tag,
+                "ruk": ruk,
             },
         )
 
-    def GetTemplates(
-        self,
-        type: str = None,
-        owner_uid: int = None,
-    ):
+    def GetTemplates(self, type: str = None, owner_uid: int = None, ruk: str = None):
         """
         :param type: filter the list by the template type (ALL,NATIVE,CARTRIDGE,DOCKERIZED)
         :param owneer_uid: filter the list by the templates available for the specific user.
@@ -4010,17 +4105,20 @@ class _Control(Environment):
             params={
                 "type": type,
                 "ownerUid": owner_uid,
+                "ruk": ruk,
             },
         )
 
-    def GetTransferRequest(self):
-        return self._get("GetTransferRequest", params={})
+    def GetTransferRequest(self, ruk: str = None):
+        return self._get(
+            "GetTransferRequest",
+            params={
+                "ruk": ruk,
+            },
+        )
 
     def InstallPackageByGroup(
-        self,
-        env_name: str,
-        node_group: str,
-        package_name: str,
+        self, env_name: str, node_group: str, package_name: str, ruk: str = None
     ):
         """
         :param env_name: environment name or appid
@@ -4032,14 +4130,12 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeGroup": node_group,
                 "packageName": package_name,
+                "ruk": ruk,
             },
         )
 
     def InstallPackageById(
-        self,
-        env_name: str,
-        package_name: str,
-        node_id: int = None,
+        self, env_name: str, package_name: str, node_id: int = None, ruk: str = None
     ):
         """
         :param env_name: environment name or appid
@@ -4051,6 +4147,7 @@ class _Control(Environment):
                 "envName": env_name,
                 "packageName": package_name,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
@@ -4060,6 +4157,7 @@ class _Control(Environment):
         keyword: str,
         node_type: str = None,
         node_group: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "InstallSoftwarePackage",
@@ -4068,6 +4166,7 @@ class _Control(Environment):
                 "keyword": keyword,
                 "nodeType": node_type,
                 "nodeGroup": node_group,
+                "ruk": ruk,
             },
         )
 
@@ -4079,6 +4178,7 @@ class _Control(Environment):
         alias: str,
         is_auto_restart: bool = None,
         group_alias: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "LinkDockerNodes",
@@ -4089,14 +4189,12 @@ class _Control(Environment):
                 "alias": alias,
                 "isAutoRestart": is_auto_restart,
                 "groupAlias": group_alias,
+                "ruk": ruk,
             },
         )
 
     def LinkNode(
-        self,
-        env_name: str,
-        child_node_id: int,
-        parent_node_id: int,
+        self, env_name: str, child_node_id: int, parent_node_id: int, ruk: str = None
     ):
         return self._get(
             "LinkNode",
@@ -4104,14 +4202,12 @@ class _Control(Environment):
                 "envName": env_name,
                 "childNodeId": child_node_id,
                 "parentNodeId": parent_node_id,
+                "ruk": ruk,
             },
         )
 
     def LinkNodes(
-        self,
-        env_name: str,
-        child_node: str,
-        parent_node: str,
+        self, env_name: str, child_node: str, parent_node: str, ruk: str = None
     ):
         return self._get(
             "LinkNodes",
@@ -4119,14 +4215,11 @@ class _Control(Environment):
                 "envName": env_name,
                 "childNode": child_node,
                 "parentNode": parent_node,
+                "ruk": ruk,
             },
         )
 
-    def ManageEnvAttributes(
-        self,
-        target_app_id: str,
-        attributes: str,
-    ):
+    def ManageEnvAttributes(self, target_app_id: str, attributes: str, ruk: str = None):
         """
         :param target_app_id: target environment name.
         :param attributes: JSON object with required attributes. For example: "{'key1': 'value1', 'key2': null}".
@@ -4136,6 +4229,7 @@ class _Control(Environment):
             params={
                 "targetAppId": target_app_id,
                 "attributes": attributes,
+                "ruk": ruk,
             },
         )
 
@@ -4144,6 +4238,7 @@ class _Control(Environment):
         env_name: str,
         hardware_node_group: str = None,
         is_on_line: bool = None,
+        ruk: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -4156,6 +4251,7 @@ class _Control(Environment):
                 "envName": env_name,
                 "hardwareNodeGroup": hardware_node_group,
                 "isOnLine": is_on_line,
+                "ruk": ruk,
             },
         )
 
@@ -4166,6 +4262,7 @@ class _Control(Environment):
         path: str,
         From: int = None,
         count: int = None,
+        ruk: str = None,
     ):
         """
         :param env_name: target environment name
@@ -4182,6 +4279,7 @@ class _Control(Environment):
                 "path": path,
                 "from": From,
                 "count": count,
+                "ruk": ruk,
             },
         )
 
@@ -4194,6 +4292,7 @@ class _Control(Environment):
         login: str = None,
         password: str = None,
         manage_dns_state: bool = None,
+        ruk: str = None,
     ):
         """
         :param env_name: target environment name
@@ -4214,6 +4313,7 @@ class _Control(Environment):
                 "login": login,
                 "password": password,
                 "manageDNSState": manage_dns_state,
+                "ruk": ruk,
             },
         )
 
@@ -4227,6 +4327,7 @@ class _Control(Environment):
         login: str = None,
         password: str = None,
         manage_dns_state: bool = None,
+        ruk: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -4249,6 +4350,7 @@ class _Control(Environment):
                 "login": login,
                 "password": password,
                 "manageDNSState": manage_dns_state,
+                "ruk": ruk,
             },
         )
 
@@ -4263,6 +4365,7 @@ class _Control(Environment):
         login: str = None,
         password: str = None,
         manage_dns_state: bool = None,
+        ruk: str = None,
     ):
         """
         :params env_name: target environment name.
@@ -4287,14 +4390,12 @@ class _Control(Environment):
                 "login": login,
                 "password": password,
                 "manageDNSState": manage_dns_state,
+                "ruk": ruk,
             },
         )
 
     def RemoveApp(
-        self,
-        env_name: str,
-        context: str,
-        node_group: str = None,
+        self, env_name: str, context: str, node_group: str = None, ruk: str = None
     ):
         """
         :params env_name: target environment name.
@@ -4307,6 +4408,7 @@ class _Control(Environment):
                 "envName": env_name,
                 "context": context,
                 "nodeGroup": node_group,
+                "ruk": ruk,
             },
         )
 
@@ -4316,6 +4418,7 @@ class _Control(Environment):
         vars: list[str],
         node_group: str = None,
         node_id: int = None,
+        ruk: str = None,
     ):
         """
         :params env_name: target environment name.
@@ -4330,14 +4433,12 @@ class _Control(Environment):
                 "vars": vars,
                 "nodeGroup": node_group,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
     def RemoveContainerVolume(
-        self,
-        env_name: str,
-        node_id: int,
-        path: str,
+        self, env_name: str, node_id: int, path: str, ruk: str = None
     ):
         return self._get(
             "RemoveContainerVolume",
@@ -4345,14 +4446,12 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeId": node_id,
                 "path": path,
+                "ruk": ruk,
             },
         )
 
     def RemoveContainerVolumeByGroup(
-        self,
-        env_name: str,
-        node_group: str,
-        path: str,
+        self, env_name: str, node_group: str, path: str, ruk: str = None
     ):
         return self._get(
             "RemoveContainerVolumeByGroup",
@@ -4360,6 +4459,7 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeGroup": node_group,
                 "path": path,
+                "ruk": ruk,
             },
         )
 
@@ -4369,6 +4469,7 @@ class _Control(Environment):
         volumes: str,
         node_group: str = None,
         node_id: int = None,
+        ruk: str = None,
     ):
         """
         :params env_name: target environment name
@@ -4383,36 +4484,37 @@ class _Control(Environment):
                 "volumes": volumes,
                 "nodeGroup": node_group,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
     def RemoveDockerVolume(
-        self,
-        env_name: str,
-        node_id: int,
-        path: str,
+        self, env_name: str, node_id: int, path: str, ruk: str = None
     ):
         return self._get(
             "RemoveDockerVolume",
-            params={"envName": env_name, "nodeId": node_id, "path": path},
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "path": path,
+                "ruk": ruk,
+            },
         )
 
     def RemoveDockerVolumeByGroup(
-        self,
-        env_name: str,
-        node_group: str,
-        path: str,
+        self, env_name: str, node_group: str, path: str, ruk: str = None
     ):
         return self._get(
             "RemoveDockerVolumeByGroup",
-            params={"envName": env_name, "nodeGroup": node_group, "path": path},
+            params={
+                "envName": env_name,
+                "nodeGroup": node_group,
+                "path": path,
+                "ruk": ruk,
+            },
         )
 
-    def RemoveEndpoint(
-        self,
-        env_name: str,
-        id: int,
-    ):
+    def RemoveEndpoint(self, env_name: str, id: int, ruk: str = None):
         """
         :param env_name: target environment name.
         :param id: unique identifier of the target endpoint.
@@ -4422,14 +4524,11 @@ class _Control(Environment):
             params={
                 "envName": env_name,
                 "id": id,
+                "ruk": ruk,
             },
         )
 
-    def RemoveEnvPolicy(
-        self,
-        target_app_id: str,
-        policy: list[str],
-    ):
+    def RemoveEnvPolicy(self, target_app_id: str, policy: list[str], ruk: str = None):
         """
         :param target_app_id: target application identifier of the environment for removing policy.
         :param policy: comma-separated list of policy. For example: "policy1,policy2".
@@ -4439,14 +4538,13 @@ class _Control(Environment):
             params={
                 "targetAppId": target_app_id,
                 "policy": policy,
+                "ruk": ruk,
             },
             delimiter=",",
         )
 
     def RemoveEnvProperty(
-        self,
-        env_name: str,
-        property_keys: list[str],
+        self, env_name: str, property_keys: list[str], ruk: str = None
     ):
         """
         :param env_name: target environment name
@@ -4457,16 +4555,12 @@ class _Control(Environment):
             params={
                 "envName": env_name,
                 "propertyKeys": property_keys,
+                "ruk": ruk,
             },
             delimiter=",",
         )
 
-    def RemoveLog(
-        self,
-        env_name: str,
-        node_id: int,
-        path: str,
-    ):
+    def RemoveLog(self, env_name: str, node_id: int, path: str, ruk: str = None):
         """
         :param env_name: target environment name
         :param node_id: unique identifier of the target node (container).
@@ -4478,15 +4572,17 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeId": node_id,
                 "path": path,
+                "ruk": ruk,
             },
         )
 
-    def RemoveNode(self, env_name: str, node_id: int):
+    def RemoveNode(self, env_name: str, node_id: int, ruk: str = None):
         return self._get(
             "RemoveNode",
             params={
                 "envName": env_name,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
@@ -4496,6 +4592,7 @@ class _Control(Environment):
         old_context: str,
         new_context: str,
         node_group: str = None,
+        ruk: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -4510,17 +4607,22 @@ class _Control(Environment):
                 "oldContext": old_context,
                 "newContext": new_context,
                 "nodeGroup": node_group,
+                "ruk": ruk,
             },
         )
 
-    def ReplicateNodes(self, env_name: str, nodes: str):
-        return self._get("ReplicateNodes", params={"envName": env_name, "nodes": nodes})
+    def ReplicateNodes(self, env_name: str, nodes: str, ruk: str = None):
+        return self._get(
+            "ReplicateNodes",
+            params={
+                "envName": env_name,
+                "nodes": nodes,
+                "ruk": ruk,
+            },
+        )
 
     def ResetContainerPassword(
-        self,
-        env_name: str,
-        node_id: int,
-        password: str = None,
+        self, env_name: str, node_id: int, password: str = None, ruk: str = None
     ):
         return self._get(
             "ResetContainerPassword",
@@ -4528,14 +4630,12 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeId": node_id,
                 "password": password,
+                "ruk": ruk,
             },
         )
 
     def ResetContainerPasswordById(
-        self,
-        env_name: str,
-        node_id: int,
-        password: str = None,
+        self, env_name: str, node_id: int, password: str = None, ruk: str = None
     ):
         return self._get(
             "ResetContainerPasswordById",
@@ -4543,14 +4643,12 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeId": node_id,
                 "password": password,
+                "ruk": ruk,
             },
         )
 
     def ResetContainerPasswordByType(
-        self,
-        env_name: str,
-        node_type: str,
-        password: str = None,
+        self, env_name: str, node_type: str, password: str = None, ruk: str = None
     ):
         return self._get(
             "ResetContainerPasswordByType",
@@ -4558,14 +4656,12 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeType": node_type,
                 "password": password,
+                "ruk": ruk,
             },
         )
 
     def ResetContainersPasswordByGroup(
-        self,
-        env_name: str,
-        node_group: str,
-        password: str = None,
+        self, env_name: str, node_group: str, password: str = None, ruk: str = None
     ):
         return self._get(
             "ResetContainersPasswordByGroup",
@@ -4573,6 +4669,7 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeGroup": node_group,
                 "password": password,
+                "ruk": ruk,
             },
         )
 
@@ -4582,6 +4679,7 @@ class _Control(Environment):
         node_group: str = None,
         node_id: int = None,
         password: str = None,
+        ruk: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -4596,14 +4694,12 @@ class _Control(Environment):
                 "nodeGroup": node_group,
                 "nodeId": node_id,
                 "password": password,
+                "ruk": ruk,
             },
         )
 
     def ResetNodePasswordById(
-        self,
-        env_name: str,
-        node_id: int,
-        password: str = None,
+        self, env_name: str, node_id: int, password: str = None, ruk: str = None
     ):
         return self._get(
             "ResetNodePasswordById",
@@ -4611,14 +4707,12 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeId": node_id,
                 "password": password,
+                "ruk": ruk,
             },
         )
 
     def ResetNodePasswordByType(
-        self,
-        env_name: str,
-        node_type: str,
-        password: str = None,
+        self, env_name: str, node_type: str, password: str = None, ruk: str = None
     ):
         return self._get(
             "ResetNodePasswordByType",
@@ -4626,6 +4720,7 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeType": node_type,
                 "password": password,
+                "ruk": ruk,
             },
         )
 
@@ -4635,6 +4730,7 @@ class _Control(Environment):
         node_group: str = None,
         node_id: int = None,
         password: str = None,
+        ruk: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -4649,6 +4745,7 @@ class _Control(Environment):
                 "nodeGroup": node_group,
                 "nodeId": node_id,
                 "password": password,
+                "ruk": ruk,
             },
         )
 
@@ -4657,6 +4754,7 @@ class _Control(Environment):
         env_name: str,
         node_id: int,
         manage_dns_state: bool = None,
+        ruk: str = None,
     ):
         return self._get(
             "RestartContainer",
@@ -4664,6 +4762,7 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeId": node_id,
                 "manageDNSState": manage_dns_state,
+                "ruk": ruk,
             },
         )
 
@@ -4672,6 +4771,7 @@ class _Control(Environment):
         env_name: str,
         node_id: int,
         manage_dns_state: bool = None,
+        ruk: str = None,
     ):
         return self._get(
             "RestartContainerById",
@@ -4679,6 +4779,7 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeid": node_id,
                 "manageDNSState": manage_dns_state,
+                "ruk": ruk,
             },
         )
 
@@ -4687,6 +4788,7 @@ class _Control(Environment):
         env_name: str,
         node_type: str,
         manage_dns_state: bool = None,
+        ruk: str = None,
     ):
         return self._get(
             "RestartContainerByType",
@@ -4694,6 +4796,7 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeType": node_type,
                 "manageDNSState": manage_dns_state,
+                "ruk": ruk,
             },
         )
 
@@ -4704,6 +4807,7 @@ class _Control(Environment):
         delay: int = None,
         is_sequential: bool = None,
         manage_dns_state: bool = None,
+        ruk: str = None,
     ):
         return self._get(
             "RestartContainersByGroup",
@@ -4713,6 +4817,7 @@ class _Control(Environment):
                 "delay": delay,
                 "isSequential": is_sequential,
                 "manageDNSState": manage_dns_state,
+                "ruk": ruk,
             },
         )
 
@@ -4721,6 +4826,7 @@ class _Control(Environment):
         env_name: str,
         node_id: int,
         manage_dns_state: bool = None,
+        ruk: str = None,
     ):
         return self._get(
             "RestartNodeById",
@@ -4728,6 +4834,7 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeId": node_id,
                 "manageDNSState": manage_dns_state,
+                "ruk": ruk,
             },
         )
 
@@ -4739,6 +4846,7 @@ class _Control(Environment):
         delay: int = None,
         is_sequential: bool = False,
         manage_dns_state: bool = False,
+        ruk: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -4757,6 +4865,7 @@ class _Control(Environment):
                 "delay": delay,
                 "isSequential": is_sequential,
                 "manageDNSState": manage_dns_state,
+                "ruk": ruk,
             },
         )
 
@@ -4767,6 +4876,7 @@ class _Control(Environment):
         delay: int = None,
         is_sequential: bool = None,
         manage_dns_state: bool = None,
+        ruk: str = None,
     ):
         return self._get(
             "RestartNodesByGroup",
@@ -4776,6 +4886,7 @@ class _Control(Environment):
                 "delay": delay,
                 "isSequential": is_sequential,
                 "manageDNSState": manage_dns_state,
+                "ruk": ruk,
             },
         )
 
@@ -4784,6 +4895,7 @@ class _Control(Environment):
         env_name: str,
         node_type: str,
         manage_dns_state: bool = None,
+        ruk: str = None,
     ):
         return self._get(
             "RestartNodesByType",
@@ -4791,6 +4903,7 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeType": node_type,
                 "manageDNSState": manage_dns_state,
+                "ruk": ruk,
             },
         )
 
@@ -4802,6 +4915,7 @@ class _Control(Environment):
         delay: int = None,
         is_sequential: bool = None,
         manage_dns_state: bool = None,
+        ruk: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -4820,6 +4934,7 @@ class _Control(Environment):
                 "delay": delay,
                 "isSequential": is_sequential,
                 "manageDNSState": manage_dns_state,
+                "ruk": ruk,
             },
         )
 
@@ -4831,6 +4946,7 @@ class _Control(Environment):
         password: str,
         dump_url: str,
         user: str = None,
+        ruk: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -4849,25 +4965,20 @@ class _Control(Environment):
                 "password": password,
                 "dumpUrl": dump_url,
                 "user": user,
+                "ruk": ruk,
             },
         )
 
-    def SendEnvCreatedEmail(
-        self,
-        is_import: bool = None,
-    ):
+    def SendEnvCreatedEmail(self, is_import: bool = None, ruk: str = None):
         return self._get(
             "SendEnvCreatedEmail",
             params={
                 "isImport": is_import,
+                "ruk": ruk,
             },
         )
 
-    def SendTransferRequest(
-        self,
-        env_name: str,
-        email: str,
-    ):
+    def SendTransferRequest(self, env_name: str, email: str, ruk: str = None):
         """
         :param env_name: application identifier of the environment
         :param email: email of the user which is going to be an owner
@@ -4877,6 +4988,7 @@ class _Control(Environment):
             params={
                 "envName": env_name,
                 "email": email,
+                "ruk": ruk,
             },
         )
 
@@ -4886,6 +4998,7 @@ class _Control(Environment):
         node_type: str,
         flexible_cloudlets: int,
         fixed_cloudlets: int,
+        ruk: str = None,
     ):
         """
         :param env_name: target environment name
@@ -4900,6 +5013,7 @@ class _Control(Environment):
                 "nodeType": node_type,
                 "flexibleCloudlets": flexible_cloudlets,
                 "fixedCloudlets": fixed_cloudlets,
+                "ruk": ruk,
             },
         )
 
@@ -4910,6 +5024,7 @@ class _Control(Environment):
         flexible_cloudlets: int,
         fixed_cloudlets: int,
         delay: int = None,
+        ruk: str = None,
     ):
         return self._get(
             "SetCloudletsCountByGroup",
@@ -4919,6 +5034,7 @@ class _Control(Environment):
                 "flexibleCloudlets": flexible_cloudlets,
                 "fixedCloudlets": fixed_cloudlets,
                 "delay": delay,
+                "ruk": ruk,
             },
         )
 
@@ -4928,6 +5044,7 @@ class _Control(Environment):
         node_id: int,
         flexible_cloudlets: int,
         fixed_cloudlets: int,
+        ruk: str = None,
     ):
         """
         :param env_name: target environment name
@@ -4942,6 +5059,7 @@ class _Control(Environment):
                 "nodeId": node_id,
                 "flexibleCloudlets": flexible_cloudlets,
                 "fixedCloudlets": fixed_cloudlets,
+                "ruk": ruk,
             },
         )
 
@@ -4951,6 +5069,7 @@ class _Control(Environment):
         node_type: str,
         flexible_cloudlets: int,
         fixed_cloudlets: int,
+        ruk: str = None,
     ):
         return self._get(
             "SetCloudletsCountByType",
@@ -4959,14 +5078,12 @@ class _Control(Environment):
                 "nodeType": node_type,
                 "flexibleCloudlets": flexible_cloudlets,
                 "fixedCloudlets": fixed_cloudlets,
+                "ruk": ruk,
             },
         )
 
     def SetContainerEntryPoint(
-        self,
-        env_name: str,
-        node_id: int,
-        data: str = None,
+        self, env_name: str, node_id: int, data: str = None, ruk: str = None
     ):
         """
         :param env_name: target environment name.
@@ -4979,14 +5096,12 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeId": node_id,
                 "data": data,
+                "ruk": ruk,
             },
         )
 
     def SetContainerEnvVars(
-        self,
-        env_name: str,
-        node_id: int,
-        var: dict,
+        self, env_name: str, node_id: int, var: dict, ruk: str = None
     ):
         """
         :param env_name: target environment name.
@@ -4996,14 +5111,16 @@ class _Control(Environment):
         var = json.dumps(var)
         return self._get(
             "SetContainerEnvVars",
-            params={"envName": env_name, "nodeId": node_id, "vars": var},
+            params={
+                "envName": env_name,
+                "nodeId": node_id,
+                "vars": var,
+                "ruk": ruk,
+            },
         )
 
     def SetContainerEnvVarsByGroup(
-        self,
-        env_name: str,
-        node_group: str,
-        data: dict,
+        self, env_name: str, node_group: str, data: dict, ruk: str = None
     ):
         """
         :param env_name: target environment name
@@ -5018,14 +5135,12 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeGroup": node_group,
                 "data": data,
+                "ruk": ruk,
             },
         )
 
     def SetContainerRunCmd(
-        self,
-        env_name: str,
-        node_id: int,
-        data: str = None,
+        self, env_name: str, node_id: int, data: str = None, ruk: str = None
     ):
         """
         :param env_name: target environment name.
@@ -5038,14 +5153,12 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeId": node_id,
                 "data": data,
+                "ruk": ruk,
             },
         )
 
     def SetDiskLimitByGroup(
-        self,
-        env_name: str,
-        node_group: str,
-        limit: int,
+        self, env_name: str, node_group: str, limit: int, ruk: str = None
     ):
         return self._get(
             "SetDiskLimitByGroup",
@@ -5053,14 +5166,12 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeGroup": node_group,
                 "limit": limit,
+                "ruk": ruk,
             },
         )
 
     def SetDiskLimitById(
-        self,
-        env_name: str,
-        node_id: int,
-        limit: int,
+        self, env_name: str, node_id: int, limit: int, ruk: str = None
     ):
         return self._get(
             "SetDiskLimitById",
@@ -5068,14 +5179,12 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeId": node_id,
                 "limit": limit,
+                "ruk": ruk,
             },
         )
 
     def SetDockerEntryPoint(
-        self,
-        env_name: str,
-        node_id: int,
-        data: str = None,
+        self, env_name: str, node_id: int, data: str = None, ruk: str = None
     ):
         """
         :param data: entry point
@@ -5086,15 +5195,11 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeId": node_id,
                 "data": data,
+                "ruk": ruk,
             },
         )
 
-    def SetDockerEnvVars(
-        self,
-        env_name: str,
-        node_id: int,
-        data: str,
-    ):
+    def SetDockerEnvVars(self, env_name: str, node_id: int, data: str, ruk: str = None):
         """
         :param data: list of container environment variables in json format
         """
@@ -5104,14 +5209,12 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeId": node_id,
                 "data": data,
+                "ruk": ruk,
             },
         )
 
     def SetDockerRunCmd(
-        self,
-        env_name: str,
-        node_id: int,
-        data: str = None,
+        self, env_name: str, node_id: int, data: str = None, ruk: str = None
     ):
         """
         :param data: run command
@@ -5122,14 +5225,12 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeId": node_id,
                 "data": data,
+                "ruk": ruk,
             },
         )
 
     def SetDockerVolumesFrom(
-        self,
-        env_name: str,
-        node_id: int,
-        data: str,
+        self, env_name: str, node_id: int, data: str, ruk: str = None
     ):
         """
         :param data: json array of volumes e.g. [{"readOnly":false,"sourceNodeId":80579}]
@@ -5140,14 +5241,12 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeId": node_id,
                 "data": data,
+                "ruk": ruk,
             },
         )
 
     def SetEngineByGroup(
-        self,
-        env_name: str,
-        node_group: str,
-        engine: str,
+        self, env_name: str, node_group: str, engine: str, ruk: str = None
     ):
         return self._get(
             "SetEngineByGroup",
@@ -5155,13 +5254,12 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeGroup": node_group,
                 "engine": engine,
+                "ruk": ruk,
             },
         )
 
     def SetEnvDisplayName(
-        self,
-        env_name: str,
-        display_name: str = None,
+        self, env_name: str, display_name: str = None, ruk: str = None
     ):
         """
         :param env_name: target environment name.
@@ -5172,19 +5270,17 @@ class _Control(Environment):
             params={
                 "envName": env_name,
                 "displayName": display_name,
+                "ruk": ruk,
             },
         )
 
-    def SetEnvGroup(
-        self,
-        env_name: str,
-        env_group: str,
-    ):
+    def SetEnvGroup(self, env_name: str, env_group: str, ruk: str = None):
         return self._get(
             "SetEnvGroup",
             params={
                 "envName": env_name,
                 "envGroup": env_group,
+                "ruk": ruk,
             },
         )
 
@@ -5193,6 +5289,7 @@ class _Control(Environment):
         env_name: str,
         node_id: int = None,
         display_name: str = None,
+        ruk: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -5205,6 +5302,7 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeId": node_id,
                 "displayName": display_name,
+                "ruk": ruk,
             },
         )
 
@@ -5213,6 +5311,7 @@ class _Control(Environment):
         env_name: str,
         node_group: str = None,
         display_name: str = None,
+        ruk: str = None,
     ):
         """
         :param env_name: target environment name.
@@ -5225,14 +5324,12 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeGroup": node_group,
                 "displayName": display_name,
+                "ruk": ruk,
             },
         )
 
     def SetSLBAccessEnabled(
-        self,
-        env_name: str,
-        node_group: str,
-        enabled: bool,
+        self, env_name: str, node_group: str, enabled: bool, ruk: str = None
     ):
         return self._get(
             "SetSLBAccessEnabled",
@@ -5240,15 +5337,11 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeGroup": node_group,
                 "enabled": enabled,
+                "ruk": ruk,
             },
         )
 
-    def SkipMessage(
-        self,
-        env_name: str,
-        node_id: int,
-        id: int,
-    ):
+    def SkipMessage(self, env_name: str, node_id: int, id: int, ruk: str = None):
         """
         :param env_name: target environment name
         :param node_id: unique identifier of the target node (container).
@@ -5260,30 +5353,34 @@ class _Control(Environment):
                 "envName": env_name,
                 "nodeId": node_id,
                 "id": id,
+                "ruk": ruk,
             },
         )
 
-    def SleepEnv(self, env_name: str):
+    def SleepEnv(self, env_name: str, ruk: str = None):
         return self._get(
             "SleepEnv",
             params={
                 "envName": env_name,
+                "ruk": ruk,
             },
         )
 
-    def StartEnv(self, env_name: str):
+    def StartEnv(self, env_name: str, ruk: str = None):
         return self._get(
             "StartEnv",
             params={
                 "envName": env_name,
+                "ruk": ruk,
             },
         )
 
-    def StopEnv(self, env_name: str):
+    def StopEnv(self, env_name: str, ruk: str = None):
         return self._get(
             "StopEnv",
             params={
                 "envName": env_name,
+                "ruk": ruk,
             },
         )
 
@@ -5293,6 +5390,7 @@ class _Control(Environment):
         keyword: str,
         node_type: str = None,
         node_group: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "UninstallSoftwarePackage",
@@ -5301,6 +5399,7 @@ class _Control(Environment):
                 "keyword": keyword,
                 "nodeType": node_type,
                 "nodeGroup": node_group,
+                "ruk": ruk,
             },
         )
 
@@ -5311,6 +5410,7 @@ class _Control(Environment):
         target_node_id: int,
         alias: str,
         is_auto_restart: bool = None,
+        ruk: str = None,
     ):
         return self._get(
             "UnlinkDockerNodes",
@@ -5320,6 +5420,7 @@ class _Control(Environment):
                 "targetNodeId": target_node_id,
                 "alias": alias,
                 "isAutoRestart": is_auto_restart,
+                "ruk": ruk,
             },
         )
 
@@ -5329,6 +5430,7 @@ class _Control(Environment):
         node_id: int,
         folders: str,
         tag: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "UnpackDocker",
@@ -5337,6 +5439,7 @@ class _Control(Environment):
                 "nodeID": node_id,
                 "folders": folders,
                 "tag": tag,
+                "ruk": ruk,
             },
         )
 
@@ -5359,6 +5462,7 @@ class _File(Environment):
         keyword: str = None,
         filter: str = None,
         is_dir: bool = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -5379,6 +5483,7 @@ class _File(Environment):
                 "keyword": keyword,
                 "filter": filter,
                 "isDir": is_dir,
+                "ruk": ruk,
             },
         )
 
@@ -5394,6 +5499,7 @@ class _File(Environment):
         name: str = None,
         read_only: bool = None,
         source_address_type: str = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -5419,6 +5525,7 @@ class _File(Environment):
                 "name": name,
                 "readOnly": read_only,
                 "sourceAddressType": source_address_type,
+                "ruk": ruk,
             },
         )
 
@@ -5434,6 +5541,7 @@ class _File(Environment):
         name: str = None,
         read_only: bool = None,
         source_address_type: str = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -5459,6 +5567,7 @@ class _File(Environment):
                 "name": name,
                 "readOnly": read_only,
                 "sourceAddressType": source_address_type,
+                "ruk": ruk,
             },
         )
 
@@ -5471,6 +5580,7 @@ class _File(Environment):
         node_group: str = None,
         master_only: bool = None,
         node_id: int = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -5491,10 +5601,13 @@ class _File(Environment):
                 "nodeGroup": node_group,
                 "masterOnly": master_only,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
-    def CheckCrossMount(self, env_name: str, node_id: int, source_node_id: int):
+    def CheckCrossMount(
+        self, env_name: str, node_id: int, source_node_id: int, ruk: str = None
+    ):
         """
         param env_name: target environment name.
         param node_id : unique identifier of the target node (container).
@@ -5506,6 +5619,7 @@ class _File(Environment):
                 "envName": env_name,
                 "nodeId": node_id,
                 "sourceNodeId": source_node_id,
+                "ruk": ruk,
             },
         )
 
@@ -5515,6 +5629,7 @@ class _File(Environment):
         node_id: int,
         source_node_id: int,
         mount_points: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "CloneMountPoints",
@@ -5523,6 +5638,7 @@ class _File(Environment):
                 "nodeId": node_id,
                 "sourceNodeId": source_node_id,
                 "mountPoints": mount_points,
+                "ruk": ruk,
             },
         )
 
@@ -5535,6 +5651,7 @@ class _File(Environment):
         node_group: str = None,
         master_only: bool = None,
         node_id: int = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -5555,6 +5672,7 @@ class _File(Environment):
                 "nodeGroup": node_group,
                 "masterOnly": master_only,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
@@ -5567,6 +5685,7 @@ class _File(Environment):
         master_only: bool = None,
         isdir: bool = None,
         node_id: int = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -5587,6 +5706,7 @@ class _File(Environment):
                 "masterOnly": master_only,
                 "isdir": isdir,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
@@ -5598,6 +5718,7 @@ class _File(Environment):
         node_group: str = None,
         master_only: bool = None,
         node_id: int = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -5616,14 +5737,12 @@ class _File(Environment):
                 "nodeGroup": node_group,
                 "masterOnly": master_only,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
     def GetExportedList(
-        self,
-        env_name: str,
-        node_id: int,
-        path: str = None,
+        self, env_name: str, node_id: int, path: str = None, ruk: str = None
     ):
         """
         param env_name: target environment name.
@@ -5636,6 +5755,7 @@ class _File(Environment):
                 "envName": env_name,
                 "nodeId": node_id,
                 "path": path,
+                "ruk": ruk,
             },
         )
 
@@ -5644,6 +5764,7 @@ class _File(Environment):
         env_name: str,
         node_group: str = None,
         node_id: int = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -5656,6 +5777,7 @@ class _File(Environment):
                 "envName": env_name,
                 "nodeGroup": node_group,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
@@ -5667,6 +5789,7 @@ class _File(Environment):
         node_group: str = None,
         node_id: int = None,
         filter: int = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -5685,6 +5808,7 @@ class _File(Environment):
                 "nodeGroup": node_group,
                 "nodeId": node_id,
                 "filter": filter,
+                "ruk": ruk,
             },
         )
 
@@ -5693,6 +5817,7 @@ class _File(Environment):
         env_name: str,
         node_group: str = None,
         node_id: int = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -5705,13 +5830,18 @@ class _File(Environment):
                 "envName": env_name,
                 "nodeGroup": node_group,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
-    def PrepareMountPoints(self, env_name: str, data: str):
+    def PrepareMountPoints(self, env_name: str, data: str, ruk: str = None):
         return self._get(
             "PrepareMountPoints",
-            params={"envName": env_name, "data": data},
+            params={
+                "envName": env_name,
+                "data": data,
+                "ruk": ruk,
+            },
         )
 
     def Read(
@@ -5721,6 +5851,7 @@ class _File(Environment):
         node_type: str = None,
         node_group: str = None,
         node_id: int = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -5737,6 +5868,7 @@ class _File(Environment):
                 "nodeType": node_type,
                 "nodeGroup": node_group,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
@@ -5747,6 +5879,7 @@ class _File(Environment):
         path: str,
         client_node_id: int,
         client_path: str,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -5763,6 +5896,7 @@ class _File(Environment):
                 "path": path,
                 "clientNodeId": client_node_id,
                 "clientPath": client_path,
+                "ruk": ruk,
             },
         )
 
@@ -5773,6 +5907,7 @@ class _File(Environment):
         node_type: str = None,
         node_group: str = None,
         node_id: int = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -5789,14 +5924,12 @@ class _File(Environment):
                 "nodeType": node_type,
                 "nodeGroup": node_group,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
     def RemoveMountPointByGroup(
-        self,
-        env_name: str,
-        path: str,
-        node_group: str,
+        self, env_name: str, path: str, node_group: str, ruk: str = None
     ):
         """
         param env_name: target environment name.
@@ -5809,14 +5942,12 @@ class _File(Environment):
                 "envName": env_name,
                 "path": path,
                 "nodeGroup": node_group,
+                "ruk": ruk,
             },
         )
 
     def RemoveMountPointById(
-        self,
-        env_name: str,
-        path: str,
-        node_id: str,
+        self, env_name: str, path: str, node_id: str, ruk: str = None
     ):
         """
         param env_name: target environment name.
@@ -5829,6 +5960,7 @@ class _File(Environment):
                 "envName": env_name,
                 "path": path,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
@@ -5841,6 +5973,7 @@ class _File(Environment):
         node_group: str = None,
         master_only: bool = None,
         node_id: int = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -5861,6 +5994,7 @@ class _File(Environment):
                 "nodeGroup": node_group,
                 "masterOnly": master_only,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
@@ -5875,6 +6009,7 @@ class _File(Environment):
         node_group: str = None,
         master_only: bool = None,
         node_id: int = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -5899,11 +6034,18 @@ class _File(Environment):
                 "nodeGroup": node_group,
                 "masterOnly": master_only,
                 "nodeId": node_id,
+                "ruk": ruk,
             },
         )
 
     def UnpackById(
-        self, env_name: str, path: str, node_id: str, source_path: str, dest_path: str
+        self,
+        env_name: str,
+        path: str,
+        node_id: str,
+        source_path: str,
+        dest_path: str,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -5920,11 +6062,18 @@ class _File(Environment):
                 "nodeId": node_id,
                 "sourcePath": source_path,
                 "destPath": dest_path,
+                "ruk": ruk,
             },
         )
 
     def UnpackByType(
-        self, env_name: str, path: str, node_type: str, source_path: str, dest_path: str
+        self,
+        env_name: str,
+        path: str,
+        node_type: str,
+        source_path: str,
+        dest_path: str,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -5941,6 +6090,7 @@ class _File(Environment):
                 "nodeType": node_type,
                 "sourcePath": source_path,
                 "destPath": dest_path,
+                "ruk": ruk,
             },
         )
 
@@ -5954,6 +6104,7 @@ class _File(Environment):
         master_only: bool = None,
         node_id: int = None,
         overwrite: bool = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -5976,6 +6127,7 @@ class _File(Environment):
                 "masterOnly": master_only,
                 "nodeId": node_id,
                 "overwrite": overwrite,
+                "ruk": ruk,
             },
         )
 
@@ -5989,6 +6141,7 @@ class _File(Environment):
         master_only: bool = False,
         node_id: int = None,
         is_append_mode: bool = False,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -6011,6 +6164,7 @@ class _File(Environment):
                 "masterOnly": master_only,
                 "nodeId": node_id,
                 "isAppendMode": is_append_mode,
+                "ruk": ruk,
             },
         )
 
@@ -6030,6 +6184,7 @@ class _Group(Environment):
         env_group: list[str],
         target_appid: str = None,
         owner_uid: int = None,
+        ruk: str = None,
     ):
         """
         param env_name: source environment name.
@@ -6044,6 +6199,7 @@ class _Group(Environment):
                 "envGroup": env_group,
                 "targetAppid": target_appid,
                 "ownerUid": owner_uid,
+                "ruk": ruk,
             },
             delimiter=",",
         )
@@ -6054,6 +6210,7 @@ class _Group(Environment):
         env_group: list[str] = None,
         data: dict = None,
         owner_uid: int = None,
+        ruk: str = None,
     ):
         """
         param env_name: source environment name.
@@ -6068,6 +6225,7 @@ class _Group(Environment):
                 "envGroup": env_group,
                 "data": data,
                 "ownerUid": owner_uid,
+                "ruk": ruk,
             },
             delimiter=",",
         )
@@ -6078,6 +6236,7 @@ class _Group(Environment):
         env_group: list[str],
         target_appid: str = None,
         owner_uid: int = None,
+        ruk: str = None,
     ):
         """
         param env_name: source environment name.
@@ -6092,6 +6251,7 @@ class _Group(Environment):
                 "envGroup": env_group,
                 "targetAppid": target_appid,
                 "ownerUid": owner_uid,
+                "ruk": ruk,
             },
             delimiter=",",
         )
@@ -6103,6 +6263,7 @@ class _Group(Environment):
         dst_group_name: str = None,
         data: dict = None,
         owner_uid: int = None,
+        ruk: str = None,
     ):
         """
         param env_name: source environment name.
@@ -6119,10 +6280,17 @@ class _Group(Environment):
                 "dstGroupName": dst_group_name,
                 "data": data,
                 "ownerUid": owner_uid,
+                "ruk": ruk,
             },
         )
 
-    def GetGroups(self, env_name: str, target_appid: str = None, owner_uid: int = None):
+    def GetGroups(
+        self,
+        env_name: str,
+        target_appid: str = None,
+        owner_uid: int = None,
+        ruk: str = None,
+    ):
         """
         param env_name: source environment name.
         param target_appid: if specified, redefines the target environment. For example, to the environment shared via the collaboration feature.
@@ -6134,10 +6302,17 @@ class _Group(Environment):
                 "envName": env_name,
                 "targetAppid": target_appid,
                 "ownerUid": owner_uid,
+                "ruk": ruk,
             },
         )
 
-    def RemoveGroup(self, env_name: str, env_group: list[str], owner_uid: int = None):
+    def RemoveGroup(
+        self,
+        env_name: str,
+        env_group: list[str],
+        owner_uid: int = None,
+        ruk: str = None,
+    ):
         """
         param env_name: source environment name.
         param env_group: a comma-separated list of the target environment group names.
@@ -6149,6 +6324,7 @@ class _Group(Environment):
                 "envName": env_name,
                 "envGroup": env_group,
                 "ownerUid": owner_uid,
+                "ruk": ruk,
             },
             delimiter=",",
         )
@@ -6158,6 +6334,7 @@ class _Group(Environment):
         env_name: str,
         env_group: list[str],
         target_appid: str = None,
+        ruk: str = None,
     ):
         """
         param env_name: source environment name.
@@ -6170,12 +6347,18 @@ class _Group(Environment):
                 "envName": env_name,
                 "envGroup": env_group,
                 "targetAppid": target_appid,
+                "ruk": ruk,
             },
             delimiter=",",
         )
 
     def SetIsolationEnabled(
-        self, env_name: str, group_name: str, enabled: bool, owner_uid: list[int] = None
+        self,
+        env_name: str,
+        group_name: str,
+        enabled: bool,
+        owner_uid: list[int] = None,
+        ruk: str = None,
     ):
         """
         param env_name: source environment name.
@@ -6190,6 +6373,7 @@ class _Group(Environment):
                 "groupName": group_name,
                 "enabled": enabled,
                 "ownerUid": owner_uid,
+                "ruk": ruk,
             },
             delimiter=",",
         )
@@ -6204,12 +6388,7 @@ class _NodeGroup(Environment):
 
     _endpoint2 = "nodegroup"
 
-    def ApplyData(
-        self,
-        env_name: str,
-        node_group: str,
-        data: dict,
-    ):
+    def ApplyData(self, env_name: str, node_group: str, data: dict, ruk: str = None):
         """
         param env_name: target environment name.
         param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
@@ -6221,14 +6400,11 @@ class _NodeGroup(Environment):
                 "envName": env_name,
                 "nodeGroup": node_group,
                 "data": data,
+                "ruk": ruk,
             },
         )
 
-    def Get(
-        self,
-        env_name: str,
-        node_group: str,
-    ):
+    def Get(self, env_name: str, node_group: str, ruk: str = None):
         """
         param env_name: target environment name.
         param node_group: unique identifier of the target node group (layer), e.g. "cp" for the default application server layer.
@@ -6238,14 +6414,12 @@ class _NodeGroup(Environment):
             params={
                 "envName": env_name,
                 "nodeGroup": node_group,
+                "ruk": ruk,
             },
         )
 
     def SetSLBAccessEnabled(
-        self,
-        env_name: str,
-        node_group: str,
-        enabled: bool,
+        self, env_name: str, node_group: str, enabled: bool, ruk: str = None
     ):
         """
         param env_name: target environment name.
@@ -6258,6 +6432,7 @@ class _NodeGroup(Environment):
                 "envName": env_name,
                 "nodeGroup": node_group,
                 "enabled": enabled,
+                "ruk": ruk,
             },
         )
 
@@ -6272,10 +6447,7 @@ class _Security(Environment):
     _endpoint2 = "security"
 
     def AddRule(
-        self,
-        env_name: str,
-        rule: dict,
-        node_group: str = None,
+        self, env_name: str, rule: dict, node_group: str = None, ruk: str = None
     ):
         """
         param env_name: target environment name.
@@ -6288,14 +6460,12 @@ class _Security(Environment):
                 "envName": env_name,
                 "rule": rule,
                 "nodeGroup": node_group,
+                "ruk": ruk,
             },
         )
 
     def AddRules(
-        self,
-        env_name: str,
-        rules: str,
-        node_group: str = None,
+        self, env_name: str, rules: str, node_group: str = None, ruk: str = None
     ):
         """
         param env_name: target environment name.
@@ -6308,14 +6478,11 @@ class _Security(Environment):
                 "envName": env_name,
                 "rules": rules,
                 "nodeGroup": node_group,
+                "ruk": ruk,
             },
         )
 
-    def EditRule(
-        self,
-        env_name: str,
-        rule: dict,
-    ):
+    def EditRule(self, env_name: str, rule: dict, ruk: str = None):
         """
         param env_name: target environment name.
         param rule: JSON object with a new firewall rule:
@@ -6325,6 +6492,7 @@ class _Security(Environment):
             params={
                 "envName": env_name,
                 "rule": rule,
+                "ruk": ruk,
             },
         )
 
@@ -6333,6 +6501,7 @@ class _Security(Environment):
         env_name: str,
         node_group: str = None,
         direction: str = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -6345,18 +6514,19 @@ class _Security(Environment):
                 "envName": env_name,
                 "nodeGroup": node_group,
                 "direction": direction,
+                "ruk": ruk,
             },
         )
 
-    def RegenerateIsolationSets(
-        self,
-    ):
+    def RegenerateIsolationSets(self, ruk: str = None):
         return self._get(
             "RegenerateIsolationSets",
-            params={},
+            params={
+                "ruk": ruk,
+            },
         )
 
-    def RemoveRule(self, env_name: str, id: int):
+    def RemoveRule(self, env_name: str, id: int, ruk: str = None):
         """
         param env_name: target environment name
         param id: Unique identifier of the target firewall rule.
@@ -6366,10 +6536,11 @@ class _Security(Environment):
             params={
                 "envName": env_name,
                 "id": id,
+                "ruk": ruk,
             },
         )
 
-    def RemoveRules(self, env_name: str, ids: list[int]):
+    def RemoveRules(self, env_name: str, ids: list[int], ruk: str = None):
         """
         param env_name: target environment name
         param id: Unique identifier of the target firewall rule.
@@ -6379,15 +6550,12 @@ class _Security(Environment):
             params={
                 "envName": env_name,
                 "ids": ids,
+                "ruk": ruk,
             },
             delimiter=",",
         )
 
-    def SetFirewallEnabled(
-        self,
-        env_name: str,
-        enabled: bool,
-    ):
+    def SetFirewallEnabled(self, env_name: str, enabled: bool, ruk: str = None):
         """
         param env_name: target environment name
         param enabled: defines whether to enable (true) or disable (false) the environment firewall feature.
@@ -6397,15 +6565,11 @@ class _Security(Environment):
             params={
                 "envName": env_name,
                 "enabled": enabled,
+                "ruk": ruk,
             },
         )
 
-    def SetRuleEnabled(
-        self,
-        env_name: str,
-        id: int,
-        enabled: bool,
-    ):
+    def SetRuleEnabled(self, env_name: str, id: int, enabled: bool, ruk: str = None):
         """
         param env_name: target environment name
         param id: Unique identifier of the target firewall
@@ -6417,14 +6581,12 @@ class _Security(Environment):
                 "envName": env_name,
                 "id": id,
                 "enabled": enabled,
+                "ruk": ruk,
             },
         )
 
     def SetRules(
-        self,
-        env_name: str,
-        rules: str,
-        node_group: str = None,
+        self, env_name: str, rules: str, node_group: str = None, ruk: str = None
     ):
         """
         param env_name: target environment name.
@@ -6437,6 +6599,7 @@ class _Security(Environment):
                 "envName": env_name,
                 "rules": rules,
                 "nodeGroup": node_group,
+                "ruk": ruk,
             },
         )
 
@@ -6448,47 +6611,53 @@ class _System(Environment):
 
     _endpoint2 = "system"
 
-    def CheckDBConnection(self, checksum: str):
+    def CheckDBConnection(self, checksum: str, ruk: str = None):
         return self._get(
             "CheckDBConnection",
             params={
                 "checksum": checksum,
+                "ruk": ruk,
             },
         )
 
-    def CheckError(self, code: int = None):
+    def CheckError(self, code: int = None, ruk: str = None):
         return self._get(
             "CheckError",
             params={
                 "code": code,
+                "ruk": ruk,
             },
         )
 
-    def CleanCheckRequestCache(self, uid: int = None):
+    def CleanCheckRequestCache(self, uid: int = None, ruk: str = None):
         return self._get(
             "CleanCheckRequestCache",
             params={
                 "uid": uid,
+                "ruk": ruk,
             },
         )
 
-    def CleanCheckRequestCacheInner(self, uid: int = None):
+    def CleanCheckRequestCacheInner(self, uid: int = None, ruk: str = None):
         return self._get(
             "CleanCheckRequestCacheInner",
             params={
                 "uid": uid,
+                "ruk": ruk,
             },
         )
 
-    def CleanTemplateManifestCache(
-        self,
-    ):
+    def CleanTemplateManifestCache(self, ruk: str = None):
         return self._get(
             "CleanTemplateManifestCache",
-            params={},
+            params={
+                "ruk": ruk,
+            },
         )
 
-    def DeleteOldEnvs(self, updatedon: str, status: str, debug: bool, checksum: str):
+    def DeleteOldEnvs(
+        self, updatedon: str, status: str, debug: bool, checksum: str, ruk: str = None
+    ):
         return self._get(
             "DeleteOldEnvs",
             params={
@@ -6496,143 +6665,173 @@ class _System(Environment):
                 "status": status,
                 "debug": debug,
                 "checksum": checksum,
+                "ruk": ruk,
             },
         )
 
-    def Event(self, message: str, publish_local: bool = None):
+    def Event(self, message: str, publish_local: bool = None, ruk: str = None):
         return self._get(
             "Event",
             params={
                 "message": message,
                 "publishLocal": publish_local,
+                "ruk": ruk,
             },
         )
 
-    def FixDuplicates(self, debug: bool = None):
+    def FixDuplicates(self, debug: bool = None, ruk: str = None):
         return self._get(
             "FixDuplicates",
             params={
                 "debug": debug,
+                "ruk": ruk,
             },
         )
 
-    def FixStuckEnvs(
-        self,
-        checksum: str,
-    ):
+    def FixStuckEnvs(self, checksum: str, ruk: str = None):
         return self._get(
             "FixStuckEnvs",
             params={
                 "checksum": checksum,
+                "ruk": ruk,
             },
         )
 
-    def GetAPIDescriptions(self, is_public_only: bool = None, is_token: bool = None):
+    def GetAPIDescriptions(
+        self, is_public_only: bool = None, is_token: bool = None, ruk: str = None
+    ):
         return self._get(
             "GetAPIDescriptions",
             params={
                 "isPublicOnly": is_public_only,
                 "isToken": is_token,
+                "ruk": ruk,
             },
         )
 
-    def GetAllAPIDescriptions(self, is_public_only: bool = None, is_token: bool = None):
+    def GetAllAPIDescriptions(
+        self, is_public_only: bool = None, is_token: bool = None, ruk: str = None
+    ):
         return self._get(
             "GetAllAPIDescriptions",
             params={
                 "isPublicOnly": is_public_only,
                 "isToken": is_token,
+                "ruk": ruk,
             },
         )
 
-    def GetBillableItems(
-        self,
-    ):
+    def GetBillableItems(self, ruk: str = None):
         return self._get(
             "GetBillableItems",
-            params={},
+            params={
+                "ruk": ruk,
+            },
         )
 
-    def GetCacheStats(
-        self,
-    ):
+    def GetCacheStats(self, ruk: str = None):
         return self._get(
             "GetCacheStats",
-            params={},
+            params={
+                "ruk": ruk,
+            },
         )
 
-    def GetCacheStatus(
-        self,
-    ):
+    def GetCacheStatus(self, ruk: str = None):
         return self._get(
             "GetCacheStatus",
-            params={},
+            params={
+                "ruk": ruk,
+            },
         )
 
-    def GetContCountStatus(self, starttime: datetime, endtime: datetime):
+    def GetContCountStatus(
+        self, starttime: datetime, endtime: datetime, ruk: str = None
+    ):
         return self._get(
             "GetContCountStatus",
-            params={"starttime": starttime, "endtime": endtime},
+            params={
+                "starttime": starttime,
+                "endtime": endtime,
+                "ruk": ruk,
+            },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
-    def GetInstanceCacheStatus(
-        self,
-    ):
+    def GetInstanceCacheStatus(self, ruk: str = None):
         return self._get(
             "GetInstanceCacheStatus",
-            params={},
+            params={
+                "ruk": ruk,
+            },
         )
 
-    def GetIpsByType(self, checksum: str, node_type: str, hnip: str = None):
+    def GetIpsByType(
+        self, checksum: str, node_type: str, hnip: str = None, ruk: str = None
+    ):
         return self._get(
             "GetIpsByType",
-            params={"checksum": checksum, "nodeType": node_type, "hnip": hnip},
+            params={
+                "checksum": checksum,
+                "nodeType": node_type,
+                "hnip": hnip,
+                "ruk": ruk,
+            },
         )
 
-    def GetKeyword(
-        self,
-        checksum: str,
-    ):
+    def GetKeyword(self, checksum: str, ruk: str = None):
         return self._get(
             "GetKeyword",
             params={
                 "checksum": checksum,
+                "ruk": ruk,
             },
         )
 
-    def GetPlatformStatus(self, checksum: str, check_smtp: bool = None):
+    def GetPlatformStatus(
+        self, checksum: str, check_smtp: bool = None, ruk: str = None
+    ):
         return self._get(
             "GetPlatformStatus",
-            params={"checksum": checksum, "checkSMTP": check_smtp},
+            params={
+                "checksum": checksum,
+                "checkSMTP": check_smtp,
+                "ruk": ruk,
+            },
         )
 
-    def GetStatCollectorStatus(
-        self,
-    ):
+    def GetStatCollectorStatus(self, ruk: str = None):
         return self._get(
             "GetStatCollectorStatus",
-            params={},
+            params={
+                "ruk": ruk,
+            },
         )
 
-    def GetVersion(
-        self,
-    ):
+    def GetVersion(self, ruk: str = None):
         return self._get(
             "GetVersion",
-            params={},
+            params={
+                "ruk": ruk,
+            },
         )
 
-    def RefreshEmailTemplates(
-        self,
-    ):
+    def RefreshEmailTemplates(self, ruk: str = None):
         return self._get(
             "RefreshEmailTemplates",
-            params={},
+            params={
+                "ruk": ruk,
+            },
         )
 
-    def RefreshUser(self, language: str = None):
-        return self._get("RefreshUser", params={"language": language})
+    def RefreshUser(self, language: str = None, ruk: str = None):
+        return self._get(
+            "RefreshUser",
+            params={
+                "language": language,
+                "ruk": ruk,
+            },
+        )
 
     def RegisterEnvContainer(
         self,
@@ -6643,6 +6842,7 @@ class _System(Environment):
         ct_id: str,
         passwd: str,
         hn_ip_address: str,
+        ruk: str = None,
     ):
         return self._get(
             "RegisterEnvContainer",
@@ -6654,19 +6854,19 @@ class _System(Environment):
                 "ctId": ct_id,
                 "passwd": passwd,
                 "hnIpAddress": hn_ip_address,
+                "ruk": ruk,
             },
         )
 
     def ReloadConfiguration(
-        self,
-        reseller_id: int = None,
-        changed_placeholders: str = None,
+        self, reseller_id: int = None, changed_placeholders: str = None, ruk: str = None
     ):
         return self._get(
             "ReloadConfiguration",
             params={
                 "resellerId": reseller_id,
                 "changedPlaceholders": changed_placeholders,
+                "ruk": ruk,
             },
         )
 
@@ -6676,6 +6876,7 @@ class _System(Environment):
         email: str = None,
         language: str = None,
         timeout: int = None,
+        ruk: str = None,
     ):
         return self._get(
             "SendEmail",
@@ -6684,24 +6885,29 @@ class _System(Environment):
                 "email": email,
                 "language": language,
                 "timeout": timeout,
+                "ruk": ruk,
             },
         )
 
-    def SurchargeBillableItems(self, starttime: datetime, endtime: datetime):
+    def SurchargeBillableItems(
+        self, starttime: datetime, endtime: datetime, ruk: str = None
+    ):
         return self._get(
             "SurchargeBillableItems",
-            params={"startTime": starttime, "endTime": endtime},
+            params={
+                "startTime": starttime,
+                "endTime": endtime,
+                "ruk": ruk,
+            },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
-    def SynchEnvs(
-        self,
-        checksum: str,
-    ):
+    def SynchEnvs(self, checksum: str, ruk: str = None):
         return self._get(
             "SynchEnvs",
             params={
                 "checksum": checksum,
+                "ruk": ruk,
             },
         )
 
@@ -6715,10 +6921,7 @@ class _Tracking(Environment):
 
     _endpoint2 = "tracking"
 
-    def GetAction(
-        self,
-        id: int = None,
-    ):
+    def GetAction(self, id: int = None, ruk: str = None):
         """
         param id: unique identifier of the target action. An error occurs if the specified action does not exist or does not belong to the current user.
         """
@@ -6726,33 +6929,42 @@ class _Tracking(Environment):
             "GetAction",
             params={
                 "id": id,
+                "ruk": ruk,
             },
         )
 
-    def GetActions(self, start_time: datetime, end_time: list[datetime] = None):
+    def GetActions(
+        self, start_time: datetime, end_time: list[datetime] = None, ruk: str = None
+    ):
         return self._get(
             "GetActions",
             params={
                 "starttime": start_time,
                 "endtime": end_time,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
     def GetAllServiceName(
-        self,
-        add_services_wildcard: bool = None,
-        type: str = None,
+        self, add_services_wildcard: bool = None, type: str = None, ruk: str = None
     ):
         return self._get(
             "GetAllServiceName",
-            params={"addServicesWildcard": add_services_wildcard, "type": type},
+            params={
+                "addServicesWildcard": add_services_wildcard,
+                "type": type,
+                "ruk": ruk,
+            },
         )
 
-    def GetCurrentActions(
-        self,
-    ):
-        return self._get("GetCurrentActions", params={})
+    def GetCurrentActions(self, ruk: str = None):
+        return self._get(
+            "GetCurrentActions",
+            params={
+                "ruk": ruk,
+            },
+        )
 
     def GetEnvActions(
         self,
@@ -6760,6 +6972,7 @@ class _Tracking(Environment):
         end_time: list[datetime] = None,
         offset: int = None,
         count: int = None,
+        ruk: str = None,
     ):
         return self._get(
             "GetEnvActions",
@@ -6768,13 +6981,12 @@ class _Tracking(Environment):
                 "endtime": end_time,
                 "offset": offset,
                 "count": count,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
-    def GetServerUTCTime(
-        self,
-    ):
+    def GetServerUTCTime(self, ruk: str = None):
         return self._get("GetServerUTCTime", params={})
 
     def GetUidActions(
@@ -6783,6 +6995,7 @@ class _Tracking(Environment):
         start_time: datetime = None,
         end_time: datetime = None,
         action_types: str = None,
+        ruk: str = None,
     ):
         """
         param count: returns the specified number of actions from the response (10 by default).
@@ -6797,6 +7010,7 @@ class _Tracking(Environment):
                 "starttime": start_time,
                 "endtime": end_time,
                 "actionTypes": action_types,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
@@ -6812,6 +7026,7 @@ class _Tracking(Environment):
         order_field: str = None,
         order_direction: str = None,
         search_text: str = None,
+        ruk: str = None,
     ):
         """
         param start_row: returns information starting from the specified row in the response (starts with 0, by default).
@@ -6834,35 +7049,53 @@ class _Tracking(Environment):
                 "orderField": order_field,
                 "orderDirection": order_direction,
                 "searchText": search_text,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
-    def SearchActions(self, session: str, search: dict):
+    def SearchActions(self, session: str, search: dict, ruk: str = None):
         """
         param session: user session or personal access token.
         param search: JSON object with the search parameters:
         """
-        return self._get("SearchActions", params={"session": session, "search": search})
+        return self._get(
+            "SearchActions",
+            params={
+                "session": session,
+                "search": search,
+                "ruk": ruk,
+            },
+        )
 
-    def StoreAuditAdminActions(self, session: str, trackedevent: dict):
+    def StoreAuditAdminActions(self, session: str, trackedevent: dict, ruk: str = None):
         """
         param session: user session or personal access token.
         param trackedevent: JSON
         """
         return self._get(
             "StoreAuditAdminActions",
-            params={"session": session, "trackedevent": trackedevent},
+            params={
+                "session": session,
+                "trackedevent": trackedevent,
+                "ruk": ruk,
+            },
         )
 
-    def StoreUserActions(self, session: str, tracked_action_event: dict):
+    def StoreUserActions(
+        self, session: str, tracked_action_event: dict, ruk: str = None
+    ):
         """
         param session: user session or personal access token.
         param trackedActionEvent: JSON
         """
         return self._get(
             "StoreUserActions",
-            params={"session": session, "trackedActionEvent": tracked_action_event},
+            params={
+                "session": session,
+                "trackedActionEvent": tracked_action_event,
+                "ruk": ruk,
+            },
         )
 
 
@@ -6878,11 +7111,7 @@ class _Trigger(Environment):
 
     _endpoint2 = "trigger"
 
-    def AddAutoScalingTrigger(
-        self,
-        env_name: str,
-        data: dict,
-    ):
+    def AddAutoScalingTrigger(self, env_name: str, data: dict, ruk: str = None):
         """
         param env_name: target environment name.
         param data: JSON object with trigger's configuration.
@@ -6892,14 +7121,11 @@ class _Trigger(Environment):
             params={
                 "envName": env_name,
                 "data": data,
+                "ruk": ruk,
             },
         )
 
-    def AddLoadAlertTrigger(
-        self,
-        env_name: str,
-        data: dict,
-    ):
+    def AddLoadAlertTrigger(self, env_name: str, data: dict, ruk: str = None):
         """
         param env_name: target environment name.
         param data: JSON object with trigger's configuration.
@@ -6909,14 +7135,11 @@ class _Trigger(Environment):
             params={
                 "envName": env_name,
                 "data": data,
+                "ruk": ruk,
             },
         )
 
-    def AddTrigger(
-        self,
-        env_name: str,
-        data: dict,
-    ):
+    def AddTrigger(self, env_name: str, data: dict, ruk: str = None):
         """
         param env_name: target environment name.
         param data: JSON object with trigger's configuration.
@@ -6926,6 +7149,7 @@ class _Trigger(Environment):
             params={
                 "envName": env_name,
                 "data": data,
+                "ruk": ruk,
             },
         )
 
@@ -6944,6 +7168,7 @@ class _Trigger(Environment):
         node_group: str = None,
         resource_types: list[str] = None,
         trigger_log_id: int = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -6976,15 +7201,12 @@ class _Trigger(Environment):
                 "nodeGroup": node_group,
                 "resourceTypes": resource_types,
                 "triggerLogId": trigger_log_id,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
-    def DeleteAutoScalingTrigger(
-        self,
-        env_name: str,
-        id: int,
-    ):
+    def DeleteAutoScalingTrigger(self, env_name: str, id: int, ruk: str = None):
         """
         param env_name: target environment name.
         param id : unique identifier of the target auto-scaling trigger
@@ -6994,14 +7216,11 @@ class _Trigger(Environment):
             params={
                 "envName": env_name,
                 "id": id,
+                "ruk": ruk,
             },
         )
 
-    def DeleteLoadAlertTrigger(
-        self,
-        env_name: str,
-        id: int,
-    ):
+    def DeleteLoadAlertTrigger(self, env_name: str, id: int, ruk: str = None):
         """
         param env_name: target environment name.
         param id : unique identifier of the target load alert trigger.
@@ -7011,23 +7230,23 @@ class _Trigger(Environment):
             params={
                 "envName": env_name,
                 "id": id,
+                "ruk": ruk,
             },
         )
 
-    def DeleteTrigger(
-        self,
-        env_name: str,
-        id: int,
-    ):
+    def DeleteTrigger(self, env_name: str, id: int, ruk: str = None):
         return self._get(
             "DeleteTrigger",
             params={
                 "envName": env_name,
                 "id": id,
+                "ruk": ruk,
             },
         )
 
-    def EditAutoScalingTrigger(self, env_name: str, id: int, data: str):
+    def EditAutoScalingTrigger(
+        self, env_name: str, id: int, data: str, ruk: str = None
+    ):
         """
         param env_name: target environment name.
         param id : unique identifier of the target load alert trigger.
@@ -7035,10 +7254,15 @@ class _Trigger(Environment):
         """
         return self._get(
             "EditAutoScalingTrigger",
-            params={"envName": env_name, "id": id, "data": data},
+            params={
+                "envName": env_name,
+                "id": id,
+                "data": data,
+                "ruk": ruk,
+            },
         )
 
-    def EditLoadAlertTrigger(self, env_name: str, id: int, data: str):
+    def EditLoadAlertTrigger(self, env_name: str, id: int, data: str, ruk: str = None):
         """
         param env_name: target environment name.
         param id : unique identifier of the target load alert trigger.
@@ -7046,16 +7270,28 @@ class _Trigger(Environment):
         """
         return self._get(
             "EditLoadAlertTrigger",
-            params={"envName": env_name, "id": id, "data": data},
+            params={
+                "envName": env_name,
+                "id": id,
+                "data": data,
+                "ruk": ruk,
+            },
         )
 
-    def EditTrigger(self, env_name: str, id: int, data: str):
+    def EditTrigger(self, env_name: str, id: int, data: str, ruk: str = None):
         return self._get(
             "EditTrigger",
-            params={"envName": env_name, "id": id, "data": data},
+            params={
+                "envName": env_name,
+                "id": id,
+                "data": data,
+                "ruk": ruk,
+            },
         )
 
-    def GetAutoScalingTriggers(self, env_name: str, action_types: list[str] = None):
+    def GetAutoScalingTriggers(
+        self, env_name: str, action_types: list[str] = None, ruk: str = None
+    ):
         """
         param env_name: target environment name
         param action_types: a semicolon-separated list of the trigger action types (for filtering).
@@ -7065,11 +7301,14 @@ class _Trigger(Environment):
             params={
                 "envName": env_name,
                 "actionTypes": action_types,
+                "ruk": ruk,
             },
             delimiter=",",
         )
 
-    def GetLoadAlertTriggers(self, env_name: str, action_types: list[str] = None):
+    def GetLoadAlertTriggers(
+        self, env_name: str, action_types: list[str] = None, ruk: str = None
+    ):
         """
         param env_name: target environment name
         param action_types: a semicolon-separated list of the trigger action types (for filtering).
@@ -7079,6 +7318,7 @@ class _Trigger(Environment):
             params={
                 "envName": env_name,
                 "actionTypes": action_types,
+                "ruk": ruk,
             },
             delimiter=",",
         )
@@ -7098,6 +7338,7 @@ class _Trigger(Environment):
         node_group: str = None,
         resource_types: list[str] = None,
         trigger_log_id: int = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -7130,11 +7371,14 @@ class _Trigger(Environment):
                 "nodeGroup": node_group,
                 "resourceTypes": resource_types,
                 "triggerLogId": trigger_log_id,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
-    def GetTriggers(self, env_name: str, action_types: list[str] = None):
+    def GetTriggers(
+        self, env_name: str, action_types: list[str] = None, ruk: str = None
+    ):
         """
         param env_name: target environment name
         param action_types: a semicolon-separated list of the trigger action types (for filtering).
@@ -7144,6 +7388,7 @@ class _Trigger(Environment):
             params={
                 "envName": env_name,
                 "actionTypes": action_types,
+                "ruk": ruk,
             },
             delimiter=",",
         )
@@ -7163,6 +7408,7 @@ class _Trigger(Environment):
         node_group: str = None,
         resource_types: list[str] = None,
         trigger_log_id: int = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -7195,26 +7441,46 @@ class _Trigger(Environment):
                 "nodeGroup": node_group,
                 "resourceTypes": resource_types,
                 "triggerLogId": trigger_log_id,
+                "ruk": ruk,
             },
             datetime_format="%Y-%m-%d %H:%M:%S",
         )
 
-    def SetAutoScalingTriggerEnabled(self, env_name: str, id: int, enabled: bool):
+    def SetAutoScalingTriggerEnabled(
+        self, env_name: str, id: int, enabled: bool, ruk: str = None
+    ):
         return self._get(
             "SetAutoScalingTriggerEnabled",
-            params={"envName": env_name, "id": id, "enabled": enabled},
+            params={
+                "envName": env_name,
+                "id": id,
+                "enabled": enabled,
+                "ruk": ruk,
+            },
         )
 
-    def SetLoadAlertTriggerEnabled(self, env_name: str, id: int, enabled: bool):
+    def SetLoadAlertTriggerEnabled(
+        self, env_name: str, id: int, enabled: bool, ruk: str = None
+    ):
         return self._get(
             "SetLoadAlertTriggerEnabled",
-            params={"envName": env_name, "id": id, "enabled": enabled},
+            params={
+                "envName": env_name,
+                "id": id,
+                "enabled": enabled,
+                "ruk": ruk,
+            },
         )
 
-    def SetTriggerEnabled(self, env_name: str, id: int, enabled: bool):
+    def SetTriggerEnabled(self, env_name: str, id: int, enabled: bool, ruk: str = None):
         return self._get(
             "SetTriggerEnabled",
-            params={"envName": env_name, "id": id, "enabled": enabled},
+            params={
+                "envName": env_name,
+                "id": id,
+                "enabled": enabled,
+                "ruk": ruk,
+            },
         )
 
 
@@ -7246,6 +7512,7 @@ class _Vcs(Environment):
         hooks: str = None,
         delay: int = None,
         repo_hash: str = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -7286,14 +7553,12 @@ class _Vcs(Environment):
                 "hooks": hooks,
                 "delay": delay,
                 "repoHash": repo_hash,
+                "ruk": ruk,
             },
         )
 
     def DeleteProject(
-        self,
-        env_name: str,
-        context: str,
-        node_group: str = None,
+        self, env_name: str, context: str, node_group: str = None, ruk: str = None
     ):
         """
         param env_name: target environment name.
@@ -7306,6 +7571,7 @@ class _Vcs(Environment):
                 "envName": env_name,
                 "context": context,
                 "nodeGroup": node_group,
+                "ruk": ruk,
             },
         )
 
@@ -7328,6 +7594,7 @@ class _Vcs(Environment):
         hooks: list[str] = None,
         delay: int = None,
         repo_hash: str = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -7368,6 +7635,7 @@ class _Vcs(Environment):
                 "hooks": hooks,
                 "delay": delay,
                 "repoHash": repo_hash,
+                "ruk": ruk,
             },
         )
 
@@ -7376,6 +7644,7 @@ class _Vcs(Environment):
         env_name: str,
         context: str = None,
         node_group: str = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -7388,6 +7657,7 @@ class _Vcs(Environment):
                 "envName": env_name,
                 "context": context,
                 "nodeGroup": node_group,
+                "ruk": ruk,
             },
         )
 
@@ -7397,6 +7667,7 @@ class _Vcs(Environment):
         context: str,
         node_group: str = None,
         delay: int = None,
+        ruk: str = None,
     ):
         """
         param env_name: target environment name.
@@ -7411,6 +7682,7 @@ class _Vcs(Environment):
                 "context": context,
                 "nodeGroup": node_group,
                 "delay": delay,
+                "ruk": ruk,
             },
         )
 
@@ -7430,6 +7702,7 @@ class _Windows(Environment):
         username: str,
         password: str,
         dns_server: str = None,
+        ruk: str = None,
     ):
         """
         param password: password of the domain user
@@ -7441,6 +7714,7 @@ class _Windows(Environment):
                 "username": username,
                 "password": password,
                 "dnsServer": dns_server,
+                "ruk": ruk,
             },
         )
 
@@ -7452,6 +7726,7 @@ class _Windows(Environment):
         old_password: str = None,
         password: str = None,
         dns_server: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "EditDomain",
@@ -7462,26 +7737,33 @@ class _Windows(Environment):
                 "oldPassword": old_password,
                 "password": password,
                 "dnsServer": dns_server,
+                "ruk": ruk,
             },
         )
 
-    def GetList(self):
-        return self._get("GetList", params={})
+    def GetList(self, ruk: str = None):
+        return self._get(
+            "GetList",
+            params={
+                "ruk": ruk,
+            },
+        )
 
-    def IsDomainExists(
-        self,
-        id: int,
-        checksum: str = None,
-    ):
-        return self._get("IsDomainExists", params={"id": id, "checksum": checksum})
+    def IsDomainExists(self, id: int, checksum: str = None, ruk: str = None):
+        return self._get(
+            "IsDomainExists",
+            params={
+                "id": id,
+                "checksum": checksum,
+                "ruk": ruk,
+            },
+        )
 
-    def RemoveDomain(
-        self,
-        id: int,
-    ):
+    def RemoveDomain(self, id: int, ruk: str = None):
         return self._get(
             "RemoveDomain",
             params={
                 "id": id,
+                "ruk": ruk,
             },
         )
