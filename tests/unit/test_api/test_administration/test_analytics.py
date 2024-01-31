@@ -4,7 +4,11 @@ from . import *
 def test_get_nodes_affinity_suggestion(client):
     client._get.return_value = success_response
     response = client.Analytics.GetNodesAffinitySuggestion(
-        ["app_id1", "app_id2"], ["node_group1", "node_group2"], ["uid1", "uid2"], 10
+        ["app_id1", "app_id2"],
+        ["node_group1", "node_group2"],
+        ["uid1", "uid2"],
+        10,
+        "ruk",
     )
     client._get.assert_called_with(
         "GetNodesAffinitySuggestion",
@@ -13,6 +17,7 @@ def test_get_nodes_affinity_suggestion(client):
             "nodeGroups": ["node_group1", "node_group2"],
             "uids": ["uid1", "uid2"],
             "threadCount": 10,
+            "ruk": "ruk",
         },
         delimiter=",",
     )
@@ -28,6 +33,7 @@ def test_get_nodes_anti_affinity_suggestion(client):
         ["node_group1", "node_group2"],
         ["uid1", "uid2"],
         10,
+        "ruk",
     )
     client._get.assert_called_with(
         "GetNodesAntiAffinitySuggestion",
@@ -37,6 +43,7 @@ def test_get_nodes_anti_affinity_suggestion(client):
             "nodeGroups": ["node_group1", "node_group2"],
             "uids": ["uid1", "uid2"],
             "threadCount": 10,
+            "ruk": "ruk",
         },
         delimiter=",",
     )
