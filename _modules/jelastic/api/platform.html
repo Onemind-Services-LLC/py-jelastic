@@ -1341,7 +1341,12 @@
 
 <div class="viewcode-block" id="_Engine.Get">
 <a class="viewcode-back" href="../../../platform.html#jelastic.api.platform._Engine.Get">[docs]</a>
-    <span class="k">def</span> <span class="nf">Get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">Get</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">engine_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">ruk</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a list of available engines for the user.</span>
 
@@ -1349,13 +1354,23 @@
 <span class="sd">        :param owner_uid: unique identifier of the platform owner.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
-            <span class="s2">&quot;Get&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;engineType&quot;</span><span class="p">:</span> <span class="n">engine_type</span><span class="p">,</span> <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">}</span>
+            <span class="s2">&quot;Get&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;engineType&quot;</span><span class="p">:</span> <span class="n">engine_type</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+                <span class="s2">&quot;ruk&quot;</span><span class="p">:</span> <span class="n">ruk</span><span class="p">,</span>
+            <span class="p">},</span>
         <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="_Engine.GetEntryPoint">
 <a class="viewcode-back" href="../../../platform.html#jelastic.api.platform._Engine.GetEntryPoint">[docs]</a>
-    <span class="k">def</span> <span class="nf">GetEntryPoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">GetEntryPoint</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">host_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">ruk</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Connects a user to the host group.</span>
 
@@ -1363,7 +1378,12 @@
 <span class="sd">        :param owner_uid: unique identifier of the platform owner.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
-            <span class="s2">&quot;GetEntryPoint&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;hostGroup&quot;</span><span class="p">:</span> <span class="n">host_group</span><span class="p">,</span> <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">}</span>
+            <span class="s2">&quot;GetEntryPoint&quot;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;hostGroup&quot;</span><span class="p">:</span> <span class="n">host_group</span><span class="p">,</span>
+                <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+                <span class="s2">&quot;ruk&quot;</span><span class="p">:</span> <span class="n">ruk</span><span class="p">,</span>
+            <span class="p">},</span>
         <span class="p">)</span></div>
 </div>
 

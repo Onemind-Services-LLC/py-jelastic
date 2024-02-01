@@ -1327,56 +1327,94 @@
 
     <span class="n">_endpoint2</span> <span class="o">=</span> <span class="s2">&quot;account&quot;</span>
 
-    <span class="k">def</span> <span class="nf">AddPrivateSSHKey</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ssh_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">AddPrivateSSHKey</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">ssh_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">ruk</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param title: title of the ssh key.</span>
 <span class="sd">        :param sshKey: value of the ssh key.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
             <span class="s2">&quot;AddPrivateSSHKey&quot;</span><span class="p">,</span>
-            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span> <span class="s2">&quot;sshKey&quot;</span><span class="p">:</span> <span class="n">ssh_key</span><span class="p">},</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+                <span class="s2">&quot;sshKey&quot;</span><span class="p">:</span> <span class="n">ssh_key</span><span class="p">,</span>
+                <span class="s2">&quot;ruk&quot;</span><span class="p">:</span> <span class="n">ruk</span><span class="p">,</span>
+            <span class="p">},</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">AddPublicSSHKey</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ssh_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">AddPublicSSHKey</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">ssh_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">ruk</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param title: title of the ssh key.</span>
 <span class="sd">        :param sshKey: value of the ssh key.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
             <span class="s2">&quot;AddPublicSSHKey&quot;</span><span class="p">,</span>
-            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span> <span class="s2">&quot;sshKey&quot;</span><span class="p">:</span> <span class="n">ssh_key</span><span class="p">},</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+                <span class="s2">&quot;sshKey&quot;</span><span class="p">:</span> <span class="n">ssh_key</span><span class="p">,</span>
+                <span class="s2">&quot;ruk&quot;</span><span class="p">:</span> <span class="n">ruk</span><span class="p">,</span>
+            <span class="p">},</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">AddSSHKey</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ssh_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">is_private</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">AddSSHKey</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">ssh_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">is_private</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">ruk</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param title: title of the ssh key.</span>
 <span class="sd">        :param sshKey: value of the ssh key.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
             <span class="s2">&quot;AddSSHKey&quot;</span><span class="p">,</span>
-            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span> <span class="s2">&quot;sshKey&quot;</span><span class="p">:</span> <span class="n">ssh_key</span><span class="p">,</span> <span class="s2">&quot;isPrivate&quot;</span><span class="p">:</span> <span class="n">is_private</span><span class="p">},</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+                <span class="s2">&quot;sshKey&quot;</span><span class="p">:</span> <span class="n">ssh_key</span><span class="p">,</span>
+                <span class="s2">&quot;isPrivate&quot;</span><span class="p">:</span> <span class="n">is_private</span><span class="p">,</span>
+                <span class="s2">&quot;ruk&quot;</span><span class="p">:</span> <span class="n">ruk</span><span class="p">,</span>
+            <span class="p">},</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">AdjustContainersLimitsForAllUsers</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
+        <span class="n">ruk</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
             <span class="s2">&quot;AdjustContainersLimitsForAllUsers&quot;</span><span class="p">,</span>
-            <span class="n">params</span><span class="o">=</span><span class="p">{},</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;ruk&quot;</span><span class="p">:</span> <span class="n">ruk</span><span class="p">,</span>
+            <span class="p">},</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">CleanQuotasCache</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">uid</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">ruk</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
             <span class="s2">&quot;CleanQuotasCache&quot;</span><span class="p">,</span>
             <span class="n">params</span><span class="o">=</span><span class="p">{</span>
                 <span class="s2">&quot;uid&quot;</span><span class="p">:</span> <span class="n">uid</span><span class="p">,</span>
+                <span class="s2">&quot;ruk&quot;</span><span class="p">:</span> <span class="n">ruk</span><span class="p">,</span>
             <span class="p">},</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">DeleteSSHKey</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">DeleteSSHKey</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">ruk</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param id: unique identifier of the ssh key.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1384,6 +1422,7 @@
             <span class="s2">&quot;DeleteSSHKey&quot;</span><span class="p">,</span>
             <span class="n">params</span><span class="o">=</span><span class="p">{</span>
                 <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">id</span><span class="p">,</span>
+                <span class="s2">&quot;ruk&quot;</span><span class="p">:</span> <span class="n">ruk</span><span class="p">,</span>
             <span class="p">},</span>
         <span class="p">)</span>
 
@@ -1391,27 +1430,37 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">ip_address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">quotasnames</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">ruk</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
             <span class="s2">&quot;GetQuotasByIpAddress&quot;</span><span class="p">,</span>
             <span class="n">params</span><span class="o">=</span><span class="p">{</span>
                 <span class="s2">&quot;ipAddress&quot;</span><span class="p">:</span> <span class="n">ip_address</span><span class="p">,</span>
                 <span class="s2">&quot;quotasnames&quot;</span><span class="p">:</span> <span class="n">quotasnames</span><span class="p">,</span>
+                <span class="s2">&quot;ruk&quot;</span><span class="p">:</span> <span class="n">ruk</span><span class="p">,</span>
             <span class="p">},</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">GetSSHKeys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">is_private</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">GetSSHKeys</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">is_private</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">ruk</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param isPrivate: defines whether to return the account&#39;s private (true) or public (false) SSH keys.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
             <span class="s2">&quot;GetSSHKeys&quot;</span><span class="p">,</span>
-            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;isPrivate&quot;</span><span class="p">:</span> <span class="n">is_private</span><span class="p">},</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;isPrivate&quot;</span><span class="p">:</span> <span class="n">is_private</span><span class="p">,</span>
+                <span class="s2">&quot;ruk&quot;</span><span class="p">:</span> <span class="n">ruk</span><span class="p">,</span>
+            <span class="p">},</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">GetSSHKeysInner</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">uid</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">ruk</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param uid: unique identifier of the user (key owner).</span>
@@ -1420,6 +1469,7 @@
             <span class="s2">&quot;GetSSHKeysInner&quot;</span><span class="p">,</span>
             <span class="n">params</span><span class="o">=</span><span class="p">{</span>
                 <span class="s2">&quot;uid&quot;</span><span class="p">:</span> <span class="n">uid</span><span class="p">,</span>
+                <span class="s2">&quot;ruk&quot;</span><span class="p">:</span> <span class="n">ruk</span><span class="p">,</span>
             <span class="p">},</span>
         <span class="p">)</span>
 </pre></div>

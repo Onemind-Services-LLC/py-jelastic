@@ -1345,6 +1345,7 @@
         <span class="n">project_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">ruk</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Creates a new Virtuozzo Hybrid Infrastructure project.</span>
@@ -1361,13 +1362,16 @@
                 <span class="s2">&quot;projectName&quot;</span><span class="p">:</span> <span class="n">project_name</span><span class="p">,</span>
                 <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
                 <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+                <span class="s2">&quot;ruk&quot;</span><span class="p">:</span> <span class="n">ruk</span><span class="p">,</span>
             <span class="p">},</span>
         <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="_Project.Delete">
 <a class="viewcode-back" href="../../../iaas.html#jelastic.api.iaas._Project.Delete">[docs]</a>
-    <span class="k">def</span> <span class="nf">Delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">project_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">Delete</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">host_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">project_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ruk</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Deletes a specified Virtuozzo Hybrid Infrastructure project.</span>
 
@@ -1381,13 +1385,14 @@
                 <span class="s2">&quot;hostGroup&quot;</span><span class="p">:</span> <span class="n">host_group</span><span class="p">,</span>
                 <span class="s2">&quot;projectId&quot;</span><span class="p">:</span> <span class="n">project_id</span><span class="p">,</span>
                 <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+                <span class="s2">&quot;ruk&quot;</span><span class="p">:</span> <span class="n">ruk</span><span class="p">,</span>
             <span class="p">},</span>
         <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="_Project.Get">
 <a class="viewcode-back" href="../../../iaas.html#jelastic.api.iaas._Project.Get">[docs]</a>
-    <span class="k">def</span> <span class="nf">Get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">Get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ruk</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a list of Virtuozzo Hybrid Infrastructure projects related to the user and host group.</span>
 
@@ -1399,6 +1404,7 @@
             <span class="n">params</span><span class="o">=</span><span class="p">{</span>
                 <span class="s2">&quot;hostGroup&quot;</span><span class="p">:</span> <span class="n">host_group</span><span class="p">,</span>
                 <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
+                <span class="s2">&quot;ruk&quot;</span><span class="p">:</span> <span class="n">ruk</span><span class="p">,</span>
             <span class="p">},</span>
         <span class="p">)</span></div>
 
@@ -1412,6 +1418,7 @@
         <span class="n">project_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">owner_uid</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">ruk</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Changes the specified project name and description.</span>
@@ -1430,6 +1437,7 @@
                 <span class="s2">&quot;projectName&quot;</span><span class="p">:</span> <span class="n">project_name</span><span class="p">,</span>
                 <span class="s2">&quot;ownerUid&quot;</span><span class="p">:</span> <span class="n">owner_uid</span><span class="p">,</span>
                 <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+                <span class="s2">&quot;ruk&quot;</span><span class="p">:</span> <span class="n">ruk</span><span class="p">,</span>
             <span class="p">},</span>
         <span class="p">)</span></div>
 </div>

@@ -1320,8 +1320,11 @@
 
 <div class="viewcode-block" id="_GeoIp.GeoIp">
 <a class="viewcode-back" href="../../../thirdparty.html#jelastic.api.thirdparty._GeoIp.GeoIp">[docs]</a>
-    <span class="k">def</span> <span class="nf">GeoIp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GeoIp&quot;</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">GeoIp</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">ruk</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="s2">&quot;GeoIp&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;ruk&quot;</span><span class="p">:</span> <span class="n">ruk</span><span class="p">})</span></div>
 </div>
 
 </pre></div>
