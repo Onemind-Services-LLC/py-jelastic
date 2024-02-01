@@ -13,6 +13,7 @@ def test_add_statistics(client):
         1,
         "note",
         "value",
+        "ruk",
     )
     client._get.assert_called_with(
         "AddStatistics",
@@ -26,6 +27,7 @@ def test_add_statistics(client):
             "nodeId": 1,
             "note": "note",
             "valueGroup": "value",
+            "ruk": "ruk",
         },
         datetime_format="%Y-%m-%d",
     )

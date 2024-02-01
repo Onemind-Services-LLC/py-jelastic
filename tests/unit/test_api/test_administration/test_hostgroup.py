@@ -4,22 +4,13 @@ from . import *
 def test_add(client):
     client._get.return_value = success_response
     response = client.HostGroup.Add(
-        {
-            "add1": "val1",
-            "add2": "val2",
-            "add3": "val3",
-            "add4": "val4",
-        }
+        {"add1": "val1", "add2": "val2", "add3": "val3", "add4": "val4"}, "ruk"
     )
     client._get.assert_called_with(
         "Add",
         params={
-            "data": {
-                "add1": "val1",
-                "add2": "val2",
-                "add3": "val3",
-                "add4": "val4",
-            },
+            "data": {"add1": "val1", "add2": "val2", "add3": "val3", "add4": "val4"},
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -35,6 +26,7 @@ def test_add_end_points(client):
             "endpoint3": "val3",
             "endpoint4": "val4",
         },
+        "ruk",
     )
     client._get.assert_called_with(
         "AddEndpoints",
@@ -46,6 +38,7 @@ def test_add_end_points(client):
                 "endpoint3": "val3",
                 "endpoint4": "val4",
             },
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -59,7 +52,8 @@ def test_edit(client):
             "edit2": "data2",
             "edit3": "data3",
             "edit4": "data4",
-        }
+        },
+        "ruk",
     )
     client._get.assert_called_with(
         "Edit",
@@ -70,6 +64,7 @@ def test_edit(client):
                 "edit3": "data3",
                 "edit4": "data4",
             },
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -85,6 +80,7 @@ def test_edit_end_points(client):
             "endpoint3": "val3",
             "endpoint4": "val4",
         },
+        "ruk",
     )
     client._get.assert_called_with(
         "EditEndpoints",
@@ -96,6 +92,7 @@ def test_edit_end_points(client):
                 "endpoint3": "val3",
                 "endpoint4": "val4",
             },
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -103,56 +100,47 @@ def test_edit_end_points(client):
 
 def test_get(client):
     client._get.return_value = success_response
-    response = client.HostGroup.Get()
-    client._get.assert_called_with("Get", params={})
+    response = client.HostGroup.Get("ruk")
+    client._get.assert_called_with("Get", params={"ruk": "ruk"})
     assert response == success_response
 
 
 def test_get_end_points(client):
     client._get.return_value = success_response
-    response = client.HostGroup.GetEndpoints("host group")
+    response = client.HostGroup.GetEndpoints("host group", "ruk")
     client._get.assert_called_with(
         "GetEndpoints",
-        params={
-            "hostGroup": "host group",
-        },
+        params={"hostGroup": "host group", "ruk": "ruk"},
     )
     assert response == success_response
 
 
 def test_remove(client):
     client._get.return_value = success_response
-    response = client.HostGroup.Remove(1)
+    response = client.HostGroup.Remove(1, "ruk")
     client._get.assert_called_with(
         "Remove",
-        params={
-            "id": 1,
-        },
+        params={"id": 1, "ruk": "ruk"},
     )
     assert response == success_response
 
 
 def test_remove_end_points(client):
     client._get.return_value = success_response
-    response = client.HostGroup.RemoveEndpoints(1)
+    response = client.HostGroup.RemoveEndpoints(1, "ruk")
     client._get.assert_called_with(
         "RemoveEndpoints",
-        params={
-            "id": 1,
-        },
+        params={"id": 1, "ruk": "ruk"},
     )
     assert response == success_response
 
 
 def test_rename_remote_user(client):
     client._get.return_value = success_response
-    response = client.HostGroup.RenameRemoteUser(1, "remoteuser@.email.com")
+    response = client.HostGroup.RenameRemoteUser(1, "remoteuser@.email.com", "ruk")
     client._get.assert_called_with(
         "RenameRemoteUser",
-        params={
-            "uid": 1,
-            "email": "remoteuser@.email.com",
-        },
+        params={"uid": 1, "email": "remoteuser@.email.com", "ruk": "ruk"},
     )
     assert response == success_response
 
@@ -165,7 +153,8 @@ def test_test_end_points(client):
             "endpoint2": "val2",
             "endpoint3": "val3",
             "endpoint4": "val4",
-        }
+        },
+        "ruk",
     )
     client._get.assert_called_with(
         "TestEndpoints",
@@ -176,6 +165,7 @@ def test_test_end_points(client):
                 "endpoint3": "val3",
                 "endpoint4": "val4",
             },
+            "ruk": "ruk",
         },
     )
     assert response == success_response

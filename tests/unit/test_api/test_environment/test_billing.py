@@ -13,6 +13,7 @@ def test_billing_add_stats(client):
         1.0,
         "note",
         "value_group",
+        "ruk",
     )
     client._get.assert_called_with(
         "AddStats",
@@ -26,6 +27,7 @@ def test_billing_add_stats(client):
             "value": 1.0,
             "note": "note",
             "valueGroup": "value_group",
+            "ruk": "ruk",
         },
         datetime_format="%Y-%m-%d",
     )
@@ -35,12 +37,17 @@ def test_billing_add_stats(client):
 
 def test_billing_env_resources(client):
     client._get.return_value = success_response
-    response = client.Billing.EnvResources(CURRENT_DATETIME, CURRENT_DATETIME)
+    response = client.Billing.EnvResources(
+        CURRENT_DATETIME,
+        CURRENT_DATETIME,
+        "ruk",
+    )
     client._get.assert_called_with(
         "EnvResources",
         params={
             "starttime": CURRENT_DATETIME,
             "endtime": CURRENT_DATETIME,
+            "ruk": "ruk",
         },
         datetime_format="%Y-%m-%d %H:%M:%S",
     )
@@ -50,7 +57,11 @@ def test_billing_env_resources(client):
 def test_billing_envs_resources(client):
     client._get.return_value = success_response
     response = client.Billing.EnvsResources(
-        CURRENT_DATETIME, CURRENT_DATETIME, "app_id", "checksum"
+        CURRENT_DATETIME,
+        CURRENT_DATETIME,
+        "app_id",
+        "checksum",
+        "ruk",
     )
     client._get.assert_called_with(
         "EnvsResources",
@@ -59,6 +70,7 @@ def test_billing_envs_resources(client):
             "endtime": CURRENT_DATETIME,
             "targetAppid": "app_id",
             "checksum": "checksum",
+            "ruk": "ruk",
         },
         datetime_format="%Y-%m-%d %H:%M:%S",
     )
@@ -68,7 +80,11 @@ def test_billing_envs_resources(client):
 def test_billing_envs_resources_by_account(client):
     client._get.return_value = success_response
     response = client.Billing.EnvsResourcesByAccount(
-        CURRENT_DATETIME, CURRENT_DATETIME, 1, "checksum"
+        CURRENT_DATETIME,
+        CURRENT_DATETIME,
+        1,
+        "checksum",
+        "ruk",
     )
     client._get.assert_called_with(
         "EnvsResourcesByAccount",
@@ -77,6 +93,7 @@ def test_billing_envs_resources_by_account(client):
             "endtime": CURRENT_DATETIME,
             "uid": 1,
             "checksum": "checksum",
+            "ruk": "ruk",
         },
         datetime_format="%Y-%m-%d %H:%M:%S",
     )
@@ -85,12 +102,17 @@ def test_billing_envs_resources_by_account(client):
 
 def test_billing_get_options(client):
     client._get.return_value = success_response
-    response = client.Billing.GetOptions("env_name", "node_group")
+    response = client.Billing.GetOptions(
+        "env_name",
+        "node_group",
+        "ruk",
+    )
     client._get.assert_called_with(
         "GetOptions",
         params={
             "targetEnvName": "env_name",
             "nodeGroup": "node_group",
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -98,7 +120,13 @@ def test_billing_get_options(client):
 
 def test_billing_set_options(client):
     client._get.return_value = success_response
-    response = client.Billing.SetOptions("env_name", "node_group", {"key": "value"}, 1)
+    response = client.Billing.SetOptions(
+        "env_name",
+        "node_group",
+        {"key": "value"},
+        1,
+        "ruk",
+    )
     client._get.assert_called_with(
         "SetOptions",
         params={
@@ -106,6 +134,7 @@ def test_billing_set_options(client):
             "nodeGroup": "node_group",
             "options": '{"key": "value"}',
             "nodeId": 1,
+            "ruk": "ruk",
         },
     )
     assert response == success_response

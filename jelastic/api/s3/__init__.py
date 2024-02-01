@@ -60,7 +60,13 @@ class _Account(S3):
 
     _endpoint2 = "account"
 
-    def Create(self, host_group: str, name: str, owner_uid: int = None):
+    def Create(
+        self,
+        host_group: str,
+        name: str,
+        owner_uid: int = None,
+        ruk: str = None,
+    ):
         """
         Creates a new S3 account.
 
@@ -70,10 +76,21 @@ class _Account(S3):
         """
         return self._get(
             "Create",
-            params={"hostGroup": host_group, "name": name, "ownerUid": owner_uid},
+            params={
+                "hostGroup": host_group,
+                "name": name,
+                "ownerUid": owner_uid,
+                "ruk": ruk,
+            },
         )
 
-    def Delete(self, host_group: str, name: str, owner_uid: int = None):
+    def Delete(
+        self,
+        host_group: str,
+        name: str,
+        owner_uid: int = None,
+        ruk: str = None,
+    ):
         """
         Deletes an S3 account.
 
@@ -83,10 +100,21 @@ class _Account(S3):
         """
         return self._get(
             "Delete",
-            params={"hostGroup": host_group, "name": name, "ownerUid": owner_uid},
+            params={
+                "hostGroup": host_group,
+                "name": name,
+                "ownerUid": owner_uid,
+                "ruk": ruk,
+            },
         )
 
-    def GenerateKey(self, host_group: str, name: str, owner_uid: int = None):
+    def GenerateKey(
+        self,
+        host_group: str,
+        name: str,
+        owner_uid: int = None,
+        ruk: str = None,
+    ):
         """
         Generates a new key for an S3 account.
 
@@ -96,18 +124,39 @@ class _Account(S3):
         """
         return self._get(
             "GenerateKey",
-            params={"hostGroup": host_group, "name": name, "ownerUid": owner_uid},
+            params={
+                "hostGroup": host_group,
+                "name": name,
+                "ownerUid": owner_uid,
+                "ruk": ruk,
+            },
         )
 
-    def GetKeys(self, owner_uid: int = None):
+    def GetKeys(
+        self,
+        owner_uid: int = None,
+        ruk: str = None,
+    ):
         """
         Returns the list of accounts together with keys for each available S3 cluster.
 
         :param owner_uid: unique identifier of the S3 account owner.
         """
-        return self._get("GetKeys", params={"ownerUid": owner_uid})
+        return self._get(
+            "GetKeys",
+            params={
+                "ownerUid": owner_uid,
+                "ruk": ruk,
+            },
+        )
 
-    def RegenerateKeys(self, host_group: str, acc_key: str, owner_uid: int = None):
+    def RegenerateKeys(
+        self,
+        host_group: str,
+        acc_key: str,
+        owner_uid: int = None,
+        ruk: str = None,
+    ):
         """
         Regenerates the target key pair by access key.
 
@@ -117,10 +166,21 @@ class _Account(S3):
         """
         return self._get(
             "RegenerateKeys",
-            params={"hostGroup": host_group, "accKey": acc_key, "ownerUid": owner_uid},
+            params={
+                "hostGroup": host_group,
+                "accKey": acc_key,
+                "ownerUid": owner_uid,
+                "ruk": ruk,
+            },
         )
 
-    def RevokeKey(self, host_group: str, acc_key: str, owner_uid: int = None):
+    def RevokeKey(
+        self,
+        host_group: str,
+        acc_key: str,
+        owner_uid: int = None,
+        ruk: str = None,
+    ):
         """
         Revokes the target key to the S3 account for the current user.
 
@@ -130,7 +190,12 @@ class _Account(S3):
         """
         return self._get(
             "RevokeKey",
-            params={"hostGroup": host_group, "accKey": acc_key, "ownerUid": owner_uid},
+            params={
+                "hostGroup": host_group,
+                "accKey": acc_key,
+                "ownerUid": owner_uid,
+                "ruk": ruk,
+            },
         )
 
 
@@ -151,6 +216,7 @@ class _Bucket(S3):
         dest_key: str,
         host_group: str,
         owner_uid: int = None,
+        ruk: str = None,
     ):
         """
         Copies an object from one bucket to another.
@@ -171,10 +237,17 @@ class _Bucket(S3):
                 "dstKey": dest_key,
                 "hostGroup": host_group,
                 "ownerUid": owner_uid,
+                "ruk": ruk,
             },
         )
 
-    def Create(self, bucket_name: str, host_group: str, owner_uid: int = None):
+    def Create(
+        self,
+        bucket_name: str,
+        host_group: str,
+        owner_uid: int = None,
+        ruk: str = None,
+    ):
         """
         Creates a new bucket in the storage.
 
@@ -188,10 +261,17 @@ class _Bucket(S3):
                 "bucketName": bucket_name,
                 "hostGroup": host_group,
                 "ownerUid": owner_uid,
+                "ruk": ruk,
             },
         )
 
-    def Delete(self, bucket_name: str, host_group: str, owner_uid: int = None):
+    def Delete(
+        self,
+        bucket_name: str,
+        host_group: str,
+        owner_uid: int = None,
+        ruk: str = None,
+    ):
         """
         Deletes a bucket from the storage.
 
@@ -205,11 +285,17 @@ class _Bucket(S3):
                 "bucketName": bucket_name,
                 "hostGroup": host_group,
                 "ownerUid": owner_uid,
+                "ruk": ruk,
             },
         )
 
     def DeleteObject(
-        self, bucket_name: str, key: str, host_group: str, owner_uid: int = None
+        self,
+        bucket_name: str,
+        key: str,
+        host_group: str,
+        owner_uid: int = None,
+        ruk: str = None,
     ):
         """
         Removes an object from the bucket.
@@ -226,10 +312,17 @@ class _Bucket(S3):
                 "key": key,
                 "hostGroup": host_group,
                 "ownerUid": owner_uid,
+                "ruk": ruk,
             },
         )
 
-    def DeletePolicy(self, bucket_name: str, host_group: str, owner_uid: int = None):
+    def DeletePolicy(
+        self,
+        bucket_name: str,
+        host_group: str,
+        owner_uid: int = None,
+        ruk: str = None,
+    ):
         """
         Removes bucket policy.
 
@@ -243,10 +336,17 @@ class _Bucket(S3):
                 "bucketName": bucket_name,
                 "hostGroup": host_group,
                 "ownerUid": owner_uid,
+                "ruk": ruk,
             },
         )
 
-    def GetPolicy(self, bucket_name: str, host_group: str, owner_uid: int = None):
+    def GetPolicy(
+        self,
+        bucket_name: str,
+        host_group: str,
+        owner_uid: int = None,
+        ruk: str = None,
+    ):
         """
         Returns a list of bucket policies.
 
@@ -260,11 +360,17 @@ class _Bucket(S3):
                 "bucketName": bucket_name,
                 "hostGroup": host_group,
                 "ownerUid": owner_uid,
+                "ruk": ruk,
             },
         )
 
     def GetPresignedURL(
-        self, bucket_name: str, key: str, host_group: str, owner_uid: int = None
+        self,
+        bucket_name: str,
+        key: str,
+        host_group: str,
+        owner_uid: int = None,
+        ruk: str = None,
     ):
         """
         Returns a link to the bucket.
@@ -281,16 +387,27 @@ class _Bucket(S3):
                 "key": key,
                 "hostGroup": host_group,
                 "ownerUid": owner_uid,
+                "ruk": ruk,
             },
         )
 
-    def List(self, owner_uid: int = None):
+    def List(
+        self,
+        owner_uid: int = None,
+        ruk: str = None,
+    ):
         """
         Returns a list of buckets in the storage.
 
         :param owner_uid: unique identifier of the bucket owner.
         """
-        return self._get("List", params={"ownerUid": owner_uid})
+        return self._get(
+            "List",
+            params={
+                "ownerUid": owner_uid,
+                "ruk": ruk,
+            },
+        )
 
     def ListObjects(
         self,
@@ -301,6 +418,7 @@ class _Bucket(S3):
         delimiter: str = ",",
         max_keys: int = 100,
         owner_uid: int = None,
+        ruk: str = None,
     ):
         """
         Returns a list of objects in a bucket.
@@ -323,11 +441,17 @@ class _Bucket(S3):
                 "delimiter": delimiter,
                 "maxKeys": max_keys,
                 "ownerUid": owner_uid,
+                "ruk": ruk,
             },
         )
 
     def SetPolicy(
-        self, bucket_name: str, host_group: str, policy: str, owner_uid: int = None
+        self,
+        bucket_name: str,
+        host_group: str,
+        policy: str,
+        owner_uid: int = None,
+        ruk: str = None,
     ):
         """
         Replaces existing bucket policies with the provided value.
@@ -344,5 +468,6 @@ class _Bucket(S3):
                 "hostGroup": host_group,
                 "policy": policy,
                 "ownerUid": owner_uid,
+                "ruk": ruk,
             },
         )

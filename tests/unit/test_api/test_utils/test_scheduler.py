@@ -8,6 +8,7 @@ def test_create_account_task(client):
         {"cron": "* * * * *"},
         "Trigger script on before install",
         {"key": "value"},
+        "ruk",
     )
     client._get.assert_called_with(
         "CreateAccountTask",
@@ -16,6 +17,7 @@ def test_create_account_task(client):
             "trigger": "cron:* * * * *",
             "description": "Trigger script on before install",
             "params": '{"key": "value"}',
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -29,6 +31,7 @@ def test_create_env_task(client):
         "env name",
         "Trigger script on before install",
         {"key": "value"},
+        "ruk",
     )
     client._get.assert_called_with(
         "CreateEnvTask",
@@ -38,6 +41,7 @@ def test_create_env_task(client):
             "envName": "env name",
             "description": "Trigger script on before install",
             "params": '{"key": "value"}',
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -45,9 +49,12 @@ def test_create_env_task(client):
 
 def test_delete_tasks(client):
     client._get.return_value = success_response
-    response = client.Scheduler.DeleteTasks(["1", "2"])
+    response = client.Scheduler.DeleteTasks(
+        ["1", "2"],
+        "ruk",
+    )
     client._get.assert_called_with(
-        "DeleteTasks", params={"ids": ["1", "2"]}, delimiter=","
+        "DeleteTasks", params={"ids": ["1", "2"], "ruk": "ruk"}, delimiter=","
     )
     assert response == success_response
 
@@ -60,6 +67,7 @@ def test_edit_task(client):
         1,
         "Trigger script on before install",
         {"key": "value"},
+        "ruk",
     )
     client._get.assert_called_with(
         "EditTask",
@@ -69,6 +77,7 @@ def test_edit_task(client):
             "id": 1,
             "description": "Trigger script on before install",
             "params": '{"key": "value"}',
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -76,22 +85,27 @@ def test_edit_task(client):
 
 def test_get_task(client):
     client._get.return_value = success_response
-    response = client.Scheduler.GetTasks(["1", "2"])
+    response = client.Scheduler.GetTasks(
+        ["1", "2"],
+        "ruk",
+    )
     client._get.assert_called_with(
-        "GetTasks", params={"ids": ["1", "2"]}, delimiter=","
+        "GetTasks", params={"ids": ["1", "2"], "ruk": "ruk"}, delimiter=","
     )
     assert response == success_response
 
 
 def test_reschedule_task(client):
     client._get.return_value = success_response
-    response = client.Scheduler.RescheduleTasks()
-    client._get.assert_called_with("RescheduleTasks")
+    response = client.Scheduler.RescheduleTasks(
+        "ruk",
+    )
+    client._get.assert_called_with("RescheduleTasks", params={"ruk": "ruk"})
     assert response == success_response
 
 
 def test_unschedule_tasks(client):
     client._get.return_value = success_response
-    response = client.Scheduler.UnscheduleTasks()
-    client._get.assert_called_with("UnscheduleTasks")
+    response = client.Scheduler.UnscheduleTasks("ruk")
+    client._get.assert_called_with("UnscheduleTasks", params={"ruk": "ruk"})
     assert response == success_response

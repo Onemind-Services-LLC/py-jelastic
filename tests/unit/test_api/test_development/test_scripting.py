@@ -6,12 +6,14 @@ def test_build(client):
     response = client.Scripting.Build(
         "script",
         "app_id",
+        "ruk",
     )
     client._get.assert_called_once_with(
         "Build",
         params={
             "script": "script",
             "appid": "app_id",
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -21,11 +23,13 @@ def test_build_stubs(client):
     client._get.return_value = success_response
     response = client.Scripting.BuildStubs(
         "app_id",
+        "ruk",
     )
     client._get.assert_called_once_with(
         "BuildStubs",
         params={
             "appid": "app_id",
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -38,6 +42,7 @@ def test_change_script(client):
         "field",
         "value",
         "app_id",
+        "ruk",
     )
     client._get.assert_called_once_with(
         "ChangeScript",
@@ -46,6 +51,7 @@ def test_change_script(client):
             "field": "field",
             "value": "value",
             "appid": "app_id",
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -59,6 +65,7 @@ def test_create_script(client):
         "code",
         "annotations",
         "app_id",
+        "ruk",
     )
     client._get.assert_called_once_with(
         "CreateScript",
@@ -68,6 +75,7 @@ def test_create_script(client):
             "code": "code",
             "annotations": "annotations",
             "appid": "app_id",
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -78,12 +86,14 @@ def test_delete_script(client):
     response = client.Scripting.DeleteScript(
         "name",
         "app_id",
+        "ruk",
     )
     client._get.assert_called_once_with(
         "DeleteScript",
         params={
             "name": "name",
             "appid": "app_id",
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -95,6 +105,7 @@ def test_eval(client):
         "script",
         "code",
         "app_id",
+        "ruk",
     )
     client._get.assert_called_once_with(
         "Eval",
@@ -102,6 +113,7 @@ def test_eval(client):
             "script": "script",
             "params": "code",
             "appid": "app_id",
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -115,6 +127,7 @@ def test_eval_code(client):
         "annotations",
         "params",
         "app_id",
+        "ruk",
     )
     client._get.assert_called_once_with(
         "EvalCode",
@@ -124,6 +137,7 @@ def test_eval_code(client):
             "annotations": "annotations",
             "params": "params",
             "appid": "app_id",
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -134,12 +148,14 @@ def test_export_scripts(client):
     response = client.Scripting.ExportScripts(
         True,
         "app_id",
+        "ruk",
     )
     client._get.assert_called_once_with(
         "ExportScripts",
         params={
             "overwrite": True,
             "appid": "app_id",
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -149,11 +165,13 @@ def test_get_engine_info(client):
     client._get.return_value = success_response
     response = client.Scripting.GetEngineInfo(
         "app_id",
+        "ruk",
     )
     client._get.assert_called_once_with(
         "GetEngineInfo",
         params={
             "appid": "app_id",
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -164,12 +182,14 @@ def test_get_script(client):
     response = client.Scripting.GetScript(
         "name",
         "app_id",
+        "ruk",
     )
     client._get.assert_called_once_with(
         "GetScript",
         params={
             "name": "name",
             "appid": "app_id",
+            "ruk": "ruk",
         },
     )
     assert response == success_response
@@ -182,6 +202,7 @@ def test_get_scripts(client):
         1,
         2,
         "app_id",
+        "ruk",
     )
     client._get.assert_called_once_with(
         "GetScripts",
@@ -190,6 +211,7 @@ def test_get_scripts(client):
             "from": 1,
             "count": 2,
             "appid": "app_id",
+            "ruk": "ruk",
         },
     )
     assert response == success_response

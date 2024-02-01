@@ -67,7 +67,12 @@ class _Batch(Utils):
 
     _endpoint2 = "batch"
 
-    def Call(self, request: dict, sync: bool = False):
+    def Call(
+        self,
+        request: dict,
+        sync: bool = False,
+        ruk: str = None,
+    ):
         """
         Multiply call the functions of platforms in a single query.
 
@@ -76,7 +81,14 @@ class _Batch(Utils):
         """
         request = json.dumps(request)
 
-        return self._get("Call", params={"request": request, "sync": sync})
+        return self._get(
+            "Call",
+            params={
+                "request": request,
+                "sync": sync,
+                "ruk": ruk,
+            },
+        )
 
 
 class _Scheduler(Utils):
@@ -96,6 +108,7 @@ class _Scheduler(Utils):
         trigger: dict[TRIGGER_TYPE, str | int],
         description: str = None,
         params: dict = None,
+        ruk: str = None,
     ):
         """
         Creates a task that executes a specified script based on the configured trigger.
@@ -115,6 +128,7 @@ class _Scheduler(Utils):
                 "trigger": trigger,
                 "description": description,
                 "params": params,
+                "ruk": ruk,
             },
         )
 
@@ -125,6 +139,7 @@ class _Scheduler(Utils):
         env_name: str,
         description: str = None,
         params: dict = None,
+        ruk: str = None,
     ):
         """
         Creates a task that executes a specified script based on the configured trigger. The task is automatically
@@ -148,16 +163,28 @@ class _Scheduler(Utils):
                 "envName": env_name,
                 "description": description,
                 "params": params,
+                "ruk": ruk,
             },
         )
 
-    def DeleteTasks(self, ids: list[str]):
+    def DeleteTasks(
+        self,
+        ids: list[str],
+        ruk: str = None,
+    ):
         """
         Deletes specified tasks.
 
         :param ids: list of task IDs to remove.
         """
-        return self._get("DeleteTasks", params={"ids": ids}, delimiter=",")
+        return self._get(
+            "DeleteTasks",
+            params={
+                "ids": ids,
+                "ruk": ruk,
+            },
+            delimiter=",",
+        )
 
     def EditTask(
         self,
@@ -166,6 +193,7 @@ class _Scheduler(Utils):
         id: int,
         description: str = None,
         params: dict = None,
+        ruk: str = None,
     ):
         """
         Changes the existing task according to the provided new values.
@@ -188,22 +216,40 @@ class _Scheduler(Utils):
                 "id": id,
                 "description": description,
                 "params": params,
+                "ruk": ruk,
             },
         )
 
-    def GetTasks(self, ids: list[str] = None):
+    def GetTasks(
+        self,
+        ids: list[str] = None,
+        ruk: str = None,
+    ):
         """
         Returns information on the specified tasks.
 
         :param ids: list of IDs to retrieve
         """
-        return self._get("GetTasks", params={"ids": ids}, delimiter=",")
+        return self._get(
+            "GetTasks",
+            params={
+                "ids": ids,
+                "ruk": ruk,
+            },
+            delimiter=",",
+        )
 
-    def RescheduleTasks(self):
-        return self._get("RescheduleTasks")
+    def RescheduleTasks(
+        self,
+        ruk: str = None,
+    ):
+        return self._get("RescheduleTasks", params={"ruk": ruk})
 
-    def UnscheduleTasks(self):
+    def UnscheduleTasks(
+        self,
+        ruk: str = None,
+    ):
         """
         Unschedules all the tasks assigned for regular execution.
         """
-        return self._get("UnscheduleTasks")
+        return self._get("UnscheduleTasks", params={"ruk": ruk})

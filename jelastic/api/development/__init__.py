@@ -53,24 +53,17 @@ class _Applications(Development):
 
     _endpoint2 = "applications"
 
-    def AddAppToPool(
-        self,
-        name: str,
-        target_appid: str,
-    ):
+    def AddAppToPool(self, name: str, target_appid: str, ruk: str = None):
         return self._get(
             "AddAppToPool",
             params={
                 "name": name,
                 "targetAppid": target_appid,
+                "ruk": ruk,
             },
         )
 
-    def AllowAppAccess(
-        self,
-        target_appid: str,
-        allow_appid: str,
-    ):
+    def AllowAppAccess(self, target_appid: str, allow_appid: str, ruk: str = None):
         """
         :param target_appid: the application identifier to which you can access using the session received in another application. You can list separated by commas multiple applications. In targetAppid can specify only the application ID for which you have the rights owner (owner) or admin (administrator)
         :param allow_appid: application Identifier session which can be used in the identifier specified in targetAppid. In allowAppid can specify any existing application ID
@@ -80,10 +73,13 @@ class _Applications(Development):
             params={
                 "targetAppid": target_appid,
                 "allowAppid": allow_appid,
+                "ruk": ruk,
             },
         )
 
-    def ChangeAppInfo(self, target_appid: str, field: str, value: str = None):
+    def ChangeAppInfo(
+        self, target_appid: str, field: str, value: str = None, ruk: str = None
+    ):
         """
         :param target_appid: id editable applications
         :param field: the name of the edited field. Valid values are:
@@ -95,14 +91,12 @@ class _Applications(Development):
                 "targetAppid": target_appid,
                 "field": field,
                 "value": value,
+                "ruk": ruk,
             },
         )
 
     def ChangeSolutionInfo(
-        self,
-        target_appid: str,
-        field: str,
-        value: str,
+        self, target_appid: str, field: str, value: str, ruk: str = None
     ):
         return self._get(
             "ChangeSolutionInfo",
@@ -110,39 +104,33 @@ class _Applications(Development):
                 "targetAppid": target_appid,
                 "field": field,
                 "value": value,
+                "ruk": ruk,
             },
         )
 
     def CleanOwnerCache(
-        self,
-        user_id: int = None,
-        clean_all_apps: bool = None,
+        self, user_id: int = None, clean_all_apps: bool = None, ruk: str = None
     ):
         return self._get(
             "CleanOwnerCache",
             params={
                 "userId": user_id,
                 "cleanAllApps": clean_all_apps,
+                "ruk": ruk,
             },
         )
 
-    def CloneApp(
-        self,
-        target_appid: str,
-        name: str = None,
-    ):
+    def CloneApp(self, target_appid: str, name: str = None, ruk: str = None):
         return self._get(
             "CloneApp",
             params={
                 "targetAppid": target_appid,
                 "name": name,
+                "ruk": ruk,
             },
         )
 
-    def ConfirmAppTransferRequest(
-        self,
-        key: str,
-    ):
+    def ConfirmAppTransferRequest(self, key: str, ruk: str = None):
         """
         :param key: disposable confirmation key
         """
@@ -150,24 +138,20 @@ class _Applications(Development):
             "ConfirmAppTransferRequest",
             params={
                 "key": key,
+                "ruk": ruk,
             },
         )
 
-    def CreateAppsPool(
-        self,
-        name: str,
-    ):
+    def CreateAppsPool(self, name: str, ruk: str = None):
         return self._get(
             "CreateAppsPool",
             params={
                 "name": name,
+                "ruk": ruk,
             },
         )
 
-    def CreateConfirmAppTransferKey(
-        self,
-        email: str,
-    ):
+    def CreateConfirmAppTransferKey(self, email: str, ruk: str = None):
         """
         param email: email to generate confirmation key
         """
@@ -175,14 +159,11 @@ class _Applications(Development):
             "CreateConfirmAppTransferKey",
             params={
                 "email": email,
+                "ruk": ruk,
             },
         )
 
-    def CreatePersistence(
-        self,
-        target_appid: str,
-        config: str = None,
-    ):
+    def CreatePersistence(self, target_appid: str, config: str = None, ruk: str = None):
         """
         param target_appid: unique identifier of the target application.
         param config: JSON object with the persistence configurations.
@@ -192,25 +173,20 @@ class _Applications(Development):
             params={
                 "targetAppid": target_appid,
                 "config": config,
+                "ruk": ruk,
             },
         )
 
-    def CreateSolution(
-        self,
-        target_appid: str,
-    ):
+    def CreateSolution(self, target_appid: str, ruk: str = None):
         return self._get(
             "CreateSolution",
             params={
                 "targetAppid": target_appid,
+                "ruk": ruk,
             },
         )
 
-    def DeleteApp(
-        self,
-        password: str,
-        target_appid: str,
-    ):
+    def DeleteApp(self, password: str, target_appid: str, ruk: str = None):
         """
         param password: the user password (for this method to re-authentication)
         param target_appid: id remove applications
@@ -220,50 +196,43 @@ class _Applications(Development):
             params={
                 "password": password,
                 "targetAppid": target_appid,
+                "ruk": ruk,
             },
         )
 
-    def DeleteAppsPool(
-        self,
-        name: str,
-    ):
+    def DeleteAppsPool(self, name: str, ruk: str = None):
         return self._get(
             "DeleteAppsPool",
             params={
                 "name": name,
+                "ruk": ruk,
             },
         )
 
-    def DeleteSolution(
-        self,
-        target_appid: str,
-    ):
+    def DeleteSolution(self, target_appid: str, ruk: str = None):
         return self._get(
             "DeleteSolution",
             params={
                 "targetAppid": target_appid,
+                "ruk": ruk,
             },
         )
 
-    def ExportAppPersistance(
-        self,
-        target_appid: str,
-    ):
+    def ExportAppPersistance(self, target_appid: str, ruk: str = None):
         return self._get(
             "ExportAppPersistance",
             params={
                 "targetAppid": target_appid,
+                "ruk": ruk,
             },
         )
 
-    def ExportAppResources(
-        self,
-        target_appid: str,
-    ):
+    def ExportAppResources(self, target_appid: str, ruk: str = None):
         return self._get(
             "ExportAppResources",
             params={
                 "targetAppid": target_appid,
+                "ruk": ruk,
             },
         )
 
@@ -273,6 +242,7 @@ class _Applications(Development):
         description: str = None,
         froms: int = None,
         count: int = None,
+        ruk: str = None,
     ):
         return self._get(
             "FindSolutions",
@@ -281,6 +251,7 @@ class _Applications(Development):
                 "description": description,
                 "froms": froms,
                 "count": count,
+                "ruk": ruk,
             },
         )
 
@@ -291,6 +262,7 @@ class _Applications(Development):
         domain: str = None,
         keywords: str = None,
         config: str = None,
+        ruk: str = None,
     ):
         """
         param name: the name of the application (max. 128 characters)
@@ -305,6 +277,7 @@ class _Applications(Development):
                 "domain": domain,
                 "keywords": keywords,
                 "config": config,
+                "ruk": ruk,
             },
         )
 
@@ -316,6 +289,7 @@ class _Applications(Development):
         domain: str = None,
         keywords: str = None,
         config: str = None,
+        ruk: str = None,
     ):
         """
         param name: the name of the application (max. 128 characters)
@@ -331,6 +305,7 @@ class _Applications(Development):
                 "domain": domain,
                 "keywords": keywords,
                 "config": config,
+                "ruk": ruk,
             },
         )
 
@@ -342,6 +317,7 @@ class _Applications(Development):
         domain: str = None,
         keywords: str = None,
         config: str = None,
+        ruk: str = None,
     ):
         """
         param owner_login: login of the environment's owner
@@ -358,40 +334,37 @@ class _Applications(Development):
                 "domain": domain,
                 "keywords": keywords,
                 "config": config,
+                "ruk": ruk,
             },
         )
 
-    def GetApp(
-        self,
-        target_appid: str,
-    ):
+    def GetApp(self, target_appid: str, ruk: str = None):
         return self._get(
             "GetApp",
             params={
                 "targetAppid": target_appid,
+                "ruk": ruk,
             },
         )
 
-    def GetAppAccess(
-        self,
-        target_appid: str,
-    ):
+    def GetAppAccess(self, target_appid: str, ruk: str = None):
         return self._get(
             "GetAppAccess",
             params={
                 "targetAppid": target_appid,
+                "ruk": ruk,
             },
         )
 
-    def GetAppHome(
-        self,
-    ):
-        return self._get("GetAppHome", params={})
+    def GetAppHome(self, ruk: str = None):
+        return self._get(
+            "GetAppHome",
+            params={
+                "ruk": ruk,
+            },
+        )
 
-    def GetAppPermission(
-        self,
-        target_appid: str,
-    ):
+    def GetAppPermission(self, target_appid: str, ruk: str = None):
         """
         param target_appid: the application identifier for which information is requested
         """
@@ -399,13 +372,11 @@ class _Applications(Development):
             "GetAppPermission",
             params={
                 "targetAppid": target_appid,
+                "ruk": ruk,
             },
         )
 
-    def GetApps(
-        self,
-        target_appid: str = None,
-    ):
+    def GetApps(self, target_appid: str = None, ruk: str = None):
         """
         param target_appid: the application identifier for which information is requested
         """
@@ -413,38 +384,37 @@ class _Applications(Development):
             "GetApps",
             params={
                 "targetAppid": target_appid,
+                "ruk": ruk,
             },
         )
 
-    def GetAppsByLogin(
-        self,
-        login: str,
-    ):
+    def GetAppsByLogin(self, login: str, ruk: str = None):
         return self._get(
             "GetAppsByLogin",
             params={
                 "login": login,
+                "ruk": ruk,
             },
         )
 
-    def GetAppsPools(
-        self,
-        name: str = None,
-    ):
+    def GetAppsPools(self, name: str = None, ruk: str = None):
         return self._get(
             "GetAppsPools",
             params={
                 "name": name,
+                "ruk": ruk,
             },
         )
 
-    def GetConfirmAppTransferKey(self):
-        return self._get("GetConfirmAppTransferKey", params={})
+    def GetConfirmAppTransferKey(self, ruk: str = None):
+        return self._get(
+            "GetConfirmAppTransferKey",
+            params={
+                "ruk": ruk,
+            },
+        )
 
-    def GetConfirmAppTransferKeys(
-        self,
-        appid: list[str] = None,
-    ):
+    def GetConfirmAppTransferKeys(self, appid: list[str] = None, ruk: str = None):
         """
         param appid: comma-separated list of environment identifiers
         """
@@ -452,14 +422,12 @@ class _Applications(Development):
             "GetConfirmAppTransferKeys",
             params={
                 "appids": appid,
+                "ruk": ruk,
             },
             delimiter=",",
         )
 
-    def GetSharedAppsByLogin(
-        self,
-        login: str,
-    ):
+    def GetSharedAppsByLogin(self, login: str, ruk: str = None):
         """
         param login: login of the target user
         """
@@ -467,136 +435,123 @@ class _Applications(Development):
             "GetSharedAppsByLogin",
             params={
                 "login": login,
+                "ruk": ruk,
             },
         )
 
-    def GetSharedAppsByOwnerLogin(
-        self,
-        owner_login: str,
-        login: str,
-    ):
+    def GetSharedAppsByOwnerLogin(self, owner_login: str, login: str, ruk: str = None):
         return self._get(
             "GetSharedAppsByOwnerLogin",
             params={
                 "ownerLogin": owner_login,
                 "login": login,
+                "ruk": ruk,
             },
         )
 
     def GetSharedAppsByOwnerLogins(
-        self,
-        owner_login: str,
-        logins: str,
+        self, owner_login: str, logins: str, ruk: str = None
     ):
         return self._get(
             "GetSharedAppsByOwnerLogins",
             params={
                 "ownerLogin": owner_login,
                 "logins": logins,
+                "ruk": ruk,
             },
         )
 
-    def GetSolution(
-        self,
-        target_appid: str,
-    ):
+    def GetSolution(self, target_appid: str, ruk: str = None):
         return self._get(
             "GetSolution",
             params={
                 "targetAppid": target_appid,
+                "ruk": ruk,
             },
         )
 
-    def GetSolutions(
-        self,
-        target_appid: str = None,
-    ):
+    def GetSolutions(self, target_appid: str = None, ruk: str = None):
         return self._get(
             "GetSolutions",
             params={
                 "targetAppid": target_appid,
+                "ruk": ruk,
             },
         )
 
     def GetUserAppPermission(
-        self,
-        target_appid: str,
-        rights: str = None,
+        self, target_appid: str, rights: str = None, ruk: str = None
     ):
         return self._get(
             "GetUserAppPermission",
             params={
                 "targetAppid": target_appid,
                 "rights": rights,
+                "ruk": ruk,
             },
         )
 
     def ImportAppPersistance(
-        self,
-        path: str,
-        target_appid: str = None,
+        self, path: str, target_appid: str = None, ruk: str = None
     ):
         return self._get(
             "ImportAppPersistance",
             params={
                 "path": path,
                 "targetAppid": target_appid,
+                "ruk": ruk,
             },
         )
 
-    def ImportAppResources(
-        self,
-        path: str,
-        target_appid: str = None,
-    ):
+    def ImportAppResources(self, path: str, target_appid: str = None, ruk: str = None):
         return self._get(
             "ImportAppResources",
             params={
                 "path": path,
                 "targetAppid": target_appid,
+                "ruk": ruk,
             },
         )
 
-    def IsAppsInstalled(
-        self,
-    ):
-        return self._get("IsAppsInstalled", params={})
+    def IsAppsInstalled(self, ruk: str = None):
+        return self._get(
+            "IsAppsInstalled",
+            params={
+                "ruk": ruk,
+            },
+        )
 
-    def RebuildApp(
-        self,
-        target_appid: str,
-    ):
+    def RebuildApp(self, target_appid: str, ruk: str = None):
         return self._get(
             "RebuildApp",
             params={
                 "targetAppid": target_appid,
+                "ruk": ruk,
             },
         )
 
-    def RemoveAppAccess(self, target_appid: str, allow_appid: str):
+    def RemoveAppAccess(self, target_appid: str, allow_appid: str, ruk: str = None):
         return self._get(
             "RemoveAppAccess",
-            params={"targetAppid": target_appid, "allowAppid": allow_appid},
+            params={
+                "targetAppid": target_appid,
+                "allowAppid": allow_appid,
+                "ruk": ruk,
+            },
         )
 
-    def RemoveAppFromPool(
-        self,
-        name: str,
-        target_appid: str,
-    ):
+    def RemoveAppFromPool(self, name: str, target_appid: str, ruk: str = None):
         return self._get(
             "RemoveAppFromPool",
             params={
                 "name": name,
                 "targetAppid": target_appid,
+                "ruk": ruk,
             },
         )
 
     def SetAppPermission(
-        self,
-        target_appid: str,
-        login: str,
-        rights: str = None,
+        self, target_appid: str, login: str, rights: str = None, ruk: str = None
     ):
         return self._get(
             "SetAppPermission",
@@ -604,6 +559,7 @@ class _Applications(Development):
                 "targetAppid": target_appid,
                 "login": login,
                 "rights": rights,
+                "ruk": ruk,
             },
         )
 
@@ -615,27 +571,22 @@ class _Scripting(Development):
 
     _endpoint2 = "scripting"
 
-    def Build(
-        self,
-        script: str,
-        app_id: str = None,
-    ):
+    def Build(self, script: str, app_id: str = None, ruk: str = None):
         return self._get(
             "Build",
             params={
                 "script": script,
                 "appid": app_id,
+                "ruk": ruk,
             },
         )
 
-    def BuildStubs(
-        self,
-        app_id: str = None,
-    ):
+    def BuildStubs(self, app_id: str = None, ruk: str = None):
         return self._get(
             "BuildStubs",
             params={
                 "appid": app_id,
+                "ruk": ruk,
             },
         )
 
@@ -645,6 +596,7 @@ class _Scripting(Development):
         field: str,
         value: str = None,
         app_id: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "ChangeScript",
@@ -653,6 +605,7 @@ class _Scripting(Development):
                 "field": field,
                 "value": value,
                 "appid": app_id,
+                "ruk": ruk,
             },
         )
 
@@ -663,6 +616,7 @@ class _Scripting(Development):
         code: str = None,
         annotations: str = None,
         app_id: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "CreateScript",
@@ -672,27 +626,22 @@ class _Scripting(Development):
                 "code": code,
                 "annotations": annotations,
                 "appid": app_id,
+                "ruk": ruk,
             },
         )
 
-    def DeleteScript(
-        self,
-        name: str,
-        app_id: str = None,
-    ):
+    def DeleteScript(self, name: str, app_id: str = None, ruk: str = None):
         return self._get(
             "DeleteScript",
             params={
                 "name": name,
                 "appid": app_id,
+                "ruk": ruk,
             },
         )
 
     def Eval(
-        self,
-        script: str,
-        params: Any = None,
-        app_id: str = None,
+        self, script: str, params: Any = None, app_id: str = None, ruk: str = None
     ):
         return self._get(
             "Eval",
@@ -700,6 +649,7 @@ class _Scripting(Development):
                 "script": script,
                 "params": params,
                 "appid": app_id,
+                "ruk": ruk,
             },
         )
 
@@ -710,6 +660,7 @@ class _Scripting(Development):
         annotations: str = None,
         params: Any = None,
         app_id: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "EvalCode",
@@ -719,43 +670,38 @@ class _Scripting(Development):
                 "annotations": annotations,
                 "params": params,
                 "appid": app_id,
+                "ruk": ruk,
             },
         )
 
     def ExportScripts(
-        self,
-        overwrite: bool = None,
-        app_id: str = None,
+        self, overwrite: bool = None, app_id: str = None, ruk: str = None
     ):
         return self._get(
             "ExportScripts",
             params={
                 "overwrite": overwrite,
                 "appid": app_id,
+                "ruk": ruk,
             },
         )
 
-    def GetEngineInfo(
-        self,
-        app_id: str = None,
-    ):
+    def GetEngineInfo(self, app_id: str = None, ruk: str = None):
         return self._get(
             "GetEngineInfo",
             params={
                 "appid": app_id,
+                "ruk": ruk,
             },
         )
 
-    def GetScript(
-        self,
-        name: str,
-        app_id: str = None,
-    ):
+    def GetScript(self, name: str, app_id: str = None, ruk: str = None):
         return self._get(
             "GetScript",
             params={
                 "name": name,
                 "appid": app_id,
+                "ruk": ruk,
             },
         )
 
@@ -765,6 +711,7 @@ class _Scripting(Development):
         From: int = None,
         count: int = None,
         app_id: str = None,
+        ruk: str = None,
     ):
         return self._get(
             "GetScripts",
@@ -773,5 +720,6 @@ class _Scripting(Development):
                 "from": From,
                 "count": count,
                 "appid": app_id,
+                "ruk": ruk,
             },
         )

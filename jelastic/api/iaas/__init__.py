@@ -44,6 +44,7 @@ class _Project(IaaS):
         project_name: str,
         owner_uid: int = None,
         description: str = None,
+        ruk: str = None,
     ):
         """
         Creates a new Virtuozzo Hybrid Infrastructure project.
@@ -60,10 +61,13 @@ class _Project(IaaS):
                 "projectName": project_name,
                 "ownerUid": owner_uid,
                 "description": description,
+                "ruk": ruk,
             },
         )
 
-    def Delete(self, host_group: str, project_id: str, owner_uid: int = None):
+    def Delete(
+        self, host_group: str, project_id: str, owner_uid: int = None, ruk: str = None
+    ):
         """
         Deletes a specified Virtuozzo Hybrid Infrastructure project.
 
@@ -77,10 +81,11 @@ class _Project(IaaS):
                 "hostGroup": host_group,
                 "projectId": project_id,
                 "ownerUid": owner_uid,
+                "ruk": ruk,
             },
         )
 
-    def Get(self, host_group: str, owner_uid: int = None):
+    def Get(self, host_group: str, owner_uid: int = None, ruk: str = None):
         """
         Returns a list of Virtuozzo Hybrid Infrastructure projects related to the user and host group.
 
@@ -92,6 +97,7 @@ class _Project(IaaS):
             params={
                 "hostGroup": host_group,
                 "ownerUid": owner_uid,
+                "ruk": ruk,
             },
         )
 
@@ -102,6 +108,7 @@ class _Project(IaaS):
         project_name: str,
         owner_uid: int = None,
         description: str = None,
+        ruk: str = None,
     ):
         """
         Changes the specified project name and description.
@@ -120,5 +127,6 @@ class _Project(IaaS):
                 "projectName": project_name,
                 "ownerUid": owner_uid,
                 "description": description,
+                "ruk": ruk,
             },
         )

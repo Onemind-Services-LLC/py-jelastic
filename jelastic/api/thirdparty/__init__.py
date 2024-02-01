@@ -19,5 +19,8 @@ class ThirdParty(ClientAbstract):
 class _GeoIp(ThirdParty):
     _endpoint2 = "geoip"
 
-    def GeoIp(self):
-        return self._get("GeoIp")
+    def GeoIp(
+        self,
+        ruk: str = None,
+    ):
+        return self._get("GeoIp", params={"ruk": ruk})
