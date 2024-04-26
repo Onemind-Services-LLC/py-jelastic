@@ -1405,7 +1405,7 @@ class _Integration(Billing):
     Ref: https://docs.jelastic.com/api/private/#!/api/administration.Integration
     """
 
-    _endpoint = "integration"
+    _endpoint2 = "integration"
 
     def GetInvoiceUrl(self, invoice_id: int, ruk: str = None):
         """
@@ -1529,7 +1529,7 @@ class _Pricing(Billing):
     Ref: https://docs.jelastic.com/api/private/#!/api/billing.Pricing
     """
 
-    endpoint = "pricing"
+    _endpoint2 = "pricing"
 
     def AddPricing(
         self,
@@ -2351,7 +2351,7 @@ class _Subscription(Billing):
     Ref: https://docs.jelastic.com/api/private/#!/api/billing.Subscription
     """
 
-    _endpoint = "subscription"
+    _endpoint2 = "subscription"
 
     def Cancel(
         self,
